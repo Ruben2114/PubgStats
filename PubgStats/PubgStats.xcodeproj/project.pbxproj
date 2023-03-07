@@ -29,6 +29,11 @@
 		8CA3990029B73A5100C09746 /* CuentaConsulta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398FF29B73A5100C09746 /* CuentaConsulta.swift */; };
 		8CA3990229B73DBB00C09746 /* CuentaRepositorio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3990129B73DBB00C09746 /* CuentaRepositorio.swift */; };
 		8CA3990429B73E8500C09746 /* CuentaconsultaRepositorio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3990329B73E8500C09746 /* CuentaconsultaRepositorio.swift */; };
+		8CA3990729B759E800C09746 /* ErrorTransferenciaDatos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3990629B759E800C09746 /* ErrorTransferenciaDatos.swift */; };
+		8CA3990929B759F900C09746 /* ServicioRed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3990829B759F900C09746 /* ServicioRed.swift */; };
+		8CA3990B29B75A1900C09746 /* Terminaciones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3990A29B75A1900C09746 /* Terminaciones.swift */; };
+		8CA3990D29B75A2400C09746 /* ConfiguracionRed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3990C29B75A2400C09746 /* ConfiguracionRed.swift */; };
+		8CA3991629B75F2800C09746 /* FlujosDeNavegacion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3991529B75F2800C09746 /* FlujosDeNavegacion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +80,11 @@
 		8CA398FF29B73A5100C09746 /* CuentaConsulta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuentaConsulta.swift; sourceTree = "<group>"; };
 		8CA3990129B73DBB00C09746 /* CuentaRepositorio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuentaRepositorio.swift; sourceTree = "<group>"; };
 		8CA3990329B73E8500C09746 /* CuentaconsultaRepositorio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuentaconsultaRepositorio.swift; sourceTree = "<group>"; };
+		8CA3990629B759E800C09746 /* ErrorTransferenciaDatos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTransferenciaDatos.swift; sourceTree = "<group>"; };
+		8CA3990829B759F900C09746 /* ServicioRed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicioRed.swift; sourceTree = "<group>"; };
+		8CA3990A29B75A1900C09746 /* Terminaciones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terminaciones.swift; sourceTree = "<group>"; };
+		8CA3990C29B75A2400C09746 /* ConfiguracionRed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiguracionRed.swift; sourceTree = "<group>"; };
+		8CA3991529B75F2800C09746 /* FlujosDeNavegacion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlujosDeNavegacion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +112,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C1D8BA129B764ED00A4C473 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8C1D8BA229B764F600A4C473 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		8CA398A029B72A1F00C09746 = {
 			isa = PBXGroup;
 			children = (
@@ -166,8 +190,8 @@
 		8CA398E029B7313000C09746 /* Presentacion */ = {
 			isa = PBXGroup;
 			children = (
-				8CA398B229B72A1F00C09746 /* Main.storyboard */,
-				8CA398B029B72A1F00C09746 /* ViewController.swift */,
+				8CA3990E29B75CE600C09746 /* Escenas */,
+				8CA3990F29B75CF700C09746 /* Utilidades */,
 			);
 			path = Presentacion;
 			sourceTree = "<group>";
@@ -192,6 +216,7 @@
 		8CA398E329B7316700C09746 /* Infraestructura */ = {
 			isa = PBXGroup;
 			children = (
+				8CA3990529B759A100C09746 /* Red */,
 			);
 			path = Infraestructura;
 			sourceTree = "<group>";
@@ -252,6 +277,76 @@
 				8CA398F529B735B300C09746 /* UseCase.swift */,
 			);
 			path = Protocolo;
+			sourceTree = "<group>";
+		};
+		8CA3990529B759A100C09746 /* Red */ = {
+			isa = PBXGroup;
+			children = (
+				8CA3990629B759E800C09746 /* ErrorTransferenciaDatos.swift */,
+				8CA3990829B759F900C09746 /* ServicioRed.swift */,
+				8CA3990A29B75A1900C09746 /* Terminaciones.swift */,
+				8CA3990C29B75A2400C09746 /* ConfiguracionRed.swift */,
+			);
+			path = Red;
+			sourceTree = "<group>";
+		};
+		8CA3990E29B75CE600C09746 /* Escenas */ = {
+			isa = PBXGroup;
+			children = (
+				8CA3991429B75E3C00C09746 /* Flujos */,
+				8CA3991329B75E1A00C09746 /* Login */,
+				8CA3991229B75D4D00C09746 /* Registro */,
+			);
+			path = Escenas;
+			sourceTree = "<group>";
+		};
+		8CA3990F29B75CF700C09746 /* Utilidades */ = {
+			isa = PBXGroup;
+			children = (
+				8CA3991129B75D2B00C09746 /* Extensiones */,
+				8CA3991029B75D2400C09746 /* Protocolos */,
+			);
+			path = Utilidades;
+			sourceTree = "<group>";
+		};
+		8CA3991029B75D2400C09746 /* Protocolos */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocolos;
+			sourceTree = "<group>";
+		};
+		8CA3991129B75D2B00C09746 /* Extensiones */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensiones;
+			sourceTree = "<group>";
+		};
+		8CA3991229B75D4D00C09746 /* Registro */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Registro;
+			sourceTree = "<group>";
+		};
+		8CA3991329B75E1A00C09746 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				8C1D8BA229B764F600A4C473 /* ViewModel */,
+				8C1D8BA129B764ED00A4C473 /* View */,
+				8CA398B229B72A1F00C09746 /* Main.storyboard */,
+				8CA398B029B72A1F00C09746 /* ViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		8CA3991429B75E3C00C09746 /* Flujos */ = {
+			isa = PBXGroup;
+			children = (
+				8CA3991529B75F2800C09746 /* FlujosDeNavegacion.swift */,
+			);
+			path = Flujos;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -389,18 +484,23 @@
 				8CA398FA29B736A700C09746 /* RegistrarUsecase.swift in Sources */,
 				8CA3990429B73E8500C09746 /* CuentaconsultaRepositorio.swift in Sources */,
 				8CA398B129B72A1F00C09746 /* ViewController.swift in Sources */,
+				8CA3990729B759E800C09746 /* ErrorTransferenciaDatos.swift in Sources */,
 				8CA398F329B733F000C09746 /* ModosDeJuego.swift in Sources */,
 				8CA398FE29B73A3C00C09746 /* Cuenta.swift in Sources */,
+				8CA3990D29B75A2400C09746 /* ConfiguracionRed.swift in Sources */,
 				8CA398F829B7365F00C09746 /* Cancelable.swift in Sources */,
 				8CA398AD29B72A1F00C09746 /* AppDelegate.swift in Sources */,
 				8CA398F029B733C700C09746 /* Weapon.swift in Sources */,
 				8CA398EE29B7339900C09746 /* Survival.swift in Sources */,
 				8CA3990229B73DBB00C09746 /* CuentaRepositorio.swift in Sources */,
 				8CA398F629B735B300C09746 /* UseCase.swift in Sources */,
+				8CA3991629B75F2800C09746 /* FlujosDeNavegacion.swift in Sources */,
 				8CA3990029B73A5100C09746 /* CuentaConsulta.swift in Sources */,
 				8CA398AF29B72A1F00C09746 /* SceneDelegate.swift in Sources */,
+				8CA3990929B759F900C09746 /* ServicioRed.swift in Sources */,
 				8CA398B729B72A1F00C09746 /* PubgStats.xcdatamodeld in Sources */,
 				8CA398FC29B736BD00C09746 /* LoginUseCase.swift in Sources */,
+				8CA3990B29B75A1900C09746 /* Terminaciones.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
