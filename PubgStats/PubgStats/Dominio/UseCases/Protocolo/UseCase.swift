@@ -10,6 +10,4 @@ import Foundation
 protocol UseCase {
     @discardableResult
     func empezar() -> Cancelable?
-    //Cancelable es un protocolo en comun
 }
-//>  <

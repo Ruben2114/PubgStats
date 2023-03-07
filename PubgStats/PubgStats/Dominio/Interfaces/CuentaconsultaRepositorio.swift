@@ -10,13 +10,12 @@ import Foundation
 protocol CuentaconsultaRepositorio {
     @discardableResult
     func buscarListaCuentas(
-        nombre: String,
-        contrasena: String,
+        consulta: Registro,
         finalizacion: @escaping (Result<[Cuenta], Error>) -> Void
     ) -> Cancelable?
     
-    func guardarConsulta(
-        query: Registro,
-        finalizacion: @escaping (Result<Registro, Error>) -> Void
+    func guardarCuenta(
+        consulta: Registro,
+        finalizacion: @escaping (Result<Cuenta, Error>) -> Void
     )
 }

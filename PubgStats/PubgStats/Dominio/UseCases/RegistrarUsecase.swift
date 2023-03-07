@@ -24,7 +24,7 @@ final class RegistroCuentaPorDefectoUseCas: RegistrarUsecase {
     func ejecutar(valorSocilitado: BuscarUsuarioUseCaseValor, finalizacion: @escaping (Result<Cuenta, Error>) -> Void) -> Cancelable? {
         return cuentaRepositorio.agregarCuenta(nombre: valorSocilitado.nombre, contrasena: valorSocilitado.contrasena, finalizacion: { resultado in
             if case .success = resultado {
-                self.cuentaconsultaRepositorio.guardarConsulta(query: Registro(nombre: valorSocilitado.nombre, contrasena: valorSocilitado.contrasena)) {_ in}
+                self.cuentaconsultaRepositorio.guardarCuenta(consulta: Registro(nombre: valorSocilitado.nombre, contrasena: valorSocilitado.contrasena)) {_ in}
             }
             finalizacion(resultado)
         })

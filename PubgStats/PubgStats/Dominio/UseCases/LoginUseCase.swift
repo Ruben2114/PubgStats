@@ -23,7 +23,7 @@ final class LoginUseCase: UseCase{
         self.cuentaconsultaRepositorio = cuentaconsultaRepositorio
     }
     func empezar() -> Cancelable? {
-        cuentaconsultaRepositorio.buscarListaCuentas( nombre: buscarUsuario.nombre, contrasena: buscarUsuario.contrasena, finalizacion: finalizacion)
+        cuentaconsultaRepositorio.buscarListaCuentas( consulta: Registro(nombre: buscarUsuario.nombre, contrasena: buscarUsuario.contrasena), finalizacion: finalizacion)
         return nil
     }
 }
