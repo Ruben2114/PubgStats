@@ -10,7 +10,6 @@ import Foundation
 protocol RegistrarUsecase {
     func ejecutar(
         valorSocilitado: BuscarUsuarioUseCaseValor,
-        cacheado: @escaping (Cuenta) -> Void,
         finalizacion: @escaping (Result<Cuenta, Error>) -> Void
     ) -> Cancelable?
 }
@@ -22,16 +21,16 @@ final class RegistroCuentaPorDefectoUseCas: RegistrarUsecase {
         self.cuentaRepositorio = cuentaRepositorio
         self.cuentaconsultaRepositorio = cuentaconsultaRepositorio
     }
-    func ejecutar(valorSocilitado: BuscarUsuarioUseCaseValor, cacheado: @escaping (Cuenta) -> Void, finalizacion: @escaping (Result<Cuenta, Error>) -> Void) -> Cancelable? {
-        return cuentaRepositorio.buscarListaCuentas(consulta: valorSocilitado.consulta, nombre: valorSocilitado.nombre, cacheado: cacheado, finalizacion: { resultado in
+    func ejecutar(valorSocilitado: BuscarUsuarioUseCaseValor, finalizacion: @escaping (Result<Cuenta, Error>) -> Void) -> Cancelable? {
+        return cuentaRepositorio.agregarCuenta(nombre: valorSocilitado.nombre, contrasena: valorSocilitado.contrasena, finalizacion: { resultado in
             if case .success = resultado {
-                self.cuentaconsultaRepositorio.guardarConsulta(query: valorSocilitado.consulta) { _ in }
+                self.cuentaconsultaRepositorio.guardarConsulta(query: Registro(nombre: valorSocilitado.nombre, contrasena: valorSocilitado.contrasena)) {_ in}
             }
             finalizacion(resultado)
         })
     }
 }
 struct BuscarUsuarioUseCaseValor {
-    let consulta: Consulta
     let nombre: String
+    let contrasena: String
 }

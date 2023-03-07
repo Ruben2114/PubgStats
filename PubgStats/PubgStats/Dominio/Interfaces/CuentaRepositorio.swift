@@ -9,10 +9,9 @@ import Foundation
 
 protocol CuentaRepositorio {
     @discardableResult
-    func buscarListaCuentas(
-        consulta: Consulta,
+    func agregarCuenta(
         nombre: String,
-        cacheado: @escaping (Cuenta) -> Void,
+        contrasena: String,
         finalizacion: @escaping (Result<Cuenta, Error>) -> Void
     ) -> Cancelable?
 }

@@ -7,22 +7,23 @@
 
 import Foundation
 final class LoginUseCase: UseCase{
-    struct UsuarioGuardado {
+    struct BuscarUsuario {
         let nombre: String
+        let contrasena: String
     }
-    typealias Usuario = (Result<[Consulta], Error>)
+    typealias Usuario = (Result<[Cuenta], Error>)
     
-    private let usuarioGuardado: UsuarioGuardado
+    private let buscarUsuario: BuscarUsuario
     private let finalizacion: (Usuario) -> Void
     private let cuentaconsultaRepositorio: CuentaconsultaRepositorio
     
-    init(usuarioGuardado: UsuarioGuardado, finalizacion: @escaping (Usuario) -> Void, cuentaconsultaRepositorio: CuentaconsultaRepositorio) {
-        self.usuarioGuardado = usuarioGuardado
+    init(buscarUsuario: BuscarUsuario, finalizacion: @escaping (Usuario) -> Void, cuentaconsultaRepositorio: CuentaconsultaRepositorio) {
+        self.buscarUsuario = buscarUsuario
         self.finalizacion = finalizacion
         self.cuentaconsultaRepositorio = cuentaconsultaRepositorio
     }
     func empezar() -> Cancelable? {
-        cuentaconsultaRepositorio.buscarConsultasGuardadas(nombre: usuarioGuardado.nombre, finalizacion: finalizacion)
+        cuentaconsultaRepositorio.buscarListaCuentas( nombre: buscarUsuario.nombre, contrasena: buscarUsuario.contrasena, finalizacion: finalizacion)
         return nil
     }
 }

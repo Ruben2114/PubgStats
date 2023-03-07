@@ -7,6 +7,7 @@
 
 import Foundation
 
-struct Consulta: Equatable {
-    let consulta: String
+struct Registro: Equatable {
+    let nombre: String
+    let contrasena: String
 }

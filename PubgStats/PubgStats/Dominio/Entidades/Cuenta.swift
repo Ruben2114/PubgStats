@@ -8,7 +8,8 @@
 import Foundation
 
 struct Cuenta: Equatable, Identifiable {
-    let id: String
+    let id: String //hacerlo que aumente solo
     let nombre: String
-    let DiaDeCreacion: Date
+    let contrasena: String
+    let DiaDeCreacion: Date //automaticamente por el dia (solo d/m/a)
 }
