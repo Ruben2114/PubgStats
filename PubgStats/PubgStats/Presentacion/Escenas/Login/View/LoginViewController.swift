@@ -7,10 +7,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
 
     @IBOutlet weak var usuarioTexto: UITextField!
     @IBOutlet weak var ContrasenaTexto: UITextField!
+    
+    //private var viewModel: ....
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C1D8BA429B7659E00A4C473 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1D8BA329B7659E00A4C473 /* LoginViewModel.swift */; };
+		8C1D8BA629B769DF00A4C473 /* ServicioTransferenciaDatos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1D8BA529B769DF00A4C473 /* ServicioTransferenciaDatos.swift */; };
+		8C1D8BAA29B76C0F00A4C473 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1D8BA929B76C0F00A4C473 /* CoreData.swift */; };
+		8C1D8BAD29B76D2100A4C473 /* DataCuentaRepositorio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1D8BAC29B76D2100A4C473 /* DataCuentaRepositorio.swift */; };
+		8C1D8BAF29B76D3E00A4C473 /* DataCuentaconsultaRepositorio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1D8BAE29B76D3E00A4C473 /* DataCuentaconsultaRepositorio.swift */; };
 		8CA398AD29B72A1F00C09746 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398AC29B72A1F00C09746 /* AppDelegate.swift */; };
 		8CA398AF29B72A1F00C09746 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398AE29B72A1F00C09746 /* SceneDelegate.swift */; };
-		8CA398B129B72A1F00C09746 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398B029B72A1F00C09746 /* ViewController.swift */; };
+		8CA398B129B72A1F00C09746 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398B029B72A1F00C09746 /* LoginViewController.swift */; };
 		8CA398B429B72A1F00C09746 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CA398B229B72A1F00C09746 /* Main.storyboard */; };
 		8CA398B729B72A1F00C09746 /* PubgStats.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398B529B72A1F00C09746 /* PubgStats.xcdatamodeld */; };
 		8CA398B929B72A2000C09746 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA398B829B72A2000C09746 /* Assets.xcassets */; };
@@ -17,10 +22,6 @@
 		8CA398C729B72A2000C09746 /* PubgStatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398C629B72A2000C09746 /* PubgStatsTests.swift */; };
 		8CA398D129B72A2000C09746 /* PubgStatsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398D029B72A2000C09746 /* PubgStatsUITests.swift */; };
 		8CA398D329B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398D229B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift */; };
-		8CA398EB29B7335600C09746 /* DatosGenerales.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398EA29B7335600C09746 /* DatosGenerales.swift */; };
-		8CA398EE29B7339900C09746 /* Survival.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398ED29B7339900C09746 /* Survival.swift */; };
-		8CA398F029B733C700C09746 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398EF29B733C700C09746 /* Weapon.swift */; };
-		8CA398F329B733F000C09746 /* ModosDeJuego.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398F229B733F000C09746 /* ModosDeJuego.swift */; };
 		8CA398F629B735B300C09746 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398F529B735B300C09746 /* UseCase.swift */; };
 		8CA398F829B7365F00C09746 /* Cancelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398F729B7365F00C09746 /* Cancelable.swift */; };
 		8CA398FA29B736A700C09746 /* RegistrarUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398F929B736A700C09746 /* RegistrarUsecase.swift */; };
@@ -29,7 +30,6 @@
 		8CA3990029B73A5100C09746 /* CuentaConsulta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398FF29B73A5100C09746 /* CuentaConsulta.swift */; };
 		8CA3990229B73DBB00C09746 /* CuentaRepositorio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3990129B73DBB00C09746 /* CuentaRepositorio.swift */; };
 		8CA3990429B73E8500C09746 /* CuentaconsultaRepositorio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3990329B73E8500C09746 /* CuentaconsultaRepositorio.swift */; };
-		8CA3990729B759E800C09746 /* ErrorTransferenciaDatos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3990629B759E800C09746 /* ErrorTransferenciaDatos.swift */; };
 		8CA3990929B759F900C09746 /* ServicioRed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3990829B759F900C09746 /* ServicioRed.swift */; };
 		8CA3990B29B75A1900C09746 /* Terminaciones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3990A29B75A1900C09746 /* Terminaciones.swift */; };
 		8CA3990D29B75A2400C09746 /* ConfiguracionRed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3990C29B75A2400C09746 /* ConfiguracionRed.swift */; };
@@ -54,10 +54,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C1D8BA329B7659E00A4C473 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		8C1D8BA529B769DF00A4C473 /* ServicioTransferenciaDatos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicioTransferenciaDatos.swift; sourceTree = "<group>"; };
+		8C1D8BA929B76C0F00A4C473 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
+		8C1D8BAC29B76D2100A4C473 /* DataCuentaRepositorio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCuentaRepositorio.swift; sourceTree = "<group>"; };
+		8C1D8BAE29B76D3E00A4C473 /* DataCuentaconsultaRepositorio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCuentaconsultaRepositorio.swift; sourceTree = "<group>"; };
 		8CA398A929B72A1F00C09746 /* PubgStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PubgStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA398AC29B72A1F00C09746 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CA398AE29B72A1F00C09746 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8CA398B029B72A1F00C09746 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8CA398B029B72A1F00C09746 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8CA398B329B72A1F00C09746 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8CA398B629B72A1F00C09746 /* PubgStats.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PubgStats.xcdatamodel; sourceTree = "<group>"; };
 		8CA398B829B72A2000C09746 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -68,10 +73,6 @@
 		8CA398CC29B72A2000C09746 /* PubgStatsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PubgStatsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA398D029B72A2000C09746 /* PubgStatsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PubgStatsUITests.swift; sourceTree = "<group>"; };
 		8CA398D229B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PubgStatsUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		8CA398EA29B7335600C09746 /* DatosGenerales.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatosGenerales.swift; sourceTree = "<group>"; };
-		8CA398ED29B7339900C09746 /* Survival.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survival.swift; sourceTree = "<group>"; };
-		8CA398EF29B733C700C09746 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
-		8CA398F229B733F000C09746 /* ModosDeJuego.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModosDeJuego.swift; sourceTree = "<group>"; };
 		8CA398F529B735B300C09746 /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		8CA398F729B7365F00C09746 /* Cancelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancelable.swift; sourceTree = "<group>"; };
 		8CA398F929B736A700C09746 /* RegistrarUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrarUsecase.swift; sourceTree = "<group>"; };
@@ -80,7 +81,6 @@
 		8CA398FF29B73A5100C09746 /* CuentaConsulta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuentaConsulta.swift; sourceTree = "<group>"; };
 		8CA3990129B73DBB00C09746 /* CuentaRepositorio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuentaRepositorio.swift; sourceTree = "<group>"; };
 		8CA3990329B73E8500C09746 /* CuentaconsultaRepositorio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuentaconsultaRepositorio.swift; sourceTree = "<group>"; };
-		8CA3990629B759E800C09746 /* ErrorTransferenciaDatos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTransferenciaDatos.swift; sourceTree = "<group>"; };
 		8CA3990829B759F900C09746 /* ServicioRed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicioRed.swift; sourceTree = "<group>"; };
 		8CA3990A29B75A1900C09746 /* Terminaciones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terminaciones.swift; sourceTree = "<group>"; };
 		8CA3990C29B75A2400C09746 /* ConfiguracionRed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiguracionRed.swift; sourceTree = "<group>"; };
@@ -115,6 +115,8 @@
 		8C1D8BA129B764ED00A4C473 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8CA398B229B72A1F00C09746 /* Main.storyboard */,
+				8CA398B029B72A1F00C09746 /* LoginViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -122,8 +124,35 @@
 		8C1D8BA229B764F600A4C473 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				8C1D8BA329B7659E00A4C473 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8C1D8BA729B76BEB00A4C473 /* AlmacenamientoPersistente */ = {
+			isa = PBXGroup;
+			children = (
+				8C1D8BA829B76BFA00A4C473 /* Coredata */,
+			);
+			path = AlmacenamientoPersistente;
+			sourceTree = "<group>";
+		};
+		8C1D8BA829B76BFA00A4C473 /* Coredata */ = {
+			isa = PBXGroup;
+			children = (
+				8CA398B529B72A1F00C09746 /* PubgStats.xcdatamodeld */,
+				8C1D8BA929B76C0F00A4C473 /* CoreData.swift */,
+			);
+			path = Coredata;
+			sourceTree = "<group>";
+		};
+		8C1D8BAB29B76CD800A4C473 /* Repositorios */ = {
+			isa = PBXGroup;
+			children = (
+				8C1D8BAC29B76D2100A4C473 /* DataCuentaRepositorio.swift */,
+				8C1D8BAE29B76D3E00A4C473 /* DataCuentaconsultaRepositorio.swift */,
+			);
+			path = Repositorios;
 			sourceTree = "<group>";
 		};
 		8CA398A029B72A1F00C09746 = {
@@ -224,11 +253,8 @@
 		8CA398E429B7318B00C09746 /* Datos */ = {
 			isa = PBXGroup;
 			children = (
-				8CA398EA29B7335600C09746 /* DatosGenerales.swift */,
-				8CA398ED29B7339900C09746 /* Survival.swift */,
-				8CA398EF29B733C700C09746 /* Weapon.swift */,
-				8CA398F229B733F000C09746 /* ModosDeJuego.swift */,
-				8CA398B529B72A1F00C09746 /* PubgStats.xcdatamodeld */,
+				8C1D8BAB29B76CD800A4C473 /* Repositorios */,
+				8C1D8BA729B76BEB00A4C473 /* AlmacenamientoPersistente */,
 			);
 			path = Datos;
 			sourceTree = "<group>";
@@ -282,7 +308,7 @@
 		8CA3990529B759A100C09746 /* Red */ = {
 			isa = PBXGroup;
 			children = (
-				8CA3990629B759E800C09746 /* ErrorTransferenciaDatos.swift */,
+				8C1D8BA529B769DF00A4C473 /* ServicioTransferenciaDatos.swift */,
 				8CA3990829B759F900C09746 /* ServicioRed.swift */,
 				8CA3990A29B75A1900C09746 /* Terminaciones.swift */,
 				8CA3990C29B75A2400C09746 /* ConfiguracionRed.swift */,
@@ -335,8 +361,6 @@
 			children = (
 				8C1D8BA229B764F600A4C473 /* ViewModel */,
 				8C1D8BA129B764ED00A4C473 /* View */,
-				8CA398B229B72A1F00C09746 /* Main.storyboard */,
-				8CA398B029B72A1F00C09746 /* ViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -480,23 +504,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CA398EB29B7335600C09746 /* DatosGenerales.swift in Sources */,
 				8CA398FA29B736A700C09746 /* RegistrarUsecase.swift in Sources */,
+				8C1D8BA429B7659E00A4C473 /* LoginViewModel.swift in Sources */,
 				8CA3990429B73E8500C09746 /* CuentaconsultaRepositorio.swift in Sources */,
-				8CA398B129B72A1F00C09746 /* ViewController.swift in Sources */,
-				8CA3990729B759E800C09746 /* ErrorTransferenciaDatos.swift in Sources */,
-				8CA398F329B733F000C09746 /* ModosDeJuego.swift in Sources */,
+				8CA398B129B72A1F00C09746 /* LoginViewController.swift in Sources */,
 				8CA398FE29B73A3C00C09746 /* Cuenta.swift in Sources */,
 				8CA3990D29B75A2400C09746 /* ConfiguracionRed.swift in Sources */,
 				8CA398F829B7365F00C09746 /* Cancelable.swift in Sources */,
 				8CA398AD29B72A1F00C09746 /* AppDelegate.swift in Sources */,
-				8CA398F029B733C700C09746 /* Weapon.swift in Sources */,
-				8CA398EE29B7339900C09746 /* Survival.swift in Sources */,
+				8C1D8BAA29B76C0F00A4C473 /* CoreData.swift in Sources */,
 				8CA3990229B73DBB00C09746 /* CuentaRepositorio.swift in Sources */,
 				8CA398F629B735B300C09746 /* UseCase.swift in Sources */,
+				8C1D8BA629B769DF00A4C473 /* ServicioTransferenciaDatos.swift in Sources */,
 				8CA3991629B75F2800C09746 /* FlujosDeNavegacion.swift in Sources */,
+				8C1D8BAF29B76D3E00A4C473 /* DataCuentaconsultaRepositorio.swift in Sources */,
 				8CA3990029B73A5100C09746 /* CuentaConsulta.swift in Sources */,
 				8CA398AF29B72A1F00C09746 /* SceneDelegate.swift in Sources */,
+				8C1D8BAD29B76D2100A4C473 /* DataCuentaRepositorio.swift in Sources */,
 				8CA3990929B759F900C09746 /* ServicioRed.swift in Sources */,
 				8CA398B729B72A1F00C09746 /* PubgStats.xcdatamodeld in Sources */,
 				8CA398FC29B736BD00C09746 /* LoginUseCase.swift in Sources */,
