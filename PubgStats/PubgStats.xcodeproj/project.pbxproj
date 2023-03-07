@@ -21,6 +21,14 @@
 		8CA398EE29B7339900C09746 /* Survival.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398ED29B7339900C09746 /* Survival.swift */; };
 		8CA398F029B733C700C09746 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398EF29B733C700C09746 /* Weapon.swift */; };
 		8CA398F329B733F000C09746 /* ModosDeJuego.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398F229B733F000C09746 /* ModosDeJuego.swift */; };
+		8CA398F629B735B300C09746 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398F529B735B300C09746 /* UseCase.swift */; };
+		8CA398F829B7365F00C09746 /* Cancelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398F729B7365F00C09746 /* Cancelable.swift */; };
+		8CA398FA29B736A700C09746 /* RegistrarUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398F929B736A700C09746 /* RegistrarUsecase.swift */; };
+		8CA398FC29B736BD00C09746 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398FB29B736BD00C09746 /* LoginUseCase.swift */; };
+		8CA398FE29B73A3C00C09746 /* Cuenta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398FD29B73A3C00C09746 /* Cuenta.swift */; };
+		8CA3990029B73A5100C09746 /* CuentaConsulta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398FF29B73A5100C09746 /* CuentaConsulta.swift */; };
+		8CA3990229B73DBB00C09746 /* CuentaRepositorio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3990129B73DBB00C09746 /* CuentaRepositorio.swift */; };
+		8CA3990429B73E8500C09746 /* CuentaconsultaRepositorio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3990329B73E8500C09746 /* CuentaconsultaRepositorio.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +67,14 @@
 		8CA398ED29B7339900C09746 /* Survival.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survival.swift; sourceTree = "<group>"; };
 		8CA398EF29B733C700C09746 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
 		8CA398F229B733F000C09746 /* ModosDeJuego.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModosDeJuego.swift; sourceTree = "<group>"; };
+		8CA398F529B735B300C09746 /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
+		8CA398F729B7365F00C09746 /* Cancelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancelable.swift; sourceTree = "<group>"; };
+		8CA398F929B736A700C09746 /* RegistrarUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrarUsecase.swift; sourceTree = "<group>"; };
+		8CA398FB29B736BD00C09746 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		8CA398FD29B73A3C00C09746 /* Cuenta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cuenta.swift; sourceTree = "<group>"; };
+		8CA398FF29B73A5100C09746 /* CuentaConsulta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuentaConsulta.swift; sourceTree = "<group>"; };
+		8CA3990129B73DBB00C09746 /* CuentaRepositorio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuentaRepositorio.swift; sourceTree = "<group>"; };
+		8CA3990329B73E8500C09746 /* CuentaconsultaRepositorio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuentaconsultaRepositorio.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +184,7 @@
 		8CA398E229B7316100C09746 /* Comun */ = {
 			isa = PBXGroup;
 			children = (
+				8CA398F729B7365F00C09746 /* Cancelable.swift */,
 			);
 			path = Comun;
 			sourceTree = "<group>";
@@ -182,6 +199,10 @@
 		8CA398E429B7318B00C09746 /* Datos */ = {
 			isa = PBXGroup;
 			children = (
+				8CA398EA29B7335600C09746 /* DatosGenerales.swift */,
+				8CA398ED29B7339900C09746 /* Survival.swift */,
+				8CA398EF29B733C700C09746 /* Weapon.swift */,
+				8CA398F229B733F000C09746 /* ModosDeJuego.swift */,
 				8CA398B529B72A1F00C09746 /* PubgStats.xcdatamodeld */,
 			);
 			path = Datos;
@@ -200,10 +221,8 @@
 		8CA398E629B732FD00C09746 /* Entidades */ = {
 			isa = PBXGroup;
 			children = (
-				8CA398EA29B7335600C09746 /* DatosGenerales.swift */,
-				8CA398ED29B7339900C09746 /* Survival.swift */,
-				8CA398EF29B733C700C09746 /* Weapon.swift */,
-				8CA398F229B733F000C09746 /* ModosDeJuego.swift */,
+				8CA398FD29B73A3C00C09746 /* Cuenta.swift */,
+				8CA398FF29B73A5100C09746 /* CuentaConsulta.swift */,
 			);
 			path = Entidades;
 			sourceTree = "<group>";
@@ -211,6 +230,8 @@
 		8CA398E729B7330900C09746 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
+				8CA3990129B73DBB00C09746 /* CuentaRepositorio.swift */,
+				8CA3990329B73E8500C09746 /* CuentaconsultaRepositorio.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -218,8 +239,19 @@
 		8CA398E829B7331A00C09746 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				8CA398F929B736A700C09746 /* RegistrarUsecase.swift */,
+				8CA398FB29B736BD00C09746 /* LoginUseCase.swift */,
+				8CA398F429B735A000C09746 /* Protocolo */,
 			);
 			path = UseCases;
+			sourceTree = "<group>";
+		};
+		8CA398F429B735A000C09746 /* Protocolo */ = {
+			isa = PBXGroup;
+			children = (
+				8CA398F529B735B300C09746 /* UseCase.swift */,
+			);
+			path = Protocolo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,13 +386,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CA398EB29B7335600C09746 /* DatosGenerales.swift in Sources */,
+				8CA398FA29B736A700C09746 /* RegistrarUsecase.swift in Sources */,
+				8CA3990429B73E8500C09746 /* CuentaconsultaRepositorio.swift in Sources */,
 				8CA398B129B72A1F00C09746 /* ViewController.swift in Sources */,
 				8CA398F329B733F000C09746 /* ModosDeJuego.swift in Sources */,
+				8CA398FE29B73A3C00C09746 /* Cuenta.swift in Sources */,
+				8CA398F829B7365F00C09746 /* Cancelable.swift in Sources */,
 				8CA398AD29B72A1F00C09746 /* AppDelegate.swift in Sources */,
 				8CA398F029B733C700C09746 /* Weapon.swift in Sources */,
 				8CA398EE29B7339900C09746 /* Survival.swift in Sources */,
+				8CA3990229B73DBB00C09746 /* CuentaRepositorio.swift in Sources */,
+				8CA398F629B735B300C09746 /* UseCase.swift in Sources */,
+				8CA3990029B73A5100C09746 /* CuentaConsulta.swift in Sources */,
 				8CA398AF29B72A1F00C09746 /* SceneDelegate.swift in Sources */,
 				8CA398B729B72A1F00C09746 /* PubgStats.xcdatamodeld in Sources */,
+				8CA398FC29B736BD00C09746 /* LoginUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
