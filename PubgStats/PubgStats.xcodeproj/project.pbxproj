@@ -17,6 +17,10 @@
 		8CA398C729B72A2000C09746 /* PubgStatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398C629B72A2000C09746 /* PubgStatsTests.swift */; };
 		8CA398D129B72A2000C09746 /* PubgStatsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398D029B72A2000C09746 /* PubgStatsUITests.swift */; };
 		8CA398D329B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398D229B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift */; };
+		8CA398EB29B7335600C09746 /* DatosGenerales.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398EA29B7335600C09746 /* DatosGenerales.swift */; };
+		8CA398EE29B7339900C09746 /* Survival.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398ED29B7339900C09746 /* Survival.swift */; };
+		8CA398F029B733C700C09746 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398EF29B733C700C09746 /* Weapon.swift */; };
+		8CA398F329B733F000C09746 /* ModosDeJuego.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398F229B733F000C09746 /* ModosDeJuego.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,10 @@
 		8CA398CC29B72A2000C09746 /* PubgStatsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PubgStatsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA398D029B72A2000C09746 /* PubgStatsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PubgStatsUITests.swift; sourceTree = "<group>"; };
 		8CA398D229B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PubgStatsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8CA398EA29B7335600C09746 /* DatosGenerales.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatosGenerales.swift; sourceTree = "<group>"; };
+		8CA398ED29B7339900C09746 /* Survival.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survival.swift; sourceTree = "<group>"; };
+		8CA398EF29B733C700C09746 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
+		8CA398F229B733F000C09746 /* ModosDeJuego.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModosDeJuego.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,8 +190,36 @@
 		8CA398E529B7319300C09746 /* Dominio */ = {
 			isa = PBXGroup;
 			children = (
+				8CA398E629B732FD00C09746 /* Entidades */,
+				8CA398E829B7331A00C09746 /* UseCases */,
+				8CA398E729B7330900C09746 /* Interfaces */,
 			);
 			path = Dominio;
+			sourceTree = "<group>";
+		};
+		8CA398E629B732FD00C09746 /* Entidades */ = {
+			isa = PBXGroup;
+			children = (
+				8CA398EA29B7335600C09746 /* DatosGenerales.swift */,
+				8CA398ED29B7339900C09746 /* Survival.swift */,
+				8CA398EF29B733C700C09746 /* Weapon.swift */,
+				8CA398F229B733F000C09746 /* ModosDeJuego.swift */,
+			);
+			path = Entidades;
+			sourceTree = "<group>";
+		};
+		8CA398E729B7330900C09746 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		8CA398E829B7331A00C09746 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCases;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,8 +353,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CA398EB29B7335600C09746 /* DatosGenerales.swift in Sources */,
 				8CA398B129B72A1F00C09746 /* ViewController.swift in Sources */,
+				8CA398F329B733F000C09746 /* ModosDeJuego.swift in Sources */,
 				8CA398AD29B72A1F00C09746 /* AppDelegate.swift in Sources */,
+				8CA398F029B733C700C09746 /* Weapon.swift in Sources */,
+				8CA398EE29B7339900C09746 /* Survival.swift in Sources */,
 				8CA398AF29B72A1F00C09746 /* SceneDelegate.swift in Sources */,
 				8CA398B729B72A1F00C09746 /* PubgStats.xcdatamodeld in Sources */,
 			);
