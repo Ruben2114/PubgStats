@@ -101,14 +101,14 @@
 		8CA398AB29B72A1F00C09746 /* PubgStats */ = {
 			isa = PBXGroup;
 			children = (
-				8CA398AC29B72A1F00C09746 /* AppDelegate.swift */,
-				8CA398AE29B72A1F00C09746 /* SceneDelegate.swift */,
-				8CA398B029B72A1F00C09746 /* ViewController.swift */,
-				8CA398B229B72A1F00C09746 /* Main.storyboard */,
-				8CA398B829B72A2000C09746 /* Assets.xcassets */,
-				8CA398BA29B72A2000C09746 /* LaunchScreen.storyboard */,
+				8CA398DF29B7310100C09746 /* Aplicacion */,
+				8CA398E029B7313000C09746 /* Presentacion */,
+				8CA398E529B7319300C09746 /* Dominio */,
+				8CA398E429B7318B00C09746 /* Datos */,
+				8CA398E329B7316700C09746 /* Infraestructura */,
+				8CA398E229B7316100C09746 /* Comun */,
+				8CA398E129B7314D00C09746 /* Recursos */,
 				8CA398BD29B72A2000C09746 /* Info.plist */,
-				8CA398B529B72A1F00C09746 /* PubgStats.xcdatamodeld */,
 			);
 			path = PubgStats;
 			sourceTree = "<group>";
@@ -128,6 +128,62 @@
 				8CA398D229B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift */,
 			);
 			path = PubgStatsUITests;
+			sourceTree = "<group>";
+		};
+		8CA398DF29B7310100C09746 /* Aplicacion */ = {
+			isa = PBXGroup;
+			children = (
+				8CA398AE29B72A1F00C09746 /* SceneDelegate.swift */,
+				8CA398AC29B72A1F00C09746 /* AppDelegate.swift */,
+			);
+			path = Aplicacion;
+			sourceTree = "<group>";
+		};
+		8CA398E029B7313000C09746 /* Presentacion */ = {
+			isa = PBXGroup;
+			children = (
+				8CA398B229B72A1F00C09746 /* Main.storyboard */,
+				8CA398B029B72A1F00C09746 /* ViewController.swift */,
+			);
+			path = Presentacion;
+			sourceTree = "<group>";
+		};
+		8CA398E129B7314D00C09746 /* Recursos */ = {
+			isa = PBXGroup;
+			children = (
+				8CA398B829B72A2000C09746 /* Assets.xcassets */,
+				8CA398BA29B72A2000C09746 /* LaunchScreen.storyboard */,
+			);
+			path = Recursos;
+			sourceTree = "<group>";
+		};
+		8CA398E229B7316100C09746 /* Comun */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Comun;
+			sourceTree = "<group>";
+		};
+		8CA398E329B7316700C09746 /* Infraestructura */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Infraestructura;
+			sourceTree = "<group>";
+		};
+		8CA398E429B7318B00C09746 /* Datos */ = {
+			isa = PBXGroup;
+			children = (
+				8CA398B529B72A1F00C09746 /* PubgStats.xcdatamodeld */,
+			);
+			path = Datos;
+			sourceTree = "<group>";
+		};
+		8CA398E529B7319300C09746 /* Dominio */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Dominio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
