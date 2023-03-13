@@ -1,33 +1,35 @@
 //
-//  HomeMenuViewModel.swift
+//  RegisterViewModel.swift
 //  PubgStats
 //
-//  Created by Ruben Rodriguez on 10/3/23.
+//  Created by Ruben Rodriguez on 13/3/23.
 //
 
 import Foundation
 import Combine
 
-
-
-final class HomeMenuViewModel {
-    
-    
+class RegisterViewModel {
+    enum Output {
+        case fetchError (error: Error)
+        case fetchSave (model : Profile)
+    }
     var state: PassthroughSubject<StateController, Never>
     private let profileDataUseCase: ProfileDataUseCase
-    private var profileModel = ProfileModel(name: "", password: "")
     
     init(state: PassthroughSubject<StateController, Never>, profileDataUseCase: ProfileDataUseCase) {
         self.state = state
         self.profileDataUseCase = profileDataUseCase
     }
     
-    func viewDidLoad(){
+    func saveUser(_ user: ProfileModel) {
         state.send(.loading)
         Task {
-            let profileResult = await profileDataUseCase.execute(profile: profileModel)
+            let result = await profileDataUseCase.execute(profile: user)
             state.send(.success)
-            print("voy por aqui")
+            print("guardado")
         }
     }
 }
+
+
+

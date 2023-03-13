@@ -1,23 +1,22 @@
 //
-//  HomeMenuViewController.swift
+//  RegisterViewController.swift
 //  PubgStats
 //
-//  Created by Ruben Rodriguez on 7/3/23.
+//  Created by Ruben Rodriguez on 13/3/23.
 //
 
 import UIKit
 import Combine
 import CoreData
 
-protocol HomeMenuViewControllerCoordinator {
-    func didTapLoginButton()
-    func didTapRegisterButton()
+protocol RegisterViewControllerCoordinator {
+    func didTapAcceptButton()
 }
 
-class HomeMenuViewController: UIViewController {
+class RegisterViewController: UIViewController {
     private var cancellable = Set<AnyCancellable>()
-    private let viewModel: HomeMenuViewModel
-    private let coordinator: HomeMenuViewControllerCoordinator
+    private let viewModel: RegisterViewModel
+    private let coordinator: RegisterViewControllerCoordinator
     
     private let containerView: UIView = {
         let view = UIView()
@@ -26,20 +25,33 @@ class HomeMenuViewController: UIViewController {
     }()
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Welcome to AppPubgStats"
+        label.text = "Register on AppPubgStats"
         label.font = UIFont.preferredFont(forTextStyle: .title2)
         label.textAlignment = .center
         return label
     }()
     private lazy var userTextField = makeTextField(placeholder: "User Name")
     private lazy var passwordTextField = makeTextField(placeholder: "Password")
-    private lazy var loginButton: UIButton = makeTitleBlueButton(
-        title: "Login")
     
-    private lazy var registerButton: UIButton = makeTitleBlueButton(
-        title: "Register")
+    //TODO: como ponerle el weak para no perder memoria
+    var acceptButton: UIButton = {
+        let button = UIButton(type: .system)
+        var configuration = UIButton.Configuration.filled()
+        configuration.title = "Accept"
+        configuration.buttonSize = .small
+        configuration.titleAlignment = .center
+        configuration.cornerStyle = .large
+        configuration.titleTextAttributesTransformer =
+        UIConfigurationTextAttributesTransformer { incoming in
+            var outgoing = incoming
+            outgoing.font = UIFont.preferredFont(forTextStyle: .headline)
+            return outgoing
+        }
+        button.configuration = configuration
+        return button
+    }()
     
-    init(coordinator: HomeMenuViewControllerCoordinator, viewModel: HomeMenuViewModel) {
+    init(coordinator: RegisterViewControllerCoordinator, viewModel: RegisterViewModel) {
         self.coordinator = coordinator
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -53,7 +65,7 @@ class HomeMenuViewController: UIViewController {
         super.viewDidLoad()
         configUserInterface()
         configTargets()
-        viewModel.viewDidLoad()
+        bind()
     }
     
     private func configUserInterface(){
@@ -92,25 +104,19 @@ class HomeMenuViewController: UIViewController {
             pTop: 25,
             pRight: 20,
             pLeft: 20)
-        
-        let buttonStackView = UIStackView(
-            arrangedSubviews: [loginButton, registerButton])
-        buttonStackView.axis = .vertical
-        buttonStackView.spacing = 25
-        containerView.addSubview(buttonStackView)
-        buttonStackView.setConstraints(
+        containerView.addSubview(acceptButton)
+        acceptButton.setConstraints(
             top: passwordTextField.bottomAnchor,
             right: containerView.rightAnchor,
             left: containerView.leftAnchor,
-            pTop: 40,
+            pTop: 25,
             pRight: 20,
             pLeft: 20)
     }
     
     
     private func configTargets() {
-        loginButton.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
-        registerButton.addTarget(self, action: #selector(didTapRegisterButton), for: .touchUpInside)
+        acceptButton.addTarget(self, action: #selector(didTapAcceptButton), for: .touchUpInside)
     }
     
     
@@ -122,36 +128,25 @@ class HomeMenuViewController: UIViewController {
         text.borderStyle = .line
         return text
     }
-    private func makeTitleBlueButton(
-        title: String
-    ) -> UIButton {
-        let button = UIButton(type: .system)
-        var configuration = UIButton.Configuration.filled()
-        configuration.title = title
-        configuration.buttonSize = .small
-        configuration.titleAlignment = .center
-        configuration.cornerStyle = .large
-        configuration.titleTextAttributesTransformer =
-        UIConfigurationTextAttributesTransformer { incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont.preferredFont(forTextStyle: .headline)
-            return outgoing
-        }
-        
-        button.configuration = configuration
-        return button
-    }
-    @objc func didTapLoginButton() {
-        //obtener usuario
-        
-        coordinator.didTapLoginButton()
-        //ir a otra vista
+    func bind(){
+        viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
+            switch state {
+            case .fetchSave(model: let model):
+                    print("gurdado")
+            case .fetchError(error: let error):
+                print("Algo ha ido mal, \(error)")
+
+            }
+        }.store(in: &cancellable)
     }
     
-    @objc func didTapRegisterButton() {
-        coordinator.didTapRegisterButton()
+    @objc func didTapAcceptButton() {
+        //manejar que no este vacio
+        let newUser = ProfileModel(name: userTextField.text ?? "", password: passwordTextField.text ?? "")
+        viewModel.saveUser(newUser)
     }
 }
-extension HomeMenuViewController: MessageDisplayable { }
+extension RegisterViewController: MessageDisplayable { }
+
 
 

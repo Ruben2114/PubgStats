@@ -25,10 +25,12 @@ extension HomeCoordinator: HomeMenuViewControllerCoordinator {
     func didTapLoginButton() {
         let loginCoordinator = homeFactory.makeLoginCoordinator(navigation: navigation)
         return loginCoordinator
+        //TODO: crear antes el coordinator en homefactory
+        //loginCoordinator.start()
     }
     
     func didTapRegisterButton() {
         let registerCoordinator = homeFactory.makeRegisterCoordinator(navigation: navigation)
-        return registerCoordinator
+        registerCoordinator.start()
     }
 }
