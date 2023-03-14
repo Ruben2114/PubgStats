@@ -21,6 +21,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         appCoordinator = AppCoordinator(navigation: navigation, appFactory: appFactory, window: window)
         appCoordinator.start()
+        /*
+         guard let windowScene = (scene as? UIWindowScene) else { return }
+         window = UIWindow(windowScene: windowScene)
+         window?.rootViewController = MainTabBarController()
+         window?.makeKeyAndVisible()
+         window?.overrideUserInterfaceStyle = .light
+         */
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

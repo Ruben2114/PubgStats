@@ -7,16 +7,17 @@
 
 import UIKit
 
-protocol ProfileFactory {
+protocol TabBarFactory {
     func makeModule() -> UIViewController
 }
 
-struct ProfileFactoryImp: ProfileFactory {
+struct TabBarFactoryImp: TabBarFactory {
     private(set) var appContainer: AppContainer
     
     func makeModule() -> UIViewController {
-        let controller = ProfileViewController()
-        controller.title = "aaaa"
+        let controller = TabBarViewController()
+        //añadir aqui todos los controller y hacerlos tabbar para mandarlos
+        controller.title = "Profile"
         return controller
     }
 }

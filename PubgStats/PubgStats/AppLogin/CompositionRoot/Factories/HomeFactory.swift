@@ -24,9 +24,9 @@ struct HomeFactoryImp: HomeFactory {
         return homeMenuController
     }
     func makeLoginCoordinator(navigation: UINavigationController) -> Coordinator {
-        let profileFactory = ProfileFactoryImp(appContainer: appContainer)
-        let profileCoordinator = ProfileCoordinator(navigation: navigation, profileFactory: profileFactory)
-        return profileCoordinator
+        let tabBarFactory = TabBarFactoryImp(appContainer: appContainer)
+        let tabBarCoordinator = TabBarCoordinator(navigation: navigation, tabBarFactory: tabBarFactory)
+        return tabBarCoordinator
     }
     
     func makeRegisterCoordinator(navigation: UINavigationController) -> Coordinator {
