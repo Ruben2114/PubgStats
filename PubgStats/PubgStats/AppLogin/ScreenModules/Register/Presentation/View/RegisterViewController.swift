@@ -13,14 +13,18 @@ protocol RegisterViewControllerCoordinator {
 }
 
 class RegisterViewController: UIViewController {
-    private var cancellable = Set<AnyCancellable>()
+    var mainScrollView = UIScrollView()
+    var contentView = UIView()
+    var cancellable = Set<AnyCancellable>()
     private let viewModel: RegisterViewModel
     private let coordinator: RegisterViewControllerCoordinator
     
-    private let containerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemBackground
-        return view
+    private let containerStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        stack.spacing = 20
+        return stack
     }()
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -29,102 +33,71 @@ class RegisterViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    private lazy var userTextField = makeTextField(placeholder: "User Name")
-    private lazy var passwordTextField = makeTextField(placeholder: "Password")
     
+    private lazy var userTextField = makeTextField(placeholder: "User Name", isSecure: false)
+    private lazy var passwordTextField = makeTextField(placeholder: "Password", isSecure: true)
     //TODO: como ponerle el weak para no perder memoria
-    var acceptButton: UIButton = {
+    private let acceptButton: UIButton = {
         let button = UIButton(type: .system)
-        var configuration = UIButton.Configuration.filled()
-        configuration.title = "Accept"
-        configuration.buttonSize = .small
-        configuration.titleAlignment = .center
-        configuration.cornerStyle = .large
-        configuration.titleTextAttributesTransformer =
-        UIConfigurationTextAttributesTransformer { incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont.preferredFont(forTextStyle: .headline)
-            return outgoing
-        }
-        button.configuration = configuration
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Log In", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.layer.cornerRadius = 10
+        button.backgroundColor = .systemBlue
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return button
     }()
-    
-    init(coordinator: RegisterViewControllerCoordinator, viewModel: RegisterViewModel) {
-        self.coordinator = coordinator
+
+    init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>(), coordinator: RegisterViewControllerCoordinator, viewModel: RegisterViewModel) {
+        self.mainScrollView = mainScrollView
+        self.contentView = contentView
+        self.cancellable = cancellable
         self.viewModel = viewModel
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configUserInterface()
+        configScroll()
+        configUI()
+        configConstraints()
         configTargets()
+        configKeyboardSubscription(mainScrollView: mainScrollView)
     }
-    
-    private func configUserInterface(){
+    private func configUI() {
         view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
-        view.addSubview(containerView)
-        containerView.setConstraints(
-            top: view.topAnchor,
-            right: view.rightAnchor,
-            bottom: view.bottomAnchor,
-            left: view.leftAnchor,
-            pTop: 250)
-        
-        containerView.addSubview(titleLabel)
-        titleLabel.setConstraints(
-            top: containerView.topAnchor,
-            right: containerView.rightAnchor,
-            left: containerView.leftAnchor,
-            pTop: 20)
-        
-        containerView.addSubview(userTextField)
-        userTextField.setConstraints(
-            top: titleLabel.bottomAnchor,
-            right: containerView.rightAnchor,
-            left: containerView.leftAnchor,
-            pTop: 40,
-            pRight: 20,
-            pLeft: 20)
-        
-        containerView.addSubview(passwordTextField)
-        passwordTextField.setConstraints(
-            top: userTextField.bottomAnchor,
-            right: containerView.rightAnchor,
-            left: containerView.leftAnchor,
-            pTop: 25,
-            pRight: 20,
-            pLeft: 20)
-        containerView.addSubview(acceptButton)
-        acceptButton.setConstraints(
-            top: passwordTextField.bottomAnchor,
-            right: containerView.rightAnchor,
-            left: containerView.leftAnchor,
-            pTop: 25,
-            pRight: 20,
-            pLeft: 20)
     }
-    
-    
+    private func configConstraints() {
+        contentView.addSubview(containerStackView)
+        containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 200).isActive = true
+        containerStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
+        containerStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
+        containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+
+        [titleLabel,userTextField, passwordTextField, acceptButton].forEach {
+            containerStackView.addArrangedSubview($0)
+        }
+    }
+        
     private func configTargets() {
         acceptButton.addTarget(self, action: #selector(didTapAcceptButton), for: .touchUpInside)
     }
     
-    
-    private func makeTextField(placeholder: String) -> UITextField {
-        let text = UITextField()
-        text.placeholder = placeholder
-        text.adjustsFontSizeToFitWidth = true
-        text.textAlignment = .center
-        text.borderStyle = .line
-        return text
+    private func makeTextField(placeholder: String, isSecure: Bool ) -> UITextField {
+        let textField = UITextField()
+        textField.backgroundColor = .gray.withAlphaComponent(0.1)
+        textField.placeholder = placeholder
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        textField.leftViewMode = .always
+        textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        textField.font = UIFont.systemFont(ofSize: 20)
+        textField.layer.cornerRadius = 10
+        textField.isSecureTextEntry = isSecure
+        return textField
     }
     //TODO: como meto aqui combine
     @objc func didTapAcceptButton() {
@@ -144,6 +117,7 @@ class RegisterViewController: UIViewController {
     }
 }
 extension RegisterViewController: MessageDisplayable { }
-
+extension RegisterViewController: ViewScrollable {}
+extension RegisterViewController: KeyboardDisplayable {}
 
 

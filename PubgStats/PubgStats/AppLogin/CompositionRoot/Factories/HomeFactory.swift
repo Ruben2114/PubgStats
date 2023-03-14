@@ -5,7 +5,6 @@
 //  Created by Ruben Rodriguez on 10/3/23.
 //
 import UIKit
-import Combine
 
 protocol HomeFactory {
     func makeModule(coordinator: HomeMenuViewControllerCoordinator) -> UIViewController
@@ -17,11 +16,10 @@ struct HomeFactoryImp: HomeFactory {
     private(set) var appContainer: AppContainer
     
     func makeModule(coordinator: HomeMenuViewControllerCoordinator) -> UIViewController {
-        let state = PassthroughSubject<StateController, Never>()
         let loginRepository = LoginRepositoryImp(dataSource: appContainer.localDataService)
         let loginDataUseCase = LoginDataUseCaseImp(loginRepository: loginRepository)
-        let viewModel = HomeMenuViewModel(state: state, loginDataUseCase: loginDataUseCase)
-        let homeMenuController = HomeMenuViewController(coordinator: coordinator, viewModel: viewModel)
+        let viewModel = HomeMenuViewModel(loginDataUseCase: loginDataUseCase)
+        let homeMenuController = HomeMenuViewController(viewModel: viewModel, coordinator: coordinator)
         homeMenuController.title = "Login"
         return homeMenuController
     }
