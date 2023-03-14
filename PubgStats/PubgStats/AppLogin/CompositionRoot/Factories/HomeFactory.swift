@@ -9,26 +9,26 @@ import Combine
 
 protocol HomeFactory {
     func makeModule(coordinator: HomeMenuViewControllerCoordinator) -> UIViewController
-    func makeLoginCoordinator(navigation: UINavigationController) //-> Coordinator
+    func makeLoginCoordinator(navigation: UINavigationController) -> Coordinator
     func makeRegisterCoordinator(navigation: UINavigationController) -> Coordinator
 }
 
 struct HomeFactoryImp: HomeFactory {
-    let appContainer: AppContainer
+    private(set) var appContainer: AppContainer
     
     func makeModule(coordinator: HomeMenuViewControllerCoordinator) -> UIViewController {
         let state = PassthroughSubject<StateController, Never>()
-        let profileRepository = ProfileRepositoryImp(dataSource: appContainer.localDataService)
-        let profileDataUseCase = RegisterDataUseCaseImp(profileRepository: profileRepository)
-        let viewModel = HomeMenuViewModel(state: state, profileDataUseCase: profileDataUseCase)
+        let loginRepository = LoginRepositoryImp(dataSource: appContainer.localDataService)
+        let loginDataUseCase = LoginDataUseCaseImp(loginRepository: loginRepository, name: ProfileModel.name, password: ProfileModel.password)
+        let viewModel = HomeMenuViewModel(state: state, loginDataUseCase: loginDataUseCase)
         let homeMenuController = HomeMenuViewController(coordinator: coordinator, viewModel: viewModel)
         homeMenuController.title = "Login"
         return homeMenuController
     }
-    func makeLoginCoordinator(navigation: UINavigationController) {
-        //TODO: crear vista perfil y crear aqui el cooordinator
-        print("navegando hacia login")
-        
+    func makeLoginCoordinator(navigation: UINavigationController) -> Coordinator {
+        let profileFactory = ProfileFactoryImp(appContainer: appContainer)
+        let profileCoordinator = ProfileCoordinator(navigation: navigation, profileFactory: profileFactory)
+        return profileCoordinator
     }
     
     func makeRegisterCoordinator(navigation: UINavigationController) -> Coordinator {

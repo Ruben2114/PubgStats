@@ -11,7 +11,7 @@ import CoreData
 import UIKit
 
 protocol LocalDataProfileService {
-    func get(name: String, password: String) async throws -> ProfileModel?
+    func get(name: String, password: String) async throws -> Profile?
     func save(profile: Profile)
     //TODO: EN UN FUTURO METER BORRAR O ACTUALIZAR
 }
@@ -21,12 +21,11 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
     private let context: NSManagedObjectContext = CoreDataManager.shared.persistentContainer.viewContext
     
     
-    func get(name: String, password: String) async throws -> ProfileModel? {
-        let profileCoreDataEntity =  try getEntity(name: name, password: password)!
-        return ProfileModel(
-            name:profileCoreDataEntity.name!,
-            password: profileCoreDataEntity.password!)
+    func get(name: String, password: String) async throws -> Profile? {
+        let profileCoreDataEntity =  try getEntity(name: name, password: password)
+        return profileCoreDataEntity
     }
+    
     func save(profile: Profile){
         try? context.save()
     }
@@ -39,6 +38,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
             NSPredicate(format: "password == %@", password)
         ])
         let profileCoreDataEntity = try context.fetch(request).first
+        
         return profileCoreDataEntity
     }
 }

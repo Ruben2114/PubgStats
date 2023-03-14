@@ -6,6 +6,6 @@
 //
 
 struct ProfileModel: Equatable {
-    let name: String
-    let password: String //hacerlo hasheable
+    static let name: String = ""
+    static let password: String = ""//hacerlo hasheable
 }

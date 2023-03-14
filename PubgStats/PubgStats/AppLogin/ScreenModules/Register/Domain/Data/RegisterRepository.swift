@@ -1,10 +1,10 @@
 //
-//  ProfileRepository.swift
+//  RegisterRepository.swift
 //  PubgStats
 //
 //  Created by Ruben Rodriguez on 13/3/23.
 //
 
-protocol ProfileRepository {
+protocol RegisterRepository {
     func saveProfileModel (profile: Profile)
 }

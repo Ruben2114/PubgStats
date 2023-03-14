@@ -12,13 +12,13 @@ protocol RegisterDataUseCase {
 }
 
 struct RegisterDataUseCaseImp: RegisterDataUseCase{
-    private let profileRepository: ProfileRepository
+    private let registerRepository: RegisterRepository
     
-    init(profileRepository: ProfileRepository) {
-        self.profileRepository = profileRepository
+    init(registerRepository: RegisterRepository) {
+        self.registerRepository = registerRepository
     }
     func execute(profile: Profile){
-        return  profileRepository.saveProfileModel(profile: profile)
+        return  registerRepository.saveProfileModel(profile: profile)
     }
 }
 

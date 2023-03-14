@@ -15,14 +15,13 @@ protocol RegisterFactory {
 }
 
 struct RegisterFactoryImp : RegisterFactory {
-    let appContainer: AppContainer
+    private(set) var appContainer: AppContainer
     
     func makeModule(coordinator: RegisterViewControllerCoordinator) -> UIViewController {
         let state = PassthroughSubject<StateController, Never>()
-        let dataSource = LocalDataProfileServiceImp()
-        let profileRepository = ProfileRepositoryImp(dataSource: dataSource)
-        let profileDataUseCase = RegisterDataUseCaseImp(profileRepository: profileRepository)
-        let viewModel = RegisterViewModel(state: state, profileDataUseCase: profileDataUseCase)
+        let registerRepository = RegisterRepositoryImp(dataSource: appContainer.localDataService)
+        let registerDataUseCase = RegisterDataUseCaseImp(registerRepository: registerRepository)
+        let viewModel = RegisterViewModel(state: state, registerDataUseCase: registerDataUseCase)
         let registerController = RegisterViewController(coordinator: coordinator, viewModel: viewModel)
         registerController.title = "Register"
         return registerController

@@ -28,12 +28,18 @@
 		8CAEB02529BB4A09009282AF /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAEB02429BB4A09009282AF /* AppFactory.swift */; };
 		8CAEB02729BB4D0B009282AF /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAEB02629BB4D0B009282AF /* HomeCoordinator.swift */; };
 		8CAEB02929BB4D49009282AF /* HomeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAEB02829BB4D49009282AF /* HomeFactory.swift */; };
+		8CB39B9529C05D2500B1D8EF /* LoginDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB39B9429C05D2500B1D8EF /* LoginDataUseCase.swift */; };
+		8CB39B9729C05DDE00B1D8EF /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB39B9629C05DDE00B1D8EF /* LoginRepository.swift */; };
+		8CB39B9B29C0604100B1D8EF /* LoginRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB39B9A29C0604100B1D8EF /* LoginRepositoryImp.swift */; };
+		8CB39B9F29C06CF400B1D8EF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB39B9E29C06CF400B1D8EF /* ProfileViewController.swift */; };
+		8CB39BA129C06EE200B1D8EF /* ProfileFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB39BA029C06EE200B1D8EF /* ProfileFactory.swift */; };
+		8CB39BA329C06F7A00B1D8EF /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB39BA229C06F7A00B1D8EF /* ProfileCoordinator.swift */; };
 		8CD7CD6229BEFF5700C57346 /* LocalDataProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD6129BEFF5700C57346 /* LocalDataProfileService.swift */; };
 		8CD7CD6929BF031600C57346 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD6829BF031600C57346 /* ProfileModel.swift */; };
 		8CD7CD6F29BF04E200C57346 /* Profile.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD6D29BF04E200C57346 /* Profile.xcdatamodeld */; };
-		8CD7CD7129BF0C7000C57346 /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD7029BF0C7000C57346 /* ProfileRepository.swift */; };
+		8CD7CD7129BF0C7000C57346 /* RegisterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD7029BF0C7000C57346 /* RegisterRepository.swift */; };
 		8CD7CD7429BF0D4C00C57346 /* ProfileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD7329BF0D4C00C57346 /* ProfileError.swift */; };
-		8CD7CD7629BF0DAA00C57346 /* ProfileRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD7529BF0DAA00C57346 /* ProfileRepositoryImp.swift */; };
+		8CD7CD7629BF0DAA00C57346 /* RegisterRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD7529BF0DAA00C57346 /* RegisterRepositoryImp.swift */; };
 		8CD7CD8229BF1B0B00C57346 /* RegisterDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD8129BF1B0B00C57346 /* RegisterDataUseCase.swift */; };
 		8CD7CD8629BF3DA900C57346 /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD8529BF3DA900C57346 /* AppContainer.swift */; };
 		8CD7CD8A29BF53A800C57346 /* RegisterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD8929BF53A800C57346 /* RegisterCoordinator.swift */; };
@@ -85,12 +91,18 @@
 		8CAEB02429BB4A09009282AF /* AppFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFactory.swift; sourceTree = "<group>"; };
 		8CAEB02629BB4D0B009282AF /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		8CAEB02829BB4D49009282AF /* HomeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFactory.swift; sourceTree = "<group>"; };
+		8CB39B9429C05D2500B1D8EF /* LoginDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataUseCase.swift; sourceTree = "<group>"; };
+		8CB39B9629C05DDE00B1D8EF /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
+		8CB39B9A29C0604100B1D8EF /* LoginRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepositoryImp.swift; sourceTree = "<group>"; };
+		8CB39B9E29C06CF400B1D8EF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		8CB39BA029C06EE200B1D8EF /* ProfileFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFactory.swift; sourceTree = "<group>"; };
+		8CB39BA229C06F7A00B1D8EF /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		8CD7CD6129BEFF5700C57346 /* LocalDataProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataProfileService.swift; sourceTree = "<group>"; };
 		8CD7CD6829BF031600C57346 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		8CD7CD6E29BF04E200C57346 /* Profile.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Profile.xcdatamodel; sourceTree = "<group>"; };
-		8CD7CD7029BF0C7000C57346 /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
+		8CD7CD7029BF0C7000C57346 /* RegisterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRepository.swift; sourceTree = "<group>"; };
 		8CD7CD7329BF0D4C00C57346 /* ProfileError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileError.swift; sourceTree = "<group>"; };
-		8CD7CD7529BF0DAA00C57346 /* ProfileRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepositoryImp.swift; sourceTree = "<group>"; };
+		8CD7CD7529BF0DAA00C57346 /* RegisterRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRepositoryImp.swift; sourceTree = "<group>"; };
 		8CD7CD8129BF1B0B00C57346 /* RegisterDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataUseCase.swift; sourceTree = "<group>"; };
 		8CD7CD8529BF3DA900C57346 /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
 		8CD7CD8929BF53A800C57346 /* RegisterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCoordinator.swift; sourceTree = "<group>"; };
@@ -179,6 +191,7 @@
 		8C7563F129BB653C000373F9 /* InterfaceRepositories */ = {
 			isa = PBXGroup;
 			children = (
+				8CB39B9629C05DDE00B1D8EF /* LoginRepository.swift */,
 			);
 			path = InterfaceRepositories;
 			sourceTree = "<group>";
@@ -294,9 +307,9 @@
 		8CAEB00C29BB468D009282AF /* HomeMenu */ = {
 			isa = PBXGroup;
 			children = (
+				8CB39B9929C0603200B1D8EF /* Data */,
 				8C7563EE29BB6510000373F9 /* Domain */,
-				8C7563DB29BB5173000373F9 /* ViewModel */,
-				8C7563DA29BB5169000373F9 /* View */,
+				8CB39B9829C05FE300B1D8EF /* Presentation */,
 			);
 			path = HomeMenu;
 			sourceTree = "<group>";
@@ -305,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				8CD7CD9529BF6E2300C57346 /* Domain */,
+				8CAEB01329BB4726009282AF /* Data */,
 				8CD7CD8D29BF54BF00C57346 /* Presentation */,
 			);
 			path = Register;
@@ -313,6 +327,7 @@
 		8CAEB00E29BB46DB009282AF /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				8CB39B9C29C06CDE00B1D8EF /* Presentation */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -345,7 +360,6 @@
 			isa = PBXGroup;
 			children = (
 				8CAEB01529BB4738009282AF /* Presentation */,
-				8CAEB01329BB4726009282AF /* Data */,
 				8CD7CD6D29BF04E200C57346 /* Profile.xcdatamodeld */,
 			);
 			path = Layer;
@@ -383,6 +397,7 @@
 				8CAEB02429BB4A09009282AF /* AppFactory.swift */,
 				8CAEB02829BB4D49009282AF /* HomeFactory.swift */,
 				8CD7CD8B29BF53EA00C57346 /* RegisterFactory.swift */,
+				8CB39BA029C06EE200B1D8EF /* ProfileFactory.swift */,
 			);
 			path = Factories;
 			sourceTree = "<group>";
@@ -392,6 +407,7 @@
 			children = (
 				8CAEB02629BB4D0B009282AF /* HomeCoordinator.swift */,
 				8CD7CD8929BF53A800C57346 /* RegisterCoordinator.swift */,
+				8CB39BA229C06F7A00B1D8EF /* ProfileCoordinator.swift */,
 			);
 			path = CoordinatorScreen;
 			sourceTree = "<group>";
@@ -430,9 +446,43 @@
 			path = AppCordinator;
 			sourceTree = "<group>";
 		};
+		8CB39B9829C05FE300B1D8EF /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				8C7563DA29BB5169000373F9 /* View */,
+				8C7563DB29BB5173000373F9 /* ViewModel */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		8CB39B9929C0603200B1D8EF /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8CB39B9A29C0604100B1D8EF /* LoginRepositoryImp.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		8CB39B9C29C06CDE00B1D8EF /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				8CB39B9D29C06CE500B1D8EF /* View */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		8CB39B9D29C06CE500B1D8EF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8CB39B9E29C06CF400B1D8EF /* ProfileViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		8CD7CD6329BF014700C57346 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				8CB39B9429C05D2500B1D8EF /* LoginDataUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -448,7 +498,7 @@
 		8CD7CD6629BF016E00C57346 /* RepositoryImplementation */ = {
 			isa = PBXGroup;
 			children = (
-				8CD7CD7529BF0DAA00C57346 /* ProfileRepositoryImp.swift */,
+				8CD7CD7529BF0DAA00C57346 /* RegisterRepositoryImp.swift */,
 			);
 			path = RepositoryImplementation;
 			sourceTree = "<group>";
@@ -489,7 +539,7 @@
 		8CD7CD9429BF6D7200C57346 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				8CD7CD7029BF0C7000C57346 /* ProfileRepository.swift */,
+				8CD7CD7029BF0C7000C57346 /* RegisterRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -645,10 +695,14 @@
 				8CAEB02529BB4A09009282AF /* AppFactory.swift in Sources */,
 				8CAEB02029BB4968009282AF /* Coordinator.swift in Sources */,
 				8CD7CD8629BF3DA900C57346 /* AppContainer.swift in Sources */,
+				8CB39BA329C06F7A00B1D8EF /* ProfileCoordinator.swift in Sources */,
 				8C7563E429BB5F17000373F9 /* MessageDisplayable.swift in Sources */,
+				8CB39B9729C05DDE00B1D8EF /* LoginRepository.swift in Sources */,
+				8CB39B9F29C06CF400B1D8EF /* ProfileViewController.swift in Sources */,
+				8CB39BA129C06EE200B1D8EF /* ProfileFactory.swift in Sources */,
 				8CD7CD8A29BF53A800C57346 /* RegisterCoordinator.swift in Sources */,
 				8C7563E929BB600A000373F9 /* BaseViewModel.swift in Sources */,
-				8CD7CD7129BF0C7000C57346 /* ProfileRepository.swift in Sources */,
+				8CD7CD7129BF0C7000C57346 /* RegisterRepository.swift in Sources */,
 				8CD7CD6F29BF04E200C57346 /* Profile.xcdatamodeld in Sources */,
 				8C7563EC29BB6073000373F9 /* StateController.swift in Sources */,
 				8C7563E229BB5E8A000373F9 /* ViewValues.swift in Sources */,
@@ -658,13 +712,15 @@
 				8CD7CD8C29BF53EA00C57346 /* RegisterFactory.swift in Sources */,
 				8CA398AD29B72A1F00C09746 /* AppDelegate.swift in Sources */,
 				8CD7CD9329BF62BE00C57346 /* RegisterViewModel.swift in Sources */,
-				8CD7CD7629BF0DAA00C57346 /* ProfileRepositoryImp.swift in Sources */,
+				8CD7CD7629BF0DAA00C57346 /* RegisterRepositoryImp.swift in Sources */,
 				8C7563E629BB5FBA000373F9 /* HomeMenuViewModel.swift in Sources */,
 				8CAEB02929BB4D49009282AF /* HomeFactory.swift in Sources */,
 				8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */,
 				8CD7CD7429BF0D4C00C57346 /* ProfileError.swift in Sources */,
 				8CAEB02729BB4D0B009282AF /* HomeCoordinator.swift in Sources */,
+				8CB39B9529C05D2500B1D8EF /* LoginDataUseCase.swift in Sources */,
 				8CA398AF29B72A1F00C09746 /* SceneDelegate.swift in Sources */,
+				8CB39B9B29C0604100B1D8EF /* LoginRepositoryImp.swift in Sources */,
 				8CD7CD8F29BF54D600C57346 /* RegisterViewController.swift in Sources */,
 				8CD7CD6229BEFF5700C57346 /* LocalDataProfileService.swift in Sources */,
 				8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */,
