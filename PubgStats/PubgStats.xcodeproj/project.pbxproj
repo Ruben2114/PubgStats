@@ -34,7 +34,7 @@
 		8CD7CD7129BF0C7000C57346 /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD7029BF0C7000C57346 /* ProfileRepository.swift */; };
 		8CD7CD7429BF0D4C00C57346 /* ProfileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD7329BF0D4C00C57346 /* ProfileError.swift */; };
 		8CD7CD7629BF0DAA00C57346 /* ProfileRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD7529BF0DAA00C57346 /* ProfileRepositoryImp.swift */; };
-		8CD7CD8229BF1B0B00C57346 /* ProfileDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD8129BF1B0B00C57346 /* ProfileDataUseCase.swift */; };
+		8CD7CD8229BF1B0B00C57346 /* RegisterDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD8129BF1B0B00C57346 /* RegisterDataUseCase.swift */; };
 		8CD7CD8629BF3DA900C57346 /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD8529BF3DA900C57346 /* AppContainer.swift */; };
 		8CD7CD8A29BF53A800C57346 /* RegisterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD8929BF53A800C57346 /* RegisterCoordinator.swift */; };
 		8CD7CD8C29BF53EA00C57346 /* RegisterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD8B29BF53EA00C57346 /* RegisterFactory.swift */; };
@@ -91,7 +91,7 @@
 		8CD7CD7029BF0C7000C57346 /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
 		8CD7CD7329BF0D4C00C57346 /* ProfileError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileError.swift; sourceTree = "<group>"; };
 		8CD7CD7529BF0DAA00C57346 /* ProfileRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepositoryImp.swift; sourceTree = "<group>"; };
-		8CD7CD8129BF1B0B00C57346 /* ProfileDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataUseCase.swift; sourceTree = "<group>"; };
+		8CD7CD8129BF1B0B00C57346 /* RegisterDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataUseCase.swift; sourceTree = "<group>"; };
 		8CD7CD8529BF3DA900C57346 /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
 		8CD7CD8929BF53A800C57346 /* RegisterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCoordinator.swift; sourceTree = "<group>"; };
 		8CD7CD8B29BF53EA00C57346 /* RegisterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFactory.swift; sourceTree = "<group>"; };
@@ -506,7 +506,7 @@
 		8CD7CD9629BF6E2B00C57346 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				8CD7CD8129BF1B0B00C57346 /* ProfileDataUseCase.swift */,
+				8CD7CD8129BF1B0B00C57346 /* RegisterDataUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -668,7 +668,7 @@
 				8CD7CD8F29BF54D600C57346 /* RegisterViewController.swift in Sources */,
 				8CD7CD6229BEFF5700C57346 /* LocalDataProfileService.swift in Sources */,
 				8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */,
-				8CD7CD8229BF1B0B00C57346 /* ProfileDataUseCase.swift in Sources */,
+				8CD7CD8229BF1B0B00C57346 /* RegisterDataUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,10 +14,10 @@ final class HomeMenuViewModel {
     
     
     var state: PassthroughSubject<StateController, Never>
-    private let profileDataUseCase: ProfileDataUseCase
+    private let profileDataUseCase: RegisterDataUseCase
     private var profileModel = ProfileModel(name: "", password: "")
     
-    init(state: PassthroughSubject<StateController, Never>, profileDataUseCase: ProfileDataUseCase) {
+    init(state: PassthroughSubject<StateController, Never>, profileDataUseCase: RegisterDataUseCase) {
         self.state = state
         self.profileDataUseCase = profileDataUseCase
     }
@@ -25,7 +25,7 @@ final class HomeMenuViewModel {
     func viewDidLoad(){
         state.send(.loading)
         Task {
-            let profileResult = await profileDataUseCase.execute(profile: profileModel)
+            
             state.send(.success)
             print("voy por aqui")
         }

@@ -21,7 +21,7 @@ struct RegisterFactoryImp : RegisterFactory {
         let state = PassthroughSubject<StateController, Never>()
         let dataSource = LocalDataProfileServiceImp()
         let profileRepository = ProfileRepositoryImp(dataSource: dataSource)
-        let profileDataUseCase = ProfileDataUseCaseImp(profileRepository: profileRepository)
+        let profileDataUseCase = RegisterDataUseCaseImp(profileRepository: profileRepository)
         let viewModel = RegisterViewModel(state: state, profileDataUseCase: profileDataUseCase)
         let registerController = RegisterViewController(coordinator: coordinator, viewModel: viewModel)
         registerController.title = "Register"

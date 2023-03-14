@@ -6,5 +6,5 @@
 //
 
 protocol ProfileRepository {
-    func saveProfileModel (profile: ProfileModel) async -> Result<Bool, ProfileError>
+    func saveProfileModel (profile: Profile)
 }

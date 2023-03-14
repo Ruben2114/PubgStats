@@ -12,7 +12,7 @@ import UIKit
 
 protocol LocalDataProfileService {
     func get(name: String, password: String) async throws -> ProfileModel?
-    func save(profile: ProfileModel) async -> Result<Bool, ProfileError>
+    func save(profile: Profile)
     //TODO: EN UN FUTURO METER BORRAR O ACTUALIZAR
 }
 
@@ -27,32 +27,16 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
             name:profileCoreDataEntity.name!,
             password: profileCoreDataEntity.password!)
     }
-    func save(profile: ProfileModel) async -> Result<Bool, ProfileError> {
-        let saveProfile: NSFetchRequest<Profile> = Profile.fetchRequest()
-        saveProfile.predicate = NSPredicate(format: "nombre == %@", profile.name )
-        do {
-            let result = try context.fetch(saveProfile)
-            if result.count > 0 {
-                print("ya estas registrado")
-            } else {
-                let newProfile = Profile(context: context)
-                newProfile.name = profile.name
-                newProfile.password = profile.password
-                print("guardado")
-                try context.save()
-            }
-        } catch {
-            print("error")
-        }
-        return .success(true)
-        
+    func save(profile: Profile){
+        try? context.save()
     }
+    
     private func getEntity(name: String, password: String) throws -> Profile? {
         let request = Profile.fetchRequest()
         request.fetchLimit = 1
         request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
-            NSPredicate(format: "nombre == %@", name),
-            NSPredicate(format: "contraseña == %@", password)
+            NSPredicate(format: "name == %@", name),
+            NSPredicate(format: "password == %@", password)
         ])
         let profileCoreDataEntity = try context.fetch(request).first
         return profileCoreDataEntity

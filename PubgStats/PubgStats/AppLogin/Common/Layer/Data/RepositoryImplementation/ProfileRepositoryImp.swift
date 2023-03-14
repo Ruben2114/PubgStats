@@ -8,7 +8,7 @@
 struct ProfileRepositoryImp: ProfileRepository {
     var dataSource: LocalDataProfileService
 
-    func saveProfileModel(profile: ProfileModel) async -> Result<Bool, ProfileError> {
-        return await dataSource.save(profile: profile)
+    func saveProfileModel(profile: Profile) {
+        return dataSource.save(profile: profile)
     }
 }

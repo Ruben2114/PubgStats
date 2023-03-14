@@ -14,7 +14,7 @@ class CoreDataManager {
     let persistentContainer: NSPersistentContainer
     
     private init() {
-        persistentContainer = NSPersistentContainer(name: "YourDataModelName")
+        persistentContainer = NSPersistentContainer(name: "Profile")
         persistentContainer.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error {
                 fatalError("Failed to load Core Data stack: \(error)")

@@ -7,7 +7,6 @@
 
 import UIKit
 import Combine
-import CoreData
 
 protocol RegisterViewControllerCoordinator {
     func didTapAcceptButton()
@@ -65,7 +64,6 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         configUserInterface()
         configTargets()
-        bind()
     }
     
     private func configUserInterface(){
@@ -128,22 +126,21 @@ class RegisterViewController: UIViewController {
         text.borderStyle = .line
         return text
     }
-    func bind(){
-        viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
-            switch state {
-            case .fetchSave(model: let model):
-                    print("gurdado")
-            case .fetchError(error: let error):
-                print("Algo ha ido mal, \(error)")
-
-            }
-        }.store(in: &cancellable)
-    }
-    
+    //TODO: como meto aqui combine
     @objc func didTapAcceptButton() {
-        //manejar que no este vacio
-        let newUser = ProfileModel(name: userTextField.text ?? "", password: passwordTextField.text ?? "")
-        viewModel.saveUser(newUser)
+        //TODO: OBLIGAR A QUE LA CONTRASEÑA TENGA X CARACTERISTICAS
+        let nameText = userTextField.text
+        let passwordText = passwordTextField.text
+        guard !nameText!.isEmpty, !passwordText!.isEmpty else {
+            presentAlert(message: "Please, fill in all fields", title: "Error")
+            return
+        }
+        guard viewModel.checkIfNameExists(name: userTextField.text!) != true else {
+            presentAlert(message: "This user already exists", title: "Error")
+            return
+        }
+        viewModel.saveUser(name: nameText ?? "", password: passwordText ?? "")
+        coordinator.didTapAcceptButton()
     }
 }
 extension RegisterViewController: MessageDisplayable { }
