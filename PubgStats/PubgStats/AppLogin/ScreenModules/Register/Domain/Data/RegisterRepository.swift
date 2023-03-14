@@ -7,4 +7,5 @@
 
 protocol RegisterRepository {
     func saveProfileModel (profile: Profile)
+    func checkName(name: String) -> Bool
 }

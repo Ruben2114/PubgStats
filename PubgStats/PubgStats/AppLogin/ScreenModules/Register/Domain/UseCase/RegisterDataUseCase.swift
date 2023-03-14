@@ -9,6 +9,7 @@ import Foundation
 
 protocol RegisterDataUseCase {
     func execute(profile: Profile)
+    func check(name: String) -> Bool
 }
 
 struct RegisterDataUseCaseImp: RegisterDataUseCase{
@@ -19,6 +20,9 @@ struct RegisterDataUseCaseImp: RegisterDataUseCase{
     }
     func execute(profile: Profile){
         return  registerRepository.saveProfileModel(profile: profile)
+    }
+    func check(name: String) -> Bool {
+        registerRepository.checkName(name: name)
     }
 }
 

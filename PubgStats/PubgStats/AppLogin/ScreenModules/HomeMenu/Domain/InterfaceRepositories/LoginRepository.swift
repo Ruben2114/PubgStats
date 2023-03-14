@@ -6,6 +6,6 @@
 //
 
 protocol LoginRepository {
-    func getProfile (name: String, password: String) async throws -> Profile?
+    func checkName(name: String, password: String) -> Bool
 }
 

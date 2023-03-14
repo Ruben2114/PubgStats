@@ -135,8 +135,8 @@ class RegisterViewController: UIViewController {
             presentAlert(message: "Please, fill in all fields", title: "Error")
             return
         }
-        guard viewModel.checkIfNameExists(name: userTextField.text!) != true else {
-            presentAlert(message: "This user already exists", title: "Error")
+        guard viewModel.checkName(name: nameText ?? "") != true else {
+            presentAlert(message: "User already exists", title: "Error")
             return
         }
         viewModel.saveUser(name: nameText ?? "", password: passwordText ?? "")

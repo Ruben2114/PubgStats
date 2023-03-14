@@ -8,8 +8,8 @@
 struct LoginRepositoryImp: LoginRepository {
     private(set) var dataSource: LocalDataProfileService
 
-    func getProfile(name: String, password: String) async throws -> Profile? {
-        let result = try await dataSource.get(name: name, password: password)
+    func checkName(name: String, password: String) -> Bool {
+        let result =  dataSource.checkUser(name: name, password: password)
         return result
     }
 }

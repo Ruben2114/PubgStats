@@ -124,11 +124,11 @@ class HomeMenuViewController: UIViewController {
         return button
     }
     @objc func didTapLoginButton() {
-        guard viewModel.checkIfNameExists(name: userTextField.text!) == true else {
+        
+        guard viewModel.checkName(name: userTextField.text ?? "", password: passwordTextField.text ?? "") == true else {
             presentAlert(message: "Incorrect username or password.", title: "Error")
             return
         }
-        viewModel.viewDidLoad(name: userTextField.text ?? "", password: passwordTextField.text ?? "")
         coordinator.didTapLoginButton()
     }
     @objc func didTapRegisterButton() {

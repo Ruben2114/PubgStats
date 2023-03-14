@@ -11,4 +11,8 @@ struct RegisterRepositoryImp: RegisterRepository {
     func saveProfileModel(profile: Profile) {
         return dataSource.save(profile: profile)
     }
+    func checkName(name: String) -> Bool {
+        let result =  dataSource.checkIfNameExists(name: name)
+        return result
+    }
 }

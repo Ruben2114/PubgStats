@@ -19,7 +19,7 @@ struct HomeFactoryImp: HomeFactory {
     func makeModule(coordinator: HomeMenuViewControllerCoordinator) -> UIViewController {
         let state = PassthroughSubject<StateController, Never>()
         let loginRepository = LoginRepositoryImp(dataSource: appContainer.localDataService)
-        let loginDataUseCase = LoginDataUseCaseImp(loginRepository: loginRepository, name: ProfileModel.name, password: ProfileModel.password)
+        let loginDataUseCase = LoginDataUseCaseImp(loginRepository: loginRepository)
         let viewModel = HomeMenuViewModel(state: state, loginDataUseCase: loginDataUseCase)
         let homeMenuController = HomeMenuViewController(coordinator: coordinator, viewModel: viewModel)
         homeMenuController.title = "Login"

@@ -6,15 +6,13 @@
 //
 
 protocol LoginDataUseCase {
-    func execute() async throws -> Profile?
+    func check(name: String, password: String) -> Bool
 }
 
 struct LoginDataUseCaseImp: LoginDataUseCase {
     private(set) var loginRepository: LoginRepository
-    private(set) var name: String
-    private(set) var password: String
 
-    func execute() async throws -> Profile? {
-        try await loginRepository.getProfile(name: name, password: password)
+    func check(name: String, password: String) -> Bool {
+        loginRepository.checkName(name: name, password: password)
     }
 }

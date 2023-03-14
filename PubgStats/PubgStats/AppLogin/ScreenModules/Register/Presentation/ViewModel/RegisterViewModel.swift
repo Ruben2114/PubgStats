@@ -17,6 +17,7 @@ class RegisterViewModel {
         self.state = state
         self.registerDataUseCase = registerDataUseCase
     }
+    //TODO: quitar de aqui el contexto
     private let context = CoreDataManager.shared.persistentContainer.viewContext
     func saveUser(name: String, password: String) {
         state.send(.loading)
@@ -28,16 +29,9 @@ class RegisterViewModel {
             state.send(.success)
         }
     }
-    func checkIfNameExists(name: String) -> Bool {
-        let fetchRequest = Profile.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name == %@", name)
-        do {
-            let result = try context.fetch(fetchRequest)
-            return result.count > 0
-        } catch let error {
-            print("Error checking if name exists: \(error)")
-            return false
-        }
+    func checkName(name: String) -> Bool {
+            let check = registerDataUseCase.check(name: name)
+            return check
     }
 }
 
