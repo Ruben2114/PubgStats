@@ -8,8 +8,8 @@
 struct RegisterRepositoryImp: RegisterRepository {
     var dataSource: LocalDataProfileService
 
-    func saveProfileModel(profile: Profile) {
-        return dataSource.save(profile: profile)
+    func saveProfileModel(name: String, password: String) {
+        return dataSource.save(name: name, password: password)
     }
     func checkName(name: String) -> Bool {
         let result =  dataSource.checkIfNameExists(name: name)

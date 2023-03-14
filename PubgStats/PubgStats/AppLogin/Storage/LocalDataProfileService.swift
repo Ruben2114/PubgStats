@@ -11,7 +11,7 @@ import CoreData
 import UIKit
 
 protocol LocalDataProfileService {
-    func save(profile: Profile)
+    func save(name: String, password: String)
     func checkIfNameExists(name: String) -> Bool
     func checkUser(name: String, password: String) -> Bool
     //TODO: EN UN FUTURO METER BORRAR O ACTUALIZAR
@@ -44,7 +44,10 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         }
     }
     
-    func save(profile: Profile){
+    func save(name: String, password: String){
+        let newUser = Profile(context: context)
+        newUser.name = name
+        newUser.password = password
         try? context.save()
     }
 }

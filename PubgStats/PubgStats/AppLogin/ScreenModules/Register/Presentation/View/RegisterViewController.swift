@@ -103,7 +103,7 @@ class RegisterViewController: UIViewController {
     @objc func didTapAcceptButton() {
         //TODO: OBLIGAR A QUE LA CONTRASEÑA TENGA X CARACTERISTICAS
         let nameText = userTextField.text
-        let passwordText = passwordTextField.text
+        let passwordText = passwordTextField.text?.hashString()
         guard !nameText!.isEmpty, !passwordText!.isEmpty else {
             presentAlert(message: "Please, fill in all fields", title: "Error")
             return
