@@ -13,21 +13,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var appCoordinator: Coordinator!
     var appFactory: AppFactory!
 
+
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let scene = (scene as? UIWindowScene) else { return }
         let navigation = UINavigationController()
         appFactory = AppFactoryImp()
         window = UIWindow(windowScene: scene)
-        appCoordinator = AppCoordinator(navigation: navigation, appFactory: appFactory, window: window)
-        appCoordinator.start()
-        /*
-         guard let windowScene = (scene as? UIWindowScene) else { return }
-         window = UIWindow(windowScene: windowScene)
-         window?.rootViewController = MainTabBarController()
-         window?.makeKeyAndVisible()
-         window?.overrideUserInterfaceStyle = .light
-         */
+        appCoordinator = AppCoordinator( appFactory: appFactory, window: window)
+        appCoordinator.start(navigation: navigation)
+        
+    }
+    func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
+        guard let window = self.window else {
+            return
+        }
+        window.rootViewController = vc
+        window.makeKeyAndVisible()
+        window.overrideUserInterfaceStyle = .light
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

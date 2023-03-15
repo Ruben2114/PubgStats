@@ -10,7 +10,7 @@ import UIKit
 
 protocol RegisterFactory {
     func makeModule(coordinator: RegisterViewControllerCoordinator) -> UIViewController
-    func makeAcceptCoordinator(navigation: UINavigationController) -> Coordinator
+    func makeAcceptCoordinator() -> Coordinator
     
 }
 
@@ -18,17 +18,16 @@ struct RegisterFactoryImp : RegisterFactory {
     private(set) var appContainer: AppContainer
     
     func makeModule(coordinator: RegisterViewControllerCoordinator) -> UIViewController {
-        let state = PassthroughSubject<StateController, Never>()
         let registerRepository = RegisterRepositoryImp(dataSource: appContainer.localDataService)
         let registerDataUseCase = RegisterDataUseCaseImp(registerRepository: registerRepository)
-        let viewModel = RegisterViewModel(state: state, registerDataUseCase: registerDataUseCase)
+        let viewModel = RegisterViewModel( registerDataUseCase: registerDataUseCase)
         let registerController = RegisterViewController(coordinator: coordinator, viewModel: viewModel)
         registerController.title = "Register"
         return registerController
     }
-    func makeAcceptCoordinator(navigation: UINavigationController) -> Coordinator {
+    func makeAcceptCoordinator() -> Coordinator {
         let homeFactory = HomeFactoryImp(appContainer: appContainer)
-        let homeCoordinator = HomeCoordinator(navigation: navigation, homeFactory: homeFactory)
+        let homeCoordinator = HomeCoordinator( homeFactory: homeFactory)
         return homeCoordinator
         
     }
