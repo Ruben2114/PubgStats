@@ -12,8 +12,11 @@ class ContactViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        view.backgroundColor = .systemBackground
+        title = "Contact"
     }
+    
+    //uilabel con la explicacion de lo que soy
     
 
 

@@ -10,7 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var appCoordinator: Coordinator!
+    var appCoordinator: Coordinator?
     var appFactory: AppFactory!
 
 
@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         appFactory = AppFactoryImp()
         window = UIWindow(windowScene: scene)
         appCoordinator = AppCoordinator( navigation: navigation, appFactory: appFactory, window: window)
-        appCoordinator.start()
+        appCoordinator?.start()
         
     }
     func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
@@ -31,6 +31,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = vc
         window.makeKeyAndVisible()
         window.overrideUserInterfaceStyle = .light
+        appCoordinator?.dismiss()
+        appCoordinator = nil
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

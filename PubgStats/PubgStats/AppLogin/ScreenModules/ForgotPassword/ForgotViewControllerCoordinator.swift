@@ -11,11 +11,11 @@ protocol ForgotViewControllerCoordinator {
 }
 
 final class ForgotViewController: UIViewController {
-    
-    let test = UILabel()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
     }
+    //enviar un correo con la nueva contraseña
+    //o decir que esta funcionalidad no esta todavia
 }

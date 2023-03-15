@@ -104,9 +104,10 @@ class RegisterViewController: UIViewController {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
             switch state{
             case .success:
+                self?.hideSpinner()
                 self?.coordinator?.didTapAcceptButton()
             case .loading:
-                print("meter spinner")
+                self?.showSpinner()
             case .fail(error: let error):
                 self?.presentAlert(message: "Error en core data\(error)", title: "Error")
             }
@@ -129,5 +130,7 @@ class RegisterViewController: UIViewController {
 extension RegisterViewController: MessageDisplayable { }
 extension RegisterViewController: ViewScrollable {}
 extension RegisterViewController: KeyboardDisplayable {}
+extension RegisterViewController: SpinnerDisplayable {}
+
 
 

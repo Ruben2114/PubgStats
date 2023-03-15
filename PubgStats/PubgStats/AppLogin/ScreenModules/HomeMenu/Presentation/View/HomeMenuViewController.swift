@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-protocol HomeMenuViewControllerCoordinator {
+protocol HomeMenuViewControllerCoordinator: AnyObject {
     func didTapLoginButton()
     func didTapForgotButton()
     func didTapRegisterButton()
@@ -19,7 +19,7 @@ class HomeMenuViewController: UIViewController {
     var contentView = UIView()
     var cancellable = Set<AnyCancellable>()
     private let viewModel: HomeMenuViewModel
-    private let coordinator: HomeMenuViewControllerCoordinator
+    private weak var coordinator: HomeMenuViewControllerCoordinator?
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -127,7 +127,7 @@ class HomeMenuViewController: UIViewController {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
             switch state{
             case .success:
-                self?.coordinator.didTapLoginButton()
+                self?.coordinator?.didTapLoginButton()
             case .loading:
                 break
             case .fail(error: let error):
@@ -141,11 +141,11 @@ class HomeMenuViewController: UIViewController {
     }
     
     @objc func didTapForgotButton() {
-        coordinator.didTapForgotButton()
+        coordinator?.didTapForgotButton()
     }
     
     @objc func didTapRegisterButton() {
-        coordinator.didTapRegisterButton()
+        coordinator?.didTapRegisterButton()
     }
 }
 extension HomeMenuViewController: ViewScrollable {}
