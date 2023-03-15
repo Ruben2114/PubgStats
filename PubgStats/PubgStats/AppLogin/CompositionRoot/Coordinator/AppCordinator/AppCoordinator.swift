@@ -8,6 +8,9 @@ import UIKit
 
 final class AppCoordinator: Coordinator {
     var navigation: UINavigationController
+    var childCoordinators: [Coordinator] = []
+    var onFinish: (() -> Void)?
+    
     private let appFactory: AppFactory
     
     init(navigation: UINavigationController, appFactory: AppFactory, window: UIWindow?){
@@ -18,6 +21,7 @@ final class AppCoordinator: Coordinator {
     func start() {
         let coordinator = appFactory.makeHomeCoordinator(navigation: navigation)
         coordinator.start()
+        append(child: coordinator)
     }
     
     private func configWindow(window: UIWindow?) {

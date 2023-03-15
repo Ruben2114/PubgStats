@@ -8,17 +8,20 @@
 import UIKit
 
 final class TabBarCoordinator: Coordinator {
-    var navigation: UINavigationController
+    var navigation: UINavigationController {
+        UINavigationController()
+    }
+    var childCoordinators: [Coordinator] = []
+    var onFinish: (() -> Void)?
+    
     private let tabBarFactory: TabBarFactory
     
-    init(navigation:UINavigationController, tabBarFactory: TabBarFactory){
-        self.navigation = navigation
+    init(tabBarFactory: TabBarFactory){
         self.tabBarFactory = tabBarFactory
     }
     
     func start() {
         let controller = tabBarFactory.makeModule()
-        navigation.pushViewController(controller, animated: true)
-        navigation.navigationBar.prefersLargeTitles = true
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(controller)
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-protocol RegisterViewControllerCoordinator {
+protocol RegisterViewControllerCoordinator: AnyObject {
     func didTapAcceptButton()
 }
 
@@ -17,7 +17,7 @@ class RegisterViewController: UIViewController {
     var contentView = UIView()
     var cancellable = Set<AnyCancellable>()
     private let viewModel: RegisterViewModel
-    private let coordinator: RegisterViewControllerCoordinator
+    private weak var coordinator: RegisterViewControllerCoordinator?
     
     private let containerStackView: UIStackView = {
         let stack = UIStackView()
@@ -67,6 +67,7 @@ class RegisterViewController: UIViewController {
         configConstraints()
         configTargets()
         configKeyboardSubscription(mainScrollView: mainScrollView)
+        bind()
     }
     private func configUI() {
         view.backgroundColor = .systemBackground
@@ -99,9 +100,19 @@ class RegisterViewController: UIViewController {
         textField.isSecureTextEntry = isSecure
         return textField
     }
-    //TODO: como meto aqui combine
+    func bind() {
+        viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
+            switch state{
+            case .success:
+                self?.coordinator?.didTapAcceptButton()
+            case .loading:
+                print("meter spinner")
+            case .fail(error: let error):
+                self?.presentAlert(message: "Error en core data\(error)", title: "Error")
+            }
+        }.store(in: &cancellable)
+    }
     @objc func didTapAcceptButton() {
-        //TODO: OBLIGAR A QUE LA CONTRASEÑA TENGA X CARACTERISTICAS
         let nameText = userTextField.text
         let passwordText = passwordTextField.text?.hashString()
         guard !nameText!.isEmpty, !passwordText!.isEmpty else {
@@ -113,7 +124,6 @@ class RegisterViewController: UIViewController {
             return
         }
         viewModel.saveUser(name: nameText ?? "", password: passwordText ?? "")
-        coordinator.didTapAcceptButton()
     }
 }
 extension RegisterViewController: MessageDisplayable { }

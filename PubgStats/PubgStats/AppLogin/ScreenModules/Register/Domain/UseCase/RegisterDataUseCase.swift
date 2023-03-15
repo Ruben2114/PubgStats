@@ -18,8 +18,8 @@ struct RegisterDataUseCaseImp: RegisterDataUseCase{
     init(registerRepository: RegisterRepository) {
         self.registerRepository = registerRepository
     }
-    func execute(name: String, password: String){
-        return  registerRepository.saveProfileModel(name: name, password: password)
+    func execute(name: String, password: String) {
+        return registerRepository.saveProfileModel(name: name, password: password)
     }
     func check(name: String) -> Bool {
         registerRepository.checkName(name: name)

@@ -7,8 +7,9 @@
 
 import UIKit
 
+    
 class ProfileViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configUserInterface()
@@ -65,14 +66,7 @@ class ProfileViewController: UIViewController {
         }
         [number2Label, date2Label, session2Label].forEach { secondStackView.addArrangedSubview($0)
         }
-        
-       
-
-        
     }
-    
-    
-    
     private func makeStackView() -> UIStackView {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false

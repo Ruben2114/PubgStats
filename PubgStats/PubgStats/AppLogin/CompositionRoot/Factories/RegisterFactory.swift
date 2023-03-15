@@ -10,7 +10,7 @@ import UIKit
 
 protocol RegisterFactory {
     func makeModule(coordinator: RegisterViewControllerCoordinator) -> UIViewController
-    func makeAcceptCoordinator() -> Coordinator
+    func makeAcceptCoordinator(navigation: UINavigationController) -> Coordinator
     
 }
 
@@ -25,9 +25,9 @@ struct RegisterFactoryImp : RegisterFactory {
         registerController.title = "Register"
         return registerController
     }
-    func makeAcceptCoordinator() -> Coordinator {
+    func makeAcceptCoordinator(navigation: UINavigationController) -> Coordinator {
         let homeFactory = HomeFactoryImp(appContainer: appContainer)
-        let homeCoordinator = HomeCoordinator( homeFactory: homeFactory)
+        let homeCoordinator = HomeCoordinator(navigation: navigation, homeFactory: homeFactory)
         return homeCoordinator
         
     }

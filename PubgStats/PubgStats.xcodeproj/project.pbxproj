@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46151CB729C1B9780054BCEA /* LoginProfilePubgViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46151CB629C1B9780054BCEA /* LoginProfilePubgViewController.swift */; };
+		46151CC129C1E8470054BCEA /* ForgotFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46151CC029C1E8470054BCEA /* ForgotFactory.swift */; };
+		46151CC329C1E8FC0054BCEA /* ForgotViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46151CC229C1E8FC0054BCEA /* ForgotViewControllerCoordinator.swift */; };
+		46151CC629C1E9C10054BCEA /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46151CC529C1E9C10054BCEA /* ContactViewController.swift */; };
+		46151CC829C1E9F40054BCEA /* ForgotCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46151CC729C1E9F40054BCEA /* ForgotCoordinator.swift */; };
 		8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */; };
 		8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */; };
 		8C7563E029BB5E5E000373F9 /* SpinnerDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563DF29BB5E5E000373F9 /* SpinnerDisplayable.swift */; };
@@ -38,8 +43,6 @@
 		8CB39BA929C0919600B1D8EF /* KeyboardDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB39BA829C0919600B1D8EF /* KeyboardDisplayable.swift */; };
 		8CB39BAC29C0C88800B1D8EF /* String+Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB39BAB29C0C88800B1D8EF /* String+Hash.swift */; };
 		8CB8FBC129C11DDA00AC52BD /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB8FBC029C11DDA00AC52BD /* TabBarViewController.swift */; };
-		8CB8FBC429C1281000AC52BD /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB8FBC329C1281000AC52BD /* ProfileCoordinator.swift */; };
-		8CB8FBC629C1283400AC52BD /* ProfileFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB8FBC529C1283400AC52BD /* ProfileFactory.swift */; };
 		8CD7CD6229BEFF5700C57346 /* LocalDataProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD6129BEFF5700C57346 /* LocalDataProfileService.swift */; };
 		8CD7CD6F29BF04E200C57346 /* Profile.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD6D29BF04E200C57346 /* Profile.xcdatamodeld */; };
 		8CD7CD7129BF0C7000C57346 /* RegisterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD7029BF0C7000C57346 /* RegisterRepository.swift */; };
@@ -71,6 +74,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		46151CB629C1B9780054BCEA /* LoginProfilePubgViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProfilePubgViewController.swift; sourceTree = "<group>"; };
+		46151CC029C1E8470054BCEA /* ForgotFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotFactory.swift; sourceTree = "<group>"; };
+		46151CC229C1E8FC0054BCEA /* ForgotViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ForgotViewControllerCoordinator.swift; path = PubgStats/AppLogin/CompositionRoot/Factories/ForgotViewControllerCoordinator.swift; sourceTree = SOURCE_ROOT; };
+		46151CC529C1E9C10054BCEA /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
+		46151CC729C1E9F40054BCEA /* ForgotCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotCoordinator.swift; sourceTree = "<group>"; };
 		8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraint.swift"; sourceTree = "<group>"; };
 		8C7563DF29BB5E5E000373F9 /* SpinnerDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerDisplayable.swift; sourceTree = "<group>"; };
@@ -106,8 +114,6 @@
 		8CB39BA829C0919600B1D8EF /* KeyboardDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDisplayable.swift; sourceTree = "<group>"; };
 		8CB39BAB29C0C88800B1D8EF /* String+Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Hash.swift"; sourceTree = "<group>"; };
 		8CB8FBC029C11DDA00AC52BD /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		8CB8FBC329C1281000AC52BD /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
-		8CB8FBC529C1283400AC52BD /* ProfileFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFactory.swift; sourceTree = "<group>"; };
 		8CD7CD6129BEFF5700C57346 /* LocalDataProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataProfileService.swift; sourceTree = "<group>"; };
 		8CD7CD6E29BF04E200C57346 /* Profile.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Profile.xcdatamodel; sourceTree = "<group>"; };
 		8CD7CD7029BF0C7000C57346 /* RegisterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRepository.swift; sourceTree = "<group>"; };
@@ -146,6 +152,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		46151CB429C1B9480054BCEA /* LoginProfilePubg */ = {
+			isa = PBXGroup;
+			children = (
+				46151CB529C1B9640054BCEA /* View */,
+			);
+			path = LoginProfilePubg;
+			sourceTree = "<group>";
+		};
+		46151CB529C1B9640054BCEA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				46151CB629C1B9780054BCEA /* LoginProfilePubgViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		46151CC429C1E9AD0054BCEA /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				46151CC529C1E9C10054BCEA /* ContactViewController.swift */,
+			);
+			path = Contact;
+			sourceTree = "<group>";
+		};
 		8C7563DA29BB5169000373F9 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,8 +309,10 @@
 		8CAEB00729BB462C009282AF /* ScreenModules */ = {
 			isa = PBXGroup;
 			children = (
+				46151CC429C1E9AD0054BCEA /* Contact */,
 				8CB8FBBF29C11D9000AC52BD /* AppTabBar */,
 				8CAEB01D29BB4811009282AF /* LaunchScreen */,
+				46151CB429C1B9480054BCEA /* LoginProfilePubg */,
 				8CAEB00E29BB46DB009282AF /* Profile */,
 				8CB39BAA29C0C25200B1D8EF /* ForgotPassword */,
 				8CAEB00D29BB46AA009282AF /* Register */,
@@ -412,7 +444,7 @@
 				8CAEB02829BB4D49009282AF /* HomeFactory.swift */,
 				8CD7CD8B29BF53EA00C57346 /* RegisterFactory.swift */,
 				8CB39BA029C06EE200B1D8EF /* TabBarFactory.swift */,
-				8CB8FBC529C1283400AC52BD /* ProfileFactory.swift */,
+				46151CC029C1E8470054BCEA /* ForgotFactory.swift */,
 			);
 			path = Factories;
 			sourceTree = "<group>";
@@ -423,7 +455,7 @@
 				8CAEB02629BB4D0B009282AF /* HomeCoordinator.swift */,
 				8CD7CD8929BF53A800C57346 /* RegisterCoordinator.swift */,
 				8CB39BA229C06F7A00B1D8EF /* TabBarCoordinator.swift */,
-				8CB8FBC329C1281000AC52BD /* ProfileCoordinator.swift */,
+				46151CC729C1E9F40054BCEA /* ForgotCoordinator.swift */,
 			);
 			path = CoordinatorScreen;
 			sourceTree = "<group>";
@@ -499,6 +531,7 @@
 		8CB39BAA29C0C25200B1D8EF /* ForgotPassword */ = {
 			isa = PBXGroup;
 			children = (
+				46151CC229C1E8FC0054BCEA /* ForgotViewControllerCoordinator.swift */,
 			);
 			path = ForgotPassword;
 			sourceTree = "<group>";
@@ -732,26 +765,30 @@
 				8CB39B9F29C06CF400B1D8EF /* ProfileViewController.swift in Sources */,
 				8CB39BA129C06EE200B1D8EF /* TabBarFactory.swift in Sources */,
 				8CD7CD8A29BF53A800C57346 /* RegisterCoordinator.swift in Sources */,
-				8CB8FBC429C1281000AC52BD /* ProfileCoordinator.swift in Sources */,
 				8CB8FBC129C11DDA00AC52BD /* TabBarViewController.swift in Sources */,
 				8C7563E929BB600A000373F9 /* BaseViewModel.swift in Sources */,
 				8CD7CD7129BF0C7000C57346 /* RegisterRepository.swift in Sources */,
 				8CD7CD6F29BF04E200C57346 /* Profile.xcdatamodeld in Sources */,
 				8C7563EC29BB6073000373F9 /* StateController.swift in Sources */,
 				8C7563E229BB5E8A000373F9 /* ViewValues.swift in Sources */,
+				46151CC129C1E8470054BCEA /* ForgotFactory.swift in Sources */,
 				8C7563E029BB5E5E000373F9 /* SpinnerDisplayable.swift in Sources */,
 				8CB39BA729C0917000B1D8EF /* ViewScrollable.swift in Sources */,
 				8CA398B129B72A1F00C09746 /* HomeMenuViewController.swift in Sources */,
 				8CAEB02329BB49C3009282AF /* AppCoordinator.swift in Sources */,
 				8CD7CD8C29BF53EA00C57346 /* RegisterFactory.swift in Sources */,
 				8CA398AD29B72A1F00C09746 /* AppDelegate.swift in Sources */,
+				46151CC829C1E9F40054BCEA /* ForgotCoordinator.swift in Sources */,
 				8CD7CD9329BF62BE00C57346 /* RegisterViewModel.swift in Sources */,
 				8CD7CD7629BF0DAA00C57346 /* RegisterRepositoryImp.swift in Sources */,
 				8C7563E629BB5FBA000373F9 /* HomeMenuViewModel.swift in Sources */,
 				8CAEB02929BB4D49009282AF /* HomeFactory.swift in Sources */,
 				8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */,
+				46151CC329C1E8FC0054BCEA /* ForgotViewControllerCoordinator.swift in Sources */,
 				8CD7CD7429BF0D4C00C57346 /* ProfileError.swift in Sources */,
+				46151CC629C1E9C10054BCEA /* ContactViewController.swift in Sources */,
 				8CB39BA929C0919600B1D8EF /* KeyboardDisplayable.swift in Sources */,
+				46151CB729C1B9780054BCEA /* LoginProfilePubgViewController.swift in Sources */,
 				8CAEB02729BB4D0B009282AF /* HomeCoordinator.swift in Sources */,
 				8CB39B9529C05D2500B1D8EF /* LoginDataUseCase.swift in Sources */,
 				8CA398AF29B72A1F00C09746 /* SceneDelegate.swift in Sources */,
@@ -759,7 +796,6 @@
 				8CD7CD8F29BF54D600C57346 /* RegisterViewController.swift in Sources */,
 				8CD7CD6229BEFF5700C57346 /* LocalDataProfileService.swift in Sources */,
 				8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */,
-				8CB8FBC629C1283400AC52BD /* ProfileFactory.swift in Sources */,
 				8CD7CD8229BF1B0B00C57346 /* RegisterDataUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

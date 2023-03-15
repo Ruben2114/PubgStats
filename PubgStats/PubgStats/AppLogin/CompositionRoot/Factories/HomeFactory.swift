@@ -10,8 +10,8 @@ import Combine
 protocol HomeFactory {
     func makeModule(coordinator: HomeMenuViewControllerCoordinator) -> UIViewController
     func makeLoginCoordinator() -> Coordinator
-    func makeForgotCoordinator() -> Coordinator
-    func makeRegisterCoordinator() -> Coordinator
+    func makeForgotCoordinator(navigation: UINavigationController) -> Coordinator
+    func makeRegisterCoordinator(navigation: UINavigationController) -> Coordinator
 }
 
 struct HomeFactoryImp: HomeFactory {
@@ -20,26 +20,25 @@ struct HomeFactoryImp: HomeFactory {
     func makeModule(coordinator: HomeMenuViewControllerCoordinator) -> UIViewController {
         let loginRepository = LoginRepositoryImp(dataSource: appContainer.localDataService)
         let loginDataUseCase = LoginDataUseCaseImp(loginRepository: loginRepository)
-        let viewModel = HomeMenuViewModel( loginDataUseCase: loginDataUseCase)
+        let viewModel = HomeMenuViewModel(loginDataUseCase: loginDataUseCase)
         let homeMenuController = HomeMenuViewController(viewModel: viewModel, coordinator: coordinator)
         homeMenuController.title = "Login"
         return homeMenuController
     }
-    func makeForgotCoordinator() -> Coordinator {
-        let forgotfactory = ForgotFactoryImp(appContainer: appContainer)
-        let forgotCoordinator = ForgotCoordinator( forgotFactory: forgotfactory)
-        return forgotCoordinator
-    }
-
     func makeLoginCoordinator() -> Coordinator {
         let tabBarFactory = TabBarFactoryImp(appContainer: appContainer)
-        let tabBarCoordinator = TabBarCoordinator( tabBarFactory: tabBarFactory)
+        let tabBarCoordinator = TabBarCoordinator(tabBarFactory: tabBarFactory)
         return tabBarCoordinator
     }
+    func makeForgotCoordinator(navigation: UINavigationController) -> Coordinator {
+        let forgotFactory = ForgotFactoryImp(appContainer: appContainer)
+        let forgotCoordinator = ForgotCoordinator(navigation: navigation, forgotFactory: forgotFactory)
+        return forgotCoordinator
+    }
     
-    func makeRegisterCoordinator() -> Coordinator {
+    func makeRegisterCoordinator(navigation: UINavigationController) -> Coordinator {
         let registerFactory = RegisterFactoryImp(appContainer: appContainer)
-        let registerCoordinator = RegisterCoordinator( registerFactory: registerFactory)
+        let registerCoordinator = RegisterCoordinator(navigation: navigation, registerFactory: registerFactory)
         return registerCoordinator
     }
 }

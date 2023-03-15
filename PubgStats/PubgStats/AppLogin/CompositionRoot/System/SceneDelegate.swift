@@ -20,8 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigation = UINavigationController()
         appFactory = AppFactoryImp()
         window = UIWindow(windowScene: scene)
-        appCoordinator = AppCoordinator( appFactory: appFactory, window: window)
-        appCoordinator.start(navigation: navigation)
+        appCoordinator = AppCoordinator( navigation: navigation, appFactory: appFactory, window: window)
+        appCoordinator.start()
         
     }
     func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {

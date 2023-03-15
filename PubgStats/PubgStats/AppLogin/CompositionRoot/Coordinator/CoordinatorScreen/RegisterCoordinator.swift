@@ -9,6 +9,9 @@ import UIKit
 
 final class RegisterCoordinator: Coordinator {
     var navigation: UINavigationController
+    var childCoordinators: [Coordinator] = []
+    var onFinish: (() -> Void)?
+    
     private let registerFactory: RegisterFactory
     
     init(navigation:UINavigationController, registerFactory: RegisterFactory){
@@ -24,8 +27,7 @@ final class RegisterCoordinator: Coordinator {
 
 extension RegisterCoordinator: RegisterViewControllerCoordinator {
     func didTapAcceptButton() {
-        let registerCoordinator = registerFactory.makeAcceptCoordinator(navigation: navigation)
-        registerCoordinator.start()
+        dismiss()
     }
     
 }

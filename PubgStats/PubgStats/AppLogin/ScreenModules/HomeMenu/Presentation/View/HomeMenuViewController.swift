@@ -73,6 +73,7 @@ class HomeMenuViewController: UIViewController {
         configConstraints()
         configTargets()
         configKeyboardSubscription(mainScrollView: mainScrollView)
+        bind()
     }
     private func configUI() {
         view.backgroundColor = .systemBackground
@@ -87,7 +88,7 @@ class HomeMenuViewController: UIViewController {
         containerStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
         containerStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
         containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-
+        
         
         [userTextField, passwordTextField, loginButton, forgotPasswordButton, registerButton].forEach {
             containerStackView.addArrangedSubview($0)
@@ -122,20 +123,25 @@ class HomeMenuViewController: UIViewController {
         button.heightAnchor.constraint(equalToConstant: 25).isActive = true
         return button
     }
+    func bind() {
+        viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
+            switch state{
+            case .success:
+                self?.coordinator.didTapLoginButton()
+            case .loading:
+                break
+            case .fail(error: let error):
+                self?.presentAlert(message: error, title: "Error")
+            }
+        }.store(in: &cancellable)    }
     
     @objc func didTapLoginButton() {
         let password = passwordTextField.text?.hashString()
-        guard viewModel.checkName(name: userTextField.text ?? "", password: password ?? "") == true else {
-            presentAlert(message: "Incorrect username or password.", title: "Error")
-            return
-        }
-        userTextField.text = ""
-        passwordTextField.text = ""
-        coordinator.didTapLoginButton()
+        viewModel.checkName(name: userTextField.text ?? "", password: password ?? "")
     }
     
     @objc func didTapForgotButton() {
-        print("sin crear")
+        coordinator.didTapForgotButton()
     }
     
     @objc func didTapRegisterButton() {

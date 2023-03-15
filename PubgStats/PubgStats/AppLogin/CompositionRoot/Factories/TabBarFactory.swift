@@ -16,8 +16,6 @@ struct TabBarFactoryImp: TabBarFactory {
     
     func makeModule() -> UIViewController {
         let controller = TabBarViewController()
-        //añadir aqui todos los controller y hacerlos tabbar para mandarlos
-        controller.title = "Profile"
         return controller
     }
 }

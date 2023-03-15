@@ -17,11 +17,12 @@ class TabBarViewController: UITabBarController {
     
     func configTabBar() {
         
-        let profileView = navController(vc: ProfileViewController(), itemName: "Buscar", itemImage: "magnifyingglass.circle.fill")
-        let favouritesView = navController(vc: UIViewController(), itemName: "Perfil", itemImage: "person.circle.fill")
+        let profileView = navController(vc: LoginProfilePubgViewController(), itemName: "Profile", itemImage: "person.circle.fill")
+        let favouritesView = navController(vc: UIViewController(), itemName: "Favourite", itemImage: "star.circle.fill")
         let rankingView = navController(vc: UIViewController(), itemName: "Ranking", itemImage: "trophy.circle.fill")
-        let guideView = navController(vc: UIViewController(), itemName: "Guia", itemImage: "book.circle.fill")
-        viewControllers = [profileView, favouritesView, rankingView, guideView ]
+        let guideView = navController(vc: UIViewController(), itemName: "Guide", itemImage: "book.circle.fill")
+        let contactGuideView = navController(vc: ContactViewController(), itemName: "Contact", itemImage: "envelope.circle.fill")
+        viewControllers = [profileView, favouritesView, rankingView, guideView,contactGuideView ]
         tabBar.backgroundColor = .white
     }
     
