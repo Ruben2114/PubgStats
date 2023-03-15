@@ -12,7 +12,7 @@ protocol RegisterViewControllerCoordinator: AnyObject {
     func didTapAcceptButton()
 }
 
-class RegisterViewController: UIViewController {
+final class RegisterViewController: UIViewController {
     var mainScrollView = UIScrollView()
     var contentView = UIView()
     var cancellable = Set<AnyCancellable>()
@@ -36,7 +36,6 @@ class RegisterViewController: UIViewController {
     
     private lazy var userTextField = makeTextField(placeholder: "User Name", isSecure: false)
     private lazy var passwordTextField = makeTextField(placeholder: "Password", isSecure: true)
-    //TODO: como ponerle el weak para no perder memoria
     private let acceptButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -109,7 +108,7 @@ class RegisterViewController: UIViewController {
             case .loading:
                 self?.showSpinner()
             case .fail(error: let error):
-                self?.presentAlert(message: "Error en core data\(error)", title: "Error")
+                self?.presentAlert(message: "Error: \(error)", title: "Error")
             }
         }.store(in: &cancellable)
     }
