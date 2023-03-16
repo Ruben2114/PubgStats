@@ -133,7 +133,8 @@ class HomeMenuViewController: UIViewController {
             case .fail(error: let error):
                 self?.presentAlert(message: error, title: "Error")
             }
-        }.store(in: &cancellable)    }
+        }.store(in: &cancellable)
+    }
     
     @objc func didTapLoginButton() {
         let password = passwordTextField.text?.hashString()

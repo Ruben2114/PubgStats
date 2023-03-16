@@ -8,13 +8,21 @@
 import UIKit
 import Combine
 
-
 class LoginProfilePubgViewController: UIViewController {
-    
     var mainScrollView = UIScrollView()
     var contentView = UIView()
     var cancellable = Set<AnyCancellable>()
-    
+    lazy var logOutButton: UIButton = {
+        var configuration = UIButton.Configuration.borderedTinted()
+        configuration.image = UIImage(systemName: "arrowshape.turn.up.backward.circle.fill")
+        configuration.baseBackgroundColor = .clear
+        let button = UIButton(type: .system, primaryAction: UIAction(handler: { _ in
+            self.logOut()
+        }))
+        button.configuration = configuration
+        button.tintColor = .black
+        return button
+    }()
     private let containerStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -60,10 +68,13 @@ class LoginProfilePubgViewController: UIViewController {
         configConstraints()
         configTargets()
         configKeyboardSubscription(mainScrollView: mainScrollView)
+        
     }
     private func configUI() {
         view.backgroundColor = .systemBackground
         title = "Login"
+        let barLeftButton = UIBarButtonItem(customView: logOutButton)
+        navigationItem.leftBarButtonItem = barLeftButton
     }
     private func configConstraints() {
         contentView.addSubview(containerStackView)
@@ -78,6 +89,11 @@ class LoginProfilePubgViewController: UIViewController {
     }
     private func configTargets() {
         acceptButton.addTarget(self, action: #selector(didTapAcceptButton), for: .touchUpInside)
+    }
+    private func logOut() {
+        //(UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController("que pongo")
+        navigationController?.popViewController(animated: true)
+        print("volver  realizar el login")
     }
     private func makeTextField(placeholder: String) -> UITextField {
         let textField = UITextField()

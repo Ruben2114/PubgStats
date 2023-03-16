@@ -28,6 +28,9 @@
 		8CA398C729B72A2000C09746 /* PubgStatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398C629B72A2000C09746 /* PubgStatsTests.swift */; };
 		8CA398D129B72A2000C09746 /* PubgStatsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398D029B72A2000C09746 /* PubgStatsUITests.swift */; };
 		8CA398D329B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398D229B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift */; };
+		8CAC3E2D29C3055300A1FE34 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E2C29C3055300A1FE34 /* GuideViewController.swift */; };
+		8CAC3E2F29C3080600A1FE34 /* GuideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E2E29C3080600A1FE34 /* GuideViewModel.swift */; };
+		8CAC3E3129C31D4700A1FE34 /* UrlGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E3029C31D4700A1FE34 /* UrlGuide.swift */; };
 		8CAEB02029BB4968009282AF /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAEB01F29BB4968009282AF /* Coordinator.swift */; };
 		8CAEB02329BB49C3009282AF /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAEB02229BB49C3009282AF /* AppCoordinator.swift */; };
 		8CAEB02529BB4A09009282AF /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAEB02429BB4A09009282AF /* AppFactory.swift */; };
@@ -99,6 +102,9 @@
 		8CA398CC29B72A2000C09746 /* PubgStatsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PubgStatsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA398D029B72A2000C09746 /* PubgStatsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PubgStatsUITests.swift; sourceTree = "<group>"; };
 		8CA398D229B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PubgStatsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8CAC3E2C29C3055300A1FE34 /* GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
+		8CAC3E2E29C3080600A1FE34 /* GuideViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewModel.swift; sourceTree = "<group>"; };
+		8CAC3E3029C31D4700A1FE34 /* UrlGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlGuide.swift; sourceTree = "<group>"; };
 		8CAEB01F29BB4968009282AF /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		8CAEB02229BB49C3009282AF /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		8CAEB02429BB4A09009282AF /* AppFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFactory.swift; sourceTree = "<group>"; };
@@ -155,7 +161,8 @@
 		46151CB429C1B9480054BCEA /* LoginProfilePubg */ = {
 			isa = PBXGroup;
 			children = (
-				46151CB529C1B9640054BCEA /* View */,
+				8CAEB00E29BB46DB009282AF /* Profile */,
+				8CAC3E2329C303C800A1FE34 /* Login */,
 			);
 			path = LoginProfilePubg;
 			sourceTree = "<group>";
@@ -283,6 +290,82 @@
 			path = PubgStatsUITests;
 			sourceTree = "<group>";
 		};
+		8CAC3E2229C303A000A1FE34 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				46151CB429C1B9480054BCEA /* LoginProfilePubg */,
+				8CAC3E2629C3047D00A1FE34 /* Favourite */,
+				8CAC3E2529C3046A00A1FE34 /* Ranking */,
+				8CAC3E2429C3045300A1FE34 /* Guide */,
+				46151CC429C1E9AD0054BCEA /* Contact */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		8CAC3E2329C303C800A1FE34 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				46151CB529C1B9640054BCEA /* View */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		8CAC3E2429C3045300A1FE34 /* Guide */ = {
+			isa = PBXGroup;
+			children = (
+				8CAC3E2929C304FF00A1FE34 /* Data */,
+				8CAC3E2729C304E700A1FE34 /* Presentation */,
+			);
+			path = Guide;
+			sourceTree = "<group>";
+		};
+		8CAC3E2529C3046A00A1FE34 /* Ranking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Ranking;
+			sourceTree = "<group>";
+		};
+		8CAC3E2629C3047D00A1FE34 /* Favourite */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Favourite;
+			sourceTree = "<group>";
+		};
+		8CAC3E2729C304E700A1FE34 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				8CAC3E2B29C3054300A1FE34 /* View */,
+				8CAC3E2A29C3053B00A1FE34 /* ViewModel */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		8CAC3E2929C304FF00A1FE34 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8CAC3E3029C31D4700A1FE34 /* UrlGuide.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		8CAC3E2A29C3053B00A1FE34 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8CAC3E2E29C3080600A1FE34 /* GuideViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8CAC3E2B29C3054300A1FE34 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8CAC3E2C29C3055300A1FE34 /* GuideViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		8CAEB00529BB460F009282AF /* AppLogin */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,11 +392,9 @@
 		8CAEB00729BB462C009282AF /* ScreenModules */ = {
 			isa = PBXGroup;
 			children = (
-				46151CC429C1E9AD0054BCEA /* Contact */,
 				8CB8FBBF29C11D9000AC52BD /* AppTabBar */,
+				8CAC3E2229C303A000A1FE34 /* TabBar */,
 				8CAEB01D29BB4811009282AF /* LaunchScreen */,
-				46151CB429C1B9480054BCEA /* LoginProfilePubg */,
-				8CAEB00E29BB46DB009282AF /* Profile */,
 				8CB39BAA29C0C25200B1D8EF /* ForgotPassword */,
 				8CAEB00D29BB46AA009282AF /* Register */,
 				8CAEB00C29BB468D009282AF /* HomeMenu */,
@@ -760,6 +841,7 @@
 				8CB39BAC29C0C88800B1D8EF /* String+Hash.swift in Sources */,
 				8CD7CD8629BF3DA900C57346 /* AppContainer.swift in Sources */,
 				8CB39BA329C06F7A00B1D8EF /* TabBarCoordinator.swift in Sources */,
+				8CAC3E2F29C3080600A1FE34 /* GuideViewModel.swift in Sources */,
 				8C7563E429BB5F17000373F9 /* MessageDisplayable.swift in Sources */,
 				8CB39B9729C05DDE00B1D8EF /* LoginRepository.swift in Sources */,
 				8CB39B9F29C06CF400B1D8EF /* ProfileViewController.swift in Sources */,
@@ -781,6 +863,8 @@
 				46151CC829C1E9F40054BCEA /* ForgotCoordinator.swift in Sources */,
 				8CD7CD9329BF62BE00C57346 /* RegisterViewModel.swift in Sources */,
 				8CD7CD7629BF0DAA00C57346 /* RegisterRepositoryImp.swift in Sources */,
+				8CAC3E3129C31D4700A1FE34 /* UrlGuide.swift in Sources */,
+				8CAC3E2D29C3055300A1FE34 /* GuideViewController.swift in Sources */,
 				8C7563E629BB5FBA000373F9 /* HomeMenuViewModel.swift in Sources */,
 				8CAEB02929BB4D49009282AF /* HomeFactory.swift in Sources */,
 				8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */,

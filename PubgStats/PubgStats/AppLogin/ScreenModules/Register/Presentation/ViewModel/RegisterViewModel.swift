@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class RegisterViewModel {
+final class RegisterViewModel {
     
     var state = PassthroughSubject<StateController, Never>()
     private let registerDataUseCase: RegisterDataUseCase
