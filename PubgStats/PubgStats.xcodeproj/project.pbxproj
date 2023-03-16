@@ -20,6 +20,8 @@
 		8C7563E629BB5FBA000373F9 /* HomeMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563E529BB5FBA000373F9 /* HomeMenuViewModel.swift */; };
 		8C7563E929BB600A000373F9 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563E829BB600A000373F9 /* BaseViewModel.swift */; };
 		8C7563EC29BB6073000373F9 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563EB29BB6073000373F9 /* StateController.swift */; };
+		8C810F7729C3442A00AEE548 /* PruebaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C810F7629C3442A00AEE548 /* PruebaViewController.swift */; };
+		8C810F7929C3690700AEE548 /* UIViewController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C810F7829C3690700AEE548 /* UIViewController+Keyboard.swift */; };
 		8CA398AD29B72A1F00C09746 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398AC29B72A1F00C09746 /* AppDelegate.swift */; };
 		8CA398AF29B72A1F00C09746 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398AE29B72A1F00C09746 /* SceneDelegate.swift */; };
 		8CA398B129B72A1F00C09746 /* HomeMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398B029B72A1F00C09746 /* HomeMenuViewController.swift */; };
@@ -90,6 +92,8 @@
 		8C7563E529BB5FBA000373F9 /* HomeMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMenuViewModel.swift; sourceTree = "<group>"; };
 		8C7563E829BB600A000373F9 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		8C7563EB29BB6073000373F9 /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
+		8C810F7629C3442A00AEE548 /* PruebaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PruebaViewController.swift; sourceTree = "<group>"; };
+		8C810F7829C3690700AEE548 /* UIViewController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Keyboard.swift"; sourceTree = "<group>"; };
 		8CA398A929B72A1F00C09746 /* PubgStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PubgStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA398AC29B72A1F00C09746 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CA398AE29B72A1F00C09746 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -178,7 +182,7 @@
 		46151CC429C1E9AD0054BCEA /* Contact */ = {
 			isa = PBXGroup;
 			children = (
-				8C31FDB629C329E500196704 /* ContactViewController.swift */,
+				8C810F7529C33E5700AEE548 /* View */,
 			);
 			path = Contact;
 			sourceTree = "<group>";
@@ -242,6 +246,14 @@
 				8CB39B9629C05DDE00B1D8EF /* LoginRepository.swift */,
 			);
 			path = InterfaceRepositories;
+			sourceTree = "<group>";
+		};
+		8C810F7529C33E5700AEE548 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8C31FDB629C329E500196704 /* ContactViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		8CA398A029B72A1F00C09746 = {
@@ -322,6 +334,7 @@
 		8CAC3E2529C3046A00A1FE34 /* Ranking */ = {
 			isa = PBXGroup;
 			children = (
+				8C810F7629C3442A00AEE548 /* PruebaViewController.swift */,
 			);
 			path = Ranking;
 			sourceTree = "<group>";
@@ -463,6 +476,7 @@
 			children = (
 				8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */,
 				8CB39BAB29C0C88800B1D8EF /* String+Hash.swift */,
+				8C810F7829C3690700AEE548 /* UIViewController+Keyboard.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -839,12 +853,14 @@
 				8CAEB02529BB4A09009282AF /* AppFactory.swift in Sources */,
 				8CAEB02029BB4968009282AF /* Coordinator.swift in Sources */,
 				8CB39BAC29C0C88800B1D8EF /* String+Hash.swift in Sources */,
+				8C810F7929C3690700AEE548 /* UIViewController+Keyboard.swift in Sources */,
 				8CD7CD8629BF3DA900C57346 /* AppContainer.swift in Sources */,
 				8CB39BA329C06F7A00B1D8EF /* TabBarCoordinator.swift in Sources */,
 				8CAC3E2F29C3080600A1FE34 /* GuideViewModel.swift in Sources */,
 				8C7563E429BB5F17000373F9 /* MessageDisplayable.swift in Sources */,
 				8CB39B9729C05DDE00B1D8EF /* LoginRepository.swift in Sources */,
 				8CB39B9F29C06CF400B1D8EF /* ProfileViewController.swift in Sources */,
+				8C810F7729C3442A00AEE548 /* PruebaViewController.swift in Sources */,
 				8CB39BA129C06EE200B1D8EF /* TabBarFactory.swift in Sources */,
 				8CD7CD8A29BF53A800C57346 /* RegisterCoordinator.swift in Sources */,
 				8CB8FBC129C11DDA00AC52BD /* TabBarViewController.swift in Sources */,
@@ -1049,6 +1065,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VBHK2Y84U5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PubgStats/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1076,6 +1093,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VBHK2Y84U5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PubgStats/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -23,6 +23,14 @@ final class LoginProfilePubgViewController: UIViewController {
         button.tintColor = .black
         return button
     }()
+    private let profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "default")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        return imageView
+    }()
     private let containerStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -30,20 +38,33 @@ final class LoginProfilePubgViewController: UIViewController {
         stack.spacing = 20
         return stack
     }()
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Pubg Player"
-        label.font = UIFont.preferredFont(forTextStyle: .title2)
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private lazy var userTextField = makeTextField(placeholder: "Player Name")
-    
-    private let acceptButton: UIButton = {
+    private let personalDataButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Accept", for: .normal)
+        button.setTitle("Personal Data", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.layer.cornerRadius = 10
+        button.backgroundColor = .systemBlue
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        return button
+    }()
+    private let settingButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Setting", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.layer.cornerRadius = 10
+        button.backgroundColor = .systemBlue
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        return button
+    }()
+    
+    private let linkPubgAccountButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Link Pubg account", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.layer.cornerRadius = 10
@@ -68,18 +89,24 @@ final class LoginProfilePubgViewController: UIViewController {
         navigationItem.leftBarButtonItem = barLeftButton
     }
     private func configConstraints() {
+        contentView.addSubview(profileImageView)
+        profileImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
+        profileImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        
         contentView.addSubview(containerStackView)
-        containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 200).isActive = true
+        containerStackView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 50).isActive = true
         containerStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
         containerStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
         containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
-        [titleLabel,userTextField, acceptButton].forEach {
+        [personalDataButton, settingButton, linkPubgAccountButton].forEach {
             containerStackView.addArrangedSubview($0)
         }
     }
     private func configTargets() {
-        acceptButton.addTarget(self, action: #selector(didTapAcceptButton), for: .touchUpInside)
+        personalDataButton.addTarget(self, action: #selector(didTapPersonalDataButton), for: .touchUpInside)
+        settingButton.addTarget(self, action: #selector(didTapSettingButton), for: .touchUpInside)
+        linkPubgAccountButton.addTarget(self, action: #selector(didTapLinkPubgAccountButton), for: .touchUpInside)
     }
     private func logOut() {
         //(UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController("que pongo")
@@ -97,7 +124,13 @@ final class LoginProfilePubgViewController: UIViewController {
         textField.layer.cornerRadius = 10
         return textField
     }
-    @objc func didTapAcceptButton() {
+    @objc func didTapPersonalDataButton() {
+        return
+    }
+    @objc func didTapSettingButton() {
+        return
+    }
+    @objc func didTapLinkPubgAccountButton() {
         return
     }
 }

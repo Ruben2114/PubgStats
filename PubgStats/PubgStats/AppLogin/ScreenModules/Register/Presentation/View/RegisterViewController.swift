@@ -67,6 +67,7 @@ final class RegisterViewController: UIViewController {
         configTargets()
         configKeyboardSubscription(mainScrollView: mainScrollView)
         bind()
+        hideKeyboard()
     }
     private func configUI() {
         view.backgroundColor = .systemBackground

@@ -7,12 +7,13 @@
 
 import UIKit
 import Combine
+import MessageUI
 
 final class ContactViewController: UIViewController {
     var mainScrollView = UIScrollView()
     var contentView = UIView()
     var cancellable = Set<AnyCancellable>()
-   
+    
     private let containerStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -23,14 +24,23 @@ final class ContactViewController: UIViewController {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.text = "Mi informacion\n\nRecien graduado en desarrollador de aplicacion IOS, con cnocimientoen en....\n\nSi tienes alguna duda contacta a traves de este correo:"
+        label.text = "Graduado en Programación de aplicaciones móviles con Swift en TokioSchool\n\nEsta aplicación ha sido creado con el objetivo de mostrar mis conocimientos adquiridos durante el curso y las prácticas curriculares en la entrega del TFM\n\nSi tienes alguna duda, sugerencia o problema con la ejecución de la app contacta a través de este correo:"
         label.font = UIFont.preferredFont(forTextStyle: .title2)
         label.textAlignment = .center
         return label
     }()
     
-    private lazy var userTextField = makeTextField(placeholder: "Player Name")
-    
+    private let textField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .gray.withAlphaComponent(0.1)
+        textField.placeholder = "tu mensaje"
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        textField.leftViewMode = .always
+        textField.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        textField.font = UIFont.systemFont(ofSize: 20)
+        textField.layer.cornerRadius = 10
+        return textField
+    }()
     private let acceptButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -50,42 +60,65 @@ final class ContactViewController: UIViewController {
         configConstraints()
         configTargets()
         configKeyboardSubscription(mainScrollView: mainScrollView)
-        
+        hideKeyboard()
     }
+    
     private func configUI() {
         view.backgroundColor = .systemBackground
         title = "Login"
     }
     private func configConstraints() {
         contentView.addSubview(containerStackView)
-        containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 50).isActive = true
+        containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         containerStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
         containerStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
         containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
-        [titleLabel,userTextField, acceptButton].forEach {
+        [titleLabel,textField, acceptButton].forEach {
             containerStackView.addArrangedSubview($0)
         }
     }
     private func configTargets() {
         acceptButton.addTarget(self, action: #selector(didTapAcceptButton), for: .touchUpInside)
     }
-    private func makeTextField(placeholder: String) -> UITextField {
-        let textField = UITextField()
-        textField.backgroundColor = .gray.withAlphaComponent(0.1)
-        textField.placeholder = placeholder
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-        textField.leftViewMode = .always
-        textField.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        textField.font = UIFont.systemFont(ofSize: 20)
-        textField.layer.cornerRadius = 10
-        return textField
-    }
+    
     @objc func didTapAcceptButton() {
-        return
+        guard MFMailComposeViewController.canSendMail() else{
+            return
+        }
+        let sendMail = MFMailComposeViewController()
+        sendMail.setToRecipients(["cervigon21@gmail.com"])
+        sendMail.setSubject("Correo de prueba")
+        guard let text = textField.text, !text.isEmpty else { return}
+        sendMail.setMessageBody(text, isHTML: true)
+        sendMail.mailComposeDelegate = self
+        present(sendMail, animated: true, completion: nil)
     }
 }
 
+
 extension ContactViewController: ViewScrollable {}
 extension ContactViewController: KeyboardDisplayable {}
+extension ContactViewController: MFMailComposeViewControllerDelegate{
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?){
+        guard error == nil else{
+            print("Ha ocurrido un problema")
+            return
+        }
+        switch result{
+        case .cancelled:
+            print("Cancelado")
+        case .saved:
+            print("Guardado")
+        case .sent:
+            print("Enviado con éxito")
+        case .failed:
+            print("Ha fallado")
+        @unknown default:
+            print("Error inesperado")
+        }
+    }
+}
+
+
 

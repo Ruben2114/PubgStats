@@ -74,6 +74,7 @@ class HomeMenuViewController: UIViewController {
         configTargets()
         configKeyboardSubscription(mainScrollView: mainScrollView)
         bind()
+        hideKeyboard()
     }
     private func configUI() {
         view.backgroundColor = .systemBackground
