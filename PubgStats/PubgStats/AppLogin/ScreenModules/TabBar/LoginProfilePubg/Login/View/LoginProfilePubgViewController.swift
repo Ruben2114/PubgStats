@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class LoginProfilePubgViewController: UIViewController {
+final class LoginProfilePubgViewController: UIViewController {
     var mainScrollView = UIScrollView()
     var contentView = UIView()
     var cancellable = Set<AnyCancellable>()
@@ -52,15 +52,6 @@ class LoginProfilePubgViewController: UIViewController {
         return button
     }()
     
-    init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>()){
-        self.mainScrollView = mainScrollView
-        self.contentView = contentView
-        self.cancellable = cancellable
-        super.init(nibName: nil, bundle: nil)
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         configScroll()
