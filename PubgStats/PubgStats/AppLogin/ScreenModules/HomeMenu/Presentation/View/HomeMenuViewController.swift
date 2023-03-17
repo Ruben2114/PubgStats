@@ -128,6 +128,7 @@ class HomeMenuViewController: UIViewController {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
             switch state{
             case .success:
+                //(UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewTabCoordinator()
                 self?.coordinator?.didTapLoginButton()
             case .loading:
                 break

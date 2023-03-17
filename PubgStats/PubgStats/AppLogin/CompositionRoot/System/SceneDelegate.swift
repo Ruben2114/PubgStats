@@ -12,11 +12,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var appCoordinator: Coordinator?
     var appFactory: AppFactory!
+    var tabCoordinator: Coordinator?
+    var itemTab: TabBarFactory!
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let scene = (scene as? UIWindowScene) else { return }
+      
         let navigation = UINavigationController()
         appFactory = AppFactoryImp()
         window = UIWindow(windowScene: scene)
@@ -24,15 +27,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         appCoordinator?.start()
         
     }
-    func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
-        guard let window = self.window else {
-            return
-        }
-        window.rootViewController = vc
-        window.makeKeyAndVisible()
-        window.overrideUserInterfaceStyle = .light
+    func changeRootViewTabCoordinator(animated: Bool = true) {
+        let tabBarController = UITabBarController()
+        let navigation = UINavigationController()
+        itemTab = TabBarFactoryImp()
+        tabCoordinator = TabCoordinator(tabBarController: tabBarController, navigation: navigation, itemTab: itemTab, window: window)
+        tabCoordinator?.start()
         appCoordinator?.dismiss()
         appCoordinator = nil
+    }
+    func changeRootViewAppCoordinator(animated: Bool = true) {
+        let navigation = UINavigationController()
+        appFactory = AppFactoryImp()
+        appCoordinator = AppCoordinator( navigation: navigation, appFactory: appFactory, window: window)
+        appCoordinator?.start()
+        tabCoordinator?.dismiss()
+        tabCoordinator = nil
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

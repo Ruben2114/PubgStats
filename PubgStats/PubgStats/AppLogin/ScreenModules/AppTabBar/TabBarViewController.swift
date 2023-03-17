@@ -8,16 +8,13 @@
 import UIKit
 
 class TabBarViewController: UITabBarController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configTabBar()
     }
-    
     func configTabBar() {
-        
-        let profileView = navController(vc: LoginProfilePubgViewController(), itemName: "Profile", itemImage: "person.circle.fill")
+        let profileView = navController(vc: UIViewController(), itemName: "Profile", itemImage: "person.circle.fill")
         let favouritesView = navController(vc: UIViewController(), itemName: "Favourite", itemImage: "star.circle.fill")
         let rankingView = navController(vc: UIViewController(), itemName: "Ranking", itemImage: "trophy.circle.fill")
         let guideView = navController(vc: GuideViewController(viewModel: GuideViewModel()), itemName: "Guide", itemImage: "book.circle.fill")

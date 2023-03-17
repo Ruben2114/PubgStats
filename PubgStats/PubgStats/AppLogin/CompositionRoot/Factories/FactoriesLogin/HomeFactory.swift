@@ -5,7 +5,6 @@
 //  Created by Ruben Rodriguez on 10/3/23.
 //
 import UIKit
-import Combine
 
 protocol HomeFactory {
     func makeModule(coordinator: HomeMenuViewControllerCoordinator) -> UIViewController
@@ -26,9 +25,8 @@ struct HomeFactoryImp: HomeFactory {
         return homeMenuController
     }
     func makeLoginCoordinator() -> Coordinator {
-        let tabBarFactory = TabBarFactoryImp(appContainer: appContainer)
-        let tabBarCoordinator = TabBarCoordinator(tabBarFactory: tabBarFactory)
-        return tabBarCoordinator
+        let changeTabBarCoordinator = ChangeTabBarCoordinator()
+        return changeTabBarCoordinator
     }
     func makeForgotCoordinator(navigation: UINavigationController) -> Coordinator {
         let forgotFactory = ForgotFactoryImp(appContainer: appContainer)
