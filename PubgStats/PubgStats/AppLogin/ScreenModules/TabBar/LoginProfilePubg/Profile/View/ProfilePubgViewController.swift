@@ -12,6 +12,7 @@ protocol ProfilePubgViewControllerCoordinator: AnyObject {
     func didTapPersonalDataButton()
     func didTapSettingButton()
     func didTapLinkPubgAccountButton()
+    func didTapStatsgAccountButton()
 }
 
 final class ProfilePubgViewController: UIViewController {
@@ -84,7 +85,18 @@ final class ProfilePubgViewController: UIViewController {
     private let linkPubgAccountButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Link Pubg account", for: .normal)
+        button.setTitle("Link Pubg Account", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.layer.cornerRadius = 10
+        button.backgroundColor = .systemBlue
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        return button
+    }()
+    private let StatsAccountButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Stats Account", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.layer.cornerRadius = 10
@@ -107,6 +119,7 @@ final class ProfilePubgViewController: UIViewController {
         title = "Login"
         let barLeftButton = UIBarButtonItem(customView: logOutButton)
         navigationItem.leftBarButtonItem = barLeftButton
+        //TODO: DOS BOTONES OCULTOS Y EL VIEWMODEL ELIGE CUAL MOSTRAR Y QUE MOSTRAR (LA FOTO, EL NOMBRE...)
     }
     private func configConstraints() {
         contentView.addSubview(profileImageView)
@@ -119,7 +132,7 @@ final class ProfilePubgViewController: UIViewController {
         containerStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
         containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
-        [personalDataButton, settingButton, linkPubgAccountButton].forEach {
+        [personalDataButton, settingButton, linkPubgAccountButton, StatsAccountButton].forEach {
             containerStackView.addArrangedSubview($0)
         }
     }
@@ -127,6 +140,7 @@ final class ProfilePubgViewController: UIViewController {
         personalDataButton.addTarget(self, action: #selector(didTapPersonalDataButton), for: .touchUpInside)
         settingButton.addTarget(self, action: #selector(didTapSettingButton), for: .touchUpInside)
         linkPubgAccountButton.addTarget(self, action: #selector(didTapLinkPubgAccountButton), for: .touchUpInside)
+        StatsAccountButton.addTarget(self, action: #selector(didTapStatsgAccountButton), for: .touchUpInside)
     }
     private func logOut() {
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewAppCoordinator()
@@ -151,6 +165,9 @@ final class ProfilePubgViewController: UIViewController {
     }
     @objc func didTapLinkPubgAccountButton() {
         coordinator?.didTapLinkPubgAccountButton()
+    }
+    @objc func didTapStatsgAccountButton() {
+        coordinator?.didTapStatsgAccountButton()
     }
 }
 extension ProfilePubgViewController: MessageDisplayable { }

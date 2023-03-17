@@ -24,6 +24,10 @@ final class ProfileCoordinator: Coordinator {
     }
 }
 extension ProfileCoordinator: ProfilePubgViewControllerCoordinator {
+    func didTapStatsgAccountButton() {
+        
+    }
+    
     func didTapPersonalDataButton() {
         //let personalDataCoordinator = profileFactory.makePersonalDataCoordinator(navigation: navigation)
         //personalDataCoordinator.start()
