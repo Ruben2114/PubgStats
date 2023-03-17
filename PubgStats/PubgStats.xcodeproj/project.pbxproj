@@ -222,6 +222,7 @@
 				8C7563E329BB5F17000373F9 /* MessageDisplayable.swift */,
 				8CB39BA629C0917000B1D8EF /* ViewScrollable.swift */,
 				8CB39BA829C0919600B1D8EF /* KeyboardDisplayable.swift */,
+				8CA17EBA29C465E900ADFFE2 /* CreateNavController.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -292,9 +293,7 @@
 		8C9F823F29C3C8DC003000CD /* TabBarCoordinator */ = {
 			isa = PBXGroup;
 			children = (
-				8C7D65C129C3755E0038DF59 /* TabCoordinator.swift */,
 				8CAEB01B29BB47BA009282AF /* CoordinatorScreen */,
-				8CA17EBA29C465E900ADFFE2 /* CreateNavController.swift */,
 			);
 			path = TabBarCoordinator;
 			sourceTree = "<group>";
@@ -599,6 +598,7 @@
 		8CAEB01B29BB47BA009282AF /* CoordinatorScreen */ = {
 			isa = PBXGroup;
 			children = (
+				8C7D65C129C3755E0038DF59 /* TabCoordinator.swift */,
 				8C7D65C729C379A90038DF59 /* ProfileCoordinator.swift */,
 				8C9F824529C3CB77003000CD /* PersonalDataCoordinator.swift */,
 			);

@@ -28,11 +28,9 @@ final class TabCoordinator: Coordinator, CreateNavController{
          let coordinator2 = tabFactory.makeProfileCoordinator(navigation: navigation)
          coordinator2.start()
          append(child: coordinator2)
-         
          let coordinator3 = tabFactory.makeProfileCoordinator(navigation: navigation)
          coordinator3.start()
          append(child: coordinator3)
-         
          */
         let viewsTotal = itemTab.allView(coordinator: coordinator)
         tabBarController.viewControllers = viewsTotal
