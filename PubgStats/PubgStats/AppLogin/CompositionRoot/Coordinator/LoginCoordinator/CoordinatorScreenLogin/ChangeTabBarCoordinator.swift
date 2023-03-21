@@ -13,7 +13,6 @@ final class ChangeTabBarCoordinator: Coordinator {
     var onFinish: (() -> Void)?
 
     func start() {
-        print("aqui estaba antes lo del cambio")
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewTabCoordinator()
     }
 }

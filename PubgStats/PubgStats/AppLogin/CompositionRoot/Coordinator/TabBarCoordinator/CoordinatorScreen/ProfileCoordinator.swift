@@ -12,18 +12,23 @@ final class ProfileCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
     
-    //private let profileFactory: ProfileFactory
+    private let profileFactory: ProfileFactory
     
-    init(navigation:UINavigationController){
+    init(navigation:UINavigationController, profileFactory: ProfileFactory){
         self.navigation = navigation
+        self.profileFactory = profileFactory
     }
     
     func start() {
-        //let controller = profileFactory.makeModule(coordinator: self)
-        //navigation.pushViewController(controller, animated: true)
     }
 }
-extension ProfileCoordinator: ProfilePubgViewControllerCoordinator {
+extension ProfileCoordinator: ProfileViewControllerCoordinator {
+    func logOut() {
+        let logOutCoordinator = profileFactory.makeLogOutDataCoordinator()
+        logOutCoordinator.start()
+        append(child: logOutCoordinator)
+    }
+    
     func didTapStatsgAccountButton() {
         
     }

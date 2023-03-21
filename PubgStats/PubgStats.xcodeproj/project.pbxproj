@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		46151CB729C1B9780054BCEA /* ProfilePubgViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46151CB629C1B9780054BCEA /* ProfilePubgViewController.swift */; };
+		46151CB729C1B9780054BCEA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46151CB629C1B9780054BCEA /* ProfileViewController.swift */; };
 		46151CC129C1E8470054BCEA /* ForgotFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46151CC029C1E8470054BCEA /* ForgotFactory.swift */; };
 		46151CC329C1E8FC0054BCEA /* ForgotViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46151CC229C1E8FC0054BCEA /* ForgotViewControllerCoordinator.swift */; };
 		46151CC829C1E9F40054BCEA /* ForgotCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46151CC729C1E9F40054BCEA /* ForgotCoordinator.swift */; };
 		8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */; };
 		8C31FDB729C329E500196704 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31FDB629C329E500196704 /* ContactViewController.swift */; };
+		8C398D0B29C49B78002FFA7F /* ChangeLoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C398D0A29C49B78002FFA7F /* ChangeLoginCoordinator.swift */; };
 		8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */; };
 		8C7563E029BB5E5E000373F9 /* SpinnerDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563DF29BB5E5E000373F9 /* SpinnerDisplayable.swift */; };
 		8C7563E229BB5E8A000373F9 /* ViewValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563E129BB5E8A000373F9 /* ViewValues.swift */; };
@@ -23,7 +24,6 @@
 		8C7D65C229C3755E0038DF59 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7D65C129C3755E0038DF59 /* TabCoordinator.swift */; };
 		8C7D65C629C377E50038DF59 /* ProfileFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7D65C529C377E50038DF59 /* ProfileFactory.swift */; };
 		8C7D65C829C379A90038DF59 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7D65C729C379A90038DF59 /* ProfileCoordinator.swift */; };
-		8C810F7729C3442A00AEE548 /* PruebaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C810F7629C3442A00AEE548 /* PruebaViewController.swift */; };
 		8C810F7929C3690700AEE548 /* UIViewController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C810F7829C3690700AEE548 /* UIViewController+Keyboard.swift */; };
 		8C9F824229C3CA02003000CD /* PersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9F824129C3CA02003000CD /* PersonalDataViewController.swift */; };
 		8C9F824429C3CAAB003000CD /* PersonalDataFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9F824329C3CAAB003000CD /* PersonalDataFactory.swift */; };
@@ -46,6 +46,9 @@
 		8CAEB02529BB4A09009282AF /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAEB02429BB4A09009282AF /* AppFactory.swift */; };
 		8CAEB02729BB4D0B009282AF /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAEB02629BB4D0B009282AF /* HomeCoordinator.swift */; };
 		8CAEB02929BB4D49009282AF /* HomeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAEB02829BB4D49009282AF /* HomeFactory.swift */; };
+		8CB2CEEC29C9A35B00E79D29 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2CEEB29C9A35B00E79D29 /* ApiClient.swift */; };
+		8CB2CEF129C9A63B00E79D29 /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2CEF029C9A63B00E79D29 /* PlayerModel.swift */; };
+		8CB2CEF329C9A87900E79D29 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2CEF229C9A87900E79D29 /* ProfileViewModel.swift */; };
 		8CB39B9529C05D2500B1D8EF /* LoginDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB39B9429C05D2500B1D8EF /* LoginDataUseCase.swift */; };
 		8CB39B9729C05DDE00B1D8EF /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB39B9629C05DDE00B1D8EF /* LoginRepository.swift */; };
 		8CB39B9B29C0604100B1D8EF /* LoginRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB39B9A29C0604100B1D8EF /* LoginRepositoryImp.swift */; };
@@ -85,12 +88,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		46151CB629C1B9780054BCEA /* ProfilePubgViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePubgViewController.swift; sourceTree = "<group>"; };
+		46151CB629C1B9780054BCEA /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		46151CC029C1E8470054BCEA /* ForgotFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotFactory.swift; sourceTree = "<group>"; };
 		46151CC229C1E8FC0054BCEA /* ForgotViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ForgotViewControllerCoordinator.swift; path = PubgStats/AppLogin/ScreenModules/ForgotPassword/ForgotViewControllerCoordinator.swift; sourceTree = SOURCE_ROOT; };
 		46151CC729C1E9F40054BCEA /* ForgotCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotCoordinator.swift; sourceTree = "<group>"; };
 		8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		8C31FDB629C329E500196704 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
+		8C398D0A29C49B78002FFA7F /* ChangeLoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLoginCoordinator.swift; sourceTree = "<group>"; };
 		8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraint.swift"; sourceTree = "<group>"; };
 		8C7563DF29BB5E5E000373F9 /* SpinnerDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerDisplayable.swift; sourceTree = "<group>"; };
 		8C7563E129BB5E8A000373F9 /* ViewValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewValues.swift; sourceTree = "<group>"; };
@@ -101,7 +105,6 @@
 		8C7D65C129C3755E0038DF59 /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
 		8C7D65C529C377E50038DF59 /* ProfileFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFactory.swift; sourceTree = "<group>"; };
 		8C7D65C729C379A90038DF59 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
-		8C810F7629C3442A00AEE548 /* PruebaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PruebaViewController.swift; sourceTree = "<group>"; };
 		8C810F7829C3690700AEE548 /* UIViewController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Keyboard.swift"; sourceTree = "<group>"; };
 		8C9F824129C3CA02003000CD /* PersonalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataViewController.swift; sourceTree = "<group>"; };
 		8C9F824329C3CAAB003000CD /* PersonalDataFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataFactory.swift; sourceTree = "<group>"; };
@@ -128,6 +131,9 @@
 		8CAEB02429BB4A09009282AF /* AppFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFactory.swift; sourceTree = "<group>"; };
 		8CAEB02629BB4D0B009282AF /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		8CAEB02829BB4D49009282AF /* HomeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFactory.swift; sourceTree = "<group>"; };
+		8CB2CEEB29C9A35B00E79D29 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		8CB2CEF029C9A63B00E79D29 /* PlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModel.swift; sourceTree = "<group>"; };
+		8CB2CEF229C9A87900E79D29 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		8CB39B9429C05D2500B1D8EF /* LoginDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataUseCase.swift; sourceTree = "<group>"; };
 		8CB39B9629C05DDE00B1D8EF /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
 		8CB39B9A29C0604100B1D8EF /* LoginRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepositoryImp.swift; sourceTree = "<group>"; };
@@ -174,19 +180,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		46151CB429C1B9480054BCEA /* LoginProfilePubg */ = {
+		46151CB429C1B9480054BCEA /* ProfilePubg */ = {
 			isa = PBXGroup;
 			children = (
 				8CAC3E2329C303C800A1FE34 /* Profile */,
 				8CAEB00E29BB46DB009282AF /* PersonalData */,
 			);
-			path = LoginProfilePubg;
+			path = ProfilePubg;
 			sourceTree = "<group>";
 		};
 		46151CB529C1B9640054BCEA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				46151CB629C1B9780054BCEA /* ProfilePubgViewController.swift */,
+				46151CB629C1B9780054BCEA /* ProfileViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -286,6 +292,7 @@
 				8CD7CD8929BF53A800C57346 /* RegisterCoordinator.swift */,
 				46151CC729C1E9F40054BCEA /* ForgotCoordinator.swift */,
 				8CB39BA229C06F7A00B1D8EF /* ChangeTabBarCoordinator.swift */,
+				8C398D0A29C49B78002FFA7F /* ChangeLoginCoordinator.swift */,
 			);
 			path = CoordinatorScreenLogin;
 			sourceTree = "<group>";
@@ -356,7 +363,7 @@
 		8CAC3E2229C303A000A1FE34 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				46151CB429C1B9480054BCEA /* LoginProfilePubg */,
+				46151CB429C1B9480054BCEA /* ProfilePubg */,
 				8CAC3E2629C3047D00A1FE34 /* Favourite */,
 				8CAC3E2529C3046A00A1FE34 /* Ranking */,
 				8CAC3E2429C3045300A1FE34 /* Guide */,
@@ -368,7 +375,9 @@
 		8CAC3E2329C303C800A1FE34 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				46151CB529C1B9640054BCEA /* View */,
+				8CB2CEE629C9A20700E79D29 /* Domain */,
+				8CB2CEE529C9A20200E79D29 /* Data */,
+				8CB2CEE429C9A1FB00E79D29 /* Presentation */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -385,7 +394,6 @@
 		8CAC3E2529C3046A00A1FE34 /* Ranking */ = {
 			isa = PBXGroup;
 			children = (
-				8C810F7629C3442A00AEE548 /* PruebaViewController.swift */,
 			);
 			path = Ranking;
 			sourceTree = "<group>";
@@ -434,6 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				8CAEB00B29BB4662009282AF /* Storage */,
+				8CB2CEEA29C9A33E00E79D29 /* Networking */,
 				8CAEB00A29BB465C009282AF /* Resources */,
 				8CAEB00829BB4636009282AF /* Common */,
 				8CAEB00729BB462C009282AF /* ScreenModules */,
@@ -637,6 +646,70 @@
 				8C9F823E29C3C8C1003000CD /* CoordinatorScreenLogin */,
 			);
 			path = LoginCoordinator;
+			sourceTree = "<group>";
+		};
+		8CB2CEE429C9A1FB00E79D29 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				8CB2CEE729C9A22500E79D29 /* ViewModel */,
+				46151CB529C1B9640054BCEA /* View */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		8CB2CEE529C9A20200E79D29 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		8CB2CEE629C9A20700E79D29 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				8CB2CEEF29C9A60F00E79D29 /* Entity */,
+				8CB2CEE929C9A24E00E79D29 /* InterfaceRepository */,
+				8CB2CEE829C9A24800E79D29 /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		8CB2CEE729C9A22500E79D29 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8CB2CEF229C9A87900E79D29 /* ProfileViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8CB2CEE829C9A24800E79D29 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		8CB2CEE929C9A24E00E79D29 /* InterfaceRepository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = InterfaceRepository;
+			sourceTree = "<group>";
+		};
+		8CB2CEEA29C9A33E00E79D29 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				8CB2CEEB29C9A35B00E79D29 /* ApiClient.swift */,
+				8CB2CEF029C9A63B00E79D29 /* PlayerModel.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		8CB2CEEF29C9A60F00E79D29 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		8CB39B9829C05FE300B1D8EF /* Presentation */ = {
@@ -898,13 +971,14 @@
 				8C810F7929C3690700AEE548 /* UIViewController+Keyboard.swift in Sources */,
 				8C7D65C829C379A90038DF59 /* ProfileCoordinator.swift in Sources */,
 				8CD7CD8629BF3DA900C57346 /* AppContainer.swift in Sources */,
+				8CB2CEF329C9A87900E79D29 /* ProfileViewModel.swift in Sources */,
 				8CB39BA329C06F7A00B1D8EF /* ChangeTabBarCoordinator.swift in Sources */,
 				8CAC3E2F29C3080600A1FE34 /* GuideViewModel.swift in Sources */,
 				8C7563E429BB5F17000373F9 /* MessageDisplayable.swift in Sources */,
 				8CB39B9729C05DDE00B1D8EF /* LoginRepository.swift in Sources */,
 				8C7D65C229C3755E0038DF59 /* TabCoordinator.swift in Sources */,
+				8CB2CEEC29C9A35B00E79D29 /* ApiClient.swift in Sources */,
 				8C7D65C629C377E50038DF59 /* ProfileFactory.swift in Sources */,
-				8C810F7729C3442A00AEE548 /* PruebaViewController.swift in Sources */,
 				8C9F824429C3CAAB003000CD /* PersonalDataFactory.swift in Sources */,
 				8CD7CD8A29BF53A800C57346 /* RegisterCoordinator.swift in Sources */,
 				8CA17EBB29C465E900ADFFE2 /* CreateNavController.swift in Sources */,
@@ -916,6 +990,7 @@
 				8C7563E229BB5E8A000373F9 /* ViewValues.swift in Sources */,
 				46151CC129C1E8470054BCEA /* ForgotFactory.swift in Sources */,
 				8C7563E029BB5E5E000373F9 /* SpinnerDisplayable.swift in Sources */,
+				8C398D0B29C49B78002FFA7F /* ChangeLoginCoordinator.swift in Sources */,
 				8CB39BA729C0917000B1D8EF /* ViewScrollable.swift in Sources */,
 				8CA398B129B72A1F00C09746 /* HomeMenuViewController.swift in Sources */,
 				8CAEB02329BB49C3009282AF /* AppCoordinator.swift in Sources */,
@@ -936,7 +1011,8 @@
 				8CA17EBD29C46F8100ADFFE2 /* TabBarFactory.swift in Sources */,
 				8C31FDB729C329E500196704 /* ContactViewController.swift in Sources */,
 				8CB39BA929C0919600B1D8EF /* KeyboardDisplayable.swift in Sources */,
-				46151CB729C1B9780054BCEA /* ProfilePubgViewController.swift in Sources */,
+				8CB2CEF129C9A63B00E79D29 /* PlayerModel.swift in Sources */,
+				46151CB729C1B9780054BCEA /* ProfileViewController.swift in Sources */,
 				8CAEB02729BB4D0B009282AF /* HomeCoordinator.swift in Sources */,
 				8CB39B9529C05D2500B1D8EF /* LoginDataUseCase.swift in Sources */,
 				8CA398AF29B72A1F00C09746 /* SceneDelegate.swift in Sources */,
@@ -1119,8 +1195,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1147,8 +1223,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

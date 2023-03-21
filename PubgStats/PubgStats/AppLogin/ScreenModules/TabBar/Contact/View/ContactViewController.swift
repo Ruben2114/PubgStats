@@ -30,21 +30,10 @@ final class ContactViewController: UIViewController {
         return label
     }()
     
-    private let textField: UITextField = {
-        let textField = UITextField()
-        textField.backgroundColor = .gray.withAlphaComponent(0.1)
-        textField.placeholder = "tu mensaje"
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-        textField.leftViewMode = .always
-        textField.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        textField.font = UIFont.systemFont(ofSize: 20)
-        textField.layer.cornerRadius = 10
-        return textField
-    }()
-    private let acceptButton: UIButton = {
+    private let emailButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Accept", for: .normal)
+        button.setTitle("Correo", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.layer.cornerRadius = 10
@@ -65,32 +54,31 @@ final class ContactViewController: UIViewController {
     
     private func configUI() {
         view.backgroundColor = .systemBackground
-        title = "Login"
+        title = "Contact"
     }
     private func configConstraints() {
         contentView.addSubview(containerStackView)
-        containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 100).isActive = true
         containerStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
         containerStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
         containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
-        [titleLabel,textField, acceptButton].forEach {
+        [titleLabel, emailButton].forEach {
             containerStackView.addArrangedSubview($0)
         }
     }
     private func configTargets() {
-        acceptButton.addTarget(self, action: #selector(didTapAcceptButton), for: .touchUpInside)
+        emailButton.addTarget(self, action: #selector(didTapEmailButton), for: .touchUpInside)
     }
     
-    @objc func didTapAcceptButton() {
+    @objc func didTapEmailButton() {
         guard MFMailComposeViewController.canSendMail() else{
             return
         }
         let sendMail = MFMailComposeViewController()
         sendMail.setToRecipients(["cervigon21@gmail.com"])
         sendMail.setSubject("Correo de prueba")
-        guard let text = textField.text, !text.isEmpty else { return}
-        sendMail.setMessageBody(text, isHTML: true)
+        sendMail.setMessageBody("", isHTML: true)
         sendMail.mailComposeDelegate = self
         present(sendMail, animated: true, completion: nil)
     }

@@ -85,7 +85,7 @@ final class RegisterViewController: UIViewController {
     }
         
     private func configTargets() {
-        acceptButton.addTarget(self, action: #selector(didTapAcceptButton), for: .touchUpInside)
+        acceptButton.addTarget(self, action: #selector(didTapEmailButton), for: .touchUpInside)
     }
     
     private func makeTextField(placeholder: String, isSecure: Bool ) -> UITextField {
@@ -113,7 +113,7 @@ final class RegisterViewController: UIViewController {
             }
         }.store(in: &cancellable)
     }
-    @objc func didTapAcceptButton() {
+    @objc func didTapEmailButton() {
         let nameText = userTextField.text
         let passwordText = passwordTextField.text?.hashString()
         guard !nameText!.isEmpty, !passwordText!.isEmpty else {
