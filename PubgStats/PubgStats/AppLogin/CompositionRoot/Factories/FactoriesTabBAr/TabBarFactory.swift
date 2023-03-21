@@ -14,7 +14,8 @@ protocol TabBarFactory {
 
 struct TabBarFactoryImp:  TabBarFactory, CreateNavController{
     func allView(coordinator: Coordinator) -> [UIViewController]{
-        let profileFactory = ProfileFactoryImp(appContainer: AppContainerImp())
+        let appContainer = AppContainerImp()
+        let profileFactory = ProfileFactoryImp(appContainer: appContainer)
         let profileView = profileFactory.makeModule(coordinator: coordinator as! ProfileViewControllerCoordinator)
         let favouritesView = navController(vc: UIViewController(), itemName: "Favourite", itemImage: "star.circle.fill")
         let rankingView = navController(vc: UIViewController(), itemName: "Ranking", itemImage: "trophy.circle.fill")
