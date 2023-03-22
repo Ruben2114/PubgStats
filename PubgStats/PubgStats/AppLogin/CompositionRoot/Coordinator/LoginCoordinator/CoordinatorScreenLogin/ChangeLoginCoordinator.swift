@@ -8,7 +8,7 @@
 import UIKit
 
 final class ChangeLoginCoordinator: Coordinator {
-    var navigation: UINavigationController = UINavigationController()
+    var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
 

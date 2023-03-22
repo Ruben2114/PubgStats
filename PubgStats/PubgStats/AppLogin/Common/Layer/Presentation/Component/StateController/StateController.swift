@@ -15,6 +15,12 @@ enum StateController {
 
 enum Output {
     case fail(error: String)
-    case success (modelo: URLRequest)
+    case success (model: URLRequest)
     case loading
 }
+enum OutputPlayer {
+    case fail(error: String)
+    case success (model: PubgPlayer)
+    case loading
+}
+

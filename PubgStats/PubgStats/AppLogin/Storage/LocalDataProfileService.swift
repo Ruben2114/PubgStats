@@ -14,6 +14,7 @@ protocol LocalDataProfileService {
     func save(name: String, password: String)
     func checkIfNameExists(name: String) -> Bool
     func checkUser(name: String, password: String) -> Bool
+    func save(player: String, account: String)
     //TODO: EN UN FUTURO METER BORRAR O ACTUALIZAR
 }
 
@@ -48,6 +49,10 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         let newUser = Profile(context: context)
         newUser.name = name
         newUser.password = password
+        try? context.save()
+    }
+    func save(player: String, account: String){
+        //
         try? context.save()
     }
 }

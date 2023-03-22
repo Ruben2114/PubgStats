@@ -19,14 +19,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let scene = (scene as? UIWindowScene) else { return }
-      
-        let navigation = UINavigationController()
-        appFactory = AppFactoryImp()
-        window = UIWindow(windowScene: scene)
-        appCoordinator = AppCoordinator( navigation: navigation, appFactory: appFactory, window: window)
-        appCoordinator?.start()
-        
+        self.window = UIWindow(windowScene: scene)
+        let dependencies = AppDependencies(window: window)
+        window?.rootViewController = dependencies.loginNavigationController()
+        window?.makeKeyAndVisible()
+        let rootCoordinator = dependencies.loginCoordinator()
+        rootCoordinator.start()
     }
+    
     func changeRootViewTabCoordinator(animated: Bool = true) {
         let tabBarController = UITabBarController()
         let navigation = UINavigationController()

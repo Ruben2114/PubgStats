@@ -8,7 +8,7 @@
 import UIKit
 
 final class ProfileCoordinator: Coordinator {
-    var navigation: UINavigationController
+    var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
     

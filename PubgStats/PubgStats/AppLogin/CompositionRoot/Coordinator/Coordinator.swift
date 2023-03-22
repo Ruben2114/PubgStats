@@ -8,10 +8,9 @@ import UIKit
 
 protocol Coordinator: AnyObject {
     var identifier: String { get }
-    var navigation: UINavigationController { get set }
+    var navigation: UINavigationController? { get set }
     var childCoordinators: [Coordinator] { get set }
     var onFinish: (() -> Void)? { get set }
-    
     func start()
     func dismiss()
 }
@@ -29,7 +28,7 @@ extension Coordinator {
     }
     
     func dismiss() {
-        navigation.popViewController(animated: true)
+        navigation?.popViewController(animated: true)
         onFinish?()
     }
 }

@@ -7,7 +7,7 @@
 import UIKit
 
 final class AppCoordinator: Coordinator {
-    var navigation: UINavigationController
+    var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
     
@@ -19,7 +19,7 @@ final class AppCoordinator: Coordinator {
         configWindow(window: window)
     }
     func start() {
-        let coordinator = appFactory.makeHomeCoordinator(navigation: navigation)
+        let coordinator = appFactory.makeHomeCoordinator(navigation: navigation!)
         coordinator.start()
         append(child: coordinator)
     }

@@ -15,6 +15,7 @@ protocol ProfileFactory {
     func makeSettingCoordinator(navigation: UINavigationController) //-> Coordinator
     //TODO: este ultimo creo que no hace falta
     func makeLinkPubgDataCoordinator(navigation: UINavigationController) //-> Coordinator
+    //TODO: meter el otro boton de stat
 }
 
 struct ProfileFactoryImp: ProfileFactory, CreateNavController{

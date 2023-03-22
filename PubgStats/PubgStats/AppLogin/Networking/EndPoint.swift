@@ -7,7 +7,7 @@
 
 enum ApisUrl {
     private var baseUrl: String { return "https://api.pubg.com/shards/steam/players"}
-    case generalData(nombre: String)
+    case generalData(name: String)
     case survivalData(id: String)
     case weaponData(id: String)
     case gameModeData(id: String)

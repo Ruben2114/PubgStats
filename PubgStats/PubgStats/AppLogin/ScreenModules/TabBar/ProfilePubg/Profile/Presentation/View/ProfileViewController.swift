@@ -61,7 +61,7 @@ final class ProfileViewController: UIViewController {
         stack.spacing = 20
         return stack
     }()
- 
+    
     private lazy var personalDataButton: UIButton = makeTitleButton(title: "Personal Data")
     private lazy var settingButton: UIButton = makeTitleButton(title: "Setting")
     private lazy var linkPubgAccountButton: UIButton = makeTitleButton(title: "Link Pubg Account")
@@ -75,6 +75,7 @@ final class ProfileViewController: UIViewController {
         configConstraints()
         configTargets()
         configKeyboardSubscription(mainScrollView: mainScrollView)
+        bind()
     }
     
     private func configUI() {
@@ -83,6 +84,21 @@ final class ProfileViewController: UIViewController {
         let barLeftButton = UIBarButtonItem(customView: logOutButton)
         navigationItem.leftBarButtonItem = barLeftButton
         //TODO: DOS BOTONES OCULTOS Y EL VIEWMODEL ELIGE CUAL MOSTRAR Y QUE MOSTRAR (LA FOTO, EL NOMBRE...)
+    }
+    private func bind() {
+        viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
+            switch state {
+            case .fail(_):
+                self?.presentAlert(message: "El nombre de usuario no existe", title: "Error")
+            case .success(let model):
+                let account = model.id
+                let name = model.name
+                print("Name: \(name ?? "no existe name") y account \(account ?? "no existe account")")
+                //TODO: guardar aqui en core data
+            case .loading:
+                print("esperando")
+            }
+        }.store(in: &cancellable)
     }
     private func configConstraints() {
         contentView.addSubview(profileImageView)
@@ -99,20 +115,7 @@ final class ProfileViewController: UIViewController {
             containerStackView.addArrangedSubview($0)
         }
     }
-    private func makeTitleButton(
-        title: String
-    ) -> UIButton {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(title, for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        button.layer.cornerRadius = 10
-        button.backgroundColor = .systemBlue
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        return button
-    }
-    
+   
     private func configTargets() {
         personalDataButton.addTarget(self, action: #selector(didTapPersonalDataButton), for: .touchUpInside)
         settingButton.addTarget(self, action: #selector(didTapSettingButton), for: .touchUpInside)
@@ -123,7 +126,7 @@ final class ProfileViewController: UIViewController {
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewAppCoordinator()
         print("volver  realizar el login")
     }
-  
+    
     @objc func didTapPersonalDataButton() {
         coordinator?.didTapPersonalDataButton()
     }
@@ -131,7 +134,23 @@ final class ProfileViewController: UIViewController {
         coordinator?.didTapSettingButton()
     }
     @objc func didTapLinkPubgAccountButton() {
-        coordinator?.didTapLinkPubgAccountButton()
+        let alert = UIAlertController(title: "Player", message: "", preferredStyle: .alert)
+        alert.addTextField{ (namePubg) in
+            namePubg.placeholder = "Name PLayer"
+        }
+        let actionAccept = UIAlertAction(title: "Accept", style: .default){ [weak self]_ in
+            guard let name = alert.textFields?.first?.text, !name.isEmpty else {
+                self?.presentAlert(message: "There are no users with an empty name", title: "Error")
+                return}
+            self?.viewModel.dataGeneral(name: name)
+            
+            //TODO: Cambiar el boton
+            self?.coordinator?.didTapLinkPubgAccountButton()
+        }
+        let actionCancel = UIAlertAction(title: "cancelar", style: .destructive)
+        alert.addAction(actionAccept)
+        alert.addAction(actionCancel)
+        present(alert, animated: true)
     }
     @objc func didTapStatsgAccountButton() {
         coordinator?.didTapStatsgAccountButton()
@@ -146,6 +165,19 @@ final class ProfileViewController: UIViewController {
         textField.font = UIFont.systemFont(ofSize: 20)
         textField.layer.cornerRadius = 10
         return textField
+    }
+    private func makeTitleButton(
+        title: String
+    ) -> UIButton {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.layer.cornerRadius = 10
+        button.backgroundColor = .systemBlue
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        return button
     }
 }
 extension ProfileViewController: MessageDisplayable { }

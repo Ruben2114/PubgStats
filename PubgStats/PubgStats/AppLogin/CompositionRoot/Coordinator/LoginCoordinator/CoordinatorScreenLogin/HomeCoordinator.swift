@@ -7,7 +7,7 @@
 import UIKit
 
 final class HomeCoordinator: Coordinator {
-    var navigation: UINavigationController
+    var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
     
@@ -20,25 +20,19 @@ final class HomeCoordinator: Coordinator {
     
     func start() {
         let controller = homeFactory.makeModule(coordinator: self)
-        navigation.pushViewController(controller, animated: true)
+        navigation?.pushViewController(controller, animated: true)
     }
 }
 
-extension HomeCoordinator: HomeMenuViewControllerCoordinator {
+extension HomeCoordinator: LoginViewControllerCoordinator {
     func didTapLoginButton() {
-        let loginCoordinator = homeFactory.makeLoginCoordinator()
-        loginCoordinator.start()
-        append(child: loginCoordinator)
+        
     }
     func didTapForgotButton() {
-        let forgotCoordinator = homeFactory.makeForgotCoordinator(navigation: navigation)
-        forgotCoordinator.start()
-        append(child: forgotCoordinator)
+        
     }
     
     func didTapRegisterButton() {
-        let registerCoordinator = homeFactory.makeRegisterCoordinator(navigation: navigation)
-        registerCoordinator.start()
-        append(child: registerCoordinator)
+        
     }
 }

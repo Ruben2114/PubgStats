@@ -14,6 +14,6 @@ final class GuideViewModel {
         state.send(.loading)
         guard let myURL = URL(string: UrlGuide.url) else {return}
         let myRequest = URLRequest(url: myURL)
-        state.send(.success(modelo: myRequest))
+        state.send(.success(model: myRequest))
     }
 }

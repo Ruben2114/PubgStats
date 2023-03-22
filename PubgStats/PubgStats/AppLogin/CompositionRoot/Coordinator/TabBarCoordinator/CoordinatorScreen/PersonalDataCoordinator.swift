@@ -8,7 +8,7 @@
 import UIKit
 
 final class PersonalDataCoordinator: Coordinator {
-    var navigation: UINavigationController
+    var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
     
@@ -21,7 +21,7 @@ final class PersonalDataCoordinator: Coordinator {
     
     func start() {
         let controller = personalDataFactory.makeModule(coordinator: self)
-        navigation.pushViewController(controller, animated: true)
+        navigation?.pushViewController(controller, animated: true)
     }
 }
 extension PersonalDataCoordinator: PersonalDataViewControllerCoordinator {

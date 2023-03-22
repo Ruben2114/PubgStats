@@ -6,8 +6,8 @@
 //
 import UIKit
 
-final class TabCoordinator: Coordinator, CreateNavController{
-    var navigation: UINavigationController
+final class TabCoordinator: Coordinator{
+    var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
     private let itemTab: TabBarFactory
@@ -21,7 +21,7 @@ final class TabCoordinator: Coordinator, CreateNavController{
     }
     func start() {
         
-        let coordinator = itemTab.makeProfileCoordinator(navigation: navigation)
+        let coordinator = itemTab.makeProfileCoordinator(navigation: navigation!)
         coordinator.start()
         append(child: coordinator)
         

@@ -8,7 +8,7 @@
 import UIKit
 
 final class RegisterCoordinator: Coordinator {
-    var navigation: UINavigationController
+    var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
     
@@ -21,7 +21,7 @@ final class RegisterCoordinator: Coordinator {
     
     func start() {
         let controller = registerFactory.makeModule(coordinator: self)
-        navigation.pushViewController(controller, animated: true)
+        navigation?.pushViewController(controller, animated: true)
     }
 }
 

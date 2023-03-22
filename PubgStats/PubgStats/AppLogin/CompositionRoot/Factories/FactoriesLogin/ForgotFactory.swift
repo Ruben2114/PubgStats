@@ -16,7 +16,7 @@ struct ForgotFactoryImp : ForgotFactory {
     private(set) var appContainer: AppContainer
     
     func makeModule(coordinator: ForgotViewControllerCoordinator) -> UIViewController {
-        let forgotController = ForgotViewController()
+        let forgotController = UIViewController()
         forgotController.title = "Forgot"
         return forgotController
     }

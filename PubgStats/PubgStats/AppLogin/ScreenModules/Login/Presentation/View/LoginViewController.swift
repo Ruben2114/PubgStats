@@ -1,5 +1,5 @@
 //
-//  HomeMenuViewController.swift
+//  LoginViewController.swift
 //  PubgStats
 //
 //  Created by Ruben Rodriguez on 7/3/23.
@@ -8,19 +8,13 @@
 import UIKit
 import Combine
 
-protocol HomeMenuViewControllerCoordinator: AnyObject {
+protocol LoginViewControllerCoordinator: AnyObject {
     func didTapLoginButton()
     func didTapForgotButton()
     func didTapRegisterButton()
 }
 
-class HomeMenuViewController: UIViewController {
-    var mainScrollView = UIScrollView()
-    var contentView = UIView()
-    var cancellable = Set<AnyCancellable>()
-    private let viewModel: HomeMenuViewModel
-    private weak var coordinator: HomeMenuViewControllerCoordinator?
-    
+class LoginViewController: UIViewController {
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "pubgHome")
@@ -55,12 +49,16 @@ class HomeMenuViewController: UIViewController {
     private lazy var registerButton: UIButton = makeTitleButton(
         title: "Sign Up")
     
-    init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>(), viewModel: HomeMenuViewModel, coordinator: HomeMenuViewControllerCoordinator) {
+    var mainScrollView = UIScrollView()
+    var contentView = UIView()
+    var cancellable = Set<AnyCancellable>()
+    private let viewModel: LoginViewModel
+    
+    init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>(), dependencies: LoginDependency) {
         self.mainScrollView = mainScrollView
         self.contentView = contentView
         self.cancellable = cancellable
-        self.viewModel = viewModel
-        self.coordinator = coordinator
+        self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder: NSCoder) {
@@ -128,7 +126,8 @@ class HomeMenuViewController: UIViewController {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
             switch state{
             case .success:
-                self?.coordinator?.didTapLoginButton()
+                //enviar currentUser creando singleton
+                print("self?.coordinator?.didTapLoginButton()")
             case .loading:
                 break
             case .fail(error: let error):
@@ -143,13 +142,13 @@ class HomeMenuViewController: UIViewController {
     }
     
     @objc func didTapForgotButton() {
-        coordinator?.didTapForgotButton()
+        viewModel.didTapForgotButton()
     }
     
     @objc func didTapRegisterButton() {
-        coordinator?.didTapRegisterButton()
+        print("didTapRegisterButton")
     }
 }
-extension HomeMenuViewController: ViewScrollable {}
-extension HomeMenuViewController: MessageDisplayable { }
-extension HomeMenuViewController: KeyboardDisplayable {}
+extension LoginViewController: ViewScrollable {}
+extension LoginViewController: MessageDisplayable { }
+extension LoginViewController: KeyboardDisplayable {}
