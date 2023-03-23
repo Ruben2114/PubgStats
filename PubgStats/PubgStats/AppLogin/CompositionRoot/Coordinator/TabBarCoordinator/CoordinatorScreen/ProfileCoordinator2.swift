@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ProfileCoordinator: Coordinator {
+final class ProfileCoordinator2: Coordinator {
     var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
@@ -22,7 +22,7 @@ final class ProfileCoordinator: Coordinator {
     func start() {
     }
 }
-extension ProfileCoordinator: ProfileViewControllerCoordinator {
+extension ProfileCoordinator2 {
     func logOut() {
         let logOutCoordinator = profileFactory.makeLogOutDataCoordinator()
         logOutCoordinator.start()

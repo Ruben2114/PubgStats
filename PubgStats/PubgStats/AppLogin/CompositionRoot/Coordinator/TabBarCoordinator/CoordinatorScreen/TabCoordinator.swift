@@ -25,7 +25,7 @@ final class TabCoordinator: Coordinator{
         coordinator.start()
         append(child: coordinator)
         
-        let viewsTotal = itemTab.allView(coordinator: coordinator)
+        let viewsTotal = itemTab.allView()
         tabBarController.viewControllers = viewsTotal
         tabBarController.tabBar.backgroundColor = .white
     }

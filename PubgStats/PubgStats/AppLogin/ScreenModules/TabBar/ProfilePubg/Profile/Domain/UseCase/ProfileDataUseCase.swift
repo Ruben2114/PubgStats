@@ -11,7 +11,7 @@ protocol ProfileDataUseCase {
 }
 
 struct ProfileDataUseCaseImp: ProfileDataUseCase {
-    private let profileRepository: ProfileRepository
+    private(set) var profileRepository: ProfileRepository
 
     func execute(player: String, account: String) {
         return profileRepository.saveProfilePubg(player: player, account: account)

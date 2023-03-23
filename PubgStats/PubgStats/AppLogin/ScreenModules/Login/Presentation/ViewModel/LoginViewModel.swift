@@ -10,7 +10,7 @@ import Combine
 
 final class LoginViewModel {
     var state = PassthroughSubject<StateController, Never>()
-    private var coordinator: LoginCoordinator
+    weak private var coordinator: LoginCoordinator?
     private let loginDataUseCase: LoginDataUseCase
     private let dependencies: LoginDependency
     
@@ -32,7 +32,13 @@ final class LoginViewModel {
             }
         }
     }
+    func didTapLoginButton() {
+        coordinator?.performTransition(.goProfile)
+    }
     func didTapForgotButton() {
-        coordinator.performTransition(.goForgot)
+        coordinator?.performTransition(.goForgot)
+    }
+    func didTapRegisterButton() {
+        coordinator?.performTransition(.goRegister)
     }
 }

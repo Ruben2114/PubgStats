@@ -7,15 +7,20 @@
 
 import Foundation
 import Combine
-import UIKit //esto deberia de quitarlo y dejarlo en otra parte
 
 final class ProfileViewModel {
     private let apiService: ApiClientService
     var state = PassthroughSubject<OutputPlayer, Never>()
     var stateSave = PassthroughSubject<StateController, Never>()
+    weak private var coordinator: ProfileCoordinator?
+    private let profileDataUseCase: ProfileDataUseCase
+    private let dependencies: ProfileDependency
     
-    init(apiService: ApiClientService = ApiClientServiceImp()) {
+    init(dependencies: ProfileDependency,apiService: ApiClientService = ApiClientServiceImp()) {
         self.apiService = apiService
+        self.dependencies = dependencies
+        self.coordinator = dependencies.resolve()
+        self.profileDataUseCase = dependencies.resolve()
     }
     
     func dataGeneral(name: String){
@@ -36,14 +41,17 @@ final class ProfileViewModel {
         stateSave.send(.success)
     }
     
-    func chooseButton(buttonLink: UIButton, buttonStat: UIButton ) {
-        if buttonLink.superview == nil {
-            buttonLink.isHidden = false
-            buttonStat.isHidden = true
-        } else {
-            buttonLink.isHidden = true
-            buttonStat.isHidden = false
-        }
+    func didTapPersonalDataButton() {
+        coordinator?.performTransition(.goPersonalData)
+    }
+    func didTapSettingButton() {
+        coordinator?.performTransition(.goSetting)
+    }
+    func didTapLinkPubgAccountButton() {
+        coordinator?.performTransition(.goLinkPubg)
+    }
+    func didTapStatsgAccountButton() {
+        coordinator?.performTransition(.goProfilePubg)
     }
 }
 

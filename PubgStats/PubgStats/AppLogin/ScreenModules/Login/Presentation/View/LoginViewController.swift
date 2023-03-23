@@ -8,47 +8,18 @@
 import UIKit
 import Combine
 
-protocol LoginViewControllerCoordinator: AnyObject {
-    func didTapLoginButton()
-    func didTapForgotButton()
-    func didTapRegisterButton()
-}
-
 class LoginViewController: UIViewController {
-    private let profileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "pubgHome")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        return imageView
-    }()
-    private let containerStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.spacing = 20
-        return stack
-    }()
     
+    private lazy var profileImageView = makeImageView(name: "pubgHome", height: 200, width: 300)
+    private lazy var containerStackView = makeStack(space: 20)
     private lazy var userTextField = makeTextField(placeholder: "User Name", isSecure: false)
     private lazy var passwordTextField = makeTextField(placeholder: "Password", isSecure: true)
-    private let loginButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Log In", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        button.layer.cornerRadius = 10
-        button.backgroundColor = .systemBlue
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        return button
-    }()
-    private lazy var forgotPasswordButton: UIButton = makeTitleButton(
+    private lazy var loginButton: UIButton = makeButtonBlue(title: "Log In")
+    private lazy var forgotPasswordButton: UIButton = makeButtonClear(
         title: "forgot your password?")
-    private lazy var registerButton: UIButton = makeTitleButton(
+    private lazy var registerButton: UIButton = makeButtonClear(
         title: "Sign Up")
-    
+
     var mainScrollView = UIScrollView()
     var contentView = UIView()
     var cancellable = Set<AnyCancellable>()
@@ -64,6 +35,7 @@ class LoginViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configScroll()
@@ -77,6 +49,20 @@ class LoginViewController: UIViewController {
     private func configUI() {
         view.backgroundColor = .systemBackground
     }
+    func bind() {
+        viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
+            switch state{
+            case .success:
+                //enviar currentUser creando singleton
+                print("enviar el current User")
+                self?.viewModel.didTapLoginButton()
+            case .loading:
+                break
+            case .fail(error: let error):
+                self?.presentAlert(message: error, title: "Error")
+            }
+        }.store(in: &cancellable)
+    }
     private func configConstraints() {
         contentView.addSubview(profileImageView)
         profileImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
@@ -88,7 +74,6 @@ class LoginViewController: UIViewController {
         containerStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
         containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
-        
         [userTextField, passwordTextField, loginButton, forgotPasswordButton, registerButton].forEach {
             containerStackView.addArrangedSubview($0)
         }
@@ -97,43 +82,6 @@ class LoginViewController: UIViewController {
         loginButton.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
         forgotPasswordButton.addTarget(self, action: #selector(didTapForgotButton), for: .touchUpInside)
         registerButton.addTarget(self, action: #selector(didTapRegisterButton), for: .touchUpInside)
-    }
-    
-    private func makeTextField(placeholder: String, isSecure: Bool ) -> UITextField {
-        let textField = UITextField()
-        textField.backgroundColor = .gray.withAlphaComponent(0.1)
-        textField.placeholder = placeholder
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-        textField.leftViewMode = .always
-        textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        textField.font = UIFont.systemFont(ofSize: 20)
-        textField.layer.cornerRadius = 10
-        textField.isSecureTextEntry = isSecure
-        return textField
-    }
-    private func makeTitleButton(
-        title: String
-    ) -> UIButton {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(title, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        button.layer.cornerRadius = 10
-        button.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        return button
-    }
-    func bind() {
-        viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
-            switch state{
-            case .success:
-                //enviar currentUser creando singleton
-                print("self?.coordinator?.didTapLoginButton()")
-            case .loading:
-                break
-            case .fail(error: let error):
-                self?.presentAlert(message: error, title: "Error")
-            }
-        }.store(in: &cancellable)
     }
     
     @objc func didTapLoginButton() {
@@ -146,7 +94,7 @@ class LoginViewController: UIViewController {
     }
     
     @objc func didTapRegisterButton() {
-        print("didTapRegisterButton")
+        viewModel.didTapRegisterButton()
     }
 }
 extension LoginViewController: ViewScrollable {}

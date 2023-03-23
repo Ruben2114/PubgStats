@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 protocol ProfileFactory {
-    func makeModule(coordinator: ProfileViewControllerCoordinator) -> UIViewController
+    func makeModule() -> UIViewController
     func makeLogOutDataCoordinator() -> Coordinator
     func makePersonalDataCoordinator(navigation: UINavigationController) -> Coordinator
     func makeSettingCoordinator(navigation: UINavigationController) //-> Coordinator
@@ -21,10 +21,8 @@ protocol ProfileFactory {
 struct ProfileFactoryImp: ProfileFactory, CreateNavController{
     private(set) var appContainer: AppContainer
     
-    func makeModule(coordinator: ProfileViewControllerCoordinator) -> UIViewController {
-        let viewModel = ProfileViewModel()
-        let profileView = navController(vc: ProfileViewController(viewModel: viewModel, coordinator: coordinator), itemName: "Profile", itemImage: "person.circle.fill")
-        return profileView
+    func makeModule() -> UIViewController {
+        UIViewController()
     }
     func makeLogOutDataCoordinator() -> Coordinator {
         let changeLoginCoordinator = ChangeLoginCoordinator()

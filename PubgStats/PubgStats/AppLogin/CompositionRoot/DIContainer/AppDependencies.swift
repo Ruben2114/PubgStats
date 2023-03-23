@@ -9,6 +9,7 @@ import UIKit
 
 struct AppDependencies {
     let window: UIWindow?
+    private var tabController = UITabBarController()
     private let loginNavController = UINavigationController()
     private let profileNavController = UINavigationController()
     private let favouriteNavController = UINavigationController()
@@ -29,9 +30,35 @@ struct AppDependencies {
     func loginNavigationController() -> UINavigationController {
         loginNavController
     }
+    func profileNavigationController() -> UINavigationController {
+        profileNavController
+    }
+    
+    func tabBarController() -> UITabBarController {
+        tabController
+    }
+    func favouriteNavigationController() -> UINavigationController {
+        favouriteNavController
+    }
+    func rankingNavigationController() -> UINavigationController {
+        rankingNavController
+    }
+    func guideNavigationController() -> UINavigationController {
+        guideNavController
+    }
+    func contactNavigationController() -> UINavigationController {
+        contactNavController
+    }
 }
 extension AppDependencies:
-    LoginExternalDependency, ForgotExternalDependency{
-}
+    LoginExternalDependency,
+    ForgotExternalDependency,
+    RegisterExternalDependency,
+    MainTabBarExternalDependency,
+    ProfileExternalDependency,
+    FavouriteExternalDependency,
+    RankingExternalDependency,
+    GuideExternalDependency,
+    ContactExternalDependency{}
 
 

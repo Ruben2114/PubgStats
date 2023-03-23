@@ -7,7 +7,7 @@
 
 final class ForgotViewModel {
     private let dependencies: ForgotDependency
-    private let coordinator: ForgotCoordinator
+    private var coordinator: ForgotCoordinator?
     
     init(dependencies: ForgotDependency) {
         self.dependencies = dependencies

@@ -8,33 +8,7 @@
 import UIKit
 import Combine
 
-protocol ProfileViewControllerCoordinator: AnyObject {
-    func didTapPersonalDataButton()
-    func didTapSettingButton()
-    func didTapLinkPubgAccountButton()
-    func didTapStatsgAccountButton()
-}
-
 final class ProfileViewController: UIViewController {
-    var mainScrollView = UIScrollView()
-    var contentView = UIView()
-    var cancellable = Set<AnyCancellable>()
-    private let viewModel: ProfileViewModel
-    private weak var coordinator: ProfileViewControllerCoordinator?
-    
-    init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>(), viewModel: ProfileViewModel, coordinator: ProfileViewControllerCoordinator) {
-        self.mainScrollView = mainScrollView
-        self.contentView = contentView
-        self.cancellable = cancellable
-        self.viewModel = viewModel
-        self.coordinator = coordinator
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     lazy var logOutButton: UIButton = {
         var configuration = UIButton.Configuration.borderedTinted()
         configuration.image = UIImage(systemName: "arrowshape.turn.up.backward.circle.fill")
@@ -46,44 +20,46 @@ final class ProfileViewController: UIViewController {
         button.tintColor = .black
         return button
     }()
-    private let profileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "default")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        return imageView
-    }()
-    private let containerStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.spacing = 20
-        return stack
-    }()
+    private lazy var profileImageView = makeImageView(name: "default", height: 300, width: 300)
+    private lazy var containerStackView = makeStack(space: 20)
+    private lazy var personalDataButton: UIButton = makeButtonBlue(title: "Personal Data")
+    private lazy var settingButton: UIButton = makeButtonBlue(title: "Setting")
+    private lazy var linkPubgAccountButton: UIButton = makeButtonBlue(title: "Link Pubg Account")
+    private lazy var statsAccountButton: UIButton = makeButtonBlue(title: "Stats Account: nameAccount")
     
-    private lazy var personalDataButton: UIButton = makeTitleButton(title: "Personal Data")
-    private lazy var settingButton: UIButton = makeTitleButton(title: "Setting")
-    private lazy var linkPubgAccountButton: UIButton = makeTitleButton(title: "Link Pubg Account")
-    private lazy var statsAccountButton: UIButton = makeTitleButton(title: "Stats Account: nameAccount")
+    var mainScrollView = UIScrollView()
+    var contentView = UIView()
+    var cancellable = Set<AnyCancellable>()
+    private let viewModel: ProfileViewModel
+    
+    init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>(), dependencies: ProfileDependency) {
+        self.mainScrollView = mainScrollView
+        self.contentView = contentView
+        self.cancellable = cancellable
+        self.viewModel = dependencies.resolve()
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configScroll()
-        viewModel.chooseButton(buttonLink: linkPubgAccountButton, buttonStat: statsAccountButton)
         configUI()
         configConstraints()
         configTargets()
         configKeyboardSubscription(mainScrollView: mainScrollView)
         bind()
+        hideKeyboard()
     }
     
     private func configUI() {
         view.backgroundColor = .systemBackground
-        title = "Login"
         let barLeftButton = UIBarButtonItem(customView: logOutButton)
         navigationItem.leftBarButtonItem = barLeftButton
-        //TODO: DOS BOTONES OCULTOS Y EL VIEWMODEL ELIGE CUAL MOSTRAR Y QUE MOSTRAR (LA FOTO, EL NOMBRE...)
+        chooseButton(buttonLink: linkPubgAccountButton, buttonStat: statsAccountButton)
     }
     private func bind() {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
@@ -99,6 +75,15 @@ final class ProfileViewController: UIViewController {
                 print("esperando")
             }
         }.store(in: &cancellable)
+    }
+    func chooseButton(buttonLink: UIButton, buttonStat: UIButton ) {
+        if buttonLink.superview == nil {
+            buttonLink.isHidden = false
+            buttonStat.isHidden = true
+        } else {
+            buttonLink.isHidden = true
+            buttonStat.isHidden = false
+        }
     }
     private func configConstraints() {
         contentView.addSubview(profileImageView)
@@ -128,10 +113,10 @@ final class ProfileViewController: UIViewController {
     }
     
     @objc func didTapPersonalDataButton() {
-        coordinator?.didTapPersonalDataButton()
+        viewModel.didTapPersonalDataButton()
     }
     @objc func didTapSettingButton() {
-        coordinator?.didTapSettingButton()
+        viewModel.didTapSettingButton()
     }
     @objc func didTapLinkPubgAccountButton() {
         let alert = UIAlertController(title: "Player", message: "", preferredStyle: .alert)
@@ -145,7 +130,7 @@ final class ProfileViewController: UIViewController {
             self?.viewModel.dataGeneral(name: name)
             
             //TODO: Cambiar el boton
-            self?.coordinator?.didTapLinkPubgAccountButton()
+            self?.viewModel.didTapLinkPubgAccountButton()
         }
         let actionCancel = UIAlertAction(title: "cancelar", style: .destructive)
         alert.addAction(actionAccept)
@@ -153,7 +138,7 @@ final class ProfileViewController: UIViewController {
         present(alert, animated: true)
     }
     @objc func didTapStatsgAccountButton() {
-        coordinator?.didTapStatsgAccountButton()
+        viewModel.didTapStatsgAccountButton()
     }
     private func makeTextField(placeholder: String) -> UITextField {
         let textField = UITextField()
@@ -165,19 +150,6 @@ final class ProfileViewController: UIViewController {
         textField.font = UIFont.systemFont(ofSize: 20)
         textField.layer.cornerRadius = 10
         return textField
-    }
-    private func makeTitleButton(
-        title: String
-    ) -> UIButton {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(title, for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        button.layer.cornerRadius = 10
-        button.backgroundColor = .systemBlue
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        return button
     }
 }
 extension ProfileViewController: MessageDisplayable { }

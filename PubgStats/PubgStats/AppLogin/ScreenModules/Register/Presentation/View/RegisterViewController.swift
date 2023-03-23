@@ -8,24 +8,9 @@
 import UIKit
 import Combine
 
-protocol RegisterViewControllerCoordinator: AnyObject {
-    func didTapAcceptButton()
-}
-
 final class RegisterViewController: UIViewController {
-    var mainScrollView = UIScrollView()
-    var contentView = UIView()
-    var cancellable = Set<AnyCancellable>()
-    private let viewModel: RegisterViewModel
-    private weak var coordinator: RegisterViewControllerCoordinator?
     
-    private let containerStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.spacing = 20
-        return stack
-    }()
+    private lazy var containerStackView = makeStack(space: 20)
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Register on AppPubgStats"
@@ -33,27 +18,20 @@ final class RegisterViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    
     private lazy var userTextField = makeTextField(placeholder: "User Name", isSecure: false)
     private lazy var passwordTextField = makeTextField(placeholder: "Password", isSecure: true)
-    private let acceptButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Accept", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        button.layer.cornerRadius = 10
-        button.backgroundColor = .systemBlue
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        return button
-    }()
+    private lazy var acceptButton = makeButtonBlue(title: "Accept")
 
-    init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>(), coordinator: RegisterViewControllerCoordinator, viewModel: RegisterViewModel) {
+    var mainScrollView = UIScrollView()
+    var contentView = UIView()
+    var cancellable = Set<AnyCancellable>()
+    private let viewModel: RegisterViewModel
+    
+    init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>(), dependencies: RegisterDependency) {
         self.mainScrollView = mainScrollView
         self.contentView = contentView
         self.cancellable = cancellable
-        self.viewModel = viewModel
-        self.coordinator = coordinator
+        self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder: NSCoder) {
@@ -72,6 +50,19 @@ final class RegisterViewController: UIViewController {
     private func configUI() {
         view.backgroundColor = .systemBackground
     }
+    func bind() {
+        viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
+            switch state{
+            case .success:
+                self?.hideSpinner()
+                self?.viewModel.didTapAcceptButton()
+            case .loading:
+                self?.showSpinner()
+            case .fail(error: let error):
+                self?.presentAlert(message: "Error: \(error)", title: "Error")
+            }
+        }.store(in: &cancellable)
+    }
     private func configConstraints() {
         contentView.addSubview(containerStackView)
         containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 200).isActive = true
@@ -83,36 +74,10 @@ final class RegisterViewController: UIViewController {
             containerStackView.addArrangedSubview($0)
         }
     }
-        
     private func configTargets() {
         acceptButton.addTarget(self, action: #selector(didTapEmailButton), for: .touchUpInside)
     }
     
-    private func makeTextField(placeholder: String, isSecure: Bool ) -> UITextField {
-        let textField = UITextField()
-        textField.backgroundColor = .gray.withAlphaComponent(0.1)
-        textField.placeholder = placeholder
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-        textField.leftViewMode = .always
-        textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        textField.font = UIFont.systemFont(ofSize: 20)
-        textField.layer.cornerRadius = 10
-        textField.isSecureTextEntry = isSecure
-        return textField
-    }
-    func bind() {
-        viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
-            switch state{
-            case .success:
-                self?.hideSpinner()
-                self?.coordinator?.didTapAcceptButton()
-            case .loading:
-                self?.showSpinner()
-            case .fail(error: let error):
-                self?.presentAlert(message: "Error: \(error)", title: "Error")
-            }
-        }.store(in: &cancellable)
-    }
     @objc func didTapEmailButton() {
         let nameText = userTextField.text
         let passwordText = passwordTextField.text?.hashString()

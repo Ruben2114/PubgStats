@@ -9,12 +9,16 @@ import Foundation
 import Combine
 
 final class RegisterViewModel {
-    
     var state = PassthroughSubject<StateController, Never>()
+    private var coordinator: RegisterCoordinator?
     private let registerDataUseCase: RegisterDataUseCase
+    private let dependencies: RegisterDependency
     
-    init(registerDataUseCase: RegisterDataUseCase) {
-        self.registerDataUseCase = registerDataUseCase
+    
+    init(dependencies: RegisterDependency) {
+        self.dependencies = dependencies
+        self.coordinator = dependencies.resolve()
+        self.registerDataUseCase = dependencies.resolve()
     }
     func saveUser(name: String, password: String) {
         state.send(.loading)
@@ -24,6 +28,9 @@ final class RegisterViewModel {
     func checkName(name: String) -> Bool {
         let check = registerDataUseCase.check(name: name)
         return check
+    }
+    func didTapAcceptButton() {
+        coordinator?.performTransition(.goAccept)
     }
 }
 

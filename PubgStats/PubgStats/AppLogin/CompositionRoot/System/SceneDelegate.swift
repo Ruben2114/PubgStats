@@ -10,11 +10,8 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var appCoordinator: Coordinator?
-    var appFactory: AppFactory!
-    var tabCoordinator: Coordinator?
-    var itemTab: TabBarFactory!
-
+    var rootCoordinatorLogin: Coordinator?
+    var rootCoordinatorTabBar: Coordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
@@ -23,26 +20,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let dependencies = AppDependencies(window: window)
         window?.rootViewController = dependencies.loginNavigationController()
         window?.makeKeyAndVisible()
-        let rootCoordinator = dependencies.loginCoordinator()
-        rootCoordinator.start()
+        rootCoordinatorLogin = dependencies.loginCoordinator()
+        rootCoordinatorLogin?.start()
     }
     
     func changeRootViewTabCoordinator(animated: Bool = true) {
-        let tabBarController = UITabBarController()
-        let navigation = UINavigationController()
-        itemTab = TabBarFactoryImp()
-        tabCoordinator = TabCoordinator(tabBarController: tabBarController, navigation: navigation, itemTab: itemTab, window: window)
-        tabCoordinator?.start()
-        appCoordinator?.dismiss()
-        appCoordinator = nil
+        let dependencies = AppDependencies(window: window)
+        window?.rootViewController = dependencies.tabBarController()
+        window?.makeKeyAndVisible()
+        rootCoordinatorTabBar = dependencies.mainTabBarCoordinator()
+        rootCoordinatorTabBar?.start()
+        rootCoordinatorLogin?.dismiss()
+        rootCoordinatorLogin = nil
     }
     func changeRootViewAppCoordinator(animated: Bool = true) {
-        let navigation = UINavigationController()
-        appFactory = AppFactoryImp()
-        appCoordinator = AppCoordinator( navigation: navigation, appFactory: appFactory, window: window)
-        appCoordinator?.start()
-        tabCoordinator?.dismiss()
-        tabCoordinator = nil
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

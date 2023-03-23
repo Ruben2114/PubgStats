@@ -10,17 +10,7 @@ import Combine
 import MessageUI
 
 final class ContactViewController: UIViewController {
-    var mainScrollView = UIScrollView()
-    var contentView = UIView()
-    var cancellable = Set<AnyCancellable>()
-    
-    private let containerStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.spacing = 20
-        return stack
-    }()
+    private lazy var containerStackView = makeStack(space: 20)
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -29,19 +19,21 @@ final class ContactViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
+    private lazy var emailButton = makeButtonBlue(title: "Correo")
     
-    private let emailButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Correo", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        button.layer.cornerRadius = 10
-        button.backgroundColor = .systemBlue
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        return button
-    }()
+    var mainScrollView = UIScrollView()
+    var contentView = UIView()
+    var cancellable = Set<AnyCancellable>()
+    private let dependencies: ContactDependency
+   
+    init(dependencies: ContactDependency) {
+        self.dependencies = dependencies
+        super.init(nibName: nil, bundle: nil)
+    }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         configScroll()
