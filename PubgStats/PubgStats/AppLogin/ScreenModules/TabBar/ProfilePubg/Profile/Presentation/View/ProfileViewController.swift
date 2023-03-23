@@ -31,11 +31,12 @@ final class ProfileViewController: UIViewController {
     var contentView = UIView()
     var cancellable = Set<AnyCancellable>()
     private let viewModel: ProfileViewModel
-    
+    private let dependencies: ProfileDependency
     init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>(), dependencies: ProfileDependency) {
         self.mainScrollView = mainScrollView
         self.contentView = contentView
         self.cancellable = cancellable
+        self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)
     }
@@ -54,12 +55,13 @@ final class ProfileViewController: UIViewController {
         bind()
         hideKeyboard()
     }
-    
     private func configUI() {
         view.backgroundColor = .systemBackground
         let barLeftButton = UIBarButtonItem(customView: logOutButton)
         navigationItem.leftBarButtonItem = barLeftButton
         chooseButton(buttonLink: linkPubgAccountButton, buttonStat: statsAccountButton)
+        let sessionUser: ProfileEntity = dependencies.external.resolve()
+        navigationItem.title = "Bienvenido \(sessionUser.name)!"
     }
     private func bind() {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
@@ -108,10 +110,8 @@ final class ProfileViewController: UIViewController {
         statsAccountButton.addTarget(self, action: #selector(didTapStatsgAccountButton), for: .touchUpInside)
     }
     private func logOut() {
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewAppCoordinator()
-        print("volver  realizar el login")
+        viewModel.logOut()
     }
-    
     @objc func didTapPersonalDataButton() {
         viewModel.didTapPersonalDataButton()
     }

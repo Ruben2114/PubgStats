@@ -22,17 +22,22 @@ final class LoginViewModel {
     
     func checkName(name: String, password: String) {
         state.send(.loading)
-        Task {
+        Task { [weak self] in
             let check = loginDataUseCase.check(name: name, password: password)
             switch check {
             case true:
-                state.send(.success)
+                self?.state.send(.success)
+                self?.loginSucess(name: name, password: password)
             case false:
-                state.send(.fail(error: "Incorrect username or password."))
+                self?.state.send(.fail(error: "Incorrect username or password."))
             }
         }
     }
-    func didTapLoginButton() {
+    func loginSucess(name: String, password: String) {
+        var sessionUser: ProfileEntity = dependencies.external.resolve()
+        sessionUser.name = name
+        sessionUser.password = password
+        var sessionUser2: ProfileEntity = dependencies.external.resolve()
         coordinator?.performTransition(.goProfile)
     }
     func didTapForgotButton() {

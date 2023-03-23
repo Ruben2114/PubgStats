@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    lazy var dependencies = AppDependencies(window: window)
     var rootCoordinatorLogin: Coordinator?
     var rootCoordinatorTabBar: Coordinator?
 
@@ -17,7 +18,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let scene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: scene)
-        let dependencies = AppDependencies(window: window)
         window?.rootViewController = dependencies.loginNavigationController()
         window?.makeKeyAndVisible()
         rootCoordinatorLogin = dependencies.loginCoordinator()
@@ -25,16 +25,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func changeRootViewTabCoordinator(animated: Bool = true) {
-        let dependencies = AppDependencies(window: window)
         window?.rootViewController = dependencies.tabBarController()
         window?.makeKeyAndVisible()
         rootCoordinatorTabBar = dependencies.mainTabBarCoordinator()
         rootCoordinatorTabBar?.start()
         rootCoordinatorLogin?.dismiss()
         rootCoordinatorLogin = nil
+        dependencies.loginNavigationController().removeFromParent()
     }
     func changeRootViewAppCoordinator(animated: Bool = true) {
-        
+        let navigation = dependencies.loginNavigationController()
+        navigation.viewControllers = []
+        window?.rootViewController = dependencies.loginNavigationController()
+        window?.makeKeyAndVisible()
+        rootCoordinatorLogin = dependencies.loginCoordinator()
+        rootCoordinatorLogin?.start()
+        rootCoordinatorTabBar?.dismiss()
+        rootCoordinatorTabBar = nil
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

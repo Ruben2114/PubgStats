@@ -16,9 +16,14 @@ struct AppDependencies {
     private let rankingNavController = UINavigationController()
     private let guideNavController = UINavigationController()
     private let contactNavController = UINavigationController()
+    private var sessionUser = ProfileEntity(name: "", password: "")
     
     init(window: UIWindow?) {
         self.window = window
+    }
+    
+    func resolve() -> ProfileEntity {
+        sessionUser
     }
     
     func resolve() -> AppDependencies {
@@ -60,5 +65,3 @@ extension AppDependencies:
     RankingExternalDependency,
     GuideExternalDependency,
     ContactExternalDependency{}
-
-

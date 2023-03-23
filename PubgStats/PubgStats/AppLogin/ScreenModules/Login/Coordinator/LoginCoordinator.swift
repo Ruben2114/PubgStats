@@ -34,13 +34,16 @@ final class LoginCoordinatorImp: Coordinator {
     func start() {
         self.navigation?.pushViewController(dependencies.resolve(), animated: true)
     }
-    
 }
 extension LoginCoordinatorImp: LoginCoordinator {
     func performTransition(_ transition: LoginTransition) {
         switch transition {
         case .goProfile:
-            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewTabCoordinator()
+            //guardar currentUser
+            print("guardar el current User")
+            DispatchQueue.main.async {
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewTabCoordinator()
+            }
         case .goForgot:
             let forgotCoordinator = dependencies.external.forgotCoordinator()
             forgotCoordinator.start()

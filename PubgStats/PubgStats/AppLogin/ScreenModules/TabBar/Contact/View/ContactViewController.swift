@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Combine
 import MessageUI
 
 final class ContactViewController: UIViewController {
@@ -23,7 +22,6 @@ final class ContactViewController: UIViewController {
     
     var mainScrollView = UIScrollView()
     var contentView = UIView()
-    var cancellable = Set<AnyCancellable>()
     private let dependencies: ContactDependency
    
     init(dependencies: ContactDependency) {
@@ -40,8 +38,6 @@ final class ContactViewController: UIViewController {
         configUI()
         configConstraints()
         configTargets()
-        configKeyboardSubscription(mainScrollView: mainScrollView)
-        hideKeyboard()
     }
     
     private func configUI() {
@@ -76,9 +72,7 @@ final class ContactViewController: UIViewController {
     }
 }
 
-
 extension ContactViewController: ViewScrollable {}
-extension ContactViewController: KeyboardDisplayable {}
 extension ContactViewController: MFMailComposeViewControllerDelegate{
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?){
         guard error == nil else{
@@ -99,6 +93,5 @@ extension ContactViewController: MFMailComposeViewControllerDelegate{
         }
     }
 }
-
 
 

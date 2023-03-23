@@ -53,12 +53,11 @@ class LoginViewController: UIViewController {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
             switch state{
             case .success:
-                //enviar currentUser creando singleton
-                print("enviar el current User")
-                self?.viewModel.didTapLoginButton()
+                self?.hideSpinner()
             case .loading:
-                break
+                self?.showSpinner()
             case .fail(error: let error):
+                self?.hideSpinner()
                 self?.presentAlert(message: error, title: "Error")
             }
         }.store(in: &cancellable)
@@ -97,6 +96,7 @@ class LoginViewController: UIViewController {
         viewModel.didTapRegisterButton()
     }
 }
+extension LoginViewController: SpinnerDisplayable { }
 extension LoginViewController: ViewScrollable {}
 extension LoginViewController: MessageDisplayable { }
 extension LoginViewController: KeyboardDisplayable {}

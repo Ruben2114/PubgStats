@@ -8,6 +8,7 @@
 import UIKit
 
 enum ProfileTransition {
+    case goLogOut
     case goPersonalData
     case goSetting
     case goLinkPubg
@@ -40,6 +41,8 @@ final class ProfileCoordinatorImp: Coordinator {
 extension ProfileCoordinatorImp: ProfileCoordinator {
     func performTransition(_ transition: ProfileTransition) {
         switch transition {
+        case .goLogOut:
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewAppCoordinator()
         case .goPersonalData:
             print("goPersonalData")
         case .goSetting:

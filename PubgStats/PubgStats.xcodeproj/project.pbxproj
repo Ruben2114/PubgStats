@@ -49,9 +49,9 @@
 		465550FF29CC820A00BF932A /* ContactDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550FE29CC820A00BF932A /* ContactDependency.swift */; };
 		4655510129CC824000BF932A /* ContactExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510029CC824000BF932A /* ContactExternalDependency.swift */; };
 		4655510429CC829800BF932A /* ContactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510329CC829800BF932A /* ContactCoordinator.swift */; };
+		4655510729CCB41500BF932A /* ProfileEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510629CCB41500BF932A /* ProfileEntity.swift */; };
 		8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */; };
 		8C31FDB729C329E500196704 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31FDB629C329E500196704 /* ContactViewController.swift */; };
-		8C398D0B29C49B78002FFA7F /* ChangeLoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C398D0A29C49B78002FFA7F /* ChangeLoginCoordinator.swift */; };
 		8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */; };
 		8C7563E029BB5E5E000373F9 /* SpinnerDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563DF29BB5E5E000373F9 /* SpinnerDisplayable.swift */; };
 		8C7563E229BB5E8A000373F9 /* ViewValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563E129BB5E8A000373F9 /* ViewValues.swift */; };
@@ -59,15 +59,9 @@
 		8C7563E629BB5FBA000373F9 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563E529BB5FBA000373F9 /* LoginViewModel.swift */; };
 		8C7563E929BB600A000373F9 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563E829BB600A000373F9 /* BaseViewModel.swift */; };
 		8C7563EC29BB6073000373F9 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563EB29BB6073000373F9 /* StateController.swift */; };
-		8C7D65C229C3755E0038DF59 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7D65C129C3755E0038DF59 /* TabCoordinator.swift */; };
-		8C7D65C629C377E50038DF59 /* ProfileFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7D65C529C377E50038DF59 /* ProfileFactory.swift */; };
-		8C7D65C829C379A90038DF59 /* ProfileCoordinator2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7D65C729C379A90038DF59 /* ProfileCoordinator2.swift */; };
 		8C810F7929C3690700AEE548 /* UIViewController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C810F7829C3690700AEE548 /* UIViewController+Keyboard.swift */; };
 		8C9F824229C3CA02003000CD /* PersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9F824129C3CA02003000CD /* PersonalDataViewController.swift */; };
-		8C9F824429C3CAAB003000CD /* PersonalDataFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9F824329C3CAAB003000CD /* PersonalDataFactory.swift */; };
-		8C9F824629C3CB77003000CD /* PersonalDataCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9F824529C3CB77003000CD /* PersonalDataCoordinator.swift */; };
 		8CA17EBB29C465E900ADFFE2 /* CreateNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA17EBA29C465E900ADFFE2 /* CreateNavController.swift */; };
-		8CA17EBD29C46F8100ADFFE2 /* TabBarFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA17EBC29C46F8100ADFFE2 /* TabBarFactory.swift */; };
 		8CA398AD29B72A1F00C09746 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398AC29B72A1F00C09746 /* AppDelegate.swift */; };
 		8CA398AF29B72A1F00C09746 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398AE29B72A1F00C09746 /* SceneDelegate.swift */; };
 		8CA398B129B72A1F00C09746 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398B029B72A1F00C09746 /* LoginViewController.swift */; };
@@ -119,7 +113,7 @@
 
 /* Begin PBXFileReference section */
 		46151CB629C1B9780054BCEA /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		46151CC229C1E8FC0054BCEA /* ForgotViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ForgotViewControllerCoordinator.swift; path = PubgStats/AppLogin/ScreenModules/ForgotPassword/View/ForgotViewControllerCoordinator.swift; sourceTree = SOURCE_ROOT; };
+		46151CC229C1E8FC0054BCEA /* ForgotViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotViewControllerCoordinator.swift; sourceTree = "<group>"; };
 		461C1F3D29C9C77C00540289 /* ApiClientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientService.swift; sourceTree = "<group>"; };
 		461C1F3F29C9C86C00540289 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		461C1F4329C9F68400540289 /* ProfileDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataUseCase.swift; sourceTree = "<group>"; };
@@ -160,9 +154,9 @@
 		465550FE29CC820A00BF932A /* ContactDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDependency.swift; sourceTree = "<group>"; };
 		4655510029CC824000BF932A /* ContactExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactExternalDependency.swift; sourceTree = "<group>"; };
 		4655510329CC829800BF932A /* ContactCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCoordinator.swift; sourceTree = "<group>"; };
+		4655510629CCB41500BF932A /* ProfileEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEntity.swift; sourceTree = "<group>"; };
 		8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		8C31FDB629C329E500196704 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
-		8C398D0A29C49B78002FFA7F /* ChangeLoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLoginCoordinator.swift; sourceTree = "<group>"; };
 		8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraint.swift"; sourceTree = "<group>"; };
 		8C7563DF29BB5E5E000373F9 /* SpinnerDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerDisplayable.swift; sourceTree = "<group>"; };
 		8C7563E129BB5E8A000373F9 /* ViewValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewValues.swift; sourceTree = "<group>"; };
@@ -170,15 +164,9 @@
 		8C7563E529BB5FBA000373F9 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		8C7563E829BB600A000373F9 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		8C7563EB29BB6073000373F9 /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
-		8C7D65C129C3755E0038DF59 /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
-		8C7D65C529C377E50038DF59 /* ProfileFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFactory.swift; sourceTree = "<group>"; };
-		8C7D65C729C379A90038DF59 /* ProfileCoordinator2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator2.swift; sourceTree = "<group>"; };
 		8C810F7829C3690700AEE548 /* UIViewController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Keyboard.swift"; sourceTree = "<group>"; };
 		8C9F824129C3CA02003000CD /* PersonalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataViewController.swift; sourceTree = "<group>"; };
-		8C9F824329C3CAAB003000CD /* PersonalDataFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataFactory.swift; sourceTree = "<group>"; };
-		8C9F824529C3CB77003000CD /* PersonalDataCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataCoordinator.swift; sourceTree = "<group>"; };
 		8CA17EBA29C465E900ADFFE2 /* CreateNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNavController.swift; sourceTree = "<group>"; };
-		8CA17EBC29C46F8100ADFFE2 /* TabBarFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFactory.swift; sourceTree = "<group>"; };
 		8CA398A929B72A1F00C09746 /* PubgStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PubgStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA398AC29B72A1F00C09746 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CA398AE29B72A1F00C09746 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -253,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				46151CB629C1B9780054BCEA /* ProfileViewController.swift */,
+				4655510629CCB41500BF932A /* ProfileEntity.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -318,13 +307,13 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		461C1F5729CB10A400540289 /* View */ = {
+		461C1F5729CB10A400540289 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				4655510529CC866D00BF932A /* View */,
 				461C1F5A29CB10E200540289 /* ViewModel */,
-				46151CC229C1E8FC0054BCEA /* ForgotViewControllerCoordinator.swift */,
 			);
-			path = View;
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		461C1F5829CB10C100540289 /* Coordinator */ = {
@@ -496,6 +485,14 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		4655510529CC866D00BF932A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				46151CC229C1E8FC0054BCEA /* ForgotViewControllerCoordinator.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		8C7563DA29BB5169000373F9 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -564,40 +561,6 @@
 				8C31FDB629C329E500196704 /* ContactViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		8C9F823D29C3C858003000CD /* FactoriesTabBAr */ = {
-			isa = PBXGroup;
-			children = (
-				8CA17EBC29C46F8100ADFFE2 /* TabBarFactory.swift */,
-				8C7D65C529C377E50038DF59 /* ProfileFactory.swift */,
-				8C9F824329C3CAAB003000CD /* PersonalDataFactory.swift */,
-			);
-			path = FactoriesTabBAr;
-			sourceTree = "<group>";
-		};
-		8C9F823E29C3C8C1003000CD /* CoordinatorScreenLogin */ = {
-			isa = PBXGroup;
-			children = (
-				8C398D0A29C49B78002FFA7F /* ChangeLoginCoordinator.swift */,
-			);
-			path = CoordinatorScreenLogin;
-			sourceTree = "<group>";
-		};
-		8C9F823F29C3C8DC003000CD /* TabBarCoordinator */ = {
-			isa = PBXGroup;
-			children = (
-				8CAEB01B29BB47BA009282AF /* CoordinatorScreen */,
-			);
-			path = TabBarCoordinator;
-			sourceTree = "<group>";
-		};
-		8C9F824029C3C950003000CD /* Factories */ = {
-			isa = PBXGroup;
-			children = (
-				8C9F823D29C3C858003000CD /* FactoriesTabBAr */,
-			);
-			path = Factories;
 			sourceTree = "<group>";
 		};
 		8CA398A029B72A1F00C09746 = {
@@ -752,7 +715,6 @@
 			children = (
 				8CAEB01E29BB48F1009282AF /* System */,
 				8CAEB01C29BB47C4009282AF /* DIContainer */,
-				8C9F824029C3C950003000CD /* Factories */,
 				8CAEB01929BB479B009282AF /* Coordinator */,
 			);
 			path = CompositionRoot;
@@ -891,20 +853,8 @@
 			isa = PBXGroup;
 			children = (
 				8CAEB01F29BB4968009282AF /* Coordinator.swift */,
-				8C9F823F29C3C8DC003000CD /* TabBarCoordinator */,
-				8CAEB02129BB49AA009282AF /* LoginCoordinator */,
 			);
 			path = Coordinator;
-			sourceTree = "<group>";
-		};
-		8CAEB01B29BB47BA009282AF /* CoordinatorScreen */ = {
-			isa = PBXGroup;
-			children = (
-				8C7D65C129C3755E0038DF59 /* TabCoordinator.swift */,
-				8C7D65C729C379A90038DF59 /* ProfileCoordinator2.swift */,
-				8C9F824529C3CB77003000CD /* PersonalDataCoordinator.swift */,
-			);
-			path = CoordinatorScreen;
 			sourceTree = "<group>";
 		};
 		8CAEB01C29BB47C4009282AF /* DIContainer */ = {
@@ -931,14 +881,6 @@
 				8CA398AC29B72A1F00C09746 /* AppDelegate.swift */,
 			);
 			path = System;
-			sourceTree = "<group>";
-		};
-		8CAEB02129BB49AA009282AF /* LoginCoordinator */ = {
-			isa = PBXGroup;
-			children = (
-				8C9F823E29C3C8C1003000CD /* CoordinatorScreenLogin */,
-			);
-			path = LoginCoordinator;
 			sourceTree = "<group>";
 		};
 		8CB2CEE429C9A1FB00E79D29 /* Presentation */ = {
@@ -1038,7 +980,7 @@
 			children = (
 				461C1F5929CB10CE00540289 /* Dependencies */,
 				461C1F5829CB10C100540289 /* Coordinator */,
-				461C1F5729CB10A400540289 /* View */,
+				461C1F5729CB10A400540289 /* Presentation */,
 			);
 			path = ForgotPassword;
 			sourceTree = "<group>";
@@ -1254,7 +1196,6 @@
 				465550F229CC7C5A00BF932A /* RankingDependency.swift in Sources */,
 				461C1F4629C9F6F000540289 /* ProfileRepository.swift in Sources */,
 				8C810F7929C3690700AEE548 /* UIViewController+Keyboard.swift in Sources */,
-				8C7D65C829C379A90038DF59 /* ProfileCoordinator2.swift in Sources */,
 				8CD7CD8629BF3DA900C57346 /* AppContainer.swift in Sources */,
 				465550CF29CC471400BF932A /* MainTabBarExternalDependency.swift in Sources */,
 				8CB2CEF329C9A87900E79D29 /* ProfileViewModel.swift in Sources */,
@@ -1267,11 +1208,8 @@
 				461C1F7829CB5CF500540289 /* RegisterDependency.swift in Sources */,
 				8CB39B9729C05DDE00B1D8EF /* LoginRepository.swift in Sources */,
 				465550D829CC504100BF932A /* ProfileCoordinator.swift in Sources */,
-				8C7D65C229C3755E0038DF59 /* TabCoordinator.swift in Sources */,
 				465550FA29CC7E4600BF932A /* GuideExternalDependency.swift in Sources */,
 				8CB2CEEC29C9A35B00E79D29 /* ApiClientServiceImp.swift in Sources */,
-				8C7D65C629C377E50038DF59 /* ProfileFactory.swift in Sources */,
-				8C9F824429C3CAAB003000CD /* PersonalDataFactory.swift in Sources */,
 				8CA17EBB29C465E900ADFFE2 /* CreateNavController.swift in Sources */,
 				465550C229CC33B000BF932A /* UIViewController+UIbutton.swift in Sources */,
 				461C1F4429C9F68400540289 /* ProfileDataUseCase.swift in Sources */,
@@ -1290,7 +1228,6 @@
 				465550C629CC3A5600BF932A /* UIViewController+Image.swift in Sources */,
 				8C7563E029BB5E5E000373F9 /* SpinnerDisplayable.swift in Sources */,
 				465550F029CC7C1300BF932A /* RankingExternalDependency.swift in Sources */,
-				8C398D0B29C49B78002FFA7F /* ChangeLoginCoordinator.swift in Sources */,
 				465550DA29CC513100BF932A /* ProfileExternalDependency.swift in Sources */,
 				465550F829CC7DE800BF932A /* GuideDependency.swift in Sources */,
 				465550E729CC700400BF932A /* FavouriteExternalDependency.swift in Sources */,
@@ -1311,13 +1248,12 @@
 				8C9F824229C3CA02003000CD /* PersonalDataViewController.swift in Sources */,
 				461C1F4029C9C86C00540289 /* EndPoint.swift in Sources */,
 				8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */,
-				8C9F824629C3CB77003000CD /* PersonalDataCoordinator.swift in Sources */,
 				46151CC329C1E8FC0054BCEA /* ForgotViewControllerCoordinator.swift in Sources */,
+				4655510729CCB41500BF932A /* ProfileEntity.swift in Sources */,
 				461C1F5429CAE59A00540289 /* LoginCoordinator.swift in Sources */,
 				461C1F5C29CB110400540289 /* ForgotDependency.swift in Sources */,
 				8CD7CD7429BF0D4C00C57346 /* ProfileError.swift in Sources */,
 				465550E929CC705200BF932A /* FavouriteDependency.swift in Sources */,
-				8CA17EBD29C46F8100ADFFE2 /* TabBarFactory.swift in Sources */,
 				465550FF29CC820A00BF932A /* ContactDependency.swift in Sources */,
 				461C1F6229CB12FA00540289 /* ForgotCoordinator.swift in Sources */,
 				461C1F4F29CAE10600540289 /* LoginExternalDependency.swift in Sources */,

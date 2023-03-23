@@ -40,7 +40,9 @@ final class ProfileViewModel {
         //profileDataUseCase.execute(name: name, password: password)
         stateSave.send(.success)
     }
-    
+    func logOut() {
+        coordinator?.performTransition(.goLogOut)
+    }
     func didTapPersonalDataButton() {
         coordinator?.performTransition(.goPersonalData)
     }
