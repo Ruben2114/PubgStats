@@ -6,5 +6,5 @@
 //
 
 protocol ProfileRepository {
-    func saveProfilePubg (player: String, account: String)
+    func saveProfilePubg (sessionUser: ProfileEntity, player: String, account: String)
 }

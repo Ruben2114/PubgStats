@@ -6,6 +6,6 @@
 //
 
 protocol LoginRepository {
-    func checkName(name: String, password: String) -> Bool
+    func checkName(sessionUser: ProfileEntity, name: String, password: String) -> Bool
 }
 

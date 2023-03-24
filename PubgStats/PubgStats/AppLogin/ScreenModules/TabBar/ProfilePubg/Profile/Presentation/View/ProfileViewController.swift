@@ -25,19 +25,21 @@ final class ProfileViewController: UIViewController {
     private lazy var personalDataButton: UIButton = makeButtonBlue(title: "Personal Data")
     private lazy var settingButton: UIButton = makeButtonBlue(title: "Setting")
     private lazy var linkPubgAccountButton: UIButton = makeButtonBlue(title: "Link Pubg Account")
-    private lazy var statsAccountButton: UIButton = makeButtonBlue(title: "Stats Account: nameAccount")
+    private lazy var statsAccountButton: UIButton = makeButtonBlue(title: "Stats Account: \(sessionUser.player ?? "")")
     
     var mainScrollView = UIScrollView()
     var contentView = UIView()
     var cancellable = Set<AnyCancellable>()
     private let viewModel: ProfileViewModel
     private let dependencies: ProfileDependency
+    let sessionUser: ProfileEntity
     init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>(), dependencies: ProfileDependency) {
         self.mainScrollView = mainScrollView
         self.contentView = contentView
         self.cancellable = cancellable
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
+        self.sessionUser = dependencies.external.resolve()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -59,8 +61,7 @@ final class ProfileViewController: UIViewController {
         view.backgroundColor = .systemBackground
         let barLeftButton = UIBarButtonItem(customView: logOutButton)
         navigationItem.leftBarButtonItem = barLeftButton
-        chooseButton(buttonLink: linkPubgAccountButton, buttonStat: statsAccountButton)
-        let sessionUser: ProfileEntity = dependencies.external.resolve()
+        chooseButton()
         navigationItem.title = "Bienvenido \(sessionUser.name)!"
     }
     private func bind() {
@@ -72,20 +73,20 @@ final class ProfileViewController: UIViewController {
                 let account = model.id ?? "no existe account"
                 let player = model.name ?? "no existe name"
                 //hacer clausula para que no sea opcional
-                //TODO: guardar aqui en core data y actualizar el perfil
                 self?.viewModel.saveUser(player: player, account: account)
+                self?.chooseButton()
             case .loading:
                 print("esperando")
             }
         }.store(in: &cancellable)
     }
-    func chooseButton(buttonLink: UIButton, buttonStat: UIButton ) {
-        if buttonLink.superview == nil {
-            buttonLink.isHidden = false
-            buttonStat.isHidden = true
+    private func chooseButton() {
+        if sessionUser.account == nil {
+            linkPubgAccountButton.isHidden = false
+            statsAccountButton.isHidden = true
         } else {
-            buttonLink.isHidden = true
-            buttonStat.isHidden = false
+            linkPubgAccountButton.isHidden = true
+            statsAccountButton.isHidden = false
         }
     }
     private func configConstraints() {

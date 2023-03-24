@@ -8,8 +8,8 @@
 struct LoginRepositoryImp: LoginRepository {
     private(set) var dataSource: LocalDataProfileService
 
-    func checkName(name: String, password: String) -> Bool {
-        let result =  dataSource.checkUser(name: name, password: password)
+    func checkName(sessionUser: ProfileEntity, name: String, password: String) -> Bool {
+        let result =  dataSource.checkUser(sessionUser: sessionUser, name: name, password: password)
         return result
     }
 }

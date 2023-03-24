@@ -20,10 +20,10 @@ final class LoginViewModel {
         self.loginDataUseCase = dependencies.resolve()
     }
     
-    func checkName(name: String, password: String) {
+    func checkName(sessionUser: ProfileEntity, name: String, password: String) {
         state.send(.loading)
         Task { [weak self] in
-            let check = loginDataUseCase.check(name: name, password: password)
+            let check = loginDataUseCase.check(sessionUser: sessionUser ,name: name, password: password)
             switch check {
             case true:
                 self?.state.send(.success)
@@ -45,4 +45,24 @@ final class LoginViewModel {
     func didTapRegisterButton() {
         coordinator?.performTransition(.goRegister)
     }
+    /*
+    private let context: NSManagedObjectContext = CoreDataManager.shared.persistentContainer.viewContext
+    func viewDidLoad(){
+        //TODO: leer datos de usuario
+        let sessionUser: ProfileEntity = dependencies.external.resolve()
+        let fetchRequest = Profile.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
+        do {
+            let result = try context.fetch(fetchRequest)
+            let namePlayer = result.map {$0}
+            if sessionUser.name == namePlayer.first?.name {
+                sessionUser.player = namePlayer.first?.player
+                sessionUser.account = namePlayer.first?.account
+            }
+        } catch {
+            print("Error en core data")
+        }
+        
+    }
+     */
 }

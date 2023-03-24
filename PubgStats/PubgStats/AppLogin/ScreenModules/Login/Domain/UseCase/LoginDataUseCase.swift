@@ -6,13 +6,13 @@
 //
 
 protocol LoginDataUseCase {
-    func check(name: String, password: String) -> Bool
+    func check(sessionUser: ProfileEntity, name: String, password: String) -> Bool
 }
 
 struct LoginDataUseCaseImp: LoginDataUseCase {
     private(set) var loginRepository: LoginRepository
 
-    func check(name: String, password: String) -> Bool {
-        loginRepository.checkName(name: name, password: password)
+    func check(sessionUser: ProfileEntity, name: String, password: String) -> Bool {
+        loginRepository.checkName(sessionUser: sessionUser, name: name, password: password)
     }
 }

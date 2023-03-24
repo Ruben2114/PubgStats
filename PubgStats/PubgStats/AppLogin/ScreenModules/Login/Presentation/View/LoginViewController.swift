@@ -24,11 +24,13 @@ class LoginViewController: UIViewController {
     var contentView = UIView()
     var cancellable = Set<AnyCancellable>()
     private let viewModel: LoginViewModel
+    private var dependencies: LoginDependency
     
     init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>(), dependencies: LoginDependency) {
         self.mainScrollView = mainScrollView
         self.contentView = contentView
         self.cancellable = cancellable
+        self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)
     }
@@ -85,7 +87,7 @@ class LoginViewController: UIViewController {
     
     @objc func didTapLoginButton() {
         let password = passwordTextField.text?.hashString()
-        viewModel.checkName(name: userTextField.text ?? "", password: password ?? "")
+        viewModel.checkName(sessionUser: dependencies.external.resolve(),name: userTextField.text ?? "", password: password ?? "")
     }
     
     @objc func didTapForgotButton() {

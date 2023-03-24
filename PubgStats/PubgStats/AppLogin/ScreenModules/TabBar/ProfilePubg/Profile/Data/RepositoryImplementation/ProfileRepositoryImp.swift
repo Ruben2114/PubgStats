@@ -8,7 +8,7 @@
 struct ProfileRepositoryImp: ProfileRepository {
     var dataSource: LocalDataProfileService
 
-    func saveProfilePubg(player: String, account: String) {
-        return dataSource.save(player: player, account: account)
+    func saveProfilePubg(sessionUser: ProfileEntity, player: String, account: String) {
+        return dataSource.savePlayerPubg(sessionUser: sessionUser, player: player, account: account)
     }
 }

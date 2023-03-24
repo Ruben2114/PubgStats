@@ -7,13 +7,13 @@
 
 
 protocol ProfileDataUseCase {
-    func execute(player: String, account: String)
+    func execute(sessionUser: ProfileEntity, player: String, account: String)
 }
 
 struct ProfileDataUseCaseImp: ProfileDataUseCase {
     private(set) var profileRepository: ProfileRepository
 
-    func execute(player: String, account: String) {
-        return profileRepository.saveProfilePubg(player: player, account: account)
+    func execute(sessionUser: ProfileEntity, player: String, account: String) {
+        return profileRepository.saveProfilePubg(sessionUser: sessionUser, player: player, account: account)
     }
 }
