@@ -250,7 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				4655510229CC828100BF932A /* Coordinator */,
-				465550FD29CC81FC00BF932A /* Dependencies */,
+				465550FD29CC81FC00BF932A /* DependenciesResolve */,
 				8C810F7529C33E5700AEE548 /* View */,
 			);
 			path = Contact;
@@ -290,13 +290,13 @@
 			path = RepositoryImplementation;
 			sourceTree = "<group>";
 		};
-		461C1F4B29CAE0A200540289 /* Dependencies */ = {
+		461C1F4B29CAE0A200540289 /* DependenciesResolve */ = {
 			isa = PBXGroup;
 			children = (
 				461C1F4C29CAE0F600540289 /* LoginDependency.swift */,
 				461C1F4E29CAE10600540289 /* LoginExternalDependency.swift */,
 			);
-			path = Dependencies;
+			path = DependenciesResolve;
 			sourceTree = "<group>";
 		};
 		461C1F5029CAE10B00540289 /* Coordinator */ = {
@@ -324,13 +324,13 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		461C1F5929CB10CE00540289 /* Dependencies */ = {
+		461C1F5929CB10CE00540289 /* DependenciesResolve */ = {
 			isa = PBXGroup;
 			children = (
 				461C1F5B29CB110400540289 /* ForgotDependency.swift */,
 				461C1F5D29CB112300540289 /* ForgotExternalDependency.swift */,
 			);
-			path = Dependencies;
+			path = DependenciesResolve;
 			sourceTree = "<group>";
 		};
 		461C1F5A29CB10E200540289 /* ViewModel */ = {
@@ -341,13 +341,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		461C1F7329CB5BA400540289 /* Dependencies */ = {
+		461C1F7329CB5BA400540289 /* DependenciesResolve */ = {
 			isa = PBXGroup;
 			children = (
 				461C1F7729CB5CF500540289 /* RegisterDependency.swift */,
 				461C1F7929CB5DE600540289 /* RegisterExternalDependency.swift */,
 			);
-			path = Dependencies;
+			path = DependenciesResolve;
 			sourceTree = "<group>";
 		};
 		461C1F7429CB5BAF00540289 /* Coordinator */ = {
@@ -362,18 +362,18 @@
 			isa = PBXGroup;
 			children = (
 				465550CB29CC46D000BF932A /* Coordinator */,
-				465550CA29CC46C600BF932A /* Dependencies */,
+				465550CA29CC46C600BF932A /* DependenciesResolve */,
 			);
 			path = MainTabBar;
 			sourceTree = "<group>";
 		};
-		465550CA29CC46C600BF932A /* Dependencies */ = {
+		465550CA29CC46C600BF932A /* DependenciesResolve */ = {
 			isa = PBXGroup;
 			children = (
 				465550CC29CC46ED00BF932A /* MainTabBarDependency.swift */,
 				465550CE29CC471400BF932A /* MainTabBarExternalDependency.swift */,
 			);
-			path = Dependencies;
+			path = DependenciesResolve;
 			sourceTree = "<group>";
 		};
 		465550CB29CC46D000BF932A /* Coordinator */ = {
@@ -392,22 +392,22 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		465550D629CC500200BF932A /* Dependencies */ = {
+		465550D629CC500200BF932A /* DependenciesResolve */ = {
 			isa = PBXGroup;
 			children = (
 				465550D929CC513100BF932A /* ProfileExternalDependency.swift */,
 				465550DB29CC51DF00BF932A /* ProfileDependency.swift */,
 			);
-			path = Dependencies;
+			path = DependenciesResolve;
 			sourceTree = "<group>";
 		};
-		465550DF29CC6EEB00BF932A /* Dependencies */ = {
+		465550DF29CC6EEB00BF932A /* DependenciesResolve */ = {
 			isa = PBXGroup;
 			children = (
 				465550E629CC700400BF932A /* FavouriteExternalDependency.swift */,
 				465550E829CC705200BF932A /* FavouriteDependency.swift */,
 			);
-			path = Dependencies;
+			path = DependenciesResolve;
 			sourceTree = "<group>";
 		};
 		465550E029CC6EF300BF932A /* Coordinator */ = {
@@ -434,13 +434,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		465550EB29CC7BBB00BF932A /* Dependencies */ = {
+		465550EB29CC7BBB00BF932A /* DependenciesResolve */ = {
 			isa = PBXGroup;
 			children = (
 				465550EF29CC7C1300BF932A /* RankingExternalDependency.swift */,
 				465550F129CC7C5A00BF932A /* RankingDependency.swift */,
 			);
-			path = Dependencies;
+			path = DependenciesResolve;
 			sourceTree = "<group>";
 		};
 		465550EC29CC7BC100BF932A /* Coordinator */ = {
@@ -451,13 +451,13 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		465550F529CC7DC000BF932A /* Dependencies */ = {
+		465550F529CC7DC000BF932A /* DependenciesResolve */ = {
 			isa = PBXGroup;
 			children = (
 				465550F729CC7DE800BF932A /* GuideDependency.swift */,
 				465550F929CC7E4600BF932A /* GuideExternalDependency.swift */,
 			);
-			path = Dependencies;
+			path = DependenciesResolve;
 			sourceTree = "<group>";
 		};
 		465550F629CC7DC900BF932A /* Coordinator */ = {
@@ -468,13 +468,13 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		465550FD29CC81FC00BF932A /* Dependencies */ = {
+		465550FD29CC81FC00BF932A /* DependenciesResolve */ = {
 			isa = PBXGroup;
 			children = (
 				465550FE29CC820A00BF932A /* ContactDependency.swift */,
 				4655510029CC824000BF932A /* ContactExternalDependency.swift */,
 			);
-			path = Dependencies;
+			path = DependenciesResolve;
 			sourceTree = "<group>";
 		};
 		4655510229CC828100BF932A /* Coordinator */ = {
@@ -624,7 +624,7 @@
 		8CAC3E2329C303C800A1FE34 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				465550D629CC500200BF932A /* Dependencies */,
+				465550D629CC500200BF932A /* DependenciesResolve */,
 				465550D529CC4FFA00BF932A /* Coordinator */,
 				8CB2CEE629C9A20700E79D29 /* Domain */,
 				8CB2CEE529C9A20200E79D29 /* Data */,
@@ -637,7 +637,7 @@
 			isa = PBXGroup;
 			children = (
 				465550F629CC7DC900BF932A /* Coordinator */,
-				465550F529CC7DC000BF932A /* Dependencies */,
+				465550F529CC7DC000BF932A /* DependenciesResolve */,
 				8CAC3E2929C304FF00A1FE34 /* Data */,
 				8CAC3E2729C304E700A1FE34 /* Presentation */,
 			);
@@ -648,7 +648,7 @@
 			isa = PBXGroup;
 			children = (
 				465550EC29CC7BC100BF932A /* Coordinator */,
-				465550EB29CC7BBB00BF932A /* Dependencies */,
+				465550EB29CC7BBB00BF932A /* DependenciesResolve */,
 				465550EA29CC7BB300BF932A /* View */,
 			);
 			path = Ranking;
@@ -658,7 +658,7 @@
 			isa = PBXGroup;
 			children = (
 				465550E029CC6EF300BF932A /* Coordinator */,
-				465550DF29CC6EEB00BF932A /* Dependencies */,
+				465550DF29CC6EEB00BF932A /* DependenciesResolve */,
 				465550E129CC6EFA00BF932A /* View */,
 			);
 			path = Favourite;
@@ -765,7 +765,7 @@
 			isa = PBXGroup;
 			children = (
 				461C1F5029CAE10B00540289 /* Coordinator */,
-				461C1F4B29CAE0A200540289 /* Dependencies */,
+				461C1F4B29CAE0A200540289 /* DependenciesResolve */,
 				8CB39B9929C0603200B1D8EF /* Data */,
 				8C7563EE29BB6510000373F9 /* Domain */,
 				8CB39B9829C05FE300B1D8EF /* Presentation */,
@@ -777,7 +777,7 @@
 			isa = PBXGroup;
 			children = (
 				461C1F7429CB5BAF00540289 /* Coordinator */,
-				461C1F7329CB5BA400540289 /* Dependencies */,
+				461C1F7329CB5BA400540289 /* DependenciesResolve */,
 				8CD7CD9529BF6E2300C57346 /* Domain */,
 				8CAEB01329BB4726009282AF /* Data */,
 				8CD7CD8D29BF54BF00C57346 /* Presentation */,
@@ -978,7 +978,7 @@
 		8CB39BAA29C0C25200B1D8EF /* ForgotPassword */ = {
 			isa = PBXGroup;
 			children = (
-				461C1F5929CB10CE00540289 /* Dependencies */,
+				461C1F5929CB10CE00540289 /* DependenciesResolve */,
 				461C1F5829CB10C100540289 /* Coordinator */,
 				461C1F5729CB10A400540289 /* Presentation */,
 			);
