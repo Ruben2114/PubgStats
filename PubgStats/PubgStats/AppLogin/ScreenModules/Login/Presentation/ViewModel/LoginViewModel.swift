@@ -34,10 +34,9 @@ final class LoginViewModel {
         }
     }
     func loginSucess(name: String, password: String) {
-        var sessionUser: ProfileEntity = dependencies.external.resolve()
+        let sessionUser: ProfileEntity = dependencies.external.resolve()
         sessionUser.name = name
         sessionUser.password = password
-        var sessionUser2: ProfileEntity = dependencies.external.resolve()
         coordinator?.performTransition(.goProfile)
     }
     func didTapForgotButton() {

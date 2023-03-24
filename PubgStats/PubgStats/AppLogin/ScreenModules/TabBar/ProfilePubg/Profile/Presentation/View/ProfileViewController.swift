@@ -69,10 +69,11 @@ final class ProfileViewController: UIViewController {
             case .fail(_):
                 self?.presentAlert(message: "El nombre de usuario no existe", title: "Error")
             case .success(let model):
-                let account = model.id
-                let name = model.name
-                print("Name: \(name ?? "no existe name") y account \(account ?? "no existe account")")
-                //TODO: guardar aqui en core data
+                let account = model.id ?? "no existe account"
+                let player = model.name ?? "no existe name"
+                //hacer clausula para que no sea opcional
+                //TODO: guardar aqui en core data y actualizar el perfil
+                self?.viewModel.saveUser(player: player, account: account)
             case .loading:
                 print("esperando")
             }

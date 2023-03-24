@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import CoreData
 
 final class ProfileViewModel {
     private let apiService: ApiClientService
@@ -35,8 +36,29 @@ final class ProfileViewModel {
         }
     }
     //TODO: GUARDAR ID EN CORE DATA
+    private let context: NSManagedObjectContext = CoreDataManager.shared.persistentContainer.viewContext
     func saveUser(player: String, account: String) {
         stateSave.send(.loading)
+        let sessionUser: ProfileEntity = dependencies.external.resolve()
+        let fetchRequest = Profile.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
+        do {
+            let result = try context.fetch(fetchRequest)
+            let namePlayer = result.map {$0.name}.description
+            if sessionUser.name == namePlayer {
+                let user = result.first
+                user?.player = player
+                user?.account = account
+                try context.save()
+                print("\(user?.account) y \(user?.name)")
+                sessionUser.player = player
+                sessionUser.account = account
+                stateSave.send(.success)
+            }
+            
+        } catch {
+            stateSave.send(.fail(error: "Error al guardar los datos en core data"))
+        }
         //profileDataUseCase.execute(name: name, password: password)
         stateSave.send(.success)
     }

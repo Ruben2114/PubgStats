@@ -8,6 +8,8 @@
 class ProfileEntity {
     var name: String
     var password: String
+    var player: String?
+    var account: String?
     init(name: String, password: String) {
         self.name = name
         self.password = password
