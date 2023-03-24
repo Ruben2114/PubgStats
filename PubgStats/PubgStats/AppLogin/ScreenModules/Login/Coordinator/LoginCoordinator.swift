@@ -59,9 +59,9 @@ extension LoginCoordinatorImp: LoginCoordinator {
 private extension LoginCoordinatorImp {
     struct Dependency: LoginDependency {
         let external: LoginExternalDependency
-        let coordinator: LoginCoordinator
+        weak var coordinator: LoginCoordinator?
         
-        func resolve() -> LoginCoordinator {
+        func resolve() -> LoginCoordinator? {
             return coordinator
         }
     }

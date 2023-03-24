@@ -9,7 +9,7 @@ protocol LoginDependency {
     var external: LoginExternalDependency { get }
     func resolve() -> LoginViewController
     func resolve() -> LoginViewModel
-    func resolve() -> LoginCoordinator
+    func resolve() -> LoginCoordinator?
     func resolve() -> LoginDataUseCase
 }
 

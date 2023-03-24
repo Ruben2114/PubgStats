@@ -35,20 +35,11 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
     func checkUser(sessionUser: ProfileEntity, name: String, password: String) -> Bool {
         let fetchRequest = Profile.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "name == %@ AND password == %@", name, password)
-        do {
-            let result = try context.fetch(fetchRequest)
-            let count = result.count > 0
-            if count == true {
-                let namePlayer = result.map {$0}
-                if sessionUser.name == namePlayer.first?.name {
-                    sessionUser.player = namePlayer.first?.player
-                    sessionUser.account = namePlayer.first?.account
-                }
-            }
-            return count
-        } catch {
-            return false
-        }
+        let result = try? context.fetch(fetchRequest)
+        guard let first = result?.first, sessionUser.name == first.name else {return false}
+        sessionUser.player = first.player
+        sessionUser.account = first.account
+        return true
     }
     
     func save(name: String, password: String){
