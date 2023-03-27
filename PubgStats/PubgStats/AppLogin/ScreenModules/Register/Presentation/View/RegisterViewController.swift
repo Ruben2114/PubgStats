@@ -21,7 +21,7 @@ final class RegisterViewController: UIViewController {
     private lazy var userTextField = makeTextField(placeholder: "User Name", isSecure: false)
     private lazy var passwordTextField = makeTextField(placeholder: "Password", isSecure: true)
     private lazy var acceptButton = makeButtonBlue(title: "Accept")
-
+    
     var mainScrollView = UIScrollView()
     var contentView = UIView()
     var cancellable = Set<AnyCancellable>()
@@ -41,14 +41,16 @@ final class RegisterViewController: UIViewController {
         super.viewDidLoad()
         configScroll()
         configUI()
+        bind()
+    }
+    
+    private func configUI() {
+        view.backgroundColor = .systemBackground
         configConstraints()
         configTargets()
         configKeyboardSubscription(mainScrollView: mainScrollView)
-        bind()
         hideKeyboard()
-    }
-    private func configUI() {
-        view.backgroundColor = .systemBackground
+        backButton(action: #selector(backButtonAction))
     }
     func bind() {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
@@ -69,7 +71,7 @@ final class RegisterViewController: UIViewController {
         containerStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
         containerStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
         containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-
+        
         [titleLabel,userTextField, passwordTextField, acceptButton].forEach {
             containerStackView.addArrangedSubview($0)
         }
@@ -90,6 +92,9 @@ final class RegisterViewController: UIViewController {
             return
         }
         viewModel.saveUser(name: nameText ?? "", password: passwordText ?? "")
+    }
+    @objc func backButtonAction() {
+        viewModel.backButton()
     }
 }
 extension RegisterViewController: MessageDisplayable { }

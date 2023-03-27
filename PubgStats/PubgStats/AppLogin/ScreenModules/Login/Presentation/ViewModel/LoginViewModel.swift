@@ -28,6 +28,7 @@ final class LoginViewModel {
             switch check {
             case true:
                 self?.state.send(.success)
+                coordinator?.performTransition(.goProfile)
             case false:
                 self?.state.send(.fail(error: "Incorrect username or password."))
             }
@@ -37,7 +38,6 @@ final class LoginViewModel {
         let sessionUser: ProfileEntity = dependencies.external.resolve()
         sessionUser.name = name
         sessionUser.password = password
-        coordinator?.performTransition(.goProfile)
     }
     func didTapForgotButton() {
         coordinator?.performTransition(.goForgot)

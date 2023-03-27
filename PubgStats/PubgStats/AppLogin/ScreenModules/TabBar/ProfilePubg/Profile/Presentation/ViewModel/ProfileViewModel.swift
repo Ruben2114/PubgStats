@@ -11,8 +11,7 @@ import Combine
 final class ProfileViewModel {
     private let apiService: ApiClientService
     var state = PassthroughSubject<OutputPlayer, Never>()
-    var stateSave = PassthroughSubject<StateController, Never>()
-    weak private var coordinator: ProfileCoordinator?
+    private weak var coordinator: ProfileCoordinator?
     private let profileDataUseCase: ProfileDataUseCase
     private let dependencies: ProfileDependency
     
@@ -22,23 +21,21 @@ final class ProfileViewModel {
         self.coordinator = dependencies.resolve()
         self.profileDataUseCase = dependencies.resolve()
     }
-  
+    
     func dataGeneral(name: String){
-        guard let url = URL(string: ApisUrl.generalData(name: name).urlString) else { return }
-        apiService.dataPlayer(url: url) { [weak self] (result: Result<PubgPlayer, Error>) in
+        state.send(.loading)
+        profileDataUseCase.fetchPlayerData(name: name) { [weak self] result in
             switch result {
-            case .success(let generalData):
-                self?.state.send(.success(model: generalData))
+            case .success(let player):
+                self?.state.send(.success(model: player))
             case .failure(let error):
                 self?.state.send(.fail(error: "\(error)"))
             }
         }
     }
     func saveUser(player: String, account: String) {
-        stateSave.send(.loading)
         let sessionUser: ProfileEntity = dependencies.external.resolve()
         profileDataUseCase.execute(sessionUser: sessionUser, player: player, account: account)
-        stateSave.send(.success)
     }
     func logOut() {
         coordinator?.performTransition(.goLogOut)
@@ -49,11 +46,8 @@ final class ProfileViewModel {
     func didTapSettingButton() {
         coordinator?.performTransition(.goSetting)
     }
-    func didTapLinkPubgAccountButton() {
-        coordinator?.performTransition(.goLinkPubg)
-    }
     func didTapStatsgAccountButton() {
-        coordinator?.performTransition(.goProfilePubg)
+        coordinator?.performTransition(.goStatsGeneral)
     }
 }
 

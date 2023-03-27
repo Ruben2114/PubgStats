@@ -31,17 +31,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         rootCoordinatorTabBar?.start()
         rootCoordinatorLogin?.dismiss()
         rootCoordinatorLogin = nil
-        dependencies.loginNavigationController().removeFromParent()
+        dependencies.loginNavigationController().viewControllers = []
     }
     func changeRootViewAppCoordinator(animated: Bool = true) {
-        let navigation = dependencies.loginNavigationController()
-        navigation.viewControllers = []
         window?.rootViewController = dependencies.loginNavigationController()
         window?.makeKeyAndVisible()
         rootCoordinatorLogin = dependencies.loginCoordinator()
         rootCoordinatorLogin?.start()
         rootCoordinatorTabBar?.dismiss()
         rootCoordinatorTabBar = nil
+        dependencies.tabBarController().viewControllers = []
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

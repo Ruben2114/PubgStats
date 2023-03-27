@@ -32,5 +32,8 @@ final class RegisterViewModel {
     func didTapAcceptButton() {
         coordinator?.performTransition(.goAccept)
     }
+    func backButton() {
+        coordinator?.dismiss()
+    }
 }
 

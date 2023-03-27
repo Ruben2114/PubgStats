@@ -14,4 +14,7 @@ class ProfileEntity {
         self.name = name
         self.password = password
     }
+    var survival: [SurvivalDTO]?
+    var weapons: [WeaponDTO]?
+    var gameModes: [GamesModesDTO]?
 }

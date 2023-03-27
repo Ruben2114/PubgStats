@@ -24,7 +24,8 @@ extension ProfileDependency {
     
     func resolve() -> ProfileDataUseCase {
         let dataSource = AppContainerImp().localDataService
-        let profileRepository = ProfileRepositoryImp(dataSource: dataSource)
+        let remoteData = AppContainerImp().remoteDataService
+        let profileRepository = ProfileRepositoryImp(dataSource: dataSource, remoteData: remoteData)
         let profileDataUseCase = ProfileDataUseCaseImp(profileRepository: profileRepository)
         return profileDataUseCase
     }

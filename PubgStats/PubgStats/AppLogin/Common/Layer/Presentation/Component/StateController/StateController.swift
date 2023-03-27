@@ -20,7 +20,13 @@ enum Output {
 }
 enum OutputPlayer {
     case fail(error: String)
-    case success (model: PubgPlayer)
+    case success (model: PubgPlayerDTO)
     case loading
+}
+enum OutputStats {
+    case loading
+    case fail(error: String)
+    case successSurvival (model: SurvivalDTO)
+    case successGamesModes (model: GamesModesDTO)
 }
 

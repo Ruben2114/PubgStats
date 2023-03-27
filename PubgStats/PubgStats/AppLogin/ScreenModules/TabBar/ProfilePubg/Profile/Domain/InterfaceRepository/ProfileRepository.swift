@@ -7,4 +7,6 @@
 
 protocol ProfileRepository {
     func saveProfilePubg (sessionUser: ProfileEntity, player: String, account: String)
+    func fetchPlayerData(name: String, completion: @escaping (Result<PubgPlayerDTO, Error>) -> Void)
 }
+

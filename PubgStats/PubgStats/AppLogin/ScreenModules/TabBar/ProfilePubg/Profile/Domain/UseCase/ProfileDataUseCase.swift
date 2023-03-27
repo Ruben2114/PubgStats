@@ -8,6 +8,7 @@
 
 protocol ProfileDataUseCase {
     func execute(sessionUser: ProfileEntity, player: String, account: String)
+    func fetchPlayerData(name: String, completion: @escaping (Result<PubgPlayerDTO, Error>) -> Void)
 }
 
 struct ProfileDataUseCaseImp: ProfileDataUseCase {
@@ -16,4 +17,8 @@ struct ProfileDataUseCaseImp: ProfileDataUseCase {
     func execute(sessionUser: ProfileEntity, player: String, account: String) {
         return profileRepository.saveProfilePubg(sessionUser: sessionUser, player: player, account: account)
     }
+    func fetchPlayerData(name: String, completion: @escaping (Result<PubgPlayerDTO, Error>) -> Void) {
+        profileRepository.fetchPlayerData(name: name, completion: completion)
+    }
+
 }

@@ -11,8 +11,7 @@ enum ProfileTransition {
     case goLogOut
     case goPersonalData
     case goSetting
-    case goLinkPubg
-    case goProfilePubg
+    case goStatsGeneral
 }
 protocol ProfileCoordinator: Coordinator {
     func performTransition(_ transition: ProfileTransition)
@@ -47,10 +46,10 @@ extension ProfileCoordinatorImp: ProfileCoordinator {
             print("goPersonalData")
         case .goSetting:
             print("goSetting")
-        case .goLinkPubg:
-            print("goLinkPubg")
-        case .goProfilePubg:
-            print("goProfilePubg")
+        case .goStatsGeneral:
+            let statsGeneralCoordinator = dependencies.external.statsGeneralCoordinator()
+            statsGeneralCoordinator.start()
+            append(child: statsGeneralCoordinator)
         }
     }
 }

@@ -6,10 +6,6 @@
 //
 import UIKit
 
-protocol ForgotViewControllerCoordinator {
-    
-}
-
 final class ForgotViewController: UIViewController {
     private let dependencies: ForgotDependency
     private let viewModel: ForgotViewModel
@@ -28,10 +24,9 @@ final class ForgotViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         title = "Forgot your password"
-        let backButton = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.backward.circle.fill"), style: .plain, target: self, action: #selector(backButton))
-        navigationItem.leftBarButtonItem = backButton
+        backButton(action: #selector(backButtonAction))
     }
-    @objc func backButton() {
+    @objc func backButtonAction() {
         viewModel.backButton()
     }
     //enviar un correo con la nueva contraseña

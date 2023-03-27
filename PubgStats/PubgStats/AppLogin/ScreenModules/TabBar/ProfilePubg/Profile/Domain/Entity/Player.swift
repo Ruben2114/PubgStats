@@ -1,12 +1,12 @@
 //
-//  PlayerModel.swift
+//  Player.swift
 //  PubgStats
 //
-//  Created by Ruben Rodriguez on 21/3/23.
+//  Created by Ruben Rodriguez on 27/3/23.
 //
 
 import Foundation
-struct PubgPlayer: Decodable {
+struct PubgPlayer {
     private let data: [PubgPlayerData]
     var name: String? {
         data.first?.attributes.name
@@ -16,12 +16,12 @@ struct PubgPlayer: Decodable {
     }
 }
 // MARK: - PubgPlayerData
-struct PubgPlayerData: Decodable {
+struct PubgPlayerData {
     let type, id: String
     let attributes: PubgPlayerAttributes
 }
 // MARK: - PubgPlayerAttributes
-struct PubgPlayerAttributes: Decodable {
+struct PubgPlayerAttributes {
     let name, titleID, shardID: String
     enum CodingKeys: String, CodingKey {
         case name

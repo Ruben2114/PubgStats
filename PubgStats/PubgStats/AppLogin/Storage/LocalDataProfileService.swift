@@ -5,8 +5,6 @@
 //  Created by Ruben Rodriguez on 13/3/23.
 //
 
-
-
 import CoreData
 import UIKit
 
@@ -36,7 +34,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         let fetchRequest = Profile.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "name == %@ AND password == %@", name, password)
         let result = try? context.fetch(fetchRequest)
-        guard let first = result?.first, sessionUser.name == first.name else {return false}
+        guard let first = result?.first, sessionUser.name == first.name, !result!.isEmpty else{return false}
         sessionUser.player = first.player
         sessionUser.account = first.account
         return true

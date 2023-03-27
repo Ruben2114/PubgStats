@@ -70,13 +70,13 @@ final class ProfileViewController: UIViewController {
             case .fail(_):
                 self?.presentAlert(message: "El nombre de usuario no existe", title: "Error")
             case .success(let model):
-                let account = model.id ?? "no existe account"
-                let player = model.name ?? "no existe name"
-                //hacer clausula para que no sea opcional
+                guard let account = model.id, !account.isEmpty, let player = model.name, !player.isEmpty else {return}
+                self?.hideSpinner()
                 self?.viewModel.saveUser(player: player, account: account)
                 self?.chooseButton()
             case .loading:
-                print("esperando")
+                self?.showSpinner()
+                
             }
         }.store(in: &cancellable)
     }
@@ -87,6 +87,7 @@ final class ProfileViewController: UIViewController {
         } else {
             linkPubgAccountButton.isHidden = true
             statsAccountButton.isHidden = false
+            statsAccountButton.setTitle("Stats Account: \(sessionUser.player ?? "")", for: .normal)
         }
     }
     private func configConstraints() {
@@ -130,9 +131,6 @@ final class ProfileViewController: UIViewController {
                 self?.presentAlert(message: "There are no users with an empty name", title: "Error")
                 return}
             self?.viewModel.dataGeneral(name: name)
-            
-            //TODO: Cambiar el boton
-            self?.viewModel.didTapLinkPubgAccountButton()
         }
         let actionCancel = UIAlertAction(title: "cancelar", style: .destructive)
         alert.addAction(actionAccept)
@@ -142,18 +140,8 @@ final class ProfileViewController: UIViewController {
     @objc func didTapStatsgAccountButton() {
         viewModel.didTapStatsgAccountButton()
     }
-    private func makeTextField(placeholder: String) -> UITextField {
-        let textField = UITextField()
-        textField.backgroundColor = .gray.withAlphaComponent(0.1)
-        textField.placeholder = placeholder
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-        textField.leftViewMode = .always
-        textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        textField.font = UIFont.systemFont(ofSize: 20)
-        textField.layer.cornerRadius = 10
-        return textField
-    }
 }
 extension ProfileViewController: MessageDisplayable { }
 extension ProfileViewController: ViewScrollable {}
 extension ProfileViewController: KeyboardDisplayable {}
+extension ProfileViewController: SpinnerDisplayable{ }

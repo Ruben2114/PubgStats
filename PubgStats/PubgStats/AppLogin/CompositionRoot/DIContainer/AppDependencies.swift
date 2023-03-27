@@ -64,4 +64,5 @@ extension AppDependencies:
     FavouriteExternalDependency,
     RankingExternalDependency,
     GuideExternalDependency,
-    ContactExternalDependency{}
+    ContactExternalDependency,
+    StatsGeneralExternalDependency{}

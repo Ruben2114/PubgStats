@@ -39,8 +39,6 @@ extension LoginCoordinatorImp: LoginCoordinator {
     func performTransition(_ transition: LoginTransition) {
         switch transition {
         case .goProfile:
-            //guardar currentUser
-            print("guardar el current User")
             DispatchQueue.main.async {
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewTabCoordinator()
             }

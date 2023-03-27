@@ -33,6 +33,7 @@ final class MainTabBarCoordinatorImp: Coordinator {
         profileNavController.tabBarItem.image = UIImage(systemName: "person.circle.fill")
         viewControllers.append(profileNavController)
         profileCoordinator.start()
+        append(child: profileCoordinator)
         
         let favouriteCoordinator = dependencies.external.favouriteCoordinator()
         let favouriteNavController = dependencies.external.favouriteNavigationController()
@@ -41,6 +42,7 @@ final class MainTabBarCoordinatorImp: Coordinator {
         favouriteNavController.tabBarItem.image = UIImage(systemName: "star.circle.fill")
         viewControllers.append(favouriteNavController)
         favouriteCoordinator.start()
+        append(child: favouriteCoordinator)
        
         let rankingCoordinator = dependencies.external.rankingCoordinator()
         let rankingNavController = dependencies.external.rankingNavigationController()
@@ -49,6 +51,7 @@ final class MainTabBarCoordinatorImp: Coordinator {
         rankingNavController.tabBarItem.image = UIImage(systemName: "trophy.circle.fill")
         viewControllers.append(rankingNavController)
         rankingCoordinator.start()
+        append(child: rankingCoordinator)
         
         let guideCoordinator = dependencies.external.guideCoordinator()
         let guideNavController = dependencies.external.guideNavigationController()
@@ -57,6 +60,7 @@ final class MainTabBarCoordinatorImp: Coordinator {
         guideNavController.tabBarItem.image = UIImage(systemName: "book.circle.fill")
         viewControllers.append(guideNavController)
         guideCoordinator.start()
+        append(child: guideCoordinator)
         
         let contactCoordinator = dependencies.external.contactCoordinator()
         let contactNavController = dependencies.external.contactNavigationController()
@@ -65,6 +69,7 @@ final class MainTabBarCoordinatorImp: Coordinator {
         contactNavController.tabBarItem.image = UIImage(systemName: "envelope.circle.fill")
         viewControllers.append(contactNavController)
         contactCoordinator.start()
+        append(child: contactCoordinator)
         
         let viewsTotal = viewControllers
         let tabBar = dependencies.external.tabBarController()
