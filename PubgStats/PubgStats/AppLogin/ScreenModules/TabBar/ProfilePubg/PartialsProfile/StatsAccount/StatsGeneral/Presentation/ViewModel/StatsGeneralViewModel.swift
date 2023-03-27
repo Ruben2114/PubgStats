@@ -53,16 +53,16 @@ final class StatsGeneralViewModel {
         coordinator?.dismiss()
     }
     func goKillsData() {
-        coordinator?.dismiss()
+        coordinator?.performTransition(.goKillsData)
     }
     func goWeapons() {
-        coordinator?.dismiss()
+        coordinator?.performTransition(.goWeapons)
     }
     func goSurvival() {
-        coordinator?.dismiss()
+        coordinator?.performTransition(.goSurvival)
     }
     func goGamesModes() {
-        coordinator?.dismiss()
+        coordinator?.performTransition(.goGamesModes)
     }
 }
 

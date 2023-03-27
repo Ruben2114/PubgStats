@@ -205,8 +205,8 @@
 		8CB07EB729D1A6B3000EE257 /* StatsGeneralDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGeneralDependency.swift; sourceTree = "<group>"; };
 		8CB07EB929D1A6EC000EE257 /* StatsGeneralExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGeneralExternalDependency.swift; sourceTree = "<group>"; };
 		8CB07EBB29D1A764000EE257 /* StatsGeneralCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGeneralCoordinator.swift; sourceTree = "<group>"; };
-		8CB07EBD29D1ACB2000EE257 /* StatsGeneralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StatsGeneralViewController.xib; path = ../../../../../../../../../../../../StatsGeneralViewController.xib; sourceTree = "<group>"; };
-		8CB07EBE29D1ACB2000EE257 /* StatsGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatsGeneralViewController.swift; path = ../../../../../../../../../../../../StatsGeneralViewController.swift; sourceTree = "<group>"; };
+		8CB07EBD29D1ACB2000EE257 /* StatsGeneralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatsGeneralViewController.xib; sourceTree = "<group>"; };
+		8CB07EBE29D1ACB2000EE257 /* StatsGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsGeneralViewController.swift; sourceTree = "<group>"; };
 		8CB07EC229D1B246000EE257 /* SurvivalDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDTO.swift; sourceTree = "<group>"; };
 		8CB07EC429D1B393000EE257 /* WeaponDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDTO.swift; sourceTree = "<group>"; };
 		8CB07EC729D1B446000EE257 /* GamesModesDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesDTO.swift; sourceTree = "<group>"; };
