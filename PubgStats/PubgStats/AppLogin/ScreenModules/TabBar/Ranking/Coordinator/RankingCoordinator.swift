@@ -34,9 +34,9 @@ extension RankingCoordinatorImp: RankingCoordinator {}
 private extension RankingCoordinatorImp {
     struct Dependency: RankingDependency {
         let external: RankingExternalDependency
-        let coordinator: RankingCoordinator
+        weak var coordinator: RankingCoordinator?
         
-        func resolve() -> RankingCoordinator {
+        func resolve() -> RankingCoordinator? {
             return coordinator
         }
     }

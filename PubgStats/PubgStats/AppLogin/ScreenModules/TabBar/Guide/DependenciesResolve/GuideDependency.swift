@@ -9,7 +9,7 @@ protocol GuideDependency {
     var external: GuideExternalDependency { get }
     func resolve() -> GuideViewController
     func resolve() -> GuideViewModel
-    func resolve() -> GuideCoordinator
+    func resolve() -> GuideCoordinator?
 }
 
 extension GuideDependency {

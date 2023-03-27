@@ -28,6 +28,11 @@ final class ForgotViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         title = "Forgot your password"
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.backward.circle.fill"), style: .plain, target: self, action: #selector(backButton))
+        navigationItem.leftBarButtonItem = backButton
+    }
+    @objc func backButton() {
+        viewModel.backButton()
     }
     //enviar un correo con la nueva contraseña
     //o decir que esta funcionalidad no esta todavia

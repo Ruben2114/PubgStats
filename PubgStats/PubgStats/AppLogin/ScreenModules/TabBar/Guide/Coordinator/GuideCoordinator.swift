@@ -34,9 +34,9 @@ extension GuideCoordinatorImp: GuideCoordinator {}
 private extension GuideCoordinatorImp {
     struct Dependency: GuideDependency {
         let external: GuideExternalDependency
-        let coordinator: GuideCoordinator
+        weak var coordinator: GuideCoordinator?
         
-        func resolve() -> GuideCoordinator {
+        func resolve() -> GuideCoordinator? {
             return coordinator
         }
     }

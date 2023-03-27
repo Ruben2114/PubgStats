@@ -43,9 +43,9 @@ extension RegisterCoordinatorImp: RegisterCoordinator {
 private extension RegisterCoordinatorImp {
     struct Dependency: RegisterDependency{
         let external: RegisterExternalDependency
-        let coordinator: RegisterCoordinator
+        weak var coordinator: RegisterCoordinator?
         
-        func resolve() -> RegisterCoordinator {
+        func resolve() -> RegisterCoordinator? {
             return coordinator
         }
     }

@@ -34,9 +34,9 @@ extension FavouriteCoordinatorImp: FavouriteCoordinator {}
 private extension FavouriteCoordinatorImp {
     struct Dependency: FavouriteDependency {
         let external: FavouriteExternalDependency
-        let coordinator: FavouriteCoordinator
+        weak var coordinator: FavouriteCoordinator?
         
-        func resolve() -> FavouriteCoordinator {
+        func resolve() -> FavouriteCoordinator? {
             return coordinator
         }
     }

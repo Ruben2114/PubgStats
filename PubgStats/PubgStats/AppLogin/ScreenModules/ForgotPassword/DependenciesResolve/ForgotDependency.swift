@@ -7,7 +7,7 @@
 
 protocol ForgotDependency {
     var external: ForgotExternalDependency { get }
-    func resolve() -> ForgotCoordinator
+    func resolve() -> ForgotCoordinator?
     func resolve() -> ForgotViewController
     func resolve() -> ForgotViewModel
 }

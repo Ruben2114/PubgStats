@@ -8,7 +8,7 @@
 protocol RankingDependency {
     var external: RankingExternalDependency { get }
     func resolve() -> RankingViewController
-    func resolve() -> RankingCoordinator
+    func resolve() -> RankingCoordinator?
 }
 
 extension RankingDependency {

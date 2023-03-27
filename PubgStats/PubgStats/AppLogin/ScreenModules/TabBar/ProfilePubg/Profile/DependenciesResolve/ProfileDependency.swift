@@ -9,7 +9,7 @@ protocol ProfileDependency {
     var external: ProfileExternalDependency { get }
     func resolve() -> ProfileViewController
     func resolve() -> ProfileViewModel
-    func resolve() -> ProfileCoordinator
+    func resolve() -> ProfileCoordinator?
     func resolve() -> ProfileDataUseCase
 }
 

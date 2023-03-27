@@ -34,9 +34,9 @@ extension ContactCoordinatorImp: ContactCoordinator {}
 private extension ContactCoordinatorImp {
     struct Dependency: ContactDependency {
         let external: ContactExternalDependency
-        let coordinator: ContactCoordinator
+        weak var coordinator: ContactCoordinator?
         
-        func resolve() -> ContactCoordinator {
+        func resolve() -> ContactCoordinator? {
             return coordinator
         }
     }

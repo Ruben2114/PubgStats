@@ -13,4 +13,7 @@ final class ForgotViewModel {
         self.dependencies = dependencies
         self.coordinator = dependencies.resolve()
     }
+    func backButton() {
+        coordinator?.dismiss()
+    }
 }

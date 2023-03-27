@@ -58,9 +58,9 @@ extension ProfileCoordinatorImp: ProfileCoordinator {
 private extension ProfileCoordinatorImp {
     struct Dependency: ProfileDependency {
         let external: ProfileExternalDependency
-        let coordinator: ProfileCoordinator
+        weak var coordinator: ProfileCoordinator?
         
-        func resolve() -> ProfileCoordinator {
+        func resolve() -> ProfileCoordinator? {
             return coordinator
         }
     }

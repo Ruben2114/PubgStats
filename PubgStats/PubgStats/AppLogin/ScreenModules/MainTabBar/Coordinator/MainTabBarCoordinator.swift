@@ -76,9 +76,9 @@ extension MainTabBarCoordinatorImp: MainTabBarCoordinator{ }
 private extension MainTabBarCoordinatorImp {
     struct Dependency: MainTabBarDependency {
         let external: MainTabBarExternalDependency
-        let coordinator: MainTabBarCoordinator
+        weak var coordinator: MainTabBarCoordinator?
         
-        func resolve() -> MainTabBarCoordinator {
+        func resolve() -> MainTabBarCoordinator? {
             return coordinator
         }
     }

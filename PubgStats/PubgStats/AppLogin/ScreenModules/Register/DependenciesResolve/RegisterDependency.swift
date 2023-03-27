@@ -9,7 +9,7 @@ protocol RegisterDependency {
     var external: RegisterExternalDependency { get }
     func resolve() -> RegisterViewController
     func resolve() -> RegisterViewModel
-    func resolve() -> RegisterCoordinator
+    func resolve() -> RegisterCoordinator?
     func resolve() -> RegisterDataUseCase
 }
 extension RegisterDependency {

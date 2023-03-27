@@ -19,7 +19,7 @@ class LoginViewController: UIViewController {
         title: "forgot your password?")
     private lazy var registerButton: UIButton = makeButtonClear(
         title: "Sign Up")
-
+    
     var mainScrollView = UIScrollView()
     var contentView = UIView()
     var cancellable = Set<AnyCancellable>()
@@ -102,3 +102,4 @@ extension LoginViewController: SpinnerDisplayable { }
 extension LoginViewController: ViewScrollable {}
 extension LoginViewController: MessageDisplayable { }
 extension LoginViewController: KeyboardDisplayable {}
+

@@ -8,7 +8,7 @@
 protocol ContactDependency {
     var external: ContactExternalDependency { get }
     func resolve() -> ContactViewController
-    func resolve() -> ContactCoordinator
+    func resolve() -> ContactCoordinator?
 }
 
 extension ContactDependency {

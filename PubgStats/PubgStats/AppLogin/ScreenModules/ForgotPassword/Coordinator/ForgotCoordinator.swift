@@ -8,7 +8,6 @@
 import UIKit
 
 protocol ForgotCoordinator: Coordinator {
-    
 }
 
 final class ForgotCoordinatorImp: Coordinator {
@@ -30,14 +29,16 @@ final class ForgotCoordinatorImp: Coordinator {
         navigation?.pushViewController(forgotView, animated: false)
     }
 }
-extension ForgotCoordinatorImp: ForgotCoordinator {}
+extension ForgotCoordinatorImp: ForgotCoordinator {
+    
+}
 
 private extension ForgotCoordinatorImp {
     struct Dependency: ForgotDependency {
         let external: ForgotExternalDependency
-        let coordinator: ForgotCoordinator
+        weak var coordinator: ForgotCoordinator?
         
-        func resolve() -> ForgotCoordinator {
+        func resolve() -> ForgotCoordinator? {
             return coordinator
         }
     }

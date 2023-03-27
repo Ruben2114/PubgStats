@@ -20,6 +20,10 @@ extension Coordinator {
         return String(describing: self)
     }
     
+    var onFinish: (() -> Void)? {
+        return nil
+    }
+    
     func append(child coordinator: Coordinator) {
         childCoordinators.append(coordinator)
         coordinator.onFinish = { [weak self, weak coordinator] in

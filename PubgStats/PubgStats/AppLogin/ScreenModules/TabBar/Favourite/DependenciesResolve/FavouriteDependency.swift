@@ -8,7 +8,7 @@
 protocol FavouriteDependency {
     var external: FavouriteExternalDependency { get }
     func resolve() -> FavouriteViewController
-    func resolve() -> FavouriteCoordinator
+    func resolve() -> FavouriteCoordinator?
 }
 
 extension FavouriteDependency {
