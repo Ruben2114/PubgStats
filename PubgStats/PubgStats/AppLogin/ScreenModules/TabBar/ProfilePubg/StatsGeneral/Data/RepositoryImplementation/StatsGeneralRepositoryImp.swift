@@ -6,7 +6,7 @@
 //
 
 struct StatsGeneralRepositoryImp: StatsGeneralRepository {
-    var remoteData: RemoteService
+    let remoteData: RemoteService
     
     func fetchSurvivalData(account: String, completion: @escaping (Result<SurvivalDTO, Error>) -> Void) {
         remoteData.getSurvivalData(account: account, completion: completion)

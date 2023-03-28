@@ -68,8 +68,9 @@ class StatsGeneralViewController: UIViewController {
                     self?.winsLabel?.text = "\(model.wonTotal)\nVictorias"
                     self?.timePlayedLabel?.text = "\(model.timePlayed)\nTiempo Jugado"
                     self?.bestRankedPosition?.text = "\(model.bestRank)\nMejor ranked"
-                    self?.hideSpinner()
                     self?.viewModel.saveGamesModeData(gamesModeData: [model.self])
+                case .success:
+                    self?.hideSpinner()
                 }
             }.store(in: &cancellable)
         guard let id = sessionUser.account, !id.isEmpty else {return}

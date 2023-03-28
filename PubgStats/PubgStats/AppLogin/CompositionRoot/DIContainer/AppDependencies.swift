@@ -65,4 +65,8 @@ extension AppDependencies:
     RankingExternalDependency,
     GuideExternalDependency,
     ContactExternalDependency,
-    StatsGeneralExternalDependency{}
+    StatsGeneralExternalDependency,
+    KillsDataExternalDependency,
+    WeaponDataExternalDependency,
+    WeaponDataDetailExternalDependency{
+}

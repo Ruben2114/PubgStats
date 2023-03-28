@@ -39,9 +39,13 @@ extension StatsGeneralCoordinatorImp: StatsGeneralCoordinator {
     func performTransition(_ transition: StatsGeneralTransition) {
         switch transition {
         case .goKillsData:
-            print("goKillsData")
+            let killsDataCoordinator = dependencies.external.killsDataCoordinator()
+            killsDataCoordinator.start()
+            append(child: killsDataCoordinator)
         case .goWeapons:
-            print("goWeapons")
+            let weaponDataCoordinator = dependencies.external.weaponDataCoordinator()
+            weaponDataCoordinator.start()
+            append(child: weaponDataCoordinator)
         case .goSurvival:
             print("goSurvival")
         case .goGamesModes:

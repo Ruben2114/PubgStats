@@ -17,4 +17,5 @@ class ProfileEntity {
     var survival: [SurvivalDTO]?
     var weapons: [WeaponDTO]?
     var gameModes: [GamesModesDTO]?
+    var weapon: String?
 }

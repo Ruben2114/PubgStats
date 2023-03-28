@@ -21,13 +21,18 @@ final class StatsGeneralViewModel {
         self.coordinator = dependencies.resolve()
         self.statsGeneralDataUseCase = dependencies.resolve()
     }
-    
-    func fetchDataGeneral(account: String){
+    func fetchDataGeneral(account: String) {
         state.send(.loading)
+        var successCount = 0
+        
         statsGeneralDataUseCase.executeSurvival(account: account) { [weak self] result in
             switch result {
             case .success(let survival):
                 self?.state.send(.successSurvival(model: survival))
+                successCount += 1
+                if successCount == 2 {
+                    self?.state.send(.success)
+                }
             case .failure(let error):
                 self?.state.send(.fail(error: "\(error)"))
             }
@@ -36,11 +41,16 @@ final class StatsGeneralViewModel {
             switch result {
             case .success(let gamesMode):
                 self?.state.send(.successGamesModes(model: gamesMode))
+                successCount += 1
+                if successCount == 2 {
+                    self?.state.send(.success)
+                }
             case .failure(let error):
                 self?.state.send(.fail(error: "\(error)"))
             }
         }
     }
+
     func saveSurvivalData(survivalData: [SurvivalDTO]) {
         let sessionUser: ProfileEntity = dependencies.external.resolve()
         sessionUser.survival = survivalData
