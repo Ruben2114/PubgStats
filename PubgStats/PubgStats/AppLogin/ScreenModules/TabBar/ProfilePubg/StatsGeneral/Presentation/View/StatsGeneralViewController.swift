@@ -96,38 +96,24 @@ class StatsGeneralViewController: UIViewController {
     }
     
     var refreshCount = 0
-    var refreshTimer: Timer?
-    var lastAlertTime: Date?
+    var isFirstRechargeDone = false
     
     @objc func refreshData() {
-        let currentTime = Date()
-        guard refreshCount < 1 else {
+        guard refreshCount < 2 else {
             mainScrollView.refreshControl?.endRefreshing()
-            print("ya no")
-            var lastRefreshTime = Date()
-            let interval: TimeInterval = 60
-            let newRefreshTime = lastRefreshTime.addingTimeInterval(interval)
-            let currentTime = Date()
-            let secondsSinceRefresh = currentTime.timeIntervalSince(lastRefreshTime)
-            
-            //TODO: ver si tiene espera 60 segundos
-            print(newRefreshTime)
-            print(secondsSinceRefresh)
-            if secondsSinceRefresh > 60{
-                refreshCount = 0
+            DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+                print("ahora si")
+                self.refreshCount = 0
             }
             return}
         refreshCount += 1
         sessionUser.survival = nil
         sessionUser.gameModes = nil
-        print("aaa")
-        //bind()
+        bind()
         mainScrollView.refreshControl?.endRefreshing()
         mainScrollView.refreshControl?.endRefreshing()
-
+        
     }
-    
-    
     
     @IBAction func goKillsData(_ sender: UIButton) {
         viewModel.goKillsData()
