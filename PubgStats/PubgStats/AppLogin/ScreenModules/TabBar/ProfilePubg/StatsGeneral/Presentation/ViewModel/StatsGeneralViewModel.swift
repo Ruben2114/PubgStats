@@ -14,17 +14,17 @@ final class StatsGeneralViewModel {
     private let dependencies: StatsGeneralDependency
     private weak var coordinator: StatsGeneralCoordinator?
     private let statsGeneralDataUseCase: StatsGeneralDataUseCase
-    
+    private let sessionUser: ProfileEntity
     init(dependencies: StatsGeneralDependency, apiService: ApiClientService = ApiClientServiceImp()) {
         self.apiService = apiService
         self.dependencies = dependencies
         self.coordinator = dependencies.resolve()
+        self.sessionUser = dependencies.external.resolve()
         self.statsGeneralDataUseCase = dependencies.resolve()
     }
     func fetchDataGeneral(account: String) {
         state.send(.loading)
         var successCount = 0
-        
         statsGeneralDataUseCase.executeSurvival(account: account) { [weak self] result in
             switch result {
             case .success(let survival):
@@ -52,11 +52,9 @@ final class StatsGeneralViewModel {
     }
 
     func saveSurvivalData(survivalData: [SurvivalDTO]) {
-        let sessionUser: ProfileEntity = dependencies.external.resolve()
         sessionUser.survival = survivalData
     }
     func saveGamesModeData(gamesModeData: [GamesModesDTO]) {
-        let sessionUser: ProfileEntity = dependencies.external.resolve()
         sessionUser.gameModes = gamesModeData
     }
     func backButton() {

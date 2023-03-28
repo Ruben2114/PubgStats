@@ -7,11 +7,10 @@
 
 import UIKit
 import Combine
-import CoreData
-
 
 class StatsGeneralViewController: UIViewController {
-   
+    
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var killsLabel: UILabel!
     @IBOutlet weak var XPLabel: UILabel!
@@ -24,10 +23,15 @@ class StatsGeneralViewController: UIViewController {
     private var cancellable = Set<AnyCancellable>()
     private let dependencies: StatsGeneralDependency
     private let viewModel: StatsGeneralViewModel
+    var mainScrollView = UIScrollView()
+    var refreshControl = UIRefreshControl()
+    let sessionUser: ProfileEntity
     
-    init(dependencies: StatsGeneralDependency) {
+    init(mainScrollView: UIScrollView = UIScrollView(), dependencies: StatsGeneralDependency) {
+        self.mainScrollView = mainScrollView
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
+        self.sessionUser = dependencies.external.resolve()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -36,6 +40,7 @@ class StatsGeneralViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        configScroll(selector: #selector(refreshData))
         configUI()
         bind()
     }
@@ -45,40 +50,84 @@ class StatsGeneralViewController: UIViewController {
     }
     
     private func bind() {
-        let sessionUser: ProfileEntity = dependencies.external.resolve()
         nameLabel?.text = sessionUser.player
-        //TODO: GUARDAR toda la info en sessionUser y luego utilizarla para no hacer mas llamadas a no ser que recarguemos
-        
-        viewModel.state.receive(on: DispatchQueue.main)
-            .sink { [weak self ] state in
-                switch state {
-                case .loading:
-                    self?.showSpinner()
-                case .fail(error: let error):
-                    //TODO: manejar errores
-                    print(error)
-                case .successSurvival(model: let model):
-                    self?.XPLabel?.text = "\(model.data.attributes.xp)\nXP"
-                    self?.levelLabel?.text = "Nivel\n\(model.data.attributes.level)"
-                    self?.viewModel.saveSurvivalData(survivalData: [model.self])
-                case .successGamesModes(model: let model):
-                    self?.killsLabel?.text = "\(model.killsTotal)\nMuertes"
-                    self?.top10sLabel?.text = "\(model.top10STotal)\nTop10S"
-                    self?.gamesPlayedLabel?.text = "\(model.gamesPlayed)\nPartidas"
-                    self?.winsLabel?.text = "\(model.wonTotal)\nVictorias"
-                    self?.timePlayedLabel?.text = "\(model.timePlayed)\nTiempo Jugado"
-                    self?.bestRankedPosition?.text = "\(model.bestRank)\nMejor ranked"
-                    self?.viewModel.saveGamesModeData(gamesModeData: [model.self])
-                case .success:
-                    self?.hideSpinner()
-                }
-            }.store(in: &cancellable)
-        guard let id = sessionUser.account, !id.isEmpty else {return}
-        viewModel.fetchDataGeneral(account: id)
+        if sessionUser.survival != nil, sessionUser.gameModes != nil {
+            guard let dataSurvival = sessionUser.survival?.first?.data.attributes else {return}
+            XPLabel?.text = "\(dataSurvival.xp)\nXP"
+            levelLabel?.text = "Nivel\n\(dataSurvival.level)"
+            guard let dataGamesMode = sessionUser.gameModes?.first else {return}
+            killsLabel?.text = "\(dataGamesMode.killsTotal)\nMuertes"
+            top10sLabel?.text = "\(dataGamesMode.top10STotal)\nTop10S"
+            gamesPlayedLabel?.text = "\(dataGamesMode.gamesPlayed)\nPartidas"
+            winsLabel?.text = "\(dataGamesMode.wonTotal)\nVictorias"
+            timePlayedLabel?.text = "\(dataGamesMode.timePlayed)\nTiempo Jugado"
+            bestRankedPosition?.text = "\(dataGamesMode.bestRank)\nMejor ranked"
+        }else{
+            viewModel.state.receive(on: DispatchQueue.main)
+                .sink { [weak self ] state in
+                    switch state {
+                    case .loading:
+                        self?.showSpinner()
+                    case .fail(error: let error):
+                        //TODO: manejar errores
+                        print(error)
+                    case .successSurvival(model: let model):
+                        self?.XPLabel?.text = "\(model.data.attributes.xp)\nXP"
+                        self?.levelLabel?.text = "Nivel\n\(model.data.attributes.level)"
+                        self?.viewModel.saveSurvivalData(survivalData: [model.self])
+                    case .successGamesModes(model: let model):
+                        self?.killsLabel?.text = "\(model.killsTotal)\nMuertes"
+                        self?.top10sLabel?.text = "\(model.top10STotal)\nTop10S"
+                        self?.gamesPlayedLabel?.text = "\(model.gamesPlayed)\nPartidas"
+                        self?.winsLabel?.text = "\(model.wonTotal)\nVictorias"
+                        self?.timePlayedLabel?.text = "\(model.timePlayed)\nTiempo Jugado"
+                        self?.bestRankedPosition?.text = "\(model.bestRank)\nMejor ranked"
+                        self?.viewModel.saveGamesModeData(gamesModeData: [model.self])
+                    case .success:
+                        self?.hideSpinner()
+                    }
+                }.store(in: &cancellable)
+            guard let id = sessionUser.account, !id.isEmpty else {return}
+            viewModel.fetchDataGeneral(account: id)
+        }
     }
     @objc func backButtonAction() {
         viewModel.backButton()
     }
+    
+    var refreshCount = 0
+    var refreshTimer: Timer?
+    var lastAlertTime: Date?
+    
+    @objc func refreshData() {
+        let currentTime = Date()
+        guard refreshCount < 1 else {
+            mainScrollView.refreshControl?.endRefreshing()
+            print("ya no")
+            var lastRefreshTime = Date()
+            let interval: TimeInterval = 60
+            let newRefreshTime = lastRefreshTime.addingTimeInterval(interval)
+            let currentTime = Date()
+            let secondsSinceRefresh = currentTime.timeIntervalSince(lastRefreshTime)
+            
+            //TODO: ver si tiene espera 60 segundos
+            print(newRefreshTime)
+            print(secondsSinceRefresh)
+            if secondsSinceRefresh > 60{
+                refreshCount = 0
+            }
+            return}
+        refreshCount += 1
+        sessionUser.survival = nil
+        sessionUser.gameModes = nil
+        print("aaa")
+        //bind()
+        mainScrollView.refreshControl?.endRefreshing()
+        mainScrollView.refreshControl?.endRefreshing()
+
+    }
+    
+    
     
     @IBAction func goKillsData(_ sender: UIButton) {
         viewModel.goKillsData()
@@ -92,8 +141,8 @@ class StatsGeneralViewController: UIViewController {
     @IBAction func goGamesModes(_ sender: UIButton) {
         viewModel.goGamesModes()
     }
-    //goKillsData, goWeapons, goSurvival, goGamesModes
 }
 extension StatsGeneralViewController: SpinnerDisplayable { }
-
+extension StatsGeneralViewController: ViewScrollableXib {}
+extension StatsGeneralViewController: MessageDisplayable{ }
 

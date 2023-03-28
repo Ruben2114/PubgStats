@@ -15,5 +15,4 @@ struct ProfileRepositoryImp: ProfileRepository {
     func fetchPlayerData(name: String, completion: @escaping (Result<PubgPlayerDTO, Error>) -> Void) {
         remoteData.getPlayerData(name: name, completion: completion)
     }
-   
 }
