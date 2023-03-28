@@ -97,7 +97,7 @@ extension WeaponDataViewController: UICollectionViewDataSource {
         cell.backgroundColor = .systemCyan
         cell.layer.cornerRadius = 15
         let model = weaponType[indexPath.row]
-        cell.categoryMenuImageView.image = UIImage(named: "default")
+        cell.categoryMenuImageView.image = UIImage(named: model)
         cell.titleCategoryLabel.text = model
         return cell
     }
