@@ -50,6 +50,7 @@
 		4655510129CC824000BF932A /* ContactExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510029CC824000BF932A /* ContactExternalDependency.swift */; };
 		4655510429CC829800BF932A /* ContactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510329CC829800BF932A /* ContactCoordinator.swift */; };
 		4655510729CCB41500BF932A /* ProfileEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510629CCB41500BF932A /* ProfileEntity.swift */; };
+		4670EDE429D4325200C1062E /* StatsGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE329D4325200C1062E /* StatsGeneralViewController.swift */; };
 		8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */; };
 		8C31FDB729C329E500196704 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31FDB629C329E500196704 /* ContactViewController.swift */; };
 		8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */; };
@@ -91,8 +92,6 @@
 		8CB07EB829D1A6B3000EE257 /* StatsGeneralDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07EB729D1A6B3000EE257 /* StatsGeneralDependency.swift */; };
 		8CB07EBA29D1A6EC000EE257 /* StatsGeneralExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07EB929D1A6EC000EE257 /* StatsGeneralExternalDependency.swift */; };
 		8CB07EBC29D1A764000EE257 /* StatsGeneralCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07EBB29D1A764000EE257 /* StatsGeneralCoordinator.swift */; };
-		8CB07EBF29D1ACB2000EE257 /* StatsGeneralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CB07EBD29D1ACB2000EE257 /* StatsGeneralViewController.xib */; };
-		8CB07EC029D1ACB2000EE257 /* StatsGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07EBE29D1ACB2000EE257 /* StatsGeneralViewController.swift */; };
 		8CB07EC329D1B246000EE257 /* SurvivalDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07EC229D1B246000EE257 /* SurvivalDTO.swift */; };
 		8CB07EC529D1B393000EE257 /* WeaponDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07EC429D1B393000EE257 /* WeaponDTO.swift */; };
 		8CB07EC829D1B446000EE257 /* GamesModesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07EC729D1B446000EE257 /* GamesModesDTO.swift */; };
@@ -190,6 +189,7 @@
 		4655510029CC824000BF932A /* ContactExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactExternalDependency.swift; sourceTree = "<group>"; };
 		4655510329CC829800BF932A /* ContactCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCoordinator.swift; sourceTree = "<group>"; };
 		4655510629CCB41500BF932A /* ProfileEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEntity.swift; sourceTree = "<group>"; };
+		4670EDE329D4325200C1062E /* StatsGeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGeneralViewController.swift; sourceTree = "<group>"; };
 		8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		8C31FDB629C329E500196704 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraint.swift"; sourceTree = "<group>"; };
@@ -235,8 +235,6 @@
 		8CB07EB729D1A6B3000EE257 /* StatsGeneralDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGeneralDependency.swift; sourceTree = "<group>"; };
 		8CB07EB929D1A6EC000EE257 /* StatsGeneralExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGeneralExternalDependency.swift; sourceTree = "<group>"; };
 		8CB07EBB29D1A764000EE257 /* StatsGeneralCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGeneralCoordinator.swift; sourceTree = "<group>"; };
-		8CB07EBD29D1ACB2000EE257 /* StatsGeneralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatsGeneralViewController.xib; sourceTree = "<group>"; };
-		8CB07EBE29D1ACB2000EE257 /* StatsGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsGeneralViewController.swift; sourceTree = "<group>"; };
 		8CB07EC229D1B246000EE257 /* SurvivalDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDTO.swift; sourceTree = "<group>"; };
 		8CB07EC429D1B393000EE257 /* WeaponDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDTO.swift; sourceTree = "<group>"; };
 		8CB07EC729D1B446000EE257 /* GamesModesDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesDTO.swift; sourceTree = "<group>"; };
@@ -1129,8 +1127,7 @@
 		8CB07EB129D1A5D8000EE257 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8CB07EBE29D1ACB2000EE257 /* StatsGeneralViewController.swift */,
-				8CB07EBD29D1ACB2000EE257 /* StatsGeneralViewController.xib */,
+				4670EDE329D4325200C1062E /* StatsGeneralViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1542,7 +1539,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CA398BC29B72A2000C09746 /* LaunchScreen.storyboard in Resources */,
-				8CB07EBF29D1ACB2000EE257 /* StatsGeneralViewController.xib in Resources */,
 				8CA398B929B72A2000C09746 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1636,7 +1632,6 @@
 				8CA398AD29B72A1F00C09746 /* AppDelegate.swift in Sources */,
 				8CB07ECD29D1CEB8000EE257 /* StatsGeneralRepository.swift in Sources */,
 				465550DC29CC51DF00BF932A /* ProfileDependency.swift in Sources */,
-				8CB07EC029D1ACB2000EE257 /* StatsGeneralViewController.swift in Sources */,
 				8CB07EA629D1969A000EE257 /* UIViewController+BackButton.swift in Sources */,
 				461C1F6029CB11ED00540289 /* ForgotViewModel.swift in Sources */,
 				8CD7CD9329BF62BE00C57346 /* RegisterViewModel.swift in Sources */,
@@ -1676,6 +1671,7 @@
 				8CB39B9B29C0604100B1D8EF /* LoginRepositoryImp.swift in Sources */,
 				8CD7CD8F29BF54D600C57346 /* RegisterViewController.swift in Sources */,
 				8CD7CD6229BEFF5700C57346 /* LocalDataProfileService.swift in Sources */,
+				4670EDE429D4325200C1062E /* StatsGeneralViewController.swift in Sources */,
 				8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */,
 				8CB6397129D245B400763231 /* WeaponDataDependency.swift in Sources */,
 				8CA9025C29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift in Sources */,

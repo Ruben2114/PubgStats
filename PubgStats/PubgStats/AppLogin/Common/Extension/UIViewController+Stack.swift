@@ -15,4 +15,11 @@ extension UIViewController {
         stack.spacing = space
         return stack
     }
+    func makeStackHorizontal(space: CGFloat) -> UIStackView {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .horizontal
+        stack.spacing = space
+        return stack
+    }
 }
