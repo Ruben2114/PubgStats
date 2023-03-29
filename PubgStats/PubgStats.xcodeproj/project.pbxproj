@@ -51,6 +51,10 @@
 		4655510429CC829800BF932A /* ContactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510329CC829800BF932A /* ContactCoordinator.swift */; };
 		4655510729CCB41500BF932A /* ProfileEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510629CCB41500BF932A /* ProfileEntity.swift */; };
 		4670EDE429D4325200C1062E /* StatsGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE329D4325200C1062E /* StatsGeneralViewController.swift */; };
+		4670EDE729D442C600C1062E /* PersonalDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE629D442C600C1062E /* PersonalDataViewModel.swift */; };
+		4670EDEA29D442FD00C1062E /* PersonalDataDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE929D442FD00C1062E /* PersonalDataDependency.swift */; };
+		4670EDEC29D4433B00C1062E /* PersonalDataExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDEB29D4433B00C1062E /* PersonalDataExternalDependency.swift */; };
+		4670EDEF29D4438500C1062E /* PersonalDataCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDEE29D4438500C1062E /* PersonalDataCoordinator.swift */; };
 		8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */; };
 		8C31FDB729C329E500196704 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31FDB629C329E500196704 /* ContactViewController.swift */; };
 		8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */; };
@@ -190,6 +194,10 @@
 		4655510329CC829800BF932A /* ContactCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCoordinator.swift; sourceTree = "<group>"; };
 		4655510629CCB41500BF932A /* ProfileEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEntity.swift; sourceTree = "<group>"; };
 		4670EDE329D4325200C1062E /* StatsGeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGeneralViewController.swift; sourceTree = "<group>"; };
+		4670EDE629D442C600C1062E /* PersonalDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataViewModel.swift; sourceTree = "<group>"; };
+		4670EDE929D442FD00C1062E /* PersonalDataDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataDependency.swift; sourceTree = "<group>"; };
+		4670EDEB29D4433B00C1062E /* PersonalDataExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataExternalDependency.swift; sourceTree = "<group>"; };
+		4670EDEE29D4438500C1062E /* PersonalDataCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataCoordinator.swift; sourceTree = "<group>"; };
 		8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		8C31FDB629C329E500196704 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraint.swift"; sourceTree = "<group>"; };
@@ -562,6 +570,31 @@
 				46151CC229C1E8FC0054BCEA /* ForgotViewControllerCoordinator.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		4670EDE529D442BA00C1062E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4670EDE629D442C600C1062E /* PersonalDataViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4670EDE829D442ED00C1062E /* DependenciesResolve */ = {
+			isa = PBXGroup;
+			children = (
+				4670EDE929D442FD00C1062E /* PersonalDataDependency.swift */,
+				4670EDEB29D4433B00C1062E /* PersonalDataExternalDependency.swift */,
+			);
+			path = DependenciesResolve;
+			sourceTree = "<group>";
+		};
+		4670EDED29D4437A00C1062E /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				4670EDEE29D4438500C1062E /* PersonalDataCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		8C7563DA29BB5169000373F9 /* View */ = {
@@ -955,6 +988,8 @@
 		8CAEB00E29BB46DB009282AF /* PersonalData */ = {
 			isa = PBXGroup;
 			children = (
+				4670EDED29D4437A00C1062E /* Coordinator */,
+				4670EDE829D442ED00C1062E /* DependenciesResolve */,
 				8CB39B9C29C06CDE00B1D8EF /* Presentation */,
 			);
 			path = PersonalData;
@@ -1262,6 +1297,7 @@
 		8CB39B9C29C06CDE00B1D8EF /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				4670EDE529D442BA00C1062E /* ViewModel */,
 				8CB39B9D29C06CE500B1D8EF /* View */,
 			);
 			path = Presentation;
@@ -1576,6 +1612,7 @@
 				8CD7CD8629BF3DA900C57346 /* AppContainer.swift in Sources */,
 				8CB07EC329D1B246000EE257 /* SurvivalDTO.swift in Sources */,
 				8CA9025029D2E20A004E71D0 /* ItemWeaponDataCollectionViewCell.swift in Sources */,
+				4670EDE729D442C600C1062E /* PersonalDataViewModel.swift in Sources */,
 				465550CF29CC471400BF932A /* MainTabBarExternalDependency.swift in Sources */,
 				8CB2CEF329C9A87900E79D29 /* ProfileViewModel.swift in Sources */,
 				4655510429CC829800BF932A /* ContactCoordinator.swift in Sources */,
@@ -1587,6 +1624,7 @@
 				8CAC3E2F29C3080600A1FE34 /* GuideViewModel.swift in Sources */,
 				8C7563E429BB5F17000373F9 /* MessageDisplayable.swift in Sources */,
 				461C1F7829CB5CF500540289 /* RegisterDependency.swift in Sources */,
+				4670EDEA29D442FD00C1062E /* PersonalDataDependency.swift in Sources */,
 				8CB39B9729C05DDE00B1D8EF /* LoginRepository.swift in Sources */,
 				465550D829CC504100BF932A /* ProfileCoordinator.swift in Sources */,
 				465550FA29CC7E4600BF932A /* GuideExternalDependency.swift in Sources */,
@@ -1602,6 +1640,7 @@
 				465550D129CC47A700BF932A /* MainTabBarCoordinator.swift in Sources */,
 				465550FC29CC7E8E00BF932A /* GuideCoordinator.swift in Sources */,
 				8CA9025629D2F2C0004E71D0 /* WeaponDataDetailViewController.swift in Sources */,
+				4670EDEC29D4433B00C1062E /* PersonalDataExternalDependency.swift in Sources */,
 				461C1F5229CAE35300540289 /* AppDependencies.swift in Sources */,
 				8CA9024B29D2BCB4004E71D0 /* WeaponDataRepository.swift in Sources */,
 				465550C429CC390200BF932A /* UIViewController+TextField.swift in Sources */,
@@ -1613,6 +1652,7 @@
 				465550CD29CC46ED00BF932A /* MainTabBarDependency.swift in Sources */,
 				8C7563EC29BB6073000373F9 /* StateController.swift in Sources */,
 				8C7563E229BB5E8A000373F9 /* ViewValues.swift in Sources */,
+				4670EDEF29D4438500C1062E /* PersonalDataCoordinator.swift in Sources */,
 				8CA9025E29D2F475004E71D0 /* WeaponDataDetailCoordinatorImp.swift in Sources */,
 				461C1F7629CB5BF100540289 /* RegisterCoordinator.swift in Sources */,
 				465550C629CC3A5600BF932A /* UIViewController+Image.swift in Sources */,

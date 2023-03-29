@@ -82,8 +82,11 @@ final class RegisterViewController: UIViewController {
     
     @objc func didTapEmailButton() {
         let nameText = userTextField.text
-        let passwordText = passwordTextField.text?.hashString()
-        guard !nameText!.isEmpty, !passwordText!.isEmpty else {
+        guard !passwordTextField.text!.isEmpty else {
+            presentAlert(message: "La contraseña tiene que tener como minimo un caracter", title: "Error")
+            return}
+        guard let passwordText = passwordTextField.text?.hashString() else {return}
+        guard !nameText!.isEmpty, !passwordText.isEmpty else {
             presentAlert(message: "Please, fill in all fields", title: "Error")
             return
         }
@@ -91,7 +94,7 @@ final class RegisterViewController: UIViewController {
             presentAlert(message: "User already exists", title: "Error")
             return
         }
-        viewModel.saveUser(name: nameText ?? "", password: passwordText ?? "")
+        viewModel.saveUser(name: nameText ?? "", password: passwordText)
     }
     @objc func backButtonAction() {
         viewModel.backButton()

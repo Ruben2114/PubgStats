@@ -43,7 +43,9 @@ extension ProfileCoordinatorImp: ProfileCoordinator {
         case .goLogOut:
             (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewAppCoordinator()
         case .goPersonalData:
-            print("goPersonalData")
+            let personalDataCoordinator = dependencies.external.personalDataCoordinator()
+            personalDataCoordinator.start()
+            append(child: personalDataCoordinator)
         case .goSetting:
             print("goSetting")
         case .goStatsGeneral:

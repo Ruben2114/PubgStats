@@ -31,5 +31,21 @@ extension UIViewController {
         button.backgroundColor = .systemBlue
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return button
-    }    
+    }
+    func makeButtonBlue2(
+        title: String,
+        height: CGFloat
+    ) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setTitle(title, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.textAlignment = .center
+        button.layer.cornerRadius = 10
+        button.backgroundColor = .systemBlue
+        button.setHeightConstraint(with: height)
+        return button
+    }
 }

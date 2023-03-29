@@ -68,5 +68,5 @@ extension AppDependencies:
     StatsGeneralExternalDependency,
     KillsDataExternalDependency,
     WeaponDataExternalDependency,
-    WeaponDataDetailExternalDependency{
-}
+    WeaponDataDetailExternalDependency,
+    PersonalDataExternalDependency{}

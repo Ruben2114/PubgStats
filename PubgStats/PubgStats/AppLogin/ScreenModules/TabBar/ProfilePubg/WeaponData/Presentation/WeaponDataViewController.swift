@@ -75,7 +75,7 @@ class WeaponDataViewController: UIViewController {
         collectionView.backgroundColor = .white
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        //collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         view.addSubview(collectionView)
         collectionView.register(ItemWeaponDataCollectionViewCell.self, forCellWithReuseIdentifier: "ItemWeaponDataCollectionViewCell")
         collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true

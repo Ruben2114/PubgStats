@@ -113,7 +113,14 @@ final class ProfileViewController: UIViewController {
         statsAccountButton.addTarget(self, action: #selector(didTapStatsgAccountButton), for: .touchUpInside)
     }
     private func logOut() {
-        viewModel.logOut()
+        let alert = UIAlertController(title: "", message: "¿Estas seguro de cerrar sesión?", preferredStyle: .alert)
+        let actionAccept = UIAlertAction(title: "Accept", style: .default){ [weak self]_ in
+            self?.viewModel.logOut()
+        }
+        let actionCancel = UIAlertAction(title: "cancelar", style: .destructive)
+        alert.addAction(actionAccept)
+        alert.addAction(actionCancel)
+        present(alert, animated: true)
     }
     @objc func didTapPersonalDataButton() {
         viewModel.didTapPersonalDataButton()
