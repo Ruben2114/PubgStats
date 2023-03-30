@@ -7,9 +7,10 @@
 
 import UIKit
 import Combine
+import AVFoundation
 
 class LoginViewController: UIViewController {
-    
+    private var videoLogin: AVPlayer!
     private lazy var profileImageView = makeImageView(name: "pubgHome", height: 200, width: 300)
     private lazy var containerStackView = makeStack(space: 20)
     private lazy var userTextField = makeTextField(placeholder: "User Name", isSecure: false)
@@ -32,6 +33,7 @@ class LoginViewController: UIViewController {
         self.cancellable = cancellable
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
+        //self.videoLogin = videoLogin
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder: NSCoder) {
@@ -65,6 +67,21 @@ class LoginViewController: UIViewController {
         }.store(in: &cancellable)
     }
     private func configConstraints() {
+        
+       
+        guard let filePath = Bundle.main.path(forResource: "videoLoginPubgStats", ofType: "mp4") else
+        {return}
+        let fileUrl = URL(filePath: filePath)
+        videoLogin = AVPlayer(url: fileUrl)
+        let videoLayer = AVPlayerLayer(player: videoLogin)
+        videoLayer.frame = view.bounds
+        videoLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        
+        contentView.layer.addSublayer(videoLayer)
+        
+        // Reproducir el video
+        videoLogin.play()
+       
         contentView.addSubview(profileImageView)
         profileImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
         profileImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
@@ -102,4 +119,3 @@ extension LoginViewController: SpinnerDisplayable { }
 extension LoginViewController: ViewScrollable {}
 extension LoginViewController: MessageDisplayable { }
 extension LoginViewController: KeyboardDisplayable {}
-
