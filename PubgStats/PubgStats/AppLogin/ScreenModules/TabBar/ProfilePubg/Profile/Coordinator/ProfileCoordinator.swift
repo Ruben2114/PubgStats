@@ -31,7 +31,7 @@ final class ProfileCoordinatorImp: Coordinator {
         self.externalDependencies = dependencies
         self.navigation = dependencies.profileNavigationController()
     }
-        
+    
     func start() {
         self.navigation?.pushViewController(dependencies.resolve(), animated: true)
     }

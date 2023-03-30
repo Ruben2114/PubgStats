@@ -130,6 +130,8 @@
 		8CD7CD8629BF3DA900C57346 /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD8529BF3DA900C57346 /* AppContainer.swift */; };
 		8CD7CD8F29BF54D600C57346 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD8E29BF54D600C57346 /* RegisterViewController.swift */; };
 		8CD7CD9329BF62BE00C57346 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD9229BF62BE00C57346 /* RegisterViewModel.swift */; };
+		8CE093EC29D5AE2E0069CE24 /* videoLogin.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 8CE093EB29D5AE220069CE24 /* videoLogin.mp4 */; };
+		8CE093EE29D5AF6A0069CE24 /* videoLoginPubg.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 8CE093ED29D5AF570069CE24 /* videoLoginPubg.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -198,7 +200,6 @@
 		4670EDE929D442FD00C1062E /* PersonalDataDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataDependency.swift; sourceTree = "<group>"; };
 		4670EDEB29D4433B00C1062E /* PersonalDataExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataExternalDependency.swift; sourceTree = "<group>"; };
 		4670EDEE29D4438500C1062E /* PersonalDataCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataCoordinator.swift; sourceTree = "<group>"; };
-		8C0176B429D569D2000A6B7C /* videoLoginPubgStats.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = videoLoginPubgStats.mp4; sourceTree = "<group>"; };
 		8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		8C31FDB629C329E500196704 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraint.swift"; sourceTree = "<group>"; };
@@ -278,6 +279,8 @@
 		8CD7CD8529BF3DA900C57346 /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
 		8CD7CD8E29BF54D600C57346 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8CD7CD9229BF62BE00C57346 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		8CE093EB29D5AE220069CE24 /* videoLogin.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = videoLogin.mp4; sourceTree = "<group>"; };
+		8CE093ED29D5AF570069CE24 /* videoLoginPubg.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = videoLoginPubg.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -948,7 +951,8 @@
 			isa = PBXGroup;
 			children = (
 				8CA398B829B72A2000C09746 /* Assets.xcassets */,
-				8C0176B429D569D2000A6B7C /* videoLoginPubgStats.mp4 */,
+				8CE093EB29D5AE220069CE24 /* videoLogin.mp4 */,
+				8CE093ED29D5AF570069CE24 /* videoLoginPubg.mp4 */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1576,6 +1580,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CE093EE29D5AF6A0069CE24 /* videoLoginPubg.mp4 in Resources */,
+				8CE093EC29D5AE2E0069CE24 /* videoLogin.mp4 in Resources */,
 				8CA398BC29B72A2000C09746 /* LaunchScreen.storyboard in Resources */,
 				8CA398B929B72A2000C09746 /* Assets.xcassets in Resources */,
 			);

@@ -20,4 +20,16 @@ extension UIViewController {
         textField.isSecureTextEntry = isSecure
         return textField
     }
+    func makeTextFieldLogin(placeholder: String, isSecure: Bool ) -> UITextField {
+        let textField = UITextField()
+        textField.backgroundColor = .white
+        textField.placeholder = placeholder
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        textField.leftViewMode = .always
+        textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        textField.font = UIFont.systemFont(ofSize: 20)
+        textField.layer.cornerRadius = 10
+        textField.isSecureTextEntry = isSecure
+        return textField
+    }
 }

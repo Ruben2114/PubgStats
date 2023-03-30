@@ -7,30 +7,19 @@
 
 import UIKit
 import Combine
-//TODO: crear array con title y image para el ui collect
-struct Edit {
-    let title: String
-    let image: String
-}
 
 
 final class PersonalDataViewController: UIViewController {
     //si borra el player actualizar lo del boton
     //tres botones con el texto y un emoticono de editar todo en un stack horizontal y encima la foto, asi puede ver como se cambian sus datos + abajo sus datos principales del link: nombre, level... y encima el boton de eliminar, el stack el mismo que en su pantalla
-    private lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let layoutWidth = (ViewValues.widthScreen - ViewValues.doublePadding) / ViewValues.multiplierTwo
-        let layoutHeigth = (ViewValues.widthScreen - ViewValues.doublePadding) / ViewValues.multiplierTwo
-        layout.itemSize = CGSize(width: layoutWidth, height: layoutHeigth)
-        layout.minimumLineSpacing = .zero
-        layout.minimumInteritemSpacing = .zero
-        layout.sectionInset = UIEdgeInsets(top: .zero, left: ViewValues.normalPadding, bottom: .zero, right: ViewValues.normalPadding)
-        layout.scrollDirection = .vertical
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        return collectionView
-    }()
+   
     private lazy var profileImageView = makeImageView(name: "default", height: 300, width: 300)
+    
+    //poner private?
+    var segmentedControl: UISegmentedControl!
+    var viewOption1: UIView!
+    var viewOption2: UIView!
+    var viewOption3: UIView!
     
     var mainScrollView = UIScrollView()
     var contentView = UIView()
@@ -38,9 +27,7 @@ final class PersonalDataViewController: UIViewController {
     private let dependencies: PersonalDataDependency
     private let viewModel: PersonalDataViewModel
     let sessionUser: ProfileEntity
-    let dataEdit = [Edit(title: "Contraseña", image: "star"),
-                      Edit(title: "Fotografía", image: "star"),
-                      Edit(title: "Borrar cuenta Pubg", image: "star")]
+    
     
     init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>(), dependencies: PersonalDataDependency) {
         self.mainScrollView = mainScrollView
@@ -67,30 +54,84 @@ final class PersonalDataViewController: UIViewController {
         
         /*
          otra tabla con estos datos de cuenta pubg
-        guard sessionUser.survival == nil else {return}
-        
-        nameAccountLabel.text = sessionUser.player
-        levelAccountLabel.text = "\(sessionUser.survival?.first?.data.attributes.level)"
-        xpAccountLabel.text = "\(sessionUser.survival?.first?.data.attributes.xp)"
+         guard sessionUser.survival == nil else {return}
+         
+         nameAccountLabel.text = sessionUser.player
+         levelAccountLabel.text = "\(sessionUser.survival?.first?.data.attributes.level)"
+         xpAccountLabel.text = "\(sessionUser.survival?.first?.data.attributes.xp)"
          */
-            
+        
     }
+    
     private func configUI() {
         view.backgroundColor = .systemBackground
         title = "Personal Data"
         backButton(action: #selector(backButtonAction))
-        collectionView.dataSource = self
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
-    private func configConstraints(){
-        contentView.addSubview(profileImageView)
-        profileImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 40).isActive = true
-        profileImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+    func createSegmentedController() {
         
-        contentView.addSubview(collectionView)
-        collectionView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 50).isActive = true
-        collectionView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
-        collectionView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
+         viewOption1 = UIView(frame: CGRect(x: 0, y: 100, width: view.frame.width, height: view.frame.height - 100))
+         viewOption1.backgroundColor = .red
+         
+         viewOption2 = UIView(frame: CGRect(x: 0, y: 100, width: view.frame.width, height: view.frame.height - 100))
+         viewOption2.backgroundColor = .green
+         
+         viewOption3 = UIView(frame: CGRect(x: 0, y: 100, width: view.frame.width, height: view.frame.height - 100))
+         viewOption3.backgroundColor = .blue
+         
+         // Agrega las vistas creadas como subvistas a la vista principal
+         contentView.addSubview(viewOption1)
+         contentView.addSubview(viewOption2)
+         contentView.addSubview(viewOption3)
+         
+         // Oculta todas las vistas excepto la vista inicial
+         viewOption2.isHidden = true
+         viewOption3.isHidden = true
+         
+         // Crea el controlador segmentado y agrega las opciones
+         segmentedControl = UISegmentedControl(items: ["Red", "Green", "Blue"])
+         segmentedControl.frame = CGRect(x: 0, y: 50, width: view.frame.width, height: 50)
+         segmentedControl.selectedSegmentIndex = 0
+         
+         // Configura la acción del controlador segmentado para mostrar la vista correspondiente y ocultar las otras vistas
+         segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
+
+         // Agrega el controlador segmentado a la vista principal
+         contentView.addSubview(segmentedControl)
+    }
+    
+    // Acción del controlador segmentado
+    @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            viewOption1.isHidden = false
+            viewOption2.isHidden = true
+            viewOption3.isHidden = true
+        case 1:
+            viewOption1.isHidden = true
+            viewOption2.isHidden = false
+            viewOption3.isHidden = true
+        case 2:
+            viewOption1.isHidden = true
+            viewOption2.isHidden = true
+            viewOption3.isHidden = false
+        default:
+            break
+        }
+    }
+    
+    private func configConstraints(){
+        /*
+         contentView.addSubview(profileImageView)
+         profileImageView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 40).isActive = true
+         profileImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+         
+         contentView.addSubview(collectionView)
+         collectionView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 50).isActive = true
+         collectionView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
+         collectionView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
+         */
+        
     }
     
     //TODO: acciones de cada tabla ponerlo con if
@@ -137,24 +178,6 @@ final class PersonalDataViewController: UIViewController {
     
     @objc func backButtonAction() {
         viewModel.backButton()
-    }
-}
-extension PersonalDataViewController: UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        dataEdit.count
-    }
-   
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .systemCyan
-        cell.layer.cornerRadius = 15
-        let model = dataEdit[indexPath.row]
-        var contenido = UIListContentConfiguration.cell()
-        contenido.text = model.title
-        contenido.image = UIImage(systemName: model.title)
-        contenido.textProperties.alignment = .center
-        cell.contentConfiguration = contenido
-        return cell
     }
 }
 

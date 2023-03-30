@@ -11,15 +11,15 @@ import AVFoundation
 
 class LoginViewController: UIViewController {
     private var videoLogin: AVPlayer!
-    private lazy var profileImageView = makeImageView(name: "pubgHome", height: 200, width: 300)
     private lazy var containerStackView = makeStack(space: 20)
-    private lazy var userTextField = makeTextField(placeholder: "User Name", isSecure: false)
-    private lazy var passwordTextField = makeTextField(placeholder: "Password", isSecure: true)
+    private lazy var userTextField = makeTextFieldLogin(placeholder: "Usuario", isSecure: false)
+    private lazy var passwordTextField = makeTextFieldLogin(placeholder: "Contraseña", isSecure: true)
     private lazy var loginButton: UIButton = makeButtonBlue(title: "Log In")
+    private lazy var registerButton: UIButton = makeButtonCorner(
+        title: "Sign Up")
     private lazy var forgotPasswordButton: UIButton = makeButtonClear(
         title: "forgot your password?")
-    private lazy var registerButton: UIButton = makeButtonClear(
-        title: "Sign Up")
+    
     
     var mainScrollView = UIScrollView()
     var contentView = UIView()
@@ -50,6 +50,35 @@ class LoginViewController: UIViewController {
         bind()
         hideKeyboard()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        guard let filePath = Bundle.main.path(forResource: "videoLoginPubg", ofType: "mp4") else { return }
+        let fileUrl = URL(fileURLWithPath: filePath)
+        videoLogin = AVPlayer(url: fileUrl)
+        let videoLayer = AVPlayerLayer(player: videoLogin)
+        videoLayer.videoGravity = .resize
+        videoLayer.frame = view.bounds
+        videoLayer.zPosition = -1
+        view.layer.addSublayer(videoLayer)
+        videoLogin.play()
+        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: videoLogin.currentItem, queue: .main) { [weak self] _ in
+            self?.videoLogin.seek(to: .zero)
+            self?.videoLogin.play()
+        }
+        configGradientForTitle()
+    }
+    private func configGradientForTitle() {
+        let gradientMaskLayer = CAGradientLayer()
+        gradientMaskLayer.frame = view.bounds
+        gradientMaskLayer.colors = [UIColor.clear.cgColor, UIColor.darkGray.cgColor]
+        gradientMaskLayer.locations = [0.0, 1.0]
+        gradientMaskLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradientMaskLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
+        view.layer.addSublayer(gradientMaskLayer)
+        gradientMaskLayer.zPosition = -1
+    }
+    
     private func configUI() {
         view.backgroundColor = .systemBackground
     }
@@ -67,32 +96,13 @@ class LoginViewController: UIViewController {
         }.store(in: &cancellable)
     }
     private func configConstraints() {
-        
-       
-        guard let filePath = Bundle.main.path(forResource: "videoLoginPubgStats", ofType: "mp4") else
-        {return}
-        let fileUrl = URL(filePath: filePath)
-        videoLogin = AVPlayer(url: fileUrl)
-        let videoLayer = AVPlayerLayer(player: videoLogin)
-        videoLayer.frame = view.bounds
-        videoLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        
-        contentView.layer.addSublayer(videoLayer)
-        
-        // Reproducir el video
-        videoLogin.play()
-       
-        contentView.addSubview(profileImageView)
-        profileImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
-        profileImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        
         contentView.addSubview(containerStackView)
-        containerStackView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 50).isActive = true
+        containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 440).isActive = true
         containerStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
         containerStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
         containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
-        [userTextField, passwordTextField, loginButton, forgotPasswordButton, registerButton].forEach {
+        [userTextField, passwordTextField, loginButton, registerButton ,forgotPasswordButton].forEach {
             containerStackView.addArrangedSubview($0)
         }
     }
