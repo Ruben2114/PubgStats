@@ -140,7 +140,6 @@ final class StatsGeneralViewController: UIViewController {
         buttonStackView.topAnchor.constraint(equalTo: stackStackView.bottomAnchor, constant: 61).isActive = true
         buttonStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 25).isActive = true
         buttonStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -25).isActive = true
-        buttonStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         [goKillsData, goWeapons, goSurvival, goGamesModes].forEach {
             buttonStackView.addArrangedSubview($0)
         }

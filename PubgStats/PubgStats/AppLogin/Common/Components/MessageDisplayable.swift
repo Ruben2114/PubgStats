@@ -18,4 +18,14 @@ extension MessageDisplayable where Self: UIViewController{
         alertController.addAction(okAction)
         self.present(alertController, animated: true)
     }
+    func presentAlertTimer(message: String, title: String, timer: Double){
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert)
+        self.present(alertController, animated: true)
+        Timer.scheduledTimer(withTimeInterval: timer, repeats: false) { _ in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+    }
 }

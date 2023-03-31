@@ -20,7 +20,7 @@ final class ProfileViewController: UIViewController {
         button.tintColor = .black
         return button
     }()
-    private lazy var profileImageView = makeImageView(name: "default", height: 300, width: 300)
+    private lazy var profileImageView = makeImageViewPersonal(name: "default")
     private lazy var containerStackView = makeStack(space: 20)
     private lazy var personalDataButton: UIButton = makeButtonBlue(title: "Personal Data")
     private lazy var settingButton: UIButton = makeButtonBlue(title: "Setting")
@@ -57,6 +57,11 @@ final class ProfileViewController: UIViewController {
         bind()
         hideKeyboard()
     }
+    //no funciona
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+            return .portrait
+    }
+
     private func configUI() {
         view.backgroundColor = .systemBackground
         let barLeftButton = UIBarButtonItem(customView: logOutButton)
@@ -91,17 +96,14 @@ final class ProfileViewController: UIViewController {
         }
     }
     private func configConstraints() {
-        contentView.addSubview(profileImageView)
-        profileImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
-        profileImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        
+      
         contentView.addSubview(containerStackView)
-        containerStackView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 50).isActive = true
-        containerStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
-        containerStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
-        containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        
-        [personalDataButton, settingButton, linkPubgAccountButton, statsAccountButton].forEach {
+        containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
+        containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
+        containerStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -50).isActive = true
+        containerStackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+
+        [profileImageView,personalDataButton, settingButton, linkPubgAccountButton, statsAccountButton].forEach {
             containerStackView.addArrangedSubview($0)
         }
     }

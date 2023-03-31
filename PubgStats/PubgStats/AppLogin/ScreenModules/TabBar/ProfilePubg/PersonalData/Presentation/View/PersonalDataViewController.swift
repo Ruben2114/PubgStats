@@ -10,16 +10,28 @@ import Combine
 
 
 final class PersonalDataViewController: UIViewController {
-    //si borra el player actualizar lo del boton
-    //tres botones con el texto y un emoticono de editar todo en un stack horizontal y encima la foto, asi puede ver como se cambian sus datos + abajo sus datos principales del link: nombre, level... y encima el boton de eliminar, el stack el mismo que en su pantalla
-   
-    private lazy var profileImageView = makeImageView(name: "default", height: 300, width: 300)
+    private lazy var profileImageView = makeImageViewPersonal(name: "default")
+    private lazy var containerStackView = makeStack(space: 30)
+    private lazy var passwordTextField = makeTextFieldBorder(placeholder: "Contraseña", isSecure: true)
+    private lazy var repeatPasswordTextField = makeTextFieldBorder(placeholder: "Repite la contraseña", isSecure: true)
+    private lazy var acceptButton: UIButton = makeButtonBlue(title: "Guardar")
+    private lazy var changePhotoButton: UIButton = makeButtonBlue(title: "Cambiar")
+    private let tableView: UITableView = {
+        let table = UITableView()
+        table.translatesAutoresizingMaskIntoConstraints = false
+        return table
+    }()
+    let segmentedControl: UISegmentedControl = {
+       let sc = UISegmentedControl(items: ["Contraseña", "Foto perfil", "Cuenta Pubg"])
+        sc.translatesAutoresizingMaskIntoConstraints = false
+        sc.selectedSegmentIndex = 0
+        return sc
+    }()
     
-    //poner private?
-    var segmentedControl: UISegmentedControl!
-    var viewOption1: UIView!
-    var viewOption2: UIView!
-    var viewOption3: UIView!
+    private lazy var viewOption1 = makeStack(space: 20)
+    private lazy var viewOption2 = makeStack(space: 20)
+    private lazy var viewOption3 = makeStack(space: 20)
+
     
     var mainScrollView = UIScrollView()
     var contentView = UIView()
@@ -46,63 +58,98 @@ final class PersonalDataViewController: UIViewController {
         configScroll()
         configUI()
         configConstraints()
+        configTarget()
         configKeyboardSubscription(mainScrollView: mainScrollView)
-        bind()
         hideKeyboard()
-    }
-    private func bind(){
-        
-        /*
-         otra tabla con estos datos de cuenta pubg
-         guard sessionUser.survival == nil else {return}
-         
-         nameAccountLabel.text = sessionUser.player
-         levelAccountLabel.text = "\(sessionUser.survival?.first?.data.attributes.level)"
-         xpAccountLabel.text = "\(sessionUser.survival?.first?.data.attributes.xp)"
-         */
-        
     }
     
     private func configUI() {
         view.backgroundColor = .systemBackground
         title = "Personal Data"
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         backButton(action: #selector(backButtonAction))
     }
-    func createSegmentedController() {
+    
+    
+    private func configConstraints(){
+        contentView.addSubview(segmentedControl)
+        segmentedControl.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        segmentedControl.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
+        segmentedControl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
+        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
         
-         viewOption1 = UIView(frame: CGRect(x: 0, y: 100, width: view.frame.width, height: view.frame.height - 100))
-         viewOption1.backgroundColor = .red
-         
-         viewOption2 = UIView(frame: CGRect(x: 0, y: 100, width: view.frame.width, height: view.frame.height - 100))
-         viewOption2.backgroundColor = .green
-         
-         viewOption3 = UIView(frame: CGRect(x: 0, y: 100, width: view.frame.width, height: view.frame.height - 100))
-         viewOption3.backgroundColor = .blue
-         
-         // Agrega las vistas creadas como subvistas a la vista principal
-         contentView.addSubview(viewOption1)
-         contentView.addSubview(viewOption2)
-         contentView.addSubview(viewOption3)
-         
-         // Oculta todas las vistas excepto la vista inicial
-         viewOption2.isHidden = true
-         viewOption3.isHidden = true
-         
-         // Crea el controlador segmentado y agrega las opciones
-         segmentedControl = UISegmentedControl(items: ["Red", "Green", "Blue"])
-         segmentedControl.frame = CGRect(x: 0, y: 50, width: view.frame.width, height: 50)
-         segmentedControl.selectedSegmentIndex = 0
-         
-         // Configura la acción del controlador segmentado para mostrar la vista correspondiente y ocultar las otras vistas
-         segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
-
-         // Agrega el controlador segmentado a la vista principal
-         contentView.addSubview(segmentedControl)
+        
+        contentView.addSubview(viewOption1)
+        viewOption1.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 40).isActive = true
+        viewOption1.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        viewOption1.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+        viewOption1.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50).isActive = true
+        
+        [containerStackView, UIView(), acceptButton].forEach {
+            viewOption1.addArrangedSubview($0)
+        }
+        [passwordTextField, repeatPasswordTextField].forEach {
+            containerStackView.addArrangedSubview($0)
+        }
+     
+        
+        
+        
+        /*
+        contentView.addSubview(viewOption2)
+        viewOption2.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 20).isActive = true
+        viewOption2.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        viewOption2.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+        [profileImageView, changePhotoButton].forEach {
+            viewOption2.addArrangedSubview($0)
+        }
+        profileImageView.topAnchor.constraint(equalTo: viewOption2.topAnchor, constant: 50).isActive = true
+        profileImageView.centerXAnchor.constraint(equalTo: viewOption2.centerXAnchor).isActive = true
+        
+        changePhotoButton.leftAnchor.constraint(equalTo: viewOption2.leftAnchor, constant: 5).isActive = true
+        changePhotoButton.rightAnchor.constraint(equalTo: viewOption2.rightAnchor, constant: -5).isActive = true
+        changePhotoButton.bottomAnchor.constraint(equalTo: viewOption2.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
+        
+        
+        
+        view.addSubview(viewOption3)
+        viewOption3.addSubview(tableView)
+        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 100).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: viewOption3.bottomAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: viewOption3.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: viewOption3.trailingAnchor).isActive = true
+        */
+        viewOption2.isHidden = true
+        viewOption3.isHidden = true
+        
     }
     
-    // Acción del controlador segmentado
-    @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
+    
+    private func configTarget(){
+        acceptButton.addTarget(self, action: #selector(saveNewPassword), for: .touchUpInside)
+        changePhotoButton.addTarget(self, action: #selector(saveNewPhoto), for: .touchUpInside)
+    }
+    @objc func saveNewPassword() {
+        guard let password = passwordTextField.text, !password.isEmpty else {
+            presentAlert(message: "La contraseña tiene que tener como minimo un caracter", title: "Error")
+            return}
+        guard passwordTextField.text == repeatPasswordTextField.text else {
+            presentAlert(message: "Contraseñas diferentes", title: "Error")
+            return}
+        //viewModel.goPasswordData()
+        presentAlertTimer(message: "Contraseña guardada", title: "Éxito", timer: 1.0)
+
+    }
+    @objc func saveNewPhoto() {
+        
+        //TODO: abrir la galeria de fotos y coger una foto
+        //viewModel.goImageData()
+        presentAlertTimer(message: "Foto guardada", title: "Éxito", timer: 1.0)
+    }
+    @objc func segmentedControlValueChanged() {
+        switch segmentedControl.selectedSegmentIndex {
         case 0:
             viewOption1.isHidden = false
             viewOption2.isHidden = true
@@ -119,63 +166,6 @@ final class PersonalDataViewController: UIViewController {
             break
         }
     }
-    
-    private func configConstraints(){
-        /*
-         contentView.addSubview(profileImageView)
-         profileImageView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 40).isActive = true
-         profileImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-         
-         contentView.addSubview(collectionView)
-         collectionView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 50).isActive = true
-         collectionView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
-         collectionView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
-         */
-        
-    }
-    
-    //TODO: acciones de cada tabla ponerlo con if
-    @objc func didTapPasswordButton() {
-        let alert = UIAlertController(title: "Cambio de contraseña", message: "¿Estás seguro de que quieres cambiar la contraseña?", preferredStyle: .alert)
-        alert.addTextField{ (password) in
-            password.placeholder = "Nueva contraseña"
-        }
-        alert.addTextField { (repeatPassword)in
-            repeatPassword.placeholder = "Repite la nueva contraseña"
-        }
-        
-        let actionAccept = UIAlertAction(title: "Accept", style: .default){ [weak self]_ in
-            guard let name = alert.textFields?.first?.text, !name.isEmpty else {
-                self?.presentAlert(message: "La contraseña tiene que tener como minimo un caracter", title: "Error")
-                return}
-            guard alert.textFields?.first?.text == alert.textFields?.last?.text else {
-                self?.presentAlert(message: "Contraseñas diferentes", title: "Error")
-                return}
-            self?.viewModel.goPasswordData()
-        }
-        let actionCancel = UIAlertAction(title: "cancelar", style: .destructive)
-        alert.addAction(actionAccept)
-        alert.addAction(actionCancel)
-        present(alert, animated: true)
-    }
-    @objc func didTapImageButton() {
-        //TODO: abrir la galeria de fotos y coger una foto
-        viewModel.goImageData()
-    }
-    @objc func didTapPubgAccountButton() {
-        let alert = UIAlertController(title: "Borrar cuenta de Pugb", message: "¿Estás seguro de que quieres eliminar la cuenta asociada de Pugb a esta app?", preferredStyle: .alert)
-        let actionAccept = UIAlertAction(title: "Accept", style: .default){ [weak self]_ in
-            self?.viewModel.goPubgAccount()
-        }
-        let actionCancel = UIAlertAction(title: "cancelar", style: .destructive)
-        alert.addAction(actionAccept)
-        alert.addAction(actionCancel)
-        present(alert, animated: true)
-    }
-    // hasta aqui las acciones
-    
-    
-    
     @objc func backButtonAction() {
         viewModel.backButton()
     }
@@ -186,4 +176,37 @@ extension PersonalDataViewController: MessageDisplayable { }
 extension PersonalDataViewController: ViewScrollable {}
 extension PersonalDataViewController: KeyboardDisplayable {}
 extension PersonalDataViewController: SpinnerDisplayable{ }
+extension ForgotViewController: MessageDisplayable { }
+extension PersonalDataViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.backgroundColor = .systemCyan
+        var listContent = UIListContentConfiguration.cell()
+        listContent.textProperties.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        listContent.text = "Leyenda"
+        listContent.secondaryTextProperties.font = UIFont.systemFont(ofSize: 16)
+        listContent.secondaryText = "Nivel: 80"
+        listContent.imageToTextPadding = 50
+        listContent.image = UIImage(systemName: "person.circle.fill")
+        cell.contentConfiguration = listContent
+        return cell
+    }
 
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(
+            style: .destructive,
+            title: "Borrar",
+            handler: { _, _, _  in
+                print("borrar")
+            }
+        )
+        delete.image = UIImage(systemName: "trash")
+        delete.backgroundColor = .red
+        let configuration = UISwipeActionsConfiguration(actions: [delete])
+        return configuration
+    }
+}

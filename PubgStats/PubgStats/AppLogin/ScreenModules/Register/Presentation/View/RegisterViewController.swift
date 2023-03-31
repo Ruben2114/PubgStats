@@ -67,10 +67,9 @@ final class RegisterViewController: UIViewController {
     }
     private func configConstraints() {
         contentView.addSubview(containerStackView)
-        containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 200).isActive = true
         containerStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
         containerStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
-        containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        containerStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -20).isActive = true
         
         [titleLabel,userTextField, passwordTextField, acceptButton].forEach {
             containerStackView.addArrangedSubview($0)
