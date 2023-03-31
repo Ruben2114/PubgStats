@@ -30,7 +30,7 @@ final class PersonalDataViewController: UIViewController {
     
     private lazy var viewOption1 = makeStack(space: 20)
     private lazy var viewOption2 = makeStack(space: 20)
-    private lazy var viewOption3 = makeStack(space: 20)
+    private lazy var viewOption3 = tableView
 
     
     var mainScrollView = UIScrollView()
@@ -85,9 +85,9 @@ final class PersonalDataViewController: UIViewController {
         viewOption1.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 40).isActive = true
         viewOption1.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
         viewOption1.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-        viewOption1.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50).isActive = true
+        viewOption1.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
         
-        [containerStackView, UIView(), acceptButton].forEach {
+        [containerStackView, UIView() ,acceptButton].forEach {
             viewOption1.addArrangedSubview($0)
         }
         [passwordTextField, repeatPasswordTextField].forEach {
@@ -95,35 +95,27 @@ final class PersonalDataViewController: UIViewController {
         }
      
         
-        
-        
-        /*
         contentView.addSubview(viewOption2)
-        viewOption2.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 20).isActive = true
+        viewOption2.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 30).isActive = true
         viewOption2.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
         viewOption2.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-        [profileImageView, changePhotoButton].forEach {
+        viewOption2.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
+
+        [profileImageView, UIView(),changePhotoButton].forEach {
             viewOption2.addArrangedSubview($0)
         }
-        profileImageView.topAnchor.constraint(equalTo: viewOption2.topAnchor, constant: 50).isActive = true
-        profileImageView.centerXAnchor.constraint(equalTo: viewOption2.centerXAnchor).isActive = true
+      
         
-        changePhotoButton.leftAnchor.constraint(equalTo: viewOption2.leftAnchor, constant: 5).isActive = true
-        changePhotoButton.rightAnchor.constraint(equalTo: viewOption2.rightAnchor, constant: -5).isActive = true
-        changePhotoButton.bottomAnchor.constraint(equalTo: viewOption2.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
+    
         
-        
-        
-        view.addSubview(viewOption3)
-        viewOption3.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 100).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: viewOption3.bottomAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: viewOption3.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: viewOption3.trailingAnchor).isActive = true
-        */
+        contentView.addSubview(viewOption3)
+        viewOption3.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 100).isActive = true
+        viewOption3.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        viewOption3.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        viewOption3.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+
         viewOption2.isHidden = true
         viewOption3.isHidden = true
-        
     }
     
     

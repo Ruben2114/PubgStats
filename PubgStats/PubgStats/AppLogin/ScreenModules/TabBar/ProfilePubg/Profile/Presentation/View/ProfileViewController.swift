@@ -9,6 +9,19 @@ import UIKit
 import Combine
 
 final class ProfileViewController: UIViewController {
+    
+    
+    
+    
+    
+    //TODO: QUITAR EL SCROLL Y PONER LA IMAGEN Y EL STACK DE FORMA NORMAL
+    
+    
+    
+    
+    
+    
+    
     lazy var logOutButton: UIButton = {
         var configuration = UIButton.Configuration.borderedTinted()
         configuration.image = UIImage(systemName: "arrowshape.turn.up.backward.circle.fill")
@@ -57,11 +70,7 @@ final class ProfileViewController: UIViewController {
         bind()
         hideKeyboard()
     }
-    //no funciona
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-            return .portrait
-    }
-
+   
     private func configUI() {
         view.backgroundColor = .systemBackground
         let barLeftButton = UIBarButtonItem(customView: logOutButton)
