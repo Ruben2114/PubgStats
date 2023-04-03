@@ -168,7 +168,6 @@ extension PersonalDataViewController: MessageDisplayable { }
 extension PersonalDataViewController: ViewScrollable {}
 extension PersonalDataViewController: KeyboardDisplayable {}
 extension PersonalDataViewController: SpinnerDisplayable{ }
-extension ForgotViewController: MessageDisplayable { }
 extension PersonalDataViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1

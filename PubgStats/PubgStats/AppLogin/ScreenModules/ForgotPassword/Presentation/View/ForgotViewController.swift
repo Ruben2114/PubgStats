@@ -1,37 +1,36 @@
 //
-//  RegisterViewController.swift
+//  ForgotViewController.swift
 //  PubgStats
 //
-//  Created by Ruben Rodriguez on 13/3/23.
+//  Created by Rubén Rodríguez Cervigón on 15/3/23.
 //
-
 import UIKit
 import Combine
 
-final class RegisterViewController: UIViewController,UISheetPresentationControllerDelegate {
+final class ForgotViewController: UIViewController, UISheetPresentationControllerDelegate {
     
-    private lazy var containerStackView = makeStack(space: 20)
-    private lazy var titleLabel = makeLabel(title: "Crear cuenta", color: .white, font: 25, style: .title2)
+    private lazy var containerStackView = makeStack(space: 30)
+    private lazy var titleLabel = makeLabel(title: "Recuperar contraseña", color: .white, font: 25, style: .title2)
+    private lazy var alertLabel = makeLabel(title: "Tu contraseña nueva será: 0000\n Por favor, cambiala en cuanto accedas a tu perfil.", color: .white, font: 15, style: .title2)
     private lazy var userTextField = makeTextFieldBlack(placeholder: "Nombre Usuario", isSecure: false)
     private lazy var emailTextField = makeTextFieldBlack(placeholder: "Correo: pubg@pubgstats.com", isSecure: false)
-    private lazy var passwordTextField = makeTextFieldBlack(placeholder: "Contraseña", isSecure: true)
     private lazy var acceptButton = makeButtonBlue(title: "Guardar")
     
     var mainScrollView = UIScrollView()
     var contentView = UIView()
     var cancellable = Set<AnyCancellable>()
-    private let viewModel: RegisterViewModel
+    private let viewModel: ForgotViewModel
     override var sheetPresentationController: UISheetPresentationController {
         presentationController as! UISheetPresentationController
     }
-    
-    init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>(), dependencies: RegisterDependency) {
+    init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>(), dependencies: ForgotDependency) {
         self.mainScrollView = mainScrollView
         self.contentView = contentView
         self.cancellable = cancellable
         self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -64,6 +63,7 @@ final class RegisterViewController: UIViewController,UISheetPresentationControll
             case .loading:
                 self?.showSpinner()
             case .fail(error: let error):
+                self?.hideSpinner()
                 self?.presentAlert(message: "Error: \(error)", title: "Error")
             }
         }.store(in: &cancellable)
@@ -72,9 +72,9 @@ final class RegisterViewController: UIViewController,UISheetPresentationControll
         contentView.addSubview(containerStackView)
         containerStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
         containerStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
-        containerStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -20).isActive = true
+        containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15).isActive = true
         
-        [titleLabel,userTextField, emailTextField ,passwordTextField, acceptButton].forEach {
+        [titleLabel, alertLabel, userTextField, emailTextField, acceptButton].forEach {
             containerStackView.addArrangedSubview($0)
         }
     }
@@ -83,35 +83,11 @@ final class RegisterViewController: UIViewController,UISheetPresentationControll
     }
     
     @objc func didTapSaveButton() {
-        guard let nameText = userTextField.text, let emailText = emailTextField.text else {return}
-        guard viewModel.checkName(name: nameText) != true, !nameText.isEmpty else {
-            if nameText.isEmpty {
-                presentAlert(message: "Por favor, rellene todos los campos", title: "Error")
-            }else {
-                presentAlert(message: "Este nombre ya existe", title: "Error")
-            }
-            return
-        }
-        guard viewModel.checkValidEmail(email: emailText) == true else {
-            presentAlert(message: "El correo no es válido", title: "Error")
-            return
-        }
-        guard viewModel.checkEmail(email: emailText) != true else {
-            presentAlert(message: "El correo ya existe", title: "Error")
-            return
-        }
-        guard let passwordText = passwordTextField.text?.hashString() else {return}
-        guard !passwordText.isEmpty else {
-            presentAlert(message: "La contraseña tiene que tener como minimo un caracter", title: "Error")
-            return}
-       
-        viewModel.saveUser(name: nameText, password: passwordText, email: emailText)
+        guard let nameText = userTextField.text, let emailText = emailTextField.text?.lowercased() else {return}
+        viewModel.checkAndChangePassword(name: nameText, email: emailText)
     }
 }
-extension RegisterViewController: MessageDisplayable { }
-extension RegisterViewController: ViewScrollable {}
-extension RegisterViewController: KeyboardDisplayable {}
-extension RegisterViewController: SpinnerDisplayable {}
-
-
-
+extension ForgotViewController: MessageDisplayable { }
+extension ForgotViewController: ViewScrollable {}
+extension ForgotViewController: KeyboardDisplayable {}
+extension ForgotViewController: SpinnerDisplayable {}

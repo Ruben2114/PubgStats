@@ -24,11 +24,14 @@ final class ForgotCoordinatorImp: Coordinator {
         self.externalDependencies = dependencies
     }
     
+    
     func start() {
         let forgotView: ForgotViewController = dependencies.resolve()
-        navigation?.pushViewController(forgotView, animated: false)
+        forgotView.modalTransitionStyle = .coverVertical
+        navigation?.present(forgotView, animated: true)
     }
 }
+
 extension ForgotCoordinatorImp: ForgotCoordinator {
     
 }

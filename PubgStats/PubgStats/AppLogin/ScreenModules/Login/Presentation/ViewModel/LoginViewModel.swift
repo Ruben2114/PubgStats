@@ -20,7 +20,7 @@ final class LoginViewModel {
         self.loginDataUseCase = dependencies.resolve()
     }
     
-    func checkName(sessionUser: ProfileEntity, name: String, password: String) {
+    func check(sessionUser: ProfileEntity, name: String, password: String) {
         state.send(.loading)
         loginSucess(name: name, password: password)
         Task { [weak self] in
@@ -46,3 +46,4 @@ final class LoginViewModel {
         coordinator?.performTransition(.goRegister)
     }
 }
+

@@ -7,11 +7,8 @@
 
 import UIKit
 
-enum RegisterTransition {
-    case goAccept
-}
+
 protocol RegisterCoordinator: Coordinator {
-    func performTransition(_ transition: RegisterTransition)
 }
 
 final class RegisterCoordinatorImp: Coordinator{
@@ -29,16 +26,11 @@ final class RegisterCoordinatorImp: Coordinator{
     }
     func start() {
         let registerView: RegisterViewController = dependencies.resolve()
-        navigation?.pushViewController(registerView, animated: false)
+        registerView.modalTransitionStyle = .coverVertical
+        navigation?.present(registerView, animated: true)
     }
 }
 extension RegisterCoordinatorImp: RegisterCoordinator {
-    func performTransition(_ transition: RegisterTransition) {
-        switch transition {
-        case .goAccept:
-            dismiss()
-        }
-    }
 }
 private extension RegisterCoordinatorImp {
     struct Dependency: RegisterDependency{

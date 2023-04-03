@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		46151CB729C1B9780054BCEA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46151CB629C1B9780054BCEA /* ProfileViewController.swift */; };
-		46151CC329C1E8FC0054BCEA /* ForgotViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46151CC229C1E8FC0054BCEA /* ForgotViewControllerCoordinator.swift */; };
+		46151CC329C1E8FC0054BCEA /* ForgotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46151CC229C1E8FC0054BCEA /* ForgotViewController.swift */; };
 		461C1F3E29C9C77C00540289 /* ApiClientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461C1F3D29C9C77C00540289 /* ApiClientService.swift */; };
 		461C1F4029C9C86C00540289 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461C1F3F29C9C86C00540289 /* EndPoint.swift */; };
 		461C1F4429C9F68400540289 /* ProfileDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461C1F4329C9F68400540289 /* ProfileDataUseCase.swift */; };
@@ -75,6 +75,10 @@
 		8CA398C729B72A2000C09746 /* PubgStatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398C629B72A2000C09746 /* PubgStatsTests.swift */; };
 		8CA398D129B72A2000C09746 /* PubgStatsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398D029B72A2000C09746 /* PubgStatsUITests.swift */; };
 		8CA398D329B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398D229B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift */; };
+		8CA720A829DAD585001E3EFA /* ForgotDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA720A729DAD585001E3EFA /* ForgotDataUseCase.swift */; };
+		8CA720AB29DAD5F4001E3EFA /* ForgotRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA720AA29DAD5F4001E3EFA /* ForgotRepository.swift */; };
+		8CA720AE29DAD6FD001E3EFA /* ForgotRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA720AD29DAD6FD001E3EFA /* ForgotRepositoryImp.swift */; };
+		8CA720B029DAE3F6001E3EFA /* UIViewController+Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA720AF29DAE3F6001E3EFA /* UIViewController+Label.swift */; };
 		8CA9024629D2BBF9004E71D0 /* WeaponDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9024529D2BBF9004E71D0 /* WeaponDataUseCase.swift */; };
 		8CA9024B29D2BCB4004E71D0 /* WeaponDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9024A29D2BCB4004E71D0 /* WeaponDataRepository.swift */; };
 		8CA9024D29D2BF49004E71D0 /* WeaponDataRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9024C29D2BF49004E71D0 /* WeaponDataRepositoryImp.swift */; };
@@ -153,7 +157,7 @@
 
 /* Begin PBXFileReference section */
 		46151CB629C1B9780054BCEA /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		46151CC229C1E8FC0054BCEA /* ForgotViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotViewControllerCoordinator.swift; sourceTree = "<group>"; };
+		46151CC229C1E8FC0054BCEA /* ForgotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotViewController.swift; sourceTree = "<group>"; };
 		461C1F3D29C9C77C00540289 /* ApiClientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientService.swift; sourceTree = "<group>"; };
 		461C1F3F29C9C86C00540289 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		461C1F4329C9F68400540289 /* ProfileDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataUseCase.swift; sourceTree = "<group>"; };
@@ -224,6 +228,10 @@
 		8CA398CC29B72A2000C09746 /* PubgStatsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PubgStatsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA398D029B72A2000C09746 /* PubgStatsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PubgStatsUITests.swift; sourceTree = "<group>"; };
 		8CA398D229B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PubgStatsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8CA720A729DAD585001E3EFA /* ForgotDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotDataUseCase.swift; sourceTree = "<group>"; };
+		8CA720AA29DAD5F4001E3EFA /* ForgotRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotRepository.swift; sourceTree = "<group>"; };
+		8CA720AD29DAD6FD001E3EFA /* ForgotRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotRepositoryImp.swift; sourceTree = "<group>"; };
+		8CA720AF29DAE3F6001E3EFA /* UIViewController+Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Label.swift"; sourceTree = "<group>"; };
 		8CA9024529D2BBF9004E71D0 /* WeaponDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataUseCase.swift; sourceTree = "<group>"; };
 		8CA9024A29D2BCB4004E71D0 /* WeaponDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataRepository.swift; sourceTree = "<group>"; };
 		8CA9024C29D2BF49004E71D0 /* WeaponDataRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataRepositoryImp.swift; sourceTree = "<group>"; };
@@ -571,7 +579,7 @@
 		4655510529CC866D00BF932A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				46151CC229C1E8FC0054BCEA /* ForgotViewControllerCoordinator.swift */,
+				46151CC229C1E8FC0054BCEA /* ForgotViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -716,6 +724,39 @@
 				8CA398D229B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift */,
 			);
 			path = PubgStatsUITests;
+			sourceTree = "<group>";
+		};
+		8CA720A529DAD567001E3EFA /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				8CA720A929DAD5E9001E3EFA /* InterfaceRepositories */,
+				8CA720A629DAD56F001E3EFA /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		8CA720A629DAD56F001E3EFA /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				8CA720A729DAD585001E3EFA /* ForgotDataUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		8CA720A929DAD5E9001E3EFA /* InterfaceRepositories */ = {
+			isa = PBXGroup;
+			children = (
+				8CA720AA29DAD5F4001E3EFA /* ForgotRepository.swift */,
+			);
+			path = InterfaceRepositories;
+			sourceTree = "<group>";
+		};
+		8CA720AC29DAD6F1001E3EFA /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8CA720AD29DAD6FD001E3EFA /* ForgotRepositoryImp.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		8CA9024229D2B970004E71D0 /* Data */ = {
@@ -1012,6 +1053,7 @@
 				465550C529CC3A5600BF932A /* UIViewController+Image.swift */,
 				465550C729CC3C1E00BF932A /* UIViewController+Stack.swift */,
 				8CB07EA529D1969A000EE257 /* UIViewController+BackButton.swift */,
+				8CA720AF29DAE3F6001E3EFA /* UIViewController+Label.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1320,6 +1362,8 @@
 		8CB39BAA29C0C25200B1D8EF /* ForgotPassword */ = {
 			isa = PBXGroup;
 			children = (
+				8CA720AC29DAD6F1001E3EFA /* Data */,
+				8CA720A529DAD567001E3EFA /* Domain */,
 				461C1F5929CB10CE00540289 /* DependenciesResolve */,
 				461C1F5829CB10C100540289 /* Coordinator */,
 				461C1F5729CB10A400540289 /* Presentation */,
@@ -1615,6 +1659,7 @@
 				8CB07EBA29D1A6EC000EE257 /* StatsGeneralExternalDependency.swift in Sources */,
 				8CB07EC529D1B393000EE257 /* WeaponDTO.swift in Sources */,
 				465550F229CC7C5A00BF932A /* RankingDependency.swift in Sources */,
+				8CA720B029DAE3F6001E3EFA /* UIViewController+Label.swift in Sources */,
 				461C1F4629C9F6F000540289 /* ProfileRepository.swift in Sources */,
 				8C810F7929C3690700AEE548 /* UIViewController+Keyboard.swift in Sources */,
 				8CD7CD8629BF3DA900C57346 /* AppContainer.swift in Sources */,
@@ -1634,9 +1679,11 @@
 				461C1F7829CB5CF500540289 /* RegisterDependency.swift in Sources */,
 				4670EDEA29D442FD00C1062E /* PersonalDataDependency.swift in Sources */,
 				8CB39B9729C05DDE00B1D8EF /* LoginRepository.swift in Sources */,
+				8CA720A829DAD585001E3EFA /* ForgotDataUseCase.swift in Sources */,
 				465550D829CC504100BF932A /* ProfileCoordinator.swift in Sources */,
 				465550FA29CC7E4600BF932A /* GuideExternalDependency.swift in Sources */,
 				8CB6396029D234C500763231 /* KillsDataViewModel.swift in Sources */,
+				8CA720AB29DAD5F4001E3EFA /* ForgotRepository.swift in Sources */,
 				8CB2CEEC29C9A35B00E79D29 /* ApiClientServiceImp.swift in Sources */,
 				8CB07EC829D1B446000EE257 /* GamesModesDTO.swift in Sources */,
 				8CA17EBB29C465E900ADFFE2 /* CreateNavController.swift in Sources */,
@@ -1645,6 +1692,7 @@
 				8CB07ED029D1CF46000EE257 /* StatsGeneralRepositoryImp.swift in Sources */,
 				461C1F4429C9F68400540289 /* ProfileDataUseCase.swift in Sources */,
 				8C7563E929BB600A000373F9 /* BaseViewModel.swift in Sources */,
+				8CA720AE29DAD6FD001E3EFA /* ForgotRepositoryImp.swift in Sources */,
 				465550D129CC47A700BF932A /* MainTabBarCoordinator.swift in Sources */,
 				465550FC29CC7E8E00BF932A /* GuideCoordinator.swift in Sources */,
 				8CA9025629D2F2C0004E71D0 /* WeaponDataDetailViewController.swift in Sources */,
@@ -1696,7 +1744,7 @@
 				8C9F824229C3CA02003000CD /* PersonalDataViewController.swift in Sources */,
 				461C1F4029C9C86C00540289 /* EndPoint.swift in Sources */,
 				8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */,
-				46151CC329C1E8FC0054BCEA /* ForgotViewControllerCoordinator.swift in Sources */,
+				46151CC329C1E8FC0054BCEA /* ForgotViewController.swift in Sources */,
 				8CB6396D29D244F300763231 /* WeaponDataViewController.swift in Sources */,
 				8CB6396F29D2457300763231 /* WeaponDataViewModel.swift in Sources */,
 				4655510729CCB41500BF932A /* ProfileEntity.swift in Sources */,

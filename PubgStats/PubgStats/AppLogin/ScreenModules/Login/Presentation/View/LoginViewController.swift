@@ -14,12 +14,11 @@ class LoginViewController: UIViewController {
     private lazy var containerStackView = makeStack(space: 20)
     private lazy var userTextField = makeTextFieldLogin(placeholder: "Usuario", isSecure: false)
     private lazy var passwordTextField = makeTextFieldLogin(placeholder: "Contraseña", isSecure: true)
-    private lazy var loginButton: UIButton = makeButtonBlue(title: "Log In")
+    private lazy var loginButton: UIButton = makeButtonBlue(title: "Iniciar Sesión")
     private lazy var registerButton: UIButton = makeButtonCorner(
-        title: "Sign Up")
+        title: "Crear Cuenta")
     private lazy var forgotPasswordButton: UIButton = makeButtonClear(
-        title: "forgot your password?")
-    
+        title: "Recuperar Contraseña")
     
     var mainScrollView = UIScrollView()
     var contentView = UIView()
@@ -33,7 +32,6 @@ class LoginViewController: UIViewController {
         self.cancellable = cancellable
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
-        //self.videoLogin = videoLogin
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder: NSCoder) {
@@ -99,7 +97,7 @@ class LoginViewController: UIViewController {
         contentView.addSubview(containerStackView)
         containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
         containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-        containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40).isActive = true
+        containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
         
         [userTextField, passwordTextField, loginButton, registerButton ,forgotPasswordButton].forEach {
                 containerStackView.addArrangedSubview($0)
@@ -113,7 +111,7 @@ class LoginViewController: UIViewController {
     
     @objc func didTapLoginButton() {
         let password = passwordTextField.text?.hashString()
-        viewModel.checkName(sessionUser: dependencies.external.resolve(),name: userTextField.text ?? "", password: password ?? "")
+        viewModel.check(sessionUser: dependencies.external.resolve(),name: userTextField.text ?? "", password: password ?? "")
     }
     
     @objc func didTapForgotButton() {

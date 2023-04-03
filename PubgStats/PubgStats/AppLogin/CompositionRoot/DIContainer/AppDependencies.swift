@@ -16,7 +16,7 @@ struct AppDependencies {
     private let rankingNavController = UINavigationController()
     private let guideNavController = UINavigationController()
     private let contactNavController = UINavigationController()
-    private var sessionUser = ProfileEntity(name: "", password: "")
+    private var sessionUser = ProfileEntity(name: "", password: "", email: "")
     
     init(window: UIWindow?) {
         self.window = window

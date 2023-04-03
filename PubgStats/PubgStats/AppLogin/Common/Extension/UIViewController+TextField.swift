@@ -47,4 +47,17 @@ extension UIViewController {
         textField.isSecureTextEntry = isSecure
         return textField
     }
+    func makeTextFieldBlack(placeholder: String, isSecure: Bool ) -> UITextField {
+        let textField = UITextField()
+        textField.backgroundColor = .gray.withAlphaComponent(0.1)
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        textField.leftViewMode = .always
+        textField.textColor = .white
+        textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        textField.font = UIFont.systemFont(ofSize: 20)
+        textField.layer.cornerRadius = 10
+        textField.isSecureTextEntry = isSecure
+        textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
+        return textField
+    }
 }
