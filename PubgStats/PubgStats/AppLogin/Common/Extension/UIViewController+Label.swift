@@ -18,4 +18,14 @@ extension UIViewController {
         label.textColor = color
         return label
     }
+    func makeLabelProfile(title: String, color: UIColor, font: CGFloat, style: UIFont.TextStyle ) -> UILabel {
+        let label = UILabel()
+        label.text = title
+        label.numberOfLines = 0
+        label.font = UIFont.preferredFont(forTextStyle: style)
+        label.font = UIFont.systemFont(ofSize: font)
+        label.textAlignment = .left
+        label.textColor = color
+        return label
+    }
 }

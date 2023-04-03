@@ -37,8 +37,8 @@ final class ProfileViewModel {
         let sessionUser: ProfileEntity = dependencies.external.resolve()
         profileDataUseCase.execute(sessionUser: sessionUser, player: player, account: account)
     }
-    func logOut() {
-        coordinator?.performTransition(.goLogOut)
+    func backButton() {
+        coordinator?.performTransition(.goBackView)
     }
     func didTapPersonalDataButton() {
         coordinator?.performTransition(.goPersonalData)

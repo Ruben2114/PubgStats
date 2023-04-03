@@ -71,9 +71,8 @@ final class MainTabBarCoordinatorImp: Coordinator {
         contactCoordinator.start()
         append(child: contactCoordinator)
         
-        let viewsTotal = viewControllers
         let tabBar = dependencies.external.tabBarController()
-        tabBar.viewControllers = viewsTotal
+        tabBar.viewControllers = viewControllers
         tabBar.tabBar.backgroundColor = .white
     }
 }

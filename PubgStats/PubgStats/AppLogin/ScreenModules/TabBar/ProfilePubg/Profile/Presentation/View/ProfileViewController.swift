@@ -10,46 +10,34 @@ import Combine
 
 final class ProfileViewController: UIViewController {
     
-    
-    
-    
-    
-    //TODO: QUITAR EL SCROLL Y PONER LA IMAGEN Y EL STACK DE FORMA NORMAL
-    
-    
-    
-    
-    
-    
-    
-    lazy var logOutButton: UIButton = {
-        var configuration = UIButton.Configuration.borderedTinted()
-        configuration.image = UIImage(systemName: "arrowshape.turn.up.backward.circle.fill")
-        configuration.baseBackgroundColor = .clear
-        let button = UIButton(type: .system, primaryAction: UIAction(handler: { _ in
-            self.logOut()
-        }))
-        button.configuration = configuration
-        button.tintColor = .black
-        return button
-    }()
+    //otra opcion
     private lazy var profileImageView = makeImageViewPersonal(name: "default")
+    //todos los label
+    private lazy var labelStackView = makeStack(space: 30)
+    private lazy var nameLabel = makeLabelProfile(title: "Nombre: \(sessionUser.name)", color: .black, font: 15, style: .title2)
+    private lazy var emailLabel = makeLabelProfile(title: "Email: \(sessionUser.email)", color: .black, font: 15, style: .title2)
+    private lazy var passwordLabel = makeLabelProfile(title: "Password: \(String(repeating: "*", count: 5))", color: .black, font: 15, style: .title2)
+   
+    
+    
+    
+    //1 opcion
+    private let tableView: UITableView = {
+        let table = UITableView()
+        table.translatesAutoresizingMaskIntoConstraints = false
+        return table
+    }()
     private lazy var containerStackView = makeStack(space: 20)
     private lazy var personalDataButton: UIButton = makeButtonBlue(title: "Personal Data")
     private lazy var settingButton: UIButton = makeButtonBlue(title: "Setting")
     private lazy var linkPubgAccountButton: UIButton = makeButtonBlue(title: "Link Pubg Account")
     private lazy var statsAccountButton: UIButton = makeButtonBlue(title: "Stats Account: \(sessionUser.player ?? "")")
     
-    var mainScrollView = UIScrollView()
-    var contentView = UIView()
-    var cancellable = Set<AnyCancellable>()
+    private var cancellable = Set<AnyCancellable>()
     private let viewModel: ProfileViewModel
     private let dependencies: ProfileDependency
     let sessionUser: ProfileEntity
-    init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>(), dependencies: ProfileDependency) {
-        self.mainScrollView = mainScrollView
-        self.contentView = contentView
-        self.cancellable = cancellable
+    init(dependencies: ProfileDependency) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
         self.sessionUser = dependencies.external.resolve()
@@ -62,21 +50,21 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configScroll()
         configUI()
         configConstraints()
         configTargets()
-        configKeyboardSubscription(mainScrollView: mainScrollView)
         bind()
-        hideKeyboard()
     }
    
     private func configUI() {
         view.backgroundColor = .systemBackground
-        let barLeftButton = UIBarButtonItem(customView: logOutButton)
-        navigationItem.leftBarButtonItem = barLeftButton
         chooseButton()
         navigationItem.title = "Bienvenido \(sessionUser.name)!"
+        backButton(action: #selector(backButtonAction))
+        tableView.dataSource = self
+        tableView.delegate = self
+        let nib = UINib(nibName: "TableViewCell", bundle: Bundle.main)
+        tableView.register(nib, forCellReuseIdentifier: "TableViewCell")
     }
     private func bind() {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
@@ -105,16 +93,29 @@ final class ProfileViewController: UIViewController {
         }
     }
     private func configConstraints() {
-      
-        contentView.addSubview(containerStackView)
-        containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
-        containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-        containerStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -50).isActive = true
-        containerStackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        view.addSubview(tableView)
+        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        tableView.setHeightConstraint(with: 80)
+        
+        view.addSubview(labelStackView)
+        labelStackView.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 30).isActive = true
+        labelStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        labelStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        [nameLabel, emailLabel, passwordLabel].forEach {
+            labelStackView.addArrangedSubview($0)
+        }
+        
+        view.addSubview(containerStackView)
+        containerStackView.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 30).isActive = true
+        containerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        containerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
 
-        [profileImageView,personalDataButton, settingButton, linkPubgAccountButton, statsAccountButton].forEach {
+        [personalDataButton, settingButton, linkPubgAccountButton, statsAccountButton].forEach {
             containerStackView.addArrangedSubview($0)
         }
+     
     }
    
     private func configTargets() {
@@ -122,16 +123,6 @@ final class ProfileViewController: UIViewController {
         settingButton.addTarget(self, action: #selector(didTapSettingButton), for: .touchUpInside)
         linkPubgAccountButton.addTarget(self, action: #selector(didTapLinkPubgAccountButton), for: .touchUpInside)
         statsAccountButton.addTarget(self, action: #selector(didTapStatsgAccountButton), for: .touchUpInside)
-    }
-    private func logOut() {
-        let alert = UIAlertController(title: "", message: "¿Estas seguro de cerrar sesión?", preferredStyle: .alert)
-        let actionAccept = UIAlertAction(title: "Accept", style: .default){ [weak self]_ in
-            self?.viewModel.logOut()
-        }
-        let actionCancel = UIAlertAction(title: "cancelar", style: .destructive)
-        alert.addAction(actionAccept)
-        alert.addAction(actionCancel)
-        present(alert, animated: true)
     }
     @objc func didTapPersonalDataButton() {
         viewModel.didTapPersonalDataButton()
@@ -158,8 +149,38 @@ final class ProfileViewController: UIViewController {
     @objc func didTapStatsgAccountButton() {
         viewModel.didTapStatsgAccountButton()
     }
+    @objc func backButtonAction() {
+        let alert = UIAlertController(title: "", message: "¿Estas seguro de cerrar sesión?", preferredStyle: .alert)
+        let actionAccept = UIAlertAction(title: "Accept", style: .default){ [weak self]_ in
+            self?.viewModel.backButton()
+        }
+        let actionCancel = UIAlertAction(title: "cancelar", style: .destructive)
+        alert.addAction(actionAccept)
+        alert.addAction(actionCancel)
+        present(alert, animated: true)
+    }
 }
 extension ProfileViewController: MessageDisplayable { }
-extension ProfileViewController: ViewScrollable {}
-extension ProfileViewController: KeyboardDisplayable {}
 extension ProfileViewController: SpinnerDisplayable{ }
+extension ProfileViewController: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
+        cell.imageUser.layer.cornerRadius = cell.imageUser.frame.width/2
+        cell.imageUser.layer.borderWidth = 1.0
+        cell.imageUser.layer.borderColor = UIColor.clear.cgColor
+        cell.imageUser.clipsToBounds = true
+
+        cell.nameLabel.text = "Nombre: \(sessionUser.name)"
+        cell.playerLabel.text = "Player: \(sessionUser.player ?? "no existe")"
+        cell.rankedLabel.text = ""
+        return cell
+    }
+}
+extension ProfileViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        80
+    }
+}

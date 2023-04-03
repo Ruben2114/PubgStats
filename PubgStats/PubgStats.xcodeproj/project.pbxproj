@@ -79,6 +79,8 @@
 		8CA720AB29DAD5F4001E3EFA /* ForgotRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA720AA29DAD5F4001E3EFA /* ForgotRepository.swift */; };
 		8CA720AE29DAD6FD001E3EFA /* ForgotRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA720AD29DAD6FD001E3EFA /* ForgotRepositoryImp.swift */; };
 		8CA720B029DAE3F6001E3EFA /* UIViewController+Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA720AF29DAE3F6001E3EFA /* UIViewController+Label.swift */; };
+		8CA720B429DAEC3B001E3EFA /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA720B229DAEC3B001E3EFA /* TableViewCell.swift */; };
+		8CA720B529DAEC3B001E3EFA /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA720B329DAEC3B001E3EFA /* TableViewCell.xib */; };
 		8CA9024629D2BBF9004E71D0 /* WeaponDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9024529D2BBF9004E71D0 /* WeaponDataUseCase.swift */; };
 		8CA9024B29D2BCB4004E71D0 /* WeaponDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9024A29D2BCB4004E71D0 /* WeaponDataRepository.swift */; };
 		8CA9024D29D2BF49004E71D0 /* WeaponDataRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9024C29D2BF49004E71D0 /* WeaponDataRepositoryImp.swift */; };
@@ -232,6 +234,8 @@
 		8CA720AA29DAD5F4001E3EFA /* ForgotRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotRepository.swift; sourceTree = "<group>"; };
 		8CA720AD29DAD6FD001E3EFA /* ForgotRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotRepositoryImp.swift; sourceTree = "<group>"; };
 		8CA720AF29DAE3F6001E3EFA /* UIViewController+Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Label.swift"; sourceTree = "<group>"; };
+		8CA720B229DAEC3B001E3EFA /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		8CA720B329DAEC3B001E3EFA /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		8CA9024529D2BBF9004E71D0 /* WeaponDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataUseCase.swift; sourceTree = "<group>"; };
 		8CA9024A29D2BCB4004E71D0 /* WeaponDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataRepository.swift; sourceTree = "<group>"; };
 		8CA9024C29D2BF49004E71D0 /* WeaponDataRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataRepositoryImp.swift; sourceTree = "<group>"; };
@@ -759,6 +763,15 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		8CA720B129DAEC0C001E3EFA /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8CA720B229DAEC3B001E3EFA /* TableViewCell.swift */,
+				8CA720B329DAEC3B001E3EFA /* TableViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		8CA9024229D2B970004E71D0 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -1077,6 +1090,7 @@
 		8CAEB01229BB4721009282AF /* Layer */ = {
 			isa = PBXGroup;
 			children = (
+				8CA720B129DAEC0C001E3EFA /* Cell */,
 				8CB07ECA29D1CE6B000EE257 /* Entity */,
 				8CAEB01529BB4738009282AF /* Presentation */,
 				461C1F4129C9C92B00540289 /* Data */,
@@ -1625,6 +1639,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CE093EE29D5AF6A0069CE24 /* videoLoginPubg.mp4 in Resources */,
+				8CA720B529DAEC3B001E3EFA /* TableViewCell.xib in Resources */,
 				8CE093EC29D5AE2E0069CE24 /* videoLogin.mp4 in Resources */,
 				8CA398BC29B72A2000C09746 /* LaunchScreen.storyboard in Resources */,
 				8CA398B929B72A2000C09746 /* Assets.xcassets in Resources */,
@@ -1706,6 +1721,7 @@
 				465550E329CC6F1F00BF932A /* FavouriteViewController.swift in Sources */,
 				8CB6397329D245FF00763231 /* WeaponDataExternalDependency.swift in Sources */,
 				465550CD29CC46ED00BF932A /* MainTabBarDependency.swift in Sources */,
+				8CA720B429DAEC3B001E3EFA /* TableViewCell.swift in Sources */,
 				8C7563EC29BB6073000373F9 /* StateController.swift in Sources */,
 				8C7563E229BB5E8A000373F9 /* ViewValues.swift in Sources */,
 				4670EDEF29D4438500C1062E /* PersonalDataCoordinator.swift in Sources */,
