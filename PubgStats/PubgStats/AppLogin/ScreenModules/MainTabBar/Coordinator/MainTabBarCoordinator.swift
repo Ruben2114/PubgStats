@@ -75,6 +75,14 @@ final class MainTabBarCoordinatorImp: Coordinator {
         tabBar.viewControllers = viewControllers
         tabBar.tabBar.backgroundColor = .white
     }
+    func dismiss() {
+        dependencies.external.contactNavigationController().viewControllers = []
+        dependencies.external.profileNavigationController().viewControllers = []
+        dependencies.external.guideNavigationController().viewControllers = []
+        dependencies.external.favouriteNavigationController().viewControllers = []
+        dependencies.external.rankingNavigationController().viewControllers = []
+    }
+    
 }
 extension MainTabBarCoordinatorImp: MainTabBarCoordinator{ }
 private extension MainTabBarCoordinatorImp {

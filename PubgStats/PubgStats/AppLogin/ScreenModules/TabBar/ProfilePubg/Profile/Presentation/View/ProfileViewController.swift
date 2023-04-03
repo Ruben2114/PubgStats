@@ -14,9 +14,9 @@ final class ProfileViewController: UIViewController {
     private lazy var profileImageView = makeImageViewPersonal(name: "default")
     //todos los label
     private lazy var labelStackView = makeStack(space: 30)
-    private lazy var nameLabel = makeLabelProfile(title: "Nombre: \(sessionUser.name)", color: .black, font: 15, style: .title2)
-    private lazy var emailLabel = makeLabelProfile(title: "Email: \(sessionUser.email)", color: .black, font: 15, style: .title2)
-    private lazy var passwordLabel = makeLabelProfile(title: "Password: \(String(repeating: "*", count: 5))", color: .black, font: 15, style: .title2)
+    private lazy var nameLabel = makeLabelProfile(title: "Nombre: \(sessionUser.name)", color: .black, font: 20, style: .title2)
+    private lazy var emailLabel = makeLabelProfile(title: "Email: \(sessionUser.email)", color: .black, font: 20, style: .title2)
+    private lazy var passwordLabel = makeLabelProfile(title: "Contraseña: \(String(repeating: "*", count: 10))", color: .black, font: 20, style: .title2)
    
     
     
@@ -28,10 +28,10 @@ final class ProfileViewController: UIViewController {
         return table
     }()
     private lazy var containerStackView = makeStack(space: 20)
-    private lazy var personalDataButton: UIButton = makeButtonBlue(title: "Personal Data")
-    private lazy var settingButton: UIButton = makeButtonBlue(title: "Setting")
-    private lazy var linkPubgAccountButton: UIButton = makeButtonBlue(title: "Link Pubg Account")
-    private lazy var statsAccountButton: UIButton = makeButtonBlue(title: "Stats Account: \(sessionUser.player ?? "")")
+    private lazy var personalDataButton: UIButton = makeButtonBlue(title: "Datos Personales")
+    private lazy var settingButton: UIButton = makeButtonBlue(title: "Ajustes")
+    private lazy var linkPubgAccountButton: UIButton = makeButtonBlue(title: "Link cuenta Pubg")
+    private lazy var statsAccountButton: UIButton = makeButtonBlue(title: "Estadísticas cuenta: \(sessionUser.player ?? "")")
     
     private var cancellable = Set<AnyCancellable>()
     private let viewModel: ProfileViewModel
@@ -71,10 +71,13 @@ final class ProfileViewController: UIViewController {
             switch state {
             case .fail(_):
                 self?.presentAlert(message: "El nombre de usuario no existe", title: "Error")
+                self?.hideSpinner()
             case .success(let model):
                 guard let account = model.id, !account.isEmpty, let player = model.name, !player.isEmpty else {return}
                 self?.hideSpinner()
                 self?.viewModel.saveUser(player: player, account: account)
+                //TODO: mientras hago esta llamada el boton de stactAccount isEnabled = false
+                self?.viewModel.allData()
                 self?.chooseButton()
             case .loading:
                 self?.showSpinner()
@@ -82,6 +85,7 @@ final class ProfileViewController: UIViewController {
             }
         }.store(in: &cancellable)
     }
+   
     private func chooseButton() {
         if sessionUser.account == nil {
             linkPubgAccountButton.isHidden = false

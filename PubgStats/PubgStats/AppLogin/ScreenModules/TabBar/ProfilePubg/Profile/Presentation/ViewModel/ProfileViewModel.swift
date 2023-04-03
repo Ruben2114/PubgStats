@@ -33,6 +33,9 @@ final class ProfileViewModel {
             }
         }
     }
+    func allData() {
+        //TODO: aqui meter en el viewemodel las llamadas y dejar bloqeuado el otro boton
+    }
     func saveUser(player: String, account: String) {
         let sessionUser: ProfileEntity = dependencies.external.resolve()
         profileDataUseCase.execute(sessionUser: sessionUser, player: player, account: account)

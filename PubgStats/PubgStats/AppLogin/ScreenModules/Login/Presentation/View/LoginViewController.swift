@@ -10,7 +10,7 @@ import Combine
 import AVFoundation
 
 class LoginViewController: UIViewController {
-    private var videoLogin: AVPlayer!
+    private var videoLogin: AVPlayer?
     private lazy var containerStackView = makeStack(space: 20)
     private lazy var userTextField = makeTextFieldLogin(placeholder: "Usuario", isSecure: false)
     private lazy var passwordTextField = makeTextFieldLogin(placeholder: "Contraseña", isSecure: true)
@@ -59,10 +59,10 @@ class LoginViewController: UIViewController {
         videoLayer.frame = view.bounds
         videoLayer.zPosition = -1
         view.layer.addSublayer(videoLayer)
-        videoLogin.play()
-        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: videoLogin.currentItem, queue: .main) { [weak self] _ in
-            self?.videoLogin.seek(to: .zero)
-            self?.videoLogin.play()
+        videoLogin?.play()
+        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: videoLogin?.currentItem, queue: .main) { [weak self] _ in
+            self?.videoLogin?.seek(to: .zero)
+            self?.videoLogin?.play()
         }
         configGradientForTitle()
     }
