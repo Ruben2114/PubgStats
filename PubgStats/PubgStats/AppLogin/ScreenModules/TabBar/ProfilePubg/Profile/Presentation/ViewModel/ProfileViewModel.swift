@@ -33,21 +33,28 @@ final class ProfileViewModel {
             }
         }
     }
-    func allData() {
-        //TODO: aqui meter en el viewemodel las llamadas y dejar bloqeuado el otro boton
-    }
+    
     func saveUser(player: String, account: String) {
         let sessionUser: ProfileEntity = dependencies.external.resolve()
         profileDataUseCase.execute(sessionUser: sessionUser, player: player, account: account)
     }
+    
+    func changeValue(sessionUser: ProfileEntity,_ value: String, type: String) {
+        profileDataUseCase.changeValue(sessionUser: sessionUser,value, type: type)
+    }
+    
+    func checkName(name: String) -> Bool {
+        let check = profileDataUseCase.check(name,type: "name")
+        return check
+    }
+    
+    func checkEmail(email: String) -> Bool {
+        let check = profileDataUseCase.check(email,type: "email")
+        return check
+    }
+
     func backButton() {
         coordinator?.performTransition(.goBackView)
-    }
-    func didTapPersonalDataButton() {
-        coordinator?.performTransition(.goPersonalData)
-    }
-    func didTapSettingButton() {
-        coordinator?.performTransition(.goSetting)
     }
     func didTapStatsgAccountButton() {
         coordinator?.performTransition(.goStatsGeneral)

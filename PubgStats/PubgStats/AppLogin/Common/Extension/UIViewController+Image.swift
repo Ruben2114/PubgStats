@@ -8,18 +8,18 @@
 import UIKit
 
 extension UIViewController {
-    func makeImageView(name: String, height: CGFloat, width: CGFloat) -> UIImageView {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: name)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.heightAnchor.constraint(equalToConstant: height).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: width).isActive = true
-        return imageView
-    }
     func makeImageViewPersonal(name: String) -> UIImageView {
         let imageView = UIImageView()
         imageView.image = UIImage(named: name)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.borderWidth = 1.0
+        imageView.layer.borderColor = UIColor.clear.cgColor
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        imageView.layer.cornerRadius = 40
         return imageView
     }
+
 }

@@ -33,13 +33,6 @@ final class RegisterViewModel {
         let check = registerDataUseCase.check(email,type: "email")
         return check
     }
-    func checkValidEmail(email: String) -> Bool {
-        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-        
-        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
-        let check = emailPredicate.evaluate(with: email)
-        return check
-    }
     
     func backButton() {
         coordinator?.dismiss()

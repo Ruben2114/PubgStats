@@ -9,8 +9,6 @@ import UIKit
 
 enum ProfileTransition {
     case goBackView
-    case goPersonalData
-    case goSetting
     case goStatsGeneral
 }
 protocol ProfileCoordinator: Coordinator {
@@ -42,12 +40,6 @@ extension ProfileCoordinatorImp: ProfileCoordinator {
         switch transition {
         case .goBackView:
             (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewAppCoordinator()
-        case .goPersonalData:
-            let personalDataCoordinator = dependencies.external.personalDataCoordinator()
-            personalDataCoordinator.start()
-            append(child: personalDataCoordinator)
-        case .goSetting:
-            print("goSetting")
         case .goStatsGeneral:
             let statsGeneralCoordinator = dependencies.external.statsGeneralCoordinator()
             statsGeneralCoordinator.start()

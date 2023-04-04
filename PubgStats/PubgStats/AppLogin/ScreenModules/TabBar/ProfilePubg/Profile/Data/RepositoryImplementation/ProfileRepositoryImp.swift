@@ -15,4 +15,7 @@ struct ProfileRepositoryImp: ProfileRepository {
     func fetchPlayerData(name: String, completion: @escaping (Result<PubgPlayerDTO, Error>) -> Void) {
         remoteData.getPlayerData(name: name, completion: completion)
     }
+    func changeValue(sessionUser: ProfileEntity,_ value: String, type: String){
+        dataSource.saveNewValue(sessionUser: sessionUser,value, type: type)
+    }
 }

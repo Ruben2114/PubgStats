@@ -14,7 +14,7 @@ extension MessageDisplayable where Self: UIViewController{
             title: title,
             message: message,
             preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default)
+        let okAction = UIAlertAction(title: "Aceptar", style: .default)
         alertController.addAction(okAction)
         self.present(alertController, animated: true)
     }
@@ -27,5 +27,28 @@ extension MessageDisplayable where Self: UIViewController{
         Timer.scheduledTimer(withTimeInterval: timer, repeats: false) { _ in
             alertController.dismiss(animated: true, completion: nil)
         }
+    }
+   
+    func presentAlertTextField(title: String, message: String, textFields: [(title: String, placeholder: String)], action: (() -> Void)? = nil, completed: ((_ text: [String]) -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        for text in textFields {
+            alert.addTextField { (textField) in
+                textField.placeholder = text.placeholder
+            }
+        }
+        let actionAccept = UIAlertAction(title: "Aceptar", style: .default) { _ in
+            var texts: [String] = []
+            for textField in alert.textFields ?? [] {
+                if let text = textField.text {
+                    texts.append(text)
+                }
+            }
+            completed?(texts)
+            action?()
+        }
+        let actionCancel = UIAlertAction(title: "cancelar", style: .destructive)
+        alert.addAction(actionCancel)
+        alert.addAction(actionAccept)
+        present(alert, animated: true)
     }
 }

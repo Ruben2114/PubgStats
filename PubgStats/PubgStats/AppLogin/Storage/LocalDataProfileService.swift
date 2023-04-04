@@ -15,6 +15,7 @@ protocol LocalDataProfileService {
     func checkUser(sessionUser: ProfileEntity, name: String, password: String) -> Bool
     func checkUserAndChangePassword(name: String, email: String) -> Bool
     func savePlayerPubg(sessionUser: ProfileEntity, player: String, account: String)
+    func saveNewValue(sessionUser: ProfileEntity,_ value: String, type: String)
 }
 
 struct LocalDataProfileServiceImp: LocalDataProfileService {
@@ -47,6 +48,8 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         fetchRequest.predicate = NSPredicate(format: "name == %@ AND password == %@", name, password)
         let result = try? context.fetch(fetchRequest)
         guard let first = result?.first, sessionUser.name == first.name, !result!.isEmpty else{return false}
+        guard let email = first.email else {return false}
+        sessionUser.email = email
         sessionUser.player = first.player
         sessionUser.account = first.account
         return true
@@ -82,6 +85,34 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
                 try context.save()
                 sessionUser.player = player
                 sessionUser.account = account
+            }
+        } catch {
+            print("Error en core data")
+        }
+    }
+    func saveNewValue(sessionUser: ProfileEntity,_ value: String, type: String){
+        let fetchRequest = Profile.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
+        do {
+            let result = try context.fetch(fetchRequest)
+            let namePlayer = result.map {$0.name}.description
+            let name2 = namePlayer.replacingOccurrences(of: "[Optional(\"", with: "").replacingOccurrences(of: "\")]", with: "")
+            if sessionUser.name == name2 {
+                let user = result.first
+                if type == "name" {
+                    user?.name = value
+                    try context.save()
+                    sessionUser.name = value
+                } else if type == "email" {
+                    user?.email = value
+                    try context.save()
+                    sessionUser.email = value
+                } else if type == "password"{
+                    user?.password = value
+                    try context.save()
+                    sessionUser.password = value
+                }
+
             }
         } catch {
             print("Error en core data")

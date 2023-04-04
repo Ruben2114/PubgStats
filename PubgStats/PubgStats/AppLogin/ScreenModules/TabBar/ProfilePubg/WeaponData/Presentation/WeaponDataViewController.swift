@@ -52,30 +52,38 @@ class WeaponDataViewController: UIViewController {
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
     func bind(){
-        viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
-            switch state {
-            case .fail(_):
-                self?.presentAlert(message: "Error al cargar los datos: por favor vuelva e intentarlo en unos segundos", title: "Error")
-            case .success(model: let model):
-                self?.hideSpinner()
-                self?.viewModel.saveSurvivalData(weaponData: [model.self])
-                for data in model.data.attributes.weaponSummaries.keys {
-                    self?.weaponType.append(data)
-                }
-                self?.weaponType.sort { $0 < $1 }
-                self?.collectionView.reloadData()
-            case .loading:
-                self?.showSpinner()
+        if sessionUser.weapons != nil {
+            guard let model = sessionUser.weapons?.first else{ return}
+            for data in model.data.attributes.weaponSummaries.keys {
+                self.weaponType.append(data)
             }
-        }.store(in: &cancellable)
-        guard let id = sessionUser.account, !id.isEmpty else {return}
-        viewModel.fetchDataGeneral(account: id)
+            weaponType.sort { $0 < $1 }
+            collectionView.reloadData()
+        }else {
+            viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
+                switch state {
+                case .fail(_):
+                    self?.presentAlert(message: "Error al cargar los datos: por favor vuelva e intentarlo en unos segundos", title: "Error")
+                case .success(model: let model):
+                    self?.hideSpinner()
+                    self?.viewModel.saveSurvivalData(weaponData: [model.self])
+                    for data in model.data.attributes.weaponSummaries.keys {
+                        self?.weaponType.append(data)
+                    }
+                    self?.weaponType.sort { $0 < $1 }
+                    self?.collectionView.reloadData()
+                case .loading:
+                    self?.showSpinner()
+                }
+            }.store(in: &cancellable)
+            guard let id = sessionUser.account, !id.isEmpty else {return}
+            viewModel.fetchDataGeneral(account: id)
+        }
     }
     func configConstraint(){
         collectionView.backgroundColor = .white
         collectionView.dataSource = self
         collectionView.delegate = self
-        //collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         view.addSubview(collectionView)
         collectionView.register(ItemWeaponDataCollectionViewCell.self, forCellWithReuseIdentifier: "ItemWeaponDataCollectionViewCell")
         collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true

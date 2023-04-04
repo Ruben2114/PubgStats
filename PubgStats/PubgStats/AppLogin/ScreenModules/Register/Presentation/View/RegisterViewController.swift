@@ -92,7 +92,7 @@ final class RegisterViewController: UIViewController,UISheetPresentationControll
             }
             return
         }
-        guard viewModel.checkValidEmail(email: emailText) == true else {
+        guard checkValidEmail(email: emailText) == true else {
             presentAlert(message: "El correo no es válido", title: "Error")
             return
         }
