@@ -12,7 +12,6 @@ protocol RegisterDependency {
     func resolve() -> RegisterCoordinator?
     func resolve() -> RegisterDataUseCase
     func resolve() -> RegisterRepository
-    func resolve() -> CommonRepository
 }
 extension RegisterDependency {
     func resolve() -> RegisterViewController {
@@ -26,8 +25,5 @@ extension RegisterDependency {
     }
     func resolve() -> RegisterRepository {
         RegisterRepositoryImp(dependencies: self)
-    }
-    func resolve() -> CommonRepository {
-        CommonRepositoryImp(dependencies: )
     }
 }
