@@ -14,4 +14,5 @@ protocol AppContainer{
 struct AppContainerImp: AppContainer {
     
     var localDataService: LocalDataProfileService = LocalDataProfileServiceImp()
+    var remoteDataService: RemoteService = RemoteServiceImp()
 }

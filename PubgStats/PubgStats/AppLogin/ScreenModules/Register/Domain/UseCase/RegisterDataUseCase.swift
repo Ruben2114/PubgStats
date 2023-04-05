@@ -7,22 +7,15 @@
 
 import Foundation
 
-protocol RegisterDataUseCase {
-    func execute(name: String, password: String)
-    func check(name: String) -> Bool
+protocol RegisterDataUseCase: CommonUseCase {
+    func execute(name: String, password: String, email: String)
 }
 
 struct RegisterDataUseCaseImp: RegisterDataUseCase{
-    private let registerRepository: RegisterRepository
+    private(set) var registerRepository: RegisterRepository
     
-    init(registerRepository: RegisterRepository) {
-        self.registerRepository = registerRepository
-    }
-    func execute(name: String, password: String) {
-        return registerRepository.saveProfileModel(name: name, password: password)
-    }
-    func check(name: String) -> Bool {
-        registerRepository.checkName(name: name)
+    func execute(name: String, password: String, email: String) {
+        registerRepository.saveProfileModel(name: name, password: password, email: email)
     }
 }
 

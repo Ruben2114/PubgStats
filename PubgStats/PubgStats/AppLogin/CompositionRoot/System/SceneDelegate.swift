@@ -10,29 +10,37 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var appCoordinator: Coordinator?
-    var appFactory: AppFactory!
-
+    lazy var dependencies = AppDependencies(window: window)
+    var rootCoordinatorLogin: Coordinator?
+    var rootCoordinatorTabBar: Coordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let scene = (scene as? UIWindowScene) else { return }
-        let navigation = UINavigationController()
-        appFactory = AppFactoryImp()
-        window = UIWindow(windowScene: scene)
-        appCoordinator = AppCoordinator( navigation: navigation, appFactory: appFactory, window: window)
-        appCoordinator?.start()
-        
+        self.window = UIWindow(windowScene: scene)
+        window?.rootViewController = dependencies.loginNavigationController()
+        window?.makeKeyAndVisible()
+        rootCoordinatorLogin = dependencies.loginCoordinator()
+        rootCoordinatorLogin?.start()
     }
-    func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
-        guard let window = self.window else {
-            return
-        }
-        window.rootViewController = vc
-        window.makeKeyAndVisible()
-        window.overrideUserInterfaceStyle = .light
-        appCoordinator?.dismiss()
-        appCoordinator = nil
+    
+    func changeRootViewTabCoordinator(animated: Bool = true) {
+        window?.rootViewController = dependencies.tabBarController()
+        window?.makeKeyAndVisible()
+        rootCoordinatorTabBar = dependencies.mainTabBarCoordinator()
+        rootCoordinatorTabBar?.start()
+        rootCoordinatorLogin?.dismiss()
+        rootCoordinatorLogin = nil
+        dependencies.loginNavigationController().viewControllers = []
+    }
+    func changeRootViewAppCoordinator(animated: Bool = true) {
+        window?.rootViewController = dependencies.loginNavigationController()
+        window?.makeKeyAndVisible()
+        rootCoordinatorLogin = dependencies.loginCoordinator()
+        rootCoordinatorLogin?.start()
+        rootCoordinatorTabBar?.dismiss()
+        rootCoordinatorTabBar = nil
+        dependencies.tabBarController().viewControllers = []
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

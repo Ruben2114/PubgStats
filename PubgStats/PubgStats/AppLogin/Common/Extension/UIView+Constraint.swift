@@ -13,7 +13,6 @@ extension UIView {
         right: NSLayoutXAxisAnchor? = nil,
         bottom: NSLayoutYAxisAnchor? = nil,
         left: NSLayoutXAxisAnchor? = nil,
-        //ahora el padding
         pTop: CGFloat = CGFloat.zero,
         pRight: CGFloat = CGFloat.zero,
         pBottom: CGFloat = CGFloat.zero,

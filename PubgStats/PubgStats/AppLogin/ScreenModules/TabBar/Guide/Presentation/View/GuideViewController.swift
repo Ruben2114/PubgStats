@@ -10,16 +10,17 @@ import WebKit
 import Combine
 
 class GuideViewController: UIViewController  {
-    var cancel = Set<AnyCancellable>()
-    private let viewModel: GuideViewModel
     var webView: WKWebView = {
         let webConfiguration = WKWebViewConfiguration()
         let web = WKWebView(frame: .zero, configuration: webConfiguration)
         return web
     }()
     
-    init(viewModel: GuideViewModel) {
-        self.viewModel = viewModel
+    var cancellable = Set<AnyCancellable>()
+    private let viewModel: GuideViewModel
+    
+    init(dependencies: GuideDependency) {
+        self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -46,7 +47,7 @@ class GuideViewController: UIViewController  {
              case .fail(error: let error):
                  self?.presentAlert(message: error, title: "Error")
              }
-         }.store(in: &cancel)
+         }.store(in: &cancellable)
          viewModel.checkUrl()
      }
 }
