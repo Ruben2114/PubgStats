@@ -9,6 +9,8 @@ import UIKit
 
 struct AppDependencies {
     let window: UIWindow?
+    private let localDataService = LocalDataProfileServiceImp()
+    private let remoteDataService = RemoteServiceImp()
     private var tabController = UITabBarController()
     private let loginNavController = UINavigationController()
     private let profileNavController = UINavigationController()
@@ -21,11 +23,15 @@ struct AppDependencies {
     init(window: UIWindow?) {
         self.window = window
     }
-    
+    func resolve() -> LocalDataProfileService {
+        localDataService
+    }
+    func resolve() -> RemoteService {
+        remoteDataService
+    }
     func resolve() -> ProfileEntity {
         sessionUser
     }
-    
     func resolve() -> AppDependencies {
         self
     }
@@ -38,7 +44,6 @@ struct AppDependencies {
     func profileNavigationController() -> UINavigationController {
         profileNavController
     }
-    
     func tabBarController() -> UITabBarController {
         tabController
     }
@@ -69,4 +74,5 @@ extension AppDependencies:
     KillsDataExternalDependency,
     WeaponDataExternalDependency,
     WeaponDataDetailExternalDependency,
-    PersonalDataExternalDependency{}
+    PersonalDataExternalDependency,
+    CommonExternalDependency{}

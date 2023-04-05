@@ -57,6 +57,8 @@
 		4670EDEF29D4438500C1062E /* PersonalDataCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDEE29D4438500C1062E /* PersonalDataCoordinator.swift */; };
 		8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */; };
 		8C31FDB729C329E500196704 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31FDB629C329E500196704 /* ContactViewController.swift */; };
+		8C3CC20C29DD619400D34228 /* CommonDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3CC20B29DD619400D34228 /* CommonDependency.swift */; };
+		8C3CC20E29DD66B400D34228 /* CommonExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3CC20D29DD66B400D34228 /* CommonExternalDependency.swift */; };
 		8C64E4C829DC646800303760 /* CommonUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C64E4C729DC646800303760 /* CommonUseCase.swift */; };
 		8C64E4CA29DC663700303760 /* CommonRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C64E4C929DC663700303760 /* CommonRepository.swift */; };
 		8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */; };
@@ -210,6 +212,8 @@
 		4670EDEE29D4438500C1062E /* PersonalDataCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataCoordinator.swift; sourceTree = "<group>"; };
 		8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		8C31FDB629C329E500196704 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
+		8C3CC20B29DD619400D34228 /* CommonDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDependency.swift; sourceTree = "<group>"; };
+		8C3CC20D29DD66B400D34228 /* CommonExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExternalDependency.swift; sourceTree = "<group>"; };
 		8C64E4C729DC646800303760 /* CommonUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUseCase.swift; sourceTree = "<group>"; };
 		8C64E4C929DC663700303760 /* CommonRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRepository.swift; sourceTree = "<group>"; };
 		8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraint.swift"; sourceTree = "<group>"; };
@@ -617,9 +621,19 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		8C3CC20A29DD616D00D34228 /* DependenciesResolve */ = {
+			isa = PBXGroup;
+			children = (
+				8C3CC20B29DD619400D34228 /* CommonDependency.swift */,
+				8C3CC20D29DD66B400D34228 /* CommonExternalDependency.swift */,
+			);
+			path = DependenciesResolve;
+			sourceTree = "<group>";
+		};
 		8C64E4C429DC641500303760 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				8C3CC20A29DD616D00D34228 /* DependenciesResolve */,
 				8C64E4C629DC642800303760 /* InterfaceRepository */,
 				8C64E4C529DC642200303760 /* UseCase */,
 			);
@@ -1708,6 +1722,7 @@
 				8C7563E429BB5F17000373F9 /* MessageDisplayable.swift in Sources */,
 				461C1F7829CB5CF500540289 /* RegisterDependency.swift in Sources */,
 				4670EDEA29D442FD00C1062E /* PersonalDataDependency.swift in Sources */,
+				8C3CC20E29DD66B400D34228 /* CommonExternalDependency.swift in Sources */,
 				8CB39B9729C05DDE00B1D8EF /* LoginRepository.swift in Sources */,
 				8CA720A829DAD585001E3EFA /* ForgotDataUseCase.swift in Sources */,
 				465550D829CC504100BF932A /* ProfileCoordinator.swift in Sources */,
@@ -1742,6 +1757,7 @@
 				4670EDEF29D4438500C1062E /* PersonalDataCoordinator.swift in Sources */,
 				8CA9025E29D2F475004E71D0 /* WeaponDataDetailCoordinatorImp.swift in Sources */,
 				461C1F7629CB5BF100540289 /* RegisterCoordinator.swift in Sources */,
+				8C3CC20C29DD619400D34228 /* CommonDependency.swift in Sources */,
 				465550C629CC3A5600BF932A /* UIViewController+Image.swift in Sources */,
 				8C7563E029BB5E5E000373F9 /* SpinnerDisplayable.swift in Sources */,
 				8CB07ED229D1CFF1000EE257 /* StatsGeneralDataUseCase.swift in Sources */,

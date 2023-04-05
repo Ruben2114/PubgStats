@@ -7,13 +7,11 @@
 
 protocol CommonUseCase {
     func check(_ value: String?, type: String) -> Bool
+    var commonRepository: CommonRepository { get }
 }
 
 extension CommonUseCase {
-    
     func check(_ value: String?, type: String) -> Bool {
-        let dataSource = LocalDataProfileServiceImp()
-        let commonRepository = CommonRepositoryImp(dataSource: dataSource)
         guard let value = value else { return false }
         if type == "name" {
             return commonRepository.checkName(name: value)

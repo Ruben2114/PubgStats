@@ -6,8 +6,12 @@
 //
 
 struct ProfileRepositoryImp: ProfileRepository {
-    var dataSource: LocalDataProfileService
-    var remoteData: RemoteService
+    private let dataSource: LocalDataProfileService
+    private let remoteData: RemoteService
+    init(dependencies: ProfileDependency) {
+        self.dataSource = dependencies.external.resolve()
+        self.remoteData = dependencies.external.resolve()
+    }
 
     func saveProfilePubg(sessionUser: ProfileEntity, player: String, account: String) {
         return dataSource.savePlayerPubg(sessionUser: sessionUser, player: player, account: account)

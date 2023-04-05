@@ -14,8 +14,12 @@ protocol ProfileDataUseCase: CommonUseCase {
 }
 
 struct ProfileDataUseCaseImp: ProfileDataUseCase{
+    internal let commonRepository: CommonRepository
     private(set) var profileRepository: ProfileRepository
-    
+    init(dependencies: ProfileDependency) {
+        self.commonRepository = dependencies.external.resolve()
+        self.profileRepository = dependencies.resolve()
+    }
     func execute(sessionUser: ProfileEntity, player: String, account: String) {
         return profileRepository.saveProfilePubg(sessionUser: sessionUser, player: player, account: account)
     }

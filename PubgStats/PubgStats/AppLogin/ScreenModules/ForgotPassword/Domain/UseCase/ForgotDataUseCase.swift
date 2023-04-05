@@ -10,8 +10,10 @@ protocol ForgotDataUseCase {
 }
 
 struct ForgotDataUseCaseImp: ForgotDataUseCase {
-    private(set) var forgotRepository: ForgotRepository
-
+    private let forgotRepository: ForgotRepository
+    init(dependencies: ForgotDependency) {
+        self.forgotRepository = dependencies.resolve()
+    }
     func check(name: String, email: String) -> Bool {
         forgotRepository.check(name: name, email: email)
     }

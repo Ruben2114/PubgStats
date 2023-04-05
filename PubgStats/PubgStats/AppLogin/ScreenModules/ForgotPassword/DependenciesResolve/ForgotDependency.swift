@@ -11,6 +11,7 @@ protocol ForgotDependency {
     func resolve() -> ForgotViewController
     func resolve() -> ForgotViewModel
     func resolve() -> ForgotDataUseCase
+    func resolve() -> ForgotRepository
 }
 
 extension ForgotDependency {
@@ -21,9 +22,9 @@ extension ForgotDependency {
         ForgotViewModel(dependencies: self)
     }
     func resolve() -> ForgotDataUseCase {
-        let dataSource = AppContainerImp().localDataService
-        let forgotRepository = ForgotRepositoryImp(dataSource: dataSource)
-        let forgotDataUseCase = ForgotDataUseCaseImp(forgotRepository: forgotRepository)
-        return forgotDataUseCase
+        ForgotDataUseCaseImp(dependencies: self)
+    }
+    func resolve() -> ForgotRepository {
+        ForgotRepositoryImp(dependencies: self)
     }
 }

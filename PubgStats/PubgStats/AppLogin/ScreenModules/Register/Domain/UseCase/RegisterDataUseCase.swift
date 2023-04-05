@@ -12,7 +12,13 @@ protocol RegisterDataUseCase: CommonUseCase {
 }
 
 struct RegisterDataUseCaseImp: RegisterDataUseCase{
+    internal let commonRepository: CommonRepository
     private(set) var registerRepository: RegisterRepository
+    
+    init(dependencies: RegisterDependency) {
+        self.commonRepository = dependencies.external.resolve()
+        self.registerRepository = dependencies.resolve()
+    }
     
     func execute(name: String, password: String, email: String) {
         registerRepository.saveProfileModel(name: name, password: password, email: email)

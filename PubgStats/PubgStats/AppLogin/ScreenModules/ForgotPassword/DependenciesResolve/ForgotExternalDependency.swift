@@ -11,6 +11,7 @@ protocol ForgotExternalDependency {
     func resolve() -> AppDependencies
     func forgotCoordinator() -> Coordinator
     func loginNavigationController() -> UINavigationController
+    func resolve() -> LocalDataProfileService
 }
 
 extension ForgotExternalDependency {

@@ -10,7 +10,10 @@ protocol LoginDataUseCase {
 }
 
 struct LoginDataUseCaseImp: LoginDataUseCase {
-    private(set) var loginRepository: LoginRepository
+    private let loginRepository: LoginRepository
+    init(dependencies: LoginDependency) {
+        self.loginRepository = dependencies.resolve()
+    }
 
     func check(sessionUser: ProfileEntity, name: String, password: String) -> Bool {
         loginRepository.checkName(sessionUser: sessionUser, name: name, password: password)

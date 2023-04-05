@@ -11,6 +11,7 @@ protocol RegisterExternalDependency {
     func resolve() -> AppDependencies
     func registerCoordinator() -> Coordinator
     func loginNavigationController() -> UINavigationController
+    func resolve() -> LocalDataProfileService
 }
 
 extension RegisterExternalDependency {
@@ -18,3 +19,4 @@ extension RegisterExternalDependency {
         RegisterCoordinatorImp(dependencies: self, navigation: loginNavigationController())
     }
 }
+
