@@ -11,6 +11,9 @@ protocol FavouriteExternalDependency {
     func resolve() -> AppDependencies
     func favouriteCoordinator() -> Coordinator
     func favouriteNavigationController() -> UINavigationController
+    func resolve() -> ProfileEntity
+    func resolve() -> LocalDataProfileService
+    func resolve() -> RemoteService
 }
 extension FavouriteExternalDependency {
     func favouriteCoordinator() -> Coordinator {

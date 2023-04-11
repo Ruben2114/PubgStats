@@ -5,17 +5,18 @@
 //  Created by Rubén Rodríguez Cervigón on 21/3/23.
 //
 
+import Foundation
 
 protocol ProfileDataUseCase: CommonUseCase {
     func execute(sessionUser: ProfileEntity, player: String, account: String)
     func fetchPlayerData(name: String, completion: @escaping (Result<PubgPlayerDTO, Error>) -> Void)
     func changeValue(sessionUser: ProfileEntity,_ value: String, type: String)
-    
+    func changeImage(sessionUser: ProfileEntity, image: Data)
 }
 
 struct ProfileDataUseCaseImp: ProfileDataUseCase{
     internal let commonRepository: CommonRepository
-    private(set) var profileRepository: ProfileRepository
+    private let profileRepository: ProfileRepository
     init(dependencies: ProfileDependency) {
         self.commonRepository = dependencies.external.resolve()
         self.profileRepository = dependencies.resolve()
@@ -28,5 +29,8 @@ struct ProfileDataUseCaseImp: ProfileDataUseCase{
     }
     func changeValue(sessionUser: ProfileEntity,_ value: String, type: String) {
         profileRepository.changeValue(sessionUser: sessionUser,value, type: type)
+    }
+    func changeImage(sessionUser: ProfileEntity, image: Data){
+        profileRepository.changeImage(sessionUser: sessionUser, image: image)
     }
 }

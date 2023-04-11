@@ -10,8 +10,10 @@ protocol WeaponDataUseCase {
 }
 
 struct WeaponDataUseCaseImp: WeaponDataUseCase {
-    private(set) var weaponDataRepository: WeaponDataRepository
-
+    private let weaponDataRepository: WeaponDataRepository
+    init(dependencies: WeaponDataDependency) {
+        self.weaponDataRepository = dependencies.resolve()
+    }
     func execute(account: String, completion: @escaping (Result<WeaponDTO, Error>) -> Void){
         weaponDataRepository.fetchWeaponData(account: account, completion: completion)
     }

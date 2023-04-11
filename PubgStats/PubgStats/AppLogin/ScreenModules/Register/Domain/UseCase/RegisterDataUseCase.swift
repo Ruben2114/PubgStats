@@ -13,7 +13,7 @@ protocol RegisterDataUseCase: CommonUseCase {
 
 struct RegisterDataUseCaseImp: RegisterDataUseCase{
     internal let commonRepository: CommonRepository
-    private(set) var registerRepository: RegisterRepository
+    private let registerRepository: RegisterRepository
     
     init(dependencies: RegisterDependency) {
         self.commonRepository = dependencies.external.resolve()

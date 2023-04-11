@@ -74,5 +74,6 @@ extension AppDependencies:
     KillsDataExternalDependency,
     WeaponDataExternalDependency,
     WeaponDataDetailExternalDependency,
-    PersonalDataExternalDependency,
-    CommonExternalDependency{}
+    HelpDataExternalDependency,
+    CommonExternalDependency,
+    SurvivalDataExternalDependency{}

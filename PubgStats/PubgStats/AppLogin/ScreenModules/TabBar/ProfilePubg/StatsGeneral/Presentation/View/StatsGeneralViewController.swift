@@ -68,10 +68,39 @@ final class StatsGeneralViewController: UIViewController {
     }
     private func bind() {
         nameLabel.text = sessionUser.player
-        if sessionUser.survival != nil, sessionUser.gameModes != nil {
-            guard let dataSurvival = sessionUser.survival?.first?.data.attributes else {return}
-            xpLabel.text = "\(dataSurvival.xp)\nXP"
-            levelLabel.text = "Nivel\n\(dataSurvival.level)"
+        let survivalData = viewModel.getSurvival(for: sessionUser)
+        let gamesModesData = viewModel.getGamesModes(for: sessionUser)
+        if survivalData?.survival != nil, gamesModesData?.first?.gamesMode != nil{
+            xpLabel.text = survivalData?.xp
+            levelLabel.text = survivalData?.level
+            print(gamesModesData?.count)
+            /*
+             var killsTotal: Int {
+                 let model = data.attributes.gameModeStats
+                 return model.duo.kills + model.duoFpp.kills + model.solo.kills + model.soloFpp.kills + model.squad.kills + model.squadFpp.kills
+             }
+             var top10STotal: Int {
+                 let model = data.attributes.gameModeStats
+                 return model.duo.top10S + model.duoFpp.top10S + model.solo.top10S + model.soloFpp.top10S + model.squad.top10S + model.squadFpp.top10S
+             }
+             var gamesPlayed: Int {
+                 let model = data.attributes.gameModeStats
+                 return model.duo.roundsPlayed + model.duoFpp.roundsPlayed + model.solo.roundsPlayed + model.soloFpp.roundsPlayed + model.squad.roundsPlayed + model.squadFpp.roundsPlayed
+             }
+             var wonTotal: Int {
+                 let model = data.attributes.gameModeStats
+                 return model.duo.wins + model.duoFpp.wins + model.solo.wins + model.soloFpp.wins + model.squad.wins + model.squadFpp.wins
+             }
+             var timePlayed: String {
+                 let model = data.attributes.gameModeStats
+                 let time = model.duo.timeSurvived + model.duoFpp.timeSurvived + model.solo.timeSurvived + model.soloFpp.timeSurvived + model.squad.timeSurvived + model.squadFpp.timeSurvived
+                 let days = time / 86400
+                 let hours = (time % 86400) / 3600
+                 let minutes = (time % 3600) / 60
+                 return "\(days) d \(hours) h \(minutes) m"
+             }
+             */
+           
             guard let dataGamesMode = sessionUser.gameModes?.first else {return}
             killsLabel.text = "\(dataGamesMode.killsTotal)\nMuertes"
             top10sLabel.text = "\(dataGamesMode.top10STotal)\nTop10S"
@@ -80,18 +109,22 @@ final class StatsGeneralViewController: UIViewController {
             timePlayedLabel.text = "\(dataGamesMode.timePlayed)\nTiempo Jugado"
             bestRankedLabel.text = "\(dataGamesMode.bestRank)\nMejor ranked"
         }else{
+            //TODO: borrar el codigo del directorio
+             let directorio = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+                     print(directorio)
             viewModel.state.receive(on: DispatchQueue.main)
                 .sink { [weak self ] state in
                     switch state {
                     case .loading:
                         self?.showSpinner()
-                    case .fail(error: let error):
-                        //TODO: manejar errores
-                        print(error)
+                    case .fail(_):
+                        //TODO: ver como implementar el temporizador
+                        self?.presentAlert(message: "Por favor debes esperar x tiempo para hacer la siguiente llamada", title: "Error")
                     case .successSurvival(model: let model):
                         self?.xpLabel.text = "\(model.data.attributes.xp) XP"
                         self?.levelLabel.text = "Nivel\n\(model.data.attributes.level)"
-                        self?.viewModel.saveSurvivalData(survivalData: [model.self])
+                        guard let user = self?.sessionUser else{return}
+                        self?.viewModel.saveSurvival(sessionUser: user, survivalData: [model.self])
                     case .successGamesModes(model: let model):
                         self?.killsLabel.text = "\(model.killsTotal)\nMuertes"
                         self?.top10sLabel.text = "\(model.top10STotal)\nTop10S"
@@ -99,7 +132,8 @@ final class StatsGeneralViewController: UIViewController {
                         self?.winsLabel.text = "\(model.wonTotal)\nVictorias"
                         self?.timePlayedLabel.text = "\(model.timePlayed)\nTiempo Jugado"
                         self?.bestRankedLabel.text = "\(model.bestRank)\nMejor ranked"
-                        self?.viewModel.saveGamesModeData(gamesModeData: [model.self])
+                        guard let user = self?.sessionUser else{return}
+                        self?.viewModel.saveGamesModeData(sessionUser: user, gamesModeData: [model.self])
                     case .success:
                         self?.hideSpinner()
                     }
@@ -175,7 +209,6 @@ final class StatsGeneralViewController: UIViewController {
             }
             return}
         refreshCount += 1
-        sessionUser.survival = nil
         sessionUser.gameModes = nil
         bind()
         mainScrollView.refreshControl?.endRefreshing()

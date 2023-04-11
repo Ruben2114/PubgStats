@@ -10,6 +10,7 @@ import UIKit
 enum ProfileTransition {
     case goBackView
     case goStatsGeneral
+    case goHelp
 }
 protocol ProfileCoordinator: Coordinator {
     func performTransition(_ transition: ProfileTransition)
@@ -44,6 +45,10 @@ extension ProfileCoordinatorImp: ProfileCoordinator {
             let statsGeneralCoordinator = dependencies.external.statsGeneralCoordinator()
             statsGeneralCoordinator.start()
             append(child: statsGeneralCoordinator)
+        case .goHelp:
+            let helpDataCoordinator = dependencies.external.helpDataCoordinator()
+            helpDataCoordinator.start()
+            append(child: helpDataCoordinator)
         }
     }
 }

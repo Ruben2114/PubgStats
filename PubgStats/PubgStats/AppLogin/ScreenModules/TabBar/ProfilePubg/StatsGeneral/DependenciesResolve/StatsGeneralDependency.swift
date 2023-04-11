@@ -11,6 +11,7 @@ protocol StatsGeneralDependency {
     func resolve() -> StatsGeneralViewController
     func resolve() -> StatsGeneralViewModel
     func resolve() -> StatsGeneralDataUseCase
+    func resolve() -> StatsGeneralRepository
 }
 
 extension StatsGeneralDependency {
@@ -21,9 +22,9 @@ extension StatsGeneralDependency {
         StatsGeneralViewModel(dependencies: self)
     }
     func resolve() -> StatsGeneralDataUseCase {
-        let remoteData = AppContainerImp().remoteDataService
-        let statsGeneralRepository = StatsGeneralRepositoryImp(remoteData: remoteData)
-        let statsGeneralDataUseCase = StatsGeneralDataUseCaseImp(statsGeneralRepository: statsGeneralRepository)
-        return statsGeneralDataUseCase
+        StatsGeneralDataUseCaseImp(dependencies: self)
+    }
+    func resolve() -> StatsGeneralRepository {
+        StatsGeneralRepositoryImp(dependencies: self)
     }
 }

@@ -5,6 +5,7 @@
 //  Created by Ruben Rodriguez on 27/3/23.
 //
 
+//TODO: nunca lo utilizo como utilizarlos para que tenga sentido el patron
 import Foundation
 struct PubgPlayer {
     private let data: [PubgPlayerData]

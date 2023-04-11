@@ -13,6 +13,7 @@ protocol WeaponDataExternalDependency {
     func weaponDataDetailCoordinator() -> Coordinator
     func profileNavigationController() -> UINavigationController
     func resolve() -> ProfileEntity
+    func resolve() -> RemoteService
 }
 
 extension WeaponDataExternalDependency {

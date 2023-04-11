@@ -9,14 +9,12 @@ import Foundation
 import Combine
 
 final class ProfileViewModel {
-    private let apiService: ApiClientService
     var state = PassthroughSubject<OutputPlayer, Never>()
     private weak var coordinator: ProfileCoordinator?
     private let profileDataUseCase: ProfileDataUseCase
     private let dependencies: ProfileDependency
     
-    init(dependencies: ProfileDependency,apiService: ApiClientService = ApiClientServiceImp()) {
-        self.apiService = apiService
+    init(dependencies: ProfileDependency) {
         self.dependencies = dependencies
         self.coordinator = dependencies.resolve()
         self.profileDataUseCase = dependencies.resolve()
@@ -38,11 +36,12 @@ final class ProfileViewModel {
         let sessionUser: ProfileEntity = dependencies.external.resolve()
         profileDataUseCase.execute(sessionUser: sessionUser, player: player, account: account)
     }
-    
     func changeValue(sessionUser: ProfileEntity,_ value: String, type: String) {
         profileDataUseCase.changeValue(sessionUser: sessionUser,value, type: type)
     }
-    
+    func changeImage(sessionUser: ProfileEntity, image: Data) {
+        profileDataUseCase.changeImage(sessionUser: sessionUser, image: image)
+    }
     func checkName(name: String) -> Bool {
         let check = profileDataUseCase.check(name,type: "name")
         return check
@@ -58,6 +57,9 @@ final class ProfileViewModel {
     }
     func didTapStatsgAccountButton() {
         coordinator?.performTransition(.goStatsGeneral)
+    }
+    func goHelp() {
+        coordinator?.performTransition(.goHelp)
     }
 }
 

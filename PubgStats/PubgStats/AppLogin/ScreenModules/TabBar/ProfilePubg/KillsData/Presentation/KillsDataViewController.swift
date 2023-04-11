@@ -8,12 +8,8 @@
 import UIKit
 
 class KillsDataViewController: UIViewController {
-    private let tableView: UITableView = {
-        let table = UITableView()
-        table.translatesAutoresizingMaskIntoConstraints = false
-        return table
-    }()
-    
+    private lazy var tableView = makeTableView()
+
     private let dependencies: KillsDataDependency
     private let viewModel: KillsDataViewModel
     init(dependencies: KillsDataDependency) {

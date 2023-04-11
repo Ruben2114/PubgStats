@@ -5,6 +5,8 @@
 //  Created by Rubén Rodríguez Cervigón on 21/3/23.
 //
 
+import Foundation
+
 struct ProfileRepositoryImp: ProfileRepository {
     private let dataSource: LocalDataProfileService
     private let remoteData: RemoteService
@@ -21,5 +23,8 @@ struct ProfileRepositoryImp: ProfileRepository {
     }
     func changeValue(sessionUser: ProfileEntity,_ value: String, type: String){
         dataSource.saveNewValue(sessionUser: sessionUser,value, type: type)
+    }
+    func changeImage(sessionUser: ProfileEntity, image: Data) {
+        dataSource.saveNewValue(sessionUser: sessionUser, image, type: "image")
     }
 }

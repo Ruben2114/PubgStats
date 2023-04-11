@@ -50,12 +50,18 @@ final class StatsGeneralViewModel {
             }
         }
     }
-
-    func saveSurvivalData(survivalData: [SurvivalDTO]) {
-        sessionUser.survival = survivalData
+    func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO]){
+        statsGeneralDataUseCase.saveSurvival(sessionUser: sessionUser, survivalData: survivalData)
     }
-    func saveGamesModeData(gamesModeData: [GamesModesDTO]) {
-        sessionUser.gameModes = gamesModeData
+    func getSurvival(for sessionUser: ProfileEntity) -> Survival?{
+        statsGeneralDataUseCase.getSurvival(for: sessionUser)
+    }
+    func getGamesModes(for sessionUser: ProfileEntity) -> [GamesModes]?{
+        statsGeneralDataUseCase.getGamesModes(for: sessionUser)
+    }
+    
+    func saveGamesModeData(sessionUser: ProfileEntity, gamesModeData: [GamesModesDTO]) {
+        statsGeneralDataUseCase.saveGamesModeData(sessionUser: sessionUser, gamesModeData: gamesModeData)
     }
     func backButton() {
         coordinator?.dismiss()

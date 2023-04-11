@@ -9,16 +9,11 @@ import UIKit
 import Combine
 
 final class ProfileViewController: UIViewController {
-    
-    private lazy var profileImageView = makeImageViewPersonal(name: "default")
+    private lazy var profileImageView = makeImageViewPersonal(name: "default", data: sessionUser.image)
     private lazy var nameLabel = makeLabelProfile(title: "\(sessionUser.name)", color: .black, font: 20, style: .title2, isBold: true)
     private lazy var emailLabel = makeLabelProfile(title: "\(sessionUser.email)", color: .black, font: 20, style: .title2, isBold: false)
+    private lazy var tableView = makeTableViewGroup()
     
-    private let tableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .insetGrouped)
-        table.translatesAutoresizingMaskIntoConstraints = false
-        return table
-    }()
     private let itemsContents = [
         ["Nombre", "Correo", "Contraseña", "Imagen"],
         ["Ayuda"],
@@ -205,10 +200,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
             vc.delegate = self
             vc.allowsEditing = true
             present(vc, animated: true)
-            profileImageView.isUserInteractionEnabled = true
         case (1, 0):
-            //TODO: explicacion de las recargas...
-            print("ayuda")
+            viewModel.goHelp()
         case (2, 0):
             let alert = UIAlertController(title: "Jugador", message: "", preferredStyle: .alert)
             alert.addTextField{ (namePubg) in
@@ -216,7 +209,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
             }
             let actionAccept = UIAlertAction(title: "Aceptar", style: .default){ [weak self]_ in
                 guard let name = alert.textFields?.first?.text, !name.isEmpty else {
-                    self?.presentAlert(message: "There are no users with an empty name", title: "Error")
+                    self?.presentAlert(message: "No existen jugadores sin nombre", title: "Error")
                     return}
                 self?.viewModel.dataGeneral(name: name)
             }
@@ -235,13 +228,12 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let imagenSeleccionada = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
             profileImageView.image = imagenSeleccionada
-            //self.viewModel.changeImage(image: imagenSeleccionada)
-            //TODO: guardar en coreData la foto, esta como image
+            guard let imageProfile = profileImageView.image else {return}
+            guard let imageData = imageProfile.pngData() else {return}
+            self.viewModel.changeImage(sessionUser: dependencies.external.resolve(), image: imageData)
         }
-        
         picker.dismiss(animated: true)
     }
-    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)
     }

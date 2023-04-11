@@ -8,11 +8,7 @@
 import UIKit
 
 class WeaponDataDetailViewController: UIViewController {
-    let tableView: UITableView = {
-        let table = UITableView()
-        table.translatesAutoresizingMaskIntoConstraints = false
-        return table
-    }()
+    private lazy var tableView = makeTableView()
     private var weaponInfo: [(String, Any)] = []
     
     private let viewModel: WeaponDataDetailViewModel
@@ -61,7 +57,7 @@ class WeaponDataDetailViewController: UIViewController {
                     weaponInfo.append(("Level Current", level))
                     weaponInfo.append(("Tier Current", tier))
                     for (key, value) in value.value.statsTotal {
-                        weaponInfo.append((key, String(value)))
+                        weaponInfo.append((key, String(format: "%.0f", value)))
                     }
                 }
             }
