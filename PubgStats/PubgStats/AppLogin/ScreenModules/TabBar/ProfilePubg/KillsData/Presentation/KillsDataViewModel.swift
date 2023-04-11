@@ -8,29 +8,37 @@
 final class KillsDataViewModel {
     private weak var coordinator: KillsDataCoordinator?
     private let dependencies: KillsDataDependency
-    private var dataKills: [String] = []
-    var dataKillsDict: [String: Int] = [:]
+    var dataKills: [String] = []
+    private let sessionUser: ProfileEntity
+    private let killsDataUseCase: KillsDataUseCase
     init(dependencies: KillsDataDependency) {
         self.dependencies = dependencies
         self.coordinator = dependencies.resolve()
+        self.sessionUser = dependencies.external.resolve()
+        self.killsDataUseCase = dependencies.resolve()
+    }
+    
+    func getGamesModes(for sessionUser: ProfileEntity) -> [GamesModes]?{
+        killsDataUseCase.getGamesModes(for: sessionUser)
     }
     func fetchDataKills() {
-        let sessionUser: ProfileEntity = dependencies.external.resolve()
-        guard let gameModes = sessionUser.gameModes?.first else { return }
-        reflectStats(gameModes.squad, gameModes.squadFpp, gameModes.duo, gameModes.duoFpp, gameModes.solo, gameModes.soloFpp)
-        for item in dataKills {
-            let components = item.components(separatedBy: ": ")
-            guard let value = Int(components[1]) else {
-                continue
+        let gameModes = getGamesModes(for: sessionUser)
+        if let modes = gameModes {
+            var dataGamesModes: [(String, Any)] = []
+            for mode in modes {
+                let excludedKeys = ["bestRankPoint", "gamesPlayed", "timePlayed", "top10STotal", "wonTotal","mode","losses","mostSurvivalTime","longestTimeSurvived","rankPoints","rankPointsTitle","rideDistance","roundsPlayed","swimDistance","timeSurvived","top10S","walkDistance","weaponsAcquired","weeklyWINS","dailyWINS","winPoints","wins","damageDealt","days"]
+                let keyValues = mode.entity.attributesByName.filter { !excludedKeys.contains($0.key) }.map { ($0.key, mode.value(forKey: $0.key) ?? "") }
+                dataGamesModes.append(contentsOf: keyValues)
             }
-            dataKillsDict[components[0]] = dataKillsDict[components[0], default: 0] + value
-        }
-    }
-    func reflectStats(_ stats: Any...) {
-        for stat in stats {
-            for (name, value) in Mirror(reflecting: stat).children {
-                dataKills.append("\(name?.uppercased() ?? ""): \(value)")
+            let combinedDataGamesModes = dataGamesModes.reduce(into: [:]) { result, element in
+                if let previousValue = result[element.0] as? Int, let currentValue = element.1 as? Int {
+                    result[element.0] = previousValue + currentValue
+                } else {
+                    result[element.0] = element.1
+                }
             }
+            let dataArray = combinedDataGamesModes.map { key, value in "\(key): \(value)" }
+            dataKills = dataArray
         }
     }
     func backButton() {

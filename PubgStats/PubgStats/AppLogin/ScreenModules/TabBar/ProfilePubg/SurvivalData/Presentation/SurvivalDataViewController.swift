@@ -54,7 +54,14 @@ extension SurvivalDataViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.backgroundColor = .systemCyan
-        let contentItem = viewModel.content[indexPath.row].0 + ": " +  String(describing: viewModel.content[indexPath.row].1)
+        let model = viewModel.content.map { $0.0 }
+        let sortedModel = model.sorted()
+        let sortedDataGamesModes = sortedModel.map { key in
+            let value = viewModel.content.first(where: { $0.0 == key })!.1
+            return (key, value)
+        }
+        let item = sortedDataGamesModes[indexPath.row]
+        let contentItem = item.0 + ": " + String(describing: item.1)
         var listContent = UIListContentConfiguration.cell()
         listContent.text = contentItem
         cell.contentConfiguration = listContent

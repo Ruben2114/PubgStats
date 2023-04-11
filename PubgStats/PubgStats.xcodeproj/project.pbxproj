@@ -82,18 +82,16 @@
 		8CA720AB29DAD5F4001E3EFA /* ForgotRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA720AA29DAD5F4001E3EFA /* ForgotRepository.swift */; };
 		8CA720AE29DAD6FD001E3EFA /* ForgotRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA720AD29DAD6FD001E3EFA /* ForgotRepositoryImp.swift */; };
 		8CA720B029DAE3F6001E3EFA /* UIViewController+Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA720AF29DAE3F6001E3EFA /* UIViewController+Label.swift */; };
-		8CA720B429DAEC3B001E3EFA /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA720B229DAEC3B001E3EFA /* TableViewCell.swift */; };
-		8CA720B529DAEC3B001E3EFA /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA720B329DAEC3B001E3EFA /* TableViewCell.xib */; };
 		8CA85D8629DC46160050C19B /* UIViewController+func.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA85D8529DC46160050C19B /* UIViewController+func.swift */; };
 		8CA9024629D2BBF9004E71D0 /* WeaponDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9024529D2BBF9004E71D0 /* WeaponDataUseCase.swift */; };
 		8CA9024B29D2BCB4004E71D0 /* WeaponDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9024A29D2BCB4004E71D0 /* WeaponDataRepository.swift */; };
 		8CA9024D29D2BF49004E71D0 /* WeaponDataRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9024C29D2BF49004E71D0 /* WeaponDataRepositoryImp.swift */; };
-		8CA9025029D2E20A004E71D0 /* ItemWeaponDataCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9024F29D2E20A004E71D0 /* ItemWeaponDataCollectionViewCell.swift */; };
+		8CA9025029D2E20A004E71D0 /* ItemDataCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9024F29D2E20A004E71D0 /* ItemDataCollectionViewCell.swift */; };
 		8CA9025629D2F2C0004E71D0 /* WeaponDataDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025529D2F2C0004E71D0 /* WeaponDataDetailViewController.swift */; };
 		8CA9025829D2F382004E71D0 /* WeaponDataDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025729D2F382004E71D0 /* WeaponDataDetailViewModel.swift */; };
 		8CA9025A29D2F3DD004E71D0 /* WeaponDataDetailDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025929D2F3DD004E71D0 /* WeaponDataDetailDependency.swift */; };
 		8CA9025C29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025B29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift */; };
-		8CA9025E29D2F475004E71D0 /* WeaponDataDetailCoordinatorImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025D29D2F475004E71D0 /* WeaponDataDetailCoordinatorImp.swift */; };
+		8CA9025E29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025D29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift */; };
 		8CA9026229D33458004E71D0 /* ViewScrollableXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9026129D33458004E71D0 /* ViewScrollableXib.swift */; };
 		8CAC3E2D29C3055300A1FE34 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E2C29C3055300A1FE34 /* GuideViewController.swift */; };
 		8CAC3E2F29C3080600A1FE34 /* GuideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E2E29C3080600A1FE34 /* GuideViewModel.swift */; };
@@ -150,6 +148,25 @@
 		8CD7CD9329BF62BE00C57346 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD9229BF62BE00C57346 /* RegisterViewModel.swift */; };
 		8CE093EC29D5AE2E0069CE24 /* videoLogin.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 8CE093EB29D5AE220069CE24 /* videoLogin.mp4 */; };
 		8CE093EE29D5AF6A0069CE24 /* videoLoginPubg.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 8CE093ED29D5AF570069CE24 /* videoLoginPubg.mp4 */; };
+		8CE9BDA929E57D5E00F45D3F /* SurvivalDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDA829E57D5E00F45D3F /* SurvivalDataUseCase.swift */; };
+		8CE9BDAB29E57DD600F45D3F /* SurvivalDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDAA29E57DD600F45D3F /* SurvivalDataRepository.swift */; };
+		8CE9BDAF29E57E4700F45D3F /* SurvivalDataRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDAE29E57E4700F45D3F /* SurvivalDataRepositoryImp.swift */; };
+		8CE9BDB729E5807F00F45D3F /* GamesModesDataDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDB629E5807F00F45D3F /* GamesModesDataDependency.swift */; };
+		8CE9BDB929E580E200F45D3F /* GamesModesDataExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDB829E580E200F45D3F /* GamesModesDataExternalDependency.swift */; };
+		8CE9BDBB29E5815000F45D3F /* GamesModesDataCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDBA29E5815000F45D3F /* GamesModesDataCoordinator.swift */; };
+		8CE9BDBD29E5824200F45D3F /* GamesModesDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDBC29E5824200F45D3F /* GamesModesDataViewController.swift */; };
+		8CE9BDBF29E582DF00F45D3F /* GamesModesDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDBE29E582DF00F45D3F /* GamesModesDataViewModel.swift */; };
+		8CE9BDC229E5836400F45D3F /* GamesModesDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDC129E5836400F45D3F /* GamesModesDataUseCase.swift */; };
+		8CE9BDC529E583F000F45D3F /* GamesModesDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDC429E583F000F45D3F /* GamesModesDataRepository.swift */; };
+		8CE9BDC829E5842000F45D3F /* GamesModesDataRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDC729E5842000F45D3F /* GamesModesDataRepositoryImp.swift */; };
+		8CE9BDCE29E59F1400F45D3F /* GamesModesDataDetailDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDCD29E59F1400F45D3F /* GamesModesDataDetailDependency.swift */; };
+		8CE9BDD029E59F4500F45D3F /* GamesModesDataDetailExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDCF29E59F4500F45D3F /* GamesModesDataDetailExternalDependency.swift */; };
+		8CE9BDD229E59F9200F45D3F /* GamesModesDataDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDD129E59F9200F45D3F /* GamesModesDataDetailCoordinator.swift */; };
+		8CE9BDD429E5A01A00F45D3F /* GamesModesDataDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDD329E5A01A00F45D3F /* GamesModesDataDetailViewController.swift */; };
+		8CE9BDD629E5A12200F45D3F /* GamesModesDataDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDD529E5A12200F45D3F /* GamesModesDataDetailViewModel.swift */; };
+		8CE9BDDA29E5B6CF00F45D3F /* KillsDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDD929E5B6CF00F45D3F /* KillsDataUseCase.swift */; };
+		8CE9BDDD29E5B72400F45D3F /* KillsDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDDC29E5B72400F45D3F /* KillsDataRepository.swift */; };
+		8CE9BDE129E5B77100F45D3F /* KillsDataRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDE029E5B77100F45D3F /* KillsDataRepositoryImp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -249,18 +266,16 @@
 		8CA720AA29DAD5F4001E3EFA /* ForgotRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotRepository.swift; sourceTree = "<group>"; };
 		8CA720AD29DAD6FD001E3EFA /* ForgotRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotRepositoryImp.swift; sourceTree = "<group>"; };
 		8CA720AF29DAE3F6001E3EFA /* UIViewController+Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Label.swift"; sourceTree = "<group>"; };
-		8CA720B229DAEC3B001E3EFA /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
-		8CA720B329DAEC3B001E3EFA /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		8CA85D8529DC46160050C19B /* UIViewController+func.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+func.swift"; sourceTree = "<group>"; };
 		8CA9024529D2BBF9004E71D0 /* WeaponDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataUseCase.swift; sourceTree = "<group>"; };
 		8CA9024A29D2BCB4004E71D0 /* WeaponDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataRepository.swift; sourceTree = "<group>"; };
 		8CA9024C29D2BF49004E71D0 /* WeaponDataRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataRepositoryImp.swift; sourceTree = "<group>"; };
-		8CA9024F29D2E20A004E71D0 /* ItemWeaponDataCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemWeaponDataCollectionViewCell.swift; sourceTree = "<group>"; };
+		8CA9024F29D2E20A004E71D0 /* ItemDataCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDataCollectionViewCell.swift; sourceTree = "<group>"; };
 		8CA9025529D2F2C0004E71D0 /* WeaponDataDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailViewController.swift; sourceTree = "<group>"; };
 		8CA9025729D2F382004E71D0 /* WeaponDataDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailViewModel.swift; sourceTree = "<group>"; };
 		8CA9025929D2F3DD004E71D0 /* WeaponDataDetailDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailDependency.swift; sourceTree = "<group>"; };
 		8CA9025B29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailExternalDependency.swift; sourceTree = "<group>"; };
-		8CA9025D29D2F475004E71D0 /* WeaponDataDetailCoordinatorImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailCoordinatorImp.swift; sourceTree = "<group>"; };
+		8CA9025D29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailCoordinator.swift; sourceTree = "<group>"; };
 		8CA9026129D33458004E71D0 /* ViewScrollableXib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScrollableXib.swift; sourceTree = "<group>"; };
 		8CAC3E2C29C3055300A1FE34 /* GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		8CAC3E2E29C3080600A1FE34 /* GuideViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewModel.swift; sourceTree = "<group>"; };
@@ -317,6 +332,25 @@
 		8CD7CD9229BF62BE00C57346 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		8CE093EB29D5AE220069CE24 /* videoLogin.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = videoLogin.mp4; sourceTree = "<group>"; };
 		8CE093ED29D5AF570069CE24 /* videoLoginPubg.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = videoLoginPubg.mp4; sourceTree = "<group>"; };
+		8CE9BDA829E57D5E00F45D3F /* SurvivalDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataUseCase.swift; sourceTree = "<group>"; };
+		8CE9BDAA29E57DD600F45D3F /* SurvivalDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataRepository.swift; sourceTree = "<group>"; };
+		8CE9BDAE29E57E4700F45D3F /* SurvivalDataRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataRepositoryImp.swift; sourceTree = "<group>"; };
+		8CE9BDB629E5807F00F45D3F /* GamesModesDataDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesDataDependency.swift; sourceTree = "<group>"; };
+		8CE9BDB829E580E200F45D3F /* GamesModesDataExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesDataExternalDependency.swift; sourceTree = "<group>"; };
+		8CE9BDBA29E5815000F45D3F /* GamesModesDataCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesDataCoordinator.swift; sourceTree = "<group>"; };
+		8CE9BDBC29E5824200F45D3F /* GamesModesDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesDataViewController.swift; sourceTree = "<group>"; };
+		8CE9BDBE29E582DF00F45D3F /* GamesModesDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesDataViewModel.swift; sourceTree = "<group>"; };
+		8CE9BDC129E5836400F45D3F /* GamesModesDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesDataUseCase.swift; sourceTree = "<group>"; };
+		8CE9BDC429E583F000F45D3F /* GamesModesDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesDataRepository.swift; sourceTree = "<group>"; };
+		8CE9BDC729E5842000F45D3F /* GamesModesDataRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesDataRepositoryImp.swift; sourceTree = "<group>"; };
+		8CE9BDCD29E59F1400F45D3F /* GamesModesDataDetailDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesDataDetailDependency.swift; sourceTree = "<group>"; };
+		8CE9BDCF29E59F4500F45D3F /* GamesModesDataDetailExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesDataDetailExternalDependency.swift; sourceTree = "<group>"; };
+		8CE9BDD129E59F9200F45D3F /* GamesModesDataDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesDataDetailCoordinator.swift; sourceTree = "<group>"; };
+		8CE9BDD329E5A01A00F45D3F /* GamesModesDataDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesDataDetailViewController.swift; sourceTree = "<group>"; };
+		8CE9BDD529E5A12200F45D3F /* GamesModesDataDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesDataDetailViewModel.swift; sourceTree = "<group>"; };
+		8CE9BDD929E5B6CF00F45D3F /* KillsDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillsDataUseCase.swift; sourceTree = "<group>"; };
+		8CE9BDDC29E5B72400F45D3F /* KillsDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillsDataRepository.swift; sourceTree = "<group>"; };
+		8CE9BDE029E5B77100F45D3F /* KillsDataRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillsDataRepositoryImp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -354,6 +388,8 @@
 				8CB6396729D242FB00763231 /* WeaponData */,
 				8CA9025129D2F24E004E71D0 /* WeaponDataDetail */,
 				8CCC92CB29E40D110019BE72 /* SurvivalData */,
+				8CE9BDB029E57FA900F45D3F /* GamesModesData */,
+				8CE9BDC929E59EAE00F45D3F /* GamesModesDataDetail */,
 			);
 			path = ProfilePubg;
 			sourceTree = "<group>";
@@ -831,15 +867,6 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		8CA720B129DAEC0C001E3EFA /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				8CA720B229DAEC3B001E3EFA /* TableViewCell.swift */,
-				8CA720B329DAEC3B001E3EFA /* TableViewCell.xib */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 		8CA9024229D2B970004E71D0 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -893,9 +920,10 @@
 		8CA9024E29D2E1E6004E71D0 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				8CA9024F29D2E20A004E71D0 /* ItemWeaponDataCollectionViewCell.swift */,
+				8CA9024F29D2E20A004E71D0 /* ItemDataCollectionViewCell.swift */,
 			);
-			path = Cell;
+			name = Cell;
+			path = ../../ScreenModules/TabBar/ProfilePubg/WeaponData/Presentation/Cell;
 			sourceTree = "<group>";
 		};
 		8CA9025129D2F24E004E71D0 /* WeaponDataDetail */ = {
@@ -929,7 +957,7 @@
 		8CA9025429D2F294004E71D0 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				8CA9025D29D2F475004E71D0 /* WeaponDataDetailCoordinatorImp.swift */,
+				8CA9025D29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1163,7 +1191,7 @@
 			isa = PBXGroup;
 			children = (
 				8C64E4C429DC641500303760 /* Domain */,
-				8CA720B129DAEC0C001E3EFA /* Cell */,
+				8CA9024E29D2E1E6004E71D0 /* Cell */,
 				8CB07ECA29D1CE6B000EE257 /* Entity */,
 				8CAEB01529BB4738009282AF /* Presentation */,
 				461C1F4129C9C92B00540289 /* Data */,
@@ -1451,6 +1479,8 @@
 		8CB6395729D233C200763231 /* KillsData */ = {
 			isa = PBXGroup;
 			children = (
+				8CE9BDDE29E5B75400F45D3F /* Data */,
+				8CE9BDD729E5B6BF00F45D3F /* Domain */,
 				8CB6395C29D2341000763231 /* Coordinator */,
 				8CB6395B29D233FC00763231 /* DependenciesResolve */,
 				8CB6395829D233E400763231 /* Presentation */,
@@ -1499,7 +1529,6 @@
 		8CB6396829D2431A00763231 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				8CA9024E29D2E1E6004E71D0 /* Cell */,
 				8CB6396C29D244F300763231 /* WeaponDataViewController.swift */,
 				8CB6396E29D2457300763231 /* WeaponDataViewModel.swift */,
 			);
@@ -1558,6 +1587,8 @@
 		8CCC92CB29E40D110019BE72 /* SurvivalData */ = {
 			isa = PBXGroup;
 			children = (
+				8CE9BDA429E57D0D00F45D3F /* Data */,
+				8CE9BDA329E57D0600F45D3F /* Domain */,
 				8CCC92CE29E40D810019BE72 /* Coordinator */,
 				8CCC92CD29E40D770019BE72 /* DependenciesResolve */,
 				8CCC92CC29E40D6F0019BE72 /* Presentation */,
@@ -1665,6 +1696,203 @@
 			path = UseCase;
 			sourceTree = "<group>";
 		};
+		8CE9BDA329E57D0600F45D3F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDA629E57D1B00F45D3F /* UseCase */,
+				8CE9BDA529E57D1700F45D3F /* InterfaceRepository */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		8CE9BDA429E57D0D00F45D3F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDA729E57D2900F45D3F /* RepositoryImplementation */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		8CE9BDA529E57D1700F45D3F /* InterfaceRepository */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDAA29E57DD600F45D3F /* SurvivalDataRepository.swift */,
+			);
+			path = InterfaceRepository;
+			sourceTree = "<group>";
+		};
+		8CE9BDA629E57D1B00F45D3F /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDA829E57D5E00F45D3F /* SurvivalDataUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		8CE9BDA729E57D2900F45D3F /* RepositoryImplementation */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDAE29E57E4700F45D3F /* SurvivalDataRepositoryImp.swift */,
+			);
+			path = RepositoryImplementation;
+			sourceTree = "<group>";
+		};
+		8CE9BDB029E57FA900F45D3F /* GamesModesData */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDB529E5805E00F45D3F /* Domain */,
+				8CE9BDB429E5805900F45D3F /* Data */,
+				8CE9BDB329E5805100F45D3F /* Coordinator */,
+				8CE9BDB229E5804500F45D3F /* DependenciesResolve */,
+				8CE9BDB129E5803E00F45D3F /* Presentation */,
+			);
+			path = GamesModesData;
+			sourceTree = "<group>";
+		};
+		8CE9BDB129E5803E00F45D3F /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDBC29E5824200F45D3F /* GamesModesDataViewController.swift */,
+				8CE9BDBE29E582DF00F45D3F /* GamesModesDataViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		8CE9BDB229E5804500F45D3F /* DependenciesResolve */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDB629E5807F00F45D3F /* GamesModesDataDependency.swift */,
+				8CE9BDB829E580E200F45D3F /* GamesModesDataExternalDependency.swift */,
+			);
+			path = DependenciesResolve;
+			sourceTree = "<group>";
+		};
+		8CE9BDB329E5805100F45D3F /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDBA29E5815000F45D3F /* GamesModesDataCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		8CE9BDB429E5805900F45D3F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDC629E5841400F45D3F /* RepositoryImplementation */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		8CE9BDB529E5805E00F45D3F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDC329E583E400F45D3F /* InterfaceRepository */,
+				8CE9BDC029E5835500F45D3F /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		8CE9BDC029E5835500F45D3F /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDC129E5836400F45D3F /* GamesModesDataUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		8CE9BDC329E583E400F45D3F /* InterfaceRepository */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDC429E583F000F45D3F /* GamesModesDataRepository.swift */,
+			);
+			path = InterfaceRepository;
+			sourceTree = "<group>";
+		};
+		8CE9BDC629E5841400F45D3F /* RepositoryImplementation */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDC729E5842000F45D3F /* GamesModesDataRepositoryImp.swift */,
+			);
+			path = RepositoryImplementation;
+			sourceTree = "<group>";
+		};
+		8CE9BDC929E59EAE00F45D3F /* GamesModesDataDetail */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDCC29E59EED00F45D3F /* Coordinator */,
+				8CE9BDCB29E59EE900F45D3F /* DependenciesResolve */,
+				8CE9BDCA29E59EDA00F45D3F /* Presentation */,
+			);
+			path = GamesModesDataDetail;
+			sourceTree = "<group>";
+		};
+		8CE9BDCA29E59EDA00F45D3F /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDD329E5A01A00F45D3F /* GamesModesDataDetailViewController.swift */,
+				8CE9BDD529E5A12200F45D3F /* GamesModesDataDetailViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		8CE9BDCB29E59EE900F45D3F /* DependenciesResolve */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDCD29E59F1400F45D3F /* GamesModesDataDetailDependency.swift */,
+				8CE9BDCF29E59F4500F45D3F /* GamesModesDataDetailExternalDependency.swift */,
+			);
+			path = DependenciesResolve;
+			sourceTree = "<group>";
+		};
+		8CE9BDCC29E59EED00F45D3F /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDD129E59F9200F45D3F /* GamesModesDataDetailCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		8CE9BDD729E5B6BF00F45D3F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDDB29E5B71700F45D3F /* InterfaceRepository */,
+				8CE9BDD829E5B6C600F45D3F /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		8CE9BDD829E5B6C600F45D3F /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDD929E5B6CF00F45D3F /* KillsDataUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		8CE9BDDB29E5B71700F45D3F /* InterfaceRepository */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDDC29E5B72400F45D3F /* KillsDataRepository.swift */,
+			);
+			path = InterfaceRepository;
+			sourceTree = "<group>";
+		};
+		8CE9BDDE29E5B75400F45D3F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDDF29E5B76200F45D3F /* RepositoryImplementation */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		8CE9BDDF29E5B76200F45D3F /* RepositoryImplementation */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9BDE029E5B77100F45D3F /* KillsDataRepositoryImp.swift */,
+			);
+			path = RepositoryImplementation;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1770,7 +1998,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CE093EE29D5AF6A0069CE24 /* videoLoginPubg.mp4 in Resources */,
-				8CA720B529DAEC3B001E3EFA /* TableViewCell.xib in Resources */,
 				8CE093EC29D5AE2E0069CE24 /* videoLogin.mp4 in Resources */,
 				8CA398BC29B72A2000C09746 /* LaunchScreen.storyboard in Resources */,
 				8CA398B929B72A2000C09746 /* Assets.xcassets in Resources */,
@@ -1802,8 +2029,10 @@
 				8C64E4C829DC646800303760 /* CommonUseCase.swift in Sources */,
 				461C1F4929C9F74700540289 /* ProfileRepositoryImp.swift in Sources */,
 				461C1F7A29CB5DE600540289 /* RegisterExternalDependency.swift in Sources */,
+				8CE9BDD629E5A12200F45D3F /* GamesModesDataDetailViewModel.swift in Sources */,
 				8CCC92C829E3FCB70019BE72 /* FavouriteDataUseCase.swift in Sources */,
 				8CAEB02029BB4968009282AF /* Coordinator.swift in Sources */,
+				8CE9BDD429E5A01A00F45D3F /* GamesModesDataDetailViewController.swift in Sources */,
 				8CB39BAC29C0C88800B1D8EF /* String+Hash.swift in Sources */,
 				8CB07EBA29D1A6EC000EE257 /* StatsGeneralExternalDependency.swift in Sources */,
 				8CB07EC529D1B393000EE257 /* WeaponDTO.swift in Sources */,
@@ -1812,7 +2041,8 @@
 				461C1F4629C9F6F000540289 /* ProfileRepository.swift in Sources */,
 				8C810F7929C3690700AEE548 /* UIViewController+Keyboard.swift in Sources */,
 				8CB07EC329D1B246000EE257 /* SurvivalDTO.swift in Sources */,
-				8CA9025029D2E20A004E71D0 /* ItemWeaponDataCollectionViewCell.swift in Sources */,
+				8CE9BDB929E580E200F45D3F /* GamesModesDataExternalDependency.swift in Sources */,
+				8CA9025029D2E20A004E71D0 /* ItemDataCollectionViewCell.swift in Sources */,
 				4670EDE729D442C600C1062E /* HelpDataViewModel.swift in Sources */,
 				465550CF29CC471400BF932A /* MainTabBarExternalDependency.swift in Sources */,
 				8CB2CEF329C9A87900E79D29 /* ProfileViewModel.swift in Sources */,
@@ -1822,17 +2052,22 @@
 				461C1F4D29CAE0F600540289 /* LoginDependency.swift in Sources */,
 				8CB07EB829D1A6B3000EE257 /* StatsGeneralDependency.swift in Sources */,
 				461C1F3E29C9C77C00540289 /* ApiClientService.swift in Sources */,
+				8CE9BDDA29E5B6CF00F45D3F /* KillsDataUseCase.swift in Sources */,
 				8CAC3E2F29C3080600A1FE34 /* GuideViewModel.swift in Sources */,
 				8C7563E429BB5F17000373F9 /* MessageDisplayable.swift in Sources */,
+				8CE9BDAF29E57E4700F45D3F /* SurvivalDataRepositoryImp.swift in Sources */,
 				461C1F7829CB5CF500540289 /* RegisterDependency.swift in Sources */,
 				4670EDEA29D442FD00C1062E /* HelpDataDependency.swift in Sources */,
 				8C3CC20E29DD66B400D34228 /* CommonExternalDependency.swift in Sources */,
 				8CB39B9729C05DDE00B1D8EF /* LoginRepository.swift in Sources */,
 				8CA720A829DAD585001E3EFA /* ForgotDataUseCase.swift in Sources */,
+				8CE9BDC529E583F000F45D3F /* GamesModesDataRepository.swift in Sources */,
+				8CE9BDDD29E5B72400F45D3F /* KillsDataRepository.swift in Sources */,
 				465550D829CC504100BF932A /* ProfileCoordinator.swift in Sources */,
 				465550FA29CC7E4600BF932A /* GuideExternalDependency.swift in Sources */,
 				8CB6396029D234C500763231 /* KillsDataViewModel.swift in Sources */,
 				8CA720AB29DAD5F4001E3EFA /* ForgotRepository.swift in Sources */,
+				8CE9BDCE29E59F1400F45D3F /* GamesModesDataDetailDependency.swift in Sources */,
 				8CB2CEEC29C9A35B00E79D29 /* ApiClientServiceImp.swift in Sources */,
 				8CB07EC829D1B446000EE257 /* GamesModesDTO.swift in Sources */,
 				8CA17EBB29C465E900ADFFE2 /* CreateNavController.swift in Sources */,
@@ -1849,19 +2084,24 @@
 				4670EDEC29D4433B00C1062E /* HelpDataExternalDependency.swift in Sources */,
 				461C1F5229CAE35300540289 /* AppDependencies.swift in Sources */,
 				8CA9024B29D2BCB4004E71D0 /* WeaponDataRepository.swift in Sources */,
+				8CE9BDAB29E57DD600F45D3F /* SurvivalDataRepository.swift in Sources */,
 				465550C429CC390200BF932A /* UIViewController+TextField.swift in Sources */,
 				8CD7CD7129BF0C7000C57346 /* RegisterRepository.swift in Sources */,
+				8CE9BDE129E5B77100F45D3F /* KillsDataRepositoryImp.swift in Sources */,
 				8CB6396229D2356B00763231 /* KillsDataDependency.swift in Sources */,
 				8C9A32AB29DDB39500F81B34 /* FavouriteViewModel.swift in Sources */,
 				8CD7CD6F29BF04E200C57346 /* Profile.xcdatamodeld in Sources */,
 				465550E329CC6F1F00BF932A /* FavouriteViewController.swift in Sources */,
 				8CB6397329D245FF00763231 /* WeaponDataExternalDependency.swift in Sources */,
 				465550CD29CC46ED00BF932A /* MainTabBarDependency.swift in Sources */,
-				8CA720B429DAEC3B001E3EFA /* TableViewCell.swift in Sources */,
+				8CE9BDC229E5836400F45D3F /* GamesModesDataUseCase.swift in Sources */,
+				8CE9BDA929E57D5E00F45D3F /* SurvivalDataUseCase.swift in Sources */,
 				8C7563EC29BB6073000373F9 /* StateController.swift in Sources */,
 				8C7563E229BB5E8A000373F9 /* ViewValues.swift in Sources */,
 				4670EDEF29D4438500C1062E /* HelpDataCoordinator.swift in Sources */,
-				8CA9025E29D2F475004E71D0 /* WeaponDataDetailCoordinatorImp.swift in Sources */,
+				8CE9BDC829E5842000F45D3F /* GamesModesDataRepositoryImp.swift in Sources */,
+				8CE9BDD229E59F9200F45D3F /* GamesModesDataDetailCoordinator.swift in Sources */,
+				8CA9025E29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift in Sources */,
 				8CCC92D229E40E240019BE72 /* SurvivalDataExternalDependency.swift in Sources */,
 				461C1F7629CB5BF100540289 /* RegisterCoordinator.swift in Sources */,
 				465550C629CC3A5600BF932A /* UIViewController+Image.swift in Sources */,
@@ -1899,10 +2139,12 @@
 				8C9F824229C3CA02003000CD /* HelpDataViewController.swift in Sources */,
 				461C1F4029C9C86C00540289 /* EndPoint.swift in Sources */,
 				8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */,
+				8CE9BDD029E59F4500F45D3F /* GamesModesDataDetailExternalDependency.swift in Sources */,
 				8CCC92D629E40EAB0019BE72 /* SurvivalDataViewModel.swift in Sources */,
 				46151CC329C1E8FC0054BCEA /* ForgotViewController.swift in Sources */,
 				8CB6396D29D244F300763231 /* WeaponDataViewController.swift in Sources */,
 				8CB6396F29D2457300763231 /* WeaponDataViewModel.swift in Sources */,
+				8CE9BDBB29E5815000F45D3F /* GamesModesDataCoordinator.swift in Sources */,
 				4655510729CCB41500BF932A /* ProfileEntity.swift in Sources */,
 				461C1F5429CAE59A00540289 /* LoginCoordinator.swift in Sources */,
 				461C1F5C29CB110400540289 /* ForgotDependency.swift in Sources */,
@@ -1913,6 +2155,7 @@
 				8CCC92C629E3FC3C0019BE72 /* FavouriteRepository.swift in Sources */,
 				461C1F6229CB12FA00540289 /* ForgotCoordinator.swift in Sources */,
 				461C1F4F29CAE10600540289 /* LoginExternalDependency.swift in Sources */,
+				8CE9BDB729E5807F00F45D3F /* GamesModesDataDependency.swift in Sources */,
 				8CB07E9829D1766B000EE257 /* Player.swift in Sources */,
 				8CB07EBC29D1A764000EE257 /* StatsGeneralCoordinator.swift in Sources */,
 				8C31FDB729C329E500196704 /* ContactViewController.swift in Sources */,
@@ -1921,6 +2164,8 @@
 				8CA9026229D33458004E71D0 /* ViewScrollableXib.swift in Sources */,
 				46151CB729C1B9780054BCEA /* ProfileViewController.swift in Sources */,
 				8CB39B9529C05D2500B1D8EF /* LoginDataUseCase.swift in Sources */,
+				8CE9BDBD29E5824200F45D3F /* GamesModesDataViewController.swift in Sources */,
+				8CE9BDBF29E582DF00F45D3F /* GamesModesDataViewModel.swift in Sources */,
 				8CA398AF29B72A1F00C09746 /* SceneDelegate.swift in Sources */,
 				8CB39B9B29C0604100B1D8EF /* LoginRepositoryImp.swift in Sources */,
 				8CD7CD8F29BF54D600C57346 /* RegisterViewController.swift in Sources */,

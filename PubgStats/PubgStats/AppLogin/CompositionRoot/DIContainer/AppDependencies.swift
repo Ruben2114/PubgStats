@@ -76,4 +76,6 @@ extension AppDependencies:
     WeaponDataDetailExternalDependency,
     HelpDataExternalDependency,
     CommonExternalDependency,
-    SurvivalDataExternalDependency{}
+    SurvivalDataExternalDependency,
+    GamesModesDataExternalDependency,
+    GamesModesDataDetailExternalDependency{}

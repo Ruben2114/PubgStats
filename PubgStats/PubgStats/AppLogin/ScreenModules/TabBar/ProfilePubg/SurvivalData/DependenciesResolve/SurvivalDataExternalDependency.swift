@@ -12,6 +12,7 @@ protocol SurvivalDataExternalDependency {
     func survivalDataCoordinator() -> Coordinator
     func profileNavigationController() -> UINavigationController
     func resolve() -> ProfileEntity
+    func resolve() -> LocalDataProfileService
 }
 
 extension SurvivalDataExternalDependency {

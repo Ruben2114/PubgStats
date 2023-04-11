@@ -49,11 +49,16 @@ class WeaponDataViewController: UIViewController {
         backButton(action: #selector(backButtonAction))
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(ItemDataCollectionViewCell.self, forCellWithReuseIdentifier: "ItemDataCollectionViewCell")
     }
     func bind(){
+        //TODO: aqui comprobar si esta en core data y manejar los datos en viewmodel
         if sessionUser.weapons != nil {
             guard let model = sessionUser.weapons?.first else{ return}
+            //saber cuantas armas tengo
+            let a = model.data.attributes.weaponSummaries.map{$0.key}.description
+            print(a)
+            
             for data in model.data.attributes.weaponSummaries.keys {
                 self.weaponType.append(data)
             }
@@ -81,11 +86,7 @@ class WeaponDataViewController: UIViewController {
         }
     }
     func configConstraint(){
-        collectionView.backgroundColor = .white
-        collectionView.dataSource = self
-        collectionView.delegate = self
         view.addSubview(collectionView)
-        collectionView.register(ItemWeaponDataCollectionViewCell.self, forCellWithReuseIdentifier: "ItemWeaponDataCollectionViewCell")
         collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -101,7 +102,7 @@ extension WeaponDataViewController: UICollectionViewDataSource {
         weaponType.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ItemWeaponDataCollectionViewCell", for: indexPath) as! ItemWeaponDataCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ItemDataCollectionViewCell", for: indexPath) as! ItemDataCollectionViewCell
         cell.backgroundColor = .systemCyan
         cell.layer.cornerRadius = 15
         let model = weaponType[indexPath.row]

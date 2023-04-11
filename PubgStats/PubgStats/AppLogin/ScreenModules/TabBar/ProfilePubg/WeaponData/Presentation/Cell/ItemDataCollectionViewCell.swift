@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ItemWeaponDataCollectionViewCell: UICollectionViewCell{
+class ItemDataCollectionViewCell: UICollectionViewCell{
     
     private let mainContainer: UIView = {
         let view = UIView()
@@ -26,6 +26,7 @@ class ItemWeaponDataCollectionViewCell: UICollectionViewCell{
         let label = UILabel()
         label.textColor = .white
         label.font = UIFont.preferredFont(forTextStyle: .headline)
+        label.textAlignment = .center
         return label
     }()
     override init(frame: CGRect) {

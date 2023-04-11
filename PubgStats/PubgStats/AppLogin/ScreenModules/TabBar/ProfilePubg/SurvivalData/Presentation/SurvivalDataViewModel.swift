@@ -9,16 +9,17 @@ final class SurvivalDataViewModel {
     private weak var coordinator: SurvivalDataCoordinator?
     private let dependencies: SurvivalDataDependency
     private let sessionUser: ProfileEntity
+    private let survivalDataUseCase: SurvivalDataUseCase
     var content: [(String, Any)] = []
     init(dependencies: SurvivalDataDependency) {
         self.sessionUser = dependencies.external.resolve()
+        self.survivalDataUseCase = dependencies.resolve()
         self.dependencies = dependencies
         self.coordinator = dependencies.resolve()
     }
-    //TODO: empujar esto a use case
-    let localData = LocalDataProfileServiceImp()
+    
     func getSurvival(for sessionUser: ProfileEntity) -> Survival?{
-        localData.getSurvival(for: sessionUser)
+        survivalDataUseCase.getSurvival(for: sessionUser)
     }
     func fetchDataSurvival() {
         let survivalData = getSurvival(for: sessionUser)
@@ -27,7 +28,6 @@ final class SurvivalDataViewModel {
             content = keyValues
         }
     }
-    
     func backButton() {
         coordinator?.dismiss()
     }

@@ -12,6 +12,7 @@ protocol KillsDataExternalDependency {
     func killsDataCoordinator() -> Coordinator
     func profileNavigationController() -> UINavigationController
     func resolve() -> ProfileEntity
+    func resolve() -> LocalDataProfileService
 }
 
 extension KillsDataExternalDependency {

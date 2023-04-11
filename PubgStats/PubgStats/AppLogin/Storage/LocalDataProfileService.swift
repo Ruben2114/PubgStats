@@ -152,87 +152,53 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
             print("Error en core data")
         }
     }
-    func saveGameData(mode: String, data: DuoDTO, profile: Profile) {
-        if let existingGamesMode = profile.gamesMode?.first(where: { ($0 as? GamesModes)?.mode == mode }) as? GamesModes {
-            existingGamesMode.mode = mode
-            existingGamesMode.assists = Int32(data.assists)
-            existingGamesMode.boosts = Int32(data.boosts)
-            existingGamesMode.dBNOS = Int32(data.dBNOS)
-            existingGamesMode.dailyKills = Int32(data.dailyKills)
-            existingGamesMode.dailyWINS = Int32(data.dailyWINS)
-            existingGamesMode.damageDealt = data.damageDealt
-            existingGamesMode.days = Int32(data.days)
-            existingGamesMode.headshotKills = Int32(data.headshotKills)
-            existingGamesMode.heals = Int32(data.heals)
-            existingGamesMode.killPoints = Int32(data.killPoints)
-            existingGamesMode.kills = Int32(data.kills)
-            existingGamesMode.longestKill = data.longestKill
-            existingGamesMode.longestTimeSurvived = Int32(data.longestTimeSurvived)
-            existingGamesMode.losses = Int32(data.losses)
-            existingGamesMode.maxKillStreaks = Int32(data.maxKillStreaks)
-            existingGamesMode.mostSurvivalTime = Int32(data.mostSurvivalTime)
-            existingGamesMode.rankPoints = Int32(data.rankPoints)
-            existingGamesMode.rankPointsTitle = data.rankPointsTitle
-            existingGamesMode.revives = Int32(data.revives)
-            existingGamesMode.rideDistance = data.rideDistance
-            existingGamesMode.roadKills = Int32(data.roadKills)
-            existingGamesMode.roundMostKills = Int32(data.roundMostKills)
-            existingGamesMode.roundsPlayed = Int32(data.roundsPlayed)
-            existingGamesMode.swimDistance = data.swimDistance
-            existingGamesMode.suicides = Int32(data.suicides)
-            existingGamesMode.teamKills = Int32(data.teamKills)
-            existingGamesMode.timeSurvived = Int32(data.timeSurvived)
-            existingGamesMode.top10S = Int32(data.top10S)
-            existingGamesMode.vehicleDestroys = Int32(data.vehicleDestroys)
-            existingGamesMode.walkDistance = data.walkDistance
-            existingGamesMode.weaponsAcquired = Int32(data.weaponsAcquired)
-            existingGamesMode.weeklyKills = Int32(data.weeklyKills)
-            existingGamesMode.weeklyWINS = Int32(data.weeklyWINS)
-            existingGamesMode.winPoints = Int32(data.winPoints)
-            existingGamesMode.wins = Int32(data.wins)
-        }else {
-            let newGamesMode = GamesModes(context: context)
-            newGamesMode.mode = mode
-            newGamesMode.assists = Int32(data.assists)
-            newGamesMode.boosts = Int32(data.boosts)
-            newGamesMode.dBNOS = Int32(data.dBNOS)
-            newGamesMode.dailyKills = Int32(data.dailyKills)
-            newGamesMode.dailyWINS = Int32(data.dailyWINS)
-            newGamesMode.damageDealt = data.damageDealt
-            newGamesMode.days = Int32(data.days)
-            newGamesMode.headshotKills = Int32(data.headshotKills)
-            newGamesMode.heals = Int32(data.heals)
-            newGamesMode.killPoints = Int32(data.killPoints)
-            newGamesMode.kills = Int32(data.kills)
-            newGamesMode.longestKill = data.longestKill
-            newGamesMode.longestTimeSurvived = Int32(data.longestTimeSurvived)
-            newGamesMode.losses = Int32(data.losses)
-            newGamesMode.maxKillStreaks = Int32(data.maxKillStreaks)
-            newGamesMode.mostSurvivalTime = Int32(data.mostSurvivalTime)
-            newGamesMode.rankPoints = Int32(data.rankPoints)
-            newGamesMode.rankPointsTitle = data.rankPointsTitle
-            newGamesMode.revives = Int32(data.revives)
-            newGamesMode.rideDistance = data.rideDistance
-            newGamesMode.roadKills = Int32(data.roadKills)
-            newGamesMode.roundMostKills = Int32(data.roundMostKills)
-            newGamesMode.roundsPlayed = Int32(data.roundsPlayed)
-            newGamesMode.swimDistance = data.swimDistance
-            newGamesMode.suicides = Int32(data.suicides)
-            newGamesMode.teamKills = Int32(data.teamKills)
-            newGamesMode.timeSurvived = Int32(data.timeSurvived)
-            newGamesMode.top10S = Int32(data.top10S)
-            newGamesMode.vehicleDestroys = Int32(data.vehicleDestroys)
-            newGamesMode.walkDistance = data.walkDistance
-            newGamesMode.weaponsAcquired = Int32(data.weaponsAcquired)
-            newGamesMode.weeklyKills = Int32(data.weeklyKills)
-            newGamesMode.weeklyWINS = Int32(data.weeklyWINS)
-            newGamesMode.winPoints = Int32(data.winPoints)
-            newGamesMode.wins = Int32(data.wins)
-            profile.addToGamesMode(newGamesMode)
-        }
+    func saveGameData(mode: String, data: DuoDTO, profile: Profile, total: GamesModesDTO) {
+        let dataGamesMode = profile.gamesMode?.first(where: { ($0 as? GamesModes)?.mode == mode }) as? GamesModes ?? GamesModes(context: context)
+        dataGamesMode.mode = mode
+        dataGamesMode.assists = Int32(data.assists)
+        dataGamesMode.boosts = Int32(data.boosts)
+        dataGamesMode.dBNOS = Int32(data.dBNOS)
+        dataGamesMode.dailyKills = Int32(data.dailyKills)
+        dataGamesMode.dailyWINS = Int32(data.dailyWINS)
+        dataGamesMode.damageDealt = data.damageDealt
+        dataGamesMode.days = Int32(data.days)
+        dataGamesMode.headshotKills = Int32(data.headshotKills)
+        dataGamesMode.heals = Int32(data.heals)
+        dataGamesMode.killPoints = Int32(data.killPoints)
+        dataGamesMode.kills = Int32(data.kills)
+        dataGamesMode.longestKill = data.longestKill
+        dataGamesMode.longestTimeSurvived = Int32(data.longestTimeSurvived)
+        dataGamesMode.losses = Int32(data.losses)
+        dataGamesMode.maxKillStreaks = Int32(data.maxKillStreaks)
+        dataGamesMode.mostSurvivalTime = Int32(data.mostSurvivalTime)
+        dataGamesMode.rankPoints = Int32(data.rankPoints)
+        dataGamesMode.rankPointsTitle = data.rankPointsTitle
+        dataGamesMode.revives = Int32(data.revives)
+        dataGamesMode.rideDistance = data.rideDistance
+        dataGamesMode.roadKills = Int32(data.roadKills)
+        dataGamesMode.roundMostKills = Int32(data.roundMostKills)
+        dataGamesMode.roundsPlayed = Int32(data.roundsPlayed)
+        dataGamesMode.swimDistance = data.swimDistance
+        dataGamesMode.suicides = Int32(data.suicides)
+        dataGamesMode.teamKills = Int32(data.teamKills)
+        dataGamesMode.timeSurvived = Int32(data.timeSurvived)
+        dataGamesMode.top10S = Int32(data.top10S)
+        dataGamesMode.vehicleDestroys = Int32(data.vehicleDestroys)
+        dataGamesMode.walkDistance = data.walkDistance
+        dataGamesMode.weaponsAcquired = Int32(data.weaponsAcquired)
+        dataGamesMode.weeklyKills = Int32(data.weeklyKills)
+        dataGamesMode.weeklyWINS = Int32(data.weeklyWINS)
+        dataGamesMode.winPoints = Int32(data.winPoints)
+        dataGamesMode.wins = Int32(data.wins)
+        dataGamesMode.bestRankPoint = Int32(total.bestRank)
+        dataGamesMode.killsTotal = Int32(total.killsTotal)
+        dataGamesMode.gamesPlayed = Int32(total.gamesPlayed)
+        dataGamesMode.timePlayed = total.timePlayed
+        dataGamesMode.top10STotal = Int32(total.top10STotal)
+        dataGamesMode.wonTotal = Int32(total.wonTotal)
+        profile.addToGamesMode(dataGamesMode)
         try? context.save()
     }
-    
     func saveGamesMode(sessionUser: ProfileEntity, gamesModeData: [GamesModesDTO]){
         let fetchRequest = Profile.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
@@ -240,12 +206,12 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
             let result = try context.fetch(fetchRequest)
             if let profile = result.first{
                 guard let data = gamesModeData.first else {return}
-                saveGameData(mode: "solo", data: data.solo, profile: profile)
-                saveGameData(mode: "soloFpp", data: data.soloFpp, profile: profile)
-                saveGameData(mode: "duo", data: data.duo, profile: profile)
-                saveGameData(mode: "duoFpp", data: data.duoFpp, profile: profile)
-                saveGameData(mode: "squad", data: data.squad, profile: profile)
-                saveGameData(mode: "squadFpp", data: data.squadFpp, profile: profile)
+                saveGameData(mode: "solo", data: data.solo, profile: profile, total: data)
+                saveGameData(mode: "soloFpp", data: data.soloFpp, profile: profile, total: data)
+                saveGameData(mode: "duo", data: data.duo, profile: profile, total: data)
+                saveGameData(mode: "duoFpp", data: data.duoFpp, profile: profile, total: data)
+                saveGameData(mode: "squad", data: data.squad, profile: profile, total: data)
+                saveGameData(mode: "squadFpp", data: data.squadFpp, profile: profile, total: data)
             }
         } catch {
             print("Error en core data")

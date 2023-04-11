@@ -1,5 +1,5 @@
 //
-//  WeaponDataDetailCoordinatorImp.swift
+//  WeaponDataDetailCoordinator.swift
 //  PubgStats
 //
 //  Created by Ruben Rodriguez on 28/3/23.

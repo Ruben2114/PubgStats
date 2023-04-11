@@ -75,8 +75,9 @@ extension WeaponDataDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.backgroundColor = .systemCyan
-        let model = weaponInfo[indexPath.row].0
-        let model2 = weaponInfo.map{$0}[indexPath.row].1 as! String
+        let sortedWeaponInfo = weaponInfo.sorted(by: { $0.0 < $1.0 })
+        let model = sortedWeaponInfo[indexPath.row].0
+        let model2 = sortedWeaponInfo[indexPath.row].1 as! String
         let model3 = model + ": " + model2
         var listContent = UIListContentConfiguration.cell()
         listContent.text = model3

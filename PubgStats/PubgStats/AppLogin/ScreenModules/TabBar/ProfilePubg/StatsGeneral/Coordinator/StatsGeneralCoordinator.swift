@@ -51,7 +51,9 @@ extension StatsGeneralCoordinatorImp: StatsGeneralCoordinator {
             survivalDataCoordinator.start()
             append(child: survivalDataCoordinator)
         case .goGamesModes:
-            print("goGamesModes")
+            let gamesModeDataCoordinator = dependencies.external.gamesModesDataCoordinator()
+            gamesModeDataCoordinator.start()
+            append(child: gamesModeDataCoordinator)
         }
     }
 }

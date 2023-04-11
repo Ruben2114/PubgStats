@@ -10,6 +10,8 @@ protocol KillsDataDependency {
     func resolve() -> KillsDataCoordinator?
     func resolve() -> KillsDataViewController
     func resolve() -> KillsDataViewModel
+    func resolve() -> KillsDataUseCase
+    func resolve() -> KillsDataRepository
 }
 
 extension KillsDataDependency {
@@ -18,5 +20,11 @@ extension KillsDataDependency {
     }
     func resolve() -> KillsDataViewModel {
         KillsDataViewModel(dependencies: self)
+    }
+    func resolve() -> KillsDataUseCase {
+        KillsDataUseCaseImp(dependencies: self)
+    }
+    func resolve() -> KillsDataRepository {
+        KillsDataRepositoryImp(dependencies: self)
     }
 }

@@ -10,6 +10,8 @@ protocol SurvivalDataDependency {
     func resolve() -> SurvivalDataCoordinator?
     func resolve() -> SurvivalDataViewController
     func resolve() -> SurvivalDataViewModel
+    func resolve() -> SurvivalDataUseCase
+    func resolve() -> SurvivalDataRepository
 }
 
 extension SurvivalDataDependency {
@@ -18,5 +20,11 @@ extension SurvivalDataDependency {
     }
     func resolve() -> SurvivalDataViewModel {
         SurvivalDataViewModel(dependencies: self)
+    }
+    func resolve() -> SurvivalDataUseCase {
+        SurvivalDataUseCaseImp(dependencies: self)
+    }
+    func resolve() -> SurvivalDataRepository {
+        SurvivalDataRepositoryImp(dependencies: self)
     }
 }

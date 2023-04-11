@@ -12,6 +12,7 @@ protocol StatsGeneralExternalDependency {
     func statsGeneralCoordinator() -> Coordinator
     func killsDataCoordinator() -> Coordinator
     func weaponDataCoordinator() -> Coordinator
+    func gamesModesDataCoordinator() -> Coordinator
     func survivalDataCoordinator() -> Coordinator
     func profileNavigationController() -> UINavigationController
     func resolve() -> ProfileEntity
