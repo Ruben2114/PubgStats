@@ -9,8 +9,6 @@ import UIKit
 
 class WeaponDataDetailViewController: UIViewController {
     private lazy var tableView = makeTableView()
-    private var weaponInfo: [(String, Any)] = []
-    
     private let viewModel: WeaponDataDetailViewModel
     private let dependencies: WeaponDataDetailDependency
     private let sessionUser: ProfileEntity
@@ -28,13 +26,17 @@ class WeaponDataDetailViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         configConstraint()
-        fetchData()
+        bind()
     }
+    func bind() {
+        viewModel.fetchDataWeaponDetail()
+        tableView.reloadData()
+    }
+    
     func configUI(){
         view.backgroundColor = .systemBackground
         guard let weapon = sessionUser.weapon else {return}
-        let weaponName = weapon.replacingOccurrences(of: "[Optional(\"", with: "").replacingOccurrences(of: "\")]", with: "")
-        title = "Detalle Arma \(weaponName)"
+        title = "Detalle Arma \(weapon)"
         backButton(action: #selector(backButtonAction))
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -46,23 +48,7 @@ class WeaponDataDetailViewController: UIViewController {
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
-    func fetchData() {
-        guard let stats = sessionUser.weapons?.first?.data.attributes.weaponSummaries else {return}
-            for value in stats {
-                if value.key == sessionUser.weapon {
-                    let xp = String(value.value.xpTotal)
-                    let level = String(value.value.levelCurrent)
-                    let tier = String(value.value.tierCurrent)
-                    weaponInfo.append(("XP Total", xp))
-                    weaponInfo.append(("Level Current", level))
-                    weaponInfo.append(("Tier Current", tier))
-                    for (key, value) in value.value.statsTotal {
-                        weaponInfo.append((key, String(format: "%.0f", value)))
-                    }
-                }
-            }
-        tableView.reloadData()
-    }
+    
     @objc func backButtonAction() {
         viewModel.backButton()
     }
@@ -70,17 +56,21 @@ class WeaponDataDetailViewController: UIViewController {
 
 extension WeaponDataDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        weaponInfo.count
+        viewModel.dataWeaponDetail.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.backgroundColor = .systemCyan
-        let sortedWeaponInfo = weaponInfo.sorted(by: { $0.0 < $1.0 })
-        let model = sortedWeaponInfo[indexPath.row].0
-        let model2 = sortedWeaponInfo[indexPath.row].1 as! String
-        let model3 = model + ": " + model2
+        let model = viewModel.dataWeaponDetail.map { $0.0 }
+        let sortedModel = model.sorted()
+        let sortedDataGamesModes = sortedModel.map { key in
+            let value = viewModel.dataWeaponDetail.first(where: { $0.0 == key })!.1
+            return (key, value)
+        }
+        let item = sortedDataGamesModes[indexPath.row]
+        let contentItem = item.0 + ": " + String(describing: item.1)
         var listContent = UIListContentConfiguration.cell()
-        listContent.text = model3
+        listContent.text = contentItem
         cell.contentConfiguration = listContent
         return cell
     }

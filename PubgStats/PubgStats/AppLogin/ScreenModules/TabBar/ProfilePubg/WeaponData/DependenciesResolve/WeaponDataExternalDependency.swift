@@ -14,6 +14,7 @@ protocol WeaponDataExternalDependency {
     func profileNavigationController() -> UINavigationController
     func resolve() -> ProfileEntity
     func resolve() -> RemoteService
+    func resolve() -> LocalDataProfileService
 }
 
 extension WeaponDataExternalDependency {

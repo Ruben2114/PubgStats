@@ -15,7 +15,6 @@ struct AppDependencies {
     private let loginNavController = UINavigationController()
     private let profileNavController = UINavigationController()
     private let favouriteNavController = UINavigationController()
-    private let rankingNavController = UINavigationController()
     private let guideNavController = UINavigationController()
     private let contactNavController = UINavigationController()
     private var sessionUser = ProfileEntity(name: "", password: "", email: "")
@@ -50,9 +49,6 @@ struct AppDependencies {
     func favouriteNavigationController() -> UINavigationController {
         favouriteNavController
     }
-    func rankingNavigationController() -> UINavigationController {
-        rankingNavController
-    }
     func guideNavigationController() -> UINavigationController {
         guideNavController
     }
@@ -67,7 +63,6 @@ extension AppDependencies:
     MainTabBarExternalDependency,
     ProfileExternalDependency,
     FavouriteExternalDependency,
-    RankingExternalDependency,
     GuideExternalDependency,
     ContactExternalDependency,
     StatsGeneralExternalDependency,

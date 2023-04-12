@@ -10,6 +10,8 @@ protocol WeaponDataDetailDependency {
     func resolve() -> WeaponDataDetailCoordinator?
     func resolve() -> WeaponDataDetailViewController
     func resolve() -> WeaponDataDetailViewModel
+    func resolve() -> WeaponDataDetailUseCase
+    func resolve() -> WeaponDataDetailRepository
 }
 
 extension WeaponDataDetailDependency {
@@ -18,5 +20,11 @@ extension WeaponDataDetailDependency {
     }
     func resolve() -> WeaponDataDetailViewModel {
         WeaponDataDetailViewModel(dependencies: self)
+    }
+    func resolve() -> WeaponDataDetailUseCase {
+        WeaponDataDetailUseCaseImp(dependencies: self)
+    }
+    func resolve() -> WeaponDataDetailRepository {
+        WeaponDataDetailRepositoryImp(dependencies: self)
     }
 }

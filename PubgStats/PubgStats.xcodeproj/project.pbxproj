@@ -39,10 +39,6 @@
 		465550E529CC6F6300BF932A /* FavouriteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550E429CC6F6300BF932A /* FavouriteCoordinator.swift */; };
 		465550E729CC700400BF932A /* FavouriteExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550E629CC700400BF932A /* FavouriteExternalDependency.swift */; };
 		465550E929CC705200BF932A /* FavouriteDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550E829CC705200BF932A /* FavouriteDependency.swift */; };
-		465550EE29CC7BD700BF932A /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550ED29CC7BD700BF932A /* RankingViewController.swift */; };
-		465550F029CC7C1300BF932A /* RankingExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550EF29CC7C1300BF932A /* RankingExternalDependency.swift */; };
-		465550F229CC7C5A00BF932A /* RankingDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550F129CC7C5A00BF932A /* RankingDependency.swift */; };
-		465550F429CC7C9300BF932A /* RankingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550F329CC7C9300BF932A /* RankingCoordinator.swift */; };
 		465550F829CC7DE800BF932A /* GuideDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550F729CC7DE800BF932A /* GuideDependency.swift */; };
 		465550FA29CC7E4600BF932A /* GuideExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550F929CC7E4600BF932A /* GuideExternalDependency.swift */; };
 		465550FC29CC7E8E00BF932A /* GuideCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550FB29CC7E8E00BF932A /* GuideCoordinator.swift */; };
@@ -55,6 +51,9 @@
 		4670EDEA29D442FD00C1062E /* HelpDataDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE929D442FD00C1062E /* HelpDataDependency.swift */; };
 		4670EDEC29D4433B00C1062E /* HelpDataExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDEB29D4433B00C1062E /* HelpDataExternalDependency.swift */; };
 		4670EDEF29D4438500C1062E /* HelpDataCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDEE29D4438500C1062E /* HelpDataCoordinator.swift */; };
+		46B0CF2229E701D400BE95EB /* WeaponDataDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B0CF2129E701D400BE95EB /* WeaponDataDetailUseCase.swift */; };
+		46B0CF2429E7027100BE95EB /* WeaponDataDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B0CF2329E7027100BE95EB /* WeaponDataDetailRepository.swift */; };
+		46B0CF2629E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B0CF2529E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift */; };
 		8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */; };
 		8C31FDB729C329E500196704 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31FDB629C329E500196704 /* ContactViewController.swift */; };
 		8C3CC20E29DD66B400D34228 /* CommonExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3CC20D29DD66B400D34228 /* CommonExternalDependency.swift */; };
@@ -219,10 +218,6 @@
 		465550E429CC6F6300BF932A /* FavouriteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCoordinator.swift; sourceTree = "<group>"; };
 		465550E629CC700400BF932A /* FavouriteExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteExternalDependency.swift; sourceTree = "<group>"; };
 		465550E829CC705200BF932A /* FavouriteDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteDependency.swift; sourceTree = "<group>"; };
-		465550ED29CC7BD700BF932A /* RankingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingViewController.swift; sourceTree = "<group>"; };
-		465550EF29CC7C1300BF932A /* RankingExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingExternalDependency.swift; sourceTree = "<group>"; };
-		465550F129CC7C5A00BF932A /* RankingDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingDependency.swift; sourceTree = "<group>"; };
-		465550F329CC7C9300BF932A /* RankingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingCoordinator.swift; sourceTree = "<group>"; };
 		465550F729CC7DE800BF932A /* GuideDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideDependency.swift; sourceTree = "<group>"; };
 		465550F929CC7E4600BF932A /* GuideExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideExternalDependency.swift; sourceTree = "<group>"; };
 		465550FB29CC7E8E00BF932A /* GuideCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideCoordinator.swift; sourceTree = "<group>"; };
@@ -235,6 +230,9 @@
 		4670EDE929D442FD00C1062E /* HelpDataDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataDependency.swift; sourceTree = "<group>"; };
 		4670EDEB29D4433B00C1062E /* HelpDataExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataExternalDependency.swift; sourceTree = "<group>"; };
 		4670EDEE29D4438500C1062E /* HelpDataCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataCoordinator.swift; sourceTree = "<group>"; };
+		46B0CF2129E701D400BE95EB /* WeaponDataDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailUseCase.swift; sourceTree = "<group>"; };
+		46B0CF2329E7027100BE95EB /* WeaponDataDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailRepository.swift; sourceTree = "<group>"; };
+		46B0CF2529E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailRepositoryImp.swift; sourceTree = "<group>"; };
 		8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		8C31FDB629C329E500196704 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		8C3CC20D29DD66B400D34228 /* CommonExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExternalDependency.swift; sourceTree = "<group>"; };
@@ -581,31 +579,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		465550EA29CC7BB300BF932A /* View */ = {
-			isa = PBXGroup;
-			children = (
-				465550ED29CC7BD700BF932A /* RankingViewController.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		465550EB29CC7BBB00BF932A /* DependenciesResolve */ = {
-			isa = PBXGroup;
-			children = (
-				465550EF29CC7C1300BF932A /* RankingExternalDependency.swift */,
-				465550F129CC7C5A00BF932A /* RankingDependency.swift */,
-			);
-			path = DependenciesResolve;
-			sourceTree = "<group>";
-		};
-		465550EC29CC7BC100BF932A /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				465550F329CC7C9300BF932A /* RankingCoordinator.swift */,
-			);
-			path = Coordinator;
-			sourceTree = "<group>";
-		};
 		465550F529CC7DC000BF932A /* DependenciesResolve */ = {
 			isa = PBXGroup;
 			children = (
@@ -671,6 +644,47 @@
 				4670EDEE29D4438500C1062E /* HelpDataCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		46B0CF1C29E7015900BE95EB /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				46B0CF1E29E7016C00BE95EB /* InterfaceRepository */,
+				46B0CF1D29E7016100BE95EB /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		46B0CF1D29E7016100BE95EB /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				46B0CF2129E701D400BE95EB /* WeaponDataDetailUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		46B0CF1E29E7016C00BE95EB /* InterfaceRepository */ = {
+			isa = PBXGroup;
+			children = (
+				46B0CF2329E7027100BE95EB /* WeaponDataDetailRepository.swift */,
+			);
+			path = InterfaceRepository;
+			sourceTree = "<group>";
+		};
+		46B0CF1F29E7017100BE95EB /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				46B0CF2029E7017E00BE95EB /* RepositoryImplementation */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		46B0CF2029E7017E00BE95EB /* RepositoryImplementation */ = {
+			isa = PBXGroup;
+			children = (
+				46B0CF2529E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift */,
+			);
+			path = RepositoryImplementation;
 			sourceTree = "<group>";
 		};
 		8C3CC20A29DD616D00D34228 /* DependenciesResolve */ = {
@@ -929,6 +943,8 @@
 		8CA9025129D2F24E004E71D0 /* WeaponDataDetail */ = {
 			isa = PBXGroup;
 			children = (
+				46B0CF1F29E7017100BE95EB /* Data */,
+				46B0CF1C29E7015900BE95EB /* Domain */,
 				8CA9025429D2F294004E71D0 /* Coordinator */,
 				8CA9025329D2F287004E71D0 /* DependenciesResolve */,
 				8CA9025229D2F27E004E71D0 /* Presentation */,
@@ -967,7 +983,6 @@
 			children = (
 				46151CB429C1B9480054BCEA /* ProfilePubg */,
 				8CAC3E2629C3047D00A1FE34 /* Favourite */,
-				8CAC3E2529C3046A00A1FE34 /* Ranking */,
 				8CAC3E2429C3045300A1FE34 /* Guide */,
 				46151CC429C1E9AD0054BCEA /* Contact */,
 			);
@@ -995,16 +1010,6 @@
 				8CAC3E2729C304E700A1FE34 /* Presentation */,
 			);
 			path = Guide;
-			sourceTree = "<group>";
-		};
-		8CAC3E2529C3046A00A1FE34 /* Ranking */ = {
-			isa = PBXGroup;
-			children = (
-				465550EC29CC7BC100BF932A /* Coordinator */,
-				465550EB29CC7BBB00BF932A /* DependenciesResolve */,
-				465550EA29CC7BB300BF932A /* View */,
-			);
-			path = Ranking;
 			sourceTree = "<group>";
 		};
 		8CAC3E2629C3047D00A1FE34 /* Favourite */ = {
@@ -2036,7 +2041,6 @@
 				8CB39BAC29C0C88800B1D8EF /* String+Hash.swift in Sources */,
 				8CB07EBA29D1A6EC000EE257 /* StatsGeneralExternalDependency.swift in Sources */,
 				8CB07EC529D1B393000EE257 /* WeaponDTO.swift in Sources */,
-				465550F229CC7C5A00BF932A /* RankingDependency.swift in Sources */,
 				8CA720B029DAE3F6001E3EFA /* UIViewController+Label.swift in Sources */,
 				461C1F4629C9F6F000540289 /* ProfileRepository.swift in Sources */,
 				8C810F7929C3690700AEE548 /* UIViewController+Keyboard.swift in Sources */,
@@ -2048,10 +2052,10 @@
 				8CB2CEF329C9A87900E79D29 /* ProfileViewModel.swift in Sources */,
 				4655510429CC829800BF932A /* ContactCoordinator.swift in Sources */,
 				8CB6397529D2463900763231 /* WeaponDataCoordinator.swift in Sources */,
-				465550EE29CC7BD700BF932A /* RankingViewController.swift in Sources */,
 				461C1F4D29CAE0F600540289 /* LoginDependency.swift in Sources */,
 				8CB07EB829D1A6B3000EE257 /* StatsGeneralDependency.swift in Sources */,
 				461C1F3E29C9C77C00540289 /* ApiClientService.swift in Sources */,
+				46B0CF2429E7027100BE95EB /* WeaponDataDetailRepository.swift in Sources */,
 				8CE9BDDA29E5B6CF00F45D3F /* KillsDataUseCase.swift in Sources */,
 				8CAC3E2F29C3080600A1FE34 /* GuideViewModel.swift in Sources */,
 				8C7563E429BB5F17000373F9 /* MessageDisplayable.swift in Sources */,
@@ -2107,7 +2111,6 @@
 				465550C629CC3A5600BF932A /* UIViewController+Image.swift in Sources */,
 				8C7563E029BB5E5E000373F9 /* SpinnerDisplayable.swift in Sources */,
 				8CB07ED229D1CFF1000EE257 /* StatsGeneralDataUseCase.swift in Sources */,
-				465550F029CC7C1300BF932A /* RankingExternalDependency.swift in Sources */,
 				465550DA29CC513100BF932A /* ProfileExternalDependency.swift in Sources */,
 				465550F829CC7DE800BF932A /* GuideDependency.swift in Sources */,
 				465550E729CC700400BF932A /* FavouriteExternalDependency.swift in Sources */,
@@ -2126,7 +2129,6 @@
 				8CD7CD9329BF62BE00C57346 /* RegisterViewModel.swift in Sources */,
 				8CCC92D029E40DAF0019BE72 /* SurvivalDataCoordinator.swift in Sources */,
 				8CCC92D829E40F120019BE72 /* SurvivalDataViewController.swift in Sources */,
-				465550F429CC7C9300BF932A /* RankingCoordinator.swift in Sources */,
 				461C1F5E29CB112300540289 /* ForgotExternalDependency.swift in Sources */,
 				8CD7CD7629BF0DAA00C57346 /* RegisterRepositoryImp.swift in Sources */,
 				8CAC3E3129C31D4700A1FE34 /* UrlGuide.swift in Sources */,
@@ -2151,6 +2153,7 @@
 				8CD7CD7429BF0D4C00C57346 /* ProfileError.swift in Sources */,
 				8CCC92CA29E407980019BE72 /* UIViewController+TableView.swift in Sources */,
 				465550E929CC705200BF932A /* FavouriteDependency.swift in Sources */,
+				46B0CF2629E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift in Sources */,
 				465550FF29CC820A00BF932A /* ContactDependency.swift in Sources */,
 				8CCC92C629E3FC3C0019BE72 /* FavouriteRepository.swift in Sources */,
 				461C1F6229CB12FA00540289 /* ForgotCoordinator.swift in Sources */,
@@ -2159,6 +2162,7 @@
 				8CB07E9829D1766B000EE257 /* Player.swift in Sources */,
 				8CB07EBC29D1A764000EE257 /* StatsGeneralCoordinator.swift in Sources */,
 				8C31FDB729C329E500196704 /* ContactViewController.swift in Sources */,
+				46B0CF2229E701D400BE95EB /* WeaponDataDetailUseCase.swift in Sources */,
 				8CB39BA929C0919600B1D8EF /* KeyboardDisplayable.swift in Sources */,
 				8CB2CEF129C9A63B00E79D29 /* PlayerDTO.swift in Sources */,
 				8CA9026229D33458004E71D0 /* ViewScrollableXib.swift in Sources */,

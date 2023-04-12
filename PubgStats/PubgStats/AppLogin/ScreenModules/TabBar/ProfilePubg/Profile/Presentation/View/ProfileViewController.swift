@@ -17,12 +17,12 @@ final class ProfileViewController: UIViewController {
     private let itemsContents = [
         ["Nombre", "Correo", "Contraseña", "Imagen"],
         ["Ayuda"],
-        ["Registro cuenta Pubg", "Estadísticas cuenta "]
+        ["Registro cuenta Pubg", "Estadísticas cuenta", "Borrar cuenta Pubg"]
     ]
     private let imageNames = [
         ["person.circle.fill", "envelope.circle.fill", "lock.circle.fill", "photo.circle.fill"],
         ["questionmark.circle.fill"],
-        ["person.crop.circle.fill.badge.plus", "trash.circle.fill"]
+        ["person.crop.circle.fill.badge.plus", "folder.circle.fill", "trash.circle.fill"]
     ]
     
     private var cancellable = Set<AnyCancellable>()
@@ -126,7 +126,10 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if sessionUser.account == nil {
-            if indexPath.section == 2 && indexPath.row == 1 {
+            if indexPath.section == 2 && indexPath.row == 1{
+                cell.isHidden = true
+            }
+            if indexPath.section == 2 && indexPath.row == 2{
                 cell.isHidden = true
             }
         } else {
@@ -219,6 +222,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
             present(alert, animated: true)
         case (2, 1):
             viewModel.didTapStatsgAccountButton()
+        case(2, 2):
+            // creo que es tan facil como borrar acount para que sea nil t table.reload() ademas de borrar todos los demas registros de la base de datos
+            print("borrar la cuenta, que se oculte la tabla de estadictica sy se ponga la de registro")
         default:
             break
         }

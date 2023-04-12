@@ -60,6 +60,7 @@
         <relationship name="favourites" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Favourite" inverseName="favourites" inverseEntity="Favourite"/>
         <relationship name="gamesMode" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GamesModes" inverseName="gamesMode" inverseEntity="GamesModes"/>
         <relationship name="survival" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Survival" inverseName="survival" inverseEntity="Survival"/>
+        <relationship name="weapon" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Weapon" inverseName="weapon" inverseEntity="Weapon"/>
     </entity>
     <entity name="Survival" representedClassName="Survival" syncable="YES" codeGenerationType="class">
         <attribute name="airDropsCalled" optional="YES" attributeType="String"/>
@@ -83,5 +84,10 @@
         <attribute name="uniqueItemsLooted" optional="YES" attributeType="String"/>
         <attribute name="xp" optional="YES" attributeType="String"/>
         <relationship name="survival" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profile" inverseName="survival" inverseEntity="Profile"/>
+    </entity>
+    <entity name="Weapon" representedClassName="Weapon" syncable="YES" codeGenerationType="class">
+        <attribute name="data" optional="YES" attributeType="Binary"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="weapon" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profile" inverseName="weapon" inverseEntity="Profile"/>
     </entity>
 </model>

@@ -43,15 +43,6 @@ final class MainTabBarCoordinatorImp: Coordinator {
         viewControllers.append(favouriteNavController)
         favouriteCoordinator.start()
         append(child: favouriteCoordinator)
-       
-        let rankingCoordinator = dependencies.external.rankingCoordinator()
-        let rankingNavController = dependencies.external.rankingNavigationController()
-        rankingNavController.viewControllers = []
-        rankingNavController.tabBarItem.title = "Ranking"
-        rankingNavController.tabBarItem.image = UIImage(systemName: "trophy.circle.fill")
-        viewControllers.append(rankingNavController)
-        rankingCoordinator.start()
-        append(child: rankingCoordinator)
         
         let guideCoordinator = dependencies.external.guideCoordinator()
         let guideNavController = dependencies.external.guideNavigationController()
@@ -80,7 +71,6 @@ final class MainTabBarCoordinatorImp: Coordinator {
         dependencies.external.profileNavigationController().viewControllers = []
         dependencies.external.guideNavigationController().viewControllers = []
         dependencies.external.favouriteNavigationController().viewControllers = []
-        dependencies.external.rankingNavigationController().viewControllers = []
     }
     
 }

@@ -79,6 +79,7 @@ final class StatsGeneralViewController: UIViewController {
                         self?.showSpinner()
                     case .fail(_):
                         self?.presentAlert(message: "Por favor debes esperar x tiempo para hacer la siguiente llamada", title: "Error")
+                        self?.hideSpinner()
                     case .successSurvival(model: let model):
                         self?.xpLabel.text = "\(model.data.attributes.xp) XP"
                         self?.levelLabel.text = "Nivel\n\(model.data.attributes.level)"

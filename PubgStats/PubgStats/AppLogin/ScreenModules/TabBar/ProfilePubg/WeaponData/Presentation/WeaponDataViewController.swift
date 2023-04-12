@@ -22,9 +22,8 @@ class WeaponDataViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
-    let sessionUser: ProfileEntity
+    private let sessionUser: ProfileEntity
     var cancellable = Set<AnyCancellable>()
-    var weaponType: [String] = []
     private let viewModel: WeaponDataViewModel
     private let dependencies: WeaponDataDependency
     init(dependencies: WeaponDataDependency) {
@@ -52,17 +51,9 @@ class WeaponDataViewController: UIViewController {
         collectionView.register(ItemDataCollectionViewCell.self, forCellWithReuseIdentifier: "ItemDataCollectionViewCell")
     }
     func bind(){
-        //TODO: aqui comprobar si esta en core data y manejar los datos en viewmodel
-        if sessionUser.weapons != nil {
-            guard let model = sessionUser.weapons?.first else{ return}
-            //saber cuantas armas tengo
-            let a = model.data.attributes.weaponSummaries.map{$0.key}.description
-            print(a)
-            
-            for data in model.data.attributes.weaponSummaries.keys {
-                self.weaponType.append(data)
-            }
-            weaponType.sort { $0 < $1 }
+        let weaponData = viewModel.getDataWeapon(for: sessionUser)
+        if weaponData?.first?.weapon != nil {
+            viewModel.getNameWeapon(for: sessionUser)
             collectionView.reloadData()
         }else {
             viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
@@ -71,11 +62,9 @@ class WeaponDataViewController: UIViewController {
                     self?.presentAlert(message: "Error al cargar los datos: por favor vuelva e intentarlo en unos segundos", title: "Error")
                 case .success(model: let model):
                     self?.hideSpinner()
-                    self?.viewModel.saveSurvivalData(weaponData: [model.self])
-                    for data in model.data.attributes.weaponSummaries.keys {
-                        self?.weaponType.append(data)
-                    }
-                    self?.weaponType.sort { $0 < $1 }
+                    guard let user = self?.sessionUser else {return}
+                    self?.viewModel.saveWeaponData(sessionUser: user, weaponData: model)
+                    self?.viewModel.getWeapons(weaponData: model)
                     self?.collectionView.reloadData()
                 case .loading:
                     self?.showSpinner()
@@ -99,13 +88,13 @@ class WeaponDataViewController: UIViewController {
 
 extension WeaponDataViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        weaponType.count
+        viewModel.weaponType.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ItemDataCollectionViewCell", for: indexPath) as! ItemDataCollectionViewCell
         cell.backgroundColor = .systemCyan
         cell.layer.cornerRadius = 15
-        let model = weaponType[indexPath.row]
+        let model = viewModel.weaponType[indexPath.row]
         cell.categoryMenuImageView.image = UIImage(named: model)
         cell.titleCategoryLabel.text = model
         return cell
@@ -118,7 +107,7 @@ extension WeaponDataViewController: UICollectionViewDelegate {
         viewModel.goWeaponItem(weapon: weapon)
     }
     func getItem(row: Int) -> String {
-        let weapon = weaponType[row]
+        let weapon = viewModel.weaponType[row]
         return weapon
     }
 }

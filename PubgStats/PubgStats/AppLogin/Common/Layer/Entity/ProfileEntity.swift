@@ -19,7 +19,6 @@ class ProfileEntity {
         self.password = password
         self.email = email
     }
-    var weapons: [WeaponDTO]? //cuando cachee la llamada esto borrar
     var weapon: String?
     var gameMode: String?
     var gameModesDetail: [GamesModes]?
