@@ -9,7 +9,7 @@ import UIKit
 
 protocol KillsDataExternalDependency {
     func resolve() -> AppDependencies
-    func killsDataCoordinator() -> Coordinator
+    func killsDataCoordinator(navigation: UINavigationController) -> Coordinator
     func profileNavigationController() -> UINavigationController
     func favouriteNavigationController() -> UINavigationController
     func resolve() -> ProfileEntity
@@ -17,7 +17,7 @@ protocol KillsDataExternalDependency {
 }
 
 extension KillsDataExternalDependency {
-    func killsDataCoordinator() -> Coordinator {
-        KillsDataCoordinatorImp(dependencies: self, navigation: profileNavigationController())
+    func killsDataCoordinator(navigation: UINavigationController) -> Coordinator {
+        KillsDataCoordinatorImp(dependencies: self, navigation: navigation)
     }
 }

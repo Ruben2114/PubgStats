@@ -10,7 +10,7 @@ import UIKit
 protocol StatsGeneralExternalDependency {
     func resolve() -> AppDependencies
     func statsGeneralCoordinator(navigationType: NavigationStats) -> Coordinator
-    func killsDataCoordinator() -> Coordinator
+    func killsDataCoordinator(navigation: UINavigationController) -> Coordinator
     func weaponDataCoordinator() -> Coordinator
     func gamesModesDataCoordinator() -> Coordinator
     func survivalDataCoordinator() -> Coordinator
