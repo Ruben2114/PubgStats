@@ -59,6 +59,8 @@ final class StatsGeneralViewController: UIViewController {
         stackStackView.backgroundColor = .systemCyan
     }
     private func bind() {
+        let directorio = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        print(directorio)
         if navigationController == dependencies.external.favouriteNavigationController() {
              nameLabel.text = sessionUser.nameFavourite
              viewModel.state.receive(on: DispatchQueue.main)
