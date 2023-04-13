@@ -36,8 +36,8 @@ extension FavouriteCoordinatorImp: FavouriteCoordinator {
     func performTransition(_ transition: FavouriteTransition) {
         switch transition {
         case .goStats:
-            let statsGeneralCoordinator = dependencies.external.statsGeneralCoordinator(navigationType: .favourite)
-            statsGeneralCoordinator.start()
+            let statsGeneralCoordinator = dependencies.external.statsGeneralCoordinator()
+            statsGeneralCoordinator.set(navigation).set(NavigationStats.favourite).start()
             append(child: statsGeneralCoordinator)
         }
     }

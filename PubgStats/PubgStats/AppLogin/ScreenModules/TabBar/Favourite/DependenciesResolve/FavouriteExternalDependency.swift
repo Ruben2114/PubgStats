@@ -10,7 +10,7 @@ import UIKit
 protocol FavouriteExternalDependency {
     func resolve() -> AppDependencies
     func favouriteCoordinator() -> Coordinator
-    func statsGeneralCoordinator(navigationType: NavigationStats) -> BindableCoordinator
+    func statsGeneralCoordinator() -> BindableCoordinator
     func favouriteNavigationController() -> UINavigationController
     func resolve() -> ProfileEntity
     func resolve() -> LocalDataProfileService

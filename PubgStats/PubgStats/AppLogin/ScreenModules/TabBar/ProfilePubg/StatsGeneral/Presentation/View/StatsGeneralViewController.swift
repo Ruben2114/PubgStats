@@ -73,6 +73,8 @@ final class StatsGeneralViewController: UIViewController {
                      case .successSurvival(model: let model):
                          self?.xpLabel.text = "\(model.data.attributes.xp) XP"
                          self?.levelLabel.text = "Nivel\n\(model.data.attributes.level)"
+                         guard let user = self?.sessionUser else{return}
+                         self?.viewModel.saveSurvival(sessionUser: user, survivalData: [model.self])
                      case .successGamesModes(model: let model):
                          self?.killsLabel.text = "\(model.killsTotal)\nMuertes"
                          self?.top10sLabel.text = "\(model.top10STotal)\nTop10S"
