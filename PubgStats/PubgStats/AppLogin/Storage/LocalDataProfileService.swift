@@ -117,9 +117,18 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         }
     }
     
-    func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO]){
+    func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], type: NavigationStats){
+        switch type {
+        case .profile:
+            setSurvival(sessionUser: sessionUser, survivalData: survivalData, key: "name", value: sessionUser.name)
+        case .favourite:
+            guard let player = sessionUser.nameFavourite else {return}
+            setSurvival(sessionUser: sessionUser, survivalData: survivalData, key: "player", value: player)
+        }
+    }
+    private func setSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], key: String, value: String) {
         let fetchRequest = Profile.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
+        fetchRequest.predicate = NSPredicate(format: "\(key) == %@", value)
         do {
             let result = try context.fetch(fetchRequest)
             if let perfil = result.first{
