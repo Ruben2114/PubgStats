@@ -17,7 +17,7 @@ protocol LocalDataProfileService {
     func checkUserAndChangePassword(name: String, email: String) -> Bool
     func savePlayerPubg(sessionUser: ProfileEntity, player: String, account: String)
     func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], type: NavigationStats)
-    func saveGamesMode(sessionUser: ProfileEntity, gamesModeData: [GamesModesDTO])
+    func saveGamesMode(sessionUser: ProfileEntity, gamesModeData: [GamesModesDTO], type: NavigationStats)
     func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO)
     func saveNewValue(sessionUser: ProfileEntity,_ value: Any, type: String)
     func getFavourites(for sessionUser: ProfileEntity) -> [Favourite]?
@@ -130,7 +130,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
     }
     
     private func setSurvival<T: NSManagedObject & HasEntities>(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], key: String, value: String, fetchRequest: NSFetchRequest<T>) {
-
+        
         fetchRequest.predicate = NSPredicate(format: "\(key) == %@", value)
         do {
             let result = try context.fetch(fetchRequest)
@@ -138,7 +138,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
                 let newSurvival = perfil.survival ?? Survival(context: context)
                 guard let data = survivalData.first?.data.attributes else {return}
                 guard let dataStats = survivalData.first?.data.attributes.stats else {return}
-                            
+                
                 newSurvival.airDropsCalled = String(format: "%.0f", dataStats.airDropsCalled.total ?? 0)
                 newSurvival.damageDealt = String(format: "%.0f", dataStats.damageDealt.total ?? 0)
                 newSurvival.damageTaken =  String(format: "%.0f", dataStats.damageTaken.total ?? 0)
@@ -166,92 +166,105 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
             print("Error en core data")
         }
     }
-   
+    
     func saveGamesMode(sessionUser: ProfileEntity, gamesModeData: [GamesModesDTO], type: NavigationStats){
         switch type {
         case .profile:
             let fetchRequest = Profile.fetchRequest()
-            saveGamesModes(sessionUser: sessionUser, gamesModeData: gamesModeData, key: "name", value: sessionUser.name, fetchRequest: fetchRequest)
+            fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
+            do {
+                let result = try context.fetch(fetchRequest)
+                if let profile = result.first{
+                    guard let data = gamesModeData.first else {return}
+                    let gameModes = [
+                        "solo": data.solo,
+                        "soloFpp": data.soloFpp,
+                        "duo": data.duo,
+                        "duoFpp": data.duoFpp,
+                        "squad": data.squad,
+                        "squadFpp": data.squadFpp
+                    ]
+                    gameModes.forEach { mode in
+                        let dataGamesMode = profile.gamesMode?.first(where: {($0 as? GamesModes)?.mode == mode.key }) as? GamesModes ?? GamesModes(context: context)
+                        saveGameData(dataGamesMode: dataGamesMode, mode: mode.key, result: mode.value, data: data)
+                        profile.addToGamesMode(dataGamesMode)
+                    }
+                }
+            } catch {
+                print("Error en core data")
+            }
         case .favourite:
             let fetchRequest = Favourite.fetchRequest()
             guard let player = sessionUser.nameFavourite else {return}
-            saveGamesModes(sessionUser: sessionUser, gamesModeData: gamesModeData, key: "name", value: player, fetchRequest: fetchRequest)
-        }
-    }
-    
-    private func saveGamesModes<T: NSManagedObject & HasEntities>(sessionUser: ProfileEntity, gamesModeData: [GamesModesDTO], key: String, value: String, fetchRequest: NSFetchRequest<T>){
-        fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
-        do {
-            let result = try context.fetch(fetchRequest)
-            if let profile = result.first{
-                guard let data = gamesModeData.first else {return}
-                let mode = ["solo","soloFpp","duo","duoFpp","squad","squadFpp"]
-                mode.forEach { result in
-                    saveGameData(mode: result, data: data.solo, profile: profile, total: data)
+            fetchRequest.predicate = NSPredicate(format: "name == %@", player)
+            do {
+                let result = try context.fetch(fetchRequest)
+                if let profile = result.first{
+                    guard let data = gamesModeData.first else {return}
+                    let gameModes = [
+                        "solo": data.solo,
+                        "soloFpp": data.soloFpp,
+                        "duo": data.duo,
+                        "duoFpp": data.duoFpp,
+                        "squad": data.squad,
+                        "squadFpp": data.squadFpp
+                    ]
+                    gameModes.forEach { mode in
+                        let dataGamesMode = profile.gamesMode?.first(where: {($0 as? GamesModes)?.mode == mode.key }) as? GamesModes ?? GamesModes(context: context)
+                        saveGameData(dataGamesMode: dataGamesMode, mode: mode.key, result: mode.value, data: data)
+                        profile.addToGamesMode(dataGamesMode)
+                    }
                 }
+            } catch {
+                print("Error en core data")
             }
-        } catch {
-            print("Error en core data")
         }
     }
-    private func saveGameData<T: NSManagedObject & HasEntities>(mode: String, data: DuoDTO, profile: T, total: GamesModesDTO) {
-        let dataGamesMode = profile.gamesMode?.first(where: { ($0 as? GamesModes)?.mode == mode }) as? GamesModes ?? GamesModes(context: context)
+    private func saveGameData(dataGamesMode: GamesModes, mode: String, result: DuoDTO, data: GamesModesDTO) {
         dataGamesMode.mode = mode
-        dataGamesMode.assists = Int32(data.assists)
-        dataGamesMode.boosts = Int32(data.boosts)
-        dataGamesMode.dBNOS = Int32(data.dBNOS)
-        dataGamesMode.dailyKills = Int32(data.dailyKills)
-        dataGamesMode.dailyWINS = Int32(data.dailyWINS)
-        dataGamesMode.damageDealt = data.damageDealt
-        dataGamesMode.days = Int32(data.days)
-        dataGamesMode.headshotKills = Int32(data.headshotKills)
-        dataGamesMode.heals = Int32(data.heals)
-        dataGamesMode.killPoints = Int32(data.killPoints)
-        dataGamesMode.kills = Int32(data.kills)
-        dataGamesMode.longestKill = data.longestKill
-        dataGamesMode.longestTimeSurvived = Int32(data.longestTimeSurvived)
-        dataGamesMode.losses = Int32(data.losses)
-        dataGamesMode.maxKillStreaks = Int32(data.maxKillStreaks)
-        dataGamesMode.mostSurvivalTime = Int32(data.mostSurvivalTime)
-        dataGamesMode.rankPoints = Int32(data.rankPoints)
-        dataGamesMode.rankPointsTitle = data.rankPointsTitle
-        dataGamesMode.revives = Int32(data.revives)
-        dataGamesMode.rideDistance = data.rideDistance
-        dataGamesMode.roadKills = Int32(data.roadKills)
-        dataGamesMode.roundMostKills = Int32(data.roundMostKills)
-        dataGamesMode.roundsPlayed = Int32(data.roundsPlayed)
-        dataGamesMode.swimDistance = data.swimDistance
-        dataGamesMode.suicides = Int32(data.suicides)
-        dataGamesMode.teamKills = Int32(data.teamKills)
-        dataGamesMode.timeSurvived = Int32(data.timeSurvived)
-        dataGamesMode.top10S = Int32(data.top10S)
-        dataGamesMode.vehicleDestroys = Int32(data.vehicleDestroys)
-        dataGamesMode.walkDistance = data.walkDistance
-        dataGamesMode.weaponsAcquired = Int32(data.weaponsAcquired)
-        dataGamesMode.weeklyKills = Int32(data.weeklyKills)
-        dataGamesMode.weeklyWINS = Int32(data.weeklyWINS)
-        dataGamesMode.winPoints = Int32(data.winPoints)
-        dataGamesMode.wins = Int32(data.wins)
-        dataGamesMode.bestRankPoint = Int32(total.bestRank)
-        dataGamesMode.killsTotal = Int32(total.killsTotal)
-        dataGamesMode.gamesPlayed = Int32(total.gamesPlayed)
-        dataGamesMode.timePlayed = total.timePlayed
-        dataGamesMode.top10STotal = Int32(total.top10STotal)
-        dataGamesMode.wonTotal = Int32(total.wonTotal)
-        profile.addToGamesMode(dataGamesMode)
+        dataGamesMode.assists = Int32(result.assists)
+        dataGamesMode.boosts = Int32(result.boosts)
+        dataGamesMode.dBNOS = Int32(result.dBNOS)
+        dataGamesMode.dailyKills = Int32(result.dailyKills)
+        dataGamesMode.dailyWINS = Int32(result.dailyWINS)
+        dataGamesMode.damageDealt = result.damageDealt
+        dataGamesMode.days = Int32(result.days)
+        dataGamesMode.headshotKills = Int32(result.headshotKills)
+        dataGamesMode.heals = Int32(result.heals)
+        dataGamesMode.killPoints = Int32(result.killPoints)
+        dataGamesMode.kills = Int32(result.kills)
+        dataGamesMode.longestKill = result.longestKill
+        dataGamesMode.longestTimeSurvived = Int32(result.longestTimeSurvived)
+        dataGamesMode.losses = Int32(result.losses)
+        dataGamesMode.maxKillStreaks = Int32(result.maxKillStreaks)
+        dataGamesMode.mostSurvivalTime = Int32(result.mostSurvivalTime)
+        dataGamesMode.rankPoints = Int32(result.rankPoints)
+        dataGamesMode.rankPointsTitle = result.rankPointsTitle
+        dataGamesMode.revives = Int32(data.solo.revives)
+        dataGamesMode.rideDistance = result.rideDistance
+        dataGamesMode.roadKills = Int32(result.roadKills)
+        dataGamesMode.roundMostKills = Int32(result.roundMostKills)
+        dataGamesMode.roundsPlayed = Int32(result.roundsPlayed)
+        dataGamesMode.swimDistance = result.swimDistance
+        dataGamesMode.suicides = Int32(result.suicides)
+        dataGamesMode.teamKills = Int32(result.teamKills)
+        dataGamesMode.timeSurvived = Int32(result.timeSurvived)
+        dataGamesMode.top10S = Int32(result.top10S)
+        dataGamesMode.vehicleDestroys = Int32(result.vehicleDestroys)
+        dataGamesMode.walkDistance = result.walkDistance
+        dataGamesMode.weaponsAcquired = Int32(result.weaponsAcquired)
+        dataGamesMode.weeklyKills = Int32(result.weeklyKills)
+        dataGamesMode.weeklyWINS = Int32(result.weeklyWINS)
+        dataGamesMode.winPoints = Int32(result.winPoints)
+        dataGamesMode.wins = Int32(result.wins)
+        dataGamesMode.bestRankPoint = Int32(data.bestRank)
+        dataGamesMode.killsTotal = Int32(data.killsTotal)
+        dataGamesMode.gamesPlayed = Int32(data.gamesPlayed)
+        dataGamesMode.timePlayed = data.timePlayed
+        dataGamesMode.top10STotal = Int32(data.top10STotal)
+        dataGamesMode.wonTotal = Int32(data.wonTotal)
         try? context.save()
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     func saveWeapon(name: String, data: Data, profile: Profile) {
         let dataWeapon = profile.weapon?.first(where: {($0 as? Weapon)?.name == name }) as? Weapon ?? Weapon(context: context)
@@ -412,9 +425,9 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
 }
 protocol HasEntities {
     var survival: Survival? { get set }
-    var weapon: Set<Weapon>? { get set }
-    var gamesModes: Set<GamesModes>? { get set }
 }
 
 extension Profile: HasEntities {}
 extension Favourite: HasEntities {}
+
+

@@ -84,6 +84,8 @@ final class StatsGeneralViewController: UIViewController {
                          self?.winsLabel.text = "\(model.wonTotal)\nVictorias"
                          self?.timePlayedLabel.text = "\(model.timePlayed)\nTiempo Jugado"
                          self?.bestRankedLabel.text = "\(model.bestRank)\nMejor ranked"
+                         guard let user = self?.sessionUser else{return}
+                         self?.viewModel.saveGamesModeData(sessionUser: user, gamesModeData: [model.self], type: .favourite)
                      case .success:
                          self?.hideSpinner()
                      }
@@ -125,7 +127,7 @@ final class StatsGeneralViewController: UIViewController {
                              self?.timePlayedLabel.text = "\(model.timePlayed)\nTiempo Jugado"
                              self?.bestRankedLabel.text = "\(model.bestRank)\nMejor ranked"
                              guard let user = self?.sessionUser else{return}
-                             self?.viewModel.saveGamesModeData(sessionUser: user, gamesModeData: [model.self])
+                             self?.viewModel.saveGamesModeData(sessionUser: user, gamesModeData: [model.self], type: .profile)
                          case .success:
                              self?.hideSpinner()
                          }
