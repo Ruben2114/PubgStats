@@ -11,7 +11,7 @@ protocol ProfileExternalDependency {
     func resolve() -> AppDependencies
     func profileCoordinator() -> Coordinator
     func helpDataCoordinator() -> Coordinator
-    func statsGeneralCoordinator(navigationType: NavigationStats) -> Coordinator
+    func statsGeneralCoordinator(navigationType: NavigationStats) -> BindableCoordinator
     func profileNavigationController() -> UINavigationController
     func resolve() -> ProfileEntity
     func resolve() -> CommonRepository

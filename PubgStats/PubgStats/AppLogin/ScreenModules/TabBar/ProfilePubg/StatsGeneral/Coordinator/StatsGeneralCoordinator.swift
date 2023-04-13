@@ -12,11 +12,12 @@ enum StatsGeneralTransition {
     case goSurvival
     case goGamesModes
 }
-protocol StatsGeneralCoordinator: Coordinator {
+protocol StatsGeneralCoordinator: BindableCoordinator {
     func performTransition(_ transition: StatsGeneralTransition)
 }
 
-final class StatsGeneralCoordinatorImp: Coordinator {
+final class StatsGeneralCoordinatorImp: BindableCoordinator {
+    var dataBinding: DataBinding
     weak var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
@@ -25,13 +26,14 @@ final class StatsGeneralCoordinatorImp: Coordinator {
         Dependency(external: externalDependencies, coordinator: self)
     }()
     
-    public init(dependencies: StatsGeneralExternalDependency, navigation: UINavigationController) {
-        self.navigation = navigation
+    public init(dependencies: StatsGeneralExternalDependency) {
         self.externalDependencies = dependencies
+        self.dataBinding = DataBindingObject()
     }
     
     func start() {
         let statsGeneralView: StatsGeneralViewController = dependencies.resolve()
+        navigation = dataBinding.get()
         navigation?.pushViewController(statsGeneralView, animated: false)
     }
 }

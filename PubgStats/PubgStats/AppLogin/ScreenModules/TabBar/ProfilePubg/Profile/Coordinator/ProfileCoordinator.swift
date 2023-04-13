@@ -43,7 +43,10 @@ extension ProfileCoordinatorImp: ProfileCoordinator {
             (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewAppCoordinator()
         case .goStatsGeneral:
             let statsGeneralCoordinator = dependencies.external.statsGeneralCoordinator(navigationType: .profile)
-            statsGeneralCoordinator.start()
+            statsGeneralCoordinator
+                .set(navigation)
+                .set(NavigationStats.profile)
+                .start()
             append(child: statsGeneralCoordinator)
         case .goHelp:
             let helpDataCoordinator = dependencies.external.helpDataCoordinator()

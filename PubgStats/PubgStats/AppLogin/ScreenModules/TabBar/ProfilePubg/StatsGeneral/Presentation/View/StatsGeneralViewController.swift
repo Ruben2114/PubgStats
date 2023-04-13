@@ -59,7 +59,8 @@ final class StatsGeneralViewController: UIViewController {
         stackStackView.backgroundColor = .systemCyan
     }
     private func bind() {
-        if navigationController == dependencies.external.favouriteNavigationController() {
+        guard let navigationType = viewModel.navigation() else {return}
+        if navigationType == .favourite {
              nameLabel.text = sessionUser.nameFavourite
              viewModel.state.receive(on: DispatchQueue.main)
                  .sink { [weak self ] state in
