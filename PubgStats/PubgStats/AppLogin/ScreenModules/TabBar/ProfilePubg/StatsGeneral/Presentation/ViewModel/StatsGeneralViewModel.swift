@@ -54,8 +54,8 @@ final class StatsGeneralViewModel {
         guard let type: NavigationStats = coordinator?.dataBinding.get() else {return nil}
         return type
     }
-    func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO]){
-        statsGeneralDataUseCase.saveSurvival(sessionUser: sessionUser, survivalData: survivalData)
+    func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], type: NavigationStats){
+        statsGeneralDataUseCase.saveSurvival(sessionUser: sessionUser, survivalData: survivalData, type: type)
     }
     func getSurvival(for sessionUser: ProfileEntity) -> Survival?{
         statsGeneralDataUseCase.getSurvival(for: sessionUser)

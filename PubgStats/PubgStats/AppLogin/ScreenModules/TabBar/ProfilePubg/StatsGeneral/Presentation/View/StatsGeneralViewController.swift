@@ -59,6 +59,8 @@ final class StatsGeneralViewController: UIViewController {
         stackStackView.backgroundColor = .systemCyan
     }
     private func bind() {
+        let directorio = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+                print(directorio)
         guard let navigationType = viewModel.navigation() else {return}
         if navigationType == .favourite {
              nameLabel.text = sessionUser.nameFavourite
@@ -74,7 +76,7 @@ final class StatsGeneralViewController: UIViewController {
                          self?.xpLabel.text = "\(model.data.attributes.xp) XP"
                          self?.levelLabel.text = "Nivel\n\(model.data.attributes.level)"
                          guard let user = self?.sessionUser else{return}
-                         self?.viewModel.saveSurvival(sessionUser: user, survivalData: [model.self])
+                         self?.viewModel.saveSurvival(sessionUser: user, survivalData: [model.self], type: .favourite)
                      case .successGamesModes(model: let model):
                          self?.killsLabel.text = "\(model.killsTotal)\nMuertes"
                          self?.top10sLabel.text = "\(model.top10STotal)\nTop10S"
@@ -114,7 +116,7 @@ final class StatsGeneralViewController: UIViewController {
                              self?.xpLabel.text = "\(model.data.attributes.xp) XP"
                              self?.levelLabel.text = "Nivel\n\(model.data.attributes.level)"
                              guard let user = self?.sessionUser else{return}
-                             self?.viewModel.saveSurvival(sessionUser: user, survivalData: [model.self])
+                             self?.viewModel.saveSurvival(sessionUser: user, survivalData: [model.self], type: .profile)
                          case .successGamesModes(model: let model):
                              self?.killsLabel.text = "\(model.killsTotal)\nMuertes"
                              self?.top10sLabel.text = "\(model.top10STotal)\nTop10S"

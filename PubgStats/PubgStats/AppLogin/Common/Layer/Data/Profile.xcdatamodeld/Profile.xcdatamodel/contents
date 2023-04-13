@@ -4,6 +4,9 @@
         <attribute name="account" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="favourites" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profile" inverseName="favourites" inverseEntity="Profile"/>
+        <relationship name="gamesMode" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GamesModes" inverseName="gamesModeFav" inverseEntity="GamesModes"/>
+        <relationship name="survival" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Survival" inverseName="survivalFav" inverseEntity="Survival"/>
+        <relationship name="weapon" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Weapon" inverseName="weaponFav" inverseEntity="Weapon"/>
     </entity>
     <entity name="GamesModes" representedClassName="GamesModes" syncable="YES" codeGenerationType="class">
         <attribute name="assists" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -49,6 +52,7 @@
         <attribute name="wins" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="wonTotal" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="gamesMode" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profile" inverseName="gamesMode" inverseEntity="Profile"/>
+        <relationship name="gamesModeFav" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Favourite" inverseName="gamesMode" inverseEntity="Favourite"/>
     </entity>
     <entity name="Profile" representedClassName="Profile" syncable="YES" codeGenerationType="class">
         <attribute name="account" optional="YES" attributeType="String"/>
@@ -84,10 +88,12 @@
         <attribute name="uniqueItemsLooted" optional="YES" attributeType="String"/>
         <attribute name="xp" optional="YES" attributeType="String"/>
         <relationship name="survival" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profile" inverseName="survival" inverseEntity="Profile"/>
+        <relationship name="survivalFav" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Favourite" inverseName="survival" inverseEntity="Favourite"/>
     </entity>
     <entity name="Weapon" representedClassName="Weapon" syncable="YES" codeGenerationType="class">
         <attribute name="data" optional="YES" attributeType="Binary"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="weapon" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profile" inverseName="weapon" inverseEntity="Profile"/>
+        <relationship name="weaponFav" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Favourite" inverseName="weapon" inverseEntity="Favourite"/>
     </entity>
 </model>

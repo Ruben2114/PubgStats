@@ -16,7 +16,7 @@ protocol LocalDataProfileService {
     func checkUser(sessionUser: ProfileEntity, name: String, password: String) -> Bool
     func checkUserAndChangePassword(name: String, email: String) -> Bool
     func savePlayerPubg(sessionUser: ProfileEntity, player: String, account: String)
-    func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO])
+    func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], type: NavigationStats)
     func saveGamesMode(sessionUser: ProfileEntity, gamesModeData: [GamesModesDTO])
     func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO)
     func saveNewValue(sessionUser: ProfileEntity,_ value: Any, type: String)
@@ -120,22 +120,25 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
     func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], type: NavigationStats){
         switch type {
         case .profile:
-            setSurvival(sessionUser: sessionUser, survivalData: survivalData, key: "name", value: sessionUser.name)
+            let fetchRequest = Profile.fetchRequest()
+            setSurvival(sessionUser: sessionUser, survivalData: survivalData, key: "name", value: sessionUser.name, fetchRequest: fetchRequest)
         case .favourite:
+            let fetchRequest = Favourite.fetchRequest()
             guard let player = sessionUser.nameFavourite else {return}
-            setSurvival(sessionUser: sessionUser, survivalData: survivalData, key: "player", value: player)
+            setSurvival(sessionUser: sessionUser, survivalData: survivalData, key: "name", value: player, fetchRequest: fetchRequest)
         }
     }
-    private func setSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], key: String, value: String) {
-        let fetchRequest = Profile.fetchRequest()
+    
+    private func setSurvival<T: NSManagedObject & HasEntities>(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], key: String, value: String, fetchRequest: NSFetchRequest<T>) {
+
         fetchRequest.predicate = NSPredicate(format: "\(key) == %@", value)
         do {
             let result = try context.fetch(fetchRequest)
-            if let perfil = result.first{
+            if var perfil = result.first{
                 let newSurvival = perfil.survival ?? Survival(context: context)
                 guard let data = survivalData.first?.data.attributes else {return}
                 guard let dataStats = survivalData.first?.data.attributes.stats else {return}
-                
+                            
                 newSurvival.airDropsCalled = String(format: "%.0f", dataStats.airDropsCalled.total ?? 0)
                 newSurvival.damageDealt = String(format: "%.0f", dataStats.damageDealt.total ?? 0)
                 newSurvival.damageTaken =  String(format: "%.0f", dataStats.damageTaken.total ?? 0)
@@ -163,7 +166,35 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
             print("Error en core data")
         }
     }
-    func saveGameData(mode: String, data: DuoDTO, profile: Profile, total: GamesModesDTO) {
+   
+    func saveGamesMode(sessionUser: ProfileEntity, gamesModeData: [GamesModesDTO], type: NavigationStats){
+        switch type {
+        case .profile:
+            let fetchRequest = Profile.fetchRequest()
+            saveGamesModes(sessionUser: sessionUser, gamesModeData: gamesModeData, key: "name", value: sessionUser.name, fetchRequest: fetchRequest)
+        case .favourite:
+            let fetchRequest = Favourite.fetchRequest()
+            guard let player = sessionUser.nameFavourite else {return}
+            saveGamesModes(sessionUser: sessionUser, gamesModeData: gamesModeData, key: "name", value: player, fetchRequest: fetchRequest)
+        }
+    }
+    
+    private func saveGamesModes<T: NSManagedObject & HasEntities>(sessionUser: ProfileEntity, gamesModeData: [GamesModesDTO], key: String, value: String, fetchRequest: NSFetchRequest<T>){
+        fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
+        do {
+            let result = try context.fetch(fetchRequest)
+            if let profile = result.first{
+                guard let data = gamesModeData.first else {return}
+                let mode = ["solo","soloFpp","duo","duoFpp","squad","squadFpp"]
+                mode.forEach { result in
+                    saveGameData(mode: result, data: data.solo, profile: profile, total: data)
+                }
+            }
+        } catch {
+            print("Error en core data")
+        }
+    }
+    private func saveGameData<T: NSManagedObject & HasEntities>(mode: String, data: DuoDTO, profile: T, total: GamesModesDTO) {
         let dataGamesMode = profile.gamesMode?.first(where: { ($0 as? GamesModes)?.mode == mode }) as? GamesModes ?? GamesModes(context: context)
         dataGamesMode.mode = mode
         dataGamesMode.assists = Int32(data.assists)
@@ -210,23 +241,18 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         profile.addToGamesMode(dataGamesMode)
         try? context.save()
     }
-    func saveGamesMode(sessionUser: ProfileEntity, gamesModeData: [GamesModesDTO]){
-        let fetchRequest = Profile.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
-        do {
-            let result = try context.fetch(fetchRequest)
-            if let profile = result.first{
-                guard let data = gamesModeData.first else {return}
-                //TODO: Desde un array guardar los mode e iterar --> probar en base de datos
-                let mode = ["solo","soloFpp","duo","duoFpp","squad","squadFpp"]
-                mode.forEach { result in
-                    saveGameData(mode: result, data: data.solo, profile: profile, total: data)
-                }
-            }
-        } catch {
-            print("Error en core data")
-        }
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     func saveWeapon(name: String, data: Data, profile: Profile) {
         let dataWeapon = profile.weapon?.first(where: {($0 as? Weapon)?.name == name }) as? Weapon ?? Weapon(context: context)
         dataWeapon.name = name
@@ -384,7 +410,11 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         }
     }
 }
+protocol HasEntities {
+    var survival: Survival? { get set }
+    var weapon: Set<Weapon>? { get set }
+    var gamesModes: Set<GamesModes>? { get set }
+}
 
-
-
-
+extension Profile: HasEntities {}
+extension Favourite: HasEntities {}

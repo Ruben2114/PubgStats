@@ -8,7 +8,7 @@
 protocol StatsGeneralDataUseCase {
     func executeSurvival(account: String, completion: @escaping (Result<SurvivalDTO, Error>) -> Void)
     func executeGamesModes(account: String, completion: @escaping (Result<GamesModesDTO, Error>) -> Void)
-    func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO])
+    func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], type: NavigationStats)
     func saveGamesModeData(sessionUser: ProfileEntity, gamesModeData: [GamesModesDTO])
     func getSurvival(for sessionUser: ProfileEntity) -> Survival?
     func getGamesModes(for sessionUser: ProfileEntity) -> [GamesModes]?
@@ -25,8 +25,8 @@ struct StatsGeneralDataUseCaseImp: StatsGeneralDataUseCase {
     func executeGamesModes(account: String, completion: @escaping (Result<GamesModesDTO, Error>) -> Void){
         statsGeneralRepository.fetchGamesModeData(account: account, completion: completion)
     }
-    func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO]){
-        statsGeneralRepository.saveSurvival(sessionUser: sessionUser, survivalData: survivalData)
+    func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], type: NavigationStats){
+        statsGeneralRepository.saveSurvival(sessionUser: sessionUser, survivalData: survivalData, type: type)
     }
     func getSurvival(for sessionUser: ProfileEntity) -> Survival?{
         statsGeneralRepository.getSurvival(for: sessionUser)

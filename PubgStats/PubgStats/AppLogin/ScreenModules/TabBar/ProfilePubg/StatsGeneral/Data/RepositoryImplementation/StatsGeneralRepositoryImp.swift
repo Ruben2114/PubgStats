@@ -18,8 +18,8 @@ struct StatsGeneralRepositoryImp: StatsGeneralRepository {
     func fetchGamesModeData(account: String, completion: @escaping (Result<GamesModesDTO, Error>) -> Void) {
         remoteData.getGamesModesData(account: account, completion: completion)
     }
-    func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO]){
-        dataSource.saveSurvival(sessionUser: sessionUser, survivalData: survivalData)
+    func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], type: NavigationStats){
+        dataSource.saveSurvival(sessionUser: sessionUser, survivalData: survivalData, type: type)
     }
     func getSurvival(for sessionUser: ProfileEntity) -> Survival?{
         dataSource.getSurvival(for: sessionUser)
