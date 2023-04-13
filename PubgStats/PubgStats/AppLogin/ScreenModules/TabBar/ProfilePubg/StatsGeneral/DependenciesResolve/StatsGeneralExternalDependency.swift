@@ -9,19 +9,32 @@ import UIKit
 
 protocol StatsGeneralExternalDependency {
     func resolve() -> AppDependencies
-    func statsGeneralCoordinator() -> Coordinator
+    func statsGeneralCoordinator(navigationType: NavigationType) -> Coordinator
     func killsDataCoordinator() -> Coordinator
     func weaponDataCoordinator() -> Coordinator
     func gamesModesDataCoordinator() -> Coordinator
     func survivalDataCoordinator() -> Coordinator
     func profileNavigationController() -> UINavigationController
+    func favouriteNavigationController() -> UINavigationController
     func resolve() -> ProfileEntity
     func resolve() -> RemoteService
     func resolve() -> LocalDataProfileService
 }
+enum NavigationType {
+    case profile
+    case favourite
+}
 
 extension StatsGeneralExternalDependency {
-    func statsGeneralCoordinator() -> Coordinator {
-        StatsGeneralCoordinatorImp(dependencies: self, navigation: profileNavigationController())
+    func statsGeneralCoordinator(navigationType: NavigationType) -> Coordinator {
+        StatsGeneralCoordinatorImp(dependencies: self, navigation: navigationController(for: navigationType))
+    }
+    private func navigationController(for type: NavigationType) -> UINavigationController {
+        switch type {
+        case .profile:
+            return profileNavigationController()
+        case .favourite:
+            return favouriteNavigationController()
+        }
     }
 }

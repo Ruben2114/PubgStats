@@ -22,4 +22,6 @@ class ProfileEntity {
     var weapon: String?
     var gameMode: String?
     var gameModesDetail: [GamesModes]?
+    var nameFavourite: String?
+    var accountFavourite: String?
 }

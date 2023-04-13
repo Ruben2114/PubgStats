@@ -160,6 +160,12 @@ extension FavouriteViewController: UITableViewDelegate {
         return configuration
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("navegando por este row")
+        let row = indexPath.row
+        let favourite = getItem(row: row)
+        viewModel.goFavourite(favourite: favourite)
+    }
+    func getItem(row: Int) -> Favourite {
+        let gameMode = profilesFavourite[row]
+        return gameMode
     }
 }

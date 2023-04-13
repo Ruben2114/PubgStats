@@ -22,3 +22,4 @@ extension WeaponDataExternalDependency {
         WeaponDataCoordinatorImp(dependencies: self, navigation: profileNavigationController())
     }
 }
+

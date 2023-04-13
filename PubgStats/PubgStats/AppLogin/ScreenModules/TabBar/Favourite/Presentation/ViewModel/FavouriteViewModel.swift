@@ -13,9 +13,10 @@ final class FavouriteViewModel {
     private weak var coordinator: FavouriteCoordinator?
     private let dependencies: FavouriteDependency
     private let favouriteDataUseCase: FavouriteDataUseCase
-    
+    private let sessionUser: ProfileEntity
     init(dependencies: FavouriteDependency) {
         self.dependencies = dependencies
+        self.sessionUser = dependencies.external.resolve()
         self.coordinator = dependencies.resolve()
         self.favouriteDataUseCase = dependencies.resolve()
     }
@@ -42,8 +43,10 @@ final class FavouriteViewModel {
     func deleteFavouriteTableView(_ profile: Favourite){
         favouriteDataUseCase.deleteFavouriteTableView(profile)
     }
+    func goFavourite(favourite: Favourite){
+        sessionUser.nameFavourite = favourite.name
+        sessionUser.accountFavourite = favourite.account
+        coordinator?.performTransition(.goStats)
+    }
 }
-
-
-
 
