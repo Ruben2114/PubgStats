@@ -9,11 +9,11 @@ import UIKit
 
 protocol StatsGeneralExternalDependency {
     func resolve() -> AppDependencies
-    func statsGeneralCoordinator() -> BindableCoordinator
-    func killsDataCoordinator(navigation: UINavigationController) -> Coordinator
-    func weaponDataCoordinator(navigation: UINavigationController) -> Coordinator
-    func gamesModesDataCoordinator(navigation: UINavigationController) -> Coordinator
-    func survivalDataCoordinator(navigation: UINavigationController) -> Coordinator
+    func statsGeneralCoordinator(type: NavigationStats) -> BindableCoordinator
+    func killsDataCoordinator(navigation: UINavigationController, type: NavigationStats) -> Coordinator
+    func weaponDataCoordinator(navigation: UINavigationController, type: NavigationStats) -> Coordinator
+    func gamesModesDataCoordinator(navigation: UINavigationController, type: NavigationStats) -> Coordinator
+    func survivalDataCoordinator(navigation: UINavigationController, type: NavigationStats) -> Coordinator
     func profileNavigationController() -> UINavigationController
     func favouriteNavigationController() -> UINavigationController
     func resolve() -> ProfileEntity
@@ -26,8 +26,8 @@ enum NavigationStats {
 }
 
 extension StatsGeneralExternalDependency {
-    func statsGeneralCoordinator() -> BindableCoordinator {
-        StatsGeneralCoordinatorImp(dependencies: self)
+    func statsGeneralCoordinator(type: NavigationStats) -> BindableCoordinator {
+        StatsGeneralCoordinatorImp(dependencies: self, type: type)
     }
     private func navigationController(for type: NavigationStats) -> UINavigationController {
         switch type {

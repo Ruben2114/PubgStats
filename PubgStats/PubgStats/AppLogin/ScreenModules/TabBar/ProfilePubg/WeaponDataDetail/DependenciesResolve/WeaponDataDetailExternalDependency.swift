@@ -9,7 +9,7 @@ import UIKit
 
 protocol WeaponDataDetailExternalDependency {
     func resolve() -> AppDependencies
-    func weaponDataDetailCoordinator(navigation: UINavigationController) -> Coordinator
+    func weaponDataDetailCoordinator(navigation: UINavigationController, type: NavigationStats) -> Coordinator
     func profileNavigationController() -> UINavigationController
     func favouriteNavigationController() -> UINavigationController
     func resolve() -> ProfileEntity
@@ -17,7 +17,7 @@ protocol WeaponDataDetailExternalDependency {
 }
 
 extension WeaponDataDetailExternalDependency {
-    func weaponDataDetailCoordinator(navigation: UINavigationController) -> Coordinator {
-        WeaponDataDetailCoordinatorImp(dependencies: self, navigation: navigation)
+    func weaponDataDetailCoordinator(navigation: UINavigationController, type: NavigationStats) -> Coordinator {
+        WeaponDataDetailCoordinatorImp(dependencies: self, navigation: navigation, type: type)
     }
 }

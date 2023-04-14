@@ -12,34 +12,61 @@ final class WeaponDataViewModel {
     private let dependencies: WeaponDataDependency
     private weak var coordinator: WeaponDataCoordinator?
     private let weaponDataUseCase: WeaponDataUseCase
+    private let sessionUser: ProfileEntity
     var weaponType: [String] = []
     
     init(dependencies: WeaponDataDependency, apiService: ApiClientService = ApiClientServiceImp()) {
         self.apiService = apiService
         self.dependencies = dependencies
+        self.sessionUser = dependencies.external.resolve()
         self.coordinator = dependencies.resolve()
         self.weaponDataUseCase = dependencies.resolve()
     }
-    func fetchDataGeneral(account: String) {
+    
+    func bind() {
         state.send(.loading)
-        weaponDataUseCase.execute(account: account) { [weak self] result in
-            switch result {
-            case .success(let weapon):
-                self?.state.send(.success(model: weapon))
-            case .failure(let error):
-                self?.state.send(.fail(error: "\(error)"))
+        let weaponData = getDataWeapon(for: sessionUser)
+        guard let id = sessionUser.accountFavourite, !id.isEmpty else {return}
+        guard let _ = weaponData?.first?.weapon ?? weaponData?.first?.weaponFav else {
+            weaponDataUseCase.execute(account: id) { [weak self] result in
+                switch result {
+                case .success(let weapon):
+                    guard let user = self?.sessionUser else {return}
+                    self?.saveWeaponData(sessionUser: user, weaponData: weapon)
+                    self?.getWeapons(weaponData: weapon)
+                    self?.state.send(.success)
+                case .failure(let error):
+                    self?.state.send(.fail(error: "\(error)"))
+                }
             }
+            return
         }
+        getNameWeapon(for: sessionUser, model: weaponData)
+        self.state.send(.success)
     }
-    func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO, type: NavigationStats) {
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO) {
+        guard let type = coordinator?.type else {return}
         weaponDataUseCase.saveWeaponData(sessionUser: sessionUser, weaponData: weaponData, type: type)
     }
-    func getDataWeapon(for sessionUser: ProfileEntity, type: NavigationStats) -> [Weapon]? {
+    func getDataWeapon(for sessionUser: ProfileEntity) -> [Weapon]? {
+        guard let type = coordinator?.type else {return nil}
         let weaponData = weaponDataUseCase.getDataWeapon(for: sessionUser, type: type)
         return weaponData
     }
-    func getNameWeapon(for sessionUser: ProfileEntity, type: NavigationStats){
-        let model = getDataWeapon(for: sessionUser, type: type)
+    func getNameWeapon(for sessionUser: ProfileEntity, model: [Weapon]?){
         if let weapon = model {
             let modes = weapon.compactMap { $0.name }
             weaponType = modes

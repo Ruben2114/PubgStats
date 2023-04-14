@@ -45,12 +45,12 @@ extension StatsGeneralCoordinatorImp: StatsGeneralCoordinator {
         switch transition {
         case .goKillsData:
             guard let navigationController = navigation else {return}
-            let killsDataCoordinator = dependencies.external.killsDataCoordinator(navigation: navigationController)
+            let killsDataCoordinator = dependencies.external.killsDataCoordinator(navigation: navigationController, type: type)
             killsDataCoordinator.start()
             append(child: killsDataCoordinator)
         case .goWeapons:
             guard let navigationController = navigation else {return}
-            let weaponDataCoordinator = dependencies.external.weaponDataCoordinator(navigation: navigationController)
+            let weaponDataCoordinator = dependencies.external.weaponDataCoordinator(navigation: navigationController, type: type)
             weaponDataCoordinator.start()
             append(child: weaponDataCoordinator)
         case .goSurvival:
@@ -60,7 +60,7 @@ extension StatsGeneralCoordinatorImp: StatsGeneralCoordinator {
             append(child: survivalDataCoordinator)
         case .goGamesModes:
             guard let navigationController = navigation else {return}
-            let gamesModeDataCoordinator = dependencies.external.gamesModesDataCoordinator(navigation: navigationController)
+            let gamesModeDataCoordinator = dependencies.external.gamesModesDataCoordinator(navigation: navigationController, type: type)
             gamesModeDataCoordinator.start()
             append(child: gamesModeDataCoordinator)
         }

@@ -9,7 +9,7 @@ import UIKit
 
 protocol SurvivalDataExternalDependency {
     func resolve() -> AppDependencies
-    func survivalDataCoordinator(navigation: UINavigationController) -> Coordinator
+    func survivalDataCoordinator(navigation: UINavigationController, type: NavigationStats) -> Coordinator
     func profileNavigationController() -> UINavigationController
     func favouriteNavigationController() -> UINavigationController
     func resolve() -> ProfileEntity
@@ -17,7 +17,7 @@ protocol SurvivalDataExternalDependency {
 }
 
 extension SurvivalDataExternalDependency {
-    func survivalDataCoordinator(navigation: UINavigationController) -> Coordinator {
-        SurvivalDataCoordinatorImp(dependencies: self, navigation: navigation)
+    func survivalDataCoordinator(navigation: UINavigationController, type: NavigationStats) -> Coordinator {
+        SurvivalDataCoordinatorImp(dependencies: self, navigation: navigation, type: type)
     }
 }

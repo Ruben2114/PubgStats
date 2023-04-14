@@ -24,7 +24,7 @@ struct StatsGeneralRepositoryImp: StatsGeneralRepository {
     func getSurvival(for sessionUser: ProfileEntity, type: NavigationStats) -> Survival?{
         dataSource.getSurvival(for: sessionUser, type: type)
     }
-    func saveGamesModeData(sessionUser: ProfileEntity, gamesModeData: [GamesModesDTO], type: NavigationStats){
+    func saveGamesModeData(sessionUser: ProfileEntity, gamesModeData: GamesModesDTO, type: NavigationStats){
         dataSource.saveGamesMode(sessionUser: sessionUser, gamesModeData: gamesModeData, type: type)
     }
     func getGamesModes(for sessionUser: ProfileEntity, type: NavigationStats) -> [GamesModes]?{

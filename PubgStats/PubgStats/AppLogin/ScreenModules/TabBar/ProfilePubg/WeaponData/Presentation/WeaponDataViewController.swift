@@ -51,43 +51,29 @@ class WeaponDataViewController: UIViewController {
         collectionView.register(ItemDataCollectionViewCell.self, forCellWithReuseIdentifier: "ItemDataCollectionViewCell")
     }
     
-    private func bind() {
-        if navigationController == dependencies.external.favouriteNavigationController() {
-            let weaponData = viewModel.getDataWeapon(for: sessionUser, type: .favourite)
-            guard let id = sessionUser.accountFavourite, !id.isEmpty else {return}
-            dataWeapon(type: .favourite, weaponData: weaponData, id: id)
-        } else{
-            let weaponData = viewModel.getDataWeapon(for: sessionUser, type: .profile)
-            guard let id = sessionUser.account, !id.isEmpty else {return}
-            dataWeapon(type: .profile, weaponData: weaponData, id: id)
-        }
-    }
-    
-    private func dataWeapon(type: NavigationStats,weaponData:[Weapon]?,  id: String) {
+    private func binfffd() {
+        let weaponData = viewModel.getDataWeapon(for: sessionUser)
+        guard let id = sessionUser.accountFavourite, !id.isEmpty else {return}
         guard let _ = weaponData?.first?.weapon ?? weaponData?.first?.weaponFav else {
-            dataBind(type: type, id: id)
             return
         }
-        viewModel.getNameWeapon(for: sessionUser, type: .profile)
+        viewModel.getNameWeapon(for: sessionUser, model: weaponData)
         collectionView.reloadData()
     }
     
-    private func dataBind(type: NavigationStats, id: String) {
+    private func bind() {
          viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
              switch state {
              case .fail(_):
                  self?.presentAlert(message: "Error al cargar los datos: por favor vuelva e intentarlo en unos segundos", title: "Error")
-             case .success(model: let model):
+             case .success:
                  self?.hideSpinner()
-                 guard let user = self?.sessionUser else {return}
-                 self?.viewModel.saveWeaponData(sessionUser: user, weaponData: model, type: type)
-                 self?.viewModel.getWeapons(weaponData: model)
                  self?.collectionView.reloadData()
              case .loading:
                  self?.showSpinner()
              }
          }.store(in: &cancellable)
-         viewModel.fetchDataGeneral(account: id)
+        viewModel.bind()
      }
    
     private func configConstraint(){

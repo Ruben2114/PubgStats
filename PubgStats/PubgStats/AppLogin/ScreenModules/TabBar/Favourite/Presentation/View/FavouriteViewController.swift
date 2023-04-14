@@ -56,6 +56,7 @@ class FavouriteViewController: UIViewController {
             switch state {
             case .fail(_):
                 self?.presentAlert(message: "El nombre de usuario no existe", title: "Error")
+                self?.hideSpinner()
             case .success(let model):
                 guard let account = model.id, !account.isEmpty, let player = model.name, !player.isEmpty, let user = self?.sessionUser else {return}
                 self?.viewModel.saveFav(sessionUser: user, player: player, account: account)

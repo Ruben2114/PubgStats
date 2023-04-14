@@ -8,9 +8,11 @@
 import UIKit
 
 protocol SurvivalDataCoordinator: Coordinator {
+    var type: NavigationStats {get}
 }
 
 final class SurvivalDataCoordinatorImp: Coordinator {
+    var type: NavigationStats
     weak var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
@@ -19,9 +21,10 @@ final class SurvivalDataCoordinatorImp: Coordinator {
         Dependency(external: externalDependencies, coordinator: self)
     }()
     
-    public init(dependencies: SurvivalDataExternalDependency, navigation: UINavigationController) {
+    public init(dependencies: SurvivalDataExternalDependency, navigation: UINavigationController, type: NavigationStats) {
         self.navigation = navigation
         self.externalDependencies = dependencies
+        self.type = type
     }
     
     func start() {

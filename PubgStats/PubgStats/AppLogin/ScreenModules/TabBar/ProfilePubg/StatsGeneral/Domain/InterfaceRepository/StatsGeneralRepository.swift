@@ -10,6 +10,6 @@ protocol StatsGeneralRepository {
     func fetchGamesModeData(account: String, completion: @escaping (Result<GamesModesDTO, Error>) -> Void)
     func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], type: NavigationStats)
     func getSurvival(for sessionUser: ProfileEntity, type: NavigationStats) -> Survival?
-    func saveGamesModeData(sessionUser: ProfileEntity, gamesModeData: [GamesModesDTO], type: NavigationStats)
+    func saveGamesModeData(sessionUser: ProfileEntity, gamesModeData: GamesModesDTO, type: NavigationStats)
     func getGamesModes(for sessionUser: ProfileEntity, type: NavigationStats) -> [GamesModes]?
 }

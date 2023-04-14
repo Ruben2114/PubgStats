@@ -8,9 +8,11 @@
 import UIKit
 
 protocol KillsDataCoordinator: Coordinator {
+    var type: NavigationStats {get}
 }
 
 final class KillsDataCoordinatorImp: Coordinator {
+    var type: NavigationStats
     weak var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
@@ -19,9 +21,10 @@ final class KillsDataCoordinatorImp: Coordinator {
         Dependency(external: externalDependencies, coordinator: self)
     }()
     
-    public init(dependencies: KillsDataExternalDependency, navigation: UINavigationController) {
+    public init(dependencies: KillsDataExternalDependency, navigation: UINavigationController, type: NavigationStats) {
         self.navigation = navigation
         self.externalDependencies = dependencies
+        self.type = type
     }
     
     func start() {

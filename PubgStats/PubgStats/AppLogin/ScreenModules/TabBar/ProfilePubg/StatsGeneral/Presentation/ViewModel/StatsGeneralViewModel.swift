@@ -64,7 +64,7 @@ final class StatsGeneralViewModel {
         statsGeneralDataUseCase.getGamesModes(for: sessionUser, type: type)
     }
     
-    func saveGamesModeData(sessionUser: ProfileEntity, gamesModeData: [GamesModesDTO], type: NavigationStats) {
+    func saveGamesModeData(sessionUser: ProfileEntity, gamesModeData: GamesModesDTO, type: NavigationStats) {
         statsGeneralDataUseCase.saveGamesModeData(sessionUser: sessionUser, gamesModeData: gamesModeData, type: type)
     }
     func backButton() {

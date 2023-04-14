@@ -90,6 +90,8 @@ final class StatsGeneralViewController: UIViewController {
         bestRankedLabel.text = "\(gamesModesData?[0].bestRankPoint ?? 0)\nMejor ranked"
     }
     private func dataBind(type: NavigationStats, id: String) {
+        let directorio = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+                print(directorio)
         viewModel.state.receive(on: DispatchQueue.main)
             .sink { [weak self ] state in
                 switch state {
@@ -111,7 +113,7 @@ final class StatsGeneralViewController: UIViewController {
                     self?.timePlayedLabel.text = "\(model.timePlayed)\nTiempo Jugado"
                     self?.bestRankedLabel.text = "\(model.bestRank)\nMejor ranked"
                     guard let user = self?.sessionUser else{return}
-                    self?.viewModel.saveGamesModeData(sessionUser: user, gamesModeData: [model.self], type: type)
+                    self?.viewModel.saveGamesModeData(sessionUser: user, gamesModeData: model, type: type)
                 case .success:
                     self?.hideSpinner()
                 }
