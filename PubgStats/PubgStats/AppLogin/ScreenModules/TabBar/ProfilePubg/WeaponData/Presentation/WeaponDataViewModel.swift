@@ -23,7 +23,7 @@ final class WeaponDataViewModel {
         self.weaponDataUseCase = dependencies.resolve()
     }
     
-    func bind() {
+    func viewDidLoad() {
         state.send(.loading)
         let weaponData = getDataWeapon(for: sessionUser)
         guard let id = sessionUser.accountFavourite, !id.isEmpty else {return}
@@ -44,19 +44,6 @@ final class WeaponDataViewModel {
         getNameWeapon(for: sessionUser, model: weaponData)
         self.state.send(.success)
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO) {
         guard let type = coordinator?.type else {return}
         weaponDataUseCase.saveWeaponData(sessionUser: sessionUser, weaponData: weaponData, type: type)

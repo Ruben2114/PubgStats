@@ -51,16 +51,6 @@ class WeaponDataViewController: UIViewController {
         collectionView.register(ItemDataCollectionViewCell.self, forCellWithReuseIdentifier: "ItemDataCollectionViewCell")
     }
     
-    private func binfffd() {
-        let weaponData = viewModel.getDataWeapon(for: sessionUser)
-        guard let id = sessionUser.accountFavourite, !id.isEmpty else {return}
-        guard let _ = weaponData?.first?.weapon ?? weaponData?.first?.weaponFav else {
-            return
-        }
-        viewModel.getNameWeapon(for: sessionUser, model: weaponData)
-        collectionView.reloadData()
-    }
-    
     private func bind() {
          viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
              switch state {
@@ -73,7 +63,7 @@ class WeaponDataViewController: UIViewController {
                  self?.showSpinner()
              }
          }.store(in: &cancellable)
-        viewModel.bind()
+        viewModel.viewDidLoad()
      }
    
     private func configConstraint(){
