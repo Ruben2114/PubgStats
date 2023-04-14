@@ -19,7 +19,13 @@ final class SurvivalDataViewModel {
     }
     
     func getSurvival(for sessionUser: ProfileEntity) -> Survival?{
-        survivalDataUseCase.getSurvival(for: sessionUser)
+        if coordinator?.navigation == dependencies.external.profileNavigationController(){
+            let survivalData = survivalDataUseCase.getSurvival(for: sessionUser, type: .profile)
+            return survivalData
+        }else {
+            let survivalData = survivalDataUseCase.getSurvival(for: sessionUser, type: .favourite)
+            return survivalData
+        }
     }
     func fetchDataSurvival() {
         let survivalData = getSurvival(for: sessionUser)

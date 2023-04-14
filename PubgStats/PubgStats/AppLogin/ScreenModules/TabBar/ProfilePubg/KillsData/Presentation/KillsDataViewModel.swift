@@ -19,7 +19,13 @@ final class KillsDataViewModel {
     }
     
     func getGamesModes(for sessionUser: ProfileEntity) -> [GamesModes]?{
-        killsDataUseCase.getGamesModes(for: sessionUser)
+        if coordinator?.navigation == dependencies.external.profileNavigationController() {
+            let killsData = killsDataUseCase.getGamesModes(for: sessionUser, type: .profile)
+            return killsData
+        }else{
+            let killsData = killsDataUseCase.getGamesModes(for: sessionUser, type: .favourite)
+            return killsData
+        }
     }
     func fetchDataKills() {
         let gameModes = getGamesModes(for: sessionUser)

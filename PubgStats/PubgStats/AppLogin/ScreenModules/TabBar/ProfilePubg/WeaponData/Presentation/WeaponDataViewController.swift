@@ -43,38 +43,54 @@ class WeaponDataViewController: UIViewController {
         configUI()
         configConstraint()
     }
-    func configUI(){
+    private func configUI(){
         title = "Tipos de armas"
         backButton(action: #selector(backButtonAction))
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(ItemDataCollectionViewCell.self, forCellWithReuseIdentifier: "ItemDataCollectionViewCell")
     }
-    func bind(){
-        let weaponData = viewModel.getDataWeapon(for: sessionUser)
-        if weaponData?.first?.weapon != nil {
-            viewModel.getNameWeapon(for: sessionUser)
-            collectionView.reloadData()
-        }else {
-            viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
-                switch state {
-                case .fail(_):
-                    self?.presentAlert(message: "Error al cargar los datos: por favor vuelva e intentarlo en unos segundos", title: "Error")
-                case .success(model: let model):
-                    self?.hideSpinner()
-                    guard let user = self?.sessionUser else {return}
-                    self?.viewModel.saveWeaponData(sessionUser: user, weaponData: model)
-                    self?.viewModel.getWeapons(weaponData: model)
-                    self?.collectionView.reloadData()
-                case .loading:
-                    self?.showSpinner()
-                }
-            }.store(in: &cancellable)
+    
+    private func bind() {
+        if navigationController == dependencies.external.favouriteNavigationController() {
+            let weaponData = viewModel.getDataWeapon(for: sessionUser, type: .favourite)
+            guard let id = sessionUser.accountFavourite, !id.isEmpty else {return}
+            dataWeapon(type: .favourite, weaponData: weaponData, id: id)
+        } else{
+            let weaponData = viewModel.getDataWeapon(for: sessionUser, type: .profile)
             guard let id = sessionUser.account, !id.isEmpty else {return}
-            viewModel.fetchDataGeneral(account: id)
+            dataWeapon(type: .profile, weaponData: weaponData, id: id)
         }
     }
-    func configConstraint(){
+    
+    private func dataWeapon(type: NavigationStats,weaponData:[Weapon]?,  id: String) {
+        guard let _ = weaponData?.first?.weapon ?? weaponData?.first?.weaponFav else {
+            dataBind(type: type, id: id)
+            return
+        }
+        viewModel.getNameWeapon(for: sessionUser, type: .profile)
+        collectionView.reloadData()
+    }
+    
+    private func dataBind(type: NavigationStats, id: String) {
+         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
+             switch state {
+             case .fail(_):
+                 self?.presentAlert(message: "Error al cargar los datos: por favor vuelva e intentarlo en unos segundos", title: "Error")
+             case .success(model: let model):
+                 self?.hideSpinner()
+                 guard let user = self?.sessionUser else {return}
+                 self?.viewModel.saveWeaponData(sessionUser: user, weaponData: model, type: type)
+                 self?.viewModel.getWeapons(weaponData: model)
+                 self?.collectionView.reloadData()
+             case .loading:
+                 self?.showSpinner()
+             }
+         }.store(in: &cancellable)
+         viewModel.fetchDataGeneral(account: id)
+     }
+   
+    private func configConstraint(){
         view.addSubview(collectionView)
         collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true

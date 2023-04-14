@@ -9,13 +9,14 @@ import UIKit
 
 protocol GamesModesDataDetailExternalDependency {
     func resolve() -> AppDependencies
-    func gamesModesDataDetailCoordinator() -> Coordinator
+    func gamesModesDataDetailCoordinator(navigation: UINavigationController) -> Coordinator
     func profileNavigationController() -> UINavigationController
+    func favouriteNavigationController() -> UINavigationController
     func resolve() -> ProfileEntity
 }
 
 extension GamesModesDataDetailExternalDependency {
-    func gamesModesDataDetailCoordinator() -> Coordinator {
-        GamesModesDataDetailCoordinatorImp(dependencies: self, navigation: profileNavigationController())
+    func gamesModesDataDetailCoordinator(navigation: UINavigationController) -> Coordinator {
+        GamesModesDataDetailCoordinatorImp(dependencies: self, navigation: navigation)
     }
 }

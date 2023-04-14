@@ -57,11 +57,11 @@ final class StatsGeneralViewModel {
     func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], type: NavigationStats){
         statsGeneralDataUseCase.saveSurvival(sessionUser: sessionUser, survivalData: survivalData, type: type)
     }
-    func getSurvival(for sessionUser: ProfileEntity) -> Survival?{
-        statsGeneralDataUseCase.getSurvival(for: sessionUser)
+    func getSurvival(for sessionUser: ProfileEntity, type: NavigationStats) -> Survival?{
+        statsGeneralDataUseCase.getSurvival(for: sessionUser, type: type)
     }
-    func getGamesModes(for sessionUser: ProfileEntity) -> [GamesModes]?{
-        statsGeneralDataUseCase.getGamesModes(for: sessionUser)
+    func getGamesModes(for sessionUser: ProfileEntity, type: NavigationStats) -> [GamesModes]?{
+        statsGeneralDataUseCase.getGamesModes(for: sessionUser, type: type)
     }
     
     func saveGamesModeData(sessionUser: ProfileEntity, gamesModeData: [GamesModesDTO], type: NavigationStats) {

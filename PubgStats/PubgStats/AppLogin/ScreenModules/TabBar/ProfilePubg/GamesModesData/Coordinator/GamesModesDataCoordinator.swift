@@ -36,7 +36,8 @@ extension GamesModesDataCoordinatorImp: GamesModesDataCoordinator {
     func performTransition(_ transition: GamesModesTransition) {
         switch transition{
         case .goGameMode:
-            let gamesModesDataDetailCoordinator = dependencies.external.gamesModesDataDetailCoordinator()
+            guard let navigationController = navigation else {return}
+            let gamesModesDataDetailCoordinator = dependencies.external.gamesModesDataDetailCoordinator(navigation: navigationController)
             gamesModesDataDetailCoordinator.start()
             append(child: gamesModesDataDetailCoordinator)
         }

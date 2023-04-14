@@ -31,14 +31,15 @@ final class WeaponDataViewModel {
             }
         }
     }
-    func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO) {
-        weaponDataUseCase.saveWeaponData(sessionUser: sessionUser, weaponData: weaponData)
+    func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO, type: NavigationStats) {
+        weaponDataUseCase.saveWeaponData(sessionUser: sessionUser, weaponData: weaponData, type: type)
     }
-    func getDataWeapon(for sessionUser: ProfileEntity) -> [Weapon]? {
-        weaponDataUseCase.getDataWeapon(for: sessionUser)
+    func getDataWeapon(for sessionUser: ProfileEntity, type: NavigationStats) -> [Weapon]? {
+        let weaponData = weaponDataUseCase.getDataWeapon(for: sessionUser, type: type)
+        return weaponData
     }
-    func getNameWeapon(for sessionUser: ProfileEntity){
-        let model = getDataWeapon(for: sessionUser)
+    func getNameWeapon(for sessionUser: ProfileEntity, type: NavigationStats){
+        let model = getDataWeapon(for: sessionUser, type: type)
         if let weapon = model {
             let modes = weapon.compactMap { $0.name }
             weaponType = modes

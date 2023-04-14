@@ -19,7 +19,13 @@ final class GamesModesDataViewModel {
         self.gamesModesDataUseCase = dependencies.resolve()
     }
     func getGamesModes(for sessionUser: ProfileEntity) -> [GamesModes]?{
-        gamesModesDataUseCase.getGamesModes(for: sessionUser)
+        if coordinator?.navigation == dependencies.external.profileNavigationController(){
+            let gamesModesData = gamesModesDataUseCase.getGamesModes(for: sessionUser, type: .profile)
+            return gamesModesData
+        }else {
+            let gamesModesData = gamesModesDataUseCase.getGamesModes(for: sessionUser, type: .favourite)
+            return gamesModesData
+        }
     }
     func fetchDataGamesModes() {
         let dataGamesMode = getGamesModes(for: sessionUser)

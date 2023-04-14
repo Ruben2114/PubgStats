@@ -11,14 +11,22 @@ final class WeaponDataDetailViewModel {
     private weak var coordinator: WeaponDataDetailCoordinator?
     private let sessionUser: ProfileEntity
     private let weaponDataDetailUseCase: WeaponDataDetailUseCase
+    private let dependencies: WeaponDataDetailDependency
     var dataWeaponDetail: [String: Any] = [:]
     init(dependencies: WeaponDataDetailDependency) {
         self.sessionUser = dependencies.external.resolve()
         self.coordinator = dependencies.resolve()
         self.weaponDataDetailUseCase = dependencies.resolve()
+        self.dependencies = dependencies
     }
     func getDataWeaponDetail(for sessionUser: ProfileEntity) -> [Weapon]? {
-        weaponDataDetailUseCase.getDataWeaponDetail(for: sessionUser)
+        if coordinator?.navigation == dependencies.external.profileNavigationController(){
+            let weaponData = weaponDataDetailUseCase.getDataWeaponDetail(for: sessionUser, type: .profile)
+            return weaponData
+        }else {
+            let weaponData = weaponDataDetailUseCase.getDataWeaponDetail(for: sessionUser, type: .favourite)
+            return weaponData
+        }
     }
     func fetchDataWeaponDetail() {
         let dataWeapon = getDataWeaponDetail(for: sessionUser)

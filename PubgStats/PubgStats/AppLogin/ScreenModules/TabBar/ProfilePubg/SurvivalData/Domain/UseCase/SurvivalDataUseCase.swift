@@ -6,7 +6,7 @@
 //
 
 protocol SurvivalDataUseCase {
-    func getSurvival(for sessionUser: ProfileEntity) -> Survival?
+    func getSurvival(for sessionUser: ProfileEntity, type: NavigationStats) -> Survival?
 }
 
 struct SurvivalDataUseCaseImp: SurvivalDataUseCase {
@@ -14,7 +14,7 @@ struct SurvivalDataUseCaseImp: SurvivalDataUseCase {
     init(dependencies: SurvivalDataDependency) {
         self.survivalDataRepository = dependencies.resolve()
     }
-    func getSurvival(for sessionUser: ProfileEntity) -> Survival?{
-        survivalDataRepository.getSurvival(for: sessionUser)
+    func getSurvival(for sessionUser: ProfileEntity, type: NavigationStats) -> Survival?{
+        survivalDataRepository.getSurvival(for: sessionUser, type: type)
     }
 }

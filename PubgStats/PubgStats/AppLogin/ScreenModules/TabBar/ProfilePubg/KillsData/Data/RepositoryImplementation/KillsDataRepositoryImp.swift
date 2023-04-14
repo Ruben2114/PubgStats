@@ -10,7 +10,7 @@ struct KillsDataRepositoryImp: KillsDataRepository {
     init(dependencies: KillsDataDependency) {
         self.dataSource = dependencies.external.resolve()
     }
-    func getGamesModes(for sessionUser: ProfileEntity) -> [GamesModes]?{
-        dataSource.getGameMode(for: sessionUser)
+    func getGamesModes(for sessionUser: ProfileEntity, type: NavigationStats) -> [GamesModes]?{
+        dataSource.getGameMode(for: sessionUser, type: type)
     }
 }

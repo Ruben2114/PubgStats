@@ -6,5 +6,5 @@
 //
 
 protocol SurvivalDataRepository {
-    func getSurvival(for sessionUser: ProfileEntity) -> Survival?
+    func getSurvival(for sessionUser: ProfileEntity, type: NavigationStats) -> Survival?
 }

@@ -59,84 +59,64 @@ final class StatsGeneralViewController: UIViewController {
         stackStackView.backgroundColor = .systemCyan
     }
     private func bind() {
-        let directorio = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-                print(directorio)
         guard let navigationType = viewModel.navigation() else {return}
         if navigationType == .favourite {
-             nameLabel.text = sessionUser.nameFavourite
-             viewModel.state.receive(on: DispatchQueue.main)
-                 .sink { [weak self ] state in
-                     switch state {
-                     case .loading:
-                         self?.showSpinner()
-                     case .fail(_):
-                         self?.presentAlert(message: "Por favor debes esperar x tiempo para hacer la siguiente llamada", title: "Error")
-                         self?.hideSpinner()
-                     case .successSurvival(model: let model):
-                         self?.xpLabel.text = "\(model.data.attributes.xp) XP"
-                         self?.levelLabel.text = "Nivel\n\(model.data.attributes.level)"
-                         guard let user = self?.sessionUser else{return}
-                         self?.viewModel.saveSurvival(sessionUser: user, survivalData: [model.self], type: .favourite)
-                     case .successGamesModes(model: let model):
-                         self?.killsLabel.text = "\(model.killsTotal)\nMuertes"
-                         self?.top10sLabel.text = "\(model.top10STotal)\nTop10S"
-                         self?.gamesPlayedLabel.text = "\(model.gamesPlayed)\nPartidas"
-                         self?.winsLabel.text = "\(model.wonTotal)\nVictorias"
-                         self?.timePlayedLabel.text = "\(model.timePlayed)\nTiempo Jugado"
-                         self?.bestRankedLabel.text = "\(model.bestRank)\nMejor ranked"
-                         guard let user = self?.sessionUser else{return}
-                         self?.viewModel.saveGamesModeData(sessionUser: user, gamesModeData: [model.self], type: .favourite)
-                     case .success:
-                         self?.hideSpinner()
-                     }
-                 }.store(in: &cancellable)
-             guard let id = sessionUser.accountFavourite, !id.isEmpty else {return}
-             viewModel.fetchDataGeneral(account: id)
-        } else {
-             nameLabel.text = sessionUser.player
-             let survivalData = viewModel.getSurvival(for: sessionUser)
-             let gamesModesData = viewModel.getGamesModes(for: sessionUser)
-             if survivalData?.survival != nil, gamesModesData?.first?.gamesMode != nil{
-                 xpLabel.text = survivalData?.xp
-                 levelLabel.text = survivalData?.level
-                 killsLabel.text = "\(gamesModesData?[0].killsTotal ?? 0)\nMuertes"
-                 top10sLabel.text = "\(gamesModesData?[0].top10STotal ?? 0)\nTop10S"
-                 gamesPlayedLabel.text = "\(gamesModesData?[0].gamesPlayed ?? 0)\nPartidas"
-                 winsLabel.text = "\(gamesModesData?[0].wonTotal ?? 0)\nVictorias"
-                 timePlayedLabel.text = "\(gamesModesData?[0].timePlayed ?? "0")\nTiempo Jugado"
-                 bestRankedLabel.text = "\(gamesModesData?[0].bestRankPoint ?? 0)\nMejor ranked"
-             }else{
-                 viewModel.state.receive(on: DispatchQueue.main)
-                     .sink { [weak self ] state in
-                         switch state {
-                         case .loading:
-                             self?.showSpinner()
-                         case .fail(_):
-                             self?.presentAlert(message: "Por favor debes esperar x tiempo para hacer la siguiente llamada", title: "Error")
-                             self?.hideSpinner()
-                         case .successSurvival(model: let model):
-                             self?.xpLabel.text = "\(model.data.attributes.xp) XP"
-                             self?.levelLabel.text = "Nivel\n\(model.data.attributes.level)"
-                             guard let user = self?.sessionUser else{return}
-                             self?.viewModel.saveSurvival(sessionUser: user, survivalData: [model.self], type: .profile)
-                         case .successGamesModes(model: let model):
-                             self?.killsLabel.text = "\(model.killsTotal)\nMuertes"
-                             self?.top10sLabel.text = "\(model.top10STotal)\nTop10S"
-                             self?.gamesPlayedLabel.text = "\(model.gamesPlayed)\nPartidas"
-                             self?.winsLabel.text = "\(model.wonTotal)\nVictorias"
-                             self?.timePlayedLabel.text = "\(model.timePlayed)\nTiempo Jugado"
-                             self?.bestRankedLabel.text = "\(model.bestRank)\nMejor ranked"
-                             guard let user = self?.sessionUser else{return}
-                             self?.viewModel.saveGamesModeData(sessionUser: user, gamesModeData: [model.self], type: .profile)
-                         case .success:
-                             self?.hideSpinner()
-                         }
-                     }.store(in: &cancellable)
-                 guard let id = sessionUser.account, !id.isEmpty else {return}
-                 viewModel.fetchDataGeneral(account: id)
-             }
+            nameLabel.text = sessionUser.nameFavourite
+            let survivalData = viewModel.getSurvival(for: sessionUser, type: .favourite)
+            let gamesModesData = viewModel.getGamesModes(for: sessionUser, type: .favourite)
+            guard let id = sessionUser.accountFavourite, !id.isEmpty else {return}
+            dataSats(type: .favourite, survivalData: survivalData, gamesModesData: gamesModesData, id: id)
+        } else{
+            nameLabel.text = sessionUser.player
+            let survivalData = viewModel.getSurvival(for: sessionUser, type: .profile)
+            let gamesModesData = viewModel.getGamesModes(for: sessionUser, type: .profile)
+            guard let id = sessionUser.account, !id.isEmpty else {return}
+            dataSats(type: .profile, survivalData: survivalData, gamesModesData: gamesModesData, id: id)
         }
-        
+    }
+    private func dataSats(type: NavigationStats, survivalData: Survival?,gamesModesData:[GamesModes]?, id: String) {
+        guard let _ = survivalData?.survival ?? survivalData?.survivalFav,
+              let _ = gamesModesData?.first?.gamesMode ?? gamesModesData?.first?.gamesModeFav else {
+            dataBind(type: type, id: id)
+            return
+        }
+        xpLabel.text = survivalData?.xp
+        levelLabel.text = survivalData?.level
+        killsLabel.text = "\(gamesModesData?[0].killsTotal ?? 0)\nMuertes"
+        top10sLabel.text = "\(gamesModesData?[0].top10STotal ?? 0)\nTop10S"
+        gamesPlayedLabel.text = "\(gamesModesData?[0].gamesPlayed ?? 0)\nPartidas"
+        winsLabel.text = "\(gamesModesData?[0].wonTotal ?? 0)\nVictorias"
+        timePlayedLabel.text = "\(gamesModesData?[0].timePlayed ?? "0")\nTiempo Jugado"
+        bestRankedLabel.text = "\(gamesModesData?[0].bestRankPoint ?? 0)\nMejor ranked"
+    }
+    private func dataBind(type: NavigationStats, id: String) {
+        viewModel.state.receive(on: DispatchQueue.main)
+            .sink { [weak self ] state in
+                switch state {
+                case .loading:
+                    self?.showSpinner()
+                case .fail(_):
+                    self?.presentAlert(message: "Por favor debes esperar x tiempo para hacer la siguiente llamada", title: "Error")
+                    self?.hideSpinner()
+                case .successSurvival(model: let model):
+                    self?.xpLabel.text = "\(model.data.attributes.xp) XP"
+                    self?.levelLabel.text = "Nivel\n\(model.data.attributes.level)"
+                    guard let user = self?.sessionUser else{return}
+                    self?.viewModel.saveSurvival(sessionUser: user, survivalData: [model.self], type: type)
+                case .successGamesModes(model: let model):
+                    self?.killsLabel.text = "\(model.killsTotal)\nMuertes"
+                    self?.top10sLabel.text = "\(model.top10STotal)\nTop10S"
+                    self?.gamesPlayedLabel.text = "\(model.gamesPlayed)\nPartidas"
+                    self?.winsLabel.text = "\(model.wonTotal)\nVictorias"
+                    self?.timePlayedLabel.text = "\(model.timePlayed)\nTiempo Jugado"
+                    self?.bestRankedLabel.text = "\(model.bestRank)\nMejor ranked"
+                    guard let user = self?.sessionUser else{return}
+                    self?.viewModel.saveGamesModeData(sessionUser: user, gamesModeData: [model.self], type: type)
+                case .success:
+                    self?.hideSpinner()
+                }
+            }.store(in: &cancellable)
+        viewModel.fetchDataGeneral(account: id)
     }
     private func configConstraints() {
         view.addSubview(levelLabel)

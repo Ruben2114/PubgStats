@@ -6,5 +6,5 @@
 //
 
 protocol KillsDataRepository {
-    func getGamesModes(for sessionUser: ProfileEntity) -> [GamesModes]?
+    func getGamesModes(for sessionUser: ProfileEntity, type: NavigationStats) -> [GamesModes]?
 }

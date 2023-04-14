@@ -10,8 +10,8 @@ protocol StatsGeneralDataUseCase {
     func executeGamesModes(account: String, completion: @escaping (Result<GamesModesDTO, Error>) -> Void)
     func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], type: NavigationStats)
     func saveGamesModeData(sessionUser: ProfileEntity, gamesModeData: [GamesModesDTO], type: NavigationStats)
-    func getSurvival(for sessionUser: ProfileEntity) -> Survival?
-    func getGamesModes(for sessionUser: ProfileEntity) -> [GamesModes]?
+    func getSurvival(for sessionUser: ProfileEntity, type: NavigationStats) -> Survival?
+    func getGamesModes(for sessionUser: ProfileEntity, type: NavigationStats) -> [GamesModes]?
 }
 
 struct StatsGeneralDataUseCaseImp: StatsGeneralDataUseCase {
@@ -28,11 +28,11 @@ struct StatsGeneralDataUseCaseImp: StatsGeneralDataUseCase {
     func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], type: NavigationStats){
         statsGeneralRepository.saveSurvival(sessionUser: sessionUser, survivalData: survivalData, type: type)
     }
-    func getSurvival(for sessionUser: ProfileEntity) -> Survival?{
-        statsGeneralRepository.getSurvival(for: sessionUser)
+    func getSurvival(for sessionUser: ProfileEntity, type: NavigationStats) -> Survival?{
+        statsGeneralRepository.getSurvival(for: sessionUser, type: type)
     }
-    func getGamesModes(for sessionUser: ProfileEntity) -> [GamesModes]?{
-        statsGeneralRepository.getGamesModes(for: sessionUser)
+    func getGamesModes(for sessionUser: ProfileEntity, type: NavigationStats) -> [GamesModes]?{
+        statsGeneralRepository.getGamesModes(for: sessionUser, type: type)
     }
     
     func saveGamesModeData(sessionUser: ProfileEntity, gamesModeData: [GamesModesDTO], type: NavigationStats){

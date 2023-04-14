@@ -23,8 +23,8 @@ final class WeaponDataCoordinatorImp: Coordinator {
     }()
     
     public init(dependencies: WeaponDataExternalDependency, navigation: UINavigationController) {
-        self.navigation = navigation
         self.externalDependencies = dependencies
+        self.navigation = navigation
     }
     
     func start() {
@@ -36,11 +36,11 @@ extension WeaponDataCoordinatorImp: WeaponDataCoordinator {
     func performTransition(_ transition: WeaponTransition) {
         switch transition{
         case .goWeapon:
-            let weaponDatDetailCoordinator = dependencies.external.weaponDataDetailCoordinator()
+            guard let navigationController = navigation else {return}
+            let weaponDatDetailCoordinator = dependencies.external.weaponDataDetailCoordinator(navigation: navigationController)
             weaponDatDetailCoordinator.start()
             append(child: weaponDatDetailCoordinator)
         }
-        
     }
 }
 

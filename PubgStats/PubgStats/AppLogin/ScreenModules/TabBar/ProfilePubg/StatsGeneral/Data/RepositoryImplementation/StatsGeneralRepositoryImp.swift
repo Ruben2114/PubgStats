@@ -21,13 +21,13 @@ struct StatsGeneralRepositoryImp: StatsGeneralRepository {
     func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], type: NavigationStats){
         dataSource.saveSurvival(sessionUser: sessionUser, survivalData: survivalData, type: type)
     }
-    func getSurvival(for sessionUser: ProfileEntity) -> Survival?{
-        dataSource.getSurvival(for: sessionUser)
+    func getSurvival(for sessionUser: ProfileEntity, type: NavigationStats) -> Survival?{
+        dataSource.getSurvival(for: sessionUser, type: type)
     }
     func saveGamesModeData(sessionUser: ProfileEntity, gamesModeData: [GamesModesDTO], type: NavigationStats){
         dataSource.saveGamesMode(sessionUser: sessionUser, gamesModeData: gamesModeData, type: type)
     }
-    func getGamesModes(for sessionUser: ProfileEntity) -> [GamesModes]?{
-        dataSource.getGameMode(for: sessionUser)
+    func getGamesModes(for sessionUser: ProfileEntity, type: NavigationStats) -> [GamesModes]?{
+        dataSource.getGameMode(for: sessionUser, type: type)
     }
 }

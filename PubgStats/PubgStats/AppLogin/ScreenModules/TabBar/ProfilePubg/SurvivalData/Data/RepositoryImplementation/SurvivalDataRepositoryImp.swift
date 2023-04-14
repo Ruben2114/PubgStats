@@ -10,8 +10,8 @@ struct SurvivalDataRepositoryImp: SurvivalDataRepository {
     init(dependencies: SurvivalDataDependency) {
         self.dataSource = dependencies.external.resolve()
     }
-    func getSurvival(for sessionUser: ProfileEntity) -> Survival?{
-        dataSource.getSurvival(for: sessionUser)
+    func getSurvival(for sessionUser: ProfileEntity, type: NavigationStats) -> Survival?{
+        dataSource.getSurvival(for: sessionUser, type: type)
     }
 }
 

@@ -18,13 +18,13 @@ protocol LocalDataProfileService {
     func savePlayerPubg(sessionUser: ProfileEntity, player: String, account: String)
     func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], type: NavigationStats)
     func saveGamesMode(sessionUser: ProfileEntity, gamesModeData: [GamesModesDTO], type: NavigationStats)
-    func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO)
+    func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO, type: NavigationStats)
     func saveNewValue(sessionUser: ProfileEntity,_ value: Any, type: String)
     func getFavourites(for sessionUser: ProfileEntity) -> [Favourite]?
     func deleteFavouriteTableView(_ profile: Favourite)
-    func getSurvival(for sessionUser: ProfileEntity) -> Survival?
-    func getGameMode(for sessionUser: ProfileEntity) -> [GamesModes]?
-    func getDataWeaponDetail(for sessionUser: ProfileEntity) -> [Weapon]?
+    func getSurvival(for sessionUser: ProfileEntity, type: NavigationStats) -> Survival?
+    func getGameMode(for sessionUser: ProfileEntity, type: NavigationStats) -> [GamesModes]?
+    func getDataWeaponDetail(for sessionUser: ProfileEntity, type: NavigationStats) -> [Weapon]?
 }
 
 struct LocalDataProfileServiceImp: LocalDataProfileService {
@@ -266,48 +266,86 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         try? context.save()
     }
     
-    func saveWeapon(name: String, data: Data, profile: Profile) {
-        let dataWeapon = profile.weapon?.first(where: {($0 as? Weapon)?.name == name }) as? Weapon ?? Weapon(context: context)
-        dataWeapon.name = name
-        dataWeapon.data = data
-        profile.addToWeapon(dataWeapon)
-        try? context.save()
-    }
-    func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO){
-        let fetchRequest = Profile.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
-        do {
-            let result = try context.fetch(fetchRequest)
-            if let profile = result.first{
-                var weaponType: [String] = []
-                for data in weaponData.data.attributes.weaponSummaries.keys {
-                    weaponType.append(data)
-                }
-                weaponType.forEach { weaponName in
-                    weaponData.data.attributes.weaponSummaries.forEach { result in
-                        if weaponName == result.key {
-                            var weapon: [(String,Any)] = []
-                            let xp = String(result.value.xpTotal)
-                            let level = String(result.value.levelCurrent)
-                            let tier = String(result.value.tierCurrent)
-                            weapon.append(("XP Total", xp))
-                            weapon.append(("Level Current", level))
-                            weapon.append(("Tier Current", tier))
-                            for (key, value) in result.value.statsTotal {
-                                weapon.append((key, String(format: "%.0f", value)))
+    func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO, type: NavigationStats){
+        switch type {
+        case .profile:
+            let fetchRequest = Profile.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
+            do {
+                let result = try context.fetch(fetchRequest)
+                if let profile = result.first{
+                    var weaponType: [String] = []
+                    for data in weaponData.data.attributes.weaponSummaries.keys {
+                        weaponType.append(data)
+                    }
+                    weaponType.forEach { weaponName in
+                        weaponData.data.attributes.weaponSummaries.forEach { result in
+                            if weaponName == result.key {
+                                var weapon: [(String,Any)] = []
+                                let xp = String(result.value.xpTotal)
+                                let level = String(result.value.levelCurrent)
+                                let tier = String(result.value.tierCurrent)
+                                weapon.append(("XP Total", xp))
+                                weapon.append(("Level Current", level))
+                                weapon.append(("Tier Current", tier))
+                                for (key, value) in result.value.statsTotal {
+                                    weapon.append((key, String(format: "%.0f", value)))
+                                }
+                                let dict = NSDictionary(dictionary: Dictionary(uniqueKeysWithValues: weapon))
+                                guard let data = try? PropertyListSerialization.data(fromPropertyList: dict, format: .binary, options: 0) else {return}
+                                let dataWeapon = profile.weapon?.first(where: {($0 as? Weapon)?.name == weaponName }) as? Weapon ?? Weapon(context: context)
+                                dataWeapon.name = weaponName
+                                dataWeapon.data = data
+                                profile.addToWeapon(dataWeapon)
+                                try? context.save()
                             }
-                            let dict = NSDictionary(dictionary: Dictionary(uniqueKeysWithValues: weapon))
-                            guard let data = try? PropertyListSerialization.data(fromPropertyList: dict, format: .binary, options: 0) else {return}
-                            saveWeapon(name: weaponName, data: data, profile: profile)
                         }
                     }
                 }
+            } catch {
+                print("Error en core data")
             }
-        } catch {
-            print("Error en core data")
+        case .favourite:
+            let fetchRequest = Favourite.fetchRequest()
+            guard let player = sessionUser.nameFavourite else {return}
+            fetchRequest.predicate = NSPredicate(format: "name == %@", player)
+            do {
+                let result = try context.fetch(fetchRequest)
+                if let profile = result.first{
+                    var weaponType: [String] = []
+                    for data in weaponData.data.attributes.weaponSummaries.keys {
+                        weaponType.append(data)
+                    }
+                    weaponType.forEach { weaponName in
+                        weaponData.data.attributes.weaponSummaries.forEach { result in
+                            if weaponName == result.key {
+                                var weapon: [(String,Any)] = []
+                                let xp = String(result.value.xpTotal)
+                                let level = String(result.value.levelCurrent)
+                                let tier = String(result.value.tierCurrent)
+                                weapon.append(("XP Total", xp))
+                                weapon.append(("Level Current", level))
+                                weapon.append(("Tier Current", tier))
+                                for (key, value) in result.value.statsTotal {
+                                    weapon.append((key, String(format: "%.0f", value)))
+                                }
+                                let dict = NSDictionary(dictionary: Dictionary(uniqueKeysWithValues: weapon))
+                                guard let data = try? PropertyListSerialization.data(fromPropertyList: dict, format: .binary, options: 0) else {return}
+                                let dataWeapon = profile.weapon?.first(where: {($0 as? Weapon)?.name == weaponName }) as? Weapon ?? Weapon(context: context)
+                                dataWeapon.name = weaponName
+                                dataWeapon.data = data
+                                profile.addToWeapon(dataWeapon)
+                                try? context.save()
+                            }
+                        }
+                    }
+                }
+            } catch {
+                print("Error en core data")
+            }
         }
+        
     }
-    
     
     func saveNewValue(sessionUser: ProfileEntity,_ value: Any, type: String){
         let fetchRequest = Profile.fetchRequest()
@@ -339,12 +377,12 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
                         sessionUser.image = dataValue
                     }
                 }
-                
             }
         } catch {
             print("Error en core data")
         }
     }
+    
     func getFavourites(for sessionUser: ProfileEntity) -> [Favourite]? {
         let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
@@ -360,47 +398,100 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
             return nil
         }
     }
-    func getSurvival(for sessionUser: ProfileEntity) -> Survival? {
-        let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
-        do {
-            let profile = try context.fetch(fetchRequest)
-            guard let survival = profile.first?.survival else { return nil }
-            return survival
-            
-        } catch {
-            print("Error en core data: \(error.localizedDescription)")
-            return nil
-        }
-    }
-    func getGameMode(for sessionUser: ProfileEntity) -> [GamesModes]? {
-        let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
-        do {
-            let profile = try context.fetch(fetchRequest)
-            guard let gameModesSet = profile.first?.gamesMode as? Set<GamesModes> else {
+    func getSurvival(for sessionUser: ProfileEntity,type: NavigationStats) -> Survival? {
+        switch type {
+        case .profile:
+            let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
+            do {
+                let profile = try context.fetch(fetchRequest)
+                guard let survival = profile.first?.survival else { return nil }
+                return survival
+                
+            } catch {
+                print("Error en core data: \(error.localizedDescription)")
                 return nil
             }
-            let gameModes = Array(gameModesSet)
-            return gameModes
-        } catch {
-            print("Error en core data: \(error.localizedDescription)")
-            return nil
-        }
-    }
-    func getDataWeaponDetail(for sessionUser: ProfileEntity) -> [Weapon]?{
-        let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
-        do {
-            let profile = try context.fetch(fetchRequest)
-            guard let weaponSet = profile.first?.weapon as? Set<Weapon> else {
+        case .favourite:
+            let fetchRequest: NSFetchRequest<Favourite> = Favourite.fetchRequest()
+            guard let player = sessionUser.nameFavourite else {return nil}
+            fetchRequest.predicate = NSPredicate(format: "name == %@", player)
+            do {
+                let profile = try context.fetch(fetchRequest)
+                guard let survival = profile.first?.survival else { return nil }
+                return survival
+                
+            } catch {
+                print("Error en core data: \(error.localizedDescription)")
                 return nil
             }
-            let weapon = Array(weaponSet)
-            return weapon
-        } catch {
-            print("Error en core data: \(error.localizedDescription)")
-            return nil
+        }
+       
+    }
+    func getGameMode(for sessionUser: ProfileEntity,type: NavigationStats) -> [GamesModes]? {
+        switch type {
+        case .profile:
+            let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
+            do {
+                let profile = try context.fetch(fetchRequest)
+                guard let gameModesSet = profile.first?.gamesMode as? Set<GamesModes> else {
+                    return nil
+                }
+                let gameModes = Array(gameModesSet)
+                return gameModes
+            } catch {
+                print("Error en core data: \(error.localizedDescription)")
+                return nil
+            }
+        case .favourite:
+            let fetchRequest: NSFetchRequest<Favourite> = Favourite.fetchRequest()
+            guard let player = sessionUser.nameFavourite else {return nil}
+            fetchRequest.predicate = NSPredicate(format: "name == %@", player)
+            do {
+                let profile = try context.fetch(fetchRequest)
+                guard let gameModesSet = profile.first?.gamesMode as? Set<GamesModes> else {
+                    return nil
+                }
+                let gameModes = Array(gameModesSet)
+                return gameModes
+            } catch {
+                print("Error en core data: \(error.localizedDescription)")
+                return nil
+            }
+        }
+    }
+    func getDataWeaponDetail(for sessionUser: ProfileEntity,type: NavigationStats) -> [Weapon]?{
+        switch type {
+        case .profile:
+            let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
+            do {
+                let profile = try context.fetch(fetchRequest)
+                guard let weaponSet = profile.first?.weapon as? Set<Weapon> else {
+                    return nil
+                }
+                let weapon = Array(weaponSet)
+                return weapon
+            } catch {
+                print("Error en core data: \(error.localizedDescription)")
+                return nil
+            }
+        case .favourite:
+            let fetchRequest: NSFetchRequest<Favourite> = Favourite.fetchRequest()
+            guard let player = sessionUser.nameFavourite else {return nil}
+            fetchRequest.predicate = NSPredicate(format: "name == %@", player)
+            do {
+                let profile = try context.fetch(fetchRequest)
+                guard let weaponSet = profile.first?.weapon as? Set<Weapon> else {
+                    return nil
+                }
+                let weapon = Array(weaponSet)
+                return weapon
+            } catch {
+                print("Error en core data: \(error.localizedDescription)")
+                return nil
+            }
         }
     }
     

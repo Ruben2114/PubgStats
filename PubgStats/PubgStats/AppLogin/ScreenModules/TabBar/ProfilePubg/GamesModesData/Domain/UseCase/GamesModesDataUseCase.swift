@@ -6,7 +6,7 @@
 //
 
 protocol GamesModesDataUseCase {
-    func getGamesModes(for sessionUser: ProfileEntity) -> [GamesModes]?
+    func getGamesModes(for sessionUser: ProfileEntity, type: NavigationStats) -> [GamesModes]?
 }
 
 struct GamesModesDataUseCaseImp: GamesModesDataUseCase {
@@ -14,7 +14,7 @@ struct GamesModesDataUseCaseImp: GamesModesDataUseCase {
     init(dependencies: GamesModesDataDependency) {
         self.gamesModesDataRepository = dependencies.resolve()
     }
-    func getGamesModes(for sessionUser: ProfileEntity) -> [GamesModes]?{
-        gamesModesDataRepository.getGamesModes(for: sessionUser)
+    func getGamesModes(for sessionUser: ProfileEntity, type: NavigationStats) -> [GamesModes]?{
+        gamesModesDataRepository.getGamesModes(for: sessionUser, type: type)
     }
 }

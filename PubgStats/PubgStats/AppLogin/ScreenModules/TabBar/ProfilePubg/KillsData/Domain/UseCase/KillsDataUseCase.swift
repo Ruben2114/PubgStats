@@ -6,7 +6,7 @@
 //
 
 protocol KillsDataUseCase {
-    func getGamesModes(for sessionUser: ProfileEntity) -> [GamesModes]?
+    func getGamesModes(for sessionUser: ProfileEntity, type: NavigationStats) -> [GamesModes]?
 }
 
 struct KillsDataUseCaseImp: KillsDataUseCase {
@@ -14,7 +14,7 @@ struct KillsDataUseCaseImp: KillsDataUseCase {
     init(dependencies: KillsDataDependency) {
         self.killsDataRepository = dependencies.resolve()
     }
-    func getGamesModes(for sessionUser: ProfileEntity) -> [GamesModes]?{
-        killsDataRepository.getGamesModes(for: sessionUser)
+    func getGamesModes(for sessionUser: ProfileEntity, type: NavigationStats) -> [GamesModes]?{
+        killsDataRepository.getGamesModes(for: sessionUser, type: type)
     }
 }
