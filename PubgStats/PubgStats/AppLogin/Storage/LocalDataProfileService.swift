@@ -346,6 +346,85 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         }
         
     }
+    func saveWeaponDatae<T: HasEntities>(sessionUser: ProfileEntity, weaponData: WeaponDTO, type: NavigationStats, request: NSFetchRequest<T>){
+        switch type {
+        case .profile:
+            request.predicate = NSPredicate(format: "name == %@", sessionUser.name)
+            do {
+                let result = try context.fetch(request)
+                if let profile = result.first{
+                    var weaponType: [String] = []
+                    for data in weaponData.data.attributes.weaponSummaries.keys {
+                        weaponType.append(data)
+                    }
+                    weaponType.forEach { weaponName in
+                        weaponData.data.attributes.weaponSummaries.forEach { result in
+                            if weaponName == result.key {
+                                var weapon: [(String,Any)] = []
+                                let xp = String(result.value.xpTotal)
+                                let level = String(result.value.levelCurrent)
+                                let tier = String(result.value.tierCurrent)
+                                weapon.append(("XP Total", xp))
+                                weapon.append(("Level Current", level))
+                                weapon.append(("Tier Current", tier))
+                                for (key, value) in result.value.statsTotal {
+                                    weapon.append((key, String(format: "%.0f", value)))
+                                }
+                                let dict = NSDictionary(dictionary: Dictionary(uniqueKeysWithValues: weapon))
+                                guard let data = try? PropertyListSerialization.data(fromPropertyList: dict, format: .binary, options: 0) else {return}
+                                let dataWeapon = profile.weapon?.first(where: {($0 as? Weapon)?.name == weaponName }) as? Weapon ?? Weapon(context: context)
+                                dataWeapon.name = weaponName
+                                dataWeapon.data = data
+                                profile.addToWeapon(dataWeapon)
+                                try? context.save()
+                            }
+                        }
+                    }
+                }
+            } catch {
+                print("Error en core data")
+            }
+        case .favourite:
+            let fetchRequest = Favourite.fetchRequest()
+            guard let player = sessionUser.nameFavourite else {return}
+            fetchRequest.predicate = NSPredicate(format: "name == %@", player)
+            do {
+                let result = try context.fetch(fetchRequest)
+                if let profile = result.first{
+                    var weaponType: [String] = []
+                    for data in weaponData.data.attributes.weaponSummaries.keys {
+                        weaponType.append(data)
+                    }
+                    weaponType.forEach { weaponName in
+                        weaponData.data.attributes.weaponSummaries.forEach { result in
+                            if weaponName == result.key {
+                                var weapon: [(String,Any)] = []
+                                let xp = String(result.value.xpTotal)
+                                let level = String(result.value.levelCurrent)
+                                let tier = String(result.value.tierCurrent)
+                                weapon.append(("XP Total", xp))
+                                weapon.append(("Level Current", level))
+                                weapon.append(("Tier Current", tier))
+                                for (key, value) in result.value.statsTotal {
+                                    weapon.append((key, String(format: "%.0f", value)))
+                                }
+                                let dict = NSDictionary(dictionary: Dictionary(uniqueKeysWithValues: weapon))
+                                guard let data = try? PropertyListSerialization.data(fromPropertyList: dict, format: .binary, options: 0) else {return}
+                                let dataWeapon = profile.weapon?.first(where: {($0 as? Weapon)?.name == weaponName }) as? Weapon ?? Weapon(context: context)
+                                dataWeapon.name = weaponName
+                                dataWeapon.data = data
+                                profile.addToWeapon(dataWeapon)
+                                try? context.save()
+                            }
+                        }
+                    }
+                }
+            } catch {
+                print("Error en core data")
+            }
+        }
+        
+    }
     
     func saveNewValue(sessionUser: ProfileEntity,_ value: Any, type: String){
         let fetchRequest = Profile.fetchRequest()
@@ -516,6 +595,8 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
 }
 protocol HasEntities {
     var survival: Survival? { get set }
+    var weapon: NSSet? {get set}
+    func addToWeapon(_ value: Weapon)
 }
 
 extension Profile: HasEntities {}
