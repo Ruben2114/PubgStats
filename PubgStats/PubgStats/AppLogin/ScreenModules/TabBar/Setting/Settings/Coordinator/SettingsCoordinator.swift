@@ -39,7 +39,9 @@ extension SettingsCoordinatorImp: SettingsCoordinator {
     func performTransition(_ transition: SettingsTransition) {
         switch transition {
         case .goInfoDeveloper:
-            print("goInfoDeveloper")
+            let infoAppCoordinator = dependencies.external.infoAppCoordinator()
+            infoAppCoordinator.start()
+            append(child: infoAppCoordinator)
         case .goHelp:
             let helpDataCoordinator = dependencies.external.helpDataCoordinator()
             helpDataCoordinator.start()

@@ -13,11 +13,11 @@ final class SettingsViewModel {
     private let settingsDataUseCase: SettingsDataUseCase
     private let sessionUser: ProfileEntity
     let itemsSettings = [
-        ["Dudas frecuentes", "Correo", "Datos desarrollador"],
-        ["Borrar cuenta Pubg"]
+        ["Dudas frecuentes", "Correo", "Aviso Legal"],
+        ["Borrar Perfil"]
     ]
     let imageSettings = [
-        ["person.circle.fill", "envelope.circle.fill", "lock.circle.fill"],
+        ["questionmark.circle.fill", "envelope.circle.fill", "info.circle.fill"],
         ["trash.circle.fill"]
     ]
     init(dependencies: SettingsDependency) {

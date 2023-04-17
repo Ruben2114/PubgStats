@@ -11,7 +11,6 @@ import Combine
 
 final class HelpDataViewController: UIViewController {
     private lazy var tableView = makeTableView()
-   
     private let viewModel: HelpDataViewModel
     private let sessionUser: ProfileEntity
     

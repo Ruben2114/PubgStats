@@ -100,7 +100,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate{
             present(sendMail, animated: true, completion: nil)
         case (0, 2):
             viewModel.infoDeveloper()
-            print("ir a otra vista con una tabla y poner mis datos y el cv para descargar")
         case (1, 0):
             viewModel.deleteProfile()
         default:

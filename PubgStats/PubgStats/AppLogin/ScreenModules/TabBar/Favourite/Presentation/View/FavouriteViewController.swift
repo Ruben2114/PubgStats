@@ -17,7 +17,6 @@ class FavouriteViewController: UIViewController {
         return search
     }()
     private lazy var tableView = makeTableViewGroup()
-    private lazy var infoLabel = makeLabel(title: "", color: .black, font: 15, style: .body)
     private var profilesFavourite: [Favourite] = []
     private let dependencies: FavouriteDependency
     private var cancellable = Set<AnyCancellable>()
