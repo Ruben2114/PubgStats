@@ -66,6 +66,9 @@ final class ProfileViewModel {
     func didTapStatsgAccountButton() {
         coordinator?.performTransition(.goStatsGeneral)
     }
+    func deletePubgAccount(){
+        profileDataUseCase.deletePubgAccount(sessionUser: sessionUser)
+    }
 }
 
 

@@ -32,7 +32,7 @@ final class StatsGeneralViewController: UIViewController {
     private let viewModel: StatsGeneralViewModel
     let sessionUser: ProfileEntity
     var refreshCount = 0
-    var isFirstRechargeDone = false
+    var reloadButton = UIBarButtonItem()
     
     init(dependencies: StatsGeneralDependency) {
         self.dependencies = dependencies
@@ -92,6 +92,8 @@ final class StatsGeneralViewController: UIViewController {
         view.backgroundColor = .systemBackground
         title = "Tus Estadisticas generales"
         backButton(action: #selector(backButtonAction))
+        reloadButton = UIBarButtonItem(image: UIImage(systemName: "arrow.clockwise.circle.fill"), style: .plain, target: self, action: #selector(reloadButtonAction))
+        navigationItem.rightBarButtonItem = reloadButton
         stackStackView.backgroundColor = .systemCyan
     }
     private func configConstraints() {
@@ -151,6 +153,18 @@ final class StatsGeneralViewController: UIViewController {
     
     @objc func backButtonAction() {
         viewModel.backButton()
+    }
+    @objc func reloadButtonAction() {
+        guard refreshCount < 2 else {
+            reloadButton.isEnabled = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+                self.reloadButton.isEnabled = true
+                self.refreshCount = 0
+            }
+            return}
+        refreshCount += 1
+        //TODO: borrar datos de survival, weapon y gamesmodes
+        bind()
     }
 }
 extension StatsGeneralViewController: MessageDisplayable { }

@@ -57,7 +57,7 @@ final class MainTabBarCoordinatorImp: Coordinator {
         let settingsNavController = dependencies.external.settingsNavigationController()
         settingsNavController.viewControllers = []
         settingsNavController.tabBarItem.title = "Ajustes"
-        settingsNavController.tabBarItem.image = UIImage(systemName: "gearshape.circle.fill")
+        settingsNavController.tabBarItem.image = UIImage(systemName: "gear.circle.fill")
         viewControllers.append(settingsNavController)
         settingsCoordinator.start()
         append(child: settingsCoordinator)

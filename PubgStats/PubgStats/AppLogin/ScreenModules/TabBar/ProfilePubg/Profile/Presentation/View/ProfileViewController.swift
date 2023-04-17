@@ -13,6 +13,7 @@ final class ProfileViewController: UIViewController {
     private lazy var nameLabel = makeLabelProfile(title: "\(sessionUser.name)", color: .black, font: 20, style: .title2, isBold: true)
     private lazy var emailLabel = makeLabelProfile(title: "\(sessionUser.email)", color: .black, font: 20, style: .title2, isBold: false)
     private lazy var tableView = makeTableViewGroup()
+    private var refreshCount = 0
     
     private var cancellable = Set<AnyCancellable>()
     private let viewModel: ProfileViewModel
@@ -133,7 +134,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
             presentAlertTextField(title: "Cambio de nombre",
                                   message: "¿Estás seguro de que quieres cambiar el nombre?",
                                   textFields: [(title: "Nuevo nombre", placeholder: "Nuevo nombre")],
-                                  action: {},
                                   completed: { text in
                 guard let nameText = text.first else {return}
                 guard self.viewModel.checkName(name: nameText) != true, !nameText.isEmpty else {
@@ -147,12 +147,11 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
                 self.viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),nameText, type: "name")
                 self.presentAlertTimer(message: "Cambiado con éxito", title: "Aviso", timer: 1.0)
                 self.viewChange()
-            })
+            }, isSecure: false)
         case (0, 1):
             presentAlertTextField(title: "Cambio de correo",
                                   message: "¿Estás seguro de que quieres cambiar el correo?",
                                   textFields: [(title: "Nuevo correo", placeholder: "Nuevo correo")],
-                                  action: {},
                                   completed: { text in
                 guard let newEmail = text.first, !newEmail.isEmpty else {
                     self.presentAlert(message: "El correo tiene que tener como mínimo un caracter", title: "Error")
@@ -168,13 +167,12 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
                 }
                 self.viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),newEmail, type: "email")
                 self.viewChange()
-            })
+            }, isSecure: false)
         case (0, 2):
             presentAlertTextField(title: "Cambio de contraseña",
                                   message: "¿Estás seguro de que quieres cambiar la contraseña?",
                                   textFields: [(title: "Nueva contraseña", placeholder: "Nueva contraseña"),
                                                (title: "Repite la nueva contraseña", placeholder: "Repite la nueva contraseña")],
-                                  action: {},
                                   completed: { text in
                 guard let newPassword = text.first, !newPassword.isEmpty else {
                     self.presentAlert(message: "La contraseña tiene que tener como mínimo un caracter", title: "Error")
@@ -185,7 +183,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
                 guard let newPasswordHash = newPassword.hashString() else {return}
                 self.viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),newPasswordHash, type: "password")
                 self.viewChange()
-            })
+            }, isSecure: true)
         case (0, 3):
             let vc = UIImagePickerController()
             vc.sourceType = .photoLibrary
@@ -193,26 +191,27 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
             vc.allowsEditing = true
             present(vc, animated: true)
         case (1, 0):
-            let alert = UIAlertController(title: "Jugador", message: "", preferredStyle: .alert)
-            alert.addTextField{ (namePubg) in
-                namePubg.placeholder = "Nombre jugador"
-            }
-            let actionAccept = UIAlertAction(title: "Aceptar", style: .default){ [weak self]_ in
-                guard let name = alert.textFields?.first?.text, !name.isEmpty else {
-                    self?.presentAlert(message: "No existen jugadores sin nombre", title: "Error")
+            presentAlertTextField(title: "Jugador",
+                                  message: "",
+                                  textFields: [(title: "Nuevo jugador", placeholder: "Nombre jugador")],
+                                  completed: { text in
+                guard let nameText = text.first, !nameText.isEmpty else {
+                    self.presentAlert(message: "No existen jugadores sin nombre", title: "Error")
                     return}
-                self?.viewModel.dataGeneral(name: name)
+                self.viewModel.dataGeneral(name: nameText)
+            }, isSecure: false)
+        case (1, 1):
+            viewModel.didTapStatsgAccountButton()
+        case(1, 2):
+            let alert = UIAlertController(title: "Aviso", message: "¿Estás seguro de borrar tu cuenta asociada de Pubg?", preferredStyle: .alert)
+            let actionAccept = UIAlertAction(title: "Aceptar", style: .default){ [weak self]_ in
+                self?.viewModel.deletePubgAccount()
+                self?.tableView.reloadData()
             }
             let actionCancel = UIAlertAction(title: "Cancelar", style: .destructive)
             alert.addAction(actionCancel)
             alert.addAction(actionAccept)
             present(alert, animated: true)
-        case (1, 1):
-            viewModel.didTapStatsgAccountButton()
-        case(1, 2):
-            
-            // creo que es tan facil como borrar acount para que sea nil t table.reload() ademas de borrar todos los demas registros de la base de datos
-            print("borrar la cuenta, que se oculte la tabla de estadictica sy se ponga la de registro")
         default:
             break
         }

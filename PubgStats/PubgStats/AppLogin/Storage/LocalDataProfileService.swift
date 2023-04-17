@@ -26,6 +26,7 @@ protocol LocalDataProfileService {
     func getDataWeaponDetail(for sessionUser: ProfileEntity, type: NavigationStats) -> [Weapon]?
     func deleteFavouriteTableView(_ profile: Favourite)
     func deleteProfile(_ profile: ProfileEntity)
+    func deletePubgAccount(sessionUser: ProfileEntity)
 }
 
 struct LocalDataProfileServiceImp: LocalDataProfileService {
@@ -347,7 +348,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
             return nil
         }
     }
-   
+    
     func getSurvival(for sessionUser: ProfileEntity,type: NavigationStats) -> Survival? {
         switch type {
         case .profile:
@@ -464,6 +465,40 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         } catch {
             print("Error en core data: \(error.localizedDescription)")
             return
+        }
+    }
+    func deletePubgAccount(sessionUser: ProfileEntity){
+        let fetchRequest = Profile.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
+        do {
+            let result = try context.fetch(fetchRequest).first
+            if let profileDelete = result {
+                profileDelete.player = nil
+                profileDelete.account = nil
+                sessionUser.player = nil
+                sessionUser.account = nil
+                if let survival = profileDelete.survival {
+                    profileDelete.survival = nil
+                    context.delete(survival)
+                }
+                if let gamesModes = profileDelete.gamesMode {
+                    for gamesMode in gamesModes.allObjects as! [NSManagedObject] {
+                        context.delete(gamesMode)
+                    }
+                    profileDelete.removeFromGamesMode(gamesModes)
+                }
+                if let weapon = profileDelete.weapon {
+                    for weapons in weapon.allObjects as! [NSManagedObject] {
+                        context.delete(weapons)
+                    }
+                    profileDelete.removeFromWeapon(weapon)
+                }
+                try context.save()
+            } else {
+                print("Error al borrar objeto")
+            }
+        } catch {
+            print("Error en Core Data: \(error.localizedDescription)")
         }
     }
 }

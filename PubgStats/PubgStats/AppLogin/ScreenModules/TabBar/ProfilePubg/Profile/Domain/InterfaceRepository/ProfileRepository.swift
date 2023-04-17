@@ -12,5 +12,6 @@ protocol ProfileRepository {
     func fetchPlayerData(name: String, completion: @escaping (Result<PubgPlayerDTO, Error>) -> Void)
     func changeValue(sessionUser: ProfileEntity,_ value: String, type: String)
     func changeImage(sessionUser: ProfileEntity, image: Data)
+    func deletePubgAccount(sessionUser: ProfileEntity)
 }
 

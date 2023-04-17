@@ -27,4 +27,7 @@ struct ProfileRepositoryImp: ProfileRepository {
     func changeImage(sessionUser: ProfileEntity, image: Data) {
         dataSource.saveNewValue(sessionUser: sessionUser, image, type: "image")
     }
+    func deletePubgAccount(sessionUser: ProfileEntity){
+        dataSource.deletePubgAccount(sessionUser: sessionUser)
+    }
 }

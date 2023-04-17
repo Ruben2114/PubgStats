@@ -28,7 +28,6 @@ final class SettingsViewModel {
     }
     
     func deleteProfile() {
-        print("esto llevarlo al tabBar de ajustes")
         settingsDataUseCase.deleteProfile(sessionUser: sessionUser)
         coordinator?.performTransition(.goDeleteProfile)
     }

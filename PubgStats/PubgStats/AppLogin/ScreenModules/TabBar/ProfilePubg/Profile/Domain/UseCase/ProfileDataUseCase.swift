@@ -12,6 +12,7 @@ protocol ProfileDataUseCase: CommonUseCase {
     func fetchPlayerData(name: String, completion: @escaping (Result<PubgPlayerDTO, Error>) -> Void)
     func changeValue(sessionUser: ProfileEntity,_ value: String, type: String)
     func changeImage(sessionUser: ProfileEntity, image: Data)
+    func deletePubgAccount(sessionUser: ProfileEntity)
 }
 
 struct ProfileDataUseCaseImp: ProfileDataUseCase{
@@ -32,5 +33,8 @@ struct ProfileDataUseCaseImp: ProfileDataUseCase{
     }
     func changeImage(sessionUser: ProfileEntity, image: Data){
         profileRepository.changeImage(sessionUser: sessionUser, image: image)
+    }
+    func deletePubgAccount(sessionUser: ProfileEntity){
+        profileRepository.deletePubgAccount(sessionUser: sessionUser)
     }
 }

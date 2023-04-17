@@ -29,11 +29,12 @@ extension MessageDisplayable where Self: UIViewController{
         }
     }
    
-    func presentAlertTextField(title: String, message: String, textFields: [(title: String, placeholder: String)], action: (() -> Void)? = nil, completed: ((_ text: [String]) -> Void)? = nil) {
+    func presentAlertTextField(title: String, message: String, textFields: [(title: String, placeholder: String)], completed: ((_ text: [String]) -> Void)? = nil, isSecure: Bool) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         for text in textFields {
             alert.addTextField { (textField) in
                 textField.placeholder = text.placeholder
+                textField.isSecureTextEntry = isSecure
             }
         }
         let actionAccept = UIAlertAction(title: "Aceptar", style: .default) { _ in
@@ -44,7 +45,6 @@ extension MessageDisplayable where Self: UIViewController{
                 }
             }
             completed?(texts)
-            action?()
         }
         let actionCancel = UIAlertAction(title: "cancelar", style: .destructive)
         alert.addAction(actionCancel)
