@@ -42,9 +42,9 @@
 		465550F829CC7DE800BF932A /* GuideDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550F729CC7DE800BF932A /* GuideDependency.swift */; };
 		465550FA29CC7E4600BF932A /* GuideExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550F929CC7E4600BF932A /* GuideExternalDependency.swift */; };
 		465550FC29CC7E8E00BF932A /* GuideCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550FB29CC7E8E00BF932A /* GuideCoordinator.swift */; };
-		465550FF29CC820A00BF932A /* ContactDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550FE29CC820A00BF932A /* ContactDependency.swift */; };
-		4655510129CC824000BF932A /* ContactExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510029CC824000BF932A /* ContactExternalDependency.swift */; };
-		4655510429CC829800BF932A /* ContactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510329CC829800BF932A /* ContactCoordinator.swift */; };
+		465550FF29CC820A00BF932A /* SettingsDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550FE29CC820A00BF932A /* SettingsDependency.swift */; };
+		4655510129CC824000BF932A /* SettingsExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510029CC824000BF932A /* SettingsExternalDependency.swift */; };
+		4655510429CC829800BF932A /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510329CC829800BF932A /* SettingsCoordinator.swift */; };
 		4655510729CCB41500BF932A /* ProfileEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510629CCB41500BF932A /* ProfileEntity.swift */; };
 		4670EDE429D4325200C1062E /* StatsGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE329D4325200C1062E /* StatsGeneralViewController.swift */; };
 		4670EDE729D442C600C1062E /* HelpDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE629D442C600C1062E /* HelpDataViewModel.swift */; };
@@ -55,7 +55,7 @@
 		46B0CF2429E7027100BE95EB /* WeaponDataDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B0CF2329E7027100BE95EB /* WeaponDataDetailRepository.swift */; };
 		46B0CF2629E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B0CF2529E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift */; };
 		8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */; };
-		8C31FDB729C329E500196704 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31FDB629C329E500196704 /* ContactViewController.swift */; };
+		8C31FDB729C329E500196704 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31FDB629C329E500196704 /* SettingsViewController.swift */; };
 		8C3CC20E29DD66B400D34228 /* CommonExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3CC20D29DD66B400D34228 /* CommonExternalDependency.swift */; };
 		8C64E4C829DC646800303760 /* CommonUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C64E4C729DC646800303760 /* CommonUseCase.swift */; };
 		8C64E4CA29DC663700303760 /* CommonRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C64E4C929DC663700303760 /* CommonRepository.swift */; };
@@ -166,6 +166,10 @@
 		8CE9BDDA29E5B6CF00F45D3F /* KillsDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDD929E5B6CF00F45D3F /* KillsDataUseCase.swift */; };
 		8CE9BDDD29E5B72400F45D3F /* KillsDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDDC29E5B72400F45D3F /* KillsDataRepository.swift */; };
 		8CE9BDE129E5B77100F45D3F /* KillsDataRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDE029E5B77100F45D3F /* KillsDataRepositoryImp.swift */; };
+		8CEB33FE29ED55C2006C2564 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEB33FD29ED55C2006C2564 /* SettingsViewModel.swift */; };
+		8CEB340529ED60E1006C2564 /* SettingsDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEB340429ED60E1006C2564 /* SettingsDataUseCase.swift */; };
+		8CEB340729ED6183006C2564 /* SettingsDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEB340629ED6183006C2564 /* SettingsDataRepository.swift */; };
+		8CEB340929ED61A3006C2564 /* SettingsDataRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEB340829ED61A3006C2564 /* SettingsDataRepositoryImp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -221,9 +225,9 @@
 		465550F729CC7DE800BF932A /* GuideDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideDependency.swift; sourceTree = "<group>"; };
 		465550F929CC7E4600BF932A /* GuideExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideExternalDependency.swift; sourceTree = "<group>"; };
 		465550FB29CC7E8E00BF932A /* GuideCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideCoordinator.swift; sourceTree = "<group>"; };
-		465550FE29CC820A00BF932A /* ContactDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDependency.swift; sourceTree = "<group>"; };
-		4655510029CC824000BF932A /* ContactExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactExternalDependency.swift; sourceTree = "<group>"; };
-		4655510329CC829800BF932A /* ContactCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCoordinator.swift; sourceTree = "<group>"; };
+		465550FE29CC820A00BF932A /* SettingsDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDependency.swift; sourceTree = "<group>"; };
+		4655510029CC824000BF932A /* SettingsExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsExternalDependency.swift; sourceTree = "<group>"; };
+		4655510329CC829800BF932A /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		4655510629CCB41500BF932A /* ProfileEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEntity.swift; sourceTree = "<group>"; };
 		4670EDE329D4325200C1062E /* StatsGeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGeneralViewController.swift; sourceTree = "<group>"; };
 		4670EDE629D442C600C1062E /* HelpDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataViewModel.swift; sourceTree = "<group>"; };
@@ -234,7 +238,7 @@
 		46B0CF2329E7027100BE95EB /* WeaponDataDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailRepository.swift; sourceTree = "<group>"; };
 		46B0CF2529E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailRepositoryImp.swift; sourceTree = "<group>"; };
 		8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		8C31FDB629C329E500196704 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
+		8C31FDB629C329E500196704 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8C3CC20D29DD66B400D34228 /* CommonExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExternalDependency.swift; sourceTree = "<group>"; };
 		8C64E4C729DC646800303760 /* CommonUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUseCase.swift; sourceTree = "<group>"; };
 		8C64E4C929DC663700303760 /* CommonRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRepository.swift; sourceTree = "<group>"; };
@@ -349,6 +353,10 @@
 		8CE9BDD929E5B6CF00F45D3F /* KillsDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillsDataUseCase.swift; sourceTree = "<group>"; };
 		8CE9BDDC29E5B72400F45D3F /* KillsDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillsDataRepository.swift; sourceTree = "<group>"; };
 		8CE9BDE029E5B77100F45D3F /* KillsDataRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillsDataRepositoryImp.swift; sourceTree = "<group>"; };
+		8CEB33FD29ED55C2006C2564 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		8CEB340429ED60E1006C2564 /* SettingsDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataUseCase.swift; sourceTree = "<group>"; };
+		8CEB340629ED6183006C2564 /* SettingsDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataRepository.swift; sourceTree = "<group>"; };
+		8CEB340829ED61A3006C2564 /* SettingsDataRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataRepositoryImp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -400,14 +408,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		46151CC429C1E9AD0054BCEA /* Contact */ = {
+		46151CC429C1E9AD0054BCEA /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				8CEB340229ED605A006C2564 /* Data */,
+				8CEB33FF29ED6036006C2564 /* Domain */,
 				4655510229CC828100BF932A /* Coordinator */,
 				465550FD29CC81FC00BF932A /* DependenciesResolve */,
 				8C810F7529C33E5700AEE548 /* View */,
 			);
-			path = Contact;
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		461C1F3C29C9C75300540289 /* ApiService */ = {
@@ -599,8 +609,8 @@
 		465550FD29CC81FC00BF932A /* DependenciesResolve */ = {
 			isa = PBXGroup;
 			children = (
-				465550FE29CC820A00BF932A /* ContactDependency.swift */,
-				4655510029CC824000BF932A /* ContactExternalDependency.swift */,
+				465550FE29CC820A00BF932A /* SettingsDependency.swift */,
+				4655510029CC824000BF932A /* SettingsExternalDependency.swift */,
 			);
 			path = DependenciesResolve;
 			sourceTree = "<group>";
@@ -608,7 +618,7 @@
 		4655510229CC828100BF932A /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				4655510329CC829800BF932A /* ContactCoordinator.swift */,
+				4655510329CC829800BF932A /* SettingsCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -771,7 +781,8 @@
 		8C810F7529C33E5700AEE548 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8C31FDB629C329E500196704 /* ContactViewController.swift */,
+				8C31FDB629C329E500196704 /* SettingsViewController.swift */,
+				8CEB33FD29ED55C2006C2564 /* SettingsViewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -984,7 +995,7 @@
 				46151CB429C1B9480054BCEA /* ProfilePubg */,
 				8CAC3E2629C3047D00A1FE34 /* Favourite */,
 				8CAC3E2429C3045300A1FE34 /* Guide */,
-				46151CC429C1E9AD0054BCEA /* Contact */,
+				46151CC429C1E9AD0054BCEA /* Setting */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -1898,6 +1909,47 @@
 			path = RepositoryImplementation;
 			sourceTree = "<group>";
 		};
+		8CEB33FF29ED6036006C2564 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				8CEB340129ED6056006C2564 /* InterfaceRepository */,
+				8CEB340029ED603C006C2564 /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		8CEB340029ED603C006C2564 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				8CEB340429ED60E1006C2564 /* SettingsDataUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		8CEB340129ED6056006C2564 /* InterfaceRepository */ = {
+			isa = PBXGroup;
+			children = (
+				8CEB340629ED6183006C2564 /* SettingsDataRepository.swift */,
+			);
+			path = InterfaceRepository;
+			sourceTree = "<group>";
+		};
+		8CEB340229ED605A006C2564 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8CEB340329ED6066006C2564 /* RepositoryImplementation */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		8CEB340329ED6066006C2564 /* RepositoryImplementation */ = {
+			isa = PBXGroup;
+			children = (
+				8CEB340829ED61A3006C2564 /* SettingsDataRepositoryImp.swift */,
+			);
+			path = RepositoryImplementation;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2038,6 +2090,7 @@
 				8CCC92C829E3FCB70019BE72 /* FavouriteDataUseCase.swift in Sources */,
 				8CAEB02029BB4968009282AF /* Coordinator.swift in Sources */,
 				8CE9BDD429E5A01A00F45D3F /* GamesModesDataDetailViewController.swift in Sources */,
+				8CEB33FE29ED55C2006C2564 /* SettingsViewModel.swift in Sources */,
 				8CB39BAC29C0C88800B1D8EF /* String+Hash.swift in Sources */,
 				8CB07EBA29D1A6EC000EE257 /* StatsGeneralExternalDependency.swift in Sources */,
 				8CB07EC529D1B393000EE257 /* WeaponDTO.swift in Sources */,
@@ -2050,7 +2103,8 @@
 				4670EDE729D442C600C1062E /* HelpDataViewModel.swift in Sources */,
 				465550CF29CC471400BF932A /* MainTabBarExternalDependency.swift in Sources */,
 				8CB2CEF329C9A87900E79D29 /* ProfileViewModel.swift in Sources */,
-				4655510429CC829800BF932A /* ContactCoordinator.swift in Sources */,
+				4655510429CC829800BF932A /* SettingsCoordinator.swift in Sources */,
+				8CEB340529ED60E1006C2564 /* SettingsDataUseCase.swift in Sources */,
 				8CB6397529D2463900763231 /* WeaponDataCoordinator.swift in Sources */,
 				461C1F4D29CAE0F600540289 /* LoginDependency.swift in Sources */,
 				8CB07EB829D1A6B3000EE257 /* StatsGeneralDependency.swift in Sources */,
@@ -2076,12 +2130,14 @@
 				8CB07EC829D1B446000EE257 /* GamesModesDTO.swift in Sources */,
 				8CA17EBB29C465E900ADFFE2 /* CreateNavController.swift in Sources */,
 				8CB6395E29D2343C00763231 /* KillsDataViewController.swift in Sources */,
+				8CEB340729ED6183006C2564 /* SettingsDataRepository.swift in Sources */,
 				465550C229CC33B000BF932A /* UIViewController+UIbutton.swift in Sources */,
 				8CB07ED029D1CF46000EE257 /* StatsGeneralRepositoryImp.swift in Sources */,
 				461C1F4429C9F68400540289 /* ProfileDataUseCase.swift in Sources */,
 				8CA720AE29DAD6FD001E3EFA /* ForgotRepositoryImp.swift in Sources */,
 				465550D129CC47A700BF932A /* MainTabBarCoordinator.swift in Sources */,
 				8CA85D8629DC46160050C19B /* UIViewController+func.swift in Sources */,
+				8CEB340929ED61A3006C2564 /* SettingsDataRepositoryImp.swift in Sources */,
 				465550FC29CC7E8E00BF932A /* GuideCoordinator.swift in Sources */,
 				8CCC92C429E3F8270019BE72 /* FavouriteRepositoryImp.swift in Sources */,
 				8CA9025629D2F2C0004E71D0 /* WeaponDataDetailViewController.swift in Sources */,
@@ -2115,7 +2171,7 @@
 				465550F829CC7DE800BF932A /* GuideDependency.swift in Sources */,
 				465550E729CC700400BF932A /* FavouriteExternalDependency.swift in Sources */,
 				8CA9025829D2F382004E71D0 /* WeaponDataDetailViewModel.swift in Sources */,
-				4655510129CC824000BF932A /* ContactExternalDependency.swift in Sources */,
+				4655510129CC824000BF932A /* SettingsExternalDependency.swift in Sources */,
 				8CB07EB629D1A683000EE257 /* StatsGeneralViewModel.swift in Sources */,
 				8CB39BA729C0917000B1D8EF /* ViewScrollable.swift in Sources */,
 				8CA398B129B72A1F00C09746 /* LoginViewController.swift in Sources */,
@@ -2154,14 +2210,14 @@
 				8CCC92CA29E407980019BE72 /* UIViewController+TableView.swift in Sources */,
 				465550E929CC705200BF932A /* FavouriteDependency.swift in Sources */,
 				46B0CF2629E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift in Sources */,
-				465550FF29CC820A00BF932A /* ContactDependency.swift in Sources */,
+				465550FF29CC820A00BF932A /* SettingsDependency.swift in Sources */,
 				8CCC92C629E3FC3C0019BE72 /* FavouriteRepository.swift in Sources */,
 				461C1F6229CB12FA00540289 /* ForgotCoordinator.swift in Sources */,
 				461C1F4F29CAE10600540289 /* LoginExternalDependency.swift in Sources */,
 				8CE9BDB729E5807F00F45D3F /* GamesModesDataDependency.swift in Sources */,
 				8CB07E9829D1766B000EE257 /* Player.swift in Sources */,
 				8CB07EBC29D1A764000EE257 /* StatsGeneralCoordinator.swift in Sources */,
-				8C31FDB729C329E500196704 /* ContactViewController.swift in Sources */,
+				8C31FDB729C329E500196704 /* SettingsViewController.swift in Sources */,
 				46B0CF2229E701D400BE95EB /* WeaponDataDetailUseCase.swift in Sources */,
 				8CB39BA929C0919600B1D8EF /* KeyboardDisplayable.swift in Sources */,
 				8CB2CEF129C9A63B00E79D29 /* PlayerDTO.swift in Sources */,

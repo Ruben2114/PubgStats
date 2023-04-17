@@ -21,10 +21,11 @@ protocol LocalDataProfileService {
     func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO, type: NavigationStats)
     func saveNewValue(sessionUser: ProfileEntity,_ value: Any, type: String)
     func getFavourites(for sessionUser: ProfileEntity) -> [Favourite]?
-    func deleteFavouriteTableView(_ profile: Favourite)
     func getSurvival(for sessionUser: ProfileEntity, type: NavigationStats) -> Survival?
     func getGameMode(for sessionUser: ProfileEntity, type: NavigationStats) -> [GamesModes]?
     func getDataWeaponDetail(for sessionUser: ProfileEntity, type: NavigationStats) -> [Weapon]?
+    func deleteFavouriteTableView(_ profile: Favourite)
+    func deleteProfile(_ profile: ProfileEntity)
 }
 
 struct LocalDataProfileServiceImp: LocalDataProfileService {
@@ -431,11 +432,28 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
     }
     
     func deleteFavouriteTableView(_ profile: Favourite) {
-        let deleteFavouriteTableView: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Favourite")
-        let profileFav = profile
-        deleteFavouriteTableView.predicate = NSPredicate(format: "name == %@", profileFav.name ?? "")
+        let deleteFavouriteTableView = Favourite.fetchRequest()
+        guard let profileFav = profile.name else {return}
+        deleteFavouriteTableView.predicate = NSPredicate(format: "name == %@", profileFav)
         do {
-            let result = try context.fetch(deleteFavouriteTableView).first as? Favourite
+            let result = try context.fetch(deleteFavouriteTableView).first
+            if let profileDelete = result {
+                context.delete(profileDelete)
+                try context.save()
+            } else {
+                print("error al borrar objeto")
+                return
+            }
+        } catch {
+            print("Error en core data: \(error.localizedDescription)")
+            return
+        }
+    }
+    func deleteProfile(_ profile: ProfileEntity) {
+        let fetchRequest = Profile.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name == %@", profile.name)
+        do {
+            let result = try context.fetch(fetchRequest).first
             if let profileDelete = result {
                 context.delete(profileDelete)
                 try context.save()

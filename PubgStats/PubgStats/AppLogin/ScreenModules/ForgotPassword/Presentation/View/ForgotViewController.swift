@@ -38,7 +38,11 @@ final class ForgotViewController: UIViewController, UISheetPresentationControlle
         super.viewDidLoad()
         configScroll()
         configUI()
+        configConstraints()
+        configTargets()
+        configKeyboardSubscription(mainScrollView: mainScrollView)
         bind()
+        hideKeyboard()
     }
     override func viewWillDisappear(_ animated: Bool) {
         viewModel.backButton()
@@ -46,10 +50,6 @@ final class ForgotViewController: UIViewController, UISheetPresentationControlle
     
     private func configUI() {
         view.backgroundColor = .black
-        configConstraints()
-        configTargets()
-        configKeyboardSubscription(mainScrollView: mainScrollView)
-        hideKeyboard()
         sheetPresentationController.delegate = self
         sheetPresentationController.prefersGrabberVisible = true
         sheetPresentationController.detents = [.medium()]

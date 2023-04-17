@@ -38,7 +38,6 @@ final class HelpDataViewController: UIViewController {
         backButton(action: #selector(backButtonAction))
     }
     
-    
     private func configConstraints(){
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -54,19 +53,20 @@ final class HelpDataViewController: UIViewController {
 
 extension HelpDataViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        viewModel.questions.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let modelQuestions = viewModel.questions[indexPath.row]
+        let modelResponse = viewModel.response[indexPath.row]
         var listContent = UIListContentConfiguration.cell()
         listContent.textProperties.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        listContent.text = "Recarga de los datos"
+        listContent.text = modelQuestions
         listContent.textProperties.alignment = .center
         listContent.secondaryTextProperties.font = UIFont.systemFont(ofSize: 16)
-        listContent.secondaryText = "La recarga de los datos esta limitada por los servidores, si usted decide recargar o buscar  datos gran cantidad de veces puede ser que sufra una demora de tiempo considerable"
+        listContent.secondaryText = modelResponse
         listContent.secondaryTextProperties.alignment = .center
         cell.contentConfiguration = listContent
-
         return cell
     }
 }

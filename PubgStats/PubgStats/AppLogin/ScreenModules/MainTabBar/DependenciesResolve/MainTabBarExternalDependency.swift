@@ -12,11 +12,11 @@ protocol MainTabBarExternalDependency {
     func profileCoordinator() -> Coordinator
     func favouriteCoordinator() -> Coordinator
     func guideCoordinator() -> Coordinator
-    func contactCoordinator() -> Coordinator
+    func settingsCoordinator() -> Coordinator
     func profileNavigationController() -> UINavigationController
     func favouriteNavigationController() -> UINavigationController
     func guideNavigationController() -> UINavigationController
-    func contactNavigationController() -> UINavigationController
+    func settingsNavigationController() -> UINavigationController
     func tabBarController() -> UITabBarController
     
 }

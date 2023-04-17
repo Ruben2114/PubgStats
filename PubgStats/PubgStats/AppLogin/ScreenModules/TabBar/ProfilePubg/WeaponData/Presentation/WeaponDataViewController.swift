@@ -55,6 +55,7 @@ class WeaponDataViewController: UIViewController {
          viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
              switch state {
              case .fail(_):
+                 self?.hideSpinner()
                  self?.presentAlert(message: "Error al cargar los datos: por favor vuelva e intentarlo en unos segundos", title: "Error")
              case .success:
                  self?.hideSpinner()

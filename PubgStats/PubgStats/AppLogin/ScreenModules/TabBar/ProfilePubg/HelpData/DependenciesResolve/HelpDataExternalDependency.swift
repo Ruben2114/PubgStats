@@ -10,12 +10,12 @@ import UIKit
 protocol HelpDataExternalDependency {
     func resolve() -> AppDependencies
     func helpDataCoordinator() -> Coordinator
-    func profileNavigationController() -> UINavigationController
+    func settingsNavigationController() -> UINavigationController
     func resolve() -> ProfileEntity
 }
 
 extension HelpDataExternalDependency {
     func helpDataCoordinator() -> Coordinator {
-        HelpDataCoordinatorImp(dependencies: self, navigation: profileNavigationController())
+        HelpDataCoordinatorImp(dependencies: self, navigation: settingsNavigationController())
     }
 }

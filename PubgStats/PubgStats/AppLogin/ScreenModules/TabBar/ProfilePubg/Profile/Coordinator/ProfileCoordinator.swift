@@ -10,7 +10,6 @@ import UIKit
 enum ProfileTransition {
     case goBackView
     case goStatsGeneral
-    case goHelp
 }
 protocol ProfileCoordinator: Coordinator {
     func performTransition(_ transition: ProfileTransition)
@@ -42,16 +41,10 @@ extension ProfileCoordinatorImp: ProfileCoordinator {
         case .goBackView:
             (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewAppCoordinator()
         case .goStatsGeneral:
-            let statsGeneralCoordinator = dependencies.external.statsGeneralCoordinator(type: .profile)
-            statsGeneralCoordinator
-                .set(navigation)
-                .set(NavigationStats.profile)
-                .start()
+            guard let navigationController = navigation else {return}
+            let statsGeneralCoordinator = dependencies.external.statsGeneralCoordinator(navigation: navigationController, type: .profile)
+            statsGeneralCoordinator.start()
             append(child: statsGeneralCoordinator)
-        case .goHelp:
-            let helpDataCoordinator = dependencies.external.helpDataCoordinator()
-            helpDataCoordinator.start()
-            append(child: helpDataCoordinator)
         }
     }
 }

@@ -39,7 +39,11 @@ final class RegisterViewController: UIViewController,UISheetPresentationControll
         super.viewDidLoad()
         configScroll()
         configUI()
+        configConstraints()
+        configTargets()
+        configKeyboardSubscription(mainScrollView: mainScrollView)
         bind()
+        hideKeyboard()
     }
     override func viewWillDisappear(_ animated: Bool) {
         viewModel.backButton()
@@ -47,10 +51,6 @@ final class RegisterViewController: UIViewController,UISheetPresentationControll
     
     private func configUI() {
         view.backgroundColor = .black
-        configConstraints()
-        configTargets()
-        configKeyboardSubscription(mainScrollView: mainScrollView)
-        hideKeyboard()
         sheetPresentationController.delegate = self
         sheetPresentationController.prefersGrabberVisible = true
         sheetPresentationController.detents = [.medium()]
@@ -64,6 +64,7 @@ final class RegisterViewController: UIViewController,UISheetPresentationControll
             case .loading:
                 self?.showSpinner()
             case .fail(error: let error):
+                self?.hideSpinner()
                 self?.presentAlert(message: "Error: \(error)", title: "Error")
             }
         }.store(in: &cancellable)
@@ -104,7 +105,6 @@ final class RegisterViewController: UIViewController,UISheetPresentationControll
         guard !passwordText.isEmpty else {
             presentAlert(message: "La contraseña tiene que tener como minimo un caracter", title: "Error")
             return}
-       
         viewModel.saveUser(name: nameText, password: passwordText, email: emailText)
     }
 }

@@ -16,7 +16,6 @@ class FavouriteViewController: UIViewController {
         search.backgroundColor = .systemGroupedBackground
         return search
     }()
-   
     private lazy var tableView = makeTableViewGroup()
     private lazy var infoLabel = makeLabel(title: "", color: .black, font: 15, style: .body)
     private var profilesFavourite: [Favourite] = []
@@ -55,11 +54,11 @@ class FavouriteViewController: UIViewController {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
             switch state {
             case .fail(_):
-                self?.presentAlert(message: "El nombre de usuario no existe", title: "Error")
                 self?.hideSpinner()
-            case .success(let model):
-                guard let account = model.id, !account.isEmpty, let player = model.name, !player.isEmpty, let user = self?.sessionUser else {return}
-                self?.viewModel.saveFav(sessionUser: user, player: player, account: account)
+                self?.presentAlert(message: "El nombre de usuario no existe", title: "Error")
+            case .success(_):
+                let directorio = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+                        print(directorio)
                 self?.searchFavourite()
                 self?.hideSpinner()
                 self?.tableView.reloadData()

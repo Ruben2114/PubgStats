@@ -13,8 +13,17 @@ final class ProfileViewModel {
     private weak var coordinator: ProfileCoordinator?
     private let profileDataUseCase: ProfileDataUseCase
     private let dependencies: ProfileDependency
-    
+    private let sessionUser: ProfileEntity
+    let itemsContents = [
+        ["Nombre", "Correo", "Contraseña", "Imagen"],
+        ["Registro cuenta Pubg", "Estadísticas cuenta", "Borrar cuenta Pubg"]
+    ]
+    let imageNames = [
+        ["person.circle.fill", "envelope.circle.fill", "lock.circle.fill", "photo.circle.fill"],
+        ["person.crop.circle.fill.badge.plus", "folder.circle.fill", "trash.circle.fill"]
+    ]
     init(dependencies: ProfileDependency) {
+        self.sessionUser = dependencies.external.resolve()
         self.dependencies = dependencies
         self.coordinator = dependencies.resolve()
         self.profileDataUseCase = dependencies.resolve()
@@ -51,15 +60,11 @@ final class ProfileViewModel {
         let check = profileDataUseCase.check(email,type: "email")
         return check
     }
-
     func backButton() {
         coordinator?.performTransition(.goBackView)
     }
     func didTapStatsgAccountButton() {
         coordinator?.performTransition(.goStatsGeneral)
-    }
-    func goHelp() {
-        coordinator?.performTransition(.goHelp)
     }
 }
 

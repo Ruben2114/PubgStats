@@ -4,6 +4,7 @@
 //
 //  Created by Ruben Rodriguez on 27/3/23.
 //
+import Foundation
 
 struct GamesModesDTO: Decodable {
     private let data: GamesModesDataDTO
@@ -47,9 +48,9 @@ struct GamesModesDTO: Decodable {
     var timePlayed: String {
         let model = data.attributes.gameModeStats
         let time = model.duo.timeSurvived + model.duoFpp.timeSurvived + model.solo.timeSurvived + model.soloFpp.timeSurvived + model.squad.timeSurvived + model.squadFpp.timeSurvived
-        let days = time / 86400
-        let hours = (time % 86400) / 3600
-        let minutes = (time % 3600) / 60
+        let days = Int(round(time / 86400))
+        let hours = Int(round((time.truncatingRemainder(dividingBy: 86400)) / 3600))
+        let minutes = Int(round((time.truncatingRemainder(dividingBy: 3600)) / 60))
         return "\(days) d \(hours) h \(minutes) m"
     }
 }
@@ -80,13 +81,14 @@ struct DuoDTO: Decodable {
     let kills: Int
     let longestKill: Double
     let longestTimeSurvived, losses, maxKillStreaks, mostSurvivalTime: Int
+    let timeSurvived: Double
     let rankPoints: Int
     let rankPointsTitle: String
     let revives: Int
     let rideDistance: Double
     let roadKills, roundMostKills, roundsPlayed, suicides: Int
     let swimDistance: Double
-    let teamKills, timeSurvived, top10S, vehicleDestroys: Int
+    let teamKills, top10S, vehicleDestroys: Int
     let walkDistance: Double
     let weaponsAcquired, weeklyKills, weeklyWINS, winPoints: Int
     let wins: Int

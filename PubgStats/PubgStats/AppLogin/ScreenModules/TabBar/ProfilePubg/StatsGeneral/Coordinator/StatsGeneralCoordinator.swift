@@ -12,13 +12,12 @@ enum StatsGeneralTransition {
     case goSurvival
     case goGamesModes
 }
-protocol StatsGeneralCoordinator: BindableCoordinator {
+protocol StatsGeneralCoordinator: Coordinator {
     func performTransition(_ transition: StatsGeneralTransition)
     var type: NavigationStats {get}
 }
 
-final class StatsGeneralCoordinatorImp: BindableCoordinator {
-    var dataBinding: DataBinding
+final class StatsGeneralCoordinatorImp: Coordinator {
     var type: NavigationStats
     weak var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
@@ -28,15 +27,14 @@ final class StatsGeneralCoordinatorImp: BindableCoordinator {
         Dependency(external: externalDependencies, coordinator: self)
     }()
     
-    public init(dependencies: StatsGeneralExternalDependency, type: NavigationStats) {
+    public init(dependencies: StatsGeneralExternalDependency, navigation: UINavigationController, type: NavigationStats) {
         self.externalDependencies = dependencies
         self.type = type
-        self.dataBinding = DataBindingObject()
+        self.navigation = navigation
     }
     
     func start() {
         let statsGeneralView: StatsGeneralViewController = dependencies.resolve()
-        navigation = dataBinding.get()
         navigation?.pushViewController(statsGeneralView, animated: false)
     }
 }
@@ -54,7 +52,7 @@ extension StatsGeneralCoordinatorImp: StatsGeneralCoordinator {
             weaponDataCoordinator.start()
             append(child: weaponDataCoordinator)
         case .goSurvival:
-            guard let navigationController = navigation, let type: NavigationStats = self.dataBinding.get() else {return}
+            guard let navigationController = navigation else {return}
             let survivalDataCoordinator = dependencies.external.survivalDataCoordinator(navigation: navigationController, type: type)
             survivalDataCoordinator.start()
             append(child: survivalDataCoordinator)

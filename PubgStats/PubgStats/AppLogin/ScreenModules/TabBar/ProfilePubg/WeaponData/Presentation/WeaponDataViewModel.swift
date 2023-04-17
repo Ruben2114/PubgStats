@@ -22,11 +22,23 @@ final class WeaponDataViewModel {
         self.coordinator = dependencies.resolve()
         self.weaponDataUseCase = dependencies.resolve()
     }
-    
+    func getDataWeapon(for sessionUser: ProfileEntity) -> [Weapon]? {
+        guard let type = coordinator?.type else {return nil}
+        let weaponData = weaponDataUseCase.getDataWeapon(for: sessionUser, type: type)
+        return weaponData
+    }
+    func searchId() -> String? {
+        guard let type = coordinator?.type else {return nil}
+        if type == .favourite{
+            return sessionUser.accountFavourite
+        } else {
+            return sessionUser.account
+        }
+    }
     func viewDidLoad() {
         state.send(.loading)
         let weaponData = getDataWeapon(for: sessionUser)
-        guard let id = sessionUser.accountFavourite, !id.isEmpty else {return}
+        guard let id = searchId(), !id.isEmpty else {return}
         guard let _ = weaponData?.first?.weapon ?? weaponData?.first?.weaponFav else {
             weaponDataUseCase.execute(account: id) { [weak self] result in
                 switch result {
@@ -47,11 +59,6 @@ final class WeaponDataViewModel {
     func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO) {
         guard let type = coordinator?.type else {return}
         weaponDataUseCase.saveWeaponData(sessionUser: sessionUser, weaponData: weaponData, type: type)
-    }
-    func getDataWeapon(for sessionUser: ProfileEntity) -> [Weapon]? {
-        guard let type = coordinator?.type else {return nil}
-        let weaponData = weaponDataUseCase.getDataWeapon(for: sessionUser, type: type)
-        return weaponData
     }
     func getNameWeapon(for sessionUser: ProfileEntity, model: [Weapon]?){
         if let weapon = model {

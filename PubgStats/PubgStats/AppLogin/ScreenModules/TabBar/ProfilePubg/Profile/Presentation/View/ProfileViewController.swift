@@ -14,21 +14,10 @@ final class ProfileViewController: UIViewController {
     private lazy var emailLabel = makeLabelProfile(title: "\(sessionUser.email)", color: .black, font: 20, style: .title2, isBold: false)
     private lazy var tableView = makeTableViewGroup()
     
-    private let itemsContents = [
-        ["Nombre", "Correo", "Contraseña", "Imagen"],
-        ["Ayuda"],
-        ["Registro cuenta Pubg", "Estadísticas cuenta", "Borrar cuenta Pubg"]
-    ]
-    private let imageNames = [
-        ["person.circle.fill", "envelope.circle.fill", "lock.circle.fill", "photo.circle.fill"],
-        ["questionmark.circle.fill"],
-        ["person.crop.circle.fill.badge.plus", "folder.circle.fill", "trash.circle.fill"]
-    ]
-    
     private var cancellable = Set<AnyCancellable>()
     private let viewModel: ProfileViewModel
     private let dependencies: ProfileDependency
-    let sessionUser: ProfileEntity
+    private let sessionUser: ProfileEntity
     init(dependencies: ProfileDependency) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
@@ -107,15 +96,15 @@ final class ProfileViewController: UIViewController {
 extension ProfileViewController: MessageDisplayable { }
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return itemsContents.count
+        return viewModel.itemsContents.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemsContents[section].count
+        return viewModel.itemsContents[section].count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        let settingContent = itemsContents[indexPath.section][indexPath.row]
-        let value = imageNames[indexPath.section][indexPath.row]
+        let settingContent = viewModel.itemsContents[indexPath.section][indexPath.row]
+        let value = viewModel.imageNames[indexPath.section][indexPath.row]
         cell.accessoryType = .disclosureIndicator
         var listContent = UIListContentConfiguration.cell()
         listContent.textProperties.font = UIFont.systemFont(ofSize: 20)
@@ -126,14 +115,14 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if sessionUser.account == nil {
-            if indexPath.section == 2 && indexPath.row == 1{
+            if indexPath.section == 1 && indexPath.row == 1{
                 cell.isHidden = true
             }
-            if indexPath.section == 2 && indexPath.row == 2{
+            if indexPath.section == 1 && indexPath.row == 2{
                 cell.isHidden = true
             }
         } else {
-            if indexPath.section == 2 && indexPath.row == 0 {
+            if indexPath.section == 1 && indexPath.row == 0 {
                 cell.isHidden = true
             }
         }
@@ -204,8 +193,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
             vc.allowsEditing = true
             present(vc, animated: true)
         case (1, 0):
-            viewModel.goHelp()
-        case (2, 0):
             let alert = UIAlertController(title: "Jugador", message: "", preferredStyle: .alert)
             alert.addTextField{ (namePubg) in
                 namePubg.placeholder = "Nombre jugador"
@@ -220,9 +207,10 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
             alert.addAction(actionCancel)
             alert.addAction(actionAccept)
             present(alert, animated: true)
-        case (2, 1):
+        case (1, 1):
             viewModel.didTapStatsgAccountButton()
-        case(2, 2):
+        case(1, 2):
+            
             // creo que es tan facil como borrar acount para que sea nil t table.reload() ademas de borrar todos los demas registros de la base de datos
             print("borrar la cuenta, que se oculte la tabla de estadictica sy se ponga la de registro")
         default:
