@@ -31,8 +31,6 @@ final class StatsGeneralViewModel {
               let _ = gamesModesData?.first?.gamesMode ?? gamesModesData?.first?.gamesModeFav
         else {
             fetchData()
-            //TODO: dispatchgroup en el fetchdata()
-            state.send(.success)
             return
         }
         state.send(.getSurvival(model: survivalData))
@@ -40,27 +38,35 @@ final class StatsGeneralViewModel {
         state.send(.success)
     }
     func fetchData() {
+        let dispatchGroup = DispatchGroup()
         guard let id = searchData()[0], !id.isEmpty else {return}
         guard let type = coordinator?.type else {return}
+        dispatchGroup.enter()
         statsGeneralDataUseCase.executeSurvival(account: id) { [weak self] result in
             switch result {
             case .success(let survival):
                 self?.state.send(.successSurvival(model: survival))
                 guard let user = self?.sessionUser else{return}
                 self?.statsGeneralDataUseCase.saveSurvival(sessionUser: user, survivalData: [survival], type: type)
+                dispatchGroup.leave()
             case .failure(let error):
                 self?.state.send(.fail(error: "\(error)"))
             }
         }
+        dispatchGroup.enter()
         statsGeneralDataUseCase.executeGamesModes(account: id) { [weak self] result in
             switch result {
             case .success(let gamesMode):
                 self?.state.send(.successGamesModes(model: gamesMode))
                 guard let user = self?.sessionUser else{return}
                 self?.statsGeneralDataUseCase.saveGamesModeData(sessionUser: user, gamesModeData: gamesMode, type: type)
+                dispatchGroup.leave()
             case .failure(let error):
                 self?.state.send(.fail(error: "\(error)"))
             }
+        }
+        dispatchGroup.notify(queue: DispatchQueue.main) {
+            self.state.send(.success)
         }
     }
     func searchData() -> [String?] {
@@ -72,9 +78,9 @@ final class StatsGeneralViewModel {
         }
     }
     func reload(){
+        //TODO: falta fetch de weapon o borrar los datos de weapon
         fetchData()
     }
-    
     func backButton() {
         coordinator?.dismiss()
     }

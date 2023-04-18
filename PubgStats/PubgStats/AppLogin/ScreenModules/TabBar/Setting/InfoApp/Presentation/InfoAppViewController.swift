@@ -8,10 +8,11 @@
 import UIKit
 
 class InfoAppViewController: UIViewController {
-    private lazy var infoLabel = makeLabel(title: viewModel.info, color: .black, font: 50, style: .body)
+    private lazy var infoLabel = makeLabel(title: viewModel.info, color: .black, font: 20, style: .body)
     private let viewModel: InfoAppViewModel
     var contentView = UIView()
     var mainScrollView = UIScrollView()
+    var label: UILabel!
     
     init(dependencies: InfoAppDependency) {
         self.viewModel = dependencies.resolve()
@@ -30,14 +31,12 @@ class InfoAppViewController: UIViewController {
         view.backgroundColor = .systemBackground
         title = "Aviso Legal"
         backButton(action: #selector(backButtonAction))
-        infoLabel.translatesAutoresizingMaskIntoConstraints = false
     }
-    private func configConstraints(){
-        contentView.addSubview(infoLabel)
-        infoLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
-        infoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
-        infoLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
-        
+    private func configConstraints() {
+         infoLabel.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 0)
+         infoLabel.sizeToFit()
+         contentView.addSubview(infoLabel)
+         mainScrollView.contentSize = infoLabel.bounds.size
     }
     @objc func backButtonAction() {
         viewModel.backButton()

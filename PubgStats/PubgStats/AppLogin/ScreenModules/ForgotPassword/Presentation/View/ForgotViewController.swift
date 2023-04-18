@@ -16,17 +16,12 @@ final class ForgotViewController: UIViewController, UISheetPresentationControlle
     private lazy var emailTextField = makeTextFieldBlack(placeholder: "Correo: pubg@pubgstats.com", isSecure: false)
     private lazy var acceptButton = makeButtonBlue(title: "Guardar")
     
-    var mainScrollView = UIScrollView()
-    var contentView = UIView()
     var cancellable = Set<AnyCancellable>()
     private let viewModel: ForgotViewModel
     override var sheetPresentationController: UISheetPresentationController {
         presentationController as! UISheetPresentationController
     }
-    init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>(), dependencies: ForgotDependency) {
-        self.mainScrollView = mainScrollView
-        self.contentView = contentView
-        self.cancellable = cancellable
+    init(dependencies: ForgotDependency) {
         self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)
     }
@@ -36,11 +31,10 @@ final class ForgotViewController: UIViewController, UISheetPresentationControlle
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        configScroll()
         configUI()
         configConstraints()
         configTargets()
-        configKeyboardSubscription(mainScrollView: mainScrollView)
+        configKeyboardSubscription(mainScrollView: UIScrollView())
         bind()
         hideKeyboard()
     }
@@ -69,10 +63,10 @@ final class ForgotViewController: UIViewController, UISheetPresentationControlle
         }.store(in: &cancellable)
     }
     private func configConstraints() {
-        contentView.addSubview(containerStackView)
-        containerStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
-        containerStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
-        containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15).isActive = true
+        view.addSubview(containerStackView)
+        containerStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        containerStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        containerStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 15).isActive = true
         
         [titleLabel, alertLabel, userTextField, emailTextField, acceptButton].forEach {
             containerStackView.addArrangedSubview($0)
@@ -88,6 +82,5 @@ final class ForgotViewController: UIViewController, UISheetPresentationControlle
     }
 }
 extension ForgotViewController: MessageDisplayable { }
-extension ForgotViewController: ViewScrollable {}
 extension ForgotViewController: KeyboardDisplayable {}
 extension ForgotViewController: SpinnerDisplayable {}

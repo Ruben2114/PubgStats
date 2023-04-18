@@ -100,7 +100,7 @@ class LoginViewController: UIViewController {
         containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
         [userTextField, passwordTextField, loginButton, registerButton ,forgotPasswordButton].forEach {
-                containerStackView.addArrangedSubview($0)
+            containerStackView.addArrangedSubview($0)
         }
     }
     private func configTargets() {

@@ -17,18 +17,13 @@ final class RegisterViewController: UIViewController,UISheetPresentationControll
     private lazy var passwordTextField = makeTextFieldBlack(placeholder: "Contraseña", isSecure: true)
     private lazy var acceptButton = makeButtonBlue(title: "Guardar")
     
-    var mainScrollView = UIScrollView()
-    var contentView = UIView()
     var cancellable = Set<AnyCancellable>()
     private let viewModel: RegisterViewModel
     override var sheetPresentationController: UISheetPresentationController {
         presentationController as! UISheetPresentationController
     }
     
-    init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>(), dependencies: RegisterDependency) {
-        self.mainScrollView = mainScrollView
-        self.contentView = contentView
-        self.cancellable = cancellable
+    init(dependencies: RegisterDependency) {
         self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)
     }
@@ -37,11 +32,10 @@ final class RegisterViewController: UIViewController,UISheetPresentationControll
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        configScroll()
         configUI()
         configConstraints()
         configTargets()
-        configKeyboardSubscription(mainScrollView: mainScrollView)
+        configKeyboardSubscription(mainScrollView: UIScrollView())
         bind()
         hideKeyboard()
     }
@@ -70,10 +64,10 @@ final class RegisterViewController: UIViewController,UISheetPresentationControll
         }.store(in: &cancellable)
     }
     private func configConstraints() {
-        contentView.addSubview(containerStackView)
-        containerStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
-        containerStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
-        containerStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -20).isActive = true
+        view.addSubview(containerStackView)
+        containerStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        containerStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        containerStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 15).isActive = true
         
         [titleLabel,userTextField, emailTextField ,passwordTextField, acceptButton].forEach {
             containerStackView.addArrangedSubview($0)
@@ -109,7 +103,6 @@ final class RegisterViewController: UIViewController,UISheetPresentationControll
     }
 }
 extension RegisterViewController: MessageDisplayable { }
-extension RegisterViewController: ViewScrollable {}
 extension RegisterViewController: KeyboardDisplayable {}
 extension RegisterViewController: SpinnerDisplayable {}
 

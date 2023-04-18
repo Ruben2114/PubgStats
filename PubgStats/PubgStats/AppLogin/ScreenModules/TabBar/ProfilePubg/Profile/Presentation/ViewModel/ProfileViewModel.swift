@@ -7,36 +7,16 @@
 
 import Foundation
 import Combine
-enum ProfileField{
-    case name
-    func title() -> String{
-        switch self{
-        case .name:
-            return "Nombre"
-        }
-    }
-    func icon() -> String{
-        switch self{
-        case .name:
-            return "person.circle.fill"
-        }
-    }
-}
+
 final class ProfileViewModel {
     var state = PassthroughSubject<OutputPlayer, Never>()
     private weak var coordinator: ProfileCoordinator?
     private let profileDataUseCase: ProfileDataUseCase
     private let dependencies: ProfileDependency
     private let sessionUser: ProfileEntity
-    let itemsContents = [
-        ["Nombre", "Correo", "Contraseña", "Imagen"],
-        ["Registro cuenta Pubg", "Estadísticas cuenta", "Borrar cuenta Pubg"]
-    ]
-    let items: [[ProfileField]] = []
-    
-    let imageNames = [
-        ["person.circle.fill", "envelope.circle.fill", "lock.circle.fill", "photo.circle.fill"],
-        ["person.crop.circle.fill.badge.plus", "folder.circle.fill", "trash.circle.fill"]
+    let items: [[ProfileField]] = [
+        [ProfileField.name, ProfileField.email, ProfileField.password, ProfileField.image],
+        [ProfileField.login, ProfileField.stats, ProfileField.delete]
     ]
     init(dependencies: ProfileDependency) {
         self.sessionUser = dependencies.external.resolve()
@@ -44,7 +24,6 @@ final class ProfileViewModel {
         self.coordinator = dependencies.resolve()
         self.profileDataUseCase = dependencies.resolve()
     }
-    
     func dataGeneral(name: String){
         state.send(.loading)
         profileDataUseCase.fetchPlayerData(name: name) { [weak self] result in
@@ -56,7 +35,6 @@ final class ProfileViewModel {
             }
         }
     }
-    
     func saveUser(player: String, account: String) {
         let sessionUser: ProfileEntity = dependencies.external.resolve()
         profileDataUseCase.execute(sessionUser: sessionUser, player: player, account: account)
@@ -71,7 +49,6 @@ final class ProfileViewModel {
         let check = profileDataUseCase.check(name,type: "name")
         return check
     }
-    
     func checkEmail(email: String) -> Bool {
         let check = profileDataUseCase.check(email,type: "email")
         return check

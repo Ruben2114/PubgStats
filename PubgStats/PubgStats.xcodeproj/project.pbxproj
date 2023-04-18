@@ -90,6 +90,7 @@
 		8CA9025A29D2F3DD004E71D0 /* WeaponDataDetailDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025929D2F3DD004E71D0 /* WeaponDataDetailDependency.swift */; };
 		8CA9025C29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025B29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift */; };
 		8CA9025E29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025D29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift */; };
+		8CAAB84F29EF3011003D7EE2 /* ItemCellProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAAB84E29EF3011003D7EE2 /* ItemCellProfile.swift */; };
 		8CAC3E2D29C3055300A1FE34 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E2C29C3055300A1FE34 /* GuideViewController.swift */; };
 		8CAC3E2F29C3080600A1FE34 /* GuideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E2E29C3080600A1FE34 /* GuideViewModel.swift */; };
 		8CAC3E3129C31D4700A1FE34 /* UrlGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E3029C31D4700A1FE34 /* UrlGuide.swift */; };
@@ -280,6 +281,7 @@
 		8CA9025929D2F3DD004E71D0 /* WeaponDataDetailDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailDependency.swift; sourceTree = "<group>"; };
 		8CA9025B29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailExternalDependency.swift; sourceTree = "<group>"; };
 		8CA9025D29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailCoordinator.swift; sourceTree = "<group>"; };
+		8CAAB84E29EF3011003D7EE2 /* ItemCellProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellProfile.swift; sourceTree = "<group>"; };
 		8CAC3E2C29C3055300A1FE34 /* GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		8CAC3E2E29C3080600A1FE34 /* GuideViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewModel.swift; sourceTree = "<group>"; };
 		8CAC3E3029C31D4700A1FE34 /* UrlGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlGuide.swift; sourceTree = "<group>"; };
@@ -361,7 +363,7 @@
 		8CEB340F29ED66C1006C2564 /* InfoAppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAppCoordinator.swift; sourceTree = "<group>"; };
 		8CEB341129ED6720006C2564 /* InfoAppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAppDependency.swift; sourceTree = "<group>"; };
 		8CEB341329ED6753006C2564 /* InfoAppExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAppExternalDependency.swift; sourceTree = "<group>"; };
-		8CEB341529ED67C5006C2564 /* InfoAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAppViewController.swift; sourceTree = "<group>"; };
+		8CEB341529ED67C5006C2564 /* InfoAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAppViewController.swift; sourceTree = "<group>"; tabWidth = 3; };
 		8CEB341729ED67DF006C2564 /* InfoAppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAppViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1418,6 +1420,7 @@
 			isa = PBXGroup;
 			children = (
 				8CB2CEF229C9A87900E79D29 /* ProfileViewModel.swift */,
+				8CAAB84E29EF3011003D7EE2 /* ItemCellProfile.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2211,6 +2214,7 @@
 				8CE9BDC829E5842000F45D3F /* GamesModesDataRepositoryImp.swift in Sources */,
 				8CE9BDD229E59F9200F45D3F /* GamesModesDataDetailCoordinator.swift in Sources */,
 				8CA9025E29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift in Sources */,
+				8CAAB84F29EF3011003D7EE2 /* ItemCellProfile.swift in Sources */,
 				8CCC92D229E40E240019BE72 /* SurvivalDataExternalDependency.swift in Sources */,
 				8CEB341829ED67DF006C2564 /* InfoAppViewModel.swift in Sources */,
 				461C1F7629CB5BF100540289 /* RegisterCoordinator.swift in Sources */,

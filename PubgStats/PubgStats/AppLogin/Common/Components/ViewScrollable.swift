@@ -25,8 +25,7 @@ extension ViewScrollable where Self : UIViewController {
         mainScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         mainScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         mainScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        mainScrollView.contentSize = CGSize(width: view.frame.size.width, height: 4000)
-        //el fallo es el heigth
+        mainScrollView.contentSize = view.bounds.size
         
         mainScrollView.addSubview(contentView)
         contentView.widthAnchor.constraint(equalTo: mainScrollView.widthAnchor).isActive = true
