@@ -8,9 +8,9 @@
 import UIKit
 
 class InfoAppViewController: UIViewController {
-    private lazy var infoLabel = makeLabel(title: viewModel.info, color: .black, font: 17, style: .body)
+    private lazy var infoLabel = makeLabel(title: viewModel.info, color: .black, font: 50, style: .body)
     private let viewModel: InfoAppViewModel
-    let contentView = UIView()
+    var contentView = UIView()
     var mainScrollView = UIScrollView()
     
     init(dependencies: InfoAppDependency) {
@@ -37,7 +37,7 @@ class InfoAppViewController: UIViewController {
         infoLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
         infoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
         infoLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
-        infoLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        
     }
     @objc func backButtonAction() {
         viewModel.backButton()

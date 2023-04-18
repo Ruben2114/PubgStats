@@ -97,10 +97,10 @@ final class ProfileViewController: UIViewController {
 extension ProfileViewController: MessageDisplayable { }
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.itemsContents.count
+        return viewModel.items.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.itemsContents[section].count
+        return viewModel.items[section].count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()

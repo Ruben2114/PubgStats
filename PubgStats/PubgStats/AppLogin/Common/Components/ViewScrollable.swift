@@ -22,16 +22,16 @@ extension ViewScrollable where Self : UIViewController {
     private func configConstraints() {
         view.addSubview(mainScrollView)
         mainScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        mainScrollView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        mainScrollView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        mainScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        mainScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         mainScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        mainScrollView.contentSize = CGSize(width: view.frame.size.width, height: 4000)
+        //el fallo es el heigth
         
         mainScrollView.addSubview(contentView)
-        contentView.topAnchor.constraint(equalTo: mainScrollView.topAnchor).isActive = true
-        contentView.leftAnchor.constraint(equalTo: mainScrollView.leftAnchor).isActive = true
-        contentView.rightAnchor.constraint(equalTo: mainScrollView.rightAnchor).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: mainScrollView.bottomAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: mainScrollView.widthAnchor).isActive = true
+        contentView.centerXAnchor.constraint(equalTo: mainScrollView.centerXAnchor).isActive = true
+        contentView.centerYAnchor.constraint(equalTo: mainScrollView.centerYAnchor).isActive = true
         contentView.heightAnchor.constraint(equalTo: mainScrollView.heightAnchor).isActive = true
     }
 }

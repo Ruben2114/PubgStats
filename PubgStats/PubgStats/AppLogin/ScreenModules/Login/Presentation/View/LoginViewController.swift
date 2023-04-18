@@ -48,7 +48,7 @@ class LoginViewController: UIViewController {
         bind()
         hideKeyboard()
     }
-  
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         guard let filePath = Bundle.main.path(forResource: "videoLoginPubg", ofType: "mp4") else { return }
@@ -76,7 +76,7 @@ class LoginViewController: UIViewController {
         view.layer.addSublayer(gradientMaskLayer)
         gradientMaskLayer.zPosition = -1
     }
-  
+
     private func configUI() {
         view.backgroundColor = .systemBackground
     }
@@ -95,9 +95,9 @@ class LoginViewController: UIViewController {
     }
     private func configConstraints() {
         contentView.addSubview(containerStackView)
-        containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: ViewValues.doublePadding).isActive = true
-        containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -ViewValues.doublePadding).isActive = true
-        containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -ViewValues.doublePadding).isActive = true
+        containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+        containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+        containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
         [userTextField, passwordTextField, loginButton, registerButton ,forgotPasswordButton].forEach {
                 containerStackView.addArrangedSubview($0)
