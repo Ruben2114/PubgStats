@@ -7,7 +7,21 @@
 
 import Foundation
 import Combine
-
+enum ProfileField{
+    case name
+    func title() -> String{
+        switch self{
+        case .name:
+            return "Nombre"
+        }
+    }
+    func icon() -> String{
+        switch self{
+        case .name:
+            return "person.circle.fill"
+        }
+    }
+}
 final class ProfileViewModel {
     var state = PassthroughSubject<OutputPlayer, Never>()
     private weak var coordinator: ProfileCoordinator?
@@ -18,6 +32,8 @@ final class ProfileViewModel {
         ["Nombre", "Correo", "Contraseña", "Imagen"],
         ["Registro cuenta Pubg", "Estadísticas cuenta", "Borrar cuenta Pubg"]
     ]
+    let items: [[ProfileField]] = []
+    
     let imageNames = [
         ["person.circle.fill", "envelope.circle.fill", "lock.circle.fill", "photo.circle.fill"],
         ["person.crop.circle.fill.badge.plus", "folder.circle.fill", "trash.circle.fill"]

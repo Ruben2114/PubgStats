@@ -10,6 +10,8 @@ import UIKit
 class InfoAppViewController: UIViewController {
     private lazy var infoLabel = makeLabel(title: viewModel.info, color: .black, font: 17, style: .body)
     private let viewModel: InfoAppViewModel
+    let contentView = UIView()
+    var mainScrollView = UIScrollView()
     
     init(dependencies: InfoAppDependency) {
         self.viewModel = dependencies.resolve()
@@ -20,6 +22,7 @@ class InfoAppViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        configScroll()
         configUI()
         configConstraints()
     }
@@ -30,14 +33,14 @@ class InfoAppViewController: UIViewController {
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
     }
     private func configConstraints(){
-        view.addSubview(infoLabel)
-        infoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        infoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
-        infoLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
-        infoLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        contentView.addSubview(infoLabel)
+        infoLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
+        infoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+        infoLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+        infoLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
     @objc func backButtonAction() {
         viewModel.backButton()
     }
 }
-
+extension InfoAppViewController: ViewScrollable{}

@@ -95,9 +95,9 @@ class LoginViewController: UIViewController {
     }
     private func configConstraints() {
         contentView.addSubview(containerStackView)
-        containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
-        containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-        containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
+        containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: ViewValues.doublePadding).isActive = true
+        containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -ViewValues.doublePadding).isActive = true
+        containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -ViewValues.doublePadding).isActive = true
         
         [userTextField, passwordTextField, loginButton, registerButton ,forgotPasswordButton].forEach {
                 containerStackView.addArrangedSubview($0)
@@ -110,10 +110,9 @@ class LoginViewController: UIViewController {
     }
     
     @objc func didTapLoginButton() {
-        let password = passwordTextField.text?.hashString()
-        viewModel.check(sessionUser: dependencies.external.resolve(),name: userTextField.text ?? "", password: password ?? "")
+        guard let password = passwordTextField.text?.hashString(), let user = userTextField.text else{return}
+        viewModel.check(sessionUser: dependencies.external.resolve(),name: user, password: password)
     }
-    
     @objc func didTapForgotButton() {
         viewModel.didTapForgotButton()
     }

@@ -155,16 +155,15 @@ final class StatsGeneralViewController: UIViewController {
         viewModel.backButton()
     }
     @objc func reloadButtonAction() {
-        guard refreshCount < 2 else {
+        guard refreshCount < 1 else {
             reloadButton.isEnabled = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 120) {
                 self.reloadButton.isEnabled = true
                 self.refreshCount = 0
             }
             return}
         refreshCount += 1
-        //TODO: borrar datos de survival, weapon y gamesmodes
-        bind()
+        viewModel.reload()
     }
 }
 extension StatsGeneralViewController: MessageDisplayable { }

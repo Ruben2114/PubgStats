@@ -31,6 +31,7 @@ final class StatsGeneralViewModel {
               let _ = gamesModesData?.first?.gamesMode ?? gamesModesData?.first?.gamesModeFav
         else {
             fetchData()
+            //TODO: dispatchgroup en el fetchdata()
             state.send(.success)
             return
         }
@@ -70,6 +71,10 @@ final class StatsGeneralViewModel {
             return [sessionUser.account, sessionUser.player]
         }
     }
+    func reload(){
+        fetchData()
+    }
+    
     func backButton() {
         coordinator?.dismiss()
     }

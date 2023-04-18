@@ -10,8 +10,8 @@ import Combine
 
 final class ProfileViewController: UIViewController {
     private lazy var profileImageView = makeImageViewPersonal(name: "default", data: sessionUser.image)
-    private lazy var nameLabel = makeLabelProfile(title: "\(sessionUser.name)", color: .black, font: 20, style: .title2, isBold: true)
-    private lazy var emailLabel = makeLabelProfile(title: "\(sessionUser.email)", color: .black, font: 20, style: .title2, isBold: false)
+    private lazy var nameLabel = makeLabelProfile(title: sessionUser.name, color: .black, font: 20, style: .title2, isBold: true)
+    private lazy var emailLabel = makeLabelProfile(title: sessionUser.email, color: .black, font: 20, style: .title2, isBold: false)
     private lazy var tableView = makeTableViewGroup()
     private var refreshCount = 0
     
@@ -104,13 +104,12 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        let settingContent = viewModel.itemsContents[indexPath.section][indexPath.row]
-        let value = viewModel.imageNames[indexPath.section][indexPath.row]
+        let profileFieldInfo = viewModel.items[indexPath.section][indexPath.row]
         cell.accessoryType = .disclosureIndicator
         var listContent = UIListContentConfiguration.cell()
         listContent.textProperties.font = UIFont.systemFont(ofSize: 20)
-        listContent.text = settingContent
-        listContent.image =  UIImage(systemName: value)
+        listContent.text = profileFieldInfo.title()
+        listContent.image =  UIImage(systemName: profileFieldInfo.icon())
         cell.contentConfiguration = listContent
         return cell
     }
