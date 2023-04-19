@@ -11,7 +11,7 @@ final class HelpDataViewModel {
         "¿Cómo borro a los usuarios favoritos de mi lista?"
     ]
     let response = [
-        "La recarga de los datos esta limitada por los servidores, si usted decide recargar o buscar  datos gran cantidad de veces puede ser que sufra una demora de tiempo considerable",
+        "La recarga de los datos esta limitada por los servidores, si usted decide recargar podrá realizar dicha recarga 1 vez cada 2 horas. Sino automaticamente los datos se recargaran cada 12 horas desde su última búsqueda",
         "Desliza el perfil de tu lista hacia la izquierda"
     ]
     private let dependencies: HelpDataDependency
