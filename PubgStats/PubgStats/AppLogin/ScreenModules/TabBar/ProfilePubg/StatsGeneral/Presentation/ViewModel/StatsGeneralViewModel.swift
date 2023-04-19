@@ -28,7 +28,7 @@ final class StatsGeneralViewModel {
         let survivalData = statsGeneralDataUseCase.getSurvival(for: sessionUser, type: type)
         let gamesModesData = statsGeneralDataUseCase.getGamesModes(for: sessionUser, type: type)
         let userDefaults = UserDefaults.standard
-        guard let lastUpdate = userDefaults.object(forKey: "lastUpdate") as? Date, Date().timeIntervalSince(lastUpdate) > 43200 else {
+        guard let lastUpdate = userDefaults.object(forKey: "lastUpdate") as? Date, Date().timeIntervalSince(lastUpdate) < 43200 else {
             reload()
             return
         }
@@ -78,7 +78,7 @@ final class StatsGeneralViewModel {
     }
     func reload(){
         let userDefaults = UserDefaults.standard
-        userDefaults.set(true, forKey: "reload")
+        userDefaults.set(false, forKey: "reload")
         fetchData()
     }
     func searchData() -> [String?] {

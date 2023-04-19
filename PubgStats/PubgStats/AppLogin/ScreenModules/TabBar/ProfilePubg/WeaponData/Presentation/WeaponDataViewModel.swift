@@ -39,6 +39,12 @@ final class WeaponDataViewModel {
     func viewDidLoad() {
         state.send(.loading)
         let weaponData = getDataWeapon(for: sessionUser)
+        let userDefaults = UserDefaults.standard
+        guard userDefaults.bool(forKey: "reload") == true else{
+            fetchData()
+            userDefaults.set(true, forKey: "reload")
+            return
+        }
         guard let _ = weaponData?.first?.weapon ?? weaponData?.first?.weaponFav else {
             fetchData()
             return
@@ -60,20 +66,14 @@ final class WeaponDataViewModel {
             }
         }
     }
-    func reload(){
-        let userDefaults = UserDefaults.standard
-        if userDefaults.bool(forKey: "reload") == true {
-            self.fetchData()
-            userDefaults.set(false, forKey: "reload")
-        }
-    }
     func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO) {
         guard let type = coordinator?.type else {return}
         weaponDataUseCase.saveWeaponData(sessionUser: sessionUser, weaponData: weaponData, type: type)
     }
     func getNameWeapon(for sessionUser: ProfileEntity, model: [Weapon]?){
         if let weapon = model {
-            let modes = weapon.compactMap { $0.name }
+            var modes = weapon.compactMap { $0.name }
+            modes.sort { $0 < $1 }
             weaponType = modes
         }
     }

@@ -43,7 +43,7 @@ class LoginViewController: UIViewController {
         bind()
         hideKeyboard()
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         guard let filePath = Bundle.main.path(forResource: "videoLoginPubg", ofType: "mp4") else { return }
@@ -71,7 +71,7 @@ class LoginViewController: UIViewController {
         view.layer.addSublayer(gradientMaskLayer)
         gradientMaskLayer.zPosition = -1
     }
-
+    
     private func configUI() {
         view.backgroundColor = .systemBackground
     }
@@ -90,11 +90,11 @@ class LoginViewController: UIViewController {
     }
     private func configConstraints() {
         contentView.addSubview(containerStackView)
-        containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
-        containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
-        containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        contentView.heightAnchor.constraint(equalTo: mainScrollView.heightAnchor).isActive = true
-
+         containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+         containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+         containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+         contentView.heightAnchor.constraint(equalTo: mainScrollView.heightAnchor).isActive = true
+        
         [userTextField, passwordTextField, loginButton, registerButton ,forgotPasswordButton].forEach {
             containerStackView.addArrangedSubview($0)
         }
@@ -120,3 +120,89 @@ extension LoginViewController: SpinnerDisplayable { }
 extension LoginViewController: ViewScrollable {}
 extension LoginViewController: MessageDisplayable { }
 extension LoginViewController: KeyboardDisplayable {}
+
+/*
+ struct User: Decodable {
+     let name: String
+     let email: String
+     
+     enum CodingKeys: String, CodingKey {
+         case name = "Nombre"
+         case email = "Correo electrónico"
+     }
+ }
+
+ */
+/*
+ extension Usuario {
+     
+ var correo: String {
+     return "Correo electrónico: \(email ?? "")"
+ }
+//correo es como lo llamo para acceder a el luego y email es la variable que me llega
+     
+ var nombre: String {
+     return "Nombre: \(name ?? "")"
+ }
+
+     
+ }
+ class ViewController: UIViewController {
+     
+     @IBOutlet weak var tableView: UITableView!
+     
+     var usuarios = [Usuario]()
+     
+     lazy var persistentContainer: NSPersistentContainer = {
+         let container = NSPersistentContainer(name: "NombreDelModeloDeDatos")
+         container.loadPersistentStores { description, error in
+             if let error = error {
+                 fatalError("Error al cargar la tienda persistente: \(error)")
+             }
+         }
+         return container
+     }()
+     
+     override func viewDidLoad() {
+         super.viewDidLoad()
+         
+         tableView.delegate = self
+         tableView.dataSource = self
+         
+         fetchUsuarios()
+     }
+     
+     func fetchUsuarios() {
+         let fetchRequest: NSFetchRequest<Usuario> = Usuario.fetchRequest()
+         
+         do {
+             usuarios = try persistentContainer.viewContext.fetch(fetchRequest)
+             tableView.reloadData()
+         } catch let error {
+             print("Error al recuperar los usuarios: \(error.localizedDescription)")
+         }
+     }
+     
+ }
+
+ extension ViewController: UITableViewDelegate, UITableViewDataSource {
+     
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+         return usuarios.count
+     }
+     
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+         let cell = tableView.dequeueReusableCell(withIdentifier: "celda", for: indexPath)
+         
+         let usuario = usuarios[indexPath.row]
+         
+         cell.textLabel?.text = usuario.nombre
+         cell.detailTextLabel?.text = usuario.correo
+         
+         return cell
+     }
+     
+ }
+
+ */
+

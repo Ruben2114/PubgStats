@@ -28,6 +28,8 @@ extension ViewScrollable where Self : UIViewController {
         
         mainScrollView.addSubview(contentView)
         contentView.topAnchor.constraint(equalTo: mainScrollView.topAnchor).isActive = true
+        contentView.leftAnchor.constraint(equalTo: mainScrollView.leftAnchor).isActive = true
+        contentView.rightAnchor.constraint(equalTo: mainScrollView.rightAnchor).isActive = true
         contentView.bottomAnchor.constraint(equalTo: mainScrollView.bottomAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: mainScrollView.widthAnchor).isActive = true
     }

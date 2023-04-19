@@ -41,7 +41,6 @@ class WeaponDataViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         configConstraint()
-        viewModel.reload()
         bind()
     }
     private func configUI(){

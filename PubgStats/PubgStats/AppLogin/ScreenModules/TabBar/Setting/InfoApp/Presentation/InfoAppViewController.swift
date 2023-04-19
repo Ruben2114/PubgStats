@@ -8,7 +8,7 @@
 import UIKit
 
 class InfoAppViewController: UIViewController {
-    private lazy var infoLabel = makeLabel(title: viewModel.info, color: .black, font: 50, style: .body)
+    private lazy var infoLabel = makeLabel(title: viewModel.info, color: .black, font: 17, style: .body)
     private let viewModel: InfoAppViewModel
     var contentView = UIView()
     var mainScrollView = UIScrollView()
