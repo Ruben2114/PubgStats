@@ -39,9 +39,10 @@ class WeaponDataViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         configUI()
         configConstraint()
+        viewModel.reload()
+        bind()
     }
     private func configUI(){
         title = "Tipos de armas"

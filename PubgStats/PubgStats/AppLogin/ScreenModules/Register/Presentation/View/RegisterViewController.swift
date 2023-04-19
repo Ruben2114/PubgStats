@@ -67,7 +67,7 @@ final class RegisterViewController: UIViewController,UISheetPresentationControll
         view.addSubview(containerStackView)
         containerStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         containerStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        containerStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 15).isActive = true
+        containerStackView.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 15).isActive = true
         
         [titleLabel,userTextField, emailTextField ,passwordTextField, acceptButton].forEach {
             containerStackView.addArrangedSubview($0)

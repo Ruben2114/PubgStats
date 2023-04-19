@@ -25,12 +25,10 @@ extension ViewScrollable where Self : UIViewController {
         mainScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         mainScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         mainScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        mainScrollView.contentSize = view.bounds.size
         
         mainScrollView.addSubview(contentView)
+        contentView.topAnchor.constraint(equalTo: mainScrollView.topAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: mainScrollView.bottomAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: mainScrollView.widthAnchor).isActive = true
-        contentView.centerXAnchor.constraint(equalTo: mainScrollView.centerXAnchor).isActive = true
-        contentView.centerYAnchor.constraint(equalTo: mainScrollView.centerYAnchor).isActive = true
-        contentView.heightAnchor.constraint(equalTo: mainScrollView.heightAnchor).isActive = true
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol RegisterDataUseCase: CommonUseCase {
-    func execute(name: String, password: String, email: String)
+    func execute(name: String, password: String, email: String) -> Bool
 }
 
 struct RegisterDataUseCaseImp: RegisterDataUseCase{
@@ -20,7 +20,7 @@ struct RegisterDataUseCaseImp: RegisterDataUseCase{
         self.registerRepository = dependencies.resolve()
     }
     
-    func execute(name: String, password: String, email: String) {
+    func execute(name: String, password: String, email: String) -> Bool {
         registerRepository.saveProfileModel(name: name, password: password, email: email)
     }
 }

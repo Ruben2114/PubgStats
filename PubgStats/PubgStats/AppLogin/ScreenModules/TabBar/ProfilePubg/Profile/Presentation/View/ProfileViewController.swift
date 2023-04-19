@@ -83,11 +83,11 @@ final class ProfileViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     @objc func backButtonAction() {
-        let alert = UIAlertController(title: "", message: "¿Estas seguro de cerrar sesión?", preferredStyle: .alert)
-        let actionAccept = UIAlertAction(title: "Accept", style: .default){ [weak self]_ in
+        let alert = UIAlertController(title: "Aviso", message: "¿Estas seguro de cerrar sesión?", preferredStyle: .alert)
+        let actionAccept = UIAlertAction(title: "Aceptar", style: .default){ [weak self]_ in
             self?.viewModel.backButton()
         }
-        let actionCancel = UIAlertAction(title: "cancelar", style: .destructive)
+        let actionCancel = UIAlertAction(title: "Cancelar", style: .destructive)
         alert.addAction(actionAccept)
         alert.addAction(actionCancel)
         present(alert, animated: true)
@@ -114,94 +114,54 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
         return cell
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let profileFieldInfo = viewModel.items[indexPath.section][indexPath.row]
         if sessionUser.account == nil {
-            if indexPath.section == 1 && indexPath.row == 1{
-                cell.isHidden = true
-            }
-            if indexPath.section == 1 && indexPath.row == 2{
-                cell.isHidden = true
-            }
+            cell.isHidden = profileFieldInfo == .stats || profileFieldInfo == .delete
         } else {
-            if indexPath.section == 1 && indexPath.row == 0 {
-                cell.isHidden = true
-            }
+            cell.isHidden = profileFieldInfo == .login
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch (indexPath.section, indexPath.row) {
-        case (0, 0):
+        let profileFieldInfo = viewModel.items[indexPath.section][indexPath.row]
+        switch profileFieldInfo {
+        case .name:
             presentAlertTextField(title: "Cambio de nombre",
                                   message: "¿Estás seguro de que quieres cambiar el nombre?",
                                   textFields: [(title: "Nuevo nombre", placeholder: "Nuevo nombre")],
                                   completed: { text in
-                guard let nameText = text.first else {return}
-                guard self.viewModel.checkName(name: nameText) != true, !nameText.isEmpty else {
-                    if nameText.isEmpty {
-                        self.presentAlert(message: "El nombre debe tener mínimo un caracter", title: "Error")
-                    }else {
-                        self.presentAlert(message: "Este nombre ya existe", title: "Error")
-                    }
-                    return
-                }
-                self.viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),nameText, type: "name")
-                self.presentAlertTimer(message: "Cambiado con éxito", title: "Aviso", timer: 1.0)
-                self.viewChange()
+                nameCell(text: text)
             }, isSecure: false)
-        case (0, 1):
+        case .email:
             presentAlertTextField(title: "Cambio de correo",
                                   message: "¿Estás seguro de que quieres cambiar el correo?",
                                   textFields: [(title: "Nuevo correo", placeholder: "Nuevo correo")],
                                   completed: { text in
-                guard let newEmail = text.first, !newEmail.isEmpty else {
-                    self.presentAlert(message: "El correo tiene que tener como mínimo un caracter", title: "Error")
-                    return
-                }
-                guard self.checkValidEmail(email: newEmail) == true else {
-                    self.presentAlert(message: "El correo no es válido", title: "Error")
-                    return
-                }
-                guard self.viewModel.checkEmail(email: newEmail) != true else {
-                    self.presentAlert(message: "El correo ya existe", title: "Error")
-                    return
-                }
-                self.viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),newEmail, type: "email")
-                self.viewChange()
+                emailCell(text: text)
             }, isSecure: false)
-        case (0, 2):
+        case .password:
             presentAlertTextField(title: "Cambio de contraseña",
                                   message: "¿Estás seguro de que quieres cambiar la contraseña?",
                                   textFields: [(title: "Nueva contraseña", placeholder: "Nueva contraseña"),
                                                (title: "Repite la nueva contraseña", placeholder: "Repite la nueva contraseña")],
                                   completed: { text in
-                guard let newPassword = text.first, !newPassword.isEmpty else {
-                    self.presentAlert(message: "La contraseña tiene que tener como mínimo un caracter", title: "Error")
-                    return}
-                guard newPassword == text.last else {
-                    self.presentAlert(message: "Contraseñas diferentes", title: "Error")
-                    return}
-                guard let newPasswordHash = newPassword.hashString() else {return}
-                self.viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),newPasswordHash, type: "password")
-                self.viewChange()
+                passwordCell(text: text)
             }, isSecure: true)
-        case (0, 3):
+        case .image:
             let vc = UIImagePickerController()
             vc.sourceType = .photoLibrary
             vc.delegate = self
             vc.allowsEditing = true
             present(vc, animated: true)
-        case (1, 0):
+        case .login:
             presentAlertTextField(title: "Jugador",
                                   message: "",
                                   textFields: [(title: "Nuevo jugador", placeholder: "Nombre jugador")],
                                   completed: { text in
-                guard let nameText = text.first, !nameText.isEmpty else {
-                    self.presentAlert(message: "No existen jugadores sin nombre", title: "Error")
-                    return}
-                self.viewModel.dataGeneral(name: nameText)
+                loginCell(text: text)
             }, isSecure: false)
-        case (1, 1):
+        case .stats:
             viewModel.didTapStatsgAccountButton()
-        case(1, 2):
+        case .delete:
             let alert = UIAlertController(title: "Aviso", message: "¿Estás seguro de borrar tu cuenta asociada de Pubg?", preferredStyle: .alert)
             let actionAccept = UIAlertAction(title: "Aceptar", style: .default){ [weak self]_ in
                 self?.viewModel.deletePubgAccount()
@@ -211,8 +171,54 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
             alert.addAction(actionCancel)
             alert.addAction(actionAccept)
             present(alert, animated: true)
-        default:
-            break
+        }
+        
+        func nameCell (text: [String]){
+            guard let nameText = text.first else {return}
+            guard viewModel.checkName(name: nameText) != true, !nameText.isEmpty else {
+                if nameText.isEmpty {
+                    presentAlert(message: "El nombre debe tener mínimo un caracter", title: "Error")
+                }else {
+                    presentAlert(message: "Este nombre ya existe", title: "Error")
+                }
+                return
+            }
+            viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),nameText, type: "name")
+            presentAlertTimer(message: "Cambiado con éxito", title: "Aviso", timer: 1.0)
+            viewChange()
+        }
+        func emailCell(text: [String]){
+            guard let newEmail = text.first, !newEmail.isEmpty else {
+                presentAlert(message: "El correo tiene que tener como mínimo un caracter", title: "Error")
+                return
+            }
+            guard checkValidEmail(email: newEmail) == true else {
+                presentAlert(message: "El correo no es válido", title: "Error")
+                return
+            }
+            guard viewModel.checkEmail(email: newEmail) != true else {
+                presentAlert(message: "El correo ya existe", title: "Error")
+                return
+            }
+            viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),newEmail, type: "email")
+            viewChange()
+        }
+        func passwordCell(text: [String]){
+            guard let newPassword = text.first, !newPassword.isEmpty else {
+                presentAlert(message: "La contraseña tiene que tener como mínimo un caracter", title: "Error")
+                return}
+            guard newPassword == text.last else {
+                presentAlert(message: "Contraseñas diferentes", title: "Error")
+                return}
+            guard let newPasswordHash = newPassword.hashString() else {return}
+            viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),newPasswordHash, type: "password")
+            viewChange()
+        }
+        func loginCell(text: [String]){
+            guard let nameText = text.first, !nameText.isEmpty else {
+                presentAlert(message: "No existen jugadores sin nombre", title: "Error")
+                return}
+            viewModel.dataGeneral(name: nameText)
         }
     }
 }

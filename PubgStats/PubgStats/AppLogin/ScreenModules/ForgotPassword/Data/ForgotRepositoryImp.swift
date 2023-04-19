@@ -11,7 +11,6 @@ struct ForgotRepositoryImp: ForgotRepository {
         self.dataSource = dependencies.external.resolve()
     }
     func check(name: String, email: String) -> Bool {
-        let result =  dataSource.checkUserAndChangePassword(name: name, email: email)
-        return result
+        dataSource.checkUserAndChangePassword(name: name, email: email)
     }
 }

@@ -25,11 +25,7 @@ class LoginViewController: UIViewController {
     var cancellable = Set<AnyCancellable>()
     private let viewModel: LoginViewModel
     private var dependencies: LoginDependency
-    
-    init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>(), dependencies: LoginDependency) {
-        self.mainScrollView = mainScrollView
-        self.contentView = contentView
-        self.cancellable = cancellable
+    init(dependencies: LoginDependency) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)
@@ -37,7 +33,6 @@ class LoginViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configScroll()
@@ -98,7 +93,8 @@ class LoginViewController: UIViewController {
         containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
         containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
         containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        
+        contentView.heightAnchor.constraint(equalTo: mainScrollView.heightAnchor).isActive = true
+
         [userTextField, passwordTextField, loginButton, registerButton ,forgotPasswordButton].forEach {
             containerStackView.addArrangedSubview($0)
         }
@@ -108,7 +104,6 @@ class LoginViewController: UIViewController {
         forgotPasswordButton.addTarget(self, action: #selector(didTapForgotButton), for: .touchUpInside)
         registerButton.addTarget(self, action: #selector(didTapRegisterButton), for: .touchUpInside)
     }
-    
     @objc func didTapLoginButton() {
         guard let password = passwordTextField.text?.hashString(), let user = userTextField.text else{return}
         viewModel.check(sessionUser: dependencies.external.resolve(),name: user, password: password)

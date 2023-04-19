@@ -9,7 +9,7 @@ import CoreData
 import UIKit
 
 protocol LocalDataProfileService {
-    func save(name: String, password: String, email: String)
+    func save(name: String, password: String, email: String) -> Bool
     func saveFav(sessionUser: ProfileEntity, name: String, account: String)
     func checkIfNameExists(name: String) -> Bool
     func checkIfEmailExists(email: String) -> Bool
@@ -76,12 +76,17 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         return true
     }
     
-    func save(name: String, password: String , email:String){
+    func save(name: String, password: String , email:String) -> Bool{
         let newUser = Profile(context: context)
         newUser.name = name
         newUser.password = password
         newUser.email = email.lowercased()
-        try? context.save()
+        do{
+            try context.save()
+            return true
+        }catch{
+            return false
+        }
     }
     func savePlayerPubg(sessionUser: ProfileEntity, player: String, account: String){
         let fetchRequest = Profile.fetchRequest()

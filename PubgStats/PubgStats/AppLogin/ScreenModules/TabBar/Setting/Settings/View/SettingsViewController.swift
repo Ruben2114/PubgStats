@@ -42,53 +42,49 @@ final class SettingsViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 }
-
+extension SettingsViewController: MessageDisplayable{ }
 extension SettingsViewController: MFMailComposeViewControllerDelegate{
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?){
-        guard error == nil else{
-            print("Ha ocurrido un problema")
-            return
-        }
+        guard error == nil else{return}
         switch result{
         case .cancelled:
-            print("Cancelado")
+            break
         case .saved:
-            print("Guardado")
+            break
         case .sent:
-            print("Enviado con éxito")
+            presentAlertTimer(message: "Enviado con éxito", title: "", timer: 1)
         case .failed:
-            print("Ha fallado")
+            presentAlert(message: "Lo siento, no se ha podido enviar el correo", title: "Error")
         @unknown default:
-            print("Error inesperado")
+            presentAlert(message: "Ha ocurrido un error", title: "Error")
         }
     }
 }
-
 extension SettingsViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.itemsSettings.count
+        return viewModel.settingsField.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.itemsSettings[section].count
+        return viewModel.settingsField[section].count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        let settingContent = viewModel.itemsSettings[indexPath.section][indexPath.row]
-        let value = viewModel.imageSettings[indexPath.section][indexPath.row]
+        let settingsField = viewModel.settingsField[indexPath.section][indexPath.row]
         cell.accessoryType = .disclosureIndicator
         var listContent = UIListContentConfiguration.cell()
         listContent.textProperties.font = UIFont.systemFont(ofSize: 20)
-        listContent.text = settingContent
-        listContent.image =  UIImage(systemName: value)
+        listContent.text = settingsField.title()
+        listContent.image =  UIImage(systemName: settingsField.icon())
         cell.contentConfiguration = listContent
         return cell
     }
    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch (indexPath.section, indexPath.row) {
-        case (0, 0):
+        let settingsField = viewModel.settingsField[indexPath.section][indexPath.row]
+        switch settingsField {
+        case .help:
             viewModel.goHelp()
-        case (0, 1):
+        case .email:
             guard MFMailComposeViewController.canSendMail() else{
                 return
             }
@@ -98,13 +94,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate{
             sendMail.setMessageBody("", isHTML: true)
             sendMail.mailComposeDelegate = self
             present(sendMail, animated: true, completion: nil)
-        case (0, 2):
+        case .legal:
             viewModel.infoDeveloper()
-        case (1, 0):
+        case .delete:
             viewModel.deleteProfile()
-        default:
-            break
         }
     }
 }
-

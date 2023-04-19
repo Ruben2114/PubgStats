@@ -22,8 +22,15 @@ final class RegisterViewModel {
     }
     func saveUser(name: String, password: String, email: String) {
         state.send(.loading)
-        registerDataUseCase.execute(name: name, password: password, email: email)
-        state.send(.success)
+        Task { [weak self] in
+            guard let check = self?.registerDataUseCase.execute(name: name, password: password, email: email) else {return}
+            switch check {
+            case true:
+                self?.state.send(.success)
+            case false:
+                self?.state.send(.fail(error: "Lo siento, ha ocurrido un problema con el servidor"))
+            }
+        }
     }
     func checkName(name: String) -> Bool {
         let check = registerDataUseCase.check(name,type: "name")

@@ -12,13 +12,9 @@ final class SettingsViewModel {
     private let dependencies: SettingsDependency
     private let settingsDataUseCase: SettingsDataUseCase
     private let sessionUser: ProfileEntity
-    let itemsSettings = [
-        ["Dudas frecuentes", "Correo", "Aviso Legal"],
-        ["Borrar Perfil"]
-    ]
-    let imageSettings = [
-        ["questionmark.circle.fill", "envelope.circle.fill", "info.circle.fill"],
-        ["trash.circle.fill"]
+    let settingsField: [[SettingsField]] = [
+        [SettingsField.help, SettingsField.email, SettingsField.legal],
+        [SettingsField.delete]
     ]
     init(dependencies: SettingsDependency) {
         self.dependencies = dependencies

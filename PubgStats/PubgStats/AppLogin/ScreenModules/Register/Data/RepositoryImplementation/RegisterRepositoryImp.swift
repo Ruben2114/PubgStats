@@ -10,7 +10,7 @@ struct RegisterRepositoryImp: RegisterRepository {
     init(dependencies: RegisterDependency) {
         self.dataSource = dependencies.external.resolve()
     }
-    func saveProfileModel(name: String, password: String ,email: String) {
-        return dataSource.save(name: name, password: password , email: email)
+    func saveProfileModel(name: String, password: String ,email: String) -> Bool {
+        dataSource.save(name: name, password: password , email: email)
     }
 }

@@ -46,6 +46,7 @@
 		4655510129CC824000BF932A /* SettingsExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510029CC824000BF932A /* SettingsExternalDependency.swift */; };
 		4655510429CC829800BF932A /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510329CC829800BF932A /* SettingsCoordinator.swift */; };
 		4655510729CCB41500BF932A /* ProfileEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510629CCB41500BF932A /* ProfileEntity.swift */; };
+		465926EF29EFCFB300A4091D /* ItemCellSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465926EE29EFCFB300A4091D /* ItemCellSettings.swift */; };
 		4670EDE429D4325200C1062E /* StatsGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE329D4325200C1062E /* StatsGeneralViewController.swift */; };
 		4670EDE729D442C600C1062E /* HelpDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE629D442C600C1062E /* HelpDataViewModel.swift */; };
 		4670EDEA29D442FD00C1062E /* HelpDataDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE929D442FD00C1062E /* HelpDataDependency.swift */; };
@@ -233,6 +234,7 @@
 		4655510029CC824000BF932A /* SettingsExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsExternalDependency.swift; sourceTree = "<group>"; };
 		4655510329CC829800BF932A /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		4655510629CCB41500BF932A /* ProfileEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEntity.swift; sourceTree = "<group>"; };
+		465926EE29EFCFB300A4091D /* ItemCellSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellSettings.swift; sourceTree = "<group>"; };
 		4670EDE329D4325200C1062E /* StatsGeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGeneralViewController.swift; sourceTree = "<group>"; };
 		4670EDE629D442C600C1062E /* HelpDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataViewModel.swift; sourceTree = "<group>"; };
 		4670EDE929D442FD00C1062E /* HelpDataDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataDependency.swift; sourceTree = "<group>"; };
@@ -786,6 +788,7 @@
 			children = (
 				8C31FDB629C329E500196704 /* SettingsViewController.swift */,
 				8CEB33FD29ED55C2006C2564 /* SettingsViewModel.swift */,
+				465926EE29EFCFB300A4091D /* ItemCellSettings.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2183,6 +2186,7 @@
 				8CB07EC829D1B446000EE257 /* GamesModesDTO.swift in Sources */,
 				8CB6395E29D2343C00763231 /* KillsDataViewController.swift in Sources */,
 				8CEB340729ED6183006C2564 /* SettingsDataRepository.swift in Sources */,
+				465926EF29EFCFB300A4091D /* ItemCellSettings.swift in Sources */,
 				465550C229CC33B000BF932A /* UIViewController+UIbutton.swift in Sources */,
 				8CB07ED029D1CF46000EE257 /* StatsGeneralRepositoryImp.swift in Sources */,
 				461C1F4429C9F68400540289 /* ProfileDataUseCase.swift in Sources */,

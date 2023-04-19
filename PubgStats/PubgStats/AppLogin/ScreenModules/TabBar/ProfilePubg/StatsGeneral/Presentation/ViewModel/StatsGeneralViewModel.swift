@@ -27,6 +27,11 @@ final class StatsGeneralViewModel {
         guard let type = coordinator?.type else {return}
         let survivalData = statsGeneralDataUseCase.getSurvival(for: sessionUser, type: type)
         let gamesModesData = statsGeneralDataUseCase.getGamesModes(for: sessionUser, type: type)
+        let userDefaults = UserDefaults.standard
+        guard let lastUpdate = userDefaults.object(forKey: "lastUpdate") as? Date, Date().timeIntervalSince(lastUpdate) > 43200 else {
+            reload()
+            return
+        }
         guard let _ = survivalData?.survival ?? survivalData?.survivalFav,
               let _ = gamesModesData?.first?.gamesMode ?? gamesModesData?.first?.gamesModeFav
         else {
@@ -37,7 +42,7 @@ final class StatsGeneralViewModel {
         state.send(.getGamesMode(model: gamesModesData))
         state.send(.success)
     }
-    func fetchData() {
+    private func fetchData() {
         let dispatchGroup = DispatchGroup()
         guard let id = searchData()[0], !id.isEmpty else {return}
         guard let type = coordinator?.type else {return}
@@ -66,8 +71,15 @@ final class StatsGeneralViewModel {
             }
         }
         dispatchGroup.notify(queue: DispatchQueue.main) {
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(Date(), forKey: "lastUpdate")
             self.state.send(.success)
         }
+    }
+    func reload(){
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(true, forKey: "reload")
+        fetchData()
     }
     func searchData() -> [String?] {
         guard let type = coordinator?.type else {return [nil]}
@@ -76,10 +88,6 @@ final class StatsGeneralViewModel {
         } else {
             return [sessionUser.account, sessionUser.player]
         }
-    }
-    func reload(){
-        //TODO: falta fetch de weapon o borrar los datos de weapon
-        fetchData()
     }
     func backButton() {
         coordinator?.dismiss()
