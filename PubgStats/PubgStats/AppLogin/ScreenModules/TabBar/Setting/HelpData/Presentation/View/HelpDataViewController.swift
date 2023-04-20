@@ -52,18 +52,17 @@ final class HelpDataViewController: UIViewController {
 
 extension HelpDataViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.questions.count
+        viewModel.itemCellHelpData.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let modelQuestions = viewModel.questions[indexPath.row]
-        let modelResponse = viewModel.response[indexPath.row]
+        let itemCellHelpData = viewModel.itemCellHelpData[indexPath.row]
         var listContent = UIListContentConfiguration.cell()
         listContent.textProperties.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        listContent.text = modelQuestions
+        listContent.text = itemCellHelpData.question()
         listContent.textProperties.alignment = .center
         listContent.secondaryTextProperties.font = UIFont.systemFont(ofSize: 16)
-        listContent.secondaryText = modelResponse
+        listContent.secondaryText = itemCellHelpData.response()
         listContent.secondaryTextProperties.alignment = .center
         cell.contentConfiguration = listContent
         return cell

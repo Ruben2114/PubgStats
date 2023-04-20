@@ -47,7 +47,7 @@ final class KillsDataViewModel {
                     } else {
                         newDict.append((oldKey, value))
                     }
-                }//TwitchAzariara
+                }
                 dataGamesModes.append(contentsOf: newDict)
             }
             let combinedDataGamesModes = dataGamesModes.reduce(into: [String: Int]()) { result, element in

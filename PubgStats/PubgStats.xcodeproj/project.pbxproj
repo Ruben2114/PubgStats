@@ -60,6 +60,7 @@
 		8C3CC20E29DD66B400D34228 /* CommonExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3CC20D29DD66B400D34228 /* CommonExternalDependency.swift */; };
 		8C64E4C829DC646800303760 /* CommonUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C64E4C729DC646800303760 /* CommonUseCase.swift */; };
 		8C64E4CA29DC663700303760 /* CommonRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C64E4C929DC663700303760 /* CommonRepository.swift */; };
+		8C6E9C9429F1560600DE593D /* ItemCellHelpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6E9C9329F1560600DE593D /* ItemCellHelpData.swift */; };
 		8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */; };
 		8C7563E029BB5E5E000373F9 /* SpinnerDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563DF29BB5E5E000373F9 /* SpinnerDisplayable.swift */; };
 		8C7563E229BB5E8A000373F9 /* ViewValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563E129BB5E8A000373F9 /* ViewValues.swift */; };
@@ -248,6 +249,7 @@
 		8C3CC20D29DD66B400D34228 /* CommonExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExternalDependency.swift; sourceTree = "<group>"; };
 		8C64E4C729DC646800303760 /* CommonUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUseCase.swift; sourceTree = "<group>"; };
 		8C64E4C929DC663700303760 /* CommonRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRepository.swift; sourceTree = "<group>"; };
+		8C6E9C9329F1560600DE593D /* ItemCellHelpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellHelpData.swift; sourceTree = "<group>"; };
 		8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraint.swift"; sourceTree = "<group>"; };
 		8C7563DF29BB5E5E000373F9 /* SpinnerDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerDisplayable.swift; sourceTree = "<group>"; };
 		8C7563E129BB5E8A000373F9 /* ViewValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewValues.swift; sourceTree = "<group>"; };
@@ -642,6 +644,7 @@
 			isa = PBXGroup;
 			children = (
 				4670EDE629D442C600C1062E /* HelpDataViewModel.swift */,
+				8C6E9C9329F1560600DE593D /* ItemCellHelpData.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2292,6 +2295,7 @@
 				8CD7CD6229BEFF5700C57346 /* LocalDataProfileService.swift in Sources */,
 				4670EDE429D4325200C1062E /* StatsGeneralViewController.swift in Sources */,
 				8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */,
+				8C6E9C9429F1560600DE593D /* ItemCellHelpData.swift in Sources */,
 				8CB6397129D245B400763231 /* WeaponDataDependency.swift in Sources */,
 				8CA9025C29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift in Sources */,
 				8CB07E9629D17347000EE257 /* RemoteService.swift in Sources */,

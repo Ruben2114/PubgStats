@@ -69,13 +69,12 @@ final class StatsGeneralViewController: UIViewController {
                     self?.gamesPlayedLabel.text = "\(model.gamesPlayed)\nPartidas"
                     self?.winsLabel.text = "\(model.wonTotal)\nVictorias"
                     self?.timePlayedLabel.text = "\(model.timePlayed)\nTiempo Jugado"
-                    //self?.bestRankedLabel.text = "\(String(format: "%.0f", model.bestRank))\nMejor ranked"
-                    self?.bestRankedLabel.text = "\(Int(floor(model.bestRank)))\nMejor ranked"
+                    self?.bestRankedLabel.text = "\(Int(model.bestRank))\nMejor ranked"
                 case .success:
                     self?.hideSpinner()
                 case .getSurvival(model: let model):
-                    self?.xpLabel.text = model?.xp
-                    self?.levelLabel.text = model?.level
+                    self?.xpLabel.text = "\(model?.xp ?? "0") XP"
+                    self?.levelLabel.text = "Nivel\n\(model?.level ?? "0")"
                 case .getGamesMode(model: let model):
                     self?.killsLabel.text = "\(model?[0].killsTotal ?? 0)\nMuertes"
                     self?.top10sLabel.text = "\(model?[0].top10STotal ?? 0)\nTop10S"
