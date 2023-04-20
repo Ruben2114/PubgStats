@@ -11,6 +11,7 @@ protocol WeaponDataDependency {
     func resolve() -> WeaponDataViewController
     func resolve() -> WeaponDataViewModel
     func resolve() -> WeaponDataUseCase
+    func resolve() -> WeaponDataRepository
 }
 
 extension WeaponDataDependency {
@@ -21,9 +22,9 @@ extension WeaponDataDependency {
         WeaponDataViewModel(dependencies: self)
     }
     func resolve() -> WeaponDataUseCase {
-        let remoteData = AppContainerImp().remoteDataService
-        let weaponDataRepository = WeaponDataRepositoryImp(remoteData: remoteData)
-        let weaponDataUseCase = WeaponDataUseCaseImp(weaponDataRepository: weaponDataRepository)
-        return weaponDataUseCase
+        WeaponDataUseCaseImp(dependencies: self)
+    }
+    func resolve() -> WeaponDataRepository {
+        WeaponDataRepositoryImp(dependencies: self)
     }
 }

@@ -8,12 +8,8 @@
 import UIKit
 
 class KillsDataViewController: UIViewController {
-    private let tableView: UITableView = {
-        let table = UITableView()
-        table.translatesAutoresizingMaskIntoConstraints = false
-        return table
-    }()
-    
+    private lazy var tableView = makeTableView()
+
     private let dependencies: KillsDataDependency
     private let viewModel: KillsDataViewModel
     init(dependencies: KillsDataDependency) {
@@ -55,13 +51,13 @@ class KillsDataViewController: UIViewController {
 
 extension KillsDataViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.dataKillsDict.count
+        viewModel.dataKills.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.backgroundColor = .systemCyan
-        let sortedDict = viewModel.dataKillsDict.sorted(by: { $0.key < $1.key})
-        let contentItem = sortedDict.map{$0}[indexPath.row].key + ": " + String(sortedDict.map{$0}[indexPath.row].value)
+        let sortedDataKills = viewModel.dataKills.sorted()
+        let contentItem = sortedDataKills[indexPath.row]
         var listContent = UIListContentConfiguration.cell()
         listContent.text = contentItem
         cell.contentConfiguration = listContent

@@ -4,6 +4,7 @@
 //
 //  Created by Ruben Rodriguez on 27/3/23.
 //
+import Foundation
 
 struct GamesModesDTO: Decodable {
     private let data: GamesModesDataDTO
@@ -25,7 +26,7 @@ struct GamesModesDTO: Decodable {
     var squadFpp: DuoDTO {
         data.attributes.gameModeStats.squadFpp
     }
-    var bestRank: Int {
+    var bestRank: Double {
         data.attributes.bestRankPoint
     }
     var killsTotal: Int {
@@ -47,9 +48,9 @@ struct GamesModesDTO: Decodable {
     var timePlayed: String {
         let model = data.attributes.gameModeStats
         let time = model.duo.timeSurvived + model.duoFpp.timeSurvived + model.solo.timeSurvived + model.soloFpp.timeSurvived + model.squad.timeSurvived + model.squadFpp.timeSurvived
-        let days = time / 86400
-        let hours = (time % 86400) / 3600
-        let minutes = (time % 3600) / 60
+        let days = Int(round(time / 86400))
+        let hours = Int(round((time.truncatingRemainder(dividingBy: 86400)) / 3600))
+        let minutes = Int(round((time.truncatingRemainder(dividingBy: 3600)) / 60))
         return "\(days) d \(hours) h \(minutes) m"
     }
 }
@@ -58,7 +59,7 @@ struct GamesModesDataDTO: Decodable {
 }
 struct GamesModesAttributesDTO: Decodable {
     let gameModeStats: StatisticsGameModes
-    let bestRankPoint: Int
+    let bestRankPoint: Double
 }
 struct StatisticsGameModes: Decodable {
     let duo, duoFpp, solo, soloFpp: DuoDTO
@@ -76,29 +77,30 @@ struct DuoDTO: Decodable {
     let assists, boosts, dBNOS, dailyKills: Int
     let dailyWINS: Int
     let damageDealt: Double
-    let days, headshotKills, heals, killPoints: Int
+    let days, headshotKills, heals: Int
     let kills: Int
     let longestKill: Double
-    let longestTimeSurvived, losses, maxKillStreaks, mostSurvivalTime: Int
-    let rankPoints: Int
+    let losses, maxKillStreaks: Int
+    let timeSurvived, mostSurvivalTime: Double
+    let rankPoints: Double
     let rankPointsTitle: String
     let revives: Int
     let rideDistance: Double
     let roadKills, roundMostKills, roundsPlayed, suicides: Int
     let swimDistance: Double
-    let teamKills, timeSurvived, top10S, vehicleDestroys: Int
+    let teamKills, top10S, vehicleDestroys: Int
     let walkDistance: Double
-    let weaponsAcquired, weeklyKills, weeklyWINS, winPoints: Int
+    let weaponsAcquired, weeklyKills, weeklyWINS: Int
     let wins: Int
     enum CodingKeys: String, CodingKey {
         case assists, boosts
         case dBNOS = "dBNOs"
         case dailyKills
         case dailyWINS = "dailyWins"
-        case damageDealt, days, headshotKills, heals, killPoints, kills, longestKill, longestTimeSurvived, losses, maxKillStreaks, mostSurvivalTime, rankPoints, rankPointsTitle, revives, rideDistance, roadKills, roundMostKills, roundsPlayed, suicides, swimDistance, teamKills, timeSurvived
+        case damageDealt, days, headshotKills, heals, kills, longestKill, losses, maxKillStreaks, mostSurvivalTime, rankPoints, rankPointsTitle, revives, rideDistance, roadKills, roundMostKills, roundsPlayed, suicides, swimDistance, teamKills, timeSurvived
         case top10S = "top10s"
         case vehicleDestroys, walkDistance, weaponsAcquired, weeklyKills
         case weeklyWINS = "weeklyWins"
-        case winPoints, wins
+        case wins
     }
 }

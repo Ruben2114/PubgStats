@@ -25,11 +25,7 @@ class LoginViewController: UIViewController {
     var cancellable = Set<AnyCancellable>()
     private let viewModel: LoginViewModel
     private var dependencies: LoginDependency
-    
-    init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>(), dependencies: LoginDependency) {
-        self.mainScrollView = mainScrollView
-        self.contentView = contentView
-        self.cancellable = cancellable
+    init(dependencies: LoginDependency) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)
@@ -37,7 +33,6 @@ class LoginViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configScroll()
@@ -48,7 +43,7 @@ class LoginViewController: UIViewController {
         bind()
         hideKeyboard()
     }
-  
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         guard let filePath = Bundle.main.path(forResource: "videoLoginPubg", ofType: "mp4") else { return }
@@ -76,7 +71,7 @@ class LoginViewController: UIViewController {
         view.layer.addSublayer(gradientMaskLayer)
         gradientMaskLayer.zPosition = -1
     }
-  
+    
     private func configUI() {
         view.backgroundColor = .systemBackground
     }
@@ -95,12 +90,13 @@ class LoginViewController: UIViewController {
     }
     private func configConstraints() {
         contentView.addSubview(containerStackView)
-        containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
-        containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-        containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
+         containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+         containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+         containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+         contentView.heightAnchor.constraint(equalTo: mainScrollView.heightAnchor).isActive = true
         
         [userTextField, passwordTextField, loginButton, registerButton ,forgotPasswordButton].forEach {
-                containerStackView.addArrangedSubview($0)
+            containerStackView.addArrangedSubview($0)
         }
     }
     private func configTargets() {
@@ -108,12 +104,10 @@ class LoginViewController: UIViewController {
         forgotPasswordButton.addTarget(self, action: #selector(didTapForgotButton), for: .touchUpInside)
         registerButton.addTarget(self, action: #selector(didTapRegisterButton), for: .touchUpInside)
     }
-    
     @objc func didTapLoginButton() {
-        let password = passwordTextField.text?.hashString()
-        viewModel.check(sessionUser: dependencies.external.resolve(),name: userTextField.text ?? "", password: password ?? "")
+        guard let password = passwordTextField.text?.hashString(), let user = userTextField.text else{return}
+        viewModel.check(sessionUser: dependencies.external.resolve(),name: user, password: password)
     }
-    
     @objc func didTapForgotButton() {
         viewModel.didTapForgotButton()
     }
@@ -126,3 +120,4 @@ extension LoginViewController: SpinnerDisplayable { }
 extension LoginViewController: ViewScrollable {}
 extension LoginViewController: MessageDisplayable { }
 extension LoginViewController: KeyboardDisplayable {}
+

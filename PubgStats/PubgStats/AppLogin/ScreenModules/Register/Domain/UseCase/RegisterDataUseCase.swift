@@ -8,13 +8,19 @@
 import Foundation
 
 protocol RegisterDataUseCase: CommonUseCase {
-    func execute(name: String, password: String, email: String)
+    func execute(name: String, password: String, email: String) -> Bool
 }
 
 struct RegisterDataUseCaseImp: RegisterDataUseCase{
-    private(set) var registerRepository: RegisterRepository
+    internal let commonRepository: CommonRepository
+    private let registerRepository: RegisterRepository
     
-    func execute(name: String, password: String, email: String) {
+    init(dependencies: RegisterDependency) {
+        self.commonRepository = dependencies.external.resolve()
+        self.registerRepository = dependencies.resolve()
+    }
+    
+    func execute(name: String, password: String, email: String) -> Bool {
         registerRepository.saveProfileModel(name: name, password: password, email: email)
     }
 }

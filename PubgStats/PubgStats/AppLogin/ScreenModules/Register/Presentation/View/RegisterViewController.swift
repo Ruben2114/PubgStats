@@ -17,18 +17,13 @@ final class RegisterViewController: UIViewController,UISheetPresentationControll
     private lazy var passwordTextField = makeTextFieldBlack(placeholder: "Contraseña", isSecure: true)
     private lazy var acceptButton = makeButtonBlue(title: "Guardar")
     
-    var mainScrollView = UIScrollView()
-    var contentView = UIView()
     var cancellable = Set<AnyCancellable>()
     private let viewModel: RegisterViewModel
     override var sheetPresentationController: UISheetPresentationController {
         presentationController as! UISheetPresentationController
     }
     
-    init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), cancellable: Set<AnyCancellable> = Set<AnyCancellable>(), dependencies: RegisterDependency) {
-        self.mainScrollView = mainScrollView
-        self.contentView = contentView
-        self.cancellable = cancellable
+    init(dependencies: RegisterDependency) {
         self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)
     }
@@ -37,9 +32,12 @@ final class RegisterViewController: UIViewController,UISheetPresentationControll
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        configScroll()
         configUI()
+        configConstraints()
+        configTargets()
+        configKeyboardSubscription(mainScrollView: UIScrollView())
         bind()
+        hideKeyboard()
     }
     override func viewWillDisappear(_ animated: Bool) {
         viewModel.backButton()
@@ -47,10 +45,6 @@ final class RegisterViewController: UIViewController,UISheetPresentationControll
     
     private func configUI() {
         view.backgroundColor = .black
-        configConstraints()
-        configTargets()
-        configKeyboardSubscription(mainScrollView: mainScrollView)
-        hideKeyboard()
         sheetPresentationController.delegate = self
         sheetPresentationController.prefersGrabberVisible = true
         sheetPresentationController.detents = [.medium()]
@@ -64,15 +58,16 @@ final class RegisterViewController: UIViewController,UISheetPresentationControll
             case .loading:
                 self?.showSpinner()
             case .fail(error: let error):
+                self?.hideSpinner()
                 self?.presentAlert(message: "Error: \(error)", title: "Error")
             }
         }.store(in: &cancellable)
     }
     private func configConstraints() {
-        contentView.addSubview(containerStackView)
-        containerStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
-        containerStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
-        containerStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -20).isActive = true
+        view.addSubview(containerStackView)
+        containerStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        containerStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        containerStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 15).isActive = true
         
         [titleLabel,userTextField, emailTextField ,passwordTextField, acceptButton].forEach {
             containerStackView.addArrangedSubview($0)
@@ -104,14 +99,11 @@ final class RegisterViewController: UIViewController,UISheetPresentationControll
         guard !passwordText.isEmpty else {
             presentAlert(message: "La contraseña tiene que tener como minimo un caracter", title: "Error")
             return}
-       
         viewModel.saveUser(name: nameText, password: passwordText, email: emailText)
     }
 }
 extension RegisterViewController: MessageDisplayable { }
-extension RegisterViewController: ViewScrollable {}
 extension RegisterViewController: KeyboardDisplayable {}
 extension RegisterViewController: SpinnerDisplayable {}
-
 
 

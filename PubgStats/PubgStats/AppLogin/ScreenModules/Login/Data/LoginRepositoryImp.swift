@@ -6,8 +6,10 @@
 //
 
 struct LoginRepositoryImp: LoginRepository {
-    private(set) var dataSource: LocalDataProfileService
-
+    private let dataSource: LocalDataProfileService
+    init(dependencies: LoginDependency) {
+        self.dataSource = dependencies.external.resolve()
+    }
     func checkName(sessionUser: ProfileEntity, name: String, password: String) -> Bool {
         let result =  dataSource.checkUser(sessionUser: sessionUser, name: name, password: password)
         return result

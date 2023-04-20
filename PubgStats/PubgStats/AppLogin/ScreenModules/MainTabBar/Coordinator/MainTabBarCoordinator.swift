@@ -43,15 +43,6 @@ final class MainTabBarCoordinatorImp: Coordinator {
         viewControllers.append(favouriteNavController)
         favouriteCoordinator.start()
         append(child: favouriteCoordinator)
-       
-        let rankingCoordinator = dependencies.external.rankingCoordinator()
-        let rankingNavController = dependencies.external.rankingNavigationController()
-        rankingNavController.viewControllers = []
-        rankingNavController.tabBarItem.title = "Ranking"
-        rankingNavController.tabBarItem.image = UIImage(systemName: "trophy.circle.fill")
-        viewControllers.append(rankingNavController)
-        rankingCoordinator.start()
-        append(child: rankingCoordinator)
         
         let guideCoordinator = dependencies.external.guideCoordinator()
         let guideNavController = dependencies.external.guideNavigationController()
@@ -62,27 +53,25 @@ final class MainTabBarCoordinatorImp: Coordinator {
         guideCoordinator.start()
         append(child: guideCoordinator)
         
-        let contactCoordinator = dependencies.external.contactCoordinator()
-        let contactNavController = dependencies.external.contactNavigationController()
-        contactNavController.viewControllers = []
-        contactNavController.tabBarItem.title = "Contact"
-        contactNavController.tabBarItem.image = UIImage(systemName: "envelope.circle.fill")
-        viewControllers.append(contactNavController)
-        contactCoordinator.start()
-        append(child: contactCoordinator)
+        let settingsCoordinator = dependencies.external.settingsCoordinator()
+        let settingsNavController = dependencies.external.settingsNavigationController()
+        settingsNavController.viewControllers = []
+        settingsNavController.tabBarItem.title = "Ajustes"
+        settingsNavController.tabBarItem.image = UIImage(systemName: "gear.circle.fill")
+        viewControllers.append(settingsNavController)
+        settingsCoordinator.start()
+        append(child: settingsCoordinator)
         
         let tabBar = dependencies.external.tabBarController()
         tabBar.viewControllers = viewControllers
         tabBar.tabBar.backgroundColor = .white
     }
     func dismiss() {
-        dependencies.external.contactNavigationController().viewControllers = []
+        dependencies.external.settingsNavigationController().viewControllers = []
         dependencies.external.profileNavigationController().viewControllers = []
         dependencies.external.guideNavigationController().viewControllers = []
         dependencies.external.favouriteNavigationController().viewControllers = []
-        dependencies.external.rankingNavigationController().viewControllers = []
     }
-    
 }
 extension MainTabBarCoordinatorImp: MainTabBarCoordinator{ }
 private extension MainTabBarCoordinatorImp {

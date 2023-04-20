@@ -11,9 +11,11 @@ enum WeaponTransition {
 }
 protocol WeaponDataCoordinator: Coordinator {
     func performTransition(_ transition: WeaponTransition)
+    var type: NavigationStats {get}
 }
 
 final class WeaponDataCoordinatorImp: Coordinator {
+    var type: NavigationStats
     weak var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
@@ -22,9 +24,10 @@ final class WeaponDataCoordinatorImp: Coordinator {
         Dependency(external: externalDependencies, coordinator: self)
     }()
     
-    public init(dependencies: WeaponDataExternalDependency, navigation: UINavigationController) {
-        self.navigation = navigation
+    public init(dependencies: WeaponDataExternalDependency, navigation: UINavigationController, type: NavigationStats) {
         self.externalDependencies = dependencies
+        self.navigation = navigation
+        self.type = type
     }
     
     func start() {
@@ -36,11 +39,11 @@ extension WeaponDataCoordinatorImp: WeaponDataCoordinator {
     func performTransition(_ transition: WeaponTransition) {
         switch transition{
         case .goWeapon:
-            let weaponDatDetailCoordinator = dependencies.external.weaponDataDetailCoordinator()
+            guard let navigationController = navigation else {return}
+            let weaponDatDetailCoordinator = dependencies.external.weaponDataDetailCoordinator(navigation: navigationController, type: type)
             weaponDatDetailCoordinator.start()
             append(child: weaponDatDetailCoordinator)
         }
-        
     }
 }
 

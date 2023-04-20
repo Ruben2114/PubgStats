@@ -14,9 +14,11 @@ enum StatsGeneralTransition {
 }
 protocol StatsGeneralCoordinator: Coordinator {
     func performTransition(_ transition: StatsGeneralTransition)
+    var type: NavigationStats {get}
 }
 
 final class StatsGeneralCoordinatorImp: Coordinator {
+    var type: NavigationStats
     weak var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
@@ -25,9 +27,10 @@ final class StatsGeneralCoordinatorImp: Coordinator {
         Dependency(external: externalDependencies, coordinator: self)
     }()
     
-    public init(dependencies: StatsGeneralExternalDependency, navigation: UINavigationController) {
-        self.navigation = navigation
+    public init(dependencies: StatsGeneralExternalDependency, navigation: UINavigationController, type: NavigationStats) {
         self.externalDependencies = dependencies
+        self.type = type
+        self.navigation = navigation
     }
     
     func start() {
@@ -39,17 +42,25 @@ extension StatsGeneralCoordinatorImp: StatsGeneralCoordinator {
     func performTransition(_ transition: StatsGeneralTransition) {
         switch transition {
         case .goKillsData:
-            let killsDataCoordinator = dependencies.external.killsDataCoordinator()
+            guard let navigationController = navigation else {return}
+            let killsDataCoordinator = dependencies.external.killsDataCoordinator(navigation: navigationController, type: type)
             killsDataCoordinator.start()
             append(child: killsDataCoordinator)
         case .goWeapons:
-            let weaponDataCoordinator = dependencies.external.weaponDataCoordinator()
+            guard let navigationController = navigation else {return}
+            let weaponDataCoordinator = dependencies.external.weaponDataCoordinator(navigation: navigationController, type: type)
             weaponDataCoordinator.start()
             append(child: weaponDataCoordinator)
         case .goSurvival:
-            print("goSurvival")
+            guard let navigationController = navigation else {return}
+            let survivalDataCoordinator = dependencies.external.survivalDataCoordinator(navigation: navigationController, type: type)
+            survivalDataCoordinator.start()
+            append(child: survivalDataCoordinator)
         case .goGamesModes:
-            print("goGamesModes")
+            guard let navigationController = navigation else {return}
+            let gamesModeDataCoordinator = dependencies.external.gamesModesDataCoordinator(navigation: navigationController, type: type)
+            gamesModeDataCoordinator.start()
+            append(child: gamesModeDataCoordinator)
         }
     }
 }

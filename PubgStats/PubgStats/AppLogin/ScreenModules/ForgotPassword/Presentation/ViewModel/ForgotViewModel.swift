@@ -20,7 +20,7 @@ final class ForgotViewModel {
     func checkAndChangePassword(name: String, email: String) {
         state.send(.loading)
         Task { [weak self] in
-            let check = forgotDataUseCase.check(name: name, email: email)
+            guard let check = self?.forgotDataUseCase.check(name: name, email: email) else {return}
             switch check {
             case true:
                 self?.state.send(.success)

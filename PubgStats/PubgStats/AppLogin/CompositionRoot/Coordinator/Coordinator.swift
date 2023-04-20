@@ -6,7 +6,7 @@
 //
 import UIKit
 
-protocol Coordinator: AnyObject {
+public protocol Coordinator: AnyObject {
     var identifier: String { get }
     var navigation: UINavigationController? { get set }
     var childCoordinators: [Coordinator] { get set }

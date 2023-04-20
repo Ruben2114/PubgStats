@@ -9,23 +9,28 @@ import UIKit
 
 struct AppDependencies {
     let window: UIWindow?
+    private let localDataService = LocalDataProfileServiceImp()
+    private let remoteDataService = RemoteServiceImp()
     private var tabController = UITabBarController()
     private let loginNavController = UINavigationController()
     private let profileNavController = UINavigationController()
     private let favouriteNavController = UINavigationController()
-    private let rankingNavController = UINavigationController()
     private let guideNavController = UINavigationController()
-    private let contactNavController = UINavigationController()
+    private let settingsNavController = UINavigationController()
     private var sessionUser = ProfileEntity(name: "", password: "", email: "")
     
     init(window: UIWindow?) {
         self.window = window
     }
-    
+    func resolve() -> LocalDataProfileService {
+        localDataService
+    }
+    func resolve() -> RemoteService {
+        remoteDataService
+    }
     func resolve() -> ProfileEntity {
         sessionUser
     }
-    
     func resolve() -> AppDependencies {
         self
     }
@@ -38,21 +43,17 @@ struct AppDependencies {
     func profileNavigationController() -> UINavigationController {
         profileNavController
     }
-    
     func tabBarController() -> UITabBarController {
         tabController
     }
     func favouriteNavigationController() -> UINavigationController {
         favouriteNavController
     }
-    func rankingNavigationController() -> UINavigationController {
-        rankingNavController
-    }
     func guideNavigationController() -> UINavigationController {
         guideNavController
     }
-    func contactNavigationController() -> UINavigationController {
-        contactNavController
+    func settingsNavigationController() -> UINavigationController {
+        settingsNavController
     }
 }
 extension AppDependencies:
@@ -62,11 +63,15 @@ extension AppDependencies:
     MainTabBarExternalDependency,
     ProfileExternalDependency,
     FavouriteExternalDependency,
-    RankingExternalDependency,
     GuideExternalDependency,
-    ContactExternalDependency,
+    SettingsExternalDependency,
     StatsGeneralExternalDependency,
     KillsDataExternalDependency,
     WeaponDataExternalDependency,
     WeaponDataDetailExternalDependency,
-    PersonalDataExternalDependency{}
+    HelpDataExternalDependency,
+    CommonExternalDependency,
+    SurvivalDataExternalDependency,
+    GamesModesDataExternalDependency,
+    GamesModesDataDetailExternalDependency,
+    InfoAppExternalDependency{}

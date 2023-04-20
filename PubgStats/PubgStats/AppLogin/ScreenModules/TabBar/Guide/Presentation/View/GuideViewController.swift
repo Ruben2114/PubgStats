@@ -45,6 +45,7 @@ class GuideViewController: UIViewController  {
              case .loading:
                  self?.showSpinner()
              case .fail(error: let error):
+                 self?.hideSpinner()
                  self?.presentAlert(message: error, title: "Error")
              }
          }.store(in: &cancellable)

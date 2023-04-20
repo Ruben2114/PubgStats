@@ -22,8 +22,8 @@ extension ViewScrollable where Self : UIViewController {
     private func configConstraints() {
         view.addSubview(mainScrollView)
         mainScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        mainScrollView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        mainScrollView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        mainScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        mainScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         mainScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
         mainScrollView.addSubview(contentView)
@@ -32,6 +32,5 @@ extension ViewScrollable where Self : UIViewController {
         contentView.rightAnchor.constraint(equalTo: mainScrollView.rightAnchor).isActive = true
         contentView.bottomAnchor.constraint(equalTo: mainScrollView.bottomAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: mainScrollView.widthAnchor).isActive = true
-        contentView.heightAnchor.constraint(equalTo: mainScrollView.heightAnchor).isActive = true
     }
 }

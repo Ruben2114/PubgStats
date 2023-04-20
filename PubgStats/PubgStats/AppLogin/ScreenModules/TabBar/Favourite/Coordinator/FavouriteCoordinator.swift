@@ -6,10 +6,13 @@
 //
 
 import UIKit
-
-protocol FavouriteCoordinator: Coordinator {
-    
+enum FavouriteTransition {
+    case goStats
 }
+protocol FavouriteCoordinator: Coordinator {
+    func performTransition(_ transition: FavouriteTransition)
+}
+
 final class FavouriteCoordinatorImp: Coordinator {
     weak var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
@@ -29,7 +32,17 @@ final class FavouriteCoordinatorImp: Coordinator {
         self.navigation?.pushViewController(dependencies.resolve(), animated: true)
     }
 }
-extension FavouriteCoordinatorImp: FavouriteCoordinator {}
+extension FavouriteCoordinatorImp: FavouriteCoordinator {
+    func performTransition(_ transition: FavouriteTransition) {
+        switch transition {
+        case .goStats:
+            guard let navigationController = navigation else {return}
+            let statsGeneralCoordinator = dependencies.external.statsGeneralCoordinator(navigation: navigationController, type: .favourite)
+            statsGeneralCoordinator.start()
+            append(child: statsGeneralCoordinator)
+        }
+    }
+}
 
 private extension FavouriteCoordinatorImp {
     struct Dependency: FavouriteDependency {

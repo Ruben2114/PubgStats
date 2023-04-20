@@ -9,122 +9,110 @@ import UIKit
 import Combine
 
 final class StatsGeneralViewController: UIViewController {
-    private lazy var levelLabel = makeLabel(height: 78)
-    private lazy var nameLabel = makeLabel(height: 21)
-    private lazy var xpLabel = makeLabel(height: 21)
+    private lazy var levelLabel = makeLabelStats(height: 78)
+    private lazy var nameLabel = makeLabelStats(height: 21)
+    private lazy var xpLabel = makeLabelStats(height: 21)
     private lazy var stackStackView = makeStack(space: 5)
     private lazy var labelFirstStackView = makeStackHorizontal(space: 5)
-    private lazy var winsLabel = makeLabel(height: 65)
-    private lazy var killsLabel = makeLabel(height: 65)
-    private lazy var top10sLabel = makeLabel(height: 65)
+    private lazy var winsLabel = makeLabelStats(height: 65)
+    private lazy var killsLabel = makeLabelStats(height: 65)
+    private lazy var top10sLabel = makeLabelStats(height: 65)
     private lazy var labelSecondStackView = makeStackHorizontal(space: 5)
-    private lazy var gamesPlayedLabel = makeLabel(height: 65)
-    private lazy var timePlayedLabel = makeLabel(height: 65)
-    private lazy var bestRankedLabel = makeLabel(height: 65)
+    private lazy var gamesPlayedLabel = makeLabelStats(height: 65)
+    private lazy var timePlayedLabel = makeLabelStats(height: 65)
+    private lazy var bestRankedLabel = makeLabelStats(height: 65)
     private lazy var buttonStackView = makeStack(space: 27)
     private lazy var goKillsData = makeButtonBlue(title: "Datos Muertes")
     private lazy var goWeapons = makeButtonBlue(title: "Datos Armas")
-    private lazy var goSurvival = makeButtonBlue(title: "Estadisticas Survival")
+    private lazy var goSurvival = makeButtonBlue(title: "Estadisticas Modo Survival")
     private lazy var goGamesModes = makeButtonBlue(title: "Modos de juego")
     
     private var cancellable = Set<AnyCancellable>()
     private let dependencies: StatsGeneralDependency
     private let viewModel: StatsGeneralViewModel
-    var mainScrollView = UIScrollView()
-    var contentView = UIView()
-    var refreshControl = UIRefreshControl()
     let sessionUser: ProfileEntity
     var refreshCount = 0
-    var isFirstRechargeDone = false
+    var reloadButton = UIBarButtonItem()
     
-    init(mainScrollView: UIScrollView = UIScrollView(), contentView: UIView = UIView(), dependencies: StatsGeneralDependency) {
-        self.mainScrollView = mainScrollView
-        self.contentView = contentView
+    init(dependencies: StatsGeneralDependency) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
         self.sessionUser = dependencies.external.resolve()
         super.init(nibName: nil, bundle: nil)
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configScroll()
         configUI()
         configConstraints()
         configTargets()
         bind()
     }
+    private func bind() {
+        viewModel.state.receive(on: DispatchQueue.main)
+            .sink { [weak self ] state in
+                switch state {
+                case .loading:
+                    self?.showSpinner()
+                case .fail(_):
+                    self?.presentAlert(message: "Por favor debes esperar x tiempo para hacer la siguiente llamada", title: "Error")
+                    self?.hideSpinner()
+                case .successSurvival(model: let model):
+                    self?.xpLabel.text = "\(model.data.attributes.xp) XP"
+                    self?.levelLabel.text = "Nivel\n\(model.data.attributes.level)"
+                case .successGamesModes(model: let model):
+                    self?.killsLabel.text = "\(model.killsTotal)\nMuertes"
+                    self?.top10sLabel.text = "\(model.top10STotal)\nTop10S"
+                    self?.gamesPlayedLabel.text = "\(model.gamesPlayed)\nPartidas"
+                    self?.winsLabel.text = "\(model.wonTotal)\nVictorias"
+                    self?.timePlayedLabel.text = "\(model.timePlayed)\nTiempo Jugado"
+                    self?.bestRankedLabel.text = "\(Int(model.bestRank))\nMejor ranked"
+                case .success:
+                    self?.hideSpinner()
+                case .getSurvival(model: let model):
+                    self?.xpLabel.text = "\(model?.xp ?? "0") XP"
+                    self?.levelLabel.text = "Nivel\n\(model?.level ?? "0")"
+                case .getGamesMode(model: let model):
+                    self?.killsLabel.text = "\(model?[0].killsTotal ?? 0)\nMuertes"
+                    self?.top10sLabel.text = "\(model?[0].top10STotal ?? 0)\nTop10S"
+                    self?.gamesPlayedLabel.text = "\(model?[0].gamesPlayed ?? 0)\nPartidas"
+                    self?.winsLabel.text = "\(model?[0].wonTotal ?? 0)\nVictorias"
+                    self?.timePlayedLabel.text = "\(model?[0].timePlayed ?? "0")\nTiempo Jugado"
+                    self?.bestRankedLabel.text = "\(model?[0].bestRankPoint ?? 0)\nMejor ranked"
+                case .getName(model: let model):
+                    self?.nameLabel.text = model
+                }
+            }.store(in: &cancellable)
+        viewModel.viewDidLoad()
+    }
     private func configUI() {
         view.backgroundColor = .systemBackground
         title = "Tus Estadisticas generales"
         backButton(action: #selector(backButtonAction))
+        reloadButton = UIBarButtonItem(image: UIImage(systemName: "arrow.clockwise.circle.fill"), style: .plain, target: self, action: #selector(reloadButtonAction))
+        navigationItem.rightBarButtonItem = reloadButton
         stackStackView.backgroundColor = .systemCyan
-        mainScrollView.refreshControl = UIRefreshControl()
-        mainScrollView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-    }
-    private func bind() {
-        nameLabel.text = sessionUser.player
-        if sessionUser.survival != nil, sessionUser.gameModes != nil {
-            guard let dataSurvival = sessionUser.survival?.first?.data.attributes else {return}
-            xpLabel.text = "\(dataSurvival.xp)\nXP"
-            levelLabel.text = "Nivel\n\(dataSurvival.level)"
-            guard let dataGamesMode = sessionUser.gameModes?.first else {return}
-            killsLabel.text = "\(dataGamesMode.killsTotal)\nMuertes"
-            top10sLabel.text = "\(dataGamesMode.top10STotal)\nTop10S"
-            gamesPlayedLabel.text = "\(dataGamesMode.gamesPlayed)\nPartidas"
-            winsLabel.text = "\(dataGamesMode.wonTotal)\nVictorias"
-            timePlayedLabel.text = "\(dataGamesMode.timePlayed)\nTiempo Jugado"
-            bestRankedLabel.text = "\(dataGamesMode.bestRank)\nMejor ranked"
-        }else{
-            viewModel.state.receive(on: DispatchQueue.main)
-                .sink { [weak self ] state in
-                    switch state {
-                    case .loading:
-                        self?.showSpinner()
-                    case .fail(error: let error):
-                        //TODO: manejar errores
-                        print(error)
-                    case .successSurvival(model: let model):
-                        self?.xpLabel.text = "\(model.data.attributes.xp) XP"
-                        self?.levelLabel.text = "Nivel\n\(model.data.attributes.level)"
-                        self?.viewModel.saveSurvivalData(survivalData: [model.self])
-                    case .successGamesModes(model: let model):
-                        self?.killsLabel.text = "\(model.killsTotal)\nMuertes"
-                        self?.top10sLabel.text = "\(model.top10STotal)\nTop10S"
-                        self?.gamesPlayedLabel.text = "\(model.gamesPlayed)\nPartidas"
-                        self?.winsLabel.text = "\(model.wonTotal)\nVictorias"
-                        self?.timePlayedLabel.text = "\(model.timePlayed)\nTiempo Jugado"
-                        self?.bestRankedLabel.text = "\(model.bestRank)\nMejor ranked"
-                        self?.viewModel.saveGamesModeData(gamesModeData: [model.self])
-                    case .success:
-                        self?.hideSpinner()
-                    }
-                }.store(in: &cancellable)
-            guard let id = sessionUser.account, !id.isEmpty else {return}
-            viewModel.fetchDataGeneral(account: id)
-        }
     }
     private func configConstraints() {
-        contentView.addSubview(levelLabel)
-        levelLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 7).isActive = true
-        levelLabel.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
+        view.addSubview(levelLabel)
+        levelLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 7).isActive = true
+        levelLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
         
-        contentView.addSubview(nameLabel)
-        nameLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 22).isActive = true
-        nameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        view.addSubview(nameLabel)
+        nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 22).isActive = true
+        nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        contentView.addSubview(xpLabel)
+        view.addSubview(xpLabel)
         xpLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 16).isActive = true
-        xpLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        xpLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        contentView.addSubview(stackStackView)
+        view.addSubview(stackStackView)
         stackStackView.topAnchor.constraint(equalTo: xpLabel.bottomAnchor, constant: 30).isActive = true
-        stackStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
-        stackStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
+        stackStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 5).isActive = true
+        stackStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -5).isActive = true
         [labelFirstStackView, labelSecondStackView].forEach {
             stackStackView.addArrangedSubview($0)
         }
@@ -136,10 +124,10 @@ final class StatsGeneralViewController: UIViewController {
         [gamesPlayedLabel,timePlayedLabel,bestRankedLabel].forEach {
             labelSecondStackView.addArrangedSubview($0)
         }
-        contentView.addSubview(buttonStackView)
+        view.addSubview(buttonStackView)
         buttonStackView.topAnchor.constraint(equalTo: stackStackView.bottomAnchor, constant: 61).isActive = true
-        buttonStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 25).isActive = true
-        buttonStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -25).isActive = true
+        buttonStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25).isActive = true
+        buttonStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -25).isActive = true
         [goKillsData, goWeapons, goSurvival, goGamesModes].forEach {
             buttonStackView.addArrangedSubview($0)
         }
@@ -166,33 +154,19 @@ final class StatsGeneralViewController: UIViewController {
     @objc func backButtonAction() {
         viewModel.backButton()
     }
-    @objc func refreshData() {
-        guard refreshCount < 2 else {
-            mainScrollView.refreshControl?.endRefreshing()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
-                print("ahora si")
+    @objc func reloadButtonAction() {
+        guard refreshCount == 1 else {
+            reloadButton.isEnabled = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 120) {
+                self.reloadButton.isEnabled = true
                 self.refreshCount = 0
             }
-            return}
-        refreshCount += 1
-        sessionUser.survival = nil
-        sessionUser.gameModes = nil
-        bind()
-        mainScrollView.refreshControl?.endRefreshing()
-        mainScrollView.refreshControl?.endRefreshing()
-        
-    }
-    private func makeLabel(height: CGFloat) -> UILabel{
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.font = UIFont.preferredFont(forTextStyle: .body)
-        label.textAlignment = .center
-        label.backgroundColor = .systemBackground
-        label.setHeightConstraint(with: height)
-        return label
+            refreshCount += 1
+            viewModel.reload()
+            return
+        }
     }
 }
 extension StatsGeneralViewController: MessageDisplayable { }
-extension StatsGeneralViewController: ViewScrollable {}
 extension StatsGeneralViewController: SpinnerDisplayable { }
 

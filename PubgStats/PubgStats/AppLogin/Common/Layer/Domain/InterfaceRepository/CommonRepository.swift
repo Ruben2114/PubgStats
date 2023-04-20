@@ -11,7 +11,12 @@ protocol CommonRepository {
 }
 
 struct CommonRepositoryImp: CommonRepository {
-    var dataSource: LocalDataProfileService
+    private let dataSource: LocalDataProfileService
+    
+    init(dependencies: CommonExternalDependency) {
+        self.dataSource = dependencies.resolve()
+    }
+    
     func checkName(name: String) -> Bool {
         let result =  dataSource.checkIfNameExists(name: name)
         return result

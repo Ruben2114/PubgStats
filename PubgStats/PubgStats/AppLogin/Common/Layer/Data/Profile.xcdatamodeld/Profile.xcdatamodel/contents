@@ -1,5 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22E261" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Favourite" representedClassName="Favourite" syncable="YES" codeGenerationType="class">
+        <attribute name="account" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="favourites" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profile" inverseName="favourites" inverseEntity="Profile"/>
+        <relationship name="gamesMode" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GamesModes" inverseName="gamesModeFav" inverseEntity="GamesModes"/>
+        <relationship name="survival" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Survival" inverseName="survivalFav" inverseEntity="Survival"/>
+        <relationship name="weapon" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Weapon" inverseName="weaponFav" inverseEntity="Weapon"/>
+    </entity>
+    <entity name="GamesModes" representedClassName="GamesModes" syncable="YES" codeGenerationType="class">
+        <attribute name="assists" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="bestRankPoint" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="boosts" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="dailyKills" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="dailyWINS" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="damageDealt" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="days" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="dBNOS" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="gamesPlayed" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="headshotKills" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="heals" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="kills" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="killsTotal" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="longestKill" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="losses" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="maxKillStreaks" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mode" optional="YES" attributeType="String"/>
+        <attribute name="mostSurvivalTime" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rankPoints" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rankPointsTitle" optional="YES" attributeType="String"/>
+        <attribute name="revives" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rideDistance" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="roadKills" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="roundMostKills" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="roundsPlayed" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="suicides" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="swimDistance" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="teamKills" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timePlayed" optional="YES" attributeType="String"/>
+        <attribute name="timeSurvived" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="top10S" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="top10STotal" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="vehicleDestroys" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="walkDistance" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="weaponsAcquired" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="weeklyKills" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="weeklyWINS" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="wins" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="wonTotal" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="gamesMode" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profile" inverseName="gamesMode" inverseEntity="Profile"/>
+        <relationship name="gamesModeFav" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Favourite" inverseName="gamesMode" inverseEntity="Favourite"/>
+    </entity>
     <entity name="Profile" representedClassName="Profile" syncable="YES" codeGenerationType="class">
         <attribute name="account" optional="YES" attributeType="String"/>
         <attribute name="email" optional="YES" attributeType="String"/>
@@ -7,5 +58,39 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="password" optional="YES" attributeType="String"/>
         <attribute name="player" optional="YES" attributeType="String"/>
+        <relationship name="favourites" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Favourite" inverseName="favourites" inverseEntity="Favourite"/>
+        <relationship name="gamesMode" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GamesModes" inverseName="gamesMode" inverseEntity="GamesModes"/>
+        <relationship name="survival" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Survival" inverseName="survival" inverseEntity="Survival"/>
+        <relationship name="weapon" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Weapon" inverseName="weapon" inverseEntity="Weapon"/>
+    </entity>
+    <entity name="Survival" representedClassName="Survival" syncable="YES" codeGenerationType="class">
+        <attribute name="airDropsCalled" optional="YES" attributeType="String"/>
+        <attribute name="damageDealt" optional="YES" attributeType="String"/>
+        <attribute name="damageTaken" optional="YES" attributeType="String"/>
+        <attribute name="distanceBySwimming" optional="YES" attributeType="String"/>
+        <attribute name="distanceByVehicle" optional="YES" attributeType="String"/>
+        <attribute name="distanceOnFoot" optional="YES" attributeType="String"/>
+        <attribute name="distanceTotal" optional="YES" attributeType="String"/>
+        <attribute name="enemyCratesLooted" optional="YES" attributeType="String"/>
+        <attribute name="healed" optional="YES" attributeType="String"/>
+        <attribute name="hotDropLandings" optional="YES" attributeType="String"/>
+        <attribute name="level" optional="YES" attributeType="String"/>
+        <attribute name="position" optional="YES" attributeType="String"/>
+        <attribute name="revived" optional="YES" attributeType="String"/>
+        <attribute name="teammatesRevived" optional="YES" attributeType="String"/>
+        <attribute name="throwablesThrown" optional="YES" attributeType="String"/>
+        <attribute name="timeSurvived" optional="YES" attributeType="String"/>
+        <attribute name="top10" optional="YES" attributeType="String"/>
+        <attribute name="totalMatchesPlayed" optional="YES" attributeType="String"/>
+        <attribute name="uniqueItemsLooted" optional="YES" attributeType="String"/>
+        <attribute name="xp" optional="YES" attributeType="String"/>
+        <relationship name="survival" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profile" inverseName="survival" inverseEntity="Profile"/>
+        <relationship name="survivalFav" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Favourite" inverseName="survival" inverseEntity="Favourite"/>
+    </entity>
+    <entity name="Weapon" representedClassName="Weapon" syncable="YES" codeGenerationType="class">
+        <attribute name="data" optional="YES" attributeType="Binary"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="weapon" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profile" inverseName="weapon" inverseEntity="Profile"/>
+        <relationship name="weaponFav" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Favourite" inverseName="weapon" inverseEntity="Favourite"/>
     </entity>
 </model>

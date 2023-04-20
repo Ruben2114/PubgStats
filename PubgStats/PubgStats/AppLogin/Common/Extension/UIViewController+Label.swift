@@ -33,4 +33,13 @@ extension UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }
+    func makeLabelStats(height: CGFloat) -> UILabel{
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.textAlignment = .center
+        label.backgroundColor = .systemBackground
+        label.setHeightConstraint(with: height)
+        return label
+    }
 }

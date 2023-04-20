@@ -8,9 +8,8 @@
 import UIKit
 
 extension UIViewController {
-    func makeImageViewPersonal(name: String) -> UIImageView {
+    func makeImageViewPersonal(name: String, data: Data?) -> UIImageView {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: name)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.borderWidth = 1.0
         imageView.layer.borderColor = UIColor.clear.cgColor
@@ -19,7 +18,11 @@ extension UIViewController {
         imageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         imageView.layer.cornerRadius = 40
+        if let imageData = data {
+            imageView.image = UIImage(data: imageData)
+        } else {
+            imageView.image = UIImage(named: name)
+        }
         return imageView
     }
-
 }

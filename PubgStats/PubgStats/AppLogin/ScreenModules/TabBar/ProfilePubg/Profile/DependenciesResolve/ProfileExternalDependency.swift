@@ -10,11 +10,12 @@ import UIKit
 protocol ProfileExternalDependency {
     func resolve() -> AppDependencies
     func profileCoordinator() -> Coordinator
-    func personalDataCoordinator() -> Coordinator
-    //func settingCoordinator() -> Coordinator
-    func statsGeneralCoordinator() -> Coordinator
+    func statsGeneralCoordinator(navigation: UINavigationController, type: NavigationStats) -> Coordinator
     func profileNavigationController() -> UINavigationController
     func resolve() -> ProfileEntity
+    func resolve() -> CommonRepository
+    func resolve() -> LocalDataProfileService
+    func resolve() -> RemoteService
 }
 extension ProfileExternalDependency {
     func profileCoordinator() -> Coordinator {

@@ -25,7 +25,7 @@ enum OutputPlayer {
 }
 enum OutputWeapon {
     case fail(error: String)
-    case success (model: WeaponDTO)
+    case success
     case loading
 }
 enum OutputStats {
@@ -33,6 +33,9 @@ enum OutputStats {
     case fail(error: String)
     case successSurvival (model: SurvivalDTO)
     case successGamesModes (model: GamesModesDTO)
+    case getSurvival (model: Survival?)
+    case getGamesMode (model: [GamesModes]?)
+    case getName (model: String)
     case success
 }
 

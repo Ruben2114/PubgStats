@@ -8,29 +8,57 @@
 final class KillsDataViewModel {
     private weak var coordinator: KillsDataCoordinator?
     private let dependencies: KillsDataDependency
-    private var dataKills: [String] = []
-    var dataKillsDict: [String: Int] = [:]
+    var dataKills: [String] = []
+    private let sessionUser: ProfileEntity
+    private let killsDataUseCase: KillsDataUseCase
     init(dependencies: KillsDataDependency) {
         self.dependencies = dependencies
         self.coordinator = dependencies.resolve()
+        self.sessionUser = dependencies.external.resolve()
+        self.killsDataUseCase = dependencies.resolve()
+    }
+    
+    func getGamesModes(for sessionUser: ProfileEntity) -> [GamesModes]?{
+        guard let type = coordinator?.type else {return nil}
+        let killsData = killsDataUseCase.getGamesModes(for: sessionUser, type: type)
+        return killsData
     }
     func fetchDataKills() {
-        let sessionUser: ProfileEntity = dependencies.external.resolve()
-        guard let gameModes = sessionUser.gameModes?.first else { return }
-        reflectStats(gameModes.squad, gameModes.squadFpp, gameModes.duo, gameModes.duoFpp, gameModes.solo, gameModes.soloFpp)
-        for item in dataKills {
-            let components = item.components(separatedBy: ": ")
-            guard let value = Int(components[1]) else {
-                continue
+        let gameModes = getGamesModes(for: sessionUser)
+        if let modes = gameModes {
+            var dataGamesModes: [(String, Any)] = []
+            for mode in modes {
+                let excludedKeys = ["bestRankPoint", "gamesPlayed", "timePlayed", "top10STotal", "boosts", "wonTotal", "mode", "losses", "mostSurvivalTime", "rankPoints" ,"rankPointsTitle" ,"rideDistance","roundsPlayed","swimDistance","timeSurvived","top10S","walkDistance","weaponsAcquired","weeklyWINS","dailyWINS","wins","damageDealt","days", "longestKill", "maxKillStreaks", "dailyKills","weeklyKills", "killsTotal","roundMostKills"]
+                let keyValues = mode.entity.attributesByName.filter { !excludedKeys.contains($0.key) }.map { ($0.key, mode.value(forKey: $0.key) ?? "") }
+                let keyMap = [("roadKills", "Atropellos"),
+                              ("teamKills", "Muertes de equipo"),
+                              ("suicides", "Suicidios"),
+                              ("dBNOS", "Derribados"),
+                              ("revives", "Reanimaciones"),
+                              ("assists", "Asistencias"),
+                              ("kills", "Muertes"),
+                              ("vehicleDestroys", "Destrucciones de vehículos"),
+                              ("headshotKills", "Muertes por disparos a la cabeza"),
+                              ("heals", "Curaciones")]
+                var newDict: [(String, Any)] = []
+                for (oldKey, value) in keyValues {
+                    if let newKey = keyMap.first(where: { $0.0 == oldKey })?.1 {
+                        newDict.append((newKey, value))
+                    } else {
+                        newDict.append((oldKey, value))
+                    }
+                }
+                dataGamesModes.append(contentsOf: newDict)
             }
-            dataKillsDict[components[0]] = dataKillsDict[components[0], default: 0] + value
-        }
-    }
-    func reflectStats(_ stats: Any...) {
-        for stat in stats {
-            for (name, value) in Mirror(reflecting: stat).children {
-                dataKills.append("\(name?.uppercased() ?? ""): \(value)")
+            let combinedDataGamesModes = dataGamesModes.reduce(into: [String: Int]()) { result, element in
+                if let previousValue = result[element.0] {
+                    result[element.0] = previousValue + (element.1 as? Int ?? 0)
+                } else {
+                    result[element.0] = element.1 as? Int ?? 0
+                }
             }
+            let dataArray = combinedDataGamesModes.map { key, value in "\(key): \(value)" }
+            dataKills = dataArray
         }
     }
     func backButton() {

@@ -11,6 +11,7 @@ protocol LoginDependency {
     func resolve() -> LoginViewModel
     func resolve() -> LoginCoordinator?
     func resolve() -> LoginDataUseCase
+    func resolve() -> LoginRepository
 }
 
 extension LoginDependency {
@@ -18,15 +19,13 @@ extension LoginDependency {
     func resolve() -> LoginViewController {
         LoginViewController(dependencies: self)
     }
-    
     func resolve() -> LoginViewModel {
         LoginViewModel(dependencies: self)
     }
-    
+    func resolve() -> LoginRepository {
+        LoginRepositoryImp(dependencies: self)
+    }
     func resolve() -> LoginDataUseCase {
-        let dataSource = AppContainerImp().localDataService
-        let loginRepository = LoginRepositoryImp(dataSource: dataSource)
-        let loginDataUseCase = LoginDataUseCaseImp(loginRepository: loginRepository)
-        return loginDataUseCase
+        LoginDataUseCaseImp(dependencies: self)
     }
 }

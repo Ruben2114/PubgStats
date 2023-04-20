@@ -54,5 +54,3 @@ struct HotDropLandingsDTO: Decodable {
  //https://api.pubg.com/shards/steam/players/account.a4ef7b3e986f42baa12a7583cdea40fb/seasons/lifetime?filter[gamepad]=false
  
 */
-
-

@@ -15,6 +15,7 @@ protocol LoginExternalDependency {
     func loginCoordinator() -> Coordinator
     func loginNavigationController() -> UINavigationController
     func resolve() -> ProfileEntity
+    func resolve() -> LocalDataProfileService
 }
 
 extension LoginExternalDependency {

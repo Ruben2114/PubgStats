@@ -11,20 +11,19 @@ protocol RegisterDependency {
     func resolve() -> RegisterViewModel
     func resolve() -> RegisterCoordinator?
     func resolve() -> RegisterDataUseCase
+    func resolve() -> RegisterRepository
 }
 extension RegisterDependency {
     func resolve() -> RegisterViewController {
         RegisterViewController(dependencies: self)
     }
-    
     func resolve() -> RegisterViewModel {
         RegisterViewModel(dependencies: self)
     }
-    
     func resolve() -> RegisterDataUseCase {
-        let dataSource = AppContainerImp().localDataService
-        let registerRepository = RegisterRepositoryImp(dataSource: dataSource)
-        let registerDataUseCase = RegisterDataUseCaseImp(registerRepository: registerRepository)
-        return registerDataUseCase
+        RegisterDataUseCaseImp(dependencies: self)
+    }
+    func resolve() -> RegisterRepository {
+        RegisterRepositoryImp(dependencies: self)
     }
 }
