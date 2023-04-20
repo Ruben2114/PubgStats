@@ -32,7 +32,9 @@ final class LoginCoordinatorImp: Coordinator {
     }
     
     func start() {
+        self.navigation?.setNavigationBarHidden(true, animated: false)
         self.navigation?.pushViewController(dependencies.resolve(), animated: true)
+        
     }
 }
 extension LoginCoordinatorImp: LoginCoordinator {

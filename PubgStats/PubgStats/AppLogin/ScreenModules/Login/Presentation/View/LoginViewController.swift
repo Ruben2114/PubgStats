@@ -19,6 +19,8 @@ class LoginViewController: UIViewController {
         title: "Crear Cuenta")
     private lazy var forgotPasswordButton: UIButton = makeButtonClear(
         title: "Recuperar Contraseña")
+    var playerLooper: AVPlayerLooper!
+    var queuePlayer: AVQueuePlayer!
     
     var mainScrollView = UIScrollView()
     var contentView = UIView()
@@ -44,23 +46,21 @@ class LoginViewController: UIViewController {
         hideKeyboard()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        guard let filePath = Bundle.main.path(forResource: "videoLoginPubg", ofType: "mp4") else { return }
+    private func configureVideo() {
+        guard let filePath = Bundle.main.path(forResource: "videoLogin", ofType: "mp4") else { return }
         let fileUrl = URL(fileURLWithPath: filePath)
-        videoLogin = AVPlayer(url: fileUrl)
-        let videoLayer = AVPlayerLayer(player: videoLogin)
+        let asset = AVAsset(url: fileUrl)
+        let playerItem = AVPlayerItem(asset: asset)
+        self.queuePlayer = AVQueuePlayer(playerItem: playerItem)
+        self.playerLooper = AVPlayerLooper(player: queuePlayer, templateItem: playerItem)
+        let videoLayer = AVPlayerLayer(player: queuePlayer)
         videoLayer.videoGravity = .resize
         videoLayer.frame = view.bounds
-        videoLayer.zPosition = -1
-        view.layer.addSublayer(videoLayer)
-        videoLogin?.play()
-        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: videoLogin?.currentItem, queue: .main) { [weak self] _ in
-            self?.videoLogin?.seek(to: .zero)
-            self?.videoLogin?.play()
-        }
-        configGradientForTitle()
+        view.layer.insertSublayer(videoLayer, at: 0)
+        queuePlayer?.play()
+        queuePlayer.isMuted = true
     }
+    
     private func configGradientForTitle() {
         let gradientMaskLayer = CAGradientLayer()
         gradientMaskLayer.frame = view.bounds
@@ -68,12 +68,13 @@ class LoginViewController: UIViewController {
         gradientMaskLayer.locations = [0.0, 1.0]
         gradientMaskLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
         gradientMaskLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
-        view.layer.addSublayer(gradientMaskLayer)
-        gradientMaskLayer.zPosition = -1
+        view.layer.insertSublayer(gradientMaskLayer, at: 1)
     }
     
     private func configUI() {
         view.backgroundColor = .systemBackground
+        configureVideo()
+        configGradientForTitle()
     }
     func bind() {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in

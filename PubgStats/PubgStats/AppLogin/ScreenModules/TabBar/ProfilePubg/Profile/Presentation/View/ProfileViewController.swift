@@ -129,14 +129,14 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
                                   message: "¿Estás seguro de que quieres cambiar el nombre?",
                                   textFields: [(title: "Nuevo nombre", placeholder: "Nuevo nombre")],
                                   completed: { text in
-                nameCell(text: text)
+                self.nameCell(text: text)
             }, isSecure: false)
         case .email:
             presentAlertTextField(title: "Cambio de correo",
                                   message: "¿Estás seguro de que quieres cambiar el correo?",
                                   textFields: [(title: "Nuevo correo", placeholder: "Nuevo correo")],
                                   completed: { text in
-                emailCell(text: text)
+                self.emailCell(text: text)
             }, isSecure: false)
         case .password:
             presentAlertTextField(title: "Cambio de contraseña",
@@ -144,7 +144,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
                                   textFields: [(title: "Nueva contraseña", placeholder: "Nueva contraseña"),
                                                (title: "Repite la nueva contraseña", placeholder: "Repite la nueva contraseña")],
                                   completed: { text in
-                passwordCell(text: text)
+                self.passwordCell(text: text)
             }, isSecure: true)
         case .image:
             let vc = UIImagePickerController()
@@ -157,7 +157,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
                                   message: "",
                                   textFields: [(title: "Nuevo jugador", placeholder: "Nombre jugador")],
                                   completed: { text in
-                loginCell(text: text)
+                self.loginCell(text: text)
             }, isSecure: false)
         case .stats:
             viewModel.didTapStatsgAccountButton()
@@ -171,54 +171,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
             alert.addAction(actionCancel)
             alert.addAction(actionAccept)
             present(alert, animated: true)
-        }
-        
-        func nameCell (text: [String]){
-            guard let nameText = text.first else {return}
-            guard viewModel.checkName(name: nameText) != true, !nameText.isEmpty else {
-                if nameText.isEmpty {
-                    presentAlert(message: "El nombre debe tener mínimo un caracter", title: "Error")
-                }else {
-                    presentAlert(message: "Este nombre ya existe", title: "Error")
-                }
-                return
-            }
-            viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),nameText, type: "name")
-            presentAlertTimer(message: "Cambiado con éxito", title: "Aviso", timer: 1.0)
-            viewChange()
-        }
-        func emailCell(text: [String]){
-            guard let newEmail = text.first, !newEmail.isEmpty else {
-                presentAlert(message: "El correo tiene que tener como mínimo un caracter", title: "Error")
-                return
-            }
-            guard checkValidEmail(email: newEmail) == true else {
-                presentAlert(message: "El correo no es válido", title: "Error")
-                return
-            }
-            guard viewModel.checkEmail(email: newEmail) != true else {
-                presentAlert(message: "El correo ya existe", title: "Error")
-                return
-            }
-            viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),newEmail, type: "email")
-            viewChange()
-        }
-        func passwordCell(text: [String]){
-            guard let newPassword = text.first, !newPassword.isEmpty else {
-                presentAlert(message: "La contraseña tiene que tener como mínimo un caracter", title: "Error")
-                return}
-            guard newPassword == text.last else {
-                presentAlert(message: "Contraseñas diferentes", title: "Error")
-                return}
-            guard let newPasswordHash = newPassword.hashString() else {return}
-            viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),newPasswordHash, type: "password")
-            viewChange()
-        }
-        func loginCell(text: [String]){
-            guard let nameText = text.first, !nameText.isEmpty else {
-                presentAlert(message: "No existen jugadores sin nombre", title: "Error")
-                return}
-            viewModel.dataGeneral(name: nameText)
         }
     }
 }
@@ -234,5 +186,56 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)
+    }
+}
+
+//MARK: tableView selection actions
+private extension ProfileViewController {
+    func nameCell (text: [String]){
+        guard let nameText = text.first else {return}
+        guard viewModel.checkName(name: nameText) != true, !nameText.isEmpty else {
+            if nameText.isEmpty {
+                presentAlert(message: "El nombre debe tener mínimo un caracter", title: "Error")
+            }else {
+                presentAlert(message: "Este nombre ya existe", title: "Error")
+            }
+            return
+        }
+        viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),nameText, type: "name")
+        presentAlertTimer(message: "Cambiado con éxito", title: "Aviso", timer: 1.0)
+        viewChange()
+    }
+    func emailCell(text: [String]){
+        guard let newEmail = text.first, !newEmail.isEmpty else {
+            presentAlert(message: "El correo tiene que tener como mínimo un caracter", title: "Error")
+            return
+        }
+        guard checkValidEmail(email: newEmail) == true else {
+            presentAlert(message: "El correo no es válido", title: "Error")
+            return
+        }
+        guard viewModel.checkEmail(email: newEmail) != true else {
+            presentAlert(message: "El correo ya existe", title: "Error")
+            return
+        }
+        viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),newEmail, type: "email")
+        viewChange()
+    }
+    func passwordCell(text: [String]){
+        guard let newPassword = text.first, !newPassword.isEmpty else {
+            presentAlert(message: "La contraseña tiene que tener como mínimo un caracter", title: "Error")
+            return}
+        guard newPassword == text.last else {
+            presentAlert(message: "Contraseñas diferentes", title: "Error")
+            return}
+        guard let newPasswordHash = newPassword.hashString() else {return}
+        viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),newPasswordHash, type: "password")
+        viewChange()
+    }
+    func loginCell(text: [String]){
+        guard let nameText = text.first, !nameText.isEmpty else {
+            presentAlert(message: "No existen jugadores sin nombre", title: "Error")
+            return}
+        viewModel.dataGeneral(name: nameText)
     }
 }
