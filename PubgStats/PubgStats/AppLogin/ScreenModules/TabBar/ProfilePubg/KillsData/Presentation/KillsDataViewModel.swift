@@ -28,7 +28,7 @@ final class KillsDataViewModel {
         if let modes = gameModes {
             var dataGamesModes: [(String, Any)] = []
             for mode in modes {
-                let excludedKeys = ["bestRankPoint", "gamesPlayed", "timePlayed", "top10STotal", "boosts", "wonTotal", "mode", "losses", "mostSurvivalTime", "rankPoints" ,"rankPointsTitle" ,"rideDistance","roundsPlayed","swimDistance","timeSurvived","top10S","walkDistance","weaponsAcquired","weeklyWINS","dailyWINS","wins","damageDealt","days", "longestKill", "maxKillStreaks", "dailyKills","weeklyKills", "killsTotal","roundMostKills"]
+                let excludedKeys = ["bestRankPoint", "gamesPlayed", "timePlayed", "assistsTotal", "boosts", "wonTotal", "mode", "losses", "mostSurvivalTime", "rankPoints" ,"rankPointsTitle" ,"rideDistance","roundsPlayed","swimDistance","timeSurvived","top10S","walkDistance","weaponsAcquired","weeklyWINS","dailyWINS","wins","damageDealt","days", "longestKill", "maxKillStreaks", "dailyKills","weeklyKills", "killsTotal","roundMostKills"]
                 let keyValues = mode.entity.attributesByName.filter { !excludedKeys.contains($0.key) }.map { ($0.key, mode.value(forKey: $0.key) ?? "") }
                 let keyMap = [("roadKills", "Atropellos"),
                               ("teamKills", "Muertes de equipo"),

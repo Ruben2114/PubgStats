@@ -33,9 +33,9 @@ struct GamesModesDTO: Decodable {
         let model = data.attributes.gameModeStats
         return model.duo.kills + model.duoFpp.kills + model.solo.kills + model.soloFpp.kills + model.squad.kills + model.squadFpp.kills
     }
-    var top10STotal: Int {
+    var assistsTotal: Int { 
         let model = data.attributes.gameModeStats
-        return model.duo.top10S + model.duoFpp.top10S + model.solo.top10S + model.soloFpp.top10S + model.squad.top10S + model.squadFpp.top10S
+        return model.duo.assists + model.duoFpp.assists + model.solo.assists + model.soloFpp.assists + model.squad.assists + model.squadFpp.assists
     }
     var gamesPlayed: Int {
         let model = data.attributes.gameModeStats

@@ -244,7 +244,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         dataGamesMode.killsTotal = Int32(data.killsTotal)
         dataGamesMode.gamesPlayed = Int32(data.gamesPlayed)
         dataGamesMode.timePlayed = data.timePlayed
-        dataGamesMode.top10STotal = Int32(data.top10STotal)
+        dataGamesMode.assistsTotal = Int32(data.assistsTotal)
         dataGamesMode.wonTotal = Int32(data.wonTotal)
         profile.addToGamesMode(dataGamesMode)
         try? context.save()

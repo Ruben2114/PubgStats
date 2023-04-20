@@ -60,7 +60,7 @@ final class StatsGeneralViewController: UIViewController {
                     self?.levelLabel.text = "Nivel\n\(model.data.attributes.level)"
                 case .successGamesModes(model: let model):
                     self?.killsLabel.text = "\(model.killsTotal)\nMuertes"
-                    self?.top10sLabel.text = "\(model.top10STotal)\nTop10S"
+                    self?.top10sLabel.text = "\(model.assistsTotal)\nAsistencias"
                     self?.gamesPlayedLabel.text = "\(model.gamesPlayed)\nPartidas"
                     self?.winsLabel.text = "\(model.wonTotal)\nVictorias"
                     self?.timePlayedLabel.text = "\(model.timePlayed)\nTiempo Jugado"
@@ -72,7 +72,7 @@ final class StatsGeneralViewController: UIViewController {
                     self?.levelLabel.text = "Nivel\n\(model?.level ?? "0")"
                 case .getGamesMode(model: let model):
                     self?.killsLabel.text = "\(model?[0].killsTotal ?? 0)\nMuertes"
-                    self?.top10sLabel.text = "\(model?[0].top10STotal ?? 0)\nTop10S"
+                    self?.top10sLabel.text = "\(model?[0].assistsTotal ?? 0)\nAsistencias"
                     self?.gamesPlayedLabel.text = "\(model?[0].gamesPlayed ?? 0)\nPartidas"
                     self?.winsLabel.text = "\(model?[0].wonTotal ?? 0)\nVictorias"
                     self?.timePlayedLabel.text = "\(model?[0].timePlayed ?? "0")\nTiempo Jugado"

@@ -16,9 +16,9 @@ final class GamesModesDataDetailViewModel {
     func fetchDataGamesModesDetail(){
         let data = sessionUser.gameModesDetail
         if let modes = data {
-            for mode in modes {  //longestTimeSurvived
+            for mode in modes {
                 if sessionUser.gameMode == mode.mode {
-                    let excludedKeys = ["bestRankPoint", "gamesPlayed", "killsTotal", "timePlayed", "top10STotal", "wonTotal","mode","rankPointsTitle", "maxKillStreaks"]
+                    let excludedKeys = ["bestRankPoint", "gamesPlayed", "killsTotal", "timePlayed", "assistsTotal", "wonTotal","mode","rankPointsTitle", "maxKillStreaks"]
                     let keyValues = mode.entity.attributesByName.filter { !excludedKeys.contains($0.key) }.map { ($0.key, mode.value(forKey: $0.key) ?? "") }
                     let keyMap = [
                         "assists": "Asistencias",
