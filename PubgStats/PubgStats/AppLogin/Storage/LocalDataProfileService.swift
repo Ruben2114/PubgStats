@@ -217,10 +217,8 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         dataGamesMode.days = Int32(result.days)
         dataGamesMode.headshotKills = Int32(result.headshotKills)
         dataGamesMode.heals = Int32(result.heals)
-        dataGamesMode.killPoints = Int32(result.killPoints)
         dataGamesMode.kills = Int32(result.kills)
         dataGamesMode.longestKill = result.longestKill
-        dataGamesMode.longestTimeSurvived = Int32(result.longestTimeSurvived)
         dataGamesMode.losses = Int32(result.losses)
         dataGamesMode.maxKillStreaks = Int32(result.maxKillStreaks)
         dataGamesMode.mostSurvivalTime = Int32(result.mostSurvivalTime)
@@ -241,7 +239,6 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         dataGamesMode.weaponsAcquired = Int32(result.weaponsAcquired)
         dataGamesMode.weeklyKills = Int32(result.weeklyKills)
         dataGamesMode.weeklyWINS = Int32(result.weeklyWINS)
-        dataGamesMode.winPoints = Int32(result.winPoints)
         dataGamesMode.wins = Int32(result.wins)
         dataGamesMode.bestRankPoint = Int32(data.bestRank)
         dataGamesMode.killsTotal = Int32(data.killsTotal)

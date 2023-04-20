@@ -50,6 +50,7 @@ final class StatsGeneralViewModel {
         statsGeneralDataUseCase.executeSurvival(account: id) { [weak self] result in
             switch result {
             case .success(let survival):
+                print(survival)
                 self?.state.send(.successSurvival(model: survival))
                 guard let user = self?.sessionUser else{return}
                 self?.statsGeneralDataUseCase.saveSurvival(sessionUser: user, survivalData: [survival], type: type)

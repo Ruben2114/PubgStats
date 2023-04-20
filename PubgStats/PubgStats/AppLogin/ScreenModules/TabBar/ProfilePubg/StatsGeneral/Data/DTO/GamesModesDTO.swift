@@ -26,7 +26,7 @@ struct GamesModesDTO: Decodable {
     var squadFpp: DuoDTO {
         data.attributes.gameModeStats.squadFpp
     }
-    var bestRank: Int {
+    var bestRank: Double {
         data.attributes.bestRankPoint
     }
     var killsTotal: Int {
@@ -59,7 +59,7 @@ struct GamesModesDataDTO: Decodable {
 }
 struct GamesModesAttributesDTO: Decodable {
     let gameModeStats: StatisticsGameModes
-    let bestRankPoint: Int
+    let bestRankPoint: Double
 }
 struct StatisticsGameModes: Decodable {
     let duo, duoFpp, solo, soloFpp: DuoDTO
@@ -77,12 +77,12 @@ struct DuoDTO: Decodable {
     let assists, boosts, dBNOS, dailyKills: Int
     let dailyWINS: Int
     let damageDealt: Double
-    let days, headshotKills, heals, killPoints: Int
+    let days, headshotKills, heals: Int
     let kills: Int
     let longestKill: Double
-    let longestTimeSurvived, losses, maxKillStreaks, mostSurvivalTime: Int
-    let timeSurvived: Double
-    let rankPoints: Int
+    let losses, maxKillStreaks: Int
+    let timeSurvived, mostSurvivalTime: Double
+    let rankPoints: Double
     let rankPointsTitle: String
     let revives: Int
     let rideDistance: Double
@@ -90,17 +90,17 @@ struct DuoDTO: Decodable {
     let swimDistance: Double
     let teamKills, top10S, vehicleDestroys: Int
     let walkDistance: Double
-    let weaponsAcquired, weeklyKills, weeklyWINS, winPoints: Int
+    let weaponsAcquired, weeklyKills, weeklyWINS: Int
     let wins: Int
     enum CodingKeys: String, CodingKey {
         case assists, boosts
         case dBNOS = "dBNOs"
         case dailyKills
         case dailyWINS = "dailyWins"
-        case damageDealt, days, headshotKills, heals, killPoints, kills, longestKill, longestTimeSurvived, losses, maxKillStreaks, mostSurvivalTime, rankPoints, rankPointsTitle, revives, rideDistance, roadKills, roundMostKills, roundsPlayed, suicides, swimDistance, teamKills, timeSurvived
+        case damageDealt, days, headshotKills, heals, kills, longestKill, losses, maxKillStreaks, mostSurvivalTime, rankPoints, rankPointsTitle, revives, rideDistance, roadKills, roundMostKills, roundsPlayed, suicides, swimDistance, teamKills, timeSurvived
         case top10S = "top10s"
         case vehicleDestroys, walkDistance, weaponsAcquired, weeklyKills
         case weeklyWINS = "weeklyWins"
-        case winPoints, wins
+        case wins
     }
 }

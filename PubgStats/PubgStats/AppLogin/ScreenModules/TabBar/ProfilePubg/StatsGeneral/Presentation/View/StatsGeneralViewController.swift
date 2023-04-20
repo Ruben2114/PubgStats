@@ -24,7 +24,7 @@ final class StatsGeneralViewController: UIViewController {
     private lazy var buttonStackView = makeStack(space: 27)
     private lazy var goKillsData = makeButtonBlue(title: "Datos Muertes")
     private lazy var goWeapons = makeButtonBlue(title: "Datos Armas")
-    private lazy var goSurvival = makeButtonBlue(title: "Estadisticas Survival")
+    private lazy var goSurvival = makeButtonBlue(title: "Estadisticas Modo Survival")
     private lazy var goGamesModes = makeButtonBlue(title: "Modos de juego")
     
     private var cancellable = Set<AnyCancellable>()
@@ -69,7 +69,8 @@ final class StatsGeneralViewController: UIViewController {
                     self?.gamesPlayedLabel.text = "\(model.gamesPlayed)\nPartidas"
                     self?.winsLabel.text = "\(model.wonTotal)\nVictorias"
                     self?.timePlayedLabel.text = "\(model.timePlayed)\nTiempo Jugado"
-                    self?.bestRankedLabel.text = "\(model.bestRank)\nMejor ranked"
+                    //self?.bestRankedLabel.text = "\(String(format: "%.0f", model.bestRank))\nMejor ranked"
+                    self?.bestRankedLabel.text = "\(Int(floor(model.bestRank)))\nMejor ranked"
                 case .success:
                     self?.hideSpinner()
                 case .getSurvival(model: let model):
@@ -155,15 +156,16 @@ final class StatsGeneralViewController: UIViewController {
         viewModel.backButton()
     }
     @objc func reloadButtonAction() {
-        guard refreshCount < 1 else {
+        guard refreshCount == 1 else {
             reloadButton.isEnabled = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 120) {
                 self.reloadButton.isEnabled = true
                 self.refreshCount = 0
             }
-            return}
-        refreshCount += 1
-        viewModel.reload()
+            refreshCount += 1
+            viewModel.reload()
+            return
+        }
     }
 }
 extension StatsGeneralViewController: MessageDisplayable { }

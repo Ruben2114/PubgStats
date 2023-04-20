@@ -28,15 +28,33 @@ final class KillsDataViewModel {
         if let modes = gameModes {
             var dataGamesModes: [(String, Any)] = []
             for mode in modes {
-                let excludedKeys = ["bestRankPoint", "gamesPlayed", "timePlayed", "top10STotal", "wonTotal","mode","losses","mostSurvivalTime","longestTimeSurvived","rankPoints","rankPointsTitle","rideDistance","roundsPlayed","swimDistance","timeSurvived","top10S","walkDistance","weaponsAcquired","weeklyWINS","dailyWINS","winPoints","wins","damageDealt","days"]
+                let excludedKeys = ["bestRankPoint", "gamesPlayed", "timePlayed", "top10STotal", "boosts", "wonTotal", "mode", "losses", "mostSurvivalTime", "rankPoints" ,"rankPointsTitle" ,"rideDistance","roundsPlayed","swimDistance","timeSurvived","top10S","walkDistance","weaponsAcquired","weeklyWINS","dailyWINS","wins","damageDealt","days", "longestKill", "maxKillStreaks", "dailyKills","weeklyKills", "killsTotal","roundMostKills"]
                 let keyValues = mode.entity.attributesByName.filter { !excludedKeys.contains($0.key) }.map { ($0.key, mode.value(forKey: $0.key) ?? "") }
-                dataGamesModes.append(contentsOf: keyValues)
+                let keyMap = [("roadKills", "Atropellos"),
+                              ("teamKills", "Muertes de equipo"),
+                              ("suicides", "Suicidios"),
+                              ("dBNOS", "Derribados"),
+                              ("revives", "Reanimaciones"),
+                              ("assists", "Asistencias"),
+                              ("kills", "Muertes"),
+                              ("vehicleDestroys", "Destrucciones de vehículos"),
+                              ("headshotKills", "Muertes por disparos a la cabeza"),
+                              ("heals", "Curaciones")]
+                var newDict: [(String, Any)] = []
+                for (oldKey, value) in keyValues {
+                    if let newKey = keyMap.first(where: { $0.0 == oldKey })?.1 {
+                        newDict.append((newKey, value))
+                    } else {
+                        newDict.append((oldKey, value))
+                    }
+                }//TwitchAzariara
+                dataGamesModes.append(contentsOf: newDict)
             }
-            let combinedDataGamesModes = dataGamesModes.reduce(into: [:]) { result, element in
-                if let previousValue = result[element.0] as? Int, let currentValue = element.1 as? Int {
-                    result[element.0] = previousValue + currentValue
+            let combinedDataGamesModes = dataGamesModes.reduce(into: [String: Int]()) { result, element in
+                if let previousValue = result[element.0] {
+                    result[element.0] = previousValue + (element.1 as? Int ?? 0)
                 } else {
-                    result[element.0] = element.1
+                    result[element.0] = element.1 as? Int ?? 0
                 }
             }
             let dataArray = combinedDataGamesModes.map { key, value in "\(key): \(value)" }

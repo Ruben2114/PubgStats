@@ -26,8 +26,35 @@ final class SurvivalDataViewModel {
     func fetchDataSurvival() {
         let survivalData = getSurvival(for: sessionUser)
         if let survival = survivalData {
-            let keyValues = survival.entity.attributesByName.map { ($0.key, survival.value(forKey: $0.key) ?? "") }
-            content = keyValues
+            let excludedKeys = ["xp","level","position","timeSurvived"]
+            let keyValues = survival.entity.attributesByName.filter { !excludedKeys.contains($0.key) }.map { ($0.key, survival.value(forKey: $0.key) ?? "") }
+            let keyMap = [("airDropsCalled", "AirDrops llamados"),
+                          ("hotDropLandings", "Aterrizajes en zonas conflictivas"),
+                          ("top10", "Top 10"),
+                          ("damageTaken", "Daño recibido"),
+                          ("distanceOnFoot", "Distancia andando"),
+                          ("distanceBySwimming", "Distancia nadando"),
+                          ("distanceTotal", "Distancia total"),
+                          ("uniqueItemsLooted", " Objetos únicos saqueados"),
+                          ("totalMatchesPlayed", "Partidas jugadas"),
+                          ("teammatesRevived", "Compañeros revividos"),
+                          ("damageDealt", "Daño infligido"),
+                          ("enemyCratesLooted", "Cajas enemigas saqueadas"),
+                          ("healed", "Curaciones"),
+                          ("distanceByVehicle", "Distancia en vehiculo"),
+                          ("throwablesThrown", "Lanzables arrojados"),
+                          ("revived", "Revivido")]
+            
+            var newDict: [(String, Any)] = []
+            for (oldKey, value) in keyValues {
+                if let newKey = keyMap.first(where: { $0.0 == oldKey })?.1 {
+                    newDict.append((newKey, value))
+                } else {
+                    newDict.append((oldKey, value))
+                }
+            }
+            content = newDict
+            
         }
     }
     func backButton() {
