@@ -9,6 +9,7 @@ import UIKit
 import Combine
 
 final class StatsGeneralViewController: UIViewController {
+    private lazy var tableView = makeTableView()
     private lazy var levelLabel = makeLabelStats(height: 78)
     private lazy var nameLabel = makeLabelStats(height: 21)
     private lazy var xpLabel = makeLabelStats(height: 21)
@@ -21,11 +22,6 @@ final class StatsGeneralViewController: UIViewController {
     private lazy var gamesPlayedLabel = makeLabelStats(height: 65)
     private lazy var timePlayedLabel = makeLabelStats(height: 65)
     private lazy var bestRankedLabel = makeLabelStats(height: 65)
-    private lazy var buttonStackView = makeStack(space: 27)
-    private lazy var goKillsData = makeButtonBlue(title: "Datos Muertes")
-    private lazy var goWeapons = makeButtonBlue(title: "Datos Armas")
-    private lazy var goSurvival = makeButtonBlue(title: "Estadisticas Modo Survival")
-    private lazy var goGamesModes = makeButtonBlue(title: "Modos de juego")
     
     private var cancellable = Set<AnyCancellable>()
     private let dependencies: StatsGeneralDependency
@@ -48,7 +44,6 @@ final class StatsGeneralViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         configConstraints()
-        configTargets()
         bind()
     }
     private func bind() {
@@ -95,6 +90,8 @@ final class StatsGeneralViewController: UIViewController {
         reloadButton = UIBarButtonItem(image: UIImage(systemName: "arrow.clockwise.circle.fill"), style: .plain, target: self, action: #selector(reloadButtonAction))
         navigationItem.rightBarButtonItem = reloadButton
         stackStackView.backgroundColor = .systemCyan
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     private func configConstraints() {
         view.addSubview(levelLabel)
@@ -124,31 +121,11 @@ final class StatsGeneralViewController: UIViewController {
         [gamesPlayedLabel,timePlayedLabel,bestRankedLabel].forEach {
             labelSecondStackView.addArrangedSubview($0)
         }
-        view.addSubview(buttonStackView)
-        buttonStackView.topAnchor.constraint(equalTo: stackStackView.bottomAnchor, constant: 61).isActive = true
-        buttonStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25).isActive = true
-        buttonStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -25).isActive = true
-        [goKillsData, goWeapons, goSurvival, goGamesModes].forEach {
-            buttonStackView.addArrangedSubview($0)
-        }
-    }
-    private func configTargets() {
-        goKillsData.addTarget(self, action: #selector(didTapGoKillsData), for: .touchUpInside)
-        goWeapons.addTarget(self, action: #selector(didTapGoWeapons), for: .touchUpInside)
-        goSurvival.addTarget(self, action: #selector(didTapGoSurvival), for: .touchUpInside)
-        goGamesModes.addTarget(self, action: #selector(didTapGoGamesModes), for: .touchUpInside)
-    }
-    @objc func didTapGoKillsData() {
-        viewModel.goKillsData()
-    }
-    @objc func didTapGoWeapons() {
-        viewModel.goWeapons()
-    }
-    @objc func didTapGoSurvival() {
-        viewModel.goSurvival()
-    }
-    @objc func didTapGoGamesModes() {
-        viewModel.goGamesModes()
+        view.addSubview(tableView)
+        tableView.topAnchor.constraint(equalTo: stackStackView.bottomAnchor, constant: 20).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     @objc func backButtonAction() {
@@ -169,4 +146,37 @@ final class StatsGeneralViewController: UIViewController {
 }
 extension StatsGeneralViewController: MessageDisplayable { }
 extension StatsGeneralViewController: SpinnerDisplayable { }
-
+extension StatsGeneralViewController: UITableViewDataSource, UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.itemCellStats.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        let itemCellStats = viewModel.itemCellStats[indexPath.row]
+        cell.accessoryType = .disclosureIndicator
+        var listContent = UIListContentConfiguration.cell()
+        listContent.textProperties.font = UIFont.systemFont(ofSize: 20)
+        listContent.text = itemCellStats.title()
+        listContent.textProperties.alignment = .center
+        listContent.image =  UIImage(named: itemCellStats.image())
+        listContent.imageProperties.reservedLayoutSize = CGSize(width: 50, height: 50)
+        cell.contentConfiguration = listContent
+        return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let itemCellStats = viewModel.itemCellStats[indexPath.row]
+        switch itemCellStats {
+        case .dataKill:
+            viewModel.goKillsData()
+        case .dataWeapon:
+            viewModel.goWeapons()
+        case .dataSurvival:
+            viewModel.goSurvival()
+        case .dataGamesModes:
+            viewModel.goGamesModes()
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        90
+    }
+}

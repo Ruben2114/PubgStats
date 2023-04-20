@@ -55,6 +55,7 @@
 		46B0CF2229E701D400BE95EB /* WeaponDataDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B0CF2129E701D400BE95EB /* WeaponDataDetailUseCase.swift */; };
 		46B0CF2429E7027100BE95EB /* WeaponDataDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B0CF2329E7027100BE95EB /* WeaponDataDetailRepository.swift */; };
 		46B0CF2629E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B0CF2529E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift */; };
+		8C007E3429F1623A0029AF2F /* ItemCellStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C007E3329F1623A0029AF2F /* ItemCellStats.swift */; };
 		8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */; };
 		8C31FDB729C329E500196704 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31FDB629C329E500196704 /* SettingsViewController.swift */; };
 		8C3CC20E29DD66B400D34228 /* CommonExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3CC20D29DD66B400D34228 /* CommonExternalDependency.swift */; };
@@ -244,6 +245,7 @@
 		46B0CF2129E701D400BE95EB /* WeaponDataDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailUseCase.swift; sourceTree = "<group>"; };
 		46B0CF2329E7027100BE95EB /* WeaponDataDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailRepository.swift; sourceTree = "<group>"; };
 		46B0CF2529E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailRepositoryImp.swift; sourceTree = "<group>"; };
+		8C007E3329F1623A0029AF2F /* ItemCellStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellStats.swift; sourceTree = "<group>"; };
 		8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		8C31FDB629C329E500196704 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8C3CC20D29DD66B400D34228 /* CommonExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExternalDependency.swift; sourceTree = "<group>"; };
@@ -1349,6 +1351,7 @@
 			isa = PBXGroup;
 			children = (
 				8CB07EB529D1A683000EE257 /* StatsGeneralViewModel.swift */,
+				8C007E3329F1623A0029AF2F /* ItemCellStats.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2299,6 +2302,7 @@
 				8CB6397129D245B400763231 /* WeaponDataDependency.swift in Sources */,
 				8CA9025C29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift in Sources */,
 				8CB07E9629D17347000EE257 /* RemoteService.swift in Sources */,
+				8C007E3429F1623A0029AF2F /* ItemCellStats.swift in Sources */,
 				465550E529CC6F6300BF932A /* FavouriteCoordinator.swift in Sources */,
 				8C64E4CA29DC663700303760 /* CommonRepository.swift in Sources */,
 				8CD7CD8229BF1B0B00C57346 /* RegisterDataUseCase.swift in Sources */,

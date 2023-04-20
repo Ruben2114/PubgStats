@@ -50,9 +50,7 @@ class ItemDataCollectionViewCell: UICollectionViewCell{
             right: mainContainer.rightAnchor,
             bottom: mainContainer.bottomAnchor,
             left: mainContainer.leftAnchor,
-            pRight: ViewValues.normalPadding,
-            pBottom: ViewValues.normalPadding,
-            pLeft: ViewValues.normalPadding)
+            pBottom: ViewValues.normalPadding)
     }
     
     private func configGradientForTitle() {

@@ -14,6 +14,7 @@ final class StatsGeneralViewModel {
     private weak var coordinator: StatsGeneralCoordinator?
     private let statsGeneralDataUseCase: StatsGeneralDataUseCase
     private let sessionUser: ProfileEntity
+    var itemCellStats: [ItemCellStats] = [ItemCellStats.dataKill, ItemCellStats.dataWeapon, ItemCellStats.dataSurvival, ItemCellStats.dataGamesModes]
     init(dependencies: StatsGeneralDependency) {
         self.dependencies = dependencies
         self.coordinator = dependencies.resolve()
