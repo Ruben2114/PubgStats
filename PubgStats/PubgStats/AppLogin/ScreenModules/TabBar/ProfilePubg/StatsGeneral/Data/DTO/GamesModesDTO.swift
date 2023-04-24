@@ -33,7 +33,7 @@ struct GamesModesDTO: Decodable {
         let model = data.attributes.gameModeStats
         return model.duo.kills + model.duoFpp.kills + model.solo.kills + model.soloFpp.kills + model.squad.kills + model.squadFpp.kills
     }
-    var assistsTotal: Int { 
+    var assistsTotal: Int {
         let model = data.attributes.gameModeStats
         return model.duo.assists + model.duoFpp.assists + model.solo.assists + model.soloFpp.assists + model.squad.assists + model.squadFpp.assists
     }
@@ -82,8 +82,6 @@ struct DuoDTO: Decodable {
     let longestKill: Double
     let losses, maxKillStreaks: Int
     let timeSurvived, mostSurvivalTime: Double
-    let rankPoints: Double
-    let rankPointsTitle: String
     let revives: Int
     let rideDistance: Double
     let roadKills, roundMostKills, roundsPlayed, suicides: Int
@@ -97,7 +95,7 @@ struct DuoDTO: Decodable {
         case dBNOS = "dBNOs"
         case dailyKills
         case dailyWINS = "dailyWins"
-        case damageDealt, days, headshotKills, heals, kills, longestKill, losses, maxKillStreaks, mostSurvivalTime, rankPoints, rankPointsTitle, revives, rideDistance, roadKills, roundMostKills, roundsPlayed, suicides, swimDistance, teamKills, timeSurvived
+        case damageDealt, days, headshotKills, heals, kills, longestKill, losses, maxKillStreaks, mostSurvivalTime, revives, rideDistance, roadKills, roundMostKills, roundsPlayed, suicides, swimDistance, teamKills, timeSurvived
         case top10S = "top10s"
         case vehicleDestroys, walkDistance, weaponsAcquired, weeklyKills
         case weeklyWINS = "weeklyWins"

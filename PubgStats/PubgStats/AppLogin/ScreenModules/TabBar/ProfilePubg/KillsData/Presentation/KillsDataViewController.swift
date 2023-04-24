@@ -31,6 +31,7 @@ class KillsDataViewController: UIViewController {
         title = "Datos muertes totales"
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.allowsSelection = false
         backButton(action: #selector(backButtonAction))
     }
     func configConstraint(){
@@ -55,7 +56,6 @@ extension KillsDataViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .systemCyan
         let sortedDataKills = viewModel.dataKills.sorted()
         let contentItem = sortedDataKills[indexPath.row]
         var listContent = UIListContentConfiguration.cell()

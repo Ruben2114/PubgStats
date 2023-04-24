@@ -222,8 +222,6 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         dataGamesMode.losses = Int32(result.losses)
         dataGamesMode.maxKillStreaks = Int32(result.maxKillStreaks)
         dataGamesMode.mostSurvivalTime = Int32(result.mostSurvivalTime)
-        dataGamesMode.rankPoints = Int32(result.rankPoints)
-        dataGamesMode.rankPointsTitle = result.rankPointsTitle
         dataGamesMode.revives = Int32(data.solo.revives)
         dataGamesMode.rideDistance = result.rideDistance
         dataGamesMode.roadKills = Int32(result.roadKills)

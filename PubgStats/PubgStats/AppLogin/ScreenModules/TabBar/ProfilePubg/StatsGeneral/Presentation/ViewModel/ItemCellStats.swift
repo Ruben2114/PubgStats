@@ -27,13 +27,13 @@ enum ItemCellStats{
     func image() -> String{
         switch self{
         case .dataKill:
-            return "default"
+            return "KillData"
         case .dataWeapon:
-            return "default"
+            return "WeaponData2"
         case .dataSurvival:
-            return "default"
+            return "SurvivalData"
         case .dataGamesModes:
-            return "default"
+            return "GamesModesData"
         }
     }
 }

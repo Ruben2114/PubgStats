@@ -38,6 +38,7 @@ class GamesModesDataDetailViewController: UIViewController {
         backButton(action: #selector(backButtonAction))
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.allowsSelection = false
     }
     func configConstraint(){
         view.addSubview(tableView)
@@ -56,7 +57,6 @@ extension GamesModesDataDetailViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .systemCyan
         let model = viewModel.dataGamesModes.map { $0.0 }
         let sortedModel = model.sorted()
         let sortedDataGamesModes = sortedModel.map { key in

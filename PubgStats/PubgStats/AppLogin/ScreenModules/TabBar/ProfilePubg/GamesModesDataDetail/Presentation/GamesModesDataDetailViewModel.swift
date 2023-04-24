@@ -18,7 +18,7 @@ final class GamesModesDataDetailViewModel {
         if let modes = data {
             for mode in modes {
                 if sessionUser.gameMode == mode.mode {
-                    let excludedKeys = ["bestRankPoint", "gamesPlayed", "killsTotal", "timePlayed", "assistsTotal", "wonTotal","mode","rankPointsTitle", "maxKillStreaks"]
+                    let excludedKeys = ["bestRankPoint", "gamesPlayed", "killsTotal", "timePlayed", "assistsTotal", "wonTotal","mode", "maxKillStreaks"]
                     let keyValues = mode.entity.attributesByName.filter { !excludedKeys.contains($0.key) }.map { ($0.key, mode.value(forKey: $0.key) ?? "") }
                     let keyMap = [
                         "assists": "Asistencias",
@@ -34,7 +34,6 @@ final class GamesModesDataDetailViewModel {
                         "revives": "Reanimaciones",
                         "heals": "Curaciones",
                         "losses": "Derrotas",
-                        "rankPoints": "Puntos de rango",
                         "roundMostKills": "Mayor muertes en una ronda",
                         "vehicleDestroys": "Vehículos destruidos",
                         "roundsPlayed": "Rondas jugadas",
@@ -43,7 +42,7 @@ final class GamesModesDataDetailViewModel {
                         "wins": "Victorias",
                         "suicides": "Suicidios",
                         "dailyWINS": "Victorias diarias",
-                        "longestKill": "Muertes a la mayor distancia",
+                        "longestKill": "Mayor distancia de muerte",
                         "timeSurvived": "Tiempo de supervivencia",
                         "damageDealt": "Daño infligido",
                         "headshotKills": "Muertes con disparo en la cabeza",
@@ -65,9 +64,6 @@ final class GamesModesDataDetailViewModel {
                             newDict[i].1 = Int(value)
                         }
                     }
-
-                    print(newDict)
-                    
                     dataGamesModes = newDict
                 }
             }
@@ -77,3 +73,4 @@ final class GamesModesDataDetailViewModel {
         coordinator?.dismiss()
     }
 }
+

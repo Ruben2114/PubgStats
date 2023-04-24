@@ -82,6 +82,7 @@ class WeaponDataViewController: UIViewController {
 extension WeaponDataViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.weaponType.count
+        
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ItemDataCollectionViewCell", for: indexPath) as! ItemDataCollectionViewCell

@@ -39,7 +39,7 @@ final class WeaponDataDetailViewModel {
                         ("DamagePlayer", "Daño realizado"),
                         ("Kills", "Muertes"),
                         ("HeadShots", "Disparos en la cabeza"),
-                        ("LongestDefeat", "Mayor distancia derribado"),
+                        ("LongestDefeat", "Derribado a mayor distancia"),
                         ("LongRangeDefeats", "Número de derribados a larga distancia"),
                         ("Defeats", "Derribados"),
                         ("Groggies", "Aturdidos"),

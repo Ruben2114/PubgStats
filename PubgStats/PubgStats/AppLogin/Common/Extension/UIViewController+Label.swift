@@ -42,4 +42,32 @@ extension UIViewController {
         label.setHeightConstraint(with: height)
         return label
     }
+    func makeLabelStatsLevel(height: CGFloat, width: CGFloat) -> UILabel{
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.textAlignment = .center
+        label.backgroundColor = .systemBackground
+        label.setHeightConstraint(with: height)
+        label.setWidthConstraint(with: width)
+        let imagenFondo = UIImage(named: "default")
+        label.backgroundColor = UIColor(patternImage: imagenFondo!)
+        label.clipsToBounds = true
+        label.layer.borderColor = UIColor.black.cgColor
+        label.layer.borderWidth = 1
+        label.layer.cornerRadius = height / 2
+        return label
+    }
+    func makeLabelStatsBoder(height: CGFloat) -> UILabel{
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.textAlignment = .center
+        label.backgroundColor = .systemBackground
+        label.setHeightConstraint(with: height)
+        label.layer.borderColor = UIColor.black.cgColor
+        label.layer.borderWidth = 1
+        label.layer.cornerRadius = 15
+        return label
+    }
 }

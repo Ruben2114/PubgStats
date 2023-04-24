@@ -73,6 +73,7 @@ class FavouriteViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        hideKeyboard()
     }
     private func configConstraint() {
         view.addSubview(searchBar)

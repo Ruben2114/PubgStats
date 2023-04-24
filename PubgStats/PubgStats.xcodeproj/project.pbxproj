@@ -71,6 +71,7 @@
 		8C810F7929C3690700AEE548 /* UIViewController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C810F7829C3690700AEE548 /* UIViewController+Keyboard.swift */; };
 		8C9A32AB29DDB39500F81B34 /* FavouriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9A32AA29DDB39500F81B34 /* FavouriteViewModel.swift */; };
 		8C9F824229C3CA02003000CD /* HelpDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9F824129C3CA02003000CD /* HelpDataViewController.swift */; };
+		8CA2FE3729F25C8100A4F475 /* StarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2FE3629F25C8100A4F475 /* StarChartView.swift */; };
 		8CA398AD29B72A1F00C09746 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398AC29B72A1F00C09746 /* AppDelegate.swift */; };
 		8CA398AF29B72A1F00C09746 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398AE29B72A1F00C09746 /* SceneDelegate.swift */; };
 		8CA398B129B72A1F00C09746 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398B029B72A1F00C09746 /* LoginViewController.swift */; };
@@ -148,7 +149,6 @@
 		8CD7CD8F29BF54D600C57346 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD8E29BF54D600C57346 /* RegisterViewController.swift */; };
 		8CD7CD9329BF62BE00C57346 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD9229BF62BE00C57346 /* RegisterViewModel.swift */; };
 		8CE093EC29D5AE2E0069CE24 /* videoLogin.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 8CE093EB29D5AE220069CE24 /* videoLogin.mp4 */; };
-		8CE093EE29D5AF6A0069CE24 /* videoLoginPubg.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 8CE093ED29D5AF570069CE24 /* videoLoginPubg.mp4 */; };
 		8CE9BDA929E57D5E00F45D3F /* SurvivalDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDA829E57D5E00F45D3F /* SurvivalDataUseCase.swift */; };
 		8CE9BDAB29E57DD600F45D3F /* SurvivalDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDAA29E57DD600F45D3F /* SurvivalDataRepository.swift */; };
 		8CE9BDAF29E57E4700F45D3F /* SurvivalDataRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDAE29E57E4700F45D3F /* SurvivalDataRepositoryImp.swift */; };
@@ -261,6 +261,7 @@
 		8C810F7829C3690700AEE548 /* UIViewController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Keyboard.swift"; sourceTree = "<group>"; };
 		8C9A32AA29DDB39500F81B34 /* FavouriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewModel.swift; sourceTree = "<group>"; };
 		8C9F824129C3CA02003000CD /* HelpDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataViewController.swift; sourceTree = "<group>"; };
+		8CA2FE3629F25C8100A4F475 /* StarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarChartView.swift; sourceTree = "<group>"; };
 		8CA398A929B72A1F00C09746 /* PubgStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PubgStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA398AC29B72A1F00C09746 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CA398AE29B72A1F00C09746 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -342,7 +343,6 @@
 		8CD7CD8E29BF54D600C57346 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8CD7CD9229BF62BE00C57346 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		8CE093EB29D5AE220069CE24 /* videoLogin.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = videoLogin.mp4; sourceTree = "<group>"; };
-		8CE093ED29D5AF570069CE24 /* videoLoginPubg.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = videoLoginPubg.mp4; sourceTree = "<group>"; };
 		8CE9BDA829E57D5E00F45D3F /* SurvivalDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataUseCase.swift; sourceTree = "<group>"; };
 		8CE9BDAA29E57DD600F45D3F /* SurvivalDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataRepository.swift; sourceTree = "<group>"; };
 		8CE9BDAE29E57E4700F45D3F /* SurvivalDataRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataRepositoryImp.swift; sourceTree = "<group>"; };
@@ -766,6 +766,7 @@
 				8C7563E329BB5F17000373F9 /* MessageDisplayable.swift */,
 				8CB39BA629C0917000B1D8EF /* ViewScrollable.swift */,
 				8CB39BA829C0919600B1D8EF /* KeyboardDisplayable.swift */,
+				8CA2FE3629F25C8100A4F475 /* StarChartView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1131,7 +1132,6 @@
 			children = (
 				8CA398B829B72A2000C09746 /* Assets.xcassets */,
 				8CE093EB29D5AE220069CE24 /* videoLogin.mp4 */,
-				8CE093ED29D5AF570069CE24 /* videoLoginPubg.mp4 */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -2115,7 +2115,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CE093EE29D5AF6A0069CE24 /* videoLoginPubg.mp4 in Resources */,
 				8CE093EC29D5AE2E0069CE24 /* videoLogin.mp4 in Resources */,
 				8CA398BC29B72A2000C09746 /* LaunchScreen.storyboard in Resources */,
 				8CA398B929B72A2000C09746 /* Assets.xcassets in Resources */,
@@ -2284,6 +2283,7 @@
 				8CE9BDB729E5807F00F45D3F /* GamesModesDataDependency.swift in Sources */,
 				8CB07E9829D1766B000EE257 /* Player.swift in Sources */,
 				8CB07EBC29D1A764000EE257 /* StatsGeneralCoordinator.swift in Sources */,
+				8CA2FE3729F25C8100A4F475 /* StarChartView.swift in Sources */,
 				8C31FDB729C329E500196704 /* SettingsViewController.swift in Sources */,
 				46B0CF2229E701D400BE95EB /* WeaponDataDetailUseCase.swift in Sources */,
 				8CB39BA929C0919600B1D8EF /* KeyboardDisplayable.swift in Sources */,

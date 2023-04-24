@@ -51,8 +51,6 @@ final class StatsGeneralViewModel {
         statsGeneralDataUseCase.executeSurvival(account: id) { [weak self] result in
             switch result {
             case .success(let survival):
-                print(survival)
-                self?.state.send(.successSurvival(model: survival))
                 guard let user = self?.sessionUser else{return}
                 self?.statsGeneralDataUseCase.saveSurvival(sessionUser: user, survivalData: [survival], type: type)
                 dispatchGroup.leave()
@@ -64,7 +62,6 @@ final class StatsGeneralViewModel {
         statsGeneralDataUseCase.executeGamesModes(account: id) { [weak self] result in
             switch result {
             case .success(let gamesMode):
-                self?.state.send(.successGamesModes(model: gamesMode))
                 guard let user = self?.sessionUser else{return}
                 self?.statsGeneralDataUseCase.saveGamesModeData(sessionUser: user, gamesModeData: gamesMode, type: type)
                 dispatchGroup.leave()
@@ -75,7 +72,7 @@ final class StatsGeneralViewModel {
         dispatchGroup.notify(queue: DispatchQueue.main) {
             let userDefaults = UserDefaults.standard
             userDefaults.set(Date(), forKey: "lastUpdate")
-            self.state.send(.success)
+            self.viewDidLoad()
         }
     }
     func reload(){
@@ -91,6 +88,56 @@ final class StatsGeneralViewModel {
             return [sessionUser.account, sessionUser.player]
         }
     }
+    
+    let localData = LocalDataProfileServiceImp()
+    func allDataRadarChart() -> PlayerStats? {
+         guard let type = coordinator?.type else {return nil}
+         let gamesModesData = statsGeneralDataUseCase.getGamesModes(for: sessionUser, type: type)
+         guard let gamesModes = gamesModesData else {return nil}
+         var dataGamesModes: [(String, Any)] = []
+         for mode in gamesModes {
+             let keyValues = mode.entity.attributesByName.map { ($0.key, mode.value(forKey: $0.key) ?? "") }
+             
+             dataGamesModes.append(contentsOf: keyValues)
+         }
+         let combinedDataGamesModes = dataGamesModes.reduce(into: [String: Double]()) { result, element in
+             if let previousValue = result[element.0] {
+                 result[element.0] = previousValue + (element.1 as? Double ?? 0.0)
+             } else {
+                 result[element.0] = element.1 as? Double ?? 0.0
+             }
+         }
+      
+        let playerStats = PlayerStats(
+            wins: (combinedDataGamesModes["wins"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0),
+            suicides: (combinedDataGamesModes["suicides"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0),
+            losses: (combinedDataGamesModes["losses"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0),
+            headshotKills: (combinedDataGamesModes["headshotKills"] ?? 0) * 100 / (combinedDataGamesModes["kills"] ?? 0),
+            top10: (combinedDataGamesModes["top10S"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0)
+        )
+        return playerStats
+    }
+    func dataRadarChart() -> [String]{
+        let dataPlayerStats = allDataRadarChart()
+        guard let playerStats = dataPlayerStats else{ return []}
+        let data = ["Victorias:\n\(String(format: "%.1f", playerStats.wins))%",
+                    "Top 10:\n\(String(format: "%.0f", playerStats.top10))%",
+                    "Muerte por disparo\n en la cabeza:\n\(String(format: "%.0f", playerStats.headshotKills))%",
+                    "Suicidios:\n\(String(format: "%.0f", playerStats.suicides))%",
+                    "Derrota:\n\(String(format: "%.1f", playerStats.losses))%"]
+        return data
+    }
+    func valuesRadarChart() -> [CGFloat]{
+        let dataPlayerStats = allDataRadarChart()
+        guard let playerStats = dataPlayerStats else{ return []}
+       let values = [CGFloat(playerStats.wins / 100),
+                     CGFloat(playerStats.top10 / 100),
+                     CGFloat(playerStats.headshotKills / 100),
+                     CGFloat(playerStats.suicides / 100),
+                     CGFloat(playerStats.losses / 100)]
+        return values
+    }
+    
     func backButton() {
         coordinator?.dismiss()
     }
@@ -108,5 +155,10 @@ final class StatsGeneralViewModel {
     }
 }
 
-
-
+struct PlayerStats {
+    var wins: Double
+    var suicides: Double
+    var losses: Double
+    var headshotKills: Double
+    var top10: Double
+}
