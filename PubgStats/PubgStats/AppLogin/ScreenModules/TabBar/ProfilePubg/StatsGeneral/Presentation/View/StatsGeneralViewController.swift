@@ -30,6 +30,7 @@ final class StatsGeneralViewController: UIViewController {
         radar.labels = viewModel.dataRadarChart()
         return radar
     }()
+    
     var contentView: UIView = UIView()
     var mainScrollView: UIScrollView = UIScrollView()
     private var cancellable = Set<AnyCancellable>()

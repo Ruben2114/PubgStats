@@ -50,6 +50,7 @@
 "killsDataViewControllerTitle" = "Total kills data";
 "fetchDataStatsError" = "Please you must wait 1 minute to make the next call";
 "killsLabel" = "Kills";
+"levelLabel" = "Level";
 "assistsLabel" = "Assists";
 "gamesPlayedLabel" = "Games";
 "winsLabel" = "Wins";

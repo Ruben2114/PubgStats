@@ -43,27 +43,27 @@ class RadarChartView: UIView {
         UIColor(red: 0, green: 1, blue: 0, alpha: 0.5).setFill()
         path.fill()
 
-        for (index, point) in vertices.enumerated() {
-            let label = UILabel()
-            label.text = labels[index]
-            label.font = UIFont.systemFont(ofSize: labelFontSize)
-            label.numberOfLines = 0
-            self.addSubview(label)
-            label.sizeToFit()
-            var offsetPoint: CGPoint
-            if index == 0 {
-                offsetPoint = CGPoint(x: point.x, y: point.y - (labelOffset - 10))
-            } else if index == 1{
-                offsetPoint = CGPoint(x: point.x + (labelOffset + 10), y: point.y)
-            }else if index == 2{
-                offsetPoint = CGPoint(x: point.x, y: point.y + (labelOffset + 5))
-            }else {
-                offsetPoint = CGPoint(x: point.x + labelOffset * sin(angle * CGFloat(index)),
-                                      y: point.y - labelOffset * cos(angle * CGFloat(index)))
-            }
-            label.center = offsetPoint
-        }
-
+      for (index, point) in vertices.enumerated() {
+          let label = UILabel()
+          label.text = labels[index]
+          label.font = UIFont.systemFont(ofSize: labelFontSize)
+          label.numberOfLines = 0
+          self.addSubview(label)
+          label.sizeToFit()
+          var offsetPoint: CGPoint
+          if index == 0 {
+              offsetPoint = CGPoint(x: point.x, y: point.y - (labelOffset - 10))
+          } else if index == 1{
+              offsetPoint = CGPoint(x: point.x + (labelOffset + 10), y: point.y)
+          }else if index == 2{
+              offsetPoint = CGPoint(x: point.x, y: point.y + (labelOffset + 5))
+          }else {
+              offsetPoint = CGPoint(x: point.x + labelOffset * sin(angle * CGFloat(index)),
+                                    y: point.y - labelOffset * cos(angle * CGFloat(index)))
+          }
+          label.center = offsetPoint
+      }
+     
 
         // círculo central
         let circlePath = UIBezierPath(arcCenter: center, radius: 5, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
@@ -108,6 +108,50 @@ class RadarChartView: UIView {
     }
 }
 
+/*
+ // Crea los botones en cada esquina de la gráfica
+ let button = UIButton()
 
+
+ // Asigna una imagen de menú desplegable a cada botón
+ buttonTopLeft.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+ buttonTopRight.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+ buttonBottomLeft.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+ buttonBottomRight.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+
+ // Crea una función para mostrar el menú en la ubicación del botón tocado
+ func showMenu(at location: CGPoint) {
+     // Define las opciones del menú
+     let option1 = UIAction(title: "Opción 1", handler: { _ in
+         print("Opción 1 seleccionada")
+     })
+     let option2 = UIAction(title: "Opción 2", handler: { _ in
+         print("Opción 2 seleccionada")
+     })
+     let option3 = UIAction(title: "Opción 3", handler: { _ in
+         print("Opción 3 seleccionada")
+     })
+
+     // Crea el menú con las opciones
+     let menu = UIMenu(title: "Selecciona una opción", children: [option1, option2, option3])
+
+     // Muestra el menú en la ubicación del botón tocado
+     menu.showMenu(from: self, rect: CGRect(origin: location, size: CGSize.zero))
+ }
+
+ // Asigna el menú creado al botón correspondiente
+ button.menu = menu
+
+
+ // Agrega la función para mostrar el menú al evento de toque del botón
+ button.addTarget(self, action: #selector(handleMenuButtonTapped(_:)), for: .touchUpInside)
+
+
+ // Función para manejar el evento de toque del botón
+ @objc func handleMenuButtonTapped(_ sender: UIButton) {
+        print("boton")
+     
+
+ */
 
 

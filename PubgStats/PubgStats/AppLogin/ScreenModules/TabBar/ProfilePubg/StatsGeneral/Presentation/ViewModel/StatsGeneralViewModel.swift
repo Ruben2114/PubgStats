@@ -107,23 +107,25 @@ final class StatsGeneralViewModel {
                  result[element.0] = element.1 as? Double ?? 0.0
              }
          }
+        
+ 
         let playerStats = PlayerStats(
-            wins: (combinedDataGamesModes["wins"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0),
-            suicides: (combinedDataGamesModes["suicides"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0),
-            losses: (combinedDataGamesModes["losses"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0),
-            headshotKills: (combinedDataGamesModes["headshotKills"] ?? 0) * 100 / (combinedDataGamesModes["kills"] ?? 0),
-            top10: (combinedDataGamesModes["top10S"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0)
+            wins: PlayerStatsData(title: "playerStatsV".localize(), value: (combinedDataGamesModes["wins"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0), averageData: 0.25),
+            suicides: PlayerStatsData(title: "playerStatsS".localize(), value: (combinedDataGamesModes["suicides"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0), averageData: 0),
+            losses: PlayerStatsData(title: "playerStatsD".localize(), value: (combinedDataGamesModes["losses"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0), averageData: 0),
+            headshotKills: PlayerStatsData(title: "playerStatsMD".localize(), value: (combinedDataGamesModes["headshotKills"] ?? 0) * 100 / (combinedDataGamesModes["kills"] ?? 0), averageData: 0),
+            top10: PlayerStatsData(title: "playerStatsT".localize(), value: (combinedDataGamesModes["top10S"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0), averageData: 0)
         )
         return playerStats
     }
     func dataRadarChart() -> [String]{
         let dataPlayerStats = allDataRadarChart()
         guard let playerStats = dataPlayerStats else{ return []}
-        let data = ["playerStatsV".localize() + "\n\(String(format: "%.1f", playerStats.wins))%",
-                    "playerStatsT".localize() + "\n\(String(format: "%.0f", playerStats.top10))%",
-                    "playerStatsMD" + "\n\(String(format: "%.0f", playerStats.headshotKills))%",
-                    "playerStatsS" + "\n\(String(format: "%.0f", playerStats.suicides))%",
-                    "playerStatsD" + "\n\(String(format: "%.1f", playerStats.losses))%"]
+        let data = [playerStats.wins.title + "\n\(String(format: "%.1f", playerStats.wins.value))%",
+                    playerStats.top10.title + "\n\(String(format: "%.0f", playerStats.top10.value))%",
+                    playerStats.headshotKills.title + "\n\(String(format: "%.0f", playerStats.headshotKills.value))%",
+                    playerStats.suicides.title + "\n\(String(format: "%.0f", playerStats.suicides.value))%",
+                    playerStats.losses.title + "\n\(String(format: "%.1f", playerStats.losses.value))%"]
         return data
     }
     func valuesRadarChart() -> [CGFloat]{
@@ -131,13 +133,13 @@ final class StatsGeneralViewModel {
         //playerStats.wins * 100 / cota
         //declaar las constantes en playerstats
         //guardar en un array los valores y mostrarlos
-        //4 es el porcertanje que le multiplico para que 25% de victorias sea el mejor dato
+        //25% de victorias sea el mejor dato
         guard let playerStats = dataPlayerStats else{ return []}
-        let values = [CGFloat(max(0,min(playerStats.wins / 100 * 4, 1.0))),
-                     CGFloat(playerStats.top10 / 100),
-                     CGFloat(playerStats.headshotKills / 100),
-                     CGFloat(playerStats.suicides / 100),
-                     CGFloat(playerStats.losses / 100)]
+        let values = [CGFloat(max(0,min(playerStats.wins.value / 100 / playerStats.wins.averageData, 1.0))),
+                     CGFloat(playerStats.top10.value / 100),
+                     CGFloat(playerStats.headshotKills.value / 100),
+                     CGFloat(playerStats.suicides.value / 100), // cambiar
+                     CGFloat(playerStats.losses.value / 100)] //cambiar
         
         return values
     }

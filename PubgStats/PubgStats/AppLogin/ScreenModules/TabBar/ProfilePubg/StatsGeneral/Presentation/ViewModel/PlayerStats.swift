@@ -6,10 +6,14 @@
 //
 
 struct PlayerStats {
-    var wins: Double
-    var suicides: Double
-    var losses: Double
-    var headshotKills: Double
-    var top10: Double
-    //meter aqui las constantes
+    var wins: PlayerStatsData
+    var suicides: PlayerStatsData
+    var losses: PlayerStatsData
+    var headshotKills: PlayerStatsData
+    var top10: PlayerStatsData
+}
+struct PlayerStatsData{
+    var title: String
+    var value: Double
+    var averageData: Double
 }
