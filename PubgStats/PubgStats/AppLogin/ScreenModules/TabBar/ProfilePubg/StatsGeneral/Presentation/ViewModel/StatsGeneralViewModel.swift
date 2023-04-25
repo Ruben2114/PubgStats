@@ -131,13 +131,14 @@ final class StatsGeneralViewModel {
         //playerStats.wins * 100 / cota
         //declaar las constantes en playerstats
         //guardar en un array los valores y mostrarlos
-        //50 es el valor medio bueno de wins o eso creo
+        //4 es el porcertanje que le multiplico para que 25% de victorias sea el mejor dato
         guard let playerStats = dataPlayerStats else{ return []}
-        let values = [CGFloat(max(0,min(playerStats.wins * 100 / 50, 1.0))),
+        let values = [CGFloat(max(0,min(playerStats.wins / 100 * 4, 1.0))),
                      CGFloat(playerStats.top10 / 100),
                      CGFloat(playerStats.headshotKills / 100),
                      CGFloat(playerStats.suicides / 100),
                      CGFloat(playerStats.losses / 100)]
+        
         return values
     }
     
