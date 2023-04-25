@@ -44,7 +44,7 @@ class WeaponDataViewController: UIViewController {
         bind()
     }
     private func configUI(){
-        title = "Tipos de armas"
+        title = "weaponDataViewControllerTitle".localize()
         backButton(action: #selector(backButtonAction))
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -54,9 +54,9 @@ class WeaponDataViewController: UIViewController {
     private func bind() {
          viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
              switch state {
-             case .fail(_):
+             case .fail(let error):
                  self?.hideSpinner()
-                 self?.presentAlert(message: "Error al cargar los datos: por favor vuelva e intentarlo en unos segundos", title: "Error")
+                 self?.presentAlert(message: error, title: "Error")
              case .success:
                  self?.hideSpinner()
                  self?.collectionView.reloadData()
@@ -82,7 +82,6 @@ class WeaponDataViewController: UIViewController {
 extension WeaponDataViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.weaponType.count
-        
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ItemDataCollectionViewCell", for: indexPath) as! ItemDataCollectionViewCell

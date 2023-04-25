@@ -11,11 +11,11 @@ import Combine
 final class RegisterViewController: UIViewController,UISheetPresentationControllerDelegate {
     
     private lazy var containerStackView = makeStack(space: 20)
-    private lazy var titleLabel = makeLabel(title: "Crear cuenta", color: .white, font: 25, style: .title2)
-    private lazy var userTextField = makeTextFieldBlack(placeholder: "Nombre Usuario", isSecure: false)
-    private lazy var emailTextField = makeTextFieldBlack(placeholder: "Correo: pubg@pubgstats.com", isSecure: false)
-    private lazy var passwordTextField = makeTextFieldBlack(placeholder: "Contraseña", isSecure: true)
-    private lazy var acceptButton = makeButtonBlue(title: "Guardar")
+    private lazy var titleLabel = makeLabel(title: "titleRegister".localize(), color: .white, font: 25, style: .title2)
+    private lazy var userTextField = makeTextFieldBlack(placeholder: "userTextField".localize(), isSecure: false)
+    private lazy var emailTextField = makeTextFieldBlack(placeholder: "emailTextField".localize(), isSecure: false)
+    private lazy var passwordTextField = makeTextFieldBlack(placeholder: "passwordTextField".localize(), isSecure: true)
+    private lazy var acceptButton = makeButtonBlue(title: "titleAcceptButton".localize())
     
     var cancellable = Set<AnyCancellable>()
     private let viewModel: RegisterViewModel
@@ -81,23 +81,23 @@ final class RegisterViewController: UIViewController,UISheetPresentationControll
         guard let nameText = userTextField.text, let emailText = emailTextField.text else {return}
         guard viewModel.checkName(name: nameText) != true, !nameText.isEmpty else {
             if nameText.isEmpty {
-                presentAlert(message: "Por favor, rellene todos los campos", title: "Error")
+                presentAlert(message: "nameTextEmpty".localize(), title: "Error")
             }else {
-                presentAlert(message: "Este nombre ya existe", title: "Error")
+                presentAlert(message: "nameTextExist".localize(), title: "Error")
             }
             return
         }
         guard checkValidEmail(email: emailText) == true else {
-            presentAlert(message: "El correo no es válido", title: "Error")
+            presentAlert(message: "emailTextInvalid".localize(), title: "Error")
             return
         }
         guard viewModel.checkEmail(email: emailText) != true else {
-            presentAlert(message: "El correo ya existe", title: "Error")
+            presentAlert(message: "emailTextExist".localize(), title: "Error")
             return
         }
         guard let passwordText = passwordTextField.text?.hashString() else {return}
         guard !passwordText.isEmpty else {
-            presentAlert(message: "La contraseña tiene que tener como minimo un caracter", title: "Error")
+            presentAlert(message: "passwordTextEmpty".localize(), title: "Error")
             return}
         viewModel.saveUser(name: nameText, password: passwordText, email: emailText)
     }

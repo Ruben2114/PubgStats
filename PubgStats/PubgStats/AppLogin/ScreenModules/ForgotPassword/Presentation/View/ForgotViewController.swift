@@ -10,11 +10,11 @@ import Combine
 final class ForgotViewController: UIViewController, UISheetPresentationControllerDelegate {
     
     private lazy var containerStackView = makeStack(space: 30)
-    private lazy var titleLabel = makeLabel(title: "Recuperar contraseña", color: .white, font: 25, style: .title2)
-    private lazy var alertLabel = makeLabel(title: "Tu contraseña nueva será: 0000\n Por favor, cambiala en cuanto accedas a tu perfil.", color: .white, font: 15, style: .title2)
-    private lazy var userTextField = makeTextFieldBlack(placeholder: "Nombre Usuario", isSecure: false)
-    private lazy var emailTextField = makeTextFieldBlack(placeholder: "Correo: pubg@pubgstats.com", isSecure: false)
-    private lazy var acceptButton = makeButtonBlue(title: "Guardar")
+    private lazy var titleLabel = makeLabel(title: "titleForgot".localize(), color: .white, font: 25, style: .title2)
+    private lazy var alertLabel = makeLabel(title: "alertLabelForgot".localize(), color: .white, font: 15, style: .title2)
+    private lazy var userTextField = makeTextFieldBlack(placeholder: "userTextField".localize(), isSecure: false)
+    private lazy var emailTextField = makeTextFieldBlack(placeholder: "emailTextField".localize(), isSecure: false)
+    private lazy var acceptButton = makeButtonBlue(title: "titleAcceptButton".localize())
     
     var cancellable = Set<AnyCancellable>()
     private let viewModel: ForgotViewModel

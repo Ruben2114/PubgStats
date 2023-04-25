@@ -61,8 +61,8 @@ final class WeaponDataViewModel {
                 self?.saveWeaponData(sessionUser: user, weaponData: weapon)
                 self?.getWeapons(weaponData: weapon)
                 self?.state.send(.success)
-            case .failure(let error):
-                self?.state.send(.fail(error: "\(error)"))
+            case .failure(_):
+                self?.state.send(.fail(error: "fetchDataWeaponError".localize()))
             }
         }
     }

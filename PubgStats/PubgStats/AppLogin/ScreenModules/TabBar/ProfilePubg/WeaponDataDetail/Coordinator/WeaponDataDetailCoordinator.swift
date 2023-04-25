@@ -32,9 +32,7 @@ final class WeaponDataDetailCoordinatorImp: Coordinator {
         navigation?.pushViewController(weaponDataDetailView, animated: false)
     }
 }
-extension WeaponDataDetailCoordinatorImp: WeaponDataDetailCoordinator {
-    
-}
+extension WeaponDataDetailCoordinatorImp: WeaponDataDetailCoordinator {}
 
 private extension WeaponDataDetailCoordinatorImp {
     struct Dependency: WeaponDataDetailDependency {

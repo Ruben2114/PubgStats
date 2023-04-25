@@ -29,7 +29,7 @@ final class MainTabBarCoordinatorImp: Coordinator {
         let profileCoordinator = dependencies.external.profileCoordinator()
         let profileNavController = dependencies.external.profileNavigationController()
         profileNavController.viewControllers = []
-        profileNavController.tabBarItem.title = "Profile"
+        profileNavController.tabBarItem.title = "profileTabBarItem".localize()
         profileNavController.tabBarItem.image = UIImage(systemName: "person.circle.fill")
         viewControllers.append(profileNavController)
         profileCoordinator.start()
@@ -38,7 +38,7 @@ final class MainTabBarCoordinatorImp: Coordinator {
         let favouriteCoordinator = dependencies.external.favouriteCoordinator()
         let favouriteNavController = dependencies.external.favouriteNavigationController()
         favouriteNavController.viewControllers = []
-        favouriteNavController.tabBarItem.title = "Favourite"
+        favouriteNavController.tabBarItem.title = "favouriteTabBarItem".localize()
         favouriteNavController.tabBarItem.image = UIImage(systemName: "star.circle.fill")
         viewControllers.append(favouriteNavController)
         favouriteCoordinator.start()
@@ -47,7 +47,7 @@ final class MainTabBarCoordinatorImp: Coordinator {
         let guideCoordinator = dependencies.external.guideCoordinator()
         let guideNavController = dependencies.external.guideNavigationController()
         guideNavController.viewControllers = []
-        guideNavController.tabBarItem.title = "Guide"
+        guideNavController.tabBarItem.title = "guideTabBarItem".localize()
         guideNavController.tabBarItem.image = UIImage(systemName: "book.circle.fill")
         viewControllers.append(guideNavController)
         guideCoordinator.start()
@@ -56,7 +56,7 @@ final class MainTabBarCoordinatorImp: Coordinator {
         let settingsCoordinator = dependencies.external.settingsCoordinator()
         let settingsNavController = dependencies.external.settingsNavigationController()
         settingsNavController.viewControllers = []
-        settingsNavController.tabBarItem.title = "Ajustes"
+        settingsNavController.tabBarItem.title = "settingsTabBarItem".localize()
         settingsNavController.tabBarItem.image = UIImage(systemName: "gear.circle.fill")
         viewControllers.append(settingsNavController)
         settingsCoordinator.start()

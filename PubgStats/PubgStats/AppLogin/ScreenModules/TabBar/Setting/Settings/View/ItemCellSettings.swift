@@ -13,13 +13,13 @@ enum SettingsField{
     func title() -> String{
         switch self{
         case .help:
-            return "Dudas frecuentes"
+            return "settingsFieldHelp".localize()
         case .email:
-            return "Correo"
+            return "settingsFieldEmail".localize()
         case .legal:
-            return "Aviso legal"
+            return "settingsFieldLegal".localize()
         case .delete:
-            return "Borrar Perfil"
+            return "settingsFieldDelete".localize()
         }
     }
     func icon() -> String{

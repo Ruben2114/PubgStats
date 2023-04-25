@@ -12,13 +12,13 @@ import AVFoundation
 class LoginViewController: UIViewController {
     private var videoLogin: AVPlayer?
     private lazy var containerStackView = makeStack(space: 20)
-    private lazy var userTextField = makeTextFieldLogin(placeholder: "Usuario", isSecure: false)
-    private lazy var passwordTextField = makeTextFieldLogin(placeholder: "Contraseña", isSecure: true)
-    private lazy var loginButton: UIButton = makeButtonBlue(title: "Iniciar Sesión")
+    private lazy var userTextField = makeTextFieldLogin(placeholder: "userTextField".localize(), isSecure: false)
+    private lazy var passwordTextField = makeTextFieldLogin(placeholder: "passwordTextField".localize(), isSecure: true)
+    private lazy var loginButton: UIButton = makeButtonBlue(title: "titleLoginButton".localize())
     private lazy var registerButton: UIButton = makeButtonCorner(
-        title: "Crear Cuenta")
+        title: "titleRegister".localize())
     private lazy var forgotPasswordButton: UIButton = makeButtonClear(
-        title: "Recuperar Contraseña")
+        title: "titleForgot".localize())
     var playerLooper: AVPlayerLooper!
     var queuePlayer: AVQueuePlayer!
     
@@ -37,13 +37,10 @@ class LoginViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        configScroll()
         configUI()
         configConstraints()
         configTargets()
-        configKeyboardSubscription(mainScrollView: mainScrollView)
         bind()
-        hideKeyboard()
     }
     
     private func configureVideo() {
@@ -73,6 +70,9 @@ class LoginViewController: UIViewController {
     
     private func configUI() {
         view.backgroundColor = .systemBackground
+        configScroll()
+        configKeyboardSubscription(mainScrollView: mainScrollView)
+        hideKeyboard()
         configureVideo()
         configGradientForTitle()
     }

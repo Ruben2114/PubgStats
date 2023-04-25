@@ -14,7 +14,7 @@ extension MessageDisplayable where Self: UIViewController{
             title: title,
             message: message,
             preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Aceptar", style: .default)
+        let okAction = UIAlertAction(title: "actionAccept".localize(), style: .default)
         alertController.addAction(okAction)
         self.present(alertController, animated: true)
     }
@@ -37,7 +37,7 @@ extension MessageDisplayable where Self: UIViewController{
                 textField.isSecureTextEntry = isSecure
             }
         }
-        let actionAccept = UIAlertAction(title: "Aceptar", style: .default) { _ in
+        let actionAccept = UIAlertAction(title: "actionAccept".localize(), style: .default) { _ in
             var texts: [String] = []
             for textField in alert.textFields ?? [] {
                 if let text = textField.text {
@@ -46,7 +46,7 @@ extension MessageDisplayable where Self: UIViewController{
             }
             completed?(texts)
         }
-        let actionCancel = UIAlertAction(title: "cancelar", style: .destructive)
+        let actionCancel = UIAlertAction(title: "actionCancel".localize(), style: .destructive)
         alert.addAction(actionCancel)
         alert.addAction(actionAccept)
         present(alert, animated: true)

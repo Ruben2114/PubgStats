@@ -53,7 +53,6 @@ final class SurvivalDataViewModel {
                 }
             }
             content = newDict
-            
         }
     }
     func backButton() {

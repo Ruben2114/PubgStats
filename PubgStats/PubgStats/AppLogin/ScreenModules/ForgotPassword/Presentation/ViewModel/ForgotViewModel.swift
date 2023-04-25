@@ -25,7 +25,7 @@ final class ForgotViewModel {
             case true:
                 self?.state.send(.success)
             case false:
-                self?.state.send(.fail(error: "Usuario o email incorrecto."))
+                self?.state.send(.fail(error: "errorForgotViewModel".localize()))
             }
         }
     }

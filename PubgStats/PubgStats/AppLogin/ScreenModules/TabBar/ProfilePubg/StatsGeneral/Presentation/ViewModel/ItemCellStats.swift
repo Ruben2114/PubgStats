@@ -15,13 +15,13 @@ enum ItemCellStats{
     func title() -> String{
         switch self{
         case .dataKill:
-            return "Datos Muertes"
+            return "itemCellStatsDataKill".localize()
         case .dataWeapon:
-            return "Datos Armas"
+            return "itemCellStatsDataWeapon".localize()
         case .dataSurvival:
-            return "Estadisticas Modo Survival"
+            return "itemCellStatsDataSurvival".localize()
         case .dataGamesModes:
-            return "Modos de juego"
+            return "itemCellStatsDataGamesModes".localize()
         }
     }
     func image() -> String{

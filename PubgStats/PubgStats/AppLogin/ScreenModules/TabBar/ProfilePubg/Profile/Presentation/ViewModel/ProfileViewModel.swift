@@ -30,8 +30,8 @@ final class ProfileViewModel {
             switch result {
             case .success(let player):
                 self?.state.send(.success(model: player))
-            case .failure(let error):
-                self?.state.send(.fail(error: "\(error)"))
+            case .failure(_):
+                self?.state.send(.fail(error: "errorProfileViewModel".localize()))
             }
         }
     }

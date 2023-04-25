@@ -43,7 +43,6 @@ class RadarChartView: UIView {
         UIColor(red: 0, green: 1, blue: 0, alpha: 0.5).setFill()
         path.fill()
 
-
         for (index, point) in vertices.enumerated() {
             let label = UILabel()
             label.text = labels[index]

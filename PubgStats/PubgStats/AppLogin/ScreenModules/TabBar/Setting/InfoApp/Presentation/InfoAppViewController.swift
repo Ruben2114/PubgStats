@@ -29,7 +29,7 @@ class InfoAppViewController: UIViewController {
     }
     private func configUI() {
         view.backgroundColor = .systemBackground
-        title = "Aviso Legal"
+        title = "infoAppViewControllerTitle".localize()
         backButton(action: #selector(backButtonAction))
     }
     private func configConstraints() {

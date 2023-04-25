@@ -26,7 +26,7 @@ class SurvivalDataViewController: UIViewController {
         fetchData()
     }
     func configUI(){
-        title = "Datos survival"
+        title = "survivalDataViewControllerTitle".localize()
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.allowsSelection = false

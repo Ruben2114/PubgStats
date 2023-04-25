@@ -34,7 +34,6 @@ struct StatsGeneralDataUseCaseImp: StatsGeneralDataUseCase {
     func getGamesModes(for sessionUser: ProfileEntity, type: NavigationStats) -> [GamesModes]?{
         statsGeneralRepository.getGamesModes(for: sessionUser, type: type)
     }
-    
     func saveGamesModeData(sessionUser: ProfileEntity, gamesModeData: GamesModesDTO, type: NavigationStats){
         statsGeneralRepository.saveGamesModeData(sessionUser: sessionUser, gamesModeData: gamesModeData, type: type)
     }

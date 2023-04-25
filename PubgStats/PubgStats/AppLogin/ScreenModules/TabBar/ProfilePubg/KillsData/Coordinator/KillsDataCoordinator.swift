@@ -32,9 +32,7 @@ final class KillsDataCoordinatorImp: Coordinator {
         navigation?.pushViewController(killDataView, animated: false)
     }
 }
-extension KillsDataCoordinatorImp: KillsDataCoordinator {
-    
-}
+extension KillsDataCoordinatorImp: KillsDataCoordinator {}
 
 private extension KillsDataCoordinatorImp {
     struct Dependency: KillsDataDependency {

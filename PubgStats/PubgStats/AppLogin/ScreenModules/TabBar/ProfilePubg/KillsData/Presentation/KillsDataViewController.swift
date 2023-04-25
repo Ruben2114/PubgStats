@@ -28,7 +28,7 @@ class KillsDataViewController: UIViewController {
         fetchData()
     }
     func configUI(){
-        title = "Datos muertes totales"
+        title = "killsDataViewControllerTitle".localize()
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.allowsSelection = false

@@ -30,7 +30,7 @@ final class LoginViewModel {
                 self?.state.send(.success)
                 self?.coordinator?.performTransition(.goProfile)
             case false:
-                self?.state.send(.fail(error: "Nombre o contraseña incorrecto."))
+                self?.state.send(.fail(error: "errorLoginViewModel".localize()))
             }
         }
     }

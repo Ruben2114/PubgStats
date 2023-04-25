@@ -36,7 +36,7 @@ class WeaponDataDetailViewController: UIViewController {
     func configUI(){
         view.backgroundColor = .systemBackground
         guard let weapon = sessionUser.weapon else {return}
-        title = "Detalle Arma \(weapon)"
+        title = "weaponDataDetailViewControllerTitle".localize() + "\(weapon)"
         backButton(action: #selector(backButtonAction))
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")

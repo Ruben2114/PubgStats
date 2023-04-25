@@ -37,20 +37,3 @@ struct AirDropsCalledDTO: Decodable {
 struct HotDropLandingsDTO: Decodable {
     let total: Double
 }
-
-/*
-//https://api.pubg.com/shards/steam/players/account.a4ef7b3e986f42baa12a7583cdea40fb
- //https://api.pubg.com/shards/steam/players?filter[playerNames]=Leyenda21
- 
- 
- survivalMasterySummary
- //https://api.pubg.com/shards/steam/players/account.a4ef7b3e986f42baa12a7583cdea40fb/survival_mastery
-
-
- weaponMasterySummary
-//https://api.pubg.com/shards/steam/players/account.a4ef7b3e986f42baa12a7583cdea40fb/weapon_mastery
- 
- playerSeason- tipos de juego
- //https://api.pubg.com/shards/steam/players/account.a4ef7b3e986f42baa12a7583cdea40fb/seasons/lifetime?filter[gamepad]=false
- 
-*/

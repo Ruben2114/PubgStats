@@ -30,7 +30,7 @@ final class HelpDataViewController: UIViewController {
     
     private func configUI() {
         view.backgroundColor = .systemBackground
-        title = "Dudas Frecuentes"
+        title = "helpDataViewControllerTitle".localize()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")

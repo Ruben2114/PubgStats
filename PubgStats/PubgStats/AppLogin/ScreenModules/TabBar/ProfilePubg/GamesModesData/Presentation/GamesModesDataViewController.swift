@@ -43,7 +43,7 @@ class GamesModesDataViewController: UIViewController {
         collectionView.reloadData()
     }
     func configUI(){
-        title = "Modos de juego"
+        title = "gamesModesDataViewControllerTitle".localize()
         view.backgroundColor = .systemGroupedBackground
         backButton(action: #selector(backButtonAction))
         collectionView.dataSource = self

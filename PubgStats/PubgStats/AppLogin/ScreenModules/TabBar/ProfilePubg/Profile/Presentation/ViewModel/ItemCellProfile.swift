@@ -16,19 +16,19 @@ enum ProfileField{
     func title() -> String{
         switch self{
         case .name:
-            return "Nombre"
+            return "profileFieldName".localize()
         case .email:
-            return "Correo"
+            return "profileFieldEmail".localize()
         case .password:
-            return "Contraseña"
+            return "profileFieldPassword".localize()
         case .image:
-            return "Imagen"
+            return "profileFieldImage".localize()
         case .login:
-            return "Registro cuenta Pubg"
+            return "profileFieldLogin".localize()
         case .stats:
-            return "Estadísticas cuenta"
+            return "profileFieldStats".localize()
         case .delete:
-            return "Borrar cuenta Pubg"
+            return "profileFieldDelete".localize()
         }
     }
     func icon() -> String{

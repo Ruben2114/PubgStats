@@ -28,7 +28,7 @@ final class RegisterViewModel {
             case true:
                 self?.state.send(.success)
             case false:
-                self?.state.send(.fail(error: "Lo siento, ha ocurrido un problema con el servidor"))
+                self?.state.send(.fail(error: "errorRegisterViewModel".localize()))
             }
         }
     }

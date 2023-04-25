@@ -28,8 +28,8 @@ final class FavouriteViewModel {
                 guard let account = player.id, !account.isEmpty, let playerName = player.name, !playerName.isEmpty, let user = self?.sessionUser else {return}
                 self?.saveFav(sessionUser: user, player: playerName, account: account)
                 self?.state.send(.success(model: player))
-            case .failure(let error):
-                self?.state.send(.fail(error: "\(error)"))
+            case .failure(_):
+                self?.state.send(.fail(error: "errorFavouriteViewModel".localize()))
             }
         }
     }

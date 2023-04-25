@@ -54,8 +54,8 @@ final class StatsGeneralViewModel {
                 guard let user = self?.sessionUser else{return}
                 self?.statsGeneralDataUseCase.saveSurvival(sessionUser: user, survivalData: [survival], type: type)
                 dispatchGroup.leave()
-            case .failure(let error):
-                self?.state.send(.fail(error: "\(error)"))
+            case .failure(_):
+                self?.state.send(.fail(error: "fetchDataStatsError".localize()))
             }
         }
         dispatchGroup.enter()
@@ -65,8 +65,8 @@ final class StatsGeneralViewModel {
                 guard let user = self?.sessionUser else{return}
                 self?.statsGeneralDataUseCase.saveGamesModeData(sessionUser: user, gamesModeData: gamesMode, type: type)
                 dispatchGroup.leave()
-            case .failure(let error):
-                self?.state.send(.fail(error: "\(error)"))
+            case .failure(_):
+                self?.state.send(.fail(error: "fetchDataStatsError".localize()))
             }
         }
         dispatchGroup.notify(queue: DispatchQueue.main) {
@@ -107,7 +107,6 @@ final class StatsGeneralViewModel {
                  result[element.0] = element.1 as? Double ?? 0.0
              }
          }
-      
         let playerStats = PlayerStats(
             wins: (combinedDataGamesModes["wins"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0),
             suicides: (combinedDataGamesModes["suicides"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0),
@@ -120,17 +119,21 @@ final class StatsGeneralViewModel {
     func dataRadarChart() -> [String]{
         let dataPlayerStats = allDataRadarChart()
         guard let playerStats = dataPlayerStats else{ return []}
-        let data = ["Victorias:\n\(String(format: "%.1f", playerStats.wins))%",
-                    "Top 10:\n\(String(format: "%.0f", playerStats.top10))%",
-                    "Muerte por disparo\n en la cabeza:\n\(String(format: "%.0f", playerStats.headshotKills))%",
-                    "Suicidios:\n\(String(format: "%.0f", playerStats.suicides))%",
-                    "Derrota:\n\(String(format: "%.1f", playerStats.losses))%"]
+        let data = ["playerStatsV".localize() + "\n\(String(format: "%.1f", playerStats.wins))%",
+                    "playerStatsT".localize() + "\n\(String(format: "%.0f", playerStats.top10))%",
+                    "playerStatsMD" + "\n\(String(format: "%.0f", playerStats.headshotKills))%",
+                    "playerStatsS" + "\n\(String(format: "%.0f", playerStats.suicides))%",
+                    "playerStatsD" + "\n\(String(format: "%.1f", playerStats.losses))%"]
         return data
     }
     func valuesRadarChart() -> [CGFloat]{
         let dataPlayerStats = allDataRadarChart()
+        //playerStats.wins * 100 / cota
+        //declaar las constantes en playerstats
+        //guardar en un array los valores y mostrarlos
+        //50 es el valor medio bueno de wins o eso creo
         guard let playerStats = dataPlayerStats else{ return []}
-       let values = [CGFloat(playerStats.wins / 100),
+        let values = [CGFloat(max(0,min(playerStats.wins * 100 / 50, 1.0))),
                      CGFloat(playerStats.top10 / 100),
                      CGFloat(playerStats.headshotKills / 100),
                      CGFloat(playerStats.suicides / 100),
@@ -153,12 +156,4 @@ final class StatsGeneralViewModel {
     func goGamesModes() {
         coordinator?.performTransition(.goGamesModes)
     }
-}
-
-struct PlayerStats {
-    var wins: Double
-    var suicides: Double
-    var losses: Double
-    var headshotKills: Double
-    var top10: Double
 }

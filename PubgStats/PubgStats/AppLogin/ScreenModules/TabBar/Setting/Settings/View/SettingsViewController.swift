@@ -30,7 +30,7 @@ final class SettingsViewController: UIViewController {
     
     private func configUI() {
         view.backgroundColor = .systemGroupedBackground
-        title = "Ajustes"
+        title = "settingsDataViewControllerTitle".localize()
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -52,11 +52,11 @@ extension SettingsViewController: MFMailComposeViewControllerDelegate{
         case .saved:
             break
         case .sent:
-            presentAlertTimer(message: "Enviado con éxito", title: "", timer: 1)
+            presentAlertTimer(message: "mailComposeControllerSent".localize(), title: "", timer: 1)
         case .failed:
-            presentAlert(message: "Lo siento, no se ha podido enviar el correo", title: "Error")
+            presentAlert(message: "mailComposeControllerFailed".localize(), title: "Error")
         @unknown default:
-            presentAlert(message: "Ha ocurrido un error", title: "Error")
+            presentAlert(message: "mailComposeControllerDefault".localize(), title: "Error")
         }
     }
 }
@@ -90,7 +90,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate{
             }
             let sendMail = MFMailComposeViewController()
             sendMail.setToRecipients(["cervigon21@gmail.com"])
-            sendMail.setSubject("Correo de prueba")
+            sendMail.setSubject("sendMailSetSubject".localize())
             sendMail.setMessageBody("", isHTML: true)
             sendMail.mailComposeDelegate = self
             present(sendMail, animated: true, completion: nil)

@@ -11,17 +11,17 @@ enum ItemCellHelpData{
     func question() -> String{
         switch self{
         case .reload:
-            return "¿Cuando se recargan los datos?"
+            return "itemCellHelpDataQuestionReload".localize()
         case .deleteFav:
-            return "¿Cómo borro a los usuarios favoritos de mi lista?"
+            return "itemCellHelpDataQuestionDeleteFav".localize()
         }
     }
     func response() -> String{
         switch self{
         case .reload:
-            return "La recarga de los datos esta limitada por los servidores, si usted decide recargar podrá realizar dicha recarga 1 vez cada 2 horas. Sino automaticamente los datos se recargaran cada 12 horas desde su última búsqueda"
+            return "itemCellHelpDataResponseReload".localize()
         case .deleteFav:
-            return "Desliza el perfil de tu lista hacia la izquierda"
+            return "itemCellHelpDataResponseDeleteFav".localize()
         }
     }
 }

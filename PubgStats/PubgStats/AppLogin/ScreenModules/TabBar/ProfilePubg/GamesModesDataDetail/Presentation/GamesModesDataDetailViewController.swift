@@ -34,7 +34,7 @@ class GamesModesDataDetailViewController: UIViewController {
     
     func configUI(){
         view.backgroundColor = .systemBackground
-        title = "Modo de juego: \(sessionUser.gameMode ?? "")"
+        title = "gamesModesDataDetailViewControllerTitle".localize() + "\(sessionUser.gameMode ?? "")"
         backButton(action: #selector(backButtonAction))
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")

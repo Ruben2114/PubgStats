@@ -11,7 +11,7 @@ import Combine
 class FavouriteViewController: UIViewController {
     private let searchBar: UISearchBar = {
         let search = UISearchBar()
-        search.placeholder = "Nombre de usuarios Pubg"
+        search.placeholder = "searchPlaceholder".localize()
         search.translatesAutoresizingMaskIntoConstraints = false
         search.backgroundColor = .systemGroupedBackground
         return search
@@ -52,12 +52,10 @@ class FavouriteViewController: UIViewController {
     private func bind() {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
             switch state {
-            case .fail(_):
+            case .fail(error: let error):
                 self?.hideSpinner()
-                self?.presentAlert(message: "El nombre de usuario no existe", title: "Error")
+                self?.presentAlert(message: error, title: "Error")
             case .success(_):
-                let directorio = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-                        print(directorio)
                 self?.searchFavourite()
                 self?.hideSpinner()
                 self?.tableView.reloadData()
@@ -68,7 +66,7 @@ class FavouriteViewController: UIViewController {
     }
     private func configUI() {
         view.backgroundColor = .systemGroupedBackground
-        navigationItem.title = "Tus usuarios preferidos"
+        navigationItem.title = "favouriteViewControllerNavigationItem".localize()
         searchBar.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
@@ -101,7 +99,7 @@ extension FavouriteViewController: UISearchBarDelegate {
             modelNames.append(modelName)
         }
         guard modelNames.contains(text) != true else {
-            presentAlert(message: "Ya tienes en tu lista a un usuario con ese nombre", title: "Error")
+            presentAlert(message: "searchBarSearchButtonClickedError".localize(), title: "Error")
             return
         }
         viewModel.searchFav(name: text)
@@ -112,7 +110,7 @@ extension FavouriteViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if profilesFavourite.isEmpty {
             let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-            messageLabel.text = "Puedes añadir aqui tus perfiles favoritos"
+            messageLabel.text = "profilesFavouriteEmpty".localize()
             messageLabel.textColor = .black
             messageLabel.numberOfLines = 0
             messageLabel.textAlignment = .center
@@ -133,7 +131,6 @@ extension FavouriteViewController: UITableViewDataSource{
         let accountModel = profilesFavourite[indexPath.row].account
         var listContent = UIListContentConfiguration.cell()
         listContent.textProperties.font = UIFont.systemFont(ofSize: 20)
-        //TODO: crear tabla donde se vean mas datos, tipo level, muertes... creada en xib en tableviewcell/common
         listContent.text = nameModel
         listContent.secondaryText = accountModel
         cell.contentConfiguration = listContent
@@ -144,7 +141,7 @@ extension FavouriteViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(
             style: .destructive,
-            title: "Borrar",
+            title: "profilesFavouriteDelete".localize(),
             handler: { _, _, _  in
                 let perfilFavorito = self.profilesFavourite[indexPath.row]
                 self.viewModel.deleteFavouriteTableView(perfilFavorito)

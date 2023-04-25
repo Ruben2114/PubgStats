@@ -43,7 +43,7 @@ final class ProfileViewController: UIViewController {
     
     private func configUI() {
         view.backgroundColor = tableView.backgroundColor
-        navigationItem.title = "Perfil Personal"
+        navigationItem.title = "profileViewControllerNavigationItem".localize()
         backButton(action: #selector(backButtonAction))
         tableView.dataSource = self
         tableView.delegate = self
@@ -51,8 +51,8 @@ final class ProfileViewController: UIViewController {
     private func bind() {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
             switch state {
-            case .fail(_):
-                self?.presentAlert(message: "El nombre de usuario no existe", title: "Error")
+            case .fail(let error):
+                self?.presentAlert(message: error, title: "Error")
             case .success(let model):
                 guard let account = model.id, !account.isEmpty, let player = model.name, !player.isEmpty else {return}
                 self?.viewModel.saveUser(player: player, account: account)
@@ -83,11 +83,11 @@ final class ProfileViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     @objc func backButtonAction() {
-        let alert = UIAlertController(title: "Aviso", message: "¿Estas seguro de cerrar sesión?", preferredStyle: .alert)
-        let actionAccept = UIAlertAction(title: "Aceptar", style: .default){ [weak self]_ in
+        let alert = UIAlertController(title: "alertTitle".localize(), message: "profileBackButtonAction".localize(), preferredStyle: .alert)
+        let actionAccept = UIAlertAction(title: "actionAccept".localize(), style: .default){ [weak self]_ in
             self?.viewModel.backButton()
         }
-        let actionCancel = UIAlertAction(title: "Cancelar", style: .destructive)
+        let actionCancel = UIAlertAction(title: "actionCancel".localize(), style: .destructive)
         alert.addAction(actionAccept)
         alert.addAction(actionCancel)
         present(alert, animated: true)
@@ -125,24 +125,26 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
         let profileFieldInfo = viewModel.items[indexPath.section][indexPath.row]
         switch profileFieldInfo {
         case .name:
-            presentAlertTextField(title: "Cambio de nombre",
-                                  message: "¿Estás seguro de que quieres cambiar el nombre?",
-                                  textFields: [(title: "Nuevo nombre", placeholder: "Nuevo nombre")],
+            presentAlertTextField(title: "profileFieldInfoNameTitle".localize(),
+                                  message: "profileFieldInfoNameMessage".localize(),
+                                  textFields: [(title: "profileFieldInfoNameTextFields".localize(), placeholder: "profileFieldInfoNameTextFields".localize())],
                                   completed: { text in
                 self.nameCell(text: text)
             }, isSecure: false)
         case .email:
-            presentAlertTextField(title: "Cambio de correo",
-                                  message: "¿Estás seguro de que quieres cambiar el correo?",
-                                  textFields: [(title: "Nuevo correo", placeholder: "Nuevo correo")],
+            presentAlertTextField(title: "profileFieldInfoEmailTitle".localize(),
+                                  message: "profileFieldInfoEmailMessage".localize(),
+                                  textFields: [(title: "profileFieldInfoEmailTextFields".localize(), placeholder: "profileFieldInfoEmailTextFields".localize())],
                                   completed: { text in
                 self.emailCell(text: text)
             }, isSecure: false)
         case .password:
-            presentAlertTextField(title: "Cambio de contraseña",
-                                  message: "¿Estás seguro de que quieres cambiar la contraseña?",
-                                  textFields: [(title: "Nueva contraseña", placeholder: "Nueva contraseña"),
-                                               (title: "Repite la nueva contraseña", placeholder: "Repite la nueva contraseña")],
+            presentAlertTextField(title: "profileFieldInfoPasswordTitle".localize(),
+                                  message: "profileFieldInfoPasswordMessage".localize(),
+                                  textFields: [(title: "profileFieldInfoPasswordTextFields".localize(),
+                                                placeholder: "profileFieldInfoPasswordTextFields".localize()),
+                                               (title: "profileFieldInfoPasswordTextFieldsSecond".localize(),
+                                                placeholder: "profileFieldInfoPasswordTextFieldsSecond".localize())],
                                   completed: { text in
                 self.passwordCell(text: text)
             }, isSecure: true)
@@ -153,21 +155,23 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
             vc.allowsEditing = true
             present(vc, animated: true)
         case .login:
-            presentAlertTextField(title: "Jugador",
+            presentAlertTextField(title: "profileFieldInfoLoginTitle".localize(),
                                   message: "",
-                                  textFields: [(title: "Nuevo jugador", placeholder: "Nombre jugador")],
+                                  textFields: [(title: "profileFieldInfoLoginTextFields".localize(), placeholder: "profileFieldInfoLoginTextFields".localize())],
                                   completed: { text in
                 self.loginCell(text: text)
             }, isSecure: false)
         case .stats:
             viewModel.didTapStatsgAccountButton()
         case .delete:
-            let alert = UIAlertController(title: "Aviso", message: "¿Estás seguro de borrar tu cuenta asociada de Pubg?", preferredStyle: .alert)
-            let actionAccept = UIAlertAction(title: "Aceptar", style: .default){ [weak self]_ in
+            let alert = UIAlertController(title: "alertTitle".localize(),
+                                          message: "profileFieldInfoDeleteMessage".localize(),
+                                          preferredStyle: .alert)
+            let actionAccept = UIAlertAction(title: "actionAccept".localize(), style: .default){ [weak self]_ in
                 self?.viewModel.deletePubgAccount()
                 self?.tableView.reloadData()
             }
-            let actionCancel = UIAlertAction(title: "Cancelar", style: .destructive)
+            let actionCancel = UIAlertAction(title: "actionCancel".localize(), style: .destructive)
             alert.addAction(actionCancel)
             alert.addAction(actionAccept)
             present(alert, animated: true)
@@ -195,27 +199,23 @@ private extension ProfileViewController {
         guard let nameText = text.first else {return}
         guard viewModel.checkName(name: nameText) != true, !nameText.isEmpty else {
             if nameText.isEmpty {
-                presentAlert(message: "El nombre debe tener mínimo un caracter", title: "Error")
+                presentAlert(message: "nameTextEmpty".localize(), title: "Error")
             }else {
-                presentAlert(message: "Este nombre ya existe", title: "Error")
+                presentAlert(message: "nameTextExist".localize(), title: "Error")
             }
             return
         }
         viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),nameText, type: "name")
-        presentAlertTimer(message: "Cambiado con éxito", title: "Aviso", timer: 1.0)
+        presentAlertTimer(message: "profileNameCellMessage".localize(), title: "alertTitle".localize(), timer: 1.0)
         viewChange()
     }
     func emailCell(text: [String]){
-        guard let newEmail = text.first, !newEmail.isEmpty else {
-            presentAlert(message: "El correo tiene que tener como mínimo un caracter", title: "Error")
-            return
-        }
-        guard checkValidEmail(email: newEmail) == true else {
-            presentAlert(message: "El correo no es válido", title: "Error")
+        guard let newEmail = text.first, checkValidEmail(email: newEmail) == true else {
+            presentAlert(message: "emailTextInvalid".localize(), title: "Error")
             return
         }
         guard viewModel.checkEmail(email: newEmail) != true else {
-            presentAlert(message: "El correo ya existe", title: "Error")
+            presentAlert(message: "emailTextExist".localize(), title: "Error")
             return
         }
         viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),newEmail, type: "email")
@@ -223,10 +223,10 @@ private extension ProfileViewController {
     }
     func passwordCell(text: [String]){
         guard let newPassword = text.first, !newPassword.isEmpty else {
-            presentAlert(message: "La contraseña tiene que tener como mínimo un caracter", title: "Error")
+            presentAlert(message: "passwordTextEmpty".localize(), title: "Error")
             return}
         guard newPassword == text.last else {
-            presentAlert(message: "Contraseñas diferentes", title: "Error")
+            presentAlert(message: "profilePasswordCellDifferent".localize(), title: "Error")
             return}
         guard let newPasswordHash = newPassword.hashString() else {return}
         viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),newPasswordHash, type: "password")
@@ -234,7 +234,7 @@ private extension ProfileViewController {
     }
     func loginCell(text: [String]){
         guard let nameText = text.first, !nameText.isEmpty else {
-            presentAlert(message: "No existen jugadores sin nombre", title: "Error")
+            presentAlert(message: "profileLoginCellInvalid".localize(), title: "Error")
             return}
         viewModel.dataGeneral(name: nameText)
     }

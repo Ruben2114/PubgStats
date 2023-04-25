@@ -30,7 +30,7 @@ class GuideViewController: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Guide"
+        title = "guideViewControllerTitle".localize()
         webView.navigationDelegate = self
         bind()
         view = webView
