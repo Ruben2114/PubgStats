@@ -15,6 +15,8 @@ final class StatsGeneralViewModel {
     private let statsGeneralDataUseCase: StatsGeneralDataUseCase
     private let sessionUser: ProfileEntity
     var itemCellStats: [ItemCellStats] = [ItemCellStats.dataKill, ItemCellStats.dataWeapon, ItemCellStats.dataSurvival, ItemCellStats.dataGamesModes]
+    var valuesRadarChart: [CGFloat] = []
+    var titleRadarChart: [String] = []
     init(dependencies: StatsGeneralDependency) {
         self.dependencies = dependencies
         self.coordinator = dependencies.resolve()
@@ -90,10 +92,10 @@ final class StatsGeneralViewModel {
     }
     
     let localData = LocalDataProfileServiceImp()
-    func allDataRadarChart() -> PlayerStats? {
-         guard let type = coordinator?.type else {return nil}
+    func allDataRadarChart(){
+         guard let type = coordinator?.type else {return}
          let gamesModesData = statsGeneralDataUseCase.getGamesModes(for: sessionUser, type: type)
-         guard let gamesModes = gamesModesData else {return nil}
+         guard let gamesModes = gamesModesData else {return}
          var dataGamesModes: [(String, Any)] = []
          for mode in gamesModes {
              let keyValues = mode.entity.attributesByName.map { ($0.key, mode.value(forKey: $0.key) ?? "") }
@@ -107,41 +109,31 @@ final class StatsGeneralViewModel {
                  result[element.0] = element.1 as? Double ?? 0.0
              }
          }
+        //la primera funcion coge los datos y la segunda los trata, dividir en dos cuando ponga el usecase
         
- 
-        let playerStats = PlayerStats(
-            wins: PlayerStatsData(title: "playerStatsV".localize(), value: (combinedDataGamesModes["wins"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0), averageData: 0.25),
-            suicides: PlayerStatsData(title: "playerStatsS".localize(), value: (combinedDataGamesModes["suicides"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0), averageData: 0),
-            losses: PlayerStatsData(title: "playerStatsD".localize(), value: (combinedDataGamesModes["losses"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0), averageData: 0),
-            headshotKills: PlayerStatsData(title: "playerStatsMD".localize(), value: (combinedDataGamesModes["headshotKills"] ?? 0) * 100 / (combinedDataGamesModes["kills"] ?? 0), averageData: 0),
-            top10: PlayerStatsData(title: "playerStatsT".localize(), value: (combinedDataGamesModes["top10S"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0), averageData: 0)
-        )
-        return playerStats
-    }
-    func dataRadarChart() -> [String]{
-        let dataPlayerStats = allDataRadarChart()
-        guard let playerStats = dataPlayerStats else{ return []}
-        let data = [playerStats.wins.title + "\n\(String(format: "%.1f", playerStats.wins.value))%",
-                    playerStats.top10.title + "\n\(String(format: "%.0f", playerStats.top10.value))%",
-                    playerStats.headshotKills.title + "\n\(String(format: "%.0f", playerStats.headshotKills.value))%",
-                    playerStats.suicides.title + "\n\(String(format: "%.0f", playerStats.suicides.value))%",
-                    playerStats.losses.title + "\n\(String(format: "%.1f", playerStats.losses.value))%"]
-        return data
-    }
-    func valuesRadarChart() -> [CGFloat]{
-        let dataPlayerStats = allDataRadarChart()
-        //playerStats.wins * 100 / cota
-        //declaar las constantes en playerstats
-        //guardar en un array los valores y mostrarlos
-        //25% de victorias sea el mejor dato
-        guard let playerStats = dataPlayerStats else{ return []}
-        let values = [CGFloat(max(0,min(playerStats.wins.value / 100 / playerStats.wins.averageData, 1.0))),
-                     CGFloat(playerStats.top10.value / 100),
-                     CGFloat(playerStats.headshotKills.value / 100),
-                     CGFloat(playerStats.suicides.value / 100), // cambiar
-                     CGFloat(playerStats.losses.value / 100)] //cambiar
+        let winsAverageData = 0.25
+        let killsAverageData = 0.30
+        let lossesAverageData = 1.0
+        let headshotKillsAverageData = 1.0
+        let top10AverageData = 1.0
         
-        return values
+        let winsValue = (combinedDataGamesModes["wins"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0)
+        let killsValue = (combinedDataGamesModes["kills"] ?? 0) / (combinedDataGamesModes["roundsPlayed"] ?? 0)
+        let lossesValue = (combinedDataGamesModes["losses"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0)
+        let headshotKillsValue = (combinedDataGamesModes["headshotKills"] ?? 0) * 100 / (combinedDataGamesModes["kills"] ?? 0)
+        let top10Value = (combinedDataGamesModes["top10S"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0)
+        
+        let win = PlayerStats2.wins(title: "playerStatsV".localize() + "\(String(format: "%.1f", winsValue))%", value: CGFloat(max(0,min(winsValue / 100 / winsAverageData, 1.0))))
+        let kills = PlayerStats2.kills(title: "playerStatsK".localize() + "\(String(format: "%.1f", killsValue))", value: CGFloat(max(0,min(killsValue / 100 / killsAverageData, 1.0))))
+        let losses = PlayerStats2.losses(title: "playerStatsD".localize() + "\(String(format: "%.1f", lossesValue))%", value: CGFloat(max(0,min(lossesValue / 100 / lossesAverageData, 1.0))))
+        let headshotKills = PlayerStats2.headshotKills(title: "playerStatsMD".localize() + "\(String(format: "%.1f", headshotKillsValue))%", value: CGFloat(max(0,min(headshotKillsValue / 100 / headshotKillsAverageData, 1.0))))
+        let top10 = PlayerStats2.top10(title: "playerStatsT".localize() + "\(String(format: "%.1f", top10Value))%", value: CGFloat(max(0,min(top10Value / 100 / top10AverageData, 1.0))))
+        
+         let item = [win,losses,headshotKills,kills,top10]
+         let values = item.map { $0.value()}
+         valuesRadarChart = values
+         let title = item.map { $0.title()}
+         titleRadarChart = title
     }
     
     func backButton() {

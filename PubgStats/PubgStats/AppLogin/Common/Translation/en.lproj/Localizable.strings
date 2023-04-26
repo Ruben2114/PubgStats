@@ -61,11 +61,11 @@
 "itemCellStatsDataWeapon" = "Weapon Data";
 "itemCellStatsDataSurvival" = "Survival Mode Statistics";
 "itemCellStatsDataGamesModes" = "Game Modes";
-"playerStatsV" = "Wins:";
-"playerStatsT" = "Top 10:";
-"playerStatsMD" = "headshot kills:";
-"playerStatsS" = "Suicides:";
-"playerStatsD" = "Losses:";
+"playerStatsV" = "Wins ";
+"playerStatsT" = "Top 10 ";
+"playerStatsMD" = "headshot kills ";
+"playerStatsS" = "Suicides ";
+"playerStatsK" = "Kills per round ";
 "profileViewControllerNavigationItem" = "Personal Profile";
 "profileBackButtonAction" = "Are you sure to logout?";
 "actionAccept" = "Accept";

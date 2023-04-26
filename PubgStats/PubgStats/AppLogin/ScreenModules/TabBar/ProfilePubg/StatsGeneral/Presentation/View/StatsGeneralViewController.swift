@@ -23,13 +23,55 @@ final class StatsGeneralViewController: UIViewController {
     private lazy var timePlayedLabel = makeLabelStatsBoder(height: 65)
     private lazy var bestRankedLabel = makeLabelStatsBoder(height: 65)
     private lazy var radarChartView: RadarChartView = {
-        let radar = RadarChartView()
+        let radar = RadarChartView(values: viewModel.valuesRadarChart, buttonsTitle: viewModel.titleRadarChart)
         radar.translatesAutoresizingMaskIntoConstraints = false
         radar.backgroundColor = .clear
-        radar.values = viewModel.valuesRadarChart()
-        radar.labels = viewModel.dataRadarChart()
+        radar.buttons.forEach({ button in
+            button.addTarget(self, action: #selector(handleMenuButtonTapped(_:)), for: .touchUpInside)
+        })
         return radar
     }()
+    
+    @objc func handleMenuButtonTapped(_ sender: UIButton) {
+        let wins = UIAction(title: "playerStatsV".localize(), handler: { [weak self] _ in
+            sender.setTitle(self?.viewModel.titleRadarChart[0], for: .normal)
+            guard var value = self?.viewModel.valuesRadarChart else {return}
+            value[sender.tag] = value[0]
+            self?.radarChartView.values = value
+            self?.radarChartView.setNeedsDisplay()
+        })
+        let kills = UIAction(title: "playerStatsK".localize(), handler: { [weak self] _ in
+            sender.setTitle(self?.viewModel.titleRadarChart[1], for: .normal)
+            guard var value = self?.viewModel.valuesRadarChart else {return}
+            value[sender.tag] = value[1]
+            self?.radarChartView.values = value
+            self?.radarChartView.setNeedsDisplay()
+        })
+        let headshotKills = UIAction(title: "playerStatsMD".localize(), handler: { [weak self] _ in
+            sender.setTitle(self?.viewModel.titleRadarChart[2], for: .normal)
+            guard var value = self?.viewModel.valuesRadarChart else {return}
+            value[sender.tag] = value[2]
+            self?.radarChartView.values = value
+            self?.radarChartView.setNeedsDisplay()
+        })
+        let losses = UIAction(title: "playerStatsD".localize(), handler: { [weak self] _ in
+            sender.setTitle(self?.viewModel.titleRadarChart[3], for: .normal)
+            guard var value = self?.viewModel.valuesRadarChart else {return}
+            value[sender.tag] = value[3]
+            self?.radarChartView.values = value
+            self?.radarChartView.setNeedsDisplay()
+        })
+        let top10 = UIAction(title: "playerStatsT".localize(), handler: { [weak self] _ in
+            sender.setTitle(self?.viewModel.titleRadarChart[4], for: .normal)
+            guard var value = self?.viewModel.valuesRadarChart else {return}
+            value[sender.tag] = value[4]
+            self?.radarChartView.values = value
+            self?.radarChartView.setNeedsDisplay()
+        })
+        let menu = UIMenu(title: "Opciones", children: [wins, kills, losses, headshotKills, top10])
+        sender.menu = menu
+        sender.showsMenuAsPrimaryAction = true
+    }
     
     var contentView: UIView = UIView()
     var mainScrollView: UIScrollView = UIScrollView()
@@ -46,6 +88,7 @@ final class StatsGeneralViewController: UIViewController {
         self.sessionUser = dependencies.external.resolve()
         super.init(nibName: nil, bundle: nil)
     }
+    @available(*,unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -94,6 +137,7 @@ final class StatsGeneralViewController: UIViewController {
         nameLabel.font = UIFont.systemFont(ofSize: 25)
         tableView.isScrollEnabled = false
         configScroll()
+        viewModel.allDataRadarChart()
     }
     private func configConstraints() {
         contentView.addSubview(levelLabel)
