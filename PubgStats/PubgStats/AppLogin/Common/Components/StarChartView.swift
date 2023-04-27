@@ -66,24 +66,22 @@ class RadarChartView: UIView {
         UIColor(red: 0, green: 1, blue: 0, alpha: 0.5).setFill()
         path.fill()
         
-        
-        for (index, point) in vertices.enumerated() {
-            let button = buttons[index]
-            button.tag = index
-            button.sizeToFit()
-            var offsetPoint: CGPoint
-            if index == 0 {
-                offsetPoint = CGPoint(x: point.x, y: point.y - (buttonOffset - 10))
-            } else if index == 1{
-                offsetPoint = CGPoint(x: point.x + (buttonOffset + 10), y: point.y)
-            }else if index == 2{
-                offsetPoint = CGPoint(x: point.x, y: point.y + (buttonOffset + 5))
-            }else {
-                offsetPoint = CGPoint(x: point.x + buttonOffset * sin(angle * CGFloat(index)),
-                                      y: point.y - buttonOffset * cos(angle * CGFloat(index)))
-            }
-            button.center = offsetPoint
-        }
+ 
+         for (index, point) in vertices.enumerated() {
+             let button = buttons[index]
+             button.tag = index
+             button.sizeToFit()
+             var offsetPoint: CGPoint
+             if index == 0 {
+                 offsetPoint = CGPoint(x: point.x + buttonOffset * sin(angle * CGFloat(index)),
+                                       y: point.y - 10 * cos(angle * CGFloat(index)))
+               
+             }else {
+                 offsetPoint = CGPoint(x: point.x + buttonOffset * sin(angle * CGFloat(index)),
+                                       y: point.y - buttonOffset * cos(angle * CGFloat(index)))
+             }
+             button.center = offsetPoint
+         }
         
         // círculo central
         let circlePath = UIBezierPath(arcCenter: center, radius: 5, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
