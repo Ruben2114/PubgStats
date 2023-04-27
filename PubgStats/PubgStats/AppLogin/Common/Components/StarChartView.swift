@@ -38,6 +38,13 @@ class RadarChartView: UIView {
             buttons.append(button)
         }
     }
+    func reloadRadarChartView(title: [String], values: [CGFloat]) {
+        for i in 0..<buttons.count {
+            buttons[i].setTitle(title[i], for: .normal)
+        }
+        self.values = values
+        self.setNeedsDisplay()
+    }
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)

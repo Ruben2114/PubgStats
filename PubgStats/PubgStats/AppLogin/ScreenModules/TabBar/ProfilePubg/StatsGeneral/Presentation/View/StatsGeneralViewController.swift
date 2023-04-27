@@ -82,6 +82,8 @@ final class StatsGeneralViewController: UIViewController {
                     self?.bestRankedLabel.text = "\(model?[0].bestRankPoint ?? 0)\n" + "bestRankedLabel".localize()
                 case .getName(model: let model):
                     self?.nameLabel.text = model
+                case .getItemRadarChar(title: let title, values: let values):
+                    self?.radarChartView.reloadRadarChartView(title: title, values: values)
                 }
             }.store(in: &cancellable)
         viewModel.viewDidLoad()
@@ -97,7 +99,6 @@ final class StatsGeneralViewController: UIViewController {
         nameLabel.font = UIFont.systemFont(ofSize: 25)
         tableView.isScrollEnabled = false
         configScroll()
-        viewModel.allDataRadarChart()
     }
     private func configConstraints() {
         contentView.addSubview(levelLabel)
@@ -157,46 +158,25 @@ final class StatsGeneralViewController: UIViewController {
         }
     }
     @objc func handleMenuButtonTapped(_ sender: UIButton) {
-        // al hacer self?.radarChartView.setNeedsDisplay() coge los valores de antes y solo cambia uno, tengo
-        //que guardarlos sino no se van aquedar
-        let wins = UIAction(title: "playerStatsVLabel".localize(), handler: { [weak self] _ in
-            sender.setTitle(self?.viewModel.titleRadarChart[0], for: .normal)
-            guard var value = self?.viewModel.valuesRadarChart else {return}
-            value[sender.tag] = self?.viewModel.valueWin ?? 0
-            self?.radarChartView.values = value
-            self?.radarChartView.setNeedsDisplay()
-        })
-        let losses = UIAction(title: "playerStatsDLabel".localize(), handler: { [weak self] _ in
-            sender.setTitle(self?.viewModel.titleRadarChart[1], for: .normal)
-            guard var value = self?.viewModel.valuesRadarChart else {return}
-            value[sender.tag] = value[1]
-            self?.radarChartView.values = value
-            self?.radarChartView.setNeedsDisplay()
-        })
-        let headshotKills = UIAction(title: "playerStatsMDLabel".localize(), handler: { [weak self] _ in
-            sender.setTitle(self?.viewModel.titleRadarChart[2], for: .normal)
-            guard var value = self?.viewModel.valuesRadarChart else {return}
-            value[sender.tag] = value[2]
-            self?.radarChartView.values = value
-            self?.radarChartView.setNeedsDisplay()
-        })
-        let kills = UIAction(title: "playerStatsKLabel".localize(), handler: { [weak self] _ in
-            sender.setTitle(self?.viewModel.titleRadarChart[3], for: .normal)
-            guard var value = self?.viewModel.valuesRadarChart else {return}
-            value[sender.tag] = value[3]
-            self?.radarChartView.values = value
-            self?.radarChartView.setNeedsDisplay()
-        })
-        let top10 = UIAction(title: "playerStatsTLabel".localize(), handler: { [weak self] _ in
-            sender.setTitle(self?.viewModel.titleRadarChart[4], for: .normal)
-            guard var value = self?.viewModel.valuesRadarChart else {return}
-            value[sender.tag] = value[4]
-            self?.radarChartView.values = value
-            self?.radarChartView.setNeedsDisplay()
-        })
+        let wins = createUIAction(title: "playerStatsVLabel".localize(), sender: sender, index: 0)
+        let losses = createUIAction(title: "playerStatsDLabel".localize(), sender: sender, index: 1)
+        let headshotKills = createUIAction(title: "playerStatsMDLabel".localize(), sender: sender, index: 2)
+        let kills = createUIAction(title: "playerStatsKLabel".localize(), sender: sender, index: 3)
+        let top10 = createUIAction(title: "playerStatsTLabel".localize(), sender: sender, index: 4)
         let menu = UIMenu(title: "Opciones", children: [wins, losses, headshotKills, kills, top10])
         sender.menu = menu
         sender.showsMenuAsPrimaryAction = true
+    }
+    private func createUIAction(title: String,sender: UIButton, index: Int) -> UIAction {
+        let action = UIAction(title: title,handler: { [weak self] _ in
+            sender.setTitle(self?.viewModel.allDifferentTitleRadarChart[index], for: .normal)
+            guard var value = self?.viewModel.allDifferentValuesRadarChart else {return}
+            value[sender.tag] = value[index]
+            self?.viewModel.valuesRadarChart = value
+            self?.radarChartView.values = value
+            self?.radarChartView.setNeedsDisplay()
+        })
+        return action
     }
 }
 extension StatsGeneralViewController: ViewScrollable { }

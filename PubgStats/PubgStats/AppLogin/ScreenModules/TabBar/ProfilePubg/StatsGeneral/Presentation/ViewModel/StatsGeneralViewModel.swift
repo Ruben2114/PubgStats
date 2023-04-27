@@ -15,8 +15,10 @@ final class StatsGeneralViewModel {
     private let statsGeneralDataUseCase: StatsGeneralDataUseCase
     private let sessionUser: ProfileEntity
     var itemCellStats: [ItemCellStats] = [ItemCellStats.dataKill, ItemCellStats.dataWeapon, ItemCellStats.dataSurvival, ItemCellStats.dataGamesModes]
-    var valuesRadarChart: [CGFloat] = []
-    var titleRadarChart: [String] = []
+    var allDifferentValuesRadarChart: [CGFloat] = []
+    var allDifferentTitleRadarChart: [String] = []
+    var valuesRadarChart: [CGFloat] = [0,0,0,0,0]
+    var titleRadarChart: [String] = ["","","","",""]
     var valueWin: CGFloat = 0
     init(dependencies: StatsGeneralDependency) {
         self.dependencies = dependencies
@@ -42,9 +44,10 @@ final class StatsGeneralViewModel {
             fetchData()
             return
         }
-        allDataRadarChart()
+        dataRadarChart()
         state.send(.getSurvival(model: survivalData))
         state.send(.getGamesMode(model: gamesModesData))
+        state.send(.getItemRadarChar(title: titleRadarChart, values: valuesRadarChart))
         state.send(.success)
     }
     private func fetchData() {
@@ -93,26 +96,9 @@ final class StatsGeneralViewModel {
         }
     }
     
-    let localData = LocalDataProfileServiceImp()
-    func allDataRadarChart(){
-        guard let type = coordinator?.type else {return}
-        let gamesModesData = statsGeneralDataUseCase.getGamesModes(for: sessionUser, type: type)
-        guard let gamesModes = gamesModesData else {return}
-        var dataGamesModes: [(String, Any)] = []
-        for mode in gamesModes {
-            let keyValues = mode.entity.attributesByName.map { ($0.key, mode.value(forKey: $0.key) ?? "") }
-            
-            dataGamesModes.append(contentsOf: keyValues)
-        }
-        let combinedDataGamesModes = dataGamesModes.reduce(into: [String: Double]()) { result, element in
-            if let previousValue = result[element.0] {
-                result[element.0] = previousValue + (element.1 as? Double ?? 0.0)
-            } else {
-                result[element.0] = element.1 as? Double ?? 0.0
-            }
-        }
-        //la primera funcion coge los datos y la segunda los trata, dividir en dos cuando ponga el usecase
-        
+    func dataRadarChart(){
+        let combinedDataGamesModes = getDataRadarChart()
+        //TODO: esto meterlo en un enum el average
         let winsAverageData = 0.25
         let killsAverageData = 0.30
         let lossesAverageData = 1.0
@@ -131,16 +117,36 @@ final class StatsGeneralViewModel {
         let headshotKills = PlayerStats2.headshotKills(title: "playerStatsMD".localize() + "\(String(format: "%.1f", headshotKillsValue))%", value: CGFloat(max(0,min(headshotKillsValue / 100 / headshotKillsAverageData, 1.0))))
         let top10 = PlayerStats2.top10(title: "playerStatsT".localize() + "\(String(format: "%.1f", top10Value))%", value: CGFloat(max(0,min(top10Value / 100 / top10AverageData, 1.0))))
         
-        let item = [win,losses,headshotKills,kills,top10]
+        let item = [win, losses, headshotKills, kills, top10]
         let values = item.map{ $0.value()}
         valuesRadarChart = values
         let title = item.map { $0.title()}
         titleRadarChart = title
-        valueWin = win.value()
+        
+        let allItem = [win, losses, headshotKills, kills, top10]
+        let allValues = allItem.map{ $0.value()}
+        let allTitle = allItem.map { $0.title()}
+        allDifferentValuesRadarChart = allValues
+        allDifferentTitleRadarChart = allTitle
     }
-
-    
-    
+    func getDataRadarChart() -> [String : Double]{
+        guard let type = coordinator?.type else {return [:]}
+        let gamesModesData = statsGeneralDataUseCase.getGamesModes(for: sessionUser, type: type)
+        guard let gamesModes = gamesModesData else {return [:]}
+        var dataGamesModes: [(String, Any)] = []
+        for mode in gamesModes {
+            let keyValues = mode.entity.attributesByName.map { ($0.key, mode.value(forKey: $0.key) ?? "") }
+            dataGamesModes.append(contentsOf: keyValues)
+        }
+        let combinedDataGamesModes = dataGamesModes.reduce(into: [String: Double]()) { result, element in
+            if let previousValue = result[element.0] {
+                result[element.0] = previousValue + (element.1 as? Double ?? 0.0)
+            } else {
+                result[element.0] = element.1 as? Double ?? 0.0
+            }
+        }
+        return combinedDataGamesModes
+    }
     func backButton() {
         coordinator?.dismiss()
     }

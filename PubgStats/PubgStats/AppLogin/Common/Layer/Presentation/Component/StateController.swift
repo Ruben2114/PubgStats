@@ -34,6 +34,7 @@ enum OutputStats {
     case getSurvival (model: Survival?)
     case getGamesMode (model: [GamesModes]?)
     case getName (model: String)
+    case getItemRadarChar (title: [String], values: [CGFloat])
     case success
 }
 
