@@ -14,32 +14,38 @@ final class StatsGeneralViewController: UIViewController {
     private lazy var nameLabel = makeLabelStats(height: 21)
     private lazy var xpLabel = makeLabelStats(height: 21)
     private lazy var stackStackView = makeStack(space: 5)
-    private lazy var labelFirstStackView = makeStackHorizontal(space: 5)
-    private lazy var winsLabel = makeLabelStatsBoder(height: 65)
-    private lazy var killsLabel = makeLabelStatsBoder(height: 65)
-    private lazy var assistsLabel = makeLabelStatsBoder(height: 65)
-    private lazy var labelSecondStackView = makeStackHorizontal(space: 5)
-    private lazy var gamesPlayedLabel = makeLabelStatsBoder(height: 65)
-    private lazy var timePlayedLabel = makeLabelStatsBoder(height: 65)
-    private lazy var bestRankedLabel = makeLabelStatsBoder(height: 65)
+    private lazy var imageFirstStackView = makeStackImage(space: 5)
+    private lazy var winsImage = makeImageViewStats(name: "wonTotal", height: 65, label: winsLabel)
+    private lazy var killsImage = makeImageViewStats(name: "wonTotal", height: 65, label: killsLabel)
+    private lazy var assistsImage = makeImageViewStats(name: "wonTotal", height: 65, label: assistsLabel)
+    private lazy var winsLabel = makeLabelImage()
+    private lazy var killsLabel = makeLabelImage()
+    private lazy var assistsLabel = makeLabelImage()
+    private lazy var imageSecondStackView = makeStackImage(space: 5)
+    private lazy var gamesPlayedImage = makeImageViewStats(name: "wonTotal", height: 65, label: gamesPlayedLabel)
+    private lazy var timePlayedImage = makeImageViewStats(name: "wonTotal", height: 65, label: timePlayedLabel)
+    private lazy var bestRankedImage = makeImageViewStats(name: "wonTotal", height: 65, label: bestRankedLabel)
+    private lazy var gamesPlayedLabel = makeLabelImage()
+    private lazy var timePlayedLabel = makeLabelImage()
+    private lazy var bestRankedLabel = makeLabelImage()
     private lazy var radarChartView: RadarChartView = {
         let radar = RadarChartView(values: viewModel.valuesRadarChart, buttonsTitle: viewModel.titleRadarChart)
         radar.translatesAutoresizingMaskIntoConstraints = false
         radar.backgroundColor = .clear
         radar.buttons.forEach({ button in
-            button.addTarget(self, action: #selector(handleMenuButtonTapped(_:)), for: .touchUpInside)
+            button.addTarget(self, action: #selector(handleMenuButtonTapped), for: .touchUpInside)
         })
         return radar
     }()
-    
+    private lazy var legendButton = legendButton()
     var contentView: UIView = UIView()
     var mainScrollView: UIScrollView = UIScrollView()
     private var cancellable = Set<AnyCancellable>()
     private let dependencies: StatsGeneralDependency
     private let viewModel: StatsGeneralViewModel
-    let sessionUser: ProfileEntity
-    var refreshCount = 0
-    var reloadButton = UIBarButtonItem()
+    private let sessionUser: ProfileEntity
+    private var refreshCount = 0
+    private var reloadButton = UIBarButtonItem()
     
     init(dependencies: StatsGeneralDependency) {
         self.dependencies = dependencies
@@ -117,16 +123,16 @@ final class StatsGeneralViewController: UIViewController {
         stackStackView.topAnchor.constraint(equalTo: xpLabel.bottomAnchor, constant: 30).isActive = true
         stackStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
         stackStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
-        [labelFirstStackView, labelSecondStackView].forEach {
+        [imageFirstStackView, imageSecondStackView].forEach {
             stackStackView.addArrangedSubview($0)
         }
         
-        [winsLabel,killsLabel, assistsLabel].forEach {
-            labelFirstStackView.addArrangedSubview($0)
+        [winsImage,killsImage, assistsImage].forEach {
+            imageFirstStackView.addArrangedSubview($0)
         }
         
-        [gamesPlayedLabel,timePlayedLabel,bestRankedLabel].forEach {
-            labelSecondStackView.addArrangedSubview($0)
+        [gamesPlayedImage,timePlayedImage,bestRankedImage].forEach {
+            imageSecondStackView.addArrangedSubview($0)
         }
         
         contentView.addSubview(radarChartView)
@@ -134,6 +140,10 @@ final class StatsGeneralViewController: UIViewController {
         radarChartView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         radarChartView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         radarChartView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        
+        contentView.addSubview(legendButton)
+        legendButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
+        legendButton.bottomAnchor.constraint(equalTo: radarChartView.bottomAnchor).isActive = true
         
         contentView.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: radarChartView.bottomAnchor, constant: 20).isActive = true

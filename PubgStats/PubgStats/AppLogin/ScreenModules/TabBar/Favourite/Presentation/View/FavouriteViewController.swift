@@ -22,6 +22,7 @@ class FavouriteViewController: UIViewController {
     private var cancellable = Set<AnyCancellable>()
     private let viewModel: FavouriteViewModel
     private let sessionUser: ProfileEntity
+    private let imageView = UIImageView(image: UIImage(named: "backgroundCar"))
     
     init(dependencies: FavouriteDependency) {
         self.dependencies = dependencies
@@ -72,8 +73,13 @@ class FavouriteViewController: UIViewController {
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         hideKeyboard()
+        tableView.backgroundColor = .clear
     }
     private func configConstraint() {
+        
+        view.insertSubview(imageView, at: 0)
+        imageView.frame = view.bounds
+
         view.addSubview(searchBar)
         searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
@@ -128,11 +134,9 @@ extension FavouriteViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let nameModel = profilesFavourite[indexPath.row].name
-        let accountModel = profilesFavourite[indexPath.row].account
         var listContent = UIListContentConfiguration.cell()
         listContent.textProperties.font = UIFont.systemFont(ofSize: 20)
         listContent.text = nameModel
-        listContent.secondaryText = accountModel
         cell.contentConfiguration = listContent
         return cell
     }

@@ -25,4 +25,23 @@ extension UIViewController {
         }
         return imageView
     }
+    func makeImageViewStats(name: String, height: CGFloat, label: UILabel) -> UIImageView {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.borderWidth = 1
+        imageView.layer.borderColor = UIColor.black.cgColor
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleToFill
+        imageView.setHeightConstraint(with: height)
+        imageView.layer.cornerRadius = 15
+        imageView.image = UIImage(named: name)
+        let text = label
+        text.translatesAutoresizingMaskIntoConstraints = false
+        imageView.addSubview(text)
+        text.leadingAnchor.constraint(equalTo: imageView.leadingAnchor).isActive = true
+        text.trailingAnchor.constraint(equalTo: imageView.trailingAnchor).isActive = true
+        text.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
+        return imageView
+    }
 }
+

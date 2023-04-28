@@ -50,9 +50,11 @@ extension UIViewController {
         label.backgroundColor = .systemBackground
         label.setHeightConstraint(with: height)
         label.setWidthConstraint(with: width)
-        let imagenFondo = UIImage(named: "default")
-        label.backgroundColor = UIColor(patternImage: imagenFondo!)
+        let image = UIImage(named: "default")
+        label.backgroundColor = UIColor(patternImage: image!)
         label.clipsToBounds = true
+        label.backgroundColor = .clear
+        label.textColor = .black
         label.layer.borderColor = UIColor.black.cgColor
         label.layer.borderWidth = 1
         label.layer.cornerRadius = height / 2
@@ -68,6 +70,14 @@ extension UIViewController {
         label.layer.borderColor = UIColor.black.cgColor
         label.layer.borderWidth = 1
         label.layer.cornerRadius = 15
+        return label
+    }
+    func makeLabelImage() -> UILabel{
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.textAlignment = .center
+        label.textColor = .white
         return label
     }
 }
