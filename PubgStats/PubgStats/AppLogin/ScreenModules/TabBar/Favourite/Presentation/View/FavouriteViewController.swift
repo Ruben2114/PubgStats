@@ -113,12 +113,12 @@ extension FavouriteViewController: UISearchBarDelegate {
 extension FavouriteViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if profilesFavourite.isEmpty {
-            let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+            let messageLabel = UILabel()
             messageLabel.text = "profilesFavouriteEmpty".localize()
-            messageLabel.textColor = .black
+            messageLabel.textColor = .white
+            messageLabel.font = UIFont.boldSystemFont(ofSize: 25)
             messageLabel.numberOfLines = 0
             messageLabel.textAlignment = .center
-            messageLabel.sizeToFit()
             tableView.backgroundView = messageLabel
             tableView.separatorStyle = .none
             return 0
