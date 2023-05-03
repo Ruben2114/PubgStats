@@ -13,7 +13,6 @@ final class HelpDataViewController: UIViewController {
     private lazy var tableView = makeTableView()
     private let viewModel: HelpDataViewModel
     private let sessionUser: ProfileEntity
-    
     init(dependencies: HelpDataDependency) {
         self.viewModel = dependencies.resolve()
         self.sessionUser = dependencies.external.resolve()
@@ -26,9 +25,7 @@ final class HelpDataViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
-        configConstraints()
     }
-    
     private func configUI() {
         view.backgroundColor = .systemBackground
         title = "helpDataViewControllerTitle".localize()
@@ -36,8 +33,8 @@ final class HelpDataViewController: UIViewController {
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         backButton(action: #selector(backButtonAction))
+        configConstraints()
     }
-    
     private func configConstraints(){
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -45,8 +42,7 @@ final class HelpDataViewController: UIViewController {
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
-   
-    @objc func backButtonAction() {
+    @objc private func backButtonAction() {
         viewModel.backButton()
     }
 }

@@ -27,7 +27,6 @@
 "settingsFieldEmail" = "Correo";
 "settingsFieldLegal" = "Aviso Legal";
 "settingsFieldDelete" = "Borrar Perfil";
-"settingsDataViewControllerTitle" = "Ajustes";
 "mailComposeControllerSent" = "Enviado con éxito";
 "mailComposeControllerFailed" = "Lo siento, no se ha podido enviar el correo";
 "mailComposeControllerDefault" = "Ha ocurrido un error";

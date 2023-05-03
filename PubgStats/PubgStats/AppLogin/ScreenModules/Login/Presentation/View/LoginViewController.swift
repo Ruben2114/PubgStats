@@ -7,10 +7,8 @@
 
 import UIKit
 import Combine
-import AVFoundation
 
 class LoginViewController: UIViewController {
-    private var videoLogin: AVPlayer?
     private lazy var containerStackView = makeStack(space: 20)
     private lazy var userTextField = makeTextFieldLogin(placeholder: "userTextField".localize(), isSecure: false)
     private lazy var passwordTextField = makeTextFieldLogin(placeholder: "passwordTextField".localize(), isSecure: true)
@@ -19,9 +17,7 @@ class LoginViewController: UIViewController {
         title: "titleRegister".localize())
     private lazy var forgotPasswordButton: UIButton = makeButtonClear(
         title: "titleForgot".localize())
-    var playerLooper: AVPlayerLooper!
-    var queuePlayer: AVQueuePlayer!
-    
+    private let imageView = UIImageView(image: UIImage(named: "backgroundPubg"))
     var mainScrollView = UIScrollView()
     var contentView = UIView()
     var cancellable = Set<AnyCancellable>()
@@ -39,45 +35,18 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
-        configConstraints()
-        configTargets()
         bind()
     }
-    
-    private func configureVideo() {
-        guard let filePath = Bundle.main.path(forResource: "videoLogin", ofType: "mp4") else { return }
-        let fileUrl = URL(fileURLWithPath: filePath)
-        let asset = AVAsset(url: fileUrl)
-        let playerItem = AVPlayerItem(asset: asset)
-        self.queuePlayer = AVQueuePlayer(playerItem: playerItem)
-        self.playerLooper = AVPlayerLooper(player: queuePlayer, templateItem: playerItem)
-        let videoLayer = AVPlayerLayer(player: queuePlayer)
-        videoLayer.videoGravity = .resize
-        videoLayer.frame = view.bounds
-        view.layer.insertSublayer(videoLayer, at: 0)
-        queuePlayer?.play()
-        queuePlayer.isMuted = true
-    }
-    
-    private func configGradientForTitle() {
-        let gradientMaskLayer = CAGradientLayer()
-        gradientMaskLayer.frame = view.bounds
-        gradientMaskLayer.colors = [UIColor.clear.cgColor, UIColor.darkGray.cgColor]
-        gradientMaskLayer.locations = [0.0, 1.0]
-        gradientMaskLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
-        gradientMaskLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
-        view.layer.insertSublayer(gradientMaskLayer, at: 1)
-    }
-    
     private func configUI() {
         view.backgroundColor = .systemBackground
         configScroll()
         configKeyboardSubscription(mainScrollView: mainScrollView)
         hideKeyboard()
-        configureVideo()
+        configConstraints()
         configGradientForTitle()
+        configTargets()
     }
-    func bind() {
+    private func bind() {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
             switch state{
             case .success:
@@ -91,30 +60,42 @@ class LoginViewController: UIViewController {
         }.store(in: &cancellable)
     }
     private func configConstraints() {
+        view.insertSubview(imageView, at: 0)
+        imageView.frame = view.bounds
+        
         contentView.addSubview(containerStackView)
-         containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
-         containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
-         containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-         contentView.heightAnchor.constraint(equalTo: mainScrollView.heightAnchor).isActive = true
+        containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+        containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+        containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        contentView.heightAnchor.constraint(equalTo: mainScrollView.heightAnchor).isActive = true
         
         [userTextField, passwordTextField, loginButton, registerButton ,forgotPasswordButton].forEach {
             containerStackView.addArrangedSubview($0)
         }
+    }
+    private func configGradientForTitle() {
+        let gradientMaskLayer = CAGradientLayer()
+        gradientMaskLayer.frame = view.bounds
+        gradientMaskLayer.colors = [UIColor.clear.cgColor, UIColor.darkGray.cgColor]
+        gradientMaskLayer.locations = [0.0, 1.0]
+        gradientMaskLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradientMaskLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
+        view.layer.insertSublayer(gradientMaskLayer, at: 1)
     }
     private func configTargets() {
         loginButton.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
         forgotPasswordButton.addTarget(self, action: #selector(didTapForgotButton), for: .touchUpInside)
         registerButton.addTarget(self, action: #selector(didTapRegisterButton), for: .touchUpInside)
     }
-    @objc func didTapLoginButton() {
+    @objc private func didTapLoginButton() {
         guard let password = passwordTextField.text?.hashString(), let user = userTextField.text else{return}
         viewModel.check(sessionUser: dependencies.external.resolve(),name: user, password: password)
     }
-    @objc func didTapForgotButton() {
+    @objc private func didTapForgotButton() {
         viewModel.didTapForgotButton()
     }
     
-    @objc func didTapRegisterButton() {
+    @objc private func didTapRegisterButton() {
         viewModel.didTapRegisterButton()
     }
 }

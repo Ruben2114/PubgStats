@@ -13,6 +13,7 @@ final class WeaponDataDetailViewModel {
     private let weaponDataDetailUseCase: WeaponDataDetailUseCase
     private let dependencies: WeaponDataDetailDependency
     var dataWeaponDetail: [(String, Any)] = []
+    
     init(dependencies: WeaponDataDetailDependency) {
         self.sessionUser = dependencies.external.resolve()
         self.coordinator = dependencies.resolve()

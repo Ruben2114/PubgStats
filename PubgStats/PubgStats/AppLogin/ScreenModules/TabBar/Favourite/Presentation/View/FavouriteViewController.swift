@@ -37,19 +37,12 @@ class FavouriteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
-        configConstraint()
         bind()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         searchFavourite()
     }
-    private func searchFavourite(){
-        guard let favourite = viewModel.getFavourites(for: sessionUser) else {return}
-        profilesFavourite = favourite
-        tableView.reloadData()
-    }
-    
     private func bind() {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
             switch state {
@@ -72,11 +65,11 @@ class FavouriteViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        hideKeyboard()
         tableView.backgroundColor = .clear
+        hideKeyboard()
+        configConstraint()
     }
     private func configConstraint() {
-        
         view.insertSubview(imageView, at: 0)
         imageView.frame = view.bounds
 
@@ -91,6 +84,11 @@ class FavouriteViewController: UIViewController {
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    private func searchFavourite(){
+        guard let favourite = viewModel.getFavourites(for: sessionUser) else {return}
+        profilesFavourite = favourite
+        tableView.reloadData()
     }
 }
 
@@ -130,7 +128,6 @@ extension FavouriteViewController: UITableViewDataSource{
             return profilesFavourite.count
         }
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let nameModel = profilesFavourite[indexPath.row].name
@@ -141,6 +138,7 @@ extension FavouriteViewController: UITableViewDataSource{
         return cell
     }
 }
+
 extension FavouriteViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(

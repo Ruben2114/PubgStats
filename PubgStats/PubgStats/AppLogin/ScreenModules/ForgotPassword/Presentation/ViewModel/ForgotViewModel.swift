@@ -11,7 +11,6 @@ final class ForgotViewModel {
     private let forgotDataUseCase: ForgotDataUseCase
     private let dependencies: ForgotDependency
     private weak var coordinator: ForgotCoordinator?
-    
     init(dependencies: ForgotDependency) {
         self.dependencies = dependencies
         self.coordinator = dependencies.resolve()

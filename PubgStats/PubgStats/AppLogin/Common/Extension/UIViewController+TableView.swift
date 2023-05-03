@@ -13,6 +13,13 @@ extension UIViewController {
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }
+    func makeTableViewData() -> UITableView {
+        let table = UITableView(frame: .zero, style: .insetGrouped)
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.allowsSelection = false
+        table.backgroundColor = .clear
+        return table
+    }
     func makeTableView() -> UITableView {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false

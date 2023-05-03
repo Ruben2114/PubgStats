@@ -87,7 +87,7 @@ final class StatsGeneralViewModel {
         userDefaults.set(false, forKey: "reload")
         fetchData()
     }
-    func searchData() -> [String?] {
+    private func searchData() -> [String?] {
         guard let type = coordinator?.type else {return [nil]}
         if type == .favourite{
             return [sessionUser.accountFavourite, sessionUser.nameFavourite]
@@ -97,39 +97,29 @@ final class StatsGeneralViewModel {
     }
     
     func dataRadarChart(){
-        let combinedDataGamesModes = getDataRadarChart()
-        //TODO: esto meterlo en un enum el average
-        let winsAverageData = 0.25
-        let killsAverageData = 0.30
-        let lossesAverageData = 1.0
-        let headshotKillsAverageData = 1.0
-        let top10AverageData = 1.0
+        let data = getDataRadarChart()
+               
+        let win = PlayerStats.wins(value: (data["wins"] ?? 0) * 100 / (data["roundsPlayed"] ?? 0), average: 0.25)
+        let kills = PlayerStats.kills(value: (data["kills"] ?? 0) / (data["roundsPlayed"] ?? 0), average: 0.30)
+        let losses = PlayerStats.losses(value: (data["losses"] ?? 0) * 100 / (data["roundsPlayed"] ?? 0), average: 1.0)
+        let headshotKills = PlayerStats.headshotKills(value: (data["headshotKills"] ?? 0) * 100 / (data["kills"] ?? 0), average: 1.0)
+        let top10 = PlayerStats.top10(value: (data["top10S"] ?? 0) * 100 / (data["roundsPlayed"] ?? 0), average: 1.0)
         
-        let winsValue = (combinedDataGamesModes["wins"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0)
-        let killsValue = (combinedDataGamesModes["kills"] ?? 0) / (combinedDataGamesModes["roundsPlayed"] ?? 0)
-        let lossesValue = (combinedDataGamesModes["losses"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0)
-        let headshotKillsValue = (combinedDataGamesModes["headshotKills"] ?? 0) * 100 / (combinedDataGamesModes["kills"] ?? 0)
-        let top10Value = (combinedDataGamesModes["top10S"] ?? 0) * 100 / (combinedDataGamesModes["roundsPlayed"] ?? 0)
-        
-        let win = PlayerStats2.wins(title: "playerStatsV".localize() + "\(String(format: "%.1f", winsValue))%", value: CGFloat(max(0,min(winsValue / 100 / winsAverageData, 1.0))))
-        let kills = PlayerStats2.kills(title: "playerStatsK".localize() + "\(String(format: "%.1f", killsValue))", value: CGFloat(max(0,min(killsValue / 100 / killsAverageData, 1.0))))
-        let losses = PlayerStats2.losses(title: "playerStatsD".localize() + "\(String(format: "%.1f", lossesValue))%", value: CGFloat(max(0,min(lossesValue / 100 / lossesAverageData, 1.0))))
-        let headshotKills = PlayerStats2.headshotKills(title: "playerStatsMD".localize() + "\(String(format: "%.1f", headshotKillsValue))%", value: CGFloat(max(0,min(headshotKillsValue / 100 / headshotKillsAverageData, 1.0))))
-        let top10 = PlayerStats2.top10(title: "playerStatsT".localize() + "\(String(format: "%.1f", top10Value))%", value: CGFloat(max(0,min(top10Value / 100 / top10AverageData, 1.0))))
-        
+        //TODO: valores que puedes ver en la grafica
         let item = [win, losses, headshotKills, kills, top10]
         let values = item.map{ $0.value()}
         valuesRadarChart = values
         let title = item.map { $0.title()}
         titleRadarChart = title
         
+        //TODO: todos los valores, poner mas y asi se ve la diferencia
         let allItem = [win, losses, headshotKills, kills, top10]
         let allValues = allItem.map{ $0.value()}
         let allTitle = allItem.map { $0.title()}
         allDifferentValuesRadarChart = allValues
         allDifferentTitleRadarChart = allTitle
     }
-    func getDataRadarChart() -> [String : Double]{
+    private func getDataRadarChart() -> [String : Double]{
         guard let type = coordinator?.type else {return [:]}
         let gamesModesData = statsGeneralDataUseCase.getGamesModes(for: sessionUser, type: type)
         guard let gamesModes = gamesModesData else {return [:]}

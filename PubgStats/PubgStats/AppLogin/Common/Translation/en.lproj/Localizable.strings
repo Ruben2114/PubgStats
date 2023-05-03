@@ -27,7 +27,6 @@
 "settingsFieldEmail" = "Mail";
 "settingsFieldLegal" = "Legal Notice";
 "settingsFieldDelete" = "Delete Profile";
-"settingsDataViewControllerTitle" = "Settings";
 "mailComposeControllerSent" = "Sent Successfully";
 "mailComposeControllerFailed" = "Sorry, failed to send mail";
 "mailComposeControllerDefault" = "An error has occurred";

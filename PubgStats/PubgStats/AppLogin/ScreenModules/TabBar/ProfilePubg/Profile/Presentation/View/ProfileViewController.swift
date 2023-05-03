@@ -10,11 +10,10 @@ import Combine
 
 final class ProfileViewController: UIViewController {
     private lazy var profileImageView = makeImageViewPersonal(name: "default", data: sessionUser.image)
+    private let imageView = UIImageView(image: UIImage(named: "backgroundProfile"))
     private lazy var nameLabel = makeLabelProfile(title: sessionUser.name, color: .black, font: 20, style: .title2, isBold: true)
     private lazy var emailLabel = makeLabelProfile(title: sessionUser.email, color: .black, font: 20, style: .title2, isBold: false)
     private lazy var tableView = makeTableViewGroup()
-    private var refreshCount = 0
-    
     private var cancellable = Set<AnyCancellable>()
     private let viewModel: ProfileViewModel
     private let dependencies: ProfileDependency
@@ -33,7 +32,6 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
-        configConstraints()
         bind()
     }
     private func viewChange() {
@@ -47,6 +45,8 @@ final class ProfileViewController: UIViewController {
         backButton(action: #selector(backButtonAction))
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.backgroundColor = .clear
+        configConstraints()
     }
     private func bind() {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
@@ -64,6 +64,9 @@ final class ProfileViewController: UIViewController {
     }
     
     private func configConstraints() {
+        view.insertSubview(imageView, at: 0)
+        imageView.frame = view.bounds
+        
         view.addSubview(profileImageView)
         profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -82,7 +85,7 @@ final class ProfileViewController: UIViewController {
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
-    @objc func backButtonAction() {
+    @objc private func backButtonAction() {
         let alert = UIAlertController(title: "alertTitle".localize(), message: "profileBackButtonAction".localize(), preferredStyle: .alert)
         let actionAccept = UIAlertAction(title: "actionAccept".localize(), style: .default){ [weak self]_ in
             self?.viewModel.backButton()

@@ -50,6 +50,7 @@
 		4655510429CC829800BF932A /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510329CC829800BF932A /* SettingsCoordinator.swift */; };
 		4655510729CCB41500BF932A /* ProfileEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510629CCB41500BF932A /* ProfileEntity.swift */; };
 		465926EF29EFCFB300A4091D /* ItemCellSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465926EE29EFCFB300A4091D /* ItemCellSettings.swift */; };
+		466BCE152A02657B002896B7 /* UIViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466BCE142A02657B002896B7 /* UIViewController+CollectionView.swift */; };
 		4670EDE429D4325200C1062E /* StatsGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE329D4325200C1062E /* StatsGeneralViewController.swift */; };
 		4670EDE729D442C600C1062E /* HelpDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE629D442C600C1062E /* HelpDataViewModel.swift */; };
 		4670EDEA29D442FD00C1062E /* HelpDataDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE929D442FD00C1062E /* HelpDataDependency.swift */; };
@@ -149,7 +150,6 @@
 		8CD7CD8229BF1B0B00C57346 /* RegisterDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD8129BF1B0B00C57346 /* RegisterDataUseCase.swift */; };
 		8CD7CD8F29BF54D600C57346 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD8E29BF54D600C57346 /* RegisterViewController.swift */; };
 		8CD7CD9329BF62BE00C57346 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD9229BF62BE00C57346 /* RegisterViewModel.swift */; };
-		8CE093EC29D5AE2E0069CE24 /* videoLogin.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 8CE093EB29D5AE220069CE24 /* videoLogin.mp4 */; };
 		8CE9BDA929E57D5E00F45D3F /* SurvivalDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDA829E57D5E00F45D3F /* SurvivalDataUseCase.swift */; };
 		8CE9BDAB29E57DD600F45D3F /* SurvivalDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDAA29E57DD600F45D3F /* SurvivalDataRepository.swift */; };
 		8CE9BDAF29E57E4700F45D3F /* SurvivalDataRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDAE29E57E4700F45D3F /* SurvivalDataRepositoryImp.swift */; };
@@ -243,6 +243,7 @@
 		4655510329CC829800BF932A /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		4655510629CCB41500BF932A /* ProfileEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEntity.swift; sourceTree = "<group>"; };
 		465926EE29EFCFB300A4091D /* ItemCellSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellSettings.swift; sourceTree = "<group>"; };
+		466BCE142A02657B002896B7 /* UIViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CollectionView.swift"; sourceTree = "<group>"; };
 		4670EDE329D4325200C1062E /* StatsGeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGeneralViewController.swift; sourceTree = "<group>"; };
 		4670EDE629D442C600C1062E /* HelpDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataViewModel.swift; sourceTree = "<group>"; };
 		4670EDE929D442FD00C1062E /* HelpDataDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataDependency.swift; sourceTree = "<group>"; };
@@ -346,7 +347,6 @@
 		8CD7CD8129BF1B0B00C57346 /* RegisterDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataUseCase.swift; sourceTree = "<group>"; };
 		8CD7CD8E29BF54D600C57346 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8CD7CD9229BF62BE00C57346 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
-		8CE093EB29D5AE220069CE24 /* videoLogin.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = videoLogin.mp4; sourceTree = "<group>"; };
 		8CE9BDA829E57D5E00F45D3F /* SurvivalDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataUseCase.swift; sourceTree = "<group>"; };
 		8CE9BDAA29E57DD600F45D3F /* SurvivalDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataRepository.swift; sourceTree = "<group>"; };
 		8CE9BDAE29E57E4700F45D3F /* SurvivalDataRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataRepositoryImp.swift; sourceTree = "<group>"; };
@@ -1144,7 +1144,6 @@
 			isa = PBXGroup;
 			children = (
 				8CA398B829B72A2000C09746 /* Assets.xcassets */,
-				8CE093EB29D5AE220069CE24 /* videoLogin.mp4 */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1207,6 +1206,7 @@
 				8CA720AF29DAE3F6001E3EFA /* UIViewController+Label.swift */,
 				8CA85D8529DC46160050C19B /* UIViewController+func.swift */,
 				8CCC92C929E407980019BE72 /* UIViewController+TableView.swift */,
+				466BCE142A02657B002896B7 /* UIViewController+CollectionView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2113,7 +2113,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CE093EC29D5AE2E0069CE24 /* videoLogin.mp4 in Resources */,
 				460ABACF29F7B8D700DD5797 /* Localizable.strings in Resources */,
 				8CA398BC29B72A2000C09746 /* LaunchScreen.storyboard in Resources */,
 				8CA398B929B72A2000C09746 /* Assets.xcassets in Resources */,
@@ -2278,6 +2277,7 @@
 				46B0CF2629E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift in Sources */,
 				465550FF29CC820A00BF932A /* SettingsDependency.swift in Sources */,
 				8CCC92C629E3FC3C0019BE72 /* FavouriteRepository.swift in Sources */,
+				466BCE152A02657B002896B7 /* UIViewController+CollectionView.swift in Sources */,
 				461C1F6229CB12FA00540289 /* ForgotCoordinator.swift in Sources */,
 				461C1F4F29CAE10600540289 /* LoginExternalDependency.swift in Sources */,
 				8CE9BDB729E5807F00F45D3F /* GamesModesDataDependency.swift in Sources */,

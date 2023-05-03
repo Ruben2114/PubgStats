@@ -33,15 +33,12 @@ final class FavouriteViewModel {
             }
         }
     }
-    
     func saveFav(sessionUser: ProfileEntity, player: String, account: String) {
         favouriteDataUseCase.saveFav(sessionUser: sessionUser, player: player, account: account)
     }
-    
     func getFavourites(for sessionUser: ProfileEntity) -> [Favourite]? {
         favouriteDataUseCase.getFavourites(for: sessionUser)
     }
-    
     func deleteFavouriteTableView(_ profile: Favourite){
         favouriteDataUseCase.deleteFavouriteTableView(profile)
     }

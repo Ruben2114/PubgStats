@@ -12,7 +12,6 @@ class InfoAppViewController: UIViewController {
     private let viewModel: InfoAppViewModel
     var contentView = UIView()
     var mainScrollView = UIScrollView()
-    var label: UILabel!
     
     init(dependencies: InfoAppDependency) {
         self.viewModel = dependencies.resolve()
@@ -24,14 +23,14 @@ class InfoAppViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        configScroll()
         configUI()
-        configConstraints()
     }
     private func configUI() {
         view.backgroundColor = .systemBackground
         title = "infoAppViewControllerTitle".localize()
         backButton(action: #selector(backButtonAction))
+        configScroll()
+        configConstraints()
     }
     private func configConstraints() {
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -42,7 +41,7 @@ class InfoAppViewController: UIViewController {
         infoLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         infoLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
     }
-    @objc func backButtonAction() {
+    @objc private func backButtonAction() {
         viewModel.backButton()
     }
 }

@@ -57,13 +57,10 @@ final class StatsGeneralViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
-        configConstraints()
         bind()
-        
     }
     private func bind() {
         viewModel.state.receive(on: DispatchQueue.main)
@@ -105,6 +102,7 @@ final class StatsGeneralViewController: UIViewController {
         nameLabel.font = UIFont.systemFont(ofSize: 25)
         tableView.isScrollEnabled = false
         configScroll()
+        configConstraints()
     }
     private func configConstraints() {
         contentView.addSubview(levelLabel)
@@ -152,10 +150,10 @@ final class StatsGeneralViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         tableView.heightAnchor.constraint(equalToConstant: 272).isActive = true
     }
-    @objc func backButtonAction() {
+    @objc private func backButtonAction() {
         viewModel.backButton()
     }
-    @objc func reloadButtonAction() {
+    @objc private func reloadButtonAction() {
         guard refreshCount == 1 else {
             reloadButton.isEnabled = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 120) {
@@ -167,7 +165,7 @@ final class StatsGeneralViewController: UIViewController {
             return
         }
     }
-    @objc func handleMenuButtonTapped(_ sender: UIButton) {
+    @objc private func handleMenuButtonTapped(_ sender: UIButton) {
         let wins = createUIAction(title: "playerStatsVLabel".localize(), sender: sender, index: 0)
         let losses = createUIAction(title: "playerStatsDLabel".localize(), sender: sender, index: 1)
         let headshotKills = createUIAction(title: "playerStatsMDLabel".localize(), sender: sender, index: 2)
@@ -179,9 +177,9 @@ final class StatsGeneralViewController: UIViewController {
     }
     private func createUIAction(title: String,sender: UIButton, index: Int) -> UIAction {
         let action = UIAction(title: title,handler: { [weak self] _ in
-            sender.setTitle(self?.viewModel.allDifferentTitleRadarChart[index], for: .normal)
-            guard var value = self?.viewModel.allDifferentValuesRadarChart else {return}
-            value[sender.tag] = value[index]
+            sender.setTitle(self?.viewModel.titleRadarChart[index], for: .normal)
+            guard let allValue = self?.viewModel.allDifferentValuesRadarChart, var value = self?.viewModel.valuesRadarChart else {return}
+            value[sender.tag] = allValue[index]
             self?.viewModel.valuesRadarChart = value
             self?.radarChartView.values = value
             self?.radarChartView.setNeedsDisplay()
@@ -189,6 +187,7 @@ final class StatsGeneralViewController: UIViewController {
         return action
     }
 }
+
 extension StatsGeneralViewController: ViewScrollable { }
 extension StatsGeneralViewController: MessageDisplayable { }
 extension StatsGeneralViewController: SpinnerDisplayable { }

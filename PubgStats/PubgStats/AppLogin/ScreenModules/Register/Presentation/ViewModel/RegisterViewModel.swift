@@ -14,7 +14,6 @@ final class RegisterViewModel {
     private let registerDataUseCase: RegisterDataUseCase
     private let dependencies: RegisterDependency
     
-    
     init(dependencies: RegisterDependency) {
         self.dependencies = dependencies
         self.coordinator = dependencies.resolve()
@@ -40,7 +39,6 @@ final class RegisterViewModel {
         let check = registerDataUseCase.check(email,type: "email")
         return check
     }
-    
     func backButton() {
         coordinator?.dismiss()
     }

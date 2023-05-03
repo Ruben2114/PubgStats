@@ -16,13 +16,13 @@ final class SettingsViewModel {
         [SettingsField.help, SettingsField.email, SettingsField.legal],
         [SettingsField.delete]
     ]
+    
     init(dependencies: SettingsDependency) {
         self.dependencies = dependencies
         self.coordinator = dependencies.resolve()
         self.sessionUser = dependencies.external.resolve()
         self.settingsDataUseCase = dependencies.resolve()
     }
-    
     func deleteProfile() {
         settingsDataUseCase.deleteProfile(sessionUser: sessionUser)
         coordinator?.performTransition(.goDeleteProfile)

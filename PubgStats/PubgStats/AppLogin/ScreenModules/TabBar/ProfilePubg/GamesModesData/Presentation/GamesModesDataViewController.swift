@@ -8,21 +8,10 @@
 import UIKit
 
 class GamesModesDataViewController: UIViewController {
-    private lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let layoutWidth = (ViewValues.widthScreen - ViewValues.doublePadding) / ViewValues.multiplierTwo
-        let layoutHeigth = (ViewValues.widthScreen - ViewValues.doublePadding) / ViewValues.multiplierTwo
-        layout.itemSize = CGSize(width: layoutWidth, height: layoutHeigth)
-        layout.minimumLineSpacing = .zero
-        layout.minimumInteritemSpacing = .zero
-        layout.sectionInset = UIEdgeInsets(top: .zero, left: ViewValues.normalPadding, bottom: .zero, right: ViewValues.normalPadding)
-        layout.scrollDirection = .vertical
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        return collectionView
-    }()
+    private lazy var collectionView = makeCollectionView()
     private let viewModel: GamesModesDataViewModel
     private let dependencies: GamesModesDataDependency
+    
     init(dependencies: GamesModesDataDependency) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
@@ -35,32 +24,33 @@ class GamesModesDataViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
-        configConstraint()
         bind()
     }
-    func bind() {
+    private func bind() {
         viewModel.fetchDataGamesModes()
         collectionView.reloadData()
     }
-    func configUI(){
+    private func configUI(){
         title = "gamesModesDataViewControllerTitle".localize()
         view.backgroundColor = .systemGroupedBackground
         backButton(action: #selector(backButtonAction))
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(ItemDataCollectionViewCell.self, forCellWithReuseIdentifier: "ItemDataCollectionViewCell")
+        configConstraint()
     }
-    func configConstraint(){
+    private func configConstraint(){
         view.addSubview(collectionView)
         collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
-    @objc func backButtonAction() {
+    @objc private func backButtonAction() {
         viewModel.backButton()
     }
 }
+
 extension GamesModesDataViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.nameGamesModes.count

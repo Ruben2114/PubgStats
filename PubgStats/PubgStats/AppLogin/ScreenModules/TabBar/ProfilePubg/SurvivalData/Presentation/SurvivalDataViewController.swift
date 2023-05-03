@@ -8,9 +8,11 @@
 import UIKit
 
 class SurvivalDataViewController: UIViewController {
-    private lazy var tableView = makeTableView()
+    private lazy var tableView = makeTableViewData()
     private let viewModel: SurvivalDataViewModel
     private let sessionUser: ProfileEntity
+    private let imageView = UIImageView(image: UIImage(named: "backgroundSurvival"))
+
     init(dependencies: SurvivalDataDependency) {
         self.viewModel = dependencies.resolve()
         self.sessionUser = dependencies.external.resolve()
@@ -23,32 +25,34 @@ class SurvivalDataViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
-        configConstraint()
-        fetchData()
     }
-    func configUI(){
+    private func configUI(){
         title = "survivalDataViewControllerTitle".localize()
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.allowsSelection = false
         backButton(action: #selector(backButtonAction))
+        configConstraint()
+        fetchData()
     }
-   
-    func configConstraint(){
+    private func configConstraint(){
+        view.insertSubview(imageView, at: 0)
+        imageView.frame = view.bounds
+        
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
-    func fetchData() {
+    private func fetchData() {
         viewModel.fetchDataSurvival()
         tableView.reloadData()
     }
-    @objc func backButtonAction() {
+    @objc private func backButtonAction() {
         viewModel.backButton()
     }
 }
+
 extension SurvivalDataViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.content.count

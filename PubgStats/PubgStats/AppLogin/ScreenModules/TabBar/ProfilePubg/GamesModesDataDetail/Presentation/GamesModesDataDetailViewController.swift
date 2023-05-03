@@ -8,10 +8,12 @@
 import UIKit
 
 class GamesModesDataDetailViewController: UIViewController {
-    private lazy var tableView = makeTableView()
+    private lazy var tableView = makeTableViewData()
     private let viewModel: GamesModesDataDetailViewModel
     private let dependencies: GamesModesDataDetailDependency
     private let sessionUser: ProfileEntity
+    private let imageView = UIImageView(image: UIImage(named: "backgroundGamesMode"))
+    
     init(dependencies: GamesModesDataDetailDependency) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
@@ -25,30 +27,32 @@ class GamesModesDataDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
-        configConstraint()
         bind()
     }
-    func bind() {
+    private func bind() {
         viewModel.fetchDataGamesModesDetail()
         tableView.reloadData()
     }
     
-    func configUI(){
+    private func configUI(){
         view.backgroundColor = .systemBackground
         title = "gamesModesDataDetailViewControllerTitle".localize() + "\(sessionUser.gameMode ?? "")"
         backButton(action: #selector(backButtonAction))
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.allowsSelection = false
+        configConstraint()
     }
-    func configConstraint(){
+    private func configConstraint(){
+        view.insertSubview(imageView, at: 0)
+        imageView.frame = view.bounds
+        
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
-    @objc func backButtonAction() {
+    @objc private func backButtonAction() {
         viewModel.backButton()
     }
 }
