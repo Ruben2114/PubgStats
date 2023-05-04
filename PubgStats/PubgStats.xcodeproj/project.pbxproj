@@ -402,13 +402,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		460ABAC929F7B71400DD5797 /* Translation */ = {
+		460ABAC929F7B71400DD5797 /* Localizables */ = {
 			isa = PBXGroup;
 			children = (
 				460ABACA29F7B75000DD5797 /* ExtensionString.swift */,
 				460ABAD129F7B8D700DD5797 /* Localizable.strings */,
 			);
-			path = Translation;
+			path = Localizables;
 			sourceTree = "<group>";
 		};
 		46151CB429C1B9480054BCEA /* ProfilePubg */ = {
@@ -1131,7 +1131,7 @@
 		8CAEB00829BB4636009282AF /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				460ABAC929F7B71400DD5797 /* Translation */,
+				460ABAC929F7B71400DD5797 /* Localizables */,
 				8C7563DE29BB5E3C000373F9 /* Components */,
 				8CAEB01229BB4721009282AF /* Layer */,
 				8CAEB01029BB4711009282AF /* Constant */,

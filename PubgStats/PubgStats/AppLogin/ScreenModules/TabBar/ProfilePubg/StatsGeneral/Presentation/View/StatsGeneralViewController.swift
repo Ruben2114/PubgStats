@@ -15,8 +15,8 @@ final class StatsGeneralViewController: UIViewController {
     private lazy var xpLabel = makeLabelStats(height: 21)
     private lazy var stackStackView = makeStack(space: 5)
     private lazy var imageFirstStackView = makeStackImage(space: 5)
-    private lazy var winsImage = makeImageViewStats(name: "wonTotal", height: 65, label: winsLabel)
-    private lazy var killsImage = makeImageViewStats(name: "wonTotal", height: 65, label: killsLabel)
+    private lazy var winsImage = makeImageViewStats(name: "win2", height: 65, label: winsLabel)
+    private lazy var killsImage = makeImageViewStats(name: "win3", height: 65, label: killsLabel)
     private lazy var assistsImage = makeImageViewStats(name: "wonTotal", height: 65, label: assistsLabel)
     private lazy var winsLabel = makeLabelImage()
     private lazy var killsLabel = makeLabelImage()
@@ -38,6 +38,7 @@ final class StatsGeneralViewController: UIViewController {
         return radar
     }()
     private lazy var legendButton = legendButton()
+    private lazy var helpButton = helpButton(selector: #selector(helpButtonAction))
     var contentView: UIView = UIView()
     var mainScrollView: UIScrollView = UIScrollView()
     private var cancellable = Set<AnyCancellable>()
@@ -46,6 +47,7 @@ final class StatsGeneralViewController: UIViewController {
     private let sessionUser: ProfileEntity
     private var refreshCount = 0
     private var reloadButton = UIBarButtonItem()
+    private let userDefaults = UserDefaults.standard
     
     init(dependencies: StatsGeneralDependency) {
         self.dependencies = dependencies
@@ -103,6 +105,8 @@ final class StatsGeneralViewController: UIViewController {
         tableView.isScrollEnabled = false
         configScroll()
         configConstraints()
+        helpButtonAlert()
+        reloadData()
     }
     private func configConstraints() {
         contentView.addSubview(levelLabel)
@@ -140,8 +144,12 @@ final class StatsGeneralViewController: UIViewController {
         radarChartView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         
         contentView.addSubview(legendButton)
-        legendButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
+        legendButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
         legendButton.bottomAnchor.constraint(equalTo: radarChartView.bottomAnchor).isActive = true
+        
+        contentView.addSubview(helpButton)
+        helpButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+        helpButton.bottomAnchor.constraint(equalTo: legendButton.topAnchor, constant: -10).isActive = true
         
         contentView.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: radarChartView.bottomAnchor, constant: 20).isActive = true
@@ -153,17 +161,40 @@ final class StatsGeneralViewController: UIViewController {
     @objc private func backButtonAction() {
         viewModel.backButton()
     }
-    @objc private func reloadButtonAction() {
-        guard refreshCount == 1 else {
-            reloadButton.isEnabled = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + 120) {
-                self.reloadButton.isEnabled = true
-                self.refreshCount = 0
-            }
-            refreshCount += 1
-            viewModel.reload()
+    private func reloadData() {
+        if userDefaults.object(forKey: "date") == nil {
             return
+        }else {
+            let valueDate = userDefaults.object(forKey: "date")
+            let date = Date()
+            let interval = date.timeIntervalSince(valueDate as! Date)
+            if interval < 120 {
+                reloadButton.isEnabled = false
+                let waitingInterval = 120 - interval
+                DispatchQueue.main.asyncAfter(deadline: .now() + waitingInterval) {
+                    self.reloadButton.isEnabled = true
+                    self.userDefaults.set(nil, forKey: "date")
+                }
+            } else {
+                userDefaults.set(nil, forKey: "date")
+            }
         }
+    }
+    @objc private func reloadButtonAction() {
+        userDefaults.set(Date(), forKey: "date")
+         guard userDefaults.bool(forKey: "refreshCount") == true else{
+             reloadButton.isEnabled = false
+             DispatchQueue.main.asyncAfter(deadline: .now() + 120) {
+                 self.reloadButton.isEnabled = true
+                 self.userDefaults.set(false, forKey: "refreshCount")
+             }
+             viewModel.reload()
+             return
+         }
+    }
+    @objc private func helpButtonAction() {
+        //TODO: cambio idioma
+        presentAlert(message: "Puedes cambiar los datos de cada vértice de la gráfica, solo debes pulsar en los datos y elegir el nuevo. Si tienes alguna duda sobre el significado de las siglas pulsa el botón menú que está justo debajo de la gráfica.", title: "Información")
     }
     @objc private func handleMenuButtonTapped(_ sender: UIButton) {
         let wins = createUIAction(title: "playerStatsVLabel".localize(), sender: sender, index: 0)
@@ -185,6 +216,13 @@ final class StatsGeneralViewController: UIViewController {
             self?.radarChartView.setNeedsDisplay()
         })
         return action
+    }
+    private func helpButtonAlert() {
+        guard userDefaults.bool(forKey: "helpButtonBool") == true else{
+            helpButtonAction()
+            userDefaults.set(true, forKey: "helpButtonBool")
+            return
+        }
     }
 }
 

@@ -13,7 +13,9 @@ class FavouriteViewController: UIViewController {
         let search = UISearchBar()
         search.placeholder = "searchPlaceholder".localize()
         search.translatesAutoresizingMaskIntoConstraints = false
-        search.backgroundColor = .systemGroupedBackground
+        search.searchTextField.backgroundColor = .systemGroupedBackground
+        search.backgroundImage = UIImage()
+        search.barTintColor = .clear
         return search
     }()
     private lazy var tableView = makeTableViewGroup()
@@ -72,7 +74,7 @@ class FavouriteViewController: UIViewController {
     private func configConstraint() {
         view.insertSubview(imageView, at: 0)
         imageView.frame = view.bounds
-
+        
         view.addSubview(searchBar)
         searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
