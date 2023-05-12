@@ -53,9 +53,7 @@ final class ProfileViewController: UIViewController {
             switch state {
             case .fail(let error):
                 self?.presentAlert(message: error, title: "Error")
-            case .success(let model):
-                guard let account = model.id, !account.isEmpty, let player = model.name, !player.isEmpty else {return}
-                self?.viewModel.saveUser(player: player, account: account)
+            case .success(_):
                 self?.tableView.reloadData()
             case .loading:
                 break
@@ -158,12 +156,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
             vc.allowsEditing = true
             present(vc, animated: true)
         case .login:
-            presentAlertTextField(title: "profileFieldInfoLoginTitle".localize(),
-                                  message: "",
-                                  textFields: [(title: "profileFieldInfoLoginTextFields".localize(), placeholder: "profileFieldInfoLoginTextFields".localize())],
-                                  completed: { text in
-                self.loginCell(text: text)
-            }, isSecure: false)
+            alertFetchFavourite(title: "profileFieldInfoLoginTitle".localize(), preferredStyle: .alert, textFieldPlaceholder: "profileFieldInfoLoginTextFields".localize(), cancelActionTitle: "Cancelar", defaultActionTitles: [("Steam", "steam"), ("Xbox", "xbox")]) { (textField, platform) in
+                self.loginCell(text: textField, platform: platform)
+            }
         case .stats:
             viewModel.didTapStatsgAccountButton()
         case .delete:
@@ -235,10 +230,10 @@ private extension ProfileViewController {
         viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),newPasswordHash, type: "password")
         viewChange()
     }
-    func loginCell(text: [String]){
-        guard let nameText = text.first, !nameText.isEmpty else {
+    func loginCell(text: String, platform: String){
+        guard !text.isEmpty else {
             presentAlert(message: "profileLoginCellInvalid".localize(), title: "Error")
             return}
-        viewModel.dataGeneral(name: nameText)
+        viewModel.dataGeneral(name: text, platform: platform)
     }
 }

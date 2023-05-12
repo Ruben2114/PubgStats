@@ -53,9 +53,10 @@ final class StatsGeneralViewModel {
     private func fetchData() {
         let dispatchGroup = DispatchGroup()
         guard let id = searchData()[0], !id.isEmpty else {return}
+        guard let platform = searchData()[2], !platform.isEmpty else {return}
         guard let type = coordinator?.type else {return}
         dispatchGroup.enter()
-        statsGeneralDataUseCase.executeSurvival(account: id) { [weak self] result in
+        statsGeneralDataUseCase.executeSurvival(account: id, platform: platform) { [weak self] result in
             switch result {
             case .success(let survival):
                 guard let user = self?.sessionUser else{return}
@@ -66,7 +67,7 @@ final class StatsGeneralViewModel {
             }
         }
         dispatchGroup.enter()
-        statsGeneralDataUseCase.executeGamesModes(account: id) { [weak self] result in
+        statsGeneralDataUseCase.executeGamesModes(account: id, platform: platform) { [weak self] result in
             switch result {
             case .success(let gamesMode):
                 guard let user = self?.sessionUser else{return}
@@ -90,9 +91,9 @@ final class StatsGeneralViewModel {
     private func searchData() -> [String?] {
         guard let type = coordinator?.type else {return [nil]}
         if type == .favourite{
-            return [sessionUser.accountFavourite, sessionUser.nameFavourite]
+            return [sessionUser.accountFavourite, sessionUser.nameFavourite, sessionUser.platformFavourite]
         } else {
-            return [sessionUser.account, sessionUser.player]
+            return [sessionUser.account, sessionUser.player, sessionUser.platform]
         }
     }
     

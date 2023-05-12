@@ -10,12 +10,12 @@ import UIKit
 
 protocol LocalDataProfileService {
     func save(name: String, password: String, email: String) -> Bool
-    func saveFav(sessionUser: ProfileEntity, name: String, account: String)
+    func saveFav(sessionUser: ProfileEntity, name: String, account: String, platform: String)
     func checkIfNameExists(name: String) -> Bool
     func checkIfEmailExists(email: String) -> Bool
     func checkUser(sessionUser: ProfileEntity, name: String, password: String) -> Bool
     func checkUserAndChangePassword(name: String, email: String) -> Bool
-    func savePlayerPubg(sessionUser: ProfileEntity, player: String, account: String)
+    func savePlayerPubg(sessionUser: ProfileEntity, player: String, account: String, platform: String)
     func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], type: NavigationStats)
     func saveGamesMode(sessionUser: ProfileEntity, gamesModeData: GamesModesDTO, type: NavigationStats)
     func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO, type: NavigationStats)
@@ -88,7 +88,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
             return false
         }
     }
-    func savePlayerPubg(sessionUser: ProfileEntity, player: String, account: String){
+    func savePlayerPubg(sessionUser: ProfileEntity, player: String, account: String, platform: String){
         let fetchRequest = Profile.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
         do {
@@ -99,15 +99,17 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
                 let user = result.first
                 user?.player = player
                 user?.account = account
+                user?.platform = platform
                 try context.save()
                 sessionUser.player = player
                 sessionUser.account = account
+                sessionUser.platform = platform
             }
         } catch {
-            print("Error en core data")
+            print("Error en core data \(error)")
         }
     }
-    func saveFav(sessionUser: ProfileEntity, name: String, account: String){
+    func saveFav(sessionUser: ProfileEntity, name: String, account: String, platform: String){
         let fetchRequest = Profile.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
         do {
@@ -116,6 +118,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
                 let newFav = Favourite(context: context)
                 newFav.name = name
                 newFav.account = account
+                newFav.platform = platform
                 perfil.addToFavourites(newFav)
                 try? context.save()
             }

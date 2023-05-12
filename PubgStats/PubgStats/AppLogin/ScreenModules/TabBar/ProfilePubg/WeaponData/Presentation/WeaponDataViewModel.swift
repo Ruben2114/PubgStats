@@ -54,7 +54,8 @@ final class WeaponDataViewModel {
     }
     func fetchData(){
         guard let id = searchId(), !id.isEmpty else {return}
-        weaponDataUseCase.execute(account: id) { [weak self] result in
+        //TODO: poner opcion platform con un boton y un menu con steam o xbox
+        weaponDataUseCase.execute(account: id, platform: "steam") { [weak self] result in
             switch result {
             case .success(let weapon):
                 guard let user = self?.sessionUser else {return}

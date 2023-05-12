@@ -98,7 +98,7 @@ extension FavouriteViewController: SpinnerDisplayable{ }
 extension FavouriteViewController: MessageDisplayable{ }
 extension FavouriteViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
-        guard let text = searchBar.text else { return }
+        guard var text = searchBar.text else { return }
         var modelNames: [String] = []
         for fav in profilesFavourite {
             guard let modelName = fav.name else {return}
@@ -108,7 +108,20 @@ extension FavouriteViewController: UISearchBarDelegate {
             presentAlert(message: "searchBarSearchButtonClickedError".localize(), title: "Error")
             return
         }
-        viewModel.searchFav(name: text)
+        if text.contains(" ") {
+            let updatedText = text.replacingOccurrences(of: " ", with: "%20")
+            text = updatedText
+        }
+        //TODO: meter title en localized y hacer generico este alertcontroller
+        let alertController = UIAlertController(title: "¿De qué plataforma?", message: nil, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Steam", style: .default, handler: { (action) in
+                self.viewModel.searchFav(name: text, platform: "steam")
+        }))
+        alertController.addAction(UIAlertAction(title: "Xbox", style: .default, handler: { (action) in
+            self.viewModel.searchFav(name: text, platform: "xbox")
+        }))
+        present(alertController, animated: true, completion: nil)
         searchBar.text = ""
     }
 }

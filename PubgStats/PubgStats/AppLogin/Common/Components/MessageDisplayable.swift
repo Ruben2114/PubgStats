@@ -9,6 +9,7 @@ import UIKit
 protocol MessageDisplayable { }
 
 extension MessageDisplayable where Self: UIViewController{
+    
     func presentAlert(message: String, title: String){
         let alertController = UIAlertController(
             title: title,
@@ -18,6 +19,7 @@ extension MessageDisplayable where Self: UIViewController{
         alertController.addAction(okAction)
         self.present(alertController, animated: true)
     }
+    
     func presentAlertTimer(message: String, title: String, timer: Double){
         let alertController = UIAlertController(
             title: title,
@@ -50,5 +52,28 @@ extension MessageDisplayable where Self: UIViewController{
         alert.addAction(actionCancel)
         alert.addAction(actionAccept)
         present(alert, animated: true)
+    }
+    
+    func alertFetchFavourite(title: String, preferredStyle: UIAlertController.Style, textFieldPlaceholder: String, cancelActionTitle: String, defaultActionTitles: [(title: String, platform: String)], completion: ((String, String) -> Void)?) {
+        
+        let alertController = UIAlertController(title: title, message: nil, preferredStyle: preferredStyle)
+        
+        alertController.addTextField { (textField) in
+            textField.placeholder = textFieldPlaceholder
+        }
+        alertController.addAction(UIAlertAction(title: cancelActionTitle, style: .cancel, handler: nil))
+        
+        for actionTitle in defaultActionTitles {
+            alertController.addAction(UIAlertAction(title: actionTitle.title, style: .default, handler: { action in
+                if var textField = alertController.textFields?.first?.text {
+                    if textField.contains(" ") {
+                        let updatedText = textField.replacingOccurrences(of: " ", with: "%20")
+                        textField = updatedText
+                    }
+                    completion?(textField, actionTitle.platform)
+                }
+            }))
+        }
+        present(alertController, animated: true, completion: nil)
     }
 }
