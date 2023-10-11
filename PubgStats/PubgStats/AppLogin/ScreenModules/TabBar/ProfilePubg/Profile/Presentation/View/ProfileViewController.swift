@@ -10,11 +10,10 @@ import Combine
 
 final class ProfileViewController: UIViewController {
     private lazy var profileImageView = makeImageViewPersonal(name: "default", data: sessionUser.image)
+    private let imageView = UIImageView(image: UIImage(named: "backgroundProfile"))
     private lazy var nameLabel = makeLabelProfile(title: sessionUser.name, color: .black, font: 20, style: .title2, isBold: true)
     private lazy var emailLabel = makeLabelProfile(title: sessionUser.email, color: .black, font: 20, style: .title2, isBold: false)
     private lazy var tableView = makeTableViewGroup()
-    private var refreshCount = 0
-    
     private var cancellable = Set<AnyCancellable>()
     private let viewModel: ProfileViewModel
     private let dependencies: ProfileDependency
@@ -25,7 +24,7 @@ final class ProfileViewController: UIViewController {
         self.sessionUser = dependencies.external.resolve()
         super.init(nibName: nil, bundle: nil)
     }
-    
+    @available(*,unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -33,7 +32,6 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
-        configConstraints()
         bind()
     }
     private func viewChange() {
@@ -43,19 +41,19 @@ final class ProfileViewController: UIViewController {
     
     private func configUI() {
         view.backgroundColor = tableView.backgroundColor
-        navigationItem.title = "Perfil Personal"
+        navigationItem.title = "profileViewControllerNavigationItem".localize()
         backButton(action: #selector(backButtonAction))
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.backgroundColor = .clear
+        configConstraints()
     }
     private func bind() {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
             switch state {
-            case .fail(_):
-                self?.presentAlert(message: "El nombre de usuario no existe", title: "Error")
-            case .success(let model):
-                guard let account = model.id, !account.isEmpty, let player = model.name, !player.isEmpty else {return}
-                self?.viewModel.saveUser(player: player, account: account)
+            case .fail(let error):
+                self?.presentAlert(message: error, title: "Error")
+            case .success(_):
                 self?.tableView.reloadData()
             case .loading:
                 break
@@ -64,6 +62,9 @@ final class ProfileViewController: UIViewController {
     }
     
     private func configConstraints() {
+        view.insertSubview(imageView, at: 0)
+        imageView.frame = view.bounds
+        
         view.addSubview(profileImageView)
         profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -82,12 +83,12 @@ final class ProfileViewController: UIViewController {
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
-    @objc func backButtonAction() {
-        let alert = UIAlertController(title: "Aviso", message: "¿Estas seguro de cerrar sesión?", preferredStyle: .alert)
-        let actionAccept = UIAlertAction(title: "Aceptar", style: .default){ [weak self]_ in
+    @objc private func backButtonAction() {
+        let alert = UIAlertController(title: "alertTitle".localize(), message: "profileBackButtonAction".localize(), preferredStyle: .alert)
+        let actionAccept = UIAlertAction(title: "actionAccept".localize(), style: .default){ [weak self]_ in
             self?.viewModel.backButton()
         }
-        let actionCancel = UIAlertAction(title: "Cancelar", style: .destructive)
+        let actionCancel = UIAlertAction(title: "actionCancel".localize(), style: .destructive)
         alert.addAction(actionAccept)
         alert.addAction(actionCancel)
         present(alert, animated: true)
@@ -125,26 +126,28 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
         let profileFieldInfo = viewModel.items[indexPath.section][indexPath.row]
         switch profileFieldInfo {
         case .name:
-            presentAlertTextField(title: "Cambio de nombre",
-                                  message: "¿Estás seguro de que quieres cambiar el nombre?",
-                                  textFields: [(title: "Nuevo nombre", placeholder: "Nuevo nombre")],
+            presentAlertTextField(title: "profileFieldInfoNameTitle".localize(),
+                                  message: "profileFieldInfoNameMessage".localize(),
+                                  textFields: [(title: "profileFieldInfoNameTextFields".localize(), placeholder: "profileFieldInfoNameTextFields".localize())],
                                   completed: { text in
-                nameCell(text: text)
+                self.nameCell(text: text)
             }, isSecure: false)
         case .email:
-            presentAlertTextField(title: "Cambio de correo",
-                                  message: "¿Estás seguro de que quieres cambiar el correo?",
-                                  textFields: [(title: "Nuevo correo", placeholder: "Nuevo correo")],
+            presentAlertTextField(title: "profileFieldInfoEmailTitle".localize(),
+                                  message: "profileFieldInfoEmailMessage".localize(),
+                                  textFields: [(title: "profileFieldInfoEmailTextFields".localize(), placeholder: "profileFieldInfoEmailTextFields".localize())],
                                   completed: { text in
-                emailCell(text: text)
+                self.emailCell(text: text)
             }, isSecure: false)
         case .password:
-            presentAlertTextField(title: "Cambio de contraseña",
-                                  message: "¿Estás seguro de que quieres cambiar la contraseña?",
-                                  textFields: [(title: "Nueva contraseña", placeholder: "Nueva contraseña"),
-                                               (title: "Repite la nueva contraseña", placeholder: "Repite la nueva contraseña")],
+            presentAlertTextField(title: "profileFieldInfoPasswordTitle".localize(),
+                                  message: "profileFieldInfoPasswordMessage".localize(),
+                                  textFields: [(title: "profileFieldInfoPasswordTextFields".localize(),
+                                                placeholder: "profileFieldInfoPasswordTextFields".localize()),
+                                               (title: "profileFieldInfoPasswordTextFieldsSecond".localize(),
+                                                placeholder: "profileFieldInfoPasswordTextFieldsSecond".localize())],
                                   completed: { text in
-                passwordCell(text: text)
+                self.passwordCell(text: text)
             }, isSecure: true)
         case .image:
             let vc = UIImagePickerController()
@@ -153,72 +156,23 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
             vc.allowsEditing = true
             present(vc, animated: true)
         case .login:
-            presentAlertTextField(title: "Jugador",
-                                  message: "",
-                                  textFields: [(title: "Nuevo jugador", placeholder: "Nombre jugador")],
-                                  completed: { text in
-                loginCell(text: text)
-            }, isSecure: false)
+            alertFetchFavourite(title: "profileFieldInfoLoginTitle".localize(), preferredStyle: .alert, textFieldPlaceholder: "profileFieldInfoLoginTextFields".localize(), cancelActionTitle: "Cancelar", defaultActionTitles: [("Steam", "steam"), ("Xbox", "xbox")]) { (textField, platform) in
+                self.loginCell(text: textField, platform: platform)
+            }
         case .stats:
             viewModel.didTapStatsgAccountButton()
         case .delete:
-            let alert = UIAlertController(title: "Aviso", message: "¿Estás seguro de borrar tu cuenta asociada de Pubg?", preferredStyle: .alert)
-            let actionAccept = UIAlertAction(title: "Aceptar", style: .default){ [weak self]_ in
+            let alert = UIAlertController(title: "alertTitle".localize(),
+                                          message: "profileFieldInfoDeleteMessage".localize(),
+                                          preferredStyle: .alert)
+            let actionAccept = UIAlertAction(title: "actionAccept".localize(), style: .default){ [weak self]_ in
                 self?.viewModel.deletePubgAccount()
                 self?.tableView.reloadData()
             }
-            let actionCancel = UIAlertAction(title: "Cancelar", style: .destructive)
+            let actionCancel = UIAlertAction(title: "actionCancel".localize(), style: .destructive)
             alert.addAction(actionCancel)
             alert.addAction(actionAccept)
             present(alert, animated: true)
-        }
-        
-        func nameCell (text: [String]){
-            guard let nameText = text.first else {return}
-            guard viewModel.checkName(name: nameText) != true, !nameText.isEmpty else {
-                if nameText.isEmpty {
-                    presentAlert(message: "El nombre debe tener mínimo un caracter", title: "Error")
-                }else {
-                    presentAlert(message: "Este nombre ya existe", title: "Error")
-                }
-                return
-            }
-            viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),nameText, type: "name")
-            presentAlertTimer(message: "Cambiado con éxito", title: "Aviso", timer: 1.0)
-            viewChange()
-        }
-        func emailCell(text: [String]){
-            guard let newEmail = text.first, !newEmail.isEmpty else {
-                presentAlert(message: "El correo tiene que tener como mínimo un caracter", title: "Error")
-                return
-            }
-            guard checkValidEmail(email: newEmail) == true else {
-                presentAlert(message: "El correo no es válido", title: "Error")
-                return
-            }
-            guard viewModel.checkEmail(email: newEmail) != true else {
-                presentAlert(message: "El correo ya existe", title: "Error")
-                return
-            }
-            viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),newEmail, type: "email")
-            viewChange()
-        }
-        func passwordCell(text: [String]){
-            guard let newPassword = text.first, !newPassword.isEmpty else {
-                presentAlert(message: "La contraseña tiene que tener como mínimo un caracter", title: "Error")
-                return}
-            guard newPassword == text.last else {
-                presentAlert(message: "Contraseñas diferentes", title: "Error")
-                return}
-            guard let newPasswordHash = newPassword.hashString() else {return}
-            viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),newPasswordHash, type: "password")
-            viewChange()
-        }
-        func loginCell(text: [String]){
-            guard let nameText = text.first, !nameText.isEmpty else {
-                presentAlert(message: "No existen jugadores sin nombre", title: "Error")
-                return}
-            viewModel.dataGeneral(name: nameText)
         }
     }
 }
@@ -234,5 +188,52 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)
+    }
+}
+
+//MARK: tableView selection actions
+private extension ProfileViewController {
+    func nameCell (text: [String]){
+        guard let nameText = text.first else {return}
+        guard viewModel.checkName(name: nameText) != true, !nameText.isEmpty else {
+            if nameText.isEmpty {
+                presentAlert(message: "nameTextEmpty".localize(), title: "Error")
+            }else {
+                presentAlert(message: "nameTextExist".localize(), title: "Error")
+            }
+            return
+        }
+        viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),nameText, type: "name")
+        presentAlertTimer(message: "profileNameCellMessage".localize(), title: "alertTitle".localize(), timer: 1.0)
+        viewChange()
+    }
+    func emailCell(text: [String]){
+        guard let newEmail = text.first, checkValidEmail(email: newEmail) == true else {
+            presentAlert(message: "emailTextInvalid".localize(), title: "Error")
+            return
+        }
+        guard viewModel.checkEmail(email: newEmail) != true else {
+            presentAlert(message: "emailTextExist".localize(), title: "Error")
+            return
+        }
+        viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),newEmail, type: "email")
+        viewChange()
+    }
+    func passwordCell(text: [String]){
+        guard let newPassword = text.first, !newPassword.isEmpty else {
+            presentAlert(message: "passwordTextEmpty".localize(), title: "Error")
+            return}
+        guard newPassword == text.last else {
+            presentAlert(message: "profilePasswordCellDifferent".localize(), title: "Error")
+            return}
+        guard let newPasswordHash = newPassword.hashString() else {return}
+        viewModel.changeValue(sessionUser: self.dependencies.external.resolve(),newPasswordHash, type: "password")
+        viewChange()
+    }
+    func loginCell(text: String, platform: String){
+        guard !text.isEmpty else {
+            presentAlert(message: "profileLoginCellInvalid".localize(), title: "Error")
+            return}
+        viewModel.dataGeneral(name: text, platform: platform)
     }
 }

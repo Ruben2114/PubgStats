@@ -44,7 +44,6 @@ final class SurvivalDataViewModel {
                           ("distanceByVehicle", "Distancia en vehiculo"),
                           ("throwablesThrown", "Lanzables arrojados"),
                           ("revived", "Revivido")]
-            
             var newDict: [(String, Any)] = []
             for (oldKey, value) in keyValues {
                 if let newKey = keyMap.first(where: { $0.0 == oldKey })?.1 {
@@ -54,7 +53,6 @@ final class SurvivalDataViewModel {
                 }
             }
             content = newDict
-            
         }
     }
     func backButton() {

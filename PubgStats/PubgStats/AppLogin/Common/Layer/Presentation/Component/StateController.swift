@@ -31,11 +31,10 @@ enum OutputWeapon {
 enum OutputStats {
     case loading
     case fail(error: String)
-    case successSurvival (model: SurvivalDTO)
-    case successGamesModes (model: GamesModesDTO)
     case getSurvival (model: Survival?)
-    case getGamesMode (model: [GamesModes]?)
+    case getDataGeneral (model: DataGeneralPlayerRepresentable)
     case getName (model: String)
+    case getItemRadarChar (title: [String], values: [CGFloat])
     case success
 }
 

@@ -57,10 +57,21 @@ extension UIViewController {
         button.setTitle(title, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 20
         button.layer.borderColor = UIColor.systemCyan.cgColor
         button.layer.borderWidth = 2
-        button.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        return button
+    }
+    func createButtonStack(title: String, selector: Selector) -> UIButton {
+        let button = UIButton()
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemGray
+        button.layer.cornerRadius = 10
+        button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.textAlignment = .center
+        button.addTarget(self, action: selector, for: .touchUpInside)
         return button
     }
 }

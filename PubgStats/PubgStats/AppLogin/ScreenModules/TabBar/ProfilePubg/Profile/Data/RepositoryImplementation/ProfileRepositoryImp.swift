@@ -15,11 +15,11 @@ struct ProfileRepositoryImp: ProfileRepository {
         self.remoteData = dependencies.external.resolve()
     }
 
-    func saveProfilePubg(sessionUser: ProfileEntity, player: String, account: String) {
-        return dataSource.savePlayerPubg(sessionUser: sessionUser, player: player, account: account)
+    func saveProfilePubg(sessionUser: ProfileEntity, player: String, account: String, platform: String) {
+        return dataSource.savePlayerPubg(sessionUser: sessionUser, player: player, account: account, platform: platform)
     }
-    func fetchPlayerData(name: String, completion: @escaping (Result<PubgPlayerDTO, Error>) -> Void) {
-        remoteData.getPlayerData(name: name, completion: completion)
+    func fetchPlayerData(name: String, platform: String, completion: @escaping (Result<PubgPlayerDTO, Error>) -> Void) {
+        remoteData.getPlayerData(name: name, platform: platform, completion: completion)
     }
     func changeValue(sessionUser: ProfileEntity,_ value: String, type: String){
         dataSource.saveNewValue(sessionUser: sessionUser,value, type: type)

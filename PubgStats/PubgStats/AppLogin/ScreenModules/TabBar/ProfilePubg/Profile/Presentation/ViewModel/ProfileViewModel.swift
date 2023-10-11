@@ -24,20 +24,22 @@ final class ProfileViewModel {
         self.coordinator = dependencies.resolve()
         self.profileDataUseCase = dependencies.resolve()
     }
-    func dataGeneral(name: String){
+    func dataGeneral(name: String, platform: String){
         state.send(.loading)
-        profileDataUseCase.fetchPlayerData(name: name) { [weak self] result in
+        profileDataUseCase.fetchPlayerData(name: name, platform: platform) { [weak self] result in
             switch result {
             case .success(let player):
+                guard let account = player.id, !account.isEmpty, let playerPubg = player.name, !playerPubg.isEmpty else {return}
+                self?.saveUser(player: playerPubg, account: account, platform: platform)
                 self?.state.send(.success(model: player))
-            case .failure(let error):
-                self?.state.send(.fail(error: "\(error)"))
+            case .failure(_):
+                self?.state.send(.fail(error: "errorProfileViewModel".localize()))
             }
         }
     }
-    func saveUser(player: String, account: String) {
+    private func saveUser(player: String, account: String, platform: String) {
         let sessionUser: ProfileEntity = dependencies.external.resolve()
-        profileDataUseCase.execute(sessionUser: sessionUser, player: player, account: account)
+        profileDataUseCase.execute(sessionUser: sessionUser, player: player, account: account, platform: platform)
     }
     func changeValue(sessionUser: ProfileEntity,_ value: String, type: String) {
         profileDataUseCase.changeValue(sessionUser: sessionUser,value, type: type)

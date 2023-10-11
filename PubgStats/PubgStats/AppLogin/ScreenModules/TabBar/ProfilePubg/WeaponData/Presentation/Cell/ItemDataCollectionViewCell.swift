@@ -33,7 +33,7 @@ class ItemDataCollectionViewCell: UICollectionViewCell{
         super .init(frame: frame)
         configUI()
     }
-    
+    @available(*,unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -50,9 +50,7 @@ class ItemDataCollectionViewCell: UICollectionViewCell{
             right: mainContainer.rightAnchor,
             bottom: mainContainer.bottomAnchor,
             left: mainContainer.leftAnchor,
-            pRight: ViewValues.normalPadding,
-            pBottom: ViewValues.normalPadding,
-            pLeft: ViewValues.normalPadding)
+            pBottom: ViewValues.normalPadding)
     }
     
     private func configGradientForTitle() {

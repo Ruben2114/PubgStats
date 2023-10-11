@@ -6,8 +6,8 @@
 //
 
 protocol StatsGeneralRepository {
-    func fetchSurvivalData(account: String, completion: @escaping (Result<SurvivalDTO, Error>) -> Void)
-    func fetchGamesModeData(account: String, completion: @escaping (Result<GamesModesDTO, Error>) -> Void)
+    func fetchSurvivalData(account: String, platform: String, completion: @escaping (Result<SurvivalDTO, Error>) -> Void)
+    func fetchGamesModeData(account: String, platform: String, completion: @escaping (Result<GamesModesDTO, Error>) -> Void)
     func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], type: NavigationStats)
     func getSurvival(for sessionUser: ProfileEntity, type: NavigationStats) -> Survival?
     func saveGamesModeData(sessionUser: ProfileEntity, gamesModeData: GamesModesDTO, type: NavigationStats)

@@ -12,29 +12,31 @@ final class SettingsViewController: UIViewController {
     private lazy var tableView = makeTableViewGroup()
     private let dependencies: SettingsDependency
     private let viewModel: SettingsViewModel
+    private let imageView = UIImageView(image: UIImage(named: "backgroundAirDrop"))
    
     init(dependencies: SettingsDependency) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)
     }
-    
+    @available(*,unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
-        configConstraints()
     }
-    
     private func configUI() {
         view.backgroundColor = .systemGroupedBackground
-        title = "Ajustes"
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.backgroundColor = .clear
+        configConstraints()
     }
     private func configConstraints() {
+        view.insertSubview(imageView, at: 0)
+        imageView.frame = view.bounds
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -42,6 +44,7 @@ final class SettingsViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 }
+
 extension SettingsViewController: MessageDisplayable{ }
 extension SettingsViewController: MFMailComposeViewControllerDelegate{
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?){
@@ -52,14 +55,15 @@ extension SettingsViewController: MFMailComposeViewControllerDelegate{
         case .saved:
             break
         case .sent:
-            presentAlertTimer(message: "Enviado con éxito", title: "", timer: 1)
+            presentAlertTimer(message: "mailComposeControllerSent".localize(), title: "", timer: 1)
         case .failed:
-            presentAlert(message: "Lo siento, no se ha podido enviar el correo", title: "Error")
+            presentAlert(message: "mailComposeControllerFailed".localize(), title: "Error")
         @unknown default:
-            presentAlert(message: "Ha ocurrido un error", title: "Error")
+            presentAlert(message: "mailComposeControllerDefault".localize(), title: "Error")
         }
     }
 }
+
 extension SettingsViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.settingsField.count
@@ -78,7 +82,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate{
         cell.contentConfiguration = listContent
         return cell
     }
-   
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let settingsField = viewModel.settingsField[indexPath.section][indexPath.row]
         switch settingsField {
@@ -90,7 +93,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate{
             }
             let sendMail = MFMailComposeViewController()
             sendMail.setToRecipients(["cervigon21@gmail.com"])
-            sendMail.setSubject("Correo de prueba")
+            sendMail.setSubject("sendMailSetSubject".localize())
             sendMail.setMessageBody("", isHTML: true)
             sendMail.mailComposeDelegate = self
             present(sendMail, animated: true, completion: nil)

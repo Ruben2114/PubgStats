@@ -32,9 +32,7 @@ final class SurvivalDataCoordinatorImp: Coordinator {
         navigation?.pushViewController(survivalDataView, animated: false)
     }
 }
-extension SurvivalDataCoordinatorImp: SurvivalDataCoordinator {
-    
-}
+extension SurvivalDataCoordinatorImp: SurvivalDataCoordinator {}
 
 private extension SurvivalDataCoordinatorImp {
     struct Dependency: SurvivalDataDependency {

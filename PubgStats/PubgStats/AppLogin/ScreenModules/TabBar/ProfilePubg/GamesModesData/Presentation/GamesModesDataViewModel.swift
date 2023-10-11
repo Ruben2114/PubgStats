@@ -6,15 +6,13 @@
 //
 
 final class GamesModesDataViewModel {
-    private let dependencies: GamesModesDataDependency
     private weak var coordinator: GamesModesDataCoordinator?
     private let gamesModesDataUseCase: GamesModesDataUseCase
-    let sessionUser: ProfileEntity
+    private let sessionUser: ProfileEntity
     var nameGamesModes: [String] = []
     
     init(dependencies: GamesModesDataDependency) {
         self.sessionUser = dependencies.external.resolve()
-        self.dependencies = dependencies
         self.coordinator = dependencies.resolve()
         self.gamesModesDataUseCase = dependencies.resolve()
     }
@@ -35,7 +33,6 @@ final class GamesModesDataViewModel {
         sessionUser.gameMode = gameMode
         coordinator?.performTransition(.goGameMode)
     }
-   
     func backButton() {
         coordinator?.dismiss()
     }

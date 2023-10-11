@@ -26,6 +26,7 @@ final class GuideCoordinatorImp: Coordinator {
     }
         
     func start() {
+        self.navigation?.setNavigationBarHidden(true, animated: false)
         self.navigation?.pushViewController(dependencies.resolve(), animated: true)
     }
 }

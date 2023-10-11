@@ -8,40 +8,44 @@
 import UIKit
 
 class WeaponDataDetailViewController: UIViewController {
-    private lazy var tableView = makeTableView()
+    private lazy var tableView = makeTableViewData()
     private let viewModel: WeaponDataDetailViewModel
     private let dependencies: WeaponDataDetailDependency
     private let sessionUser: ProfileEntity
+    private let imageView = UIImageView(image: UIImage(named: "backgroundWeapon"))
+    
     init(dependencies: WeaponDataDetailDependency) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
         self.sessionUser = dependencies.external.resolve()
         super.init(nibName: nil, bundle: nil)
     }
+    @available(*,unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
-        configConstraint()
         bind()
     }
-    func bind() {
+    private func bind() {
         viewModel.fetchDataWeaponDetail()
         tableView.reloadData()
     }
-    
-    func configUI(){
+    private func configUI(){
         view.backgroundColor = .systemBackground
         guard let weapon = sessionUser.weapon else {return}
-        title = "Detalle Arma \(weapon)"
+        title = "weaponDataDetailViewControllerTitle".localize() + "\(weapon)"
         backButton(action: #selector(backButtonAction))
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        configConstraint()
     }
-    func configConstraint(){
+    private func configConstraint(){
+        view.insertSubview(imageView, at: 0)
+        imageView.frame = view.bounds
+        
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -49,7 +53,7 @@ class WeaponDataDetailViewController: UIViewController {
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
-    @objc func backButtonAction() {
+    @objc private func backButtonAction() {
         viewModel.backButton()
     }
 }
@@ -60,7 +64,6 @@ extension WeaponDataDetailViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .systemCyan
         let model = viewModel.dataWeaponDetail.map { $0.0 }
         let sortedModel = model.sorted()
         let sortedDataGamesModes = sortedModel.map { key in

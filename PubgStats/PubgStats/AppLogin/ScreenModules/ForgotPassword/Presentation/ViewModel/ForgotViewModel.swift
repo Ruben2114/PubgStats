@@ -11,7 +11,6 @@ final class ForgotViewModel {
     private let forgotDataUseCase: ForgotDataUseCase
     private let dependencies: ForgotDependency
     private weak var coordinator: ForgotCoordinator?
-    
     init(dependencies: ForgotDependency) {
         self.dependencies = dependencies
         self.coordinator = dependencies.resolve()
@@ -25,7 +24,7 @@ final class ForgotViewModel {
             case true:
                 self?.state.send(.success)
             case false:
-                self?.state.send(.fail(error: "Usuario o email incorrecto."))
+                self?.state.send(.fail(error: "errorForgotViewModel".localize()))
             }
         }
     }

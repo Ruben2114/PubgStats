@@ -9,54 +9,41 @@ import UIKit
 import Combine
 
 class WeaponDataViewController: UIViewController {
-    private lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let layoutWidth = (ViewValues.widthScreen - ViewValues.doublePadding) / ViewValues.multiplierTwo
-        let layoutHeigth = (ViewValues.widthScreen - ViewValues.doublePadding) / ViewValues.multiplierTwo
-        layout.itemSize = CGSize(width: layoutWidth, height: layoutHeigth)
-        layout.minimumLineSpacing = .zero
-        layout.minimumInteritemSpacing = .zero
-        layout.sectionInset = UIEdgeInsets(top: .zero, left: ViewValues.normalPadding, bottom: .zero, right: ViewValues.normalPadding)
-        layout.scrollDirection = .vertical
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        return collectionView
-    }()
+    private lazy var collectionView = makeCollectionView()
     private let sessionUser: ProfileEntity
-    var cancellable = Set<AnyCancellable>()
+    private var cancellable = Set<AnyCancellable>()
     private let viewModel: WeaponDataViewModel
     private let dependencies: WeaponDataDependency
+    
     init(dependencies: WeaponDataDependency) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
         self.sessionUser = dependencies.external.resolve()
         super.init(nibName: nil, bundle: nil)
     }
-    
+    @available(*,unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
-        configConstraint()
         bind()
     }
     private func configUI(){
-        title = "Tipos de armas"
+        title = "weaponDataViewControllerTitle".localize()
         backButton(action: #selector(backButtonAction))
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(ItemDataCollectionViewCell.self, forCellWithReuseIdentifier: "ItemDataCollectionViewCell")
+        configConstraint()
     }
-    
     private func bind() {
          viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
              switch state {
-             case .fail(_):
+             case .fail(let error):
                  self?.hideSpinner()
-                 self?.presentAlert(message: "Error al cargar los datos: por favor vuelva e intentarlo en unos segundos", title: "Error")
+                 self?.presentAlert(message: error, title: "Error")
              case .success:
                  self?.hideSpinner()
                  self?.collectionView.reloadData()
@@ -66,7 +53,6 @@ class WeaponDataViewController: UIViewController {
          }.store(in: &cancellable)
         viewModel.viewDidLoad()
      }
-   
     private func configConstraint(){
         view.addSubview(collectionView)
         collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -74,7 +60,7 @@ class WeaponDataViewController: UIViewController {
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
-    @objc func backButtonAction() {
+    @objc private func backButtonAction() {
         viewModel.backButton()
     }
 }

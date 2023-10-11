@@ -12,25 +12,25 @@ class InfoAppViewController: UIViewController {
     private let viewModel: InfoAppViewModel
     var contentView = UIView()
     var mainScrollView = UIScrollView()
-    var label: UILabel!
     
     init(dependencies: InfoAppDependency) {
         self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)
     }
+    @available(*,unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        configScroll()
         configUI()
-        configConstraints()
     }
     private func configUI() {
         view.backgroundColor = .systemBackground
-        title = "Aviso Legal"
+        title = "infoAppViewControllerTitle".localize()
         backButton(action: #selector(backButtonAction))
+        configScroll()
+        configConstraints()
     }
     private func configConstraints() {
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -41,7 +41,7 @@ class InfoAppViewController: UIViewController {
         infoLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         infoLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
     }
-    @objc func backButtonAction() {
+    @objc private func backButtonAction() {
         viewModel.backButton()
     }
 }

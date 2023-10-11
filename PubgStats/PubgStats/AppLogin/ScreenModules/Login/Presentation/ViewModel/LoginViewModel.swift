@@ -24,13 +24,13 @@ final class LoginViewModel {
         state.send(.loading)
         loginSucess(name: name, password: password)
         Task { [weak self] in
-            let check = loginDataUseCase.check(sessionUser: sessionUser ,name: name, password: password)
+            guard let check = self?.loginDataUseCase.check(sessionUser: sessionUser ,name: name, password: password) else {return}
             switch check {
             case true:
                 self?.state.send(.success)
-                coordinator?.performTransition(.goProfile)
+                self?.coordinator?.performTransition(.goProfile)
             case false:
-                self?.state.send(.fail(error: "Incorrect username or password."))
+                self?.state.send(.fail(error: "errorLoginViewModel".localize()))
             }
         }
     }

@@ -13,6 +13,7 @@ final class WeaponDataDetailViewModel {
     private let weaponDataDetailUseCase: WeaponDataDetailUseCase
     private let dependencies: WeaponDataDetailDependency
     var dataWeaponDetail: [(String, Any)] = []
+    
     init(dependencies: WeaponDataDetailDependency) {
         self.sessionUser = dependencies.external.resolve()
         self.coordinator = dependencies.resolve()
@@ -39,7 +40,7 @@ final class WeaponDataDetailViewModel {
                         ("DamagePlayer", "Daño realizado"),
                         ("Kills", "Muertes"),
                         ("HeadShots", "Disparos en la cabeza"),
-                        ("LongestDefeat", "Mayor distancia derribado"),
+                        ("LongestDefeat", "Derribado a mayor distancia"),
                         ("LongRangeDefeats", "Número de derribados a larga distancia"),
                         ("Defeats", "Derribados"),
                         ("Groggies", "Aturdidos"),

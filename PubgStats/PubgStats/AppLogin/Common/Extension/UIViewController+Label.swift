@@ -42,4 +42,54 @@ extension UIViewController {
         label.setHeightConstraint(with: height)
         return label
     }
+    func makeLabelStatsLevel(height: CGFloat, width: CGFloat) -> UILabel{
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.textAlignment = .center
+        label.backgroundColor = .systemBackground
+        label.setHeightConstraint(with: height)
+        label.setWidthConstraint(with: width)
+        let image = UIImage(named: "default")
+        label.backgroundColor = UIColor(patternImage: image!)
+        label.clipsToBounds = true
+        label.backgroundColor = .clear
+        label.textColor = .black
+        label.layer.borderColor = UIColor.black.cgColor
+        label.layer.borderWidth = 1
+        label.layer.cornerRadius = height / 2
+        return label
+    }
+    func makeLabelStatsBoder(height: CGFloat) -> UILabel{
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.textAlignment = .center
+        label.backgroundColor = .systemBackground
+        label.setHeightConstraint(with: height)
+        label.layer.borderColor = UIColor.black.cgColor
+        label.layer.borderWidth = 1
+        label.layer.cornerRadius = 15
+        return label
+    }
+    func makeLabelImage() -> UILabel{
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.textAlignment = .center
+        label.textColor = .white
+        return label
+    }
+}
+
+extension UIView {
+    func createLabel() -> UILabel {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: label.font.pointSize, weight: .heavy)
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }
 }

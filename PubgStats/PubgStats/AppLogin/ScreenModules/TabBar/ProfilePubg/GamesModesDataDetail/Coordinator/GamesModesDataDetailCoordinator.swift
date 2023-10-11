@@ -32,7 +32,6 @@ final class GamesModesDataDetailCoordinatorImp: Coordinator {
 extension GamesModesDataDetailCoordinatorImp: GamesModesDataDetailCoordinator {
     
 }
-
 private extension GamesModesDataDetailCoordinatorImp {
     struct Dependency: GamesModesDataDetailDependency {
         let external: GamesModesDataDetailExternalDependency

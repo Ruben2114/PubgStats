@@ -13,6 +13,7 @@ class ProfileEntity {
     var email: String
     var player: String?
     var account: String?
+    var platform: String?
     var image: Data?
     init(name: String, password: String, email: String) {
         self.name = name
@@ -24,4 +25,5 @@ class ProfileEntity {
     var gameModesDetail: [GamesModes]?
     var nameFavourite: String?
     var accountFavourite: String?
+    var platformFavourite: String?
 }

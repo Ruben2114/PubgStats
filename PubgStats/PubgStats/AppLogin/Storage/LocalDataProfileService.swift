@@ -10,12 +10,12 @@ import UIKit
 
 protocol LocalDataProfileService {
     func save(name: String, password: String, email: String) -> Bool
-    func saveFav(sessionUser: ProfileEntity, name: String, account: String)
+    func saveFav(sessionUser: ProfileEntity, name: String, account: String, platform: String)
     func checkIfNameExists(name: String) -> Bool
     func checkIfEmailExists(email: String) -> Bool
     func checkUser(sessionUser: ProfileEntity, name: String, password: String) -> Bool
     func checkUserAndChangePassword(name: String, email: String) -> Bool
-    func savePlayerPubg(sessionUser: ProfileEntity, player: String, account: String)
+    func savePlayerPubg(sessionUser: ProfileEntity, player: String, account: String, platform: String)
     func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], type: NavigationStats)
     func saveGamesMode(sessionUser: ProfileEntity, gamesModeData: GamesModesDTO, type: NavigationStats)
     func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO, type: NavigationStats)
@@ -64,6 +64,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         sessionUser.player = first.player
         sessionUser.account = first.account
         sessionUser.image = first.image
+        sessionUser.platform = first.platform
         return true
     }
     func checkUserAndChangePassword(name: String, email: String) -> Bool {
@@ -88,7 +89,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
             return false
         }
     }
-    func savePlayerPubg(sessionUser: ProfileEntity, player: String, account: String){
+    func savePlayerPubg(sessionUser: ProfileEntity, player: String, account: String, platform: String){
         let fetchRequest = Profile.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
         do {
@@ -99,15 +100,17 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
                 let user = result.first
                 user?.player = player
                 user?.account = account
+                user?.platform = platform
                 try context.save()
                 sessionUser.player = player
                 sessionUser.account = account
+                sessionUser.platform = platform
             }
         } catch {
-            print("Error en core data")
+            print("Error en core data \(error)")
         }
     }
-    func saveFav(sessionUser: ProfileEntity, name: String, account: String){
+    func saveFav(sessionUser: ProfileEntity, name: String, account: String, platform: String){
         let fetchRequest = Profile.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "name == %@", sessionUser.name)
         do {
@@ -116,6 +119,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
                 let newFav = Favourite(context: context)
                 newFav.name = name
                 newFav.account = account
+                newFav.platform = platform
                 perfil.addToFavourites(newFav)
                 try? context.save()
             }
@@ -222,8 +226,6 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         dataGamesMode.losses = Int32(result.losses)
         dataGamesMode.maxKillStreaks = Int32(result.maxKillStreaks)
         dataGamesMode.mostSurvivalTime = Int32(result.mostSurvivalTime)
-        dataGamesMode.rankPoints = Int32(result.rankPoints)
-        dataGamesMode.rankPointsTitle = result.rankPointsTitle
         dataGamesMode.revives = Int32(data.solo.revives)
         dataGamesMode.rideDistance = result.rideDistance
         dataGamesMode.roadKills = Int32(result.roadKills)
@@ -244,7 +246,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         dataGamesMode.killsTotal = Int32(data.killsTotal)
         dataGamesMode.gamesPlayed = Int32(data.gamesPlayed)
         dataGamesMode.timePlayed = data.timePlayed
-        dataGamesMode.top10STotal = Int32(data.top10STotal)
+        dataGamesMode.assistsTotal = Int32(data.assistsTotal)
         dataGamesMode.wonTotal = Int32(data.wonTotal)
         profile.addToGamesMode(dataGamesMode)
         try? context.save()

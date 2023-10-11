@@ -14,7 +14,6 @@ final class RegisterViewModel {
     private let registerDataUseCase: RegisterDataUseCase
     private let dependencies: RegisterDependency
     
-    
     init(dependencies: RegisterDependency) {
         self.dependencies = dependencies
         self.coordinator = dependencies.resolve()
@@ -28,7 +27,7 @@ final class RegisterViewModel {
             case true:
                 self?.state.send(.success)
             case false:
-                self?.state.send(.fail(error: "Lo siento, ha ocurrido un problema con el servidor"))
+                self?.state.send(.fail(error: "errorRegisterViewModel".localize()))
             }
         }
     }
@@ -40,7 +39,6 @@ final class RegisterViewModel {
         let check = registerDataUseCase.check(email,type: "email")
         return check
     }
-    
     func backButton() {
         coordinator?.dismiss()
     }
