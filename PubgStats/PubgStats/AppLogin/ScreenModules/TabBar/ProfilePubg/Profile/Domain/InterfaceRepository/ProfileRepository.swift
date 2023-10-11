@@ -6,12 +6,9 @@
 //
 
 import Foundation
+import Combine
 
 protocol ProfileRepository {
-    func saveProfilePubg (sessionUser: ProfileEntity, player: String, account: String, platform: String)
-    func fetchPlayerData(name: String, platform: String, completion: @escaping (Result<PubgPlayerDTO, Error>) -> Void)
-    func changeValue(sessionUser: ProfileEntity,_ value: String, type: String)
-    func changeImage(sessionUser: ProfileEntity, image: Data)
-    func deletePubgAccount(sessionUser: ProfileEntity)
+    func fetchPlayerData(name: String, platform: String) -> AnyPublisher<PubgPlayerDTO, Error>
 }
 

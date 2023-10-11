@@ -48,7 +48,6 @@
 		465550FF29CC820A00BF932A /* SettingsDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550FE29CC820A00BF932A /* SettingsDependency.swift */; };
 		4655510129CC824000BF932A /* SettingsExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510029CC824000BF932A /* SettingsExternalDependency.swift */; };
 		4655510429CC829800BF932A /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510329CC829800BF932A /* SettingsCoordinator.swift */; };
-		4655510729CCB41500BF932A /* ProfileEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510629CCB41500BF932A /* ProfileEntity.swift */; };
 		465926EF29EFCFB300A4091D /* ItemCellSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465926EE29EFCFB300A4091D /* ItemCellSettings.swift */; };
 		466BCE152A02657B002896B7 /* UIViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466BCE142A02657B002896B7 /* UIViewController+CollectionView.swift */; };
 		4670EDE429D4325200C1062E /* StatsGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE329D4325200C1062E /* StatsGeneralViewController.swift */; };
@@ -250,7 +249,6 @@
 		465550FE29CC820A00BF932A /* SettingsDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDependency.swift; sourceTree = "<group>"; };
 		4655510029CC824000BF932A /* SettingsExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsExternalDependency.swift; sourceTree = "<group>"; };
 		4655510329CC829800BF932A /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
-		4655510629CCB41500BF932A /* ProfileEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEntity.swift; sourceTree = "<group>"; };
 		465926EE29EFCFB300A4091D /* ItemCellSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellSettings.swift; sourceTree = "<group>"; };
 		466BCE142A02657B002896B7 /* UIViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CollectionView.swift"; sourceTree = "<group>"; };
 		4670EDE329D4325200C1062E /* StatsGeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGeneralViewController.swift; sourceTree = "<group>"; };
@@ -1255,7 +1253,6 @@
 			children = (
 				8C64E4C429DC641500303760 /* Domain */,
 				8CA9024E29D2E1E6004E71D0 /* Cell */,
-				8CB07ECA29D1CE6B000EE257 /* Entity */,
 				8CAEB01529BB4738009282AF /* Presentation */,
 				461C1F4129C9C92B00540289 /* Data */,
 			);
@@ -1428,14 +1425,6 @@
 				8CB07ECC29D1CEB8000EE257 /* StatsGeneralRepository.swift */,
 			);
 			path = InterfaceRepository;
-			sourceTree = "<group>";
-		};
-		8CB07ECA29D1CE6B000EE257 /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-				4655510629CCB41500BF932A /* ProfileEntity.swift */,
-			);
-			path = Entity;
 			sourceTree = "<group>";
 		};
 		8CB07ECB29D1CE8E000EE257 /* UseCase */ = {
@@ -2320,7 +2309,6 @@
 				8CB6396D29D244F300763231 /* WeaponDataViewController.swift in Sources */,
 				8CB6396F29D2457300763231 /* WeaponDataViewModel.swift in Sources */,
 				8CE9BDBB29E5815000F45D3F /* GamesModesDataCoordinator.swift in Sources */,
-				4655510729CCB41500BF932A /* ProfileEntity.swift in Sources */,
 				461C1F5429CAE59A00540289 /* LoginCoordinator.swift in Sources */,
 				461C1F5C29CB110400540289 /* ForgotDependency.swift in Sources */,
 				8CCC92CA29E407980019BE72 /* UIViewController+TableView.swift in Sources */,

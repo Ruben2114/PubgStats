@@ -24,16 +24,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         rootCoordinatorLogin?.start()
     }
     
-    func changeRootViewTabCoordinator(animated: Bool = true) {
+    func changeRootViewTabCoordinator(animated: Bool? = true, player: String) {
         window?.rootViewController = dependencies.tabBarController()
         window?.makeKeyAndVisible()
-        rootCoordinatorTabBar = dependencies.mainTabBarCoordinator()
+        rootCoordinatorTabBar = dependencies.mainTabBarCoordinator(player: player)
         rootCoordinatorTabBar?.start()
         rootCoordinatorLogin?.dismiss()
         rootCoordinatorLogin = nil
         dependencies.loginNavigationController().viewControllers = []
     }
-    func changeRootViewAppCoordinator(animated: Bool = true) {
+    func changeRootViewAppCoordinator(animated: Bool? = true) {
         window?.rootViewController = dependencies.loginNavigationController()
         window?.makeKeyAndVisible()
         rootCoordinatorLogin = dependencies.loginCoordinator()

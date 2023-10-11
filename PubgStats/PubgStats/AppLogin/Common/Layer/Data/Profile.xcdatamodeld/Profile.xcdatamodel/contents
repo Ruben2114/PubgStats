@@ -52,10 +52,6 @@
     </entity>
     <entity name="Profile" representedClassName="Profile" syncable="YES" codeGenerationType="class">
         <attribute name="account" optional="YES" attributeType="String"/>
-        <attribute name="email" optional="YES" attributeType="String"/>
-        <attribute name="image" optional="YES" attributeType="Binary"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="password" optional="YES" attributeType="String"/>
         <attribute name="platform" optional="YES" attributeType="String"/>
         <attribute name="player" optional="YES" attributeType="String"/>
         <relationship name="favourites" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Favourite" inverseName="favourites" inverseEntity="Favourite"/>

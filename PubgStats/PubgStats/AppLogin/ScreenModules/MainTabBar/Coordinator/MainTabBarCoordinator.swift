@@ -18,7 +18,7 @@ final class MainTabBarCoordinatorImp: Coordinator {
         Dependency(external: externalDependencies, coordinator: self)
     }()
     
-    public init(dependencies: MainTabBarExternalDependency) {
+    public init(dependencies: MainTabBarExternalDependency, player: String) {
         self.externalDependencies = dependencies
     }
     

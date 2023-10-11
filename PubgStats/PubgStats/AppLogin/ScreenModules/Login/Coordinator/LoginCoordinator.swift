@@ -7,13 +7,8 @@
 
 import UIKit
 
-enum LoginTransition {
-    case goProfile
-    case goForgot
-    case goRegister
-}
 protocol LoginCoordinator: Coordinator {
-    func performTransition(_ transition: LoginTransition)
+    func goToProfile(player: String)
 }
 
 final class LoginCoordinatorImp: Coordinator {
@@ -38,20 +33,9 @@ final class LoginCoordinatorImp: Coordinator {
     }
 }
 extension LoginCoordinatorImp: LoginCoordinator {
-    func performTransition(_ transition: LoginTransition) {
-        switch transition {
-        case .goProfile:
-            DispatchQueue.main.async {
-                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewTabCoordinator()
-            }
-        case .goForgot:
-            let forgotCoordinator = dependencies.external.forgotCoordinator()
-            forgotCoordinator.start()
-            append(child: forgotCoordinator)
-        case .goRegister:
-            let registerCoordinator = dependencies.external.registerCoordinator()
-            registerCoordinator.start()
-            append(child: registerCoordinator)
+    func goToProfile(player: String) {
+        DispatchQueue.main.async {
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewTabCoordinator(player: player)
         }
     }
 }
