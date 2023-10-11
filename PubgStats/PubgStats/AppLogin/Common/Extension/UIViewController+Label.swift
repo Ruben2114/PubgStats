@@ -81,3 +81,15 @@ extension UIViewController {
         return label
     }
 }
+
+extension UIView {
+    func createLabel() -> UILabel {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: label.font.pointSize, weight: .heavy)
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }
+}

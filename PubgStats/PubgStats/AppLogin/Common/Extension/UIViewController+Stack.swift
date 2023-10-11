@@ -24,4 +24,24 @@ extension UIViewController {
         stack.distribution = .fillEqually
         return stack
     }
+    func createStackHorizontalButton(space: CGFloat) -> UIStackView {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .fill
+        stack.distribution = .fillEqually
+        stack.spacing = space
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }
+}
+
+extension UIView {
+    func createStack() -> UIStackView {
+        let stack = UIStackView()
+        stack.spacing = 5
+         stack.axis = .vertical
+         stack.alignment = .center
+         stack.translatesAutoresizingMaskIntoConstraints = false
+         return stack
+    }
 }

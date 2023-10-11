@@ -27,10 +27,6 @@ extension UIViewController {
     }
     func makeImageViewStats(name: String, height: CGFloat, label: UILabel) -> UIImageView {
         let imageView = UIImageView()
-        //TODO: quitar cuando tenga todas las imagenes
-        if name == "" {
-            imageView.backgroundColor = .systemGray2
-        }
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor.black.cgColor

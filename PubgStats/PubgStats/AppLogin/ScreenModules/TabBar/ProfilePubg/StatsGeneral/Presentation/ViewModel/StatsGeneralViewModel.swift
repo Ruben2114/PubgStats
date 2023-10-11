@@ -39,14 +39,16 @@ final class StatsGeneralViewModel {
             return
         }
         guard let _ = survivalData?.survival ?? survivalData?.survivalFav,
-              let _ = gamesModesData?.first?.gamesMode ?? gamesModesData?.first?.gamesModeFav
+              let _ = gamesModesData?.first?.gamesMode ?? gamesModesData?.first?.gamesModeFav,
+              let dataGamesModeTotal = gamesModesData?.first
         else {
             fetchData()
             return
         }
+        let dataGamesMode = createDataGeneralPlayer(data: dataGamesModeTotal)
         dataRadarChart()
         state.send(.getSurvival(model: survivalData))
-        state.send(.getGamesMode(model: gamesModesData))
+        state.send(.getDataGeneral(model: dataGamesMode))
         state.send(.getItemRadarChar(title: titleRadarChart, values: valuesRadarChart))
         state.send(.success)
     }
@@ -97,14 +99,36 @@ final class StatsGeneralViewModel {
         }
     }
     
+    func createDataGeneralPlayer(data: GamesModes) -> DataGeneralPlayerRepresentable {
+        let percentage = data.wonTotal * 100 / data.gamesPlayed
+        let dataLabel = DataLabel(winsLabel: "\(data.wonTotal)",
+                                  timePlayedLabel: "\(data.timePlayed ?? "0")",
+                                  killsLabel: "\(data.killsTotal)",
+                                  assistsLabel: "\(data.assistsTotal)",
+                                  knocksLabel: "300",
+                                  bestRankedLabel: "\(data.bestRankPoint)",
+                                  gamesPlayedLabel: "\(data.gamesPlayed)",
+                                  dataLabelComplement: nil)
+        var dataPlayer = DataGeneralPlayerRepresentable(percentage: Int(percentage), modeLabel: "General", dataLabel: dataLabel)
+        dataPlayer.gamesLabel += "\(data.gamesPlayed)"
+        dataPlayer.topLabel += "\(data.top10S)"
+        return dataPlayer
+    }
+    
     func dataRadarChart(){
-        let data = getDataRadarChart()
-               
-        let win = PlayerStats.wins(value: (data["wins"] ?? 0) * 100 / (data["roundsPlayed"] ?? 0), average: 0.25)
-        let kills = PlayerStats.kills(value: (data["kills"] ?? 0) / (data["roundsPlayed"] ?? 0), average: 0.30)
-        let losses = PlayerStats.losses(value: (data["losses"] ?? 0) * 100 / (data["roundsPlayed"] ?? 0), average: 1.0)
-        let headshotKills = PlayerStats.headshotKills(value: (data["headshotKills"] ?? 0) * 100 / (data["kills"] ?? 0), average: 1.0)
-        let top10 = PlayerStats.top10(value: (data["top10S"] ?? 0) * 100 / (data["roundsPlayed"] ?? 0), average: 1.0)
+        guard let type = coordinator?.type else {return}
+        let gamesModesData = statsGeneralDataUseCase.getGamesModes(for: sessionUser, type: type)
+        guard let data = gamesModesData else {return}
+        
+        let losseTotal = data.compactMap{$0.losses}.reduce(0,+)
+        let headshotKillsTotal = data.compactMap{$0.headshotKills}.reduce(0,+)
+        let top10STotal = data.compactMap{$0.top10S}.reduce(0,+)
+        
+        let win = PlayerStats.wins(value: CGFloat(data[0].wonTotal * 100 / data[0].gamesPlayed), average: 0.25)
+        let kills = PlayerStats.kills(value: CGFloat(data[0].killsTotal / data[0].gamesPlayed), average: 0.30)
+        let losses = PlayerStats.losses(value: CGFloat(losseTotal * 100 / data[0].gamesPlayed), average: 1.0)
+        let headshotKills = PlayerStats.headshotKills(value: CGFloat(headshotKillsTotal * 100 / data[0].killsTotal), average: 1.0)
+        let top10 = PlayerStats.top10(value: CGFloat(top10STotal * 100 / data[0].gamesPlayed), average: 1.0)
         
         //TODO: valores que puedes ver en la grafica
         let item = [win, losses, headshotKills, kills, top10]
@@ -120,24 +144,7 @@ final class StatsGeneralViewModel {
         allDifferentValuesRadarChart = allValues
         allDifferentTitleRadarChart = allTitle
     }
-    private func getDataRadarChart() -> [String : Double]{
-        guard let type = coordinator?.type else {return [:]}
-        let gamesModesData = statsGeneralDataUseCase.getGamesModes(for: sessionUser, type: type)
-        guard let gamesModes = gamesModesData else {return [:]}
-        var dataGamesModes: [(String, Any)] = []
-        for mode in gamesModes {
-            let keyValues = mode.entity.attributesByName.map { ($0.key, mode.value(forKey: $0.key) ?? "") }
-            dataGamesModes.append(contentsOf: keyValues)
-        }
-        let combinedDataGamesModes = dataGamesModes.reduce(into: [String: Double]()) { result, element in
-            if let previousValue = result[element.0] {
-                result[element.0] = previousValue + (element.1 as? Double ?? 0.0)
-            } else {
-                result[element.0] = element.1 as? Double ?? 0.0
-            }
-        }
-        return combinedDataGamesModes
-    }
+    
     func backButton() {
         coordinator?.dismiss()
     }

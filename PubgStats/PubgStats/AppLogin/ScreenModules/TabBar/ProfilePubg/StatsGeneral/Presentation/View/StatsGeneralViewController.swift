@@ -9,25 +9,15 @@ import UIKit
 import Combine
 
 final class StatsGeneralViewController: UIViewController {
+    private let dataGeneralPlayer = DataGeneralPlayer()
+    private lazy var stackView = createStackHorizontalButton(space: 10)
+    private lazy var  buttonWeapons = createButtonStack(title: "Weapons", selector: #selector(didTapWeapons))
+    private lazy var  buttonSurvival = createButtonStack(title: "Survival", selector: #selector(didTapSurvival))
+    private lazy var  buttonModes = createButtonStack(title: "Modos", selector: #selector(didTapModes))
     private lazy var tableView = makeTableView()
     private lazy var levelLabel = makeLabelStatsLevel(height: 80, width: 80)
     private lazy var nameLabel = makeLabelStats(height: 21)
     private lazy var xpLabel = makeLabelStats(height: 21)
-    private lazy var stackStackView = makeStack(space: 5)
-    private lazy var imageFirstStackView = makeStackImage(space: 5)
-    private lazy var winsImage = makeImageViewStats(name: "win3", height: 65, label: winsLabel)
-    private lazy var killsImage = makeImageViewStats(name: "", height: 65, label: killsLabel)
-    private lazy var assistsImage = makeImageViewStats(name: "", height: 65, label: assistsLabel)
-    private lazy var winsLabel = makeLabelImage()
-    private lazy var killsLabel = makeLabelImage()
-    private lazy var assistsLabel = makeLabelImage()
-    private lazy var imageSecondStackView = makeStackImage(space: 5)
-    private lazy var gamesPlayedImage = makeImageViewStats(name: "", height: 65, label: gamesPlayedLabel)
-    private lazy var timePlayedImage = makeImageViewStats(name: "", height: 65, label: timePlayedLabel)
-    private lazy var bestRankedImage = makeImageViewStats(name: "", height: 65, label: bestRankedLabel)
-    private lazy var gamesPlayedLabel = makeLabelImage()
-    private lazy var timePlayedLabel = makeLabelImage()
-    private lazy var bestRankedLabel = makeLabelImage()
     private lazy var radarChartView: RadarChartView = {
         let radar = RadarChartView(values: viewModel.valuesRadarChart, buttonsTitle: viewModel.titleRadarChart)
         radar.translatesAutoresizingMaskIntoConstraints = false
@@ -49,6 +39,25 @@ final class StatsGeneralViewController: UIViewController {
     private var reloadButton = UIBarButtonItem()
     private let userDefaults = UserDefaults.standard
     
+    private let scrollView = UIScrollView()
+    private let pageControl = UIPageControl()
+    //TODO: esto al viewModel
+    private var interactiveChart = [
+        PieChartViewData(centerIconKey: "star", centerTitleText: "2552", centerSubtitleText: "Kills Total", categories: [
+            CategoryRepresentable(percentage: 60, color: .red, secundaryColor: .systemRed, currentCenterTitleText: "1111", currentSubTitleText: "TItle1", iconUrl: "star"),
+            CategoryRepresentable(percentage: 30, color: .blue, secundaryColor: .systemBlue, currentCenterTitleText: "2222", currentSubTitleText: "TItle2", iconUrl: "star"),
+            CategoryRepresentable(percentage: 10, color: .yellow, secundaryColor: .systemYellow, currentCenterTitleText: "3333", currentSubTitleText: "Muerte por disparo en la cabeza", iconUrl: "star")
+        ], tooltipLabelTextKey: "Gráfica de las muertes totales"),
+        PieChartViewData(centerIconKey: "star", centerTitleText: "10000", centerSubtitleText: "Muerte por disparo en la cabeza", categories: [
+            CategoryRepresentable(percentage: 10, color: .gray, secundaryColor: .systemGray, currentCenterTitleText: "1000", currentSubTitleText: "Modo Solo", iconUrl: "star"),
+            CategoryRepresentable(percentage: 30, color: .blue, secundaryColor: .systemBlue, currentCenterTitleText: "3000", currentSubTitleText: "Modo Duo", iconUrl: "star"),
+            CategoryRepresentable(percentage: 20, color: .red, secundaryColor: .systemRed, currentCenterTitleText: "2000", currentSubTitleText: "Modo Squad", iconUrl: "star"),
+            CategoryRepresentable(percentage: 10, color: .green, secundaryColor: .systemGreen, currentCenterTitleText: "1000", currentSubTitleText: "Modo Solo FPP", iconUrl: "star"),
+            CategoryRepresentable(percentage: 20, color: .brown, secundaryColor: .systemBrown, currentCenterTitleText: "2000", currentSubTitleText: "Modo Duo FPP", iconUrl: "star"),
+            CategoryRepresentable(percentage: 10, color: .yellow, secundaryColor: .systemYellow, currentCenterTitleText: "1000", currentSubTitleText: "Modo Squad FPP", iconUrl: "star")
+        ], tooltipLabelTextKey: "Gráfica de las partidas por modos de juego")
+    ]
+    
     init(dependencies: StatsGeneralDependency) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
@@ -61,8 +70,8 @@ final class StatsGeneralViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        configUI()
         bind()
+        configUI()
     }
     private func bind() {
         viewModel.state.receive(on: DispatchQueue.main)
@@ -78,13 +87,8 @@ final class StatsGeneralViewController: UIViewController {
                 case .getSurvival(model: let model):
                     self?.xpLabel.text = "\(model?.xp ?? "0") XP"
                     self?.levelLabel.text = "levelLabel".localize() + "\n\(model?.level ?? "0")"
-                case .getGamesMode(model: let model):
-                    self?.killsLabel.text = "\(model?[0].killsTotal ?? 0)\n" + "killsLabel".localize()
-                    self?.assistsLabel.text = "\(model?[0].assistsTotal ?? 0)\n" + "assistsLabel".localize()
-                    self?.gamesPlayedLabel.text = "\(model?[0].gamesPlayed ?? 0)\n" + "gamesPlayedLabel".localize()
-                    self?.winsLabel.text = "\(model?[0].wonTotal ?? 0)\n" + "winsLabel".localize()
-                    self?.timePlayedLabel.text = "\(model?[0].timePlayed ?? "0")\n" + "timePlayedLabel".localize()
-                    self?.bestRankedLabel.text = "\(model?[0].bestRankPoint ?? 0)\n" + "bestRankedLabel".localize()
+                case .getDataGeneral(model: let model):
+                    self?.dataGeneralPlayer.build(data: model)
                 case .getName(model: let model):
                     self?.nameLabel.text = model
                 case .getItemRadarChar(title: let title, values: let values):
@@ -103,42 +107,81 @@ final class StatsGeneralViewController: UIViewController {
         tableView.delegate = self
         nameLabel.font = UIFont.systemFont(ofSize: 25)
         tableView.isScrollEnabled = false
+        
+        scrollView.isPagingEnabled = true
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.delegate = self
+
+        pageControl.numberOfPages = interactiveChart.count
+        pageControl.currentPage = 0
+        pageControl.backgroundColor = .red
+        pageControl.addTarget(self, action: #selector(pageControlDidChange(_:)), for: .valueChanged)
+
         configScroll()
         configConstraints()
         helpButtonAlert()
         reloadData()
     }
+    
     private func configConstraints() {
         contentView.addSubview(levelLabel)
-        levelLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 7).isActive = true
-        levelLabel.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
+        levelLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 7).isActive = true
+        levelLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
         
         contentView.addSubview(nameLabel)
-        nameLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 22).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 22).isActive = true
         nameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
         contentView.addSubview(xpLabel)
         xpLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 16).isActive = true
         xpLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
-        contentView.addSubview(stackStackView)
-        stackStackView.topAnchor.constraint(equalTo: xpLabel.bottomAnchor, constant: 30).isActive = true
-        stackStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
-        stackStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
-        [imageFirstStackView, imageSecondStackView].forEach {
-            stackStackView.addArrangedSubview($0)
+        stackView.addArrangedSubview(buttonWeapons)
+        stackView.addArrangedSubview(buttonSurvival)
+        stackView.addArrangedSubview(buttonModes)
+        contentView.addSubview(stackView)
+        stackView.topAnchor.constraint(equalTo: xpLabel.bottomAnchor, constant: 30).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+        
+        buttonWeapons.widthAnchor.constraint(equalTo: buttonSurvival.widthAnchor).isActive = true
+        buttonWeapons.widthAnchor.constraint(equalTo: buttonModes.widthAnchor).isActive = true
+        
+        dataGeneralPlayer.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(dataGeneralPlayer)
+        dataGeneralPlayer.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30).isActive = true
+        dataGeneralPlayer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+        dataGeneralPlayer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(scrollView)
+        scrollView.topAnchor.constraint(equalTo: dataGeneralPlayer.bottomAnchor, constant: 30).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        scrollView.heightAnchor.constraint(equalToConstant: 360).isActive = true
+        
+        scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(interactiveChart.count), height: 360)
+        
+        for index in 0..<interactiveChart.count {
+            let dataGeneralView = ChartView()
+            let info = interactiveChart[index]
+            dataGeneralView.setCellInfo(info)
+            dataGeneralView.translatesAutoresizingMaskIntoConstraints = false
+            scrollView.addSubview(dataGeneralView)
+            dataGeneralView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: CGFloat(index) * view.frame.width + 10).isActive = true
+            dataGeneralView.widthAnchor.constraint(equalToConstant: view.frame.width - 20).isActive = true
+            dataGeneralView.heightAnchor.constraint(equalTo: scrollView.heightAnchor).isActive = true
         }
         
-        [winsImage,killsImage, assistsImage].forEach {
-            imageFirstStackView.addArrangedSubview($0)
-        }
-        
-        [gamesPlayedImage,timePlayedImage,bestRankedImage].forEach {
-            imageSecondStackView.addArrangedSubview($0)
-        }
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(pageControl)
+        pageControl.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 10).isActive = true
+        pageControl.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30).isActive = true
+        pageControl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30).isActive = true
+        pageControl.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         contentView.addSubview(radarChartView)
-        radarChartView.topAnchor.constraint(equalTo: stackStackView.bottomAnchor, constant: 20).isActive = true
+        radarChartView.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 20).isActive = true
         radarChartView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         radarChartView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         radarChartView.heightAnchor.constraint(equalToConstant: 300).isActive = true
@@ -179,6 +222,19 @@ final class StatsGeneralViewController: UIViewController {
                 userDefaults.set(nil, forKey: "date")
             }
         }
+    }
+    @objc func didTapWeapons() {
+        viewModel.goWeapons()
+    }
+    @objc func didTapSurvival() {
+        viewModel.goSurvival()
+    }
+    @objc func didTapModes() {
+        viewModel.goGamesModes()
+    }
+    @objc func pageControlDidChange(_ sender: UIPageControl) {
+        let offsetX = view.frame.width * CGFloat(sender.currentPage)
+        scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
     }
     @objc private func reloadButtonAction() {
         userDefaults.set(Date(), forKey: "date")

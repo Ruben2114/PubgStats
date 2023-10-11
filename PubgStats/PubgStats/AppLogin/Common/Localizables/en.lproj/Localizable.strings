@@ -52,6 +52,7 @@
  "levelLabel" = "Level";
  "assistsLabel" = "Assists";
  "gamesPlayedLabel" = "Games";
+"knocksLabel" = "Knocks";
  "winsLabel" = "Wins";
  "timePlayedLabel" = "Time Played";
  "bestRankedLabel" = "Best Ranked";

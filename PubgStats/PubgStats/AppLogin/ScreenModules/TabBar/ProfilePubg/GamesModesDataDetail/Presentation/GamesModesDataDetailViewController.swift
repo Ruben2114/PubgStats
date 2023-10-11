@@ -62,6 +62,7 @@ extension GamesModesDataDetailViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
         let model = viewModel.dataGamesModes.map { $0.0 }
         let sortedModel = model.sorted()
         let sortedDataGamesModes = sortedModel.map { key in

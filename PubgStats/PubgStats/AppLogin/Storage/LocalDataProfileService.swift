@@ -64,6 +64,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         sessionUser.player = first.player
         sessionUser.account = first.account
         sessionUser.image = first.image
+        sessionUser.platform = first.platform
         return true
     }
     func checkUserAndChangePassword(name: String, email: String) -> Bool {

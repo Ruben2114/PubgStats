@@ -8,7 +8,7 @@
 import UIKit
 
 class GamesModesDataViewController: UIViewController {
-    private lazy var collectionView = makeCollectionView()
+    private lazy var collectionView = makeCollectionView2()
     private let viewModel: GamesModesDataViewModel
     private let dependencies: GamesModesDataDependency
     
@@ -36,7 +36,8 @@ class GamesModesDataViewController: UIViewController {
         backButton(action: #selector(backButtonAction))
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(ItemDataCollectionViewCell.self, forCellWithReuseIdentifier: "ItemDataCollectionViewCell")
+        let nib = UINib(nibName: "ItemCollectionViewCell", bundle: nil)
+        collectionView.register(nib, forCellWithReuseIdentifier: "CustomCell")
         configConstraint()
     }
     private func configConstraint(){
@@ -51,21 +52,24 @@ class GamesModesDataViewController: UIViewController {
     }
 }
 
-extension GamesModesDataViewController: UICollectionViewDataSource {
+extension GamesModesDataViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.nameGamesModes.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ItemDataCollectionViewCell", for: indexPath) as! ItemDataCollectionViewCell
-        cell.backgroundColor = .systemCyan
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! ItemCollectionViewCell
+ 
+        cell.backgroundColor = .systemGray
         cell.layer.cornerRadius = 15
         let model = viewModel.nameGamesModes[indexPath.row]
-        cell.categoryMenuImageView.image = UIImage(named: model)
-        cell.titleCategoryLabel.text = model
+        cell.imageView.image = UIImage(named: model)
+        cell.titleLabel.text = model
+        cell.levelLabel.text = "20"
+        cell.spLabel.text = "SP: 300"
+        cell.rankLabel.text = "no tienes rank en esta sesion"
         return cell
     }
-}
-extension GamesModesDataViewController: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let row = indexPath.row
         let gameMode = getItem(row: row)
@@ -76,4 +80,5 @@ extension GamesModesDataViewController: UICollectionViewDelegate {
         return gameMode
     }
 }
+
 
