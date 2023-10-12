@@ -58,7 +58,6 @@
 		8C7563E429BB5F17000373F9 /* MessageDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563E329BB5F17000373F9 /* MessageDisplayable.swift */; };
 		8C7563E629BB5FBA000373F9 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563E529BB5FBA000373F9 /* LoginViewModel.swift */; };
 		8C7563EC29BB6073000373F9 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563EB29BB6073000373F9 /* StateController.swift */; };
-		8C810F7929C3690700AEE548 /* UIViewController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C810F7829C3690700AEE548 /* UIViewController+Keyboard.swift */; };
 		8C9A32AB29DDB39500F81B34 /* FavouriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9A32AA29DDB39500F81B34 /* FavouriteViewModel.swift */; };
 		8C9ABEEE2AD830A000552101 /* TestLoginDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9ABEED2AD830A000552101 /* TestLoginDependency.swift */; };
 		8C9ABEF02AD8318200552101 /* TestLoginExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9ABEEF2AD8318200552101 /* TestLoginExternalDependency.swift */; };
@@ -120,7 +119,6 @@
 		8CB2CEF329C9A87900E79D29 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2CEF229C9A87900E79D29 /* ProfileViewModel.swift */; };
 		8CB39B9529C05D2500B1D8EF /* LoginDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB39B9429C05D2500B1D8EF /* LoginDataUseCase.swift */; };
 		8CB39BA729C0917000B1D8EF /* ViewScrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB39BA629C0917000B1D8EF /* ViewScrollable.swift */; };
-		8CB39BA929C0919600B1D8EF /* KeyboardDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB39BA829C0919600B1D8EF /* KeyboardDisplayable.swift */; };
 		8CB39BAC29C0C88800B1D8EF /* String+Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB39BAB29C0C88800B1D8EF /* String+Hash.swift */; };
 		8CB6395E29D2343C00763231 /* KillsDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6395D29D2343C00763231 /* KillsDataViewController.swift */; };
 		8CB6396029D234C500763231 /* KillsDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6395F29D234C500763231 /* KillsDataViewModel.swift */; };
@@ -249,7 +247,6 @@
 		8C7563E329BB5F17000373F9 /* MessageDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDisplayable.swift; sourceTree = "<group>"; };
 		8C7563E529BB5FBA000373F9 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		8C7563EB29BB6073000373F9 /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
-		8C810F7829C3690700AEE548 /* UIViewController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Keyboard.swift"; sourceTree = "<group>"; };
 		8C9A32AA29DDB39500F81B34 /* FavouriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewModel.swift; sourceTree = "<group>"; };
 		8C9ABEED2AD830A000552101 /* TestLoginDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginDependency.swift; sourceTree = "<group>"; };
 		8C9ABEEF2AD8318200552101 /* TestLoginExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginExternalDependency.swift; sourceTree = "<group>"; };
@@ -315,7 +312,6 @@
 		8CB2CEF229C9A87900E79D29 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		8CB39B9429C05D2500B1D8EF /* LoginDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataUseCase.swift; sourceTree = "<group>"; };
 		8CB39BA629C0917000B1D8EF /* ViewScrollable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScrollable.swift; sourceTree = "<group>"; };
-		8CB39BA829C0919600B1D8EF /* KeyboardDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDisplayable.swift; sourceTree = "<group>"; };
 		8CB39BAB29C0C88800B1D8EF /* String+Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Hash.swift"; sourceTree = "<group>"; };
 		8CB6395D29D2343C00763231 /* KillsDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillsDataViewController.swift; sourceTree = "<group>"; };
 		8CB6395F29D234C500763231 /* KillsDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillsDataViewModel.swift; sourceTree = "<group>"; };
@@ -675,7 +671,6 @@
 				8C7563DF29BB5E5E000373F9 /* SpinnerDisplayable.swift */,
 				8C7563E329BB5F17000373F9 /* MessageDisplayable.swift */,
 				8CB39BA629C0917000B1D8EF /* ViewScrollable.swift */,
-				8CB39BA829C0919600B1D8EF /* KeyboardDisplayable.swift */,
 				8CA2FE3629F25C8100A4F475 /* StarChartView.swift */,
 			);
 			path = Components;
@@ -1075,7 +1070,6 @@
 			children = (
 				8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */,
 				8CB39BAB29C0C88800B1D8EF /* String+Hash.swift */,
-				8C810F7829C3690700AEE548 /* UIViewController+Keyboard.swift */,
 				465550C129CC33B000BF932A /* UIViewController+UIbutton.swift */,
 				465550C329CC390200BF932A /* UIViewController+TextField.swift */,
 				465550C529CC3A5600BF932A /* UIViewController+Image.swift */,
@@ -1962,7 +1956,6 @@
 				8CB07EBA29D1A6EC000EE257 /* StatsGeneralExternalDependency.swift in Sources */,
 				8CB07EC529D1B393000EE257 /* WeaponDTO.swift in Sources */,
 				8CA720B029DAE3F6001E3EFA /* UIViewController+Label.swift in Sources */,
-				8C810F7929C3690700AEE548 /* UIViewController+Keyboard.swift in Sources */,
 				8CB07EC329D1B246000EE257 /* SurvivalDTO.swift in Sources */,
 				8CE9BDB929E580E200F45D3F /* GamesModesDataExternalDependency.swift in Sources */,
 				8CA9025029D2E20A004E71D0 /* ItemDataCollectionViewCell.swift in Sources */,
@@ -2088,7 +2081,6 @@
 				8CA2FE3729F25C8100A4F475 /* StarChartView.swift in Sources */,
 				8C31FDB729C329E500196704 /* SettingsViewController.swift in Sources */,
 				46B0CF2229E701D400BE95EB /* WeaponDataDetailUseCase.swift in Sources */,
-				8CB39BA929C0919600B1D8EF /* KeyboardDisplayable.swift in Sources */,
 				8CB2CEF129C9A63B00E79D29 /* PlayerDTO.swift in Sources */,
 				46151CB729C1B9780054BCEA /* ProfileViewController.swift in Sources */,
 				8CB39B9529C05D2500B1D8EF /* LoginDataUseCase.swift in Sources */,

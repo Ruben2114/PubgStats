@@ -31,9 +31,8 @@ class LoginViewController: UIViewController {
     
     private let viewModel: LoginViewModel
     private var dependencies: LoginDependency
-    var mainScrollView = UIScrollView()
-    var contentView = UIView()
-    var cancellable = Set<AnyCancellable>()
+    private var cancellable = Set<AnyCancellable>()
+    private var bottomConstraint: NSLayoutConstraint?
     
     init(dependencies: LoginDependency) {
         self.dependencies = dependencies
@@ -48,21 +47,24 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configUI()
+        setAppearance()
         bind()
         viewModel.viewDidLoad()
     }
 }
 
 private extension LoginViewController {
-    func configUI() {
-        view.backgroundColor = .systemBackground
-        configScroll()
-        configKeyboardSubscription(mainScrollView: mainScrollView)
-        hideKeyboard()
+    func setAppearance() {
+        configView()
+        addObserverKeyboard()
         configConstraints()
         configGradientForTitle()
         configTargets()
+    }
+    
+    func configView() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
     
     func bind() {
@@ -75,6 +77,7 @@ private extension LoginViewController {
                 self?.viewModel.goToProfile(player: data.name ?? "", id: data.id ?? "")
             case .sendInfoProfileError:
                 self?.hideSpinner()
+                self?.view.endEditing(true)
                 self?.presentAlert(message: "El player no existe", title: "Error")
             case .showLoading:
                 //TODO: cambiar el spinner por un lottie json
@@ -87,11 +90,11 @@ private extension LoginViewController {
         view.insertSubview(imageView, at: 0)
         imageView.frame = view.bounds
         
-        contentView.addSubview(containerStackView)
-        containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
-        containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
-        containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        contentView.heightAnchor.constraint(equalTo: mainScrollView.heightAnchor).isActive = true
+        view.addSubview(containerStackView)
+        containerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+        containerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+        bottomConstraint = containerStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
+        bottomConstraint?.isActive = true
         
         [userTextField, segmentedControl, loginButton].forEach {
             containerStackView.addArrangedSubview($0)
@@ -113,8 +116,15 @@ private extension LoginViewController {
         segmentedControl.addTarget(self, action: #selector(changePlatform(_:)), for: .valueChanged)
     }
     
+    @objc private func dismissKeyboard(tap: UITapGestureRecognizer) {
+        let location = tap.location(in: view)
+        if !containerStackView.frame.contains(location) {
+            view.endEditing(true)
+        }
+    }
+    
     @objc func didTapLoginButton() {
-        guard let user = userTextField.text else{
+        guard let user = userTextField.text, !user.isEmpty else{
             presentAlert(message: "profileLoginCellInvalid".localize(), title: "Error")
             return}
         viewModel.checkPlayer(player: user, platform: platform)
@@ -133,7 +143,30 @@ private extension LoginViewController {
 }
 
 extension LoginViewController: SpinnerDisplayable { }
-extension LoginViewController: ViewScrollable {}
 extension LoginViewController: MessageDisplayable { }
-extension LoginViewController: KeyboardDisplayable {}
+extension LoginViewController {
+    func addObserverKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        
+    }
+    
+    @objc func showKeyboard(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        bottomConstraint?.constant = -(keyboardSize.height + self.view.safeAreaInsets.bottom)
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc func hideKeyboard(notification: NSNotification) {
+        bottomConstraint?.constant = -50
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+        
+    }
+}
+
 

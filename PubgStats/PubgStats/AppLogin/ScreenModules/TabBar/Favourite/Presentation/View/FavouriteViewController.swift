@@ -66,7 +66,7 @@ class FavouriteViewController: UIViewController {
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.backgroundColor = .clear
-        hideKeyboard()
+        //hideKeyboard()
         configConstraint()
     }
     private func configConstraint() {
