@@ -13,7 +13,6 @@ final class StatsGeneralViewModel {
     private let dependencies: StatsGeneralDependency
     private weak var coordinator: StatsGeneralCoordinator?
     private let statsGeneralDataUseCase: StatsGeneralDataUseCase
-    private let sessionUser: ProfileEntity
     var itemCellStats: [ItemCellStats] = [ItemCellStats.dataKill, ItemCellStats.dataWeapon, ItemCellStats.dataSurvival, ItemCellStats.dataGamesModes]
     var allDifferentValuesRadarChart: [CGFloat] = []
     var allDifferentTitleRadarChart: [String] = []
@@ -23,7 +22,6 @@ final class StatsGeneralViewModel {
     init(dependencies: StatsGeneralDependency) {
         self.dependencies = dependencies
         self.coordinator = dependencies.resolve()
-        self.sessionUser = dependencies.external.resolve()
         self.statsGeneralDataUseCase = dependencies.resolve()
     }
     func viewDidLoad() {
@@ -31,8 +29,8 @@ final class StatsGeneralViewModel {
         guard let name = searchData()[1], !name.isEmpty else {return}
         state.send(.getName(model: name))
         guard let type = coordinator?.type else {return}
-        let survivalData = statsGeneralDataUseCase.getSurvival(for: sessionUser, type: type)
-        let gamesModesData = statsGeneralDataUseCase.getGamesModes(for: sessionUser, type: type)
+        let survivalData = statsGeneralDataUseCase.getSurvival(type: type)
+        let gamesModesData = statsGeneralDataUseCase.getGamesModes(type: type)
         let userDefaults = UserDefaults.standard
         guard let lastUpdate = userDefaults.object(forKey: "lastUpdate") as? Date, Date().timeIntervalSince(lastUpdate) < 43200 else {
             reload()
@@ -61,8 +59,7 @@ final class StatsGeneralViewModel {
         statsGeneralDataUseCase.executeSurvival(account: id, platform: platform) { [weak self] result in
             switch result {
             case .success(let survival):
-                guard let user = self?.sessionUser else{return}
-                self?.statsGeneralDataUseCase.saveSurvival(sessionUser: user, survivalData: [survival], type: type)
+                self?.statsGeneralDataUseCase.saveSurvival(survivalData: [survival], type: type)
                 dispatchGroup.leave()
             case .failure(_):
                 self?.state.send(.fail(error: "fetchDataStatsError".localize()))
@@ -72,8 +69,7 @@ final class StatsGeneralViewModel {
         statsGeneralDataUseCase.executeGamesModes(account: id, platform: platform) { [weak self] result in
             switch result {
             case .success(let gamesMode):
-                guard let user = self?.sessionUser else{return}
-                self?.statsGeneralDataUseCase.saveGamesModeData(sessionUser: user, gamesModeData: gamesMode, type: type)
+                self?.statsGeneralDataUseCase.saveGamesModeData(gamesModeData: gamesMode, type: type)
                 dispatchGroup.leave()
             case .failure(_):
                 self?.state.send(.fail(error: "fetchDataStatsError".localize()))
@@ -93,9 +89,11 @@ final class StatsGeneralViewModel {
     private func searchData() -> [String?] {
         guard let type = coordinator?.type else {return [nil]}
         if type == .favourite{
-            return [sessionUser.accountFavourite, sessionUser.nameFavourite, sessionUser.platformFavourite]
+            return []
+            //[sessionUser.accountFavourite, sessionUser.nameFavourite, sessionUser.platformFavourite]
         } else {
-            return [sessionUser.account, sessionUser.player, sessionUser.platform]
+            return []
+            //[sessionUser.account, sessionUser.player, sessionUser.platform]
         }
     }
     
@@ -117,7 +115,7 @@ final class StatsGeneralViewModel {
     
     func dataRadarChart(){
         guard let type = coordinator?.type else {return}
-        let gamesModesData = statsGeneralDataUseCase.getGamesModes(for: sessionUser, type: type)
+        let gamesModesData = statsGeneralDataUseCase.getGamesModes(type: type)
         guard let data = gamesModesData else {return}
         
         let losseTotal = data.compactMap{$0.losses}.reduce(0,+)

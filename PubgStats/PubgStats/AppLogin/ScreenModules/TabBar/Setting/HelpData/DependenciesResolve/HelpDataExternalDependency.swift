@@ -11,7 +11,6 @@ protocol HelpDataExternalDependency {
     func resolve() -> AppDependencies
     func helpDataCoordinator() -> Coordinator
     func settingsNavigationController() -> UINavigationController
-    func resolve() -> ProfileEntity
 }
 
 extension HelpDataExternalDependency {

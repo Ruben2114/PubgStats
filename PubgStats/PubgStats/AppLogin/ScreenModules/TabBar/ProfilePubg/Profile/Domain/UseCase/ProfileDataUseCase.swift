@@ -8,19 +8,10 @@
 import Foundation
 import Combine
 
-protocol ProfileDataUseCase: CommonUseCase {
-    func fetchPlayerData(name: String, platform: String) -> AnyPublisher<PubgPlayerDTO, Error>
+protocol ProfileDataUseCase {
 }
 
 struct ProfileDataUseCaseImp: ProfileDataUseCase{
-    internal let commonRepository: CommonRepository
-    private let profileRepository: ProfileRepository
-    init(dependencies: ProfileDependency) {
-        self.commonRepository = dependencies.external.resolve()
-        self.profileRepository = dependencies.resolve()
-    }
     
-    func fetchPlayerData(name: String, platform: String) -> AnyPublisher<PubgPlayerDTO, Error> {
-        profileRepository.fetchPlayerData(name: name, platform: platform).eraseToAnyPublisher()
-    }
+    
 }

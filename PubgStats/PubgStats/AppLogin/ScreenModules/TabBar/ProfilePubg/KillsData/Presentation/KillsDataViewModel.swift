@@ -9,22 +9,20 @@ final class KillsDataViewModel {
     private weak var coordinator: KillsDataCoordinator?
     private let dependencies: KillsDataDependency
     var dataKills: [String] = []
-    private let sessionUser: ProfileEntity
     private let killsDataUseCase: KillsDataUseCase
     init(dependencies: KillsDataDependency) {
         self.dependencies = dependencies
         self.coordinator = dependencies.resolve()
-        self.sessionUser = dependencies.external.resolve()
         self.killsDataUseCase = dependencies.resolve()
     }
     
-    func getGamesModes(for sessionUser: ProfileEntity) -> [GamesModes]?{
+    func getGamesModes() -> [GamesModes]?{
         guard let type = coordinator?.type else {return nil}
-        let killsData = killsDataUseCase.getGamesModes(for: sessionUser, type: type)
+        let killsData = killsDataUseCase.getGamesModes(type: type)
         return killsData
     }
     func fetchDataKills() {
-        let gameModes = getGamesModes(for: sessionUser)
+        let gameModes = getGamesModes()
         if let modes = gameModes {
             var dataGamesModes: [(String, Any)] = []
             for mode in modes {

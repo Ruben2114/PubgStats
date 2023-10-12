@@ -10,8 +10,8 @@ protocol ProfileDependency {
     func resolve() -> ProfileViewController
     func resolve() -> ProfileViewModel
     func resolve() -> ProfileCoordinator?
-    func resolve() -> ProfileDataUseCase
-    func resolve() -> ProfileRepository
+    //func resolve() -> ProfileDataUseCase
+    func resolve() -> ProfileCoordinator
 }
 
 extension ProfileDependency {
@@ -21,12 +21,5 @@ extension ProfileDependency {
     
     func resolve() -> ProfileViewModel {
         ProfileViewModel(dependencies: self)
-    }
-    
-    func resolve() -> ProfileDataUseCase {
-        ProfileDataUseCaseImp(dependencies: self)
-    }
-    func resolve() -> ProfileRepository{
-        ProfileRepositoryImp(dependencies: self)
     }
 }

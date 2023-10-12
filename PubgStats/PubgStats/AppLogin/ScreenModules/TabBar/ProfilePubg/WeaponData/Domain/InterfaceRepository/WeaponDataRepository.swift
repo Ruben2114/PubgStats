@@ -7,6 +7,6 @@
 
 protocol WeaponDataRepository {
     func fetchWeaponData(account: String, platform: String, completion: @escaping (Result<WeaponDTO, Error>) -> Void)
-    func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO, type: NavigationStats)
-    func getDataWeapon(for sessionUser: ProfileEntity, type: NavigationStats) -> [Weapon]?
+    func saveWeaponData(weaponData: WeaponDTO, type: NavigationStats)
+    func getDataWeapon(type: NavigationStats) -> [Weapon]?
 }

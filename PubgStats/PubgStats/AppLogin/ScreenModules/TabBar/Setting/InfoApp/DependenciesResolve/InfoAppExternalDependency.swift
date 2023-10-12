@@ -11,7 +11,6 @@ protocol InfoAppExternalDependency {
     func resolve() -> AppDependencies
     func infoAppCoordinator() -> Coordinator
     func settingsNavigationController() -> UINavigationController
-    func resolve() -> ProfileEntity
 }
 
 extension InfoAppExternalDependency {

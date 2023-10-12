@@ -8,63 +8,58 @@
 import Foundation
 import Combine
 
+enum ProfileState {
+    case idle
+    case sendInfoProfile(IdAccountDataProfile)
+    case sendInfoProfileError
+}
+
 final class ProfileViewModel {
-    var state = PassthroughSubject<OutputPlayer, Never>()
-    private weak var coordinator: ProfileCoordinator?
-    private let profileDataUseCase: ProfileDataUseCase
+    private var anySubscription: Set<AnyCancellable> = []
     private let dependencies: ProfileDependency
-    private let sessionUser: ProfileEntity
+    private let stateSubject = CurrentValueSubject<ProfileState, Never>(.idle)
+    var state: AnyPublisher<ProfileState, Never>
+    private let getAccountProfilSubject = PassthroughSubject<(String, String), Never>()
+  
     let items: [[ProfileField]] = [
         [ProfileField.name, ProfileField.email, ProfileField.password, ProfileField.image],
         [ProfileField.login, ProfileField.stats, ProfileField.delete]
     ]
     init(dependencies: ProfileDependency) {
-        self.sessionUser = dependencies.external.resolve()
         self.dependencies = dependencies
-        self.coordinator = dependencies.resolve()
-        self.profileDataUseCase = dependencies.resolve()
+        state = stateSubject.eraseToAnyPublisher()
     }
-    func dataGeneral(name: String, platform: String){
-        state.send(.loading)
-        profileDataUseCase.fetchPlayerData(name: name, platform: platform) { [weak self] result in
-            switch result {
-            case .success(let player):
-                guard let account = player.id, !account.isEmpty, let playerPubg = player.name, !playerPubg.isEmpty else {return}
-                self?.saveUser(player: playerPubg, account: account, platform: platform)
-                self?.state.send(.success(model: player))
-            case .failure(_):
-                self?.state.send(.fail(error: "errorProfileViewModel".localize()))
-            }
-        }
+    
+    func viewDidLoad() {
+        
+       
     }
+  
     private func saveUser(player: String, account: String, platform: String) {
-        let sessionUser: ProfileEntity = dependencies.external.resolve()
-        profileDataUseCase.execute(sessionUser: sessionUser, player: player, account: account, platform: platform)
+        
     }
-    func changeValue(sessionUser: ProfileEntity,_ value: String, type: String) {
-        profileDataUseCase.changeValue(sessionUser: sessionUser,value, type: type)
-    }
-    func changeImage(sessionUser: ProfileEntity, image: Data) {
-        profileDataUseCase.changeImage(sessionUser: sessionUser, image: image)
-    }
-    func checkName(name: String) -> Bool {
-        let check = profileDataUseCase.check(name,type: "name")
-        return check
-    }
-    func checkEmail(email: String) -> Bool {
-        let check = profileDataUseCase.check(email,type: "email")
-        return check
-    }
+  
+   
     func backButton() {
-        coordinator?.performTransition(.goBackView)
+        coordinator.performTransition(.goBackView)
     }
     func didTapStatsgAccountButton() {
-        coordinator?.performTransition(.goStatsGeneral)
-    }
-    func deletePubgAccount(){
-        profileDataUseCase.deletePubgAccount(sessionUser: sessionUser)
+        coordinator.performTransition(.goStatsGeneral)
     }
 }
+
+private extension ProfileViewModel {
+    var coordinator: ProfileCoordinator {
+        return dependencies.resolve()
+    }
+}
+
+
+//MARK: - Subscriptions
+
+
+//MARK: - Publishers
+
 
 
 

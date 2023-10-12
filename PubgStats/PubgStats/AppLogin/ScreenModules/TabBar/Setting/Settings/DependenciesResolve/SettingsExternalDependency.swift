@@ -13,7 +13,6 @@ protocol SettingsExternalDependency {
     func helpDataCoordinator() -> Coordinator
     func infoAppCoordinator() -> Coordinator
     func settingsNavigationController() -> UINavigationController
-    func resolve() -> ProfileEntity
     func resolve() -> LocalDataProfileService
 }
 extension SettingsExternalDependency {

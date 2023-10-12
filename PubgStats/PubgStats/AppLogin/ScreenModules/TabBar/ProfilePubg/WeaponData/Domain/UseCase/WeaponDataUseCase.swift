@@ -7,8 +7,8 @@
 
 protocol WeaponDataUseCase {
     func execute(account: String, platform: String, completion: @escaping (Result<WeaponDTO, Error>) -> Void)
-    func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO, type: NavigationStats)
-    func getDataWeapon(for sessionUser: ProfileEntity, type: NavigationStats) -> [Weapon]?
+    func saveWeaponData(weaponData: WeaponDTO, type: NavigationStats)
+    func getDataWeapon(type: NavigationStats) -> [Weapon]?
 }
 
 struct WeaponDataUseCaseImp: WeaponDataUseCase {
@@ -19,10 +19,10 @@ struct WeaponDataUseCaseImp: WeaponDataUseCase {
     func execute(account: String, platform: String, completion: @escaping (Result<WeaponDTO, Error>) -> Void){
         weaponDataRepository.fetchWeaponData(account: account, platform: platform, completion: completion)
     }
-    func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO,type: NavigationStats) {
-        weaponDataRepository.saveWeaponData(sessionUser: sessionUser, weaponData: weaponData, type: type)
+    func saveWeaponData(weaponData: WeaponDTO,type: NavigationStats) {
+        weaponDataRepository.saveWeaponData(weaponData: weaponData, type: type)
     }
-    func getDataWeapon(for sessionUser: ProfileEntity, type: NavigationStats) -> [Weapon]? {
-        weaponDataRepository.getDataWeapon(for: sessionUser, type: type)
+    func getDataWeapon(type: NavigationStats) -> [Weapon]? {
+        weaponDataRepository.getDataWeapon(type: type)
     }
 }

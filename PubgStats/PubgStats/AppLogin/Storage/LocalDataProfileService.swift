@@ -22,6 +22,7 @@ protocol LocalDataProfileService {
     func getSurvival(player: String, type: NavigationStats) -> Survival?
     func getGameMode(player: String, type: NavigationStats) -> [GamesModes]?
     func getDataWeaponDetail(player: String, type: NavigationStats) -> [Weapon]?
+    func getAccountProfile(player: String) -> IdAccountDataProfile?
     func deleteFavouriteTableView(_ profile: Favourite)
     func deleteProfile(player: String)
 }
@@ -144,6 +145,18 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
             let fetchRequest = Favourite.fetchRequest()
             let weapon = getDataWeapon(fetchRequest: fetchRequest, name: player)
             return weapon
+        }
+    }
+    
+    func getAccountProfile(player: String) -> IdAccountDataProfile? {
+        let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "player == %@", player)
+        do {
+            let profile = try context.fetch(fetchRequest)
+            return DefaultIdAccountDataProfile(id: profile.first?.account, name: profile.first?.player)
+        } catch {
+            print("Error en core data: \(error.localizedDescription)")
+            return nil
         }
     }
   

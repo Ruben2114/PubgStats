@@ -6,8 +6,8 @@
 //
 
 protocol FavouriteRepository {
-    func saveFav(sessionUser: ProfileEntity, player: String, account: String, platform: String)
+    func saveFav(player: String, account: String, platform: String)
     func fetchPlayerData(name: String, platform: String, completion: @escaping (Result<PubgPlayerDTO, Error>) -> Void)
-    func getFavourites(for sessionUser: ProfileEntity) -> [Favourite]?
+    func getFavourites() -> [Favourite]?
     func deleteFavouriteTableView(_ profile: Favourite)
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MainTabBarExternalDependency {
-    func mainTabBarCoordinator(player: String) -> Coordinator
+    func mainTabBarCoordinator(player: String, id: String) -> Coordinator
     func profileCoordinator() -> Coordinator
     func favouriteCoordinator() -> Coordinator
     func guideCoordinator() -> Coordinator
@@ -22,7 +22,7 @@ protocol MainTabBarExternalDependency {
 }
 
 extension MainTabBarExternalDependency {
-    func mainTabBarCoordinator(player: String) -> Coordinator {
-        MainTabBarCoordinatorImp(dependencies: self, player: player)
+    func mainTabBarCoordinator(player: String, id: String) -> Coordinator {
+        MainTabBarCoordinatorImp(dependencies: self, player: player, id: id)
     }
 }

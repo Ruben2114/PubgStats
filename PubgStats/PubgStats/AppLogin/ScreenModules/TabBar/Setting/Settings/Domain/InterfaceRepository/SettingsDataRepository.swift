@@ -6,5 +6,5 @@
 //
 
 protocol SettingsDataRepository {
-    func deleteProfile(sessionUser: ProfileEntity)
+    func deleteProfile()
 }

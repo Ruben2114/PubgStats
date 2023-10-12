@@ -12,10 +12,8 @@ import Combine
 final class HelpDataViewController: UIViewController {
     private lazy var tableView = makeTableView()
     private let viewModel: HelpDataViewModel
-    private let sessionUser: ProfileEntity
     init(dependencies: HelpDataDependency) {
         self.viewModel = dependencies.resolve()
-        self.sessionUser = dependencies.external.resolve()
         super.init(nibName: nil, bundle: nil)
     }
     @available(*,unavailable)

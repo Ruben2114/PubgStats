@@ -6,7 +6,7 @@
 //
 
 protocol WeaponDataDetailUseCase {
-    func getDataWeaponDetail(for sessionUser: ProfileEntity, type: NavigationStats) -> [Weapon]?
+    func getDataWeaponDetail(type: NavigationStats) -> [Weapon]?
 }
 
 struct WeaponDataDetailUseCaseImp: WeaponDataDetailUseCase {
@@ -14,7 +14,7 @@ struct WeaponDataDetailUseCaseImp: WeaponDataDetailUseCase {
     init(dependencies: WeaponDataDetailDependency) {
         self.weaponDataDetailRepository = dependencies.resolve()
     }
-    func getDataWeaponDetail(for sessionUser: ProfileEntity, type: NavigationStats) -> [Weapon]? {
-        weaponDataDetailRepository.getDataWeaponDetail(for: sessionUser, type: type)
+    func getDataWeaponDetail(type: NavigationStats) -> [Weapon]? {
+        weaponDataDetailRepository.getDataWeaponDetail(type: type)
     }
 }

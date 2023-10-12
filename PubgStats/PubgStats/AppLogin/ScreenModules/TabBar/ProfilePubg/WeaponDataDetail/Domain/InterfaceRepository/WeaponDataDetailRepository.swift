@@ -6,5 +6,5 @@
 //
 
 protocol WeaponDataDetailRepository {
-    func getDataWeaponDetail(for sessionUser: ProfileEntity, type: NavigationStats) -> [Weapon]?
+    func getDataWeaponDetail(type: NavigationStats) -> [Weapon]?
 }

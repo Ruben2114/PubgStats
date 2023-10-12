@@ -13,12 +13,14 @@ struct WeaponDataRepositoryImp: WeaponDataRepository {
         self.dataSource = dependencies.external.resolve()
     }
     func fetchWeaponData(account: String, platform: String, completion: @escaping (Result<WeaponDTO, Error>) -> Void) {
-        remoteData.getWeaponData(account: account, platform: platform, completion: completion)
+        
     }
-    func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO, type: NavigationStats) {
-        dataSource.saveWeaponData(sessionUser: sessionUser, weaponData: weaponData, type: type)
+    
+    func saveWeaponData(weaponData: WeaponDTO, type: NavigationStats) {
+        
     }
-    func getDataWeapon(for sessionUser: ProfileEntity, type: NavigationStats) -> [Weapon]? {
-        dataSource.getDataWeaponDetail(for: sessionUser, type: type)
+    
+    func getDataWeapon(type: NavigationStats) -> [Weapon]? {
+        return []
     }
 }

@@ -12,7 +12,6 @@ struct SettingsDataRepositoryImp : SettingsDataRepository {
         self.dataSource = dependencies.external.resolve()
     }
     
-    func deleteProfile(sessionUser: ProfileEntity) {
-        dataSource.deleteProfile(sessionUser)
+    func deleteProfile() {
     }
 }
