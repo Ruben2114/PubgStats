@@ -6,7 +6,7 @@
 //
 
 protocol SettingsDataUseCase {
-    func deleteProfile(sessionUser: ProfileEntity)
+    func deleteProfile()
 }
 
 struct SettingsDataUseCaseImp: SettingsDataUseCase {
@@ -14,7 +14,7 @@ struct SettingsDataUseCaseImp: SettingsDataUseCase {
     init(dependencies: SettingsDependency){
         self.settingsDataRepository = dependencies.resolve()
     }
-    func deleteProfile(sessionUser: ProfileEntity) {
-        settingsDataRepository.deleteProfile(sessionUser: sessionUser)
+    func deleteProfile() {
+        settingsDataRepository.deleteProfile()
     }
 }

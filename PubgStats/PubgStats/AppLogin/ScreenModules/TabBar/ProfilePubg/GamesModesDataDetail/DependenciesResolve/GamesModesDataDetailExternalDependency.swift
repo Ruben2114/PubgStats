@@ -12,7 +12,6 @@ protocol GamesModesDataDetailExternalDependency {
     func gamesModesDataDetailCoordinator(navigation: UINavigationController) -> Coordinator
     func profileNavigationController() -> UINavigationController
     func favouriteNavigationController() -> UINavigationController
-    func resolve() -> ProfileEntity
 }
 
 extension GamesModesDataDetailExternalDependency {

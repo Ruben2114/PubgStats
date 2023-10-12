@@ -13,21 +13,17 @@ struct StatsGeneralRepositoryImp: StatsGeneralRepository {
         self.dataSource = dependencies.external.resolve()
     }
     func fetchSurvivalData(account: String, platform: String, completion: @escaping (Result<SurvivalDTO, Error>) -> Void) {
-        remoteData.getSurvivalData(account: account, platform: platform, completion: completion)
     }
     func fetchGamesModeData(account: String, platform: String, completion: @escaping (Result<GamesModesDTO, Error>) -> Void) {
-        remoteData.getGamesModesData(account: account, platform: platform, completion: completion)
     }
-    func saveSurvival(sessionUser: ProfileEntity, survivalData: [SurvivalDTO], type: NavigationStats){
-        dataSource.saveSurvival(sessionUser: sessionUser, survivalData: survivalData, type: type)
+    func saveSurvival(survivalData: [SurvivalDTO], type: NavigationStats){
     }
-    func getSurvival(for sessionUser: ProfileEntity, type: NavigationStats) -> Survival?{
-        dataSource.getSurvival(for: sessionUser, type: type)
+    func getSurvival(type: NavigationStats) -> Survival?{
+        return nil
     }
-    func saveGamesModeData(sessionUser: ProfileEntity, gamesModeData: GamesModesDTO, type: NavigationStats){
-        dataSource.saveGamesMode(sessionUser: sessionUser, gamesModeData: gamesModeData, type: type)
+    func saveGamesModeData(gamesModeData: GamesModesDTO, type: NavigationStats){
     }
-    func getGamesModes(for sessionUser: ProfileEntity, type: NavigationStats) -> [GamesModes]?{
-        dataSource.getGameMode(for: sessionUser, type: type)
+    func getGamesModes(type: NavigationStats) -> [GamesModes]?{
+        return []
     }
 }

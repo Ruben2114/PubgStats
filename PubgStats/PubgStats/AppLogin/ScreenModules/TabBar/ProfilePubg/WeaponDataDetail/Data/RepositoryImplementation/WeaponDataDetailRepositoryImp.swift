@@ -7,10 +7,12 @@
 
 struct WeaponDataDetailRepositoryImp: WeaponDataDetailRepository {
     private let dataSource: LocalDataProfileService
+    
     init(dependencies: WeaponDataDetailDependency) {
         self.dataSource = dependencies.external.resolve()
     }
-    func getDataWeaponDetail(for sessionUser: ProfileEntity, type: NavigationStats) -> [Weapon]? {
-        dataSource.getDataWeaponDetail(for: sessionUser, type: type)
+    
+    func getDataWeaponDetail(type: NavigationStats) -> [Weapon]? {
+        return []
     }
 }

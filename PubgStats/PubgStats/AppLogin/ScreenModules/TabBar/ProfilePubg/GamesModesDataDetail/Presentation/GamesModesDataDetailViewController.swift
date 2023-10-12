@@ -11,13 +11,11 @@ class GamesModesDataDetailViewController: UIViewController {
     private lazy var tableView = makeTableViewData()
     private let viewModel: GamesModesDataDetailViewModel
     private let dependencies: GamesModesDataDetailDependency
-    private let sessionUser: ProfileEntity
     private let imageView = UIImageView(image: UIImage(named: "backgroundGamesMode"))
     
     init(dependencies: GamesModesDataDetailDependency) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
-        self.sessionUser = dependencies.external.resolve()
         super.init(nibName: nil, bundle: nil)
     }
     @available(*,unavailable)
@@ -36,7 +34,7 @@ class GamesModesDataDetailViewController: UIViewController {
     
     private func configUI(){
         view.backgroundColor = .systemBackground
-        title = "gamesModesDataDetailViewControllerTitle".localize() + "\(sessionUser.gameMode ?? "")"
+        title = "gamesModesDataDetailViewControllerTitle".localize() + "el nombre del modo"
         backButton(action: #selector(backButtonAction))
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")

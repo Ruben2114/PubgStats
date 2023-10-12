@@ -10,12 +10,10 @@ import UIKit
 class SurvivalDataViewController: UIViewController {
     private lazy var tableView = makeTableViewData()
     private let viewModel: SurvivalDataViewModel
-    private let sessionUser: ProfileEntity
     private let imageView = UIImageView(image: UIImage(named: "backgroundSurvival"))
 
     init(dependencies: SurvivalDataDependency) {
         self.viewModel = dependencies.resolve()
-        self.sessionUser = dependencies.external.resolve()
         super.init(nibName: nil, bundle: nil)
     }
     @available(*,unavailable)

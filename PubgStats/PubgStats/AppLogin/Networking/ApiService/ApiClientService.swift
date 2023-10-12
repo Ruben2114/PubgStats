@@ -6,7 +6,8 @@
 //
 
 import Foundation
+import Combine
 
 protocol ApiClientService {
-    func dataPlayer<T: Decodable>(url: URL, completion: @escaping (Result<T, Error>) -> Void)
+    func dataPlayer<T: Decodable>(url: URL) -> AnyPublisher<T, Error>
 }

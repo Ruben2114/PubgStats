@@ -14,16 +14,13 @@ struct FavouriteRepositoryImp: FavouriteRepository {
         self.remoteData = dependencies.external.resolve()
     }
     func fetchPlayerData(name: String, platform: String, completion: @escaping (Result<PubgPlayerDTO, Error>) -> Void) {
-        remoteData.getPlayerData(name: name, platform: platform, completion: completion)
     }
-    func saveFav(sessionUser: ProfileEntity, player: String, account: String, platform: String) {
-        dataSource.saveFav(sessionUser: sessionUser, name: player, account: account, platform: platform)
+    func saveFav( player: String, account: String, platform: String) {
     }
-    func getFavourites(for sessionUser: ProfileEntity) -> [Favourite]?{
-        dataSource.getFavourites(for: sessionUser)
+    func getFavourites() -> [Favourite]?{
+        return []
     }
     func deleteFavouriteTableView(_ profile: Favourite){
-        dataSource.deleteFavouriteTableView(profile)
     }
 }
 

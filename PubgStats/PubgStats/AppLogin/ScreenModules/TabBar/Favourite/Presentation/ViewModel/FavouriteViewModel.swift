@@ -13,10 +13,8 @@ final class FavouriteViewModel {
     private weak var coordinator: FavouriteCoordinator?
     private let dependencies: FavouriteDependency
     private let favouriteDataUseCase: FavouriteDataUseCase
-    private let sessionUser: ProfileEntity
     init(dependencies: FavouriteDependency) {
         self.dependencies = dependencies
-        self.sessionUser = dependencies.external.resolve()
         self.coordinator = dependencies.resolve()
         self.favouriteDataUseCase = dependencies.resolve()
     }
@@ -25,27 +23,24 @@ final class FavouriteViewModel {
         favouriteDataUseCase.fetchPlayerData(name: name, platform: platform) { [weak self] result in
             switch result {
             case .success(let player):
-                guard let account = player.id, !account.isEmpty, let playerName = player.name, !playerName.isEmpty, let user = self?.sessionUser else {return}
-                self?.saveFav(sessionUser: user, player: playerName, account: account, platform: platform)
+                guard let account = player.id, !account.isEmpty, let playerName = player.name, !playerName.isEmpty else {return}
+                self?.saveFav(player: playerName, account: account, platform: platform)
                 self?.state.send(.success(model: player))
             case .failure(_):
                 self?.state.send(.fail(error: "errorFavouriteViewModel".localize()))
             }
         }
     }
-    func saveFav(sessionUser: ProfileEntity, player: String, account: String, platform: String) {
-        favouriteDataUseCase.saveFav(sessionUser: sessionUser, player: player, account: account, platform: platform)
+    func saveFav(player: String, account: String, platform: String) {
+        favouriteDataUseCase.saveFav(player: player, account: account, platform: platform)
     }
-    func getFavourites(for sessionUser: ProfileEntity) -> [Favourite]? {
-        favouriteDataUseCase.getFavourites(for: sessionUser)
+    func getFavourites() -> [Favourite]? {
+        favouriteDataUseCase.getFavourites()
     }
     func deleteFavouriteTableView(_ profile: Favourite){
         favouriteDataUseCase.deleteFavouriteTableView(profile)
     }
     func goFavourite(favourite: Favourite){
-        sessionUser.nameFavourite = favourite.name
-        sessionUser.accountFavourite = favourite.account
-        sessionUser.platformFavourite = favourite.platform
         coordinator?.performTransition(.goStats)
     }
 }

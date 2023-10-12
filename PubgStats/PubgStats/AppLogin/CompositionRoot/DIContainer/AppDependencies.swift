@@ -17,49 +17,58 @@ struct AppDependencies {
     private let favouriteNavController = UINavigationController()
     private let guideNavController = UINavigationController()
     private let settingsNavController = UINavigationController()
-    private var sessionUser = ProfileEntity(name: "", password: "", email: "")
     
     init(window: UIWindow?) {
         self.window = window
     }
+    
     func resolve() -> LocalDataProfileService {
         localDataService
     }
+    
     func resolve() -> RemoteService {
         remoteDataService
     }
-    func resolve() -> ProfileEntity {
-        sessionUser
+    
+    func resolve() -> DataProfleRepository {
+        DataProfleRepositoryImp(dependencies: self)
     }
+    
     func resolve() -> AppDependencies {
         self
     }
+    
     func resolve() -> UIWindow? {
         window
     }
+    
     func loginNavigationController() -> UINavigationController {
         loginNavController
     }
+    
     func profileNavigationController() -> UINavigationController {
         profileNavController
     }
+    
     func tabBarController() -> UITabBarController {
         tabController
     }
+    
     func favouriteNavigationController() -> UINavigationController {
         favouriteNavController
     }
+    
     func guideNavigationController() -> UINavigationController {
         guideNavController
     }
+    
     func settingsNavigationController() -> UINavigationController {
         settingsNavController
     }
 }
+
 extension AppDependencies:
     LoginExternalDependency,
-    ForgotExternalDependency,
-    RegisterExternalDependency,
     MainTabBarExternalDependency,
     ProfileExternalDependency,
     FavouriteExternalDependency,
@@ -70,7 +79,6 @@ extension AppDependencies:
     WeaponDataExternalDependency,
     WeaponDataDetailExternalDependency,
     HelpDataExternalDependency,
-    CommonExternalDependency,
     SurvivalDataExternalDependency,
     GamesModesDataExternalDependency,
     GamesModesDataDetailExternalDependency,

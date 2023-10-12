@@ -13,32 +13,32 @@ final class WeaponDataViewModel {
     private let dependencies: WeaponDataDependency
     private weak var coordinator: WeaponDataCoordinator?
     private let weaponDataUseCase: WeaponDataUseCase
-    private let sessionUser: ProfileEntity
     var weaponType: [String] = []
     
     init(dependencies: WeaponDataDependency, apiService: ApiClientService = ApiClientServiceImp()) {
         self.apiService = apiService
         self.dependencies = dependencies
-        self.sessionUser = dependencies.external.resolve()
         self.coordinator = dependencies.resolve()
         self.weaponDataUseCase = dependencies.resolve()
     }
-    func getDataWeapon(for sessionUser: ProfileEntity) -> [Weapon]? {
+    func getDataWeapon() -> [Weapon]? {
         guard let type = coordinator?.type else {return nil}
-        let weaponData = weaponDataUseCase.getDataWeapon(for: sessionUser, type: type)
+        let weaponData = weaponDataUseCase.getDataWeapon(type: type)
         return weaponData
     }
     func searchId() -> String? {
         guard let type = coordinator?.type else {return nil}
         if type == .favourite{
-            return sessionUser.accountFavourite
+            return ""
+            //sessionUser.accountFavourite
         } else {
-            return sessionUser.account
+            return ""
+            //sessionUser.account
         }
     }
     func viewDidLoad() {
         state.send(.loading)
-        let weaponData = getDataWeapon(for: sessionUser)
+        let weaponData = getDataWeapon()
         let userDefaults = UserDefaults.standard
         guard userDefaults.bool(forKey: "reload") == true else{
             fetchData()
@@ -49,7 +49,7 @@ final class WeaponDataViewModel {
             fetchData()
             return
         }
-        getNameWeapon(for: sessionUser, model: weaponData)
+        getNameWeapon(model: weaponData)
         self.state.send(.success)
     }
     func fetchData(){
@@ -58,8 +58,7 @@ final class WeaponDataViewModel {
         weaponDataUseCase.execute(account: id, platform: "steam") { [weak self] result in
             switch result {
             case .success(let weapon):
-                guard let user = self?.sessionUser else {return}
-                self?.saveWeaponData(sessionUser: user, weaponData: weapon)
+                self?.saveWeaponData(weaponData: weapon)
                 self?.getWeapons(weaponData: weapon)
                 self?.state.send(.success)
             case .failure(_):
@@ -67,11 +66,11 @@ final class WeaponDataViewModel {
             }
         }
     }
-    func saveWeaponData(sessionUser: ProfileEntity, weaponData: WeaponDTO) {
+    func saveWeaponData(weaponData: WeaponDTO) {
         guard let type = coordinator?.type else {return}
-        weaponDataUseCase.saveWeaponData(sessionUser: sessionUser, weaponData: weaponData, type: type)
+        weaponDataUseCase.saveWeaponData(weaponData: weaponData, type: type)
     }
-    func getNameWeapon(for sessionUser: ProfileEntity, model: [Weapon]?){
+    func getNameWeapon(model: [Weapon]?){
         if let weapon = model {
             var modes = weapon.compactMap { $0.name }
             modes.sort { $0 < $1 }
@@ -88,8 +87,6 @@ final class WeaponDataViewModel {
         coordinator?.dismiss()
     }
     func goWeaponItem(weapon: String){
-        let sessionUser: ProfileEntity = dependencies.external.resolve()
-        sessionUser.weapon = weapon
         coordinator?.performTransition(.goWeapon)
     }
 }

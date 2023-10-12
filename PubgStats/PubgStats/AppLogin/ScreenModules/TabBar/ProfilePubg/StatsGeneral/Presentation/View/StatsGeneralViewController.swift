@@ -34,7 +34,6 @@ final class StatsGeneralViewController: UIViewController {
     private var cancellable = Set<AnyCancellable>()
     private let dependencies: StatsGeneralDependency
     private let viewModel: StatsGeneralViewModel
-    private let sessionUser: ProfileEntity
     private var refreshCount = 0
     private var reloadButton = UIBarButtonItem()
     private let userDefaults = UserDefaults.standard
@@ -61,7 +60,6 @@ final class StatsGeneralViewController: UIViewController {
     init(dependencies: StatsGeneralDependency) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
-        self.sessionUser = dependencies.external.resolve()
         super.init(nibName: nil, bundle: nil)
     }
     @available(*,unavailable)

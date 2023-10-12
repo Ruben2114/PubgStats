@@ -10,7 +10,6 @@ import Combine
 
 class WeaponDataViewController: UIViewController {
     private lazy var collectionView = makeCollectionView()
-    private let sessionUser: ProfileEntity
     private var cancellable = Set<AnyCancellable>()
     private let viewModel: WeaponDataViewModel
     private let dependencies: WeaponDataDependency
@@ -18,7 +17,6 @@ class WeaponDataViewController: UIViewController {
     init(dependencies: WeaponDataDependency) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
-        self.sessionUser = dependencies.external.resolve()
         super.init(nibName: nil, bundle: nil)
     }
     @available(*,unavailable)

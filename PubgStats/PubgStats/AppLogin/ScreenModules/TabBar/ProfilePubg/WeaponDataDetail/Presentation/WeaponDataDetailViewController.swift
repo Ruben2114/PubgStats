@@ -11,13 +11,11 @@ class WeaponDataDetailViewController: UIViewController {
     private lazy var tableView = makeTableViewData()
     private let viewModel: WeaponDataDetailViewModel
     private let dependencies: WeaponDataDetailDependency
-    private let sessionUser: ProfileEntity
     private let imageView = UIImageView(image: UIImage(named: "backgroundWeapon"))
     
     init(dependencies: WeaponDataDetailDependency) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
-        self.sessionUser = dependencies.external.resolve()
         super.init(nibName: nil, bundle: nil)
     }
     @available(*,unavailable)
@@ -35,8 +33,7 @@ class WeaponDataDetailViewController: UIViewController {
     }
     private func configUI(){
         view.backgroundColor = .systemBackground
-        guard let weapon = sessionUser.weapon else {return}
-        title = "weaponDataDetailViewControllerTitle".localize() + "\(weapon)"
+        title = "weaponDataDetailViewControllerTitle".localize() //falta el weapon
         backButton(action: #selector(backButtonAction))
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")

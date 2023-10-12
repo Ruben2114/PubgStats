@@ -23,13 +23,11 @@ class FavouriteViewController: UIViewController {
     private let dependencies: FavouriteDependency
     private var cancellable = Set<AnyCancellable>()
     private let viewModel: FavouriteViewModel
-    private let sessionUser: ProfileEntity
     private let imageView = UIImageView(image: UIImage(named: "backgroundCar"))
     
     init(dependencies: FavouriteDependency) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
-        self.sessionUser = dependencies.external.resolve()
         super.init(nibName: nil, bundle: nil)
     }
     @available(*,unavailable)
@@ -68,7 +66,7 @@ class FavouriteViewController: UIViewController {
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.backgroundColor = .clear
-        hideKeyboard()
+        //hideKeyboard()
         configConstraint()
     }
     private func configConstraint() {
@@ -88,7 +86,7 @@ class FavouriteViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     private func searchFavourite(){
-        guard let favourite = viewModel.getFavourites(for: sessionUser) else {return}
+        guard let favourite = viewModel.getFavourites() else {return}
         profilesFavourite = favourite
         tableView.reloadData()
     }

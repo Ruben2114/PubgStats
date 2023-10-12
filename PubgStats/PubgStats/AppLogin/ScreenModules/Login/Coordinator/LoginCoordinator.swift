@@ -7,62 +7,56 @@
 
 import UIKit
 
-enum LoginTransition {
-    case goProfile
-    case goForgot
-    case goRegister
-}
-protocol LoginCoordinator: Coordinator {
-    func performTransition(_ transition: LoginTransition)
+public protocol LoginCoordinator: Coordinator {
+    func goToProfile(player: String, id: String)
 }
 
-final class LoginCoordinatorImp: Coordinator {
+final class LoginCoordinatorImp: LoginCoordinator {
     weak var navigation: UINavigationController?
-    var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
+    var childCoordinators: [Coordinator] = []
     private let externalDependencies: LoginExternalDependency
+    
     private lazy var dependencies: Dependency = {
-        Dependency(external: externalDependencies,
+        Dependency(dependencies: externalDependencies,
                    coordinator: self)
     }()
 
-    public init(dependencies: LoginExternalDependency) {
+    public init(dependencies: LoginExternalDependency, navigation: UINavigationController?) {
         self.externalDependencies = dependencies
-        self.navigation = dependencies.loginNavigationController()
+        self.navigation = navigation
     }
-    
+}
+
+extension LoginCoordinatorImp {
     func start() {
-        self.navigation?.setNavigationBarHidden(true, animated: false)
         self.navigation?.pushViewController(dependencies.resolve(), animated: true)
         
     }
-}
-extension LoginCoordinatorImp: LoginCoordinator {
-    func performTransition(_ transition: LoginTransition) {
-        switch transition {
-        case .goProfile:
-            DispatchQueue.main.async {
-                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewTabCoordinator()
-            }
-        case .goForgot:
-            let forgotCoordinator = dependencies.external.forgotCoordinator()
-            forgotCoordinator.start()
-            append(child: forgotCoordinator)
-        case .goRegister:
-            let registerCoordinator = dependencies.external.registerCoordinator()
-            registerCoordinator.start()
-            append(child: registerCoordinator)
+    
+    func goToProfile(player: String, id: String) {
+        DispatchQueue.main.async {
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewTabCoordinator(player: player, id: id)
         }
     }
 }
 
 private extension LoginCoordinatorImp {
     struct Dependency: LoginDependency {
-        let external: LoginExternalDependency
-        weak var coordinator: LoginCoordinator?
+        let dependencies: LoginExternalDependency
+        unowned var coordinator: LoginCoordinator
+        let dataBinding = DataBindingObject()
         
-        func resolve() -> LoginCoordinator? {
+        var external: LoginExternalDependency {
+            return  dependencies
+        }
+        
+        func resolve() -> LoginCoordinator {
             return coordinator
+        }
+        
+        func resolve()  -> DataBinding {
+            return dataBinding
         }
     }
 }

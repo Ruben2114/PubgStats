@@ -6,9 +6,7 @@
 //
 
 enum ApisUrl {
-    //TODO: cambiar steam por un enum que pueda ser steam o xbox lo elija en el textfield, y se guarde en core data para las llamadas
-    //llamadas tanto en profile como en favourite, en favourite dentro
-    //searchbar un boton que seleccione steam o xbox y que este predefinido steam
+    //TODO: llamadas tanto en profile como en favourite, en favourite dentro
     private var baseUrl: String { return "https://api.pubg.com/shards"}
     case generalData(name: String, platform: String)
     case survivalData(id: String, platform: String)

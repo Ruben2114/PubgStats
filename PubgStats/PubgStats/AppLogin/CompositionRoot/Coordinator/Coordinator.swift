@@ -6,18 +6,24 @@
 //
 import UIKit
 
-public protocol Coordinator: AnyObject {
+public typealias BindableCoordinator = Coordinator & Bindable
+
+public protocol Coordinator: AnyObject, uniqueIdentifiable {
     var identifier: String { get }
-    var navigation: UINavigationController? { get set }
     var childCoordinators: [Coordinator] { get set }
+    var navigation: UINavigationController? { get set }
     var onFinish: (() -> Void)? { get set }
     func start()
     func dismiss()
 }
 
-extension Coordinator {
+public extension Coordinator {
     var identifier: String {
         return String(describing: self)
+    }
+    
+    var uniqueIdentifer: Int {
+        return identifier.hashValue
     }
     
     var onFinish: (() -> Void)? {
@@ -35,4 +41,12 @@ extension Coordinator {
         navigation?.popViewController(animated: true)
         onFinish?()
     }
+}
+
+public protocol uniqueIdentifiable {
+    var uniqueIdentifer: Int { get }
+}
+
+func ==<T: uniqueIdentifiable>(lhs: T, rhs: T) -> Bool {
+    return lhs.uniqueIdentifer == rhs.uniqueIdentifer
 }
