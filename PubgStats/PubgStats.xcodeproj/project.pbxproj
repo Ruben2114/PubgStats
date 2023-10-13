@@ -130,9 +130,11 @@
 		8CB6397129D245B400763231 /* WeaponDataDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6397029D245B400763231 /* WeaponDataDependency.swift */; };
 		8CB6397329D245FF00763231 /* WeaponDataExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6397229D245FF00763231 /* WeaponDataExternalDependency.swift */; };
 		8CB6397529D2463900763231 /* WeaponDataCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6397429D2463900763231 /* WeaponDataCoordinator.swift */; };
+		8CBC02832AD99C99002449E1 /* SurvivalDataProfileRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC02822AD99C99002449E1 /* SurvivalDataProfileRepresentable.swift */; };
+		8CBC02852AD9AA32002449E1 /* GamesModesDataProfileRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC02842AD9AA32002449E1 /* GamesModesDataProfileRepresentable.swift */; };
 		8CBC70422AD7D40E00234420 /* DataProfleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC70412AD7D40E00234420 /* DataProfleRepository.swift */; };
 		8CBC70442AD7D44300234420 /* DataProfleRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC70432AD7D44300234420 /* DataProfleRepositoryImp.swift */; };
-		8CBC70472AD7D4CF00234420 /* DataGeneralPlayerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC70462AD7D4CF00234420 /* DataGeneralPlayerRepresentable.swift */; };
+		8CBC70472AD7D4CF00234420 /* IdAccountDataProfileRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC70462AD7D4CF00234420 /* IdAccountDataProfileRepresentable.swift */; };
 		8CBC704A2AD7EBBA00234420 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC70492AD7EBBA00234420 /* Bindable.swift */; };
 		8CBC704C2AD7F3B700234420 /* DataBindingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC704B2AD7F3B700234420 /* DataBindingObject.swift */; };
 		8CC118B82AD979A900839855 /* ScrollableStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC118B72AD979A900839855 /* ScrollableStackView.swift */; };
@@ -326,9 +328,11 @@
 		8CB6397029D245B400763231 /* WeaponDataDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDependency.swift; sourceTree = "<group>"; };
 		8CB6397229D245FF00763231 /* WeaponDataExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataExternalDependency.swift; sourceTree = "<group>"; };
 		8CB6397429D2463900763231 /* WeaponDataCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataCoordinator.swift; sourceTree = "<group>"; };
+		8CBC02822AD99C99002449E1 /* SurvivalDataProfileRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataProfileRepresentable.swift; sourceTree = "<group>"; };
+		8CBC02842AD9AA32002449E1 /* GamesModesDataProfileRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesDataProfileRepresentable.swift; sourceTree = "<group>"; };
 		8CBC70412AD7D40E00234420 /* DataProfleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProfleRepository.swift; sourceTree = "<group>"; };
 		8CBC70432AD7D44300234420 /* DataProfleRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProfleRepositoryImp.swift; sourceTree = "<group>"; };
-		8CBC70462AD7D4CF00234420 /* DataGeneralPlayerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataGeneralPlayerRepresentable.swift; sourceTree = "<group>"; };
+		8CBC70462AD7D4CF00234420 /* IdAccountDataProfileRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdAccountDataProfileRepresentable.swift; sourceTree = "<group>"; };
 		8CBC70492AD7EBBA00234420 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		8CBC704B2AD7F3B700234420 /* DataBindingObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBindingObject.swift; sourceTree = "<group>"; };
 		8CC118B72AD979A900839855 /* ScrollableStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableStackView.swift; sourceTree = "<group>"; };
@@ -1441,7 +1445,9 @@
 		8CBC70452AD7D4AB00234420 /* Representables */ = {
 			isa = PBXGroup;
 			children = (
-				8CBC70462AD7D4CF00234420 /* DataGeneralPlayerRepresentable.swift */,
+				8CBC70462AD7D4CF00234420 /* IdAccountDataProfileRepresentable.swift */,
+				8CBC02822AD99C99002449E1 /* SurvivalDataProfileRepresentable.swift */,
+				8CBC02842AD9AA32002449E1 /* GamesModesDataProfileRepresentable.swift */,
 			);
 			path = Representables;
 			sourceTree = "<group>";
@@ -2013,6 +2019,7 @@
 				8CE9BDAB29E57DD600F45D3F /* SurvivalDataRepository.swift in Sources */,
 				465550C429CC390200BF932A /* UIViewController+TextField.swift in Sources */,
 				8CE9BDE129E5B77100F45D3F /* KillsDataRepositoryImp.swift in Sources */,
+				8CBC02832AD99C99002449E1 /* SurvivalDataProfileRepresentable.swift in Sources */,
 				8CB6396229D2356B00763231 /* KillsDataDependency.swift in Sources */,
 				8C9A32AB29DDB39500F81B34 /* FavouriteViewModel.swift in Sources */,
 				8CBC704A2AD7EBBA00234420 /* Bindable.swift in Sources */,
@@ -2057,6 +2064,7 @@
 				8CB07EA629D1969A000EE257 /* UIViewController+BackButton.swift in Sources */,
 				8CB05F952A5F3DD6000B4092 /* PieChartView.swift in Sources */,
 				8CCC92D029E40DAF0019BE72 /* SurvivalDataCoordinator.swift in Sources */,
+				8CBC02852AD9AA32002449E1 /* GamesModesDataProfileRepresentable.swift in Sources */,
 				8CCC92D829E40F120019BE72 /* SurvivalDataViewController.swift in Sources */,
 				8CAC3E3129C31D4700A1FE34 /* UrlGuide.swift in Sources */,
 				8CEB341429ED6753006C2564 /* InfoAppExternalDependency.swift in Sources */,
@@ -2073,7 +2081,7 @@
 				461C1F4029C9C86C00540289 /* EndPoint.swift in Sources */,
 				8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */,
 				8CB05F992A5F3E3A000B4092 /* PieChartViewData.swift in Sources */,
-				8CBC70472AD7D4CF00234420 /* DataGeneralPlayerRepresentable.swift in Sources */,
+				8CBC70472AD7D4CF00234420 /* IdAccountDataProfileRepresentable.swift in Sources */,
 				8CE9BDD029E59F4500F45D3F /* GamesModesDataDetailExternalDependency.swift in Sources */,
 				8CCC92D629E40EAB0019BE72 /* SurvivalDataViewModel.swift in Sources */,
 				8CB6396D29D244F300763231 /* WeaponDataViewController.swift in Sources */,

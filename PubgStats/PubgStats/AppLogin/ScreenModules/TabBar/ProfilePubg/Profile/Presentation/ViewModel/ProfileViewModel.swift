@@ -18,7 +18,7 @@ final class ProfileViewModel: DataBindable {
     private let stateSubject = CurrentValueSubject<ProfileState, Never>(.idle)
     var state: AnyPublisher<ProfileState, Never>
     private let getAccountProfilSubject = PassthroughSubject<(String, String), Never>()
-    @BindingOptional private var dataProfile: DefaultIdAccountDataProfile?
+    @BindingOptional private var dataProfile: DefaultIdAccountDataProfileRepresentable?
   
     let items: [[ProfileField]] = [
         [ProfileField.name, ProfileField.email, ProfileField.password, ProfileField.image],

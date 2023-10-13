@@ -15,14 +15,14 @@ import UIKit
 protocol LocalDataProfileService {
     func save(player: String, account: String, platform: String)
     func saveFav(player: String, playerFav: String, account: String, platform: String)
-    func saveSurvival(player: String?, playerFav: String?, survivalData: [SurvivalDTO], type: NavigationStats)
-    func saveGamesMode(player: String?, playerFav: String?, gamesModeData: GamesModesDTO, type: NavigationStats)
+    func saveSurvival(player: String?, survivalData: [SurvivalDTO], type: NavigationStats)
+    func saveGamesMode(player: String?, gamesModeData: GamesModesDTO, type: NavigationStats)
     func saveWeaponData(player: String?, playerFav: String?, weaponData: WeaponDTO, type: NavigationStats)
     func getFavourites(player: String) -> [Favourite]?
-    func getSurvival(player: String, type: NavigationStats) -> Survival?
+    func getSurvival(player: String, type: NavigationStats) -> SurvivalDataProfileRepresentable?
     func getGameMode(player: String, type: NavigationStats) -> [GamesModes]?
     func getDataWeaponDetail(player: String, type: NavigationStats) -> [Weapon]?
-    func getAccountProfile(player: String) -> IdAccountDataProfile?
+    func getAccountProfile(player: String) -> IdAccountDataProfileRepresentable?
     func deleteFavouriteTableView(_ profile: Favourite)
     func deleteProfile(player: String)
 }
@@ -60,25 +60,25 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         }
     }
     
-    func saveSurvival(player: String?, playerFav: String?, survivalData: [SurvivalDTO], type: NavigationStats) {
+    func saveSurvival(player: String?, survivalData: [SurvivalDTO], type: NavigationStats) {
         switch type {
         case .profile:
             let fetchRequest = Profile.fetchRequest()
             setSurvival(survivalData: survivalData, key: "player", value: player ?? "", fetchRequest: fetchRequest)
         case .favourite:
             let fetchRequest = Favourite.fetchRequest()
-            setSurvival(survivalData: survivalData, key: "player", value: playerFav ?? "", fetchRequest: fetchRequest)
+            setSurvival(survivalData: survivalData, key: "player", value: player ?? "", fetchRequest: fetchRequest)
         }
     }
     
-    func saveGamesMode(player: String?, playerFav: String?, gamesModeData: GamesModesDTO, type: NavigationStats) {
+    func saveGamesMode(player: String?, gamesModeData: GamesModesDTO, type: NavigationStats) {
         switch type {
         case .profile:
             let fetchRequest = Profile.fetchRequest()
             saveGames(gamesModeData: gamesModeData, type: .profile, request: fetchRequest, name: player ?? "")
         case .favourite:
             let fetchRequest = Favourite.fetchRequest()
-            saveGames(gamesModeData: gamesModeData, type: .favourite, request: fetchRequest, name: playerFav ?? "")
+            saveGames(gamesModeData: gamesModeData, type: .favourite, request: fetchRequest, name: player ?? "")
         }
     }
     
@@ -108,7 +108,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         }
     }
     
-    func getSurvival(player: String, type: NavigationStats) -> Survival? {
+    func getSurvival(player: String, type: NavigationStats) -> SurvivalDataProfileRepresentable? {
         switch type {
         case .profile:
             let fetchRequest = Profile.fetchRequest()
@@ -148,12 +148,12 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         }
     }
     
-    func getAccountProfile(player: String) -> IdAccountDataProfile? {
+    func getAccountProfile(player: String) -> IdAccountDataProfileRepresentable? {
         let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "player == %@", player)
         do {
             let profile = try context.fetch(fetchRequest)
-            return DefaultIdAccountDataProfile(id: profile.first?.account, name: profile.first?.player)
+            return DefaultIdAccountDataProfileRepresentable(id: profile.first?.account, name: profile.first?.player)
         } catch {
             print("Error en core data: \(error.localizedDescription)")
             return nil
@@ -338,13 +338,12 @@ private extension LocalDataProfileServiceImp {
         }
     }
     
-    func getDataSulvival<T: HasEntities>(fetchRequest: NSFetchRequest<T>, name: String) -> Survival? {
+    func getDataSulvival<T: HasEntities>(fetchRequest: NSFetchRequest<T>, name: String) -> SurvivalDataProfileRepresentable? {
         fetchRequest.predicate = NSPredicate(format: "player == %@", name)
         do {
             let profile = try context.fetch(fetchRequest)
             guard let survival = profile.first?.survival else { return nil }
-            return survival
-            
+            return DefaultSurvivalDataProfile(survival)
         } catch {
             print("Error en core data: \(error.localizedDescription)")
             return nil

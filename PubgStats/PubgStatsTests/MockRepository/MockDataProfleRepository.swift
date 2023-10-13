@@ -11,13 +11,13 @@ import PubgStats
 
 struct MockDataProfleRepository: DataProfleRepository {
     
-    func fetchPlayerData(name: String, platform: String) -> AnyPublisher<IdAccountDataProfile, Error> {
+    func fetchPlayerData(name: String, platform: String) -> AnyPublisher<IdAccountDataProfileRepresentable, Error> {
         return Just(MockIdAccountDataProfile(id: "", name: "")).setFailureType(to: Error.self).eraseToAnyPublisher()
     }
 }
 
 //MARK: - Mock Representables
-struct MockIdAccountDataProfile: IdAccountDataProfile {
+struct MockIdAccountDataProfile: IdAccountDataProfileRepresentable {
     var id: String?
     var name: String?
     

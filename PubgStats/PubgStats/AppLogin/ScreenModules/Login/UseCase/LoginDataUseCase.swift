@@ -8,7 +8,7 @@
 import Combine
 
 protocol LoginDataUseCase {
-    func fetchPlayerData(name: String, platform: String) -> AnyPublisher<IdAccountDataProfile, Error>
+    func fetchPlayerData(name: String, platform: String) -> AnyPublisher<IdAccountDataProfileRepresentable, Error>
 }
 
 struct LoginDataUseCaseImp: LoginDataUseCase {
@@ -17,7 +17,7 @@ struct LoginDataUseCaseImp: LoginDataUseCase {
         self.profileRepository = dependencies.external.resolve()
     }
     
-    func fetchPlayerData(name: String, platform: String) -> AnyPublisher<IdAccountDataProfile, Error> {
+    func fetchPlayerData(name: String, platform: String) -> AnyPublisher<IdAccountDataProfileRepresentable, Error> {
         profileRepository.fetchPlayerData(name: name, platform: platform).eraseToAnyPublisher()
     }
 }

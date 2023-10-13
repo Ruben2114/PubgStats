@@ -45,6 +45,14 @@ struct GamesModesDTO: Decodable {
         let model = data.attributes.gameModeStats
         return model.duo.wins + model.duoFpp.wins + model.solo.wins + model.soloFpp.wins + model.squad.wins + model.squadFpp.wins
     }
+    var top10STotal: Int {
+        let model = data.attributes.gameModeStats
+        return model.duo.top10S + model.duoFpp.top10S + model.solo.top10S + model.soloFpp.top10S + model.squad.top10S + model.squadFpp.top10S
+    }
+    var headshotKillsTotal: Int {
+        let model = data.attributes.gameModeStats
+        return model.duo.headshotKills + model.duoFpp.headshotKills + model.solo.headshotKills + model.soloFpp.headshotKills + model.squad.headshotKills + model.squadFpp.headshotKills
+    }
     var timePlayed: String {
         let model = data.attributes.gameModeStats
         let time = model.duo.timeSurvived + model.duoFpp.timeSurvived + model.solo.timeSurvived + model.soloFpp.timeSurvived + model.squad.timeSurvived + model.squadFpp.timeSurvived

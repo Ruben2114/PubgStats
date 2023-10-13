@@ -18,11 +18,11 @@ final class MainTabBarCoordinatorImp: MainTabBarCoordinator {
     private lazy var dependencies: Dependency = {
         Dependency(external: externalDependencies, coordinator: self)
     }()
-    private var dataProfile: DefaultIdAccountDataProfile?
+    private var dataProfile: DefaultIdAccountDataProfileRepresentable?
     
     public init(dependencies: MainTabBarExternalDependency, player: String, id: String) {
         self.externalDependencies = dependencies
-        self.dataProfile = DefaultIdAccountDataProfile(id: id, name: player)
+        self.dataProfile = DefaultIdAccountDataProfileRepresentable(id: id, name: player)
     }
     
     func start() {

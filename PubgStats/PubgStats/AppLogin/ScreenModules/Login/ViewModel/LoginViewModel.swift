@@ -10,7 +10,7 @@ import Combine
 
 enum LoginState {
     case idle
-    case sendInfoProfile(IdAccountDataProfile)
+    case sendInfoProfile(IdAccountDataProfileRepresentable)
     case sendInfoProfileError
     case showLoading
 }
@@ -69,7 +69,7 @@ private extension LoginViewModel {
 //MARK: - Publishers
 
 private extension LoginViewModel {
-    func dataGeneralPublisher() -> AnyPublisher<IdAccountDataProfile, Error> {
+    func dataGeneralPublisher() -> AnyPublisher<IdAccountDataProfileRepresentable, Error> {
         return getAccountProfileSubject.flatMap { [unowned self] name, platform in
             self.profileDataUseCase.fetchPlayerData(name: name, platform: platform)
         }.receive(on: DispatchQueue.main)
