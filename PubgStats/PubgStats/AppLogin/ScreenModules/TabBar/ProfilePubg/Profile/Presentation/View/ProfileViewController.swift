@@ -9,13 +9,22 @@ import UIKit
 import Combine
 
 final class ProfileViewController: UIViewController {
+    
     private let imageView = UIImageView(image: UIImage(named: "backgroundProfile"))
     private lazy var nameLabel = makeLabelProfile(title: "sessionUser.name", color: .black, font: 20, style: .title2, isBold: true)
     private lazy var emailLabel = makeLabelProfile(title:" sessionUser.email", color: .black, font: 20, style: .title2, isBold: false)
-    private lazy var tableView = makeTableViewGroup()
+    
     private var cancellable = Set<AnyCancellable>()
     private let viewModel: ProfileViewModel
     private let dependencies: ProfileDependency
+    private lazy var scrollableStackView: ScrollableStackView = {
+        let view = ScrollableStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.setup(with: self.view)
+        view.setScrollInsect(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+        return view
+    }()
+    
     init(dependencies: ProfileDependency) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
@@ -28,52 +37,48 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configUI()
+        setAppearance()
         bind()
+        viewModel.viewDidLoad()
     }
     
-    private func configUI() {
-        view.backgroundColor = tableView.backgroundColor
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //crear componente y meter aqui la barra de navegacion
+    }
+}
+
+private extension ProfileViewController {
+    func setAppearance() {
+        configView()
+        addViewToScrollableStackView()
+    }
+    
+    func configView() {
         navigationItem.title = "profileViewControllerNavigationItem".localize()
         backButton(action: #selector(backButtonAction))
-     
-        tableView.backgroundColor = .clear
-        configConstraints()
+        //self.view.backgroundColor = .white
+        self.view.insertSubview(imageView, at: 0)
+        self.imageView.frame = view.bounds
     }
-    private func bind() {
+    
+    func bind() {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
             switch state {
             case .idle:
                 break
-            case .sendInfoProfile(_):
-                self?.tableView.reloadData()
-            case .sendInfoProfileError:
-                self?.presentAlert( message: "", title: "Error")
             }
         }.store(in: &cancellable)
     }
     
-    private func configConstraints() {
-        view.insertSubview(imageView, at: 0)
-        imageView.frame = view.bounds
-        
-        view.addSubview(nameLabel)
-        nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-        nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
-        view.addSubview(emailLabel)
-        emailLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5).isActive = true
-        emailLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
-        view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 20).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    func addViewToScrollableStackView() {
+        scrollableStackView.addArrangedSubview(nameLabel)
+        scrollableStackView.addArrangedSubview(emailLabel)
     }
-    @objc private func backButtonAction() {
+    
+    @objc func backButtonAction() {
         let alert = UIAlertController(title: "alertTitle".localize(), message: "profileBackButtonAction".localize(), preferredStyle: .alert)
-        let actionAccept = UIAlertAction(title: "actionAccept".localize(), style: .default){ [weak self]_ in
+        let actionAccept = UIAlertAction(title: "actionAccept".localize(), style: .default) { [weak self]_ in
             self?.viewModel.backButton()
         }
         let actionCancel = UIAlertAction(title: "actionCancel".localize(), style: .destructive)

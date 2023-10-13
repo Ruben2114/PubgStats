@@ -11,15 +11,16 @@ enum ProfileTransition {
     case goBackView
     case goStatsGeneral
 }
-protocol ProfileCoordinator: Coordinator {
+protocol ProfileCoordinator: BindableCoordinator {
     func performTransition(_ transition: ProfileTransition)
 }
 
-final class ProfileCoordinatorImp: Coordinator {
+final class ProfileCoordinatorImp: ProfileCoordinator {
     weak var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
     private let externalDependencies: ProfileExternalDependency
+    lazy var dataBinding: DataBinding = dependencies.resolve()
     private lazy var dependencies: Dependency = {
         Dependency(external: externalDependencies,
                    coordinator: self)
@@ -35,7 +36,7 @@ final class ProfileCoordinatorImp: Coordinator {
     }
 }
 
-extension ProfileCoordinatorImp: ProfileCoordinator {
+extension ProfileCoordinatorImp {
     func performTransition(_ transition: ProfileTransition) {
         switch transition {
         case .goBackView:
@@ -51,15 +52,20 @@ extension ProfileCoordinatorImp: ProfileCoordinator {
 
 private extension ProfileCoordinatorImp {
     struct Dependency: ProfileDependency {
+        let external: ProfileExternalDependency
+        unowned var coordinator: ProfileCoordinator
+        let dataBinding = DataBindingObject()
+        
         func resolve() -> ProfileCoordinator {
             coordinator
         }
         
-        let external: ProfileExternalDependency
-        unowned var coordinator: ProfileCoordinator
-        
         func resolve() -> ProfileCoordinator? {
             return coordinator
+        }
+        
+        func resolve()  -> DataBinding {
+            return dataBinding
         }
     }
 }

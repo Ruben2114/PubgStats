@@ -9,13 +9,13 @@ import UIKit
 
 protocol ProfileExternalDependency {
     func resolve() -> AppDependencies
-    func profileCoordinator() -> Coordinator
+    func profileCoordinator() -> BindableCoordinator
     func statsGeneralCoordinator(navigation: UINavigationController, type: NavigationStats) -> Coordinator
     func profileNavigationController() -> UINavigationController
 }
 
 extension ProfileExternalDependency {
-    func profileCoordinator() -> Coordinator {
+    func profileCoordinator() -> BindableCoordinator {
         ProfileCoordinatorImp(dependencies: self)
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 protocol MainTabBarExternalDependency {
     func mainTabBarCoordinator(player: String, id: String) -> Coordinator
-    func profileCoordinator() -> Coordinator
+    func profileCoordinator() -> BindableCoordinator
     func favouriteCoordinator() -> Coordinator
     func guideCoordinator() -> Coordinator
     func settingsCoordinator() -> Coordinator

@@ -11,6 +11,7 @@ protocol ProfileDependency {
     func resolve() -> ProfileViewModel
     func resolve() -> ProfileCoordinator?
     //func resolve() -> ProfileDataUseCase
+    func resolve() -> DataBinding
     func resolve() -> ProfileCoordinator
 }
 

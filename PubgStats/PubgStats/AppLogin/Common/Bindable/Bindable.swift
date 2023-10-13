@@ -23,7 +23,6 @@ public protocol DataBindable {
     var dataBinding: DataBinding { get }
 }
 
-
 public protocol Bindable {
     var dataBinding: DataBinding { get }
     func set<T>(_ value: T) -> Self
@@ -39,57 +38,4 @@ public extension Bindable {
     func removeAll() {
         dataBinding.removeAll()
     }
-}
-
-
-@propertyWrapper
-public struct AnyBinding<EnclosingType: DataBindable, Value> {
-    
-    public static subscript(
-        _enclosingInstance instance: EnclosingType,
-        wrapped wrappedKeyPath: ReferenceWritableKeyPath<EnclosingType, Value>,
-        storae storageKeyPath: ReferenceWritableKeyPath<EnclosingType, Self>) -> Value {
-            get {
-                return instance.dataBinding.get() ?? instance[keyPath: storageKeyPath].defaultValue
-            }
-            @available(*, unavailable)
-            set {
-                fatalError()
-            }
-        }
-    
-    @available(*, unavailable)
-    public var wrappedValue: Value {
-        get { fatalError() }
-        set { fatalError() }
-    }
-    
-    let defaultValue: Value
-    
-    public init(defaultValue: Value) {
-        self.defaultValue = defaultValue
-    }
-}
-
-@propertyWrapper
-public struct AnyBindingOptional<EnclosingType: DataBindable, Value: ExpressibleByNilLiteral> {
-    
-    public static subscript(
-        _enclosingInstance instance: EnclosingType,
-        wrapped wrappedKeyPath: ReferenceWritableKeyPath<EnclosingType, Value>,
-        storae storageKeyPath: ReferenceWritableKeyPath<EnclosingType, Self>) -> Value {
-            get {
-                return instance.dataBinding.get() ?? Value(nilLiteral: ())
-            }
-            @available(*, unavailable)
-            set { fatalError() }
-        }
-    
-    @available(*, unavailable)
-    public var wrappedValue: Value {
-        get { fatalError() }
-        set { fatalError() }
-    }
-    
-    public init() {}
 }

@@ -9,7 +9,8 @@ import UIKit
 
 protocol MainTabBarCoordinator: Coordinator { }
 
-final class MainTabBarCoordinatorImp: Coordinator {
+final class MainTabBarCoordinatorImp: MainTabBarCoordinator {
+    lazy var dataBinding: DataBinding = dependencies.resolve()
     weak var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
@@ -17,9 +18,11 @@ final class MainTabBarCoordinatorImp: Coordinator {
     private lazy var dependencies: Dependency = {
         Dependency(external: externalDependencies, coordinator: self)
     }()
+    private var dataProfile: DefaultIdAccountDataProfile?
     
     public init(dependencies: MainTabBarExternalDependency, player: String, id: String) {
         self.externalDependencies = dependencies
+        self.dataProfile = DefaultIdAccountDataProfile(id: id, name: player)
     }
     
     func start() {
@@ -32,7 +35,7 @@ final class MainTabBarCoordinatorImp: Coordinator {
         profileNavController.tabBarItem.title = "profileTabBarItem".localize()
         profileNavController.tabBarItem.image = UIImage(systemName: "person.circle.fill")
         viewControllers.append(profileNavController)
-        profileCoordinator.start()
+        profileCoordinator.set(dataProfile).start()
         append(child: profileCoordinator)
         
         let favouriteCoordinator = dependencies.external.favouriteCoordinator()
@@ -73,14 +76,19 @@ final class MainTabBarCoordinatorImp: Coordinator {
         dependencies.external.favouriteNavigationController().viewControllers = []
     }
 }
-extension MainTabBarCoordinatorImp: MainTabBarCoordinator{ }
+
 private extension MainTabBarCoordinatorImp {
     struct Dependency: MainTabBarDependency {
         let external: MainTabBarExternalDependency
-        weak var coordinator: MainTabBarCoordinator?
+        unowned var coordinator: MainTabBarCoordinator
+        let dataBinding = DataBindingObject()
         
-        func resolve() -> MainTabBarCoordinator? {
+        func resolve() -> MainTabBarCoordinator {
             return coordinator
+        }
+        
+        func resolve() -> DataBinding {
+            dataBinding
         }
     }
 }

@@ -135,6 +135,9 @@
 		8CBC70472AD7D4CF00234420 /* DataGeneralPlayerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC70462AD7D4CF00234420 /* DataGeneralPlayerRepresentable.swift */; };
 		8CBC704A2AD7EBBA00234420 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC70492AD7EBBA00234420 /* Bindable.swift */; };
 		8CBC704C2AD7F3B700234420 /* DataBindingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC704B2AD7F3B700234420 /* DataBindingObject.swift */; };
+		8CC118B82AD979A900839855 /* ScrollableStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC118B72AD979A900839855 /* ScrollableStackView.swift */; };
+		8CC118BA2AD98F1700839855 /* AnyBindingOptional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC118B92AD98F1700839855 /* AnyBindingOptional.swift */; };
+		8CC118BC2AD98F4300839855 /* AnyBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC118BB2AD98F4300839855 /* AnyBinding.swift */; };
 		8CCC92C429E3F8270019BE72 /* FavouriteRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC92C329E3F8270019BE72 /* FavouriteRepositoryImp.swift */; };
 		8CCC92C629E3FC3C0019BE72 /* FavouriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC92C529E3FC3C0019BE72 /* FavouriteRepository.swift */; };
 		8CCC92C829E3FCB70019BE72 /* FavouriteDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC92C729E3FCB70019BE72 /* FavouriteDataUseCase.swift */; };
@@ -328,6 +331,9 @@
 		8CBC70462AD7D4CF00234420 /* DataGeneralPlayerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataGeneralPlayerRepresentable.swift; sourceTree = "<group>"; };
 		8CBC70492AD7EBBA00234420 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		8CBC704B2AD7F3B700234420 /* DataBindingObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBindingObject.swift; sourceTree = "<group>"; };
+		8CC118B72AD979A900839855 /* ScrollableStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableStackView.swift; sourceTree = "<group>"; };
+		8CC118B92AD98F1700839855 /* AnyBindingOptional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyBindingOptional.swift; sourceTree = "<group>"; };
+		8CC118BB2AD98F4300839855 /* AnyBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyBinding.swift; sourceTree = "<group>"; };
 		8CCC92C329E3F8270019BE72 /* FavouriteRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteRepositoryImp.swift; sourceTree = "<group>"; };
 		8CCC92C529E3FC3C0019BE72 /* FavouriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteRepository.swift; sourceTree = "<group>"; };
 		8CCC92C729E3FCB70019BE72 /* FavouriteDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteDataUseCase.swift; sourceTree = "<group>"; };
@@ -672,6 +678,7 @@
 				8C7563E329BB5F17000373F9 /* MessageDisplayable.swift */,
 				8CB39BA629C0917000B1D8EF /* ViewScrollable.swift */,
 				8CA2FE3629F25C8100A4F475 /* StarChartView.swift */,
+				8CC118B72AD979A900839855 /* ScrollableStackView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1444,6 +1451,8 @@
 			children = (
 				8CBC70492AD7EBBA00234420 /* Bindable.swift */,
 				8CBC704B2AD7F3B700234420 /* DataBindingObject.swift */,
+				8CC118B92AD98F1700839855 /* AnyBindingOptional.swift */,
+				8CC118BB2AD98F4300839855 /* AnyBinding.swift */,
 			);
 			path = Bindable;
 			sourceTree = "<group>";
@@ -2026,6 +2035,7 @@
 				465550C629CC3A5600BF932A /* UIViewController+Image.swift in Sources */,
 				8C7563E029BB5E5E000373F9 /* SpinnerDisplayable.swift in Sources */,
 				8CB05FA02A5F4F80000B4092 /* PercentageRectangleView.swift in Sources */,
+				8CC118BC2AD98F4300839855 /* AnyBinding.swift in Sources */,
 				8CB07ED229D1CFF1000EE257 /* StatsGeneralDataUseCase.swift in Sources */,
 				8CB05F972A5F3DF6000B4092 /* InteractiveSectoredPieChartView.swift in Sources */,
 				465550DA29CC513100BF932A /* ProfileExternalDependency.swift in Sources */,
@@ -2050,6 +2060,7 @@
 				8CCC92D829E40F120019BE72 /* SurvivalDataViewController.swift in Sources */,
 				8CAC3E3129C31D4700A1FE34 /* UrlGuide.swift in Sources */,
 				8CEB341429ED6753006C2564 /* InfoAppExternalDependency.swift in Sources */,
+				8CC118B82AD979A900839855 /* ScrollableStackView.swift in Sources */,
 				8CB6396429D235B900763231 /* KillsDataExternalDependency.swift in Sources */,
 				465550C829CC3C1E00BF932A /* UIViewController+Stack.swift in Sources */,
 				8CA9024D29D2BF49004E71D0 /* WeaponDataRepositoryImp.swift in Sources */,
@@ -2066,6 +2077,7 @@
 				8CE9BDD029E59F4500F45D3F /* GamesModesDataDetailExternalDependency.swift in Sources */,
 				8CCC92D629E40EAB0019BE72 /* SurvivalDataViewModel.swift in Sources */,
 				8CB6396D29D244F300763231 /* WeaponDataViewController.swift in Sources */,
+				8CC118BA2AD98F1700839855 /* AnyBindingOptional.swift in Sources */,
 				8CB6396F29D2457300763231 /* WeaponDataViewModel.swift in Sources */,
 				8CE9BDBB29E5815000F45D3F /* GamesModesDataCoordinator.swift in Sources */,
 				461C1F5429CAE59A00540289 /* LoginCoordinator.swift in Sources */,
