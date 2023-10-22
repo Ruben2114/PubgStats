@@ -68,6 +68,7 @@
 		8C9ABF002AD8426000552101 /* LoginViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9ABEFF2AD8426000552101 /* LoginViewModelTest.swift */; };
 		8C9ABF022AD8450100552101 /* LoginDataUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9ABF012AD8450100552101 /* LoginDataUseCaseTest.swift */; };
 		8C9F824229C3CA02003000CD /* HelpDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9F824129C3CA02003000CD /* HelpDataViewController.swift */; };
+		8CA1D2532ADB552800365A5C /* WeaponDataProfileRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1D2522ADB552800365A5C /* WeaponDataProfileRepresentable.swift */; };
 		8CA2FE3729F25C8100A4F475 /* StarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2FE3629F25C8100A4F475 /* StarChartView.swift */; };
 		8CA398AD29B72A1F00C09746 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398AC29B72A1F00C09746 /* AppDelegate.swift */; };
 		8CA398AF29B72A1F00C09746 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398AE29B72A1F00C09746 /* SceneDelegate.swift */; };
@@ -90,7 +91,6 @@
 		8CA9025A29D2F3DD004E71D0 /* WeaponDataDetailDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025929D2F3DD004E71D0 /* WeaponDataDetailDependency.swift */; };
 		8CA9025C29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025B29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift */; };
 		8CA9025E29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025D29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift */; };
-		8CAAB84F29EF3011003D7EE2 /* ItemCellProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAAB84E29EF3011003D7EE2 /* ItemCellProfile.swift */; };
 		8CAC3E2D29C3055300A1FE34 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E2C29C3055300A1FE34 /* GuideViewController.swift */; };
 		8CAC3E2F29C3080600A1FE34 /* GuideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E2E29C3080600A1FE34 /* GuideViewModel.swift */; };
 		8CAC3E3129C31D4700A1FE34 /* UrlGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E3029C31D4700A1FE34 /* UrlGuide.swift */; };
@@ -99,7 +99,6 @@
 		8CB05F972A5F3DF6000B4092 /* InteractiveSectoredPieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB05F962A5F3DF6000B4092 /* InteractiveSectoredPieChartView.swift */; };
 		8CB05F992A5F3E3A000B4092 /* PieChartViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB05F982A5F3E3A000B4092 /* PieChartViewData.swift */; };
 		8CB05F9B2A5F3E50000B4092 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB05F9A2A5F3E50000B4092 /* ChartView.swift */; };
-		8CB05F9E2A5F4EA6000B4092 /* DataGeneralPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB05F9D2A5F4EA6000B4092 /* DataGeneralPlayer.swift */; };
 		8CB05FA02A5F4F80000B4092 /* PercentageRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB05F9F2A5F4F80000B4092 /* PercentageRectangleView.swift */; };
 		8CB05FA22A5F5022000B4092 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB05FA12A5F5022000B4092 /* UILabel.swift */; };
 		8CB07E9629D17347000EE257 /* RemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07E9529D17347000EE257 /* RemoteService.swift */; };
@@ -262,6 +261,7 @@
 		8C9ABEFF2AD8426000552101 /* LoginViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTest.swift; sourceTree = "<group>"; };
 		8C9ABF012AD8450100552101 /* LoginDataUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataUseCaseTest.swift; sourceTree = "<group>"; };
 		8C9F824129C3CA02003000CD /* HelpDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataViewController.swift; sourceTree = "<group>"; };
+		8CA1D2522ADB552800365A5C /* WeaponDataProfileRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataProfileRepresentable.swift; sourceTree = "<group>"; };
 		8CA2FE3629F25C8100A4F475 /* StarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarChartView.swift; sourceTree = "<group>"; };
 		8CA398A929B72A1F00C09746 /* PubgStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PubgStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA398AC29B72A1F00C09746 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -288,7 +288,6 @@
 		8CA9025929D2F3DD004E71D0 /* WeaponDataDetailDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailDependency.swift; sourceTree = "<group>"; };
 		8CA9025B29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailExternalDependency.swift; sourceTree = "<group>"; };
 		8CA9025D29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailCoordinator.swift; sourceTree = "<group>"; };
-		8CAAB84E29EF3011003D7EE2 /* ItemCellProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellProfile.swift; sourceTree = "<group>"; };
 		8CAC3E2C29C3055300A1FE34 /* GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		8CAC3E2E29C3080600A1FE34 /* GuideViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewModel.swift; sourceTree = "<group>"; };
 		8CAC3E3029C31D4700A1FE34 /* UrlGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlGuide.swift; sourceTree = "<group>"; };
@@ -297,7 +296,6 @@
 		8CB05F962A5F3DF6000B4092 /* InteractiveSectoredPieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveSectoredPieChartView.swift; sourceTree = "<group>"; };
 		8CB05F982A5F3E3A000B4092 /* PieChartViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartViewData.swift; sourceTree = "<group>"; };
 		8CB05F9A2A5F3E50000B4092 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
-		8CB05F9D2A5F4EA6000B4092 /* DataGeneralPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataGeneralPlayer.swift; sourceTree = "<group>"; };
 		8CB05F9F2A5F4F80000B4092 /* PercentageRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentageRectangleView.swift; sourceTree = "<group>"; };
 		8CB05FA12A5F5022000B4092 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		8CB07E9529D17347000EE257 /* RemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteService.swift; sourceTree = "<group>"; };
@@ -1176,7 +1174,6 @@
 		8CB05F9C2A5F4E9A000B4092 /* DataGeneralPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				8CB05F9D2A5F4EA6000B4092 /* DataGeneralPlayer.swift */,
 				8CB05F9F2A5F4F80000B4092 /* PercentageRectangleView.swift */,
 			);
 			path = DataGeneralPlayer;
@@ -1326,7 +1323,6 @@
 			isa = PBXGroup;
 			children = (
 				8CB2CEF229C9A87900E79D29 /* ProfileViewModel.swift */,
-				8CAAB84E29EF3011003D7EE2 /* ItemCellProfile.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1448,6 +1444,7 @@
 				8CBC70462AD7D4CF00234420 /* IdAccountDataProfileRepresentable.swift */,
 				8CBC02822AD99C99002449E1 /* SurvivalDataProfileRepresentable.swift */,
 				8CBC02842AD9AA32002449E1 /* GamesModesDataProfileRepresentable.swift */,
+				8CA1D2522ADB552800365A5C /* WeaponDataProfileRepresentable.swift */,
 			);
 			path = Representables;
 			sourceTree = "<group>";
@@ -2012,7 +2009,6 @@
 				465550FC29CC7E8E00BF932A /* GuideCoordinator.swift in Sources */,
 				8CCC92C429E3F8270019BE72 /* FavouriteRepositoryImp.swift in Sources */,
 				8CA9025629D2F2C0004E71D0 /* WeaponDataDetailViewController.swift in Sources */,
-				8CB05F9E2A5F4EA6000B4092 /* DataGeneralPlayer.swift in Sources */,
 				4670EDEC29D4433B00C1062E /* HelpDataExternalDependency.swift in Sources */,
 				461C1F5229CAE35300540289 /* AppDependencies.swift in Sources */,
 				8CA9024B29D2BCB4004E71D0 /* WeaponDataRepository.swift in Sources */,
@@ -2035,11 +2031,11 @@
 				8CE9BDC829E5842000F45D3F /* GamesModesDataRepositoryImp.swift in Sources */,
 				8CE9BDD229E59F9200F45D3F /* GamesModesDataDetailCoordinator.swift in Sources */,
 				8CA9025E29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift in Sources */,
-				8CAAB84F29EF3011003D7EE2 /* ItemCellProfile.swift in Sources */,
 				8CCC92D229E40E240019BE72 /* SurvivalDataExternalDependency.swift in Sources */,
 				8CBC70442AD7D44300234420 /* DataProfleRepositoryImp.swift in Sources */,
 				8CEB341829ED67DF006C2564 /* InfoAppViewModel.swift in Sources */,
 				465550C629CC3A5600BF932A /* UIViewController+Image.swift in Sources */,
+				8CA1D2532ADB552800365A5C /* WeaponDataProfileRepresentable.swift in Sources */,
 				8C7563E029BB5E5E000373F9 /* SpinnerDisplayable.swift in Sources */,
 				8CB05FA02A5F4F80000B4092 /* PercentageRectangleView.swift in Sources */,
 				8CC118BC2AD98F4300839855 /* AnyBinding.swift in Sources */,

@@ -7,6 +7,8 @@
 
 import UIKit
 
+//TODO: refactorizar esta clase, sin didset
+
 class PercentageRectangleView: UIView {
     private let fillLayer = CALayer()
     var percentage: CGFloat = 0 {

@@ -9,9 +9,16 @@ import Foundation
 import Combine
 
 protocol ProfileDataUseCase {
+    func fetchGamesModeData(name: String, account: String, platform: String) -> AnyPublisher<GamesModesDataProfileRepresentable, Error>
 }
 
 struct ProfileDataUseCaseImp: ProfileDataUseCase{
+    private let profileRepository: DataProfleRepository
+    init(dependencies: ProfileDependency) {
+        self.profileRepository = dependencies.external.resolve()
+    }
     
-    
+    func fetchGamesModeData(name: String, account: String, platform: String) -> AnyPublisher<GamesModesDataProfileRepresentable, Error>  {
+        profileRepository.fetchGamesModeData(name: name, account: account, platform: platform).eraseToAnyPublisher()
+    }
 }

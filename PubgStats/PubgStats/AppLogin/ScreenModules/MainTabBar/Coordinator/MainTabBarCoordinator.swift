@@ -18,15 +18,14 @@ final class MainTabBarCoordinatorImp: MainTabBarCoordinator {
     private lazy var dependencies: Dependency = {
         Dependency(external: externalDependencies, coordinator: self)
     }()
-    private var dataProfile: DefaultIdAccountDataProfileRepresentable?
+    private var dataProfile: IdAccountDataProfileRepresentable?
     
-    public init(dependencies: MainTabBarExternalDependency, player: String, id: String) {
+    public init(dependencies: MainTabBarExternalDependency, data: IdAccountDataProfileRepresentable) {
         self.externalDependencies = dependencies
-        self.dataProfile = DefaultIdAccountDataProfileRepresentable(id: id, name: player)
+        self.dataProfile = data
     }
     
     func start() {
-        
         var viewControllers = [UIViewController]()
         
         let profileCoordinator = dependencies.external.profileCoordinator()
@@ -69,11 +68,13 @@ final class MainTabBarCoordinatorImp: MainTabBarCoordinator {
         tabBar.viewControllers = viewControllers
         tabBar.tabBar.backgroundColor = .white
     }
+    
     func dismiss() {
         dependencies.external.settingsNavigationController().viewControllers = []
         dependencies.external.profileNavigationController().viewControllers = []
         dependencies.external.guideNavigationController().viewControllers = []
         dependencies.external.favouriteNavigationController().viewControllers = []
+        childCoordinators.removeAll()
     }
 }
 

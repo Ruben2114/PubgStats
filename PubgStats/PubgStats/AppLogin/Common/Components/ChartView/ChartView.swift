@@ -8,23 +8,23 @@
 import UIKit
 
 final class ChartView: UIView {
-    private var interactiveChart = InteractiveSectoredPieChartView()
-    private var tooltipImageView: UIImageView = {
+    private lazy var interactiveChart: InteractiveSectoredPieChartView = {
+        return InteractiveSectoredPieChartView()
+    }()
+    private lazy var tooltipImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "star")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
-    private var tooltipLabel: UILabel = {
+    private lazy var tooltipLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    var isSingleCell: Bool = false
-    
+        
     func setCellInfo(_ data: PieChartViewData) {
         setAppearance()
         setConstrait()

@@ -8,21 +8,20 @@
 import Foundation
 
 public protocol GamesModesDataProfileRepresentable {
+    var bestRankPoint: Double? { get }
+    var killsTotal: Int { get }
+    var assistsTotal: Int { get }
+    var gamesPlayed: Int { get }
+    var wonTotal: Int { get }
+    var top10STotal: Int { get }
+    var headshotKillsTotal: Int { get }
+    var timePlayed: String { get }
     var duo: StatisticsGameModesRepresentable { get }
     var duoFpp: StatisticsGameModesRepresentable { get }
     var solo: StatisticsGameModesRepresentable { get }
     var soloFpp: StatisticsGameModesRepresentable { get }
     var squad: StatisticsGameModesRepresentable { get }
     var squadFpp: StatisticsGameModesRepresentable { get }
-    var bestRankPoint: String? { get }
-    var killsTotal: String { get }
-    var assistsTotal: String { get }
-    var gamesPlayed: String { get }
-    var wonTotal: String { get }
-    var top10STotal: String { get }
-    var headshotKillsTotal: String { get }
-    var timePlayed: String { get }
-    //TODO: ver que variables las queremos como totales por si quiero mas
 }
 
 public protocol StatisticsGameModesRepresentable {
@@ -59,36 +58,53 @@ public protocol StatisticsGameModesRepresentable {
 }
 
 struct DefaultGamesModesDataProfileRepresentable: GamesModesDataProfileRepresentable {
+    var bestRankPoint: Double?
+    var killsTotal: Int
+    var assistsTotal: Int
+    var gamesPlayed: Int
+    var wonTotal: Int
+    var top10STotal: Int
+    var headshotKillsTotal: Int
+    var timePlayed: String
     var duo: StatisticsGameModesRepresentable
     var duoFpp: StatisticsGameModesRepresentable
     var solo: StatisticsGameModesRepresentable
     var soloFpp: StatisticsGameModesRepresentable
     var squad: StatisticsGameModesRepresentable
     var squadFpp: StatisticsGameModesRepresentable
-    var bestRankPoint: String?
-    var killsTotal: String
-    var assistsTotal: String
-    var gamesPlayed: String
-    var wonTotal: String
-    var top10STotal: String
-    var headshotKillsTotal: String
-    var timePlayed: String
     
     init(_ data: GamesModesDTO) {
+        bestRankPoint = data.bestRank
+        killsTotal = data.killsTotal
+        assistsTotal = data.assistsTotal
+        gamesPlayed = data.gamesPlayed
+        wonTotal = data.wonTotal
+        top10STotal = data.top10STotal
+        headshotKillsTotal = data.headshotKillsTotal
+        timePlayed = data.timePlayed
         duo = DefaultStatisticsGameModesRepresentable(data.duo)
         duoFpp = DefaultStatisticsGameModesRepresentable(data.duoFpp)
         solo = DefaultStatisticsGameModesRepresentable(data.solo)
         soloFpp = DefaultStatisticsGameModesRepresentable(data.soloFpp)
         squad = DefaultStatisticsGameModesRepresentable(data.squad)
         squadFpp = DefaultStatisticsGameModesRepresentable(data.squadFpp)
-        bestRankPoint = String(format: "%.0f", data.bestRank)
-        killsTotal = String(data.killsTotal)
-        assistsTotal = String(data.assistsTotal)
-        gamesPlayed = String(data.gamesPlayed)
-        wonTotal = String(data.wonTotal)
-        top10STotal = String(data.top10STotal)
-        headshotKillsTotal = String(data.headshotKillsTotal)
-        timePlayed = String(data.timePlayed)
+    }
+    
+    init(_ data: [GamesModes]) {
+        solo = DefaultStatisticsGameModesRepresentable(data.first(where: { gamesModes in gamesModes.mode == "solo"}))
+        soloFpp = DefaultStatisticsGameModesRepresentable(data.first(where: { gamesModes in gamesModes.mode == "soloFpp"}))
+        duo = DefaultStatisticsGameModesRepresentable(data.first(where: { gamesModes in gamesModes.mode == "duo"}))
+        duoFpp = DefaultStatisticsGameModesRepresentable(data.first(where: { gamesModes in gamesModes.mode == "duoFpp"}))
+        squad = DefaultStatisticsGameModesRepresentable(data.first(where: { gamesModes in gamesModes.mode == "squad"}))
+        squadFpp = DefaultStatisticsGameModesRepresentable(data.first(where: { gamesModes in gamesModes.mode == "squadFpp"}))
+        bestRankPoint = data.first?.bestRankPoint
+        killsTotal = Int(data.first?.killsTotal ?? 0)
+        assistsTotal = Int(data.first?.assistsTotal ?? 0)
+        gamesPlayed = Int(data.first?.gamesPlayed ?? 0)
+        wonTotal = Int(data.first?.wonTotal ?? 0)
+        top10STotal = Int(data.first?.top10STotal ?? 0)
+        headshotKillsTotal = Int(data.first?.headshotKillsTotal ?? 0)
+        timePlayed = data.first?.timePlayed ?? ""
     }
 }
 
@@ -155,5 +171,38 @@ struct DefaultStatisticsGameModesRepresentable: StatisticsGameModesRepresentable
         weeklyKills = String(data.weeklyKills)
         weeklyWINS = String(data.weeklyWINS)
         wins = String(data.wins)
+    }
+    
+    init(_ data: GamesModes?) {
+        assists = data?.assists.description ?? ""
+        boosts = data?.boosts.description ?? ""
+        dBNOS = data?.dBNOS.description ?? ""
+        dailyKills = data?.dailyKills.description ?? ""
+        dailyWINS = data?.dailyWINS.description ?? ""
+        damageDealt = data?.damageDealt.description ?? ""
+        days = data?.days.description ?? ""
+        headshotKills = data?.headshotKills.description ?? ""
+        heals = data?.heals.description ?? ""
+        kills = data?.kills.description ?? ""
+        longestKill = data?.longestKill.description ?? ""
+        losses = data?.losses.description ?? ""
+        maxKillStreaks = data?.maxKillStreaks.description ?? ""
+        timeSurvived = data?.timeSurvived.description ?? ""
+        mostSurvivalTime = data?.mostSurvivalTime.description ?? ""
+        revives = data?.revives.description ?? ""
+        rideDistance = data?.rideDistance.description ?? ""
+        roadKills = data?.roadKills.description ?? ""
+        roundMostKills = data?.roundMostKills.description ?? ""
+        roundsPlayed = data?.roundsPlayed.description ?? ""
+        suicides = data?.suicides.description ?? ""
+        swimDistance = data?.swimDistance.description ?? ""
+        teamKills = data?.teamKills.description ?? ""
+        top10S = data?.top10S.description ?? ""
+        vehicleDestroys = data?.vehicleDestroys.description ?? ""
+        walkDistance = data?.walkDistance.description ?? ""
+        weaponsAcquired = data?.weaponsAcquired.description ?? ""
+        weeklyKills = data?.weeklyKills.description ?? ""
+        weeklyWINS = data?.weeklyWINS.description ?? ""
+        wins = data?.wins.description ?? ""
     }
 }

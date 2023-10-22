@@ -17,12 +17,12 @@ struct DataProfleRepositoryImp: DataProfleRepository {
     }
     
     func fetchPlayerData(name: String, platform: String) -> AnyPublisher<IdAccountDataProfileRepresentable, Error> {
-        if let cache = self.dataSource.getAccountProfile(player: name), cache.id != nil{
+        if let cache = self.dataSource.getAccountProfile(player: name), !cache.name.isEmpty {
             return Just(cache).setFailureType(to: Error.self).eraseToAnyPublisher()
         }
         return remoteData.getPlayerData(name: name, platform: platform).map { data in
             self.dataSource.save(player: name, account: data.id ?? "", platform: platform)
-            return DefaultIdAccountDataProfileRepresentable(id: data.id, name: data.name)
+            return DefaultIdAccountDataProfileRepresentable(id: data.id ?? "", name: name, platform: platform)
         }.eraseToAnyPublisher()
     }
     
@@ -37,10 +37,22 @@ struct DataProfleRepositoryImp: DataProfleRepository {
     }
     
     func fetchGamesModeData(name: String, account: String, platform: String) -> AnyPublisher<GamesModesDataProfileRepresentable, Error> {
+        if let cache = self.dataSource.getGameMode(player: name, type: .profile), !cache.timePlayed.isEmpty {
+            return Just(cache).setFailureType(to: Error.self).eraseToAnyPublisher()
+        }
         return remoteData.getGamesModesData(account: account, platform: platform).map { data in
             self.dataSource.saveGamesMode(player: name, gamesModeData: data, type: .profile)
             return DefaultGamesModesDataProfileRepresentable(data)
         }.eraseToAnyPublisher()
     }
-
+    
+    func fetchWeaponData(name: String, account: String, platform: String) -> AnyPublisher<WeaponDataProfileRepresentable, Error> {
+        if let cache = self.dataSource.getDataWeaponDetail(player: name, type: .profile), !cache.weaponSummaries.isEmpty {
+            return Just(cache).setFailureType(to: Error.self).eraseToAnyPublisher()
+        }
+        return remoteData.getWeaponData(account: account, platform: platform).map { data in
+            self.dataSource.saveWeaponData(player: name, weaponData: data, type: .profile)
+            return DefaultWeaponDataProfileRepresentable(data.data)
+        }.eraseToAnyPublisher()
+    }
 }

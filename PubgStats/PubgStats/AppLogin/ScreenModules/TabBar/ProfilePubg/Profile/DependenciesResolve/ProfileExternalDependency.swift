@@ -10,6 +10,7 @@ import UIKit
 protocol ProfileExternalDependency {
     func resolve() -> AppDependencies
     func profileCoordinator() -> BindableCoordinator
+    func resolve() -> DataProfleRepository
     func statsGeneralCoordinator(navigation: UINavigationController, type: NavigationStats) -> Coordinator
     func profileNavigationController() -> UINavigationController
 }

@@ -10,7 +10,7 @@ protocol ProfileDependency {
     func resolve() -> ProfileViewController
     func resolve() -> ProfileViewModel
     func resolve() -> ProfileCoordinator?
-    //func resolve() -> ProfileDataUseCase
+    func resolve() -> ProfileDataUseCase
     func resolve() -> DataBinding
     func resolve() -> ProfileCoordinator
 }
@@ -22,5 +22,9 @@ extension ProfileDependency {
     
     func resolve() -> ProfileViewModel {
         ProfileViewModel(dependencies: self)
+    }
+    
+    func resolve() -> ProfileDataUseCase {
+        ProfileDataUseCaseImp(dependencies: self)
     }
 }

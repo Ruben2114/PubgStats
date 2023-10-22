@@ -8,7 +8,7 @@
 import UIKit
 
 public protocol LoginCoordinator: Coordinator {
-    func goToProfile(player: String, id: String)
+    func goToProfile(data: IdAccountDataProfileRepresentable)
 }
 
 final class LoginCoordinatorImp: LoginCoordinator {
@@ -34,10 +34,12 @@ extension LoginCoordinatorImp {
         
     }
     
-    func goToProfile(player: String, id: String) {
+    func goToProfile(data: IdAccountDataProfileRepresentable) {
+        dismiss()
         DispatchQueue.main.async {
-            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewTabCoordinator(player: player, id: id)
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewTabCoordinator(data: data)
         }
+        dependencies.external.loginNavigationController().viewControllers = []
     }
 }
 

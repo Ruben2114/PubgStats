@@ -43,12 +43,12 @@ final class StatsGeneralViewModel {
             fetchData()
             return
         }
-        let dataGamesMode = createDataGeneralPlayer(data: dataGamesModeTotal)
-        dataRadarChart()
-        state.send(.getSurvival(model: survivalData))
-        state.send(.getDataGeneral(model: dataGamesMode))
-        state.send(.getItemRadarChar(title: titleRadarChart, values: valuesRadarChart))
-        state.send(.success)
+        //let dataGamesMode = createDataGeneralPlayer(data: dataGamesModeTotal)
+//        dataRadarChart()
+//        state.send(.getSurvival(model: survivalData))
+//        state.send(.getDataGeneral(model: dataGamesMode))
+//        state.send(.getItemRadarChar(title: titleRadarChart, values: valuesRadarChart))
+//        state.send(.success)
     }
     private func fetchData() {
         let dispatchGroup = DispatchGroup()
@@ -97,20 +97,20 @@ final class StatsGeneralViewModel {
         }
     }
     
-    func createDataGeneralPlayer(data: GamesModes) -> DataGeneralPlayerRepresentable {
-        let percentage = data.wonTotal * 100 / data.gamesPlayed
-        let dataLabel = DataLabel(winsLabel: "\(data.wonTotal)",
-                                  timePlayedLabel: "\(data.timePlayed ?? "0")",
-                                  killsLabel: "\(data.killsTotal)",
-                                  assistsLabel: "\(data.assistsTotal)",
-                                  knocksLabel: "300",
-                                  bestRankedLabel: "\(data.bestRankPoint)",
-                                  gamesPlayedLabel: "\(data.gamesPlayed)",
-                                  dataLabelComplement: nil)
-        var dataPlayer = DataGeneralPlayerRepresentable(percentage: Int(percentage), modeLabel: "General", dataLabel: dataLabel)
-        dataPlayer.gamesLabel += "\(data.gamesPlayed)"
-        dataPlayer.topLabel += "\(data.top10S)"
-        return dataPlayer
+    func createDataGeneralPlayer(data: GamesModes) {
+//        let percentage = data.wonTotal * 100 / data.gamesPlayed
+//        let dataLabel = DataLabel(winsLabel: "\(data.wonTotal)",
+//                                  timePlayedLabel: "\(data.timePlayed ?? "0")",
+//                                  killsLabel: "\(data.killsTotal)",
+//                                  assistsLabel: "\(data.assistsTotal)",
+//                                  knocksLabel: "300",
+//                                  bestRankedLabel: "\(data.bestRankPoint)",
+//                                  gamesPlayedLabel: "\(data.gamesPlayed)",
+//                                  dataLabelComplement: nil)
+//        var dataPlayer = DataGeneralPlayerRepresentable(percentage: Int(percentage), modeLabel: "General", dataLabel: dataLabel)
+//        dataPlayer.gamesLabel += "\(data.gamesPlayed)"
+//        dataPlayer.topLabel += "\(data.top10S)"
+//        return dataPlayer
     }
     
     func dataRadarChart(){

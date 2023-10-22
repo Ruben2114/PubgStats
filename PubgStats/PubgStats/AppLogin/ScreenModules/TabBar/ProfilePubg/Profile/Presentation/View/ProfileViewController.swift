@@ -25,6 +25,10 @@ final class ProfileViewController: UIViewController {
         return view
     }()
     
+    private lazy var chartView: ChartView = {
+        return ChartView()
+    }()
+    
     init(dependencies: ProfileDependency) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
@@ -44,7 +48,7 @@ final class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //crear componente y meter aqui la barra de navegacion
+        //TODO: crear componente y meter aqui la barra de navegacion
     }
 }
 
@@ -67,6 +71,24 @@ private extension ProfileViewController {
             switch state {
             case .idle:
                 break
+            case .sendGamesMode(let gamesModesData):
+                guard let self else { return }
+                self.hideSpinner()
+                print(gamesModesData)
+                self.chartView.setCellInfo(PieChartViewData(centerIconKey: "",
+                                                            centerTitleText: "Prueba",
+                                                            centerSubtitleText: "0",
+                                                             categories: [CategoryRepresentable(percentage: 20, color: .red, secundaryColor: .blue, currentCenterTitleText: "balon", currentSubTitleText: "otro", iconUrl: ""),
+                                                                          CategoryRepresentable(percentage: 40, color: .green, secundaryColor: .yellow, currentCenterTitleText: "pelota", currentSubTitleText: "otro", iconUrl: "")],
+                                                            tooltipLabelTextKey: "prueba de la vista"))
+                self.scrollableStackView.addArrangedSubview(self.chartView)
+                //TODO: enviar info a la view para crearla
+            case .sendGamesModeError:
+                self?.hideSpinner()
+                self?.presentAlert(message: "Error al cagar los datos de los modos de juego", title: "Error")
+            case .showLoading:
+                //TODO: cambiar el spinner por un lottie json
+                self?.showSpinner()
             }
         }.store(in: &cancellable)
     }
@@ -89,3 +111,4 @@ private extension ProfileViewController {
 }
 
 extension ProfileViewController: MessageDisplayable { }
+extension ProfileViewController: SpinnerDisplayable { }

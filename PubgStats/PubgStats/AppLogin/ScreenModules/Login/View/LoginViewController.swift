@@ -74,7 +74,7 @@ private extension LoginViewController {
                 break
             case .sendInfoProfile(let data):
                 self?.hideSpinner()
-                self?.viewModel.goToProfile(player: data.name ?? "", id: data.id ?? "")
+                self?.viewModel.goToProfile(data: data)
             case .sendInfoProfileError:
                 self?.hideSpinner()
                 self?.view.endEditing(true)
@@ -155,15 +155,15 @@ extension LoginViewController {
     @objc func showKeyboard(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         bottomConstraint?.constant = -(keyboardSize.height + self.view.safeAreaInsets.bottom)
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.3) {  [weak self] in
+            self?.view.layoutIfNeeded()
         }
     }
     
     @objc func hideKeyboard(notification: NSNotification) {
         bottomConstraint?.constant = -50
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.view.layoutIfNeeded()
         }
         
     }

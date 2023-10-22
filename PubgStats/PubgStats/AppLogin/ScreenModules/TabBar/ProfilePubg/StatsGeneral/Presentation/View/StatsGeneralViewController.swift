@@ -9,7 +9,6 @@ import UIKit
 import Combine
 
 final class StatsGeneralViewController: UIViewController {
-    private let dataGeneralPlayer = DataGeneralPlayer()
     private lazy var stackView = createStackHorizontalButton(space: 10)
     private lazy var  buttonWeapons = createButtonStack(title: "Weapons", selector: #selector(didTapWeapons))
     private lazy var  buttonSurvival = createButtonStack(title: "Survival", selector: #selector(didTapSurvival))
@@ -74,24 +73,24 @@ final class StatsGeneralViewController: UIViewController {
     private func bind() {
         viewModel.state.receive(on: DispatchQueue.main)
             .sink { [weak self ] state in
-                switch state {
-                case .loading:
-                    self?.showSpinner()
-                case .fail(let error):
-                    self?.presentAlert(message: error, title: "Error")
-                    self?.hideSpinner()
-                case .success:
-                    self?.hideSpinner()
-                case .getSurvival(model: let model):
-                    self?.xpLabel.text = "\(model?.xp ?? "0") XP"
-                    self?.levelLabel.text = "levelLabel".localize() + "\n\(model?.level ?? "0")"
-                case .getDataGeneral(model: let model):
-                    self?.dataGeneralPlayer.build(data: model)
-                case .getName(model: let model):
-                    self?.nameLabel.text = model
-                case .getItemRadarChar(title: let title, values: let values):
-                    self?.radarChartView.reloadRadarChartView(title: title, values: values)
-                }
+//                switch state {
+//                case .loading:
+//                    self?.showSpinner()
+//                case .fail(let error):
+//                    self?.presentAlert(message: error, title: "Error")
+//                    self?.hideSpinner()
+//                case .success:
+//                    self?.hideSpinner()
+//                case .getSurvival(model: let model):
+//                    self?.xpLabel.text = "\(model?.xp ?? "0") XP"
+//                    self?.levelLabel.text = "levelLabel".localize() + "\n\(model?.level ?? "0")"
+//                case .getDataGeneral(model: let model):
+//                    self?.dataGeneralPlayer.build(data: model)
+//                case .getName(model: let model):
+//                    self?.nameLabel.text = model
+//                case .getItemRadarChar(title: let title, values: let values):
+//                    self?.radarChartView.reloadRadarChartView(title: title, values: values)
+//                }
             }.store(in: &cancellable)
         viewModel.viewDidLoad()
     }
@@ -122,82 +121,82 @@ final class StatsGeneralViewController: UIViewController {
     }
     
     private func configConstraints() {
-        contentView.addSubview(levelLabel)
-        levelLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 7).isActive = true
-        levelLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
-        
-        contentView.addSubview(nameLabel)
-        nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 22).isActive = true
-        nameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        
-        contentView.addSubview(xpLabel)
-        xpLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 16).isActive = true
-        xpLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        
-        stackView.addArrangedSubview(buttonWeapons)
-        stackView.addArrangedSubview(buttonSurvival)
-        stackView.addArrangedSubview(buttonModes)
-        contentView.addSubview(stackView)
-        stackView.topAnchor.constraint(equalTo: xpLabel.bottomAnchor, constant: 30).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
-        
-        buttonWeapons.widthAnchor.constraint(equalTo: buttonSurvival.widthAnchor).isActive = true
-        buttonWeapons.widthAnchor.constraint(equalTo: buttonModes.widthAnchor).isActive = true
-        
-        dataGeneralPlayer.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(dataGeneralPlayer)
-        dataGeneralPlayer.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30).isActive = true
-        dataGeneralPlayer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
-        dataGeneralPlayer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
-        
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(scrollView)
-        scrollView.topAnchor.constraint(equalTo: dataGeneralPlayer.bottomAnchor, constant: 30).isActive = true
-        scrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        scrollView.heightAnchor.constraint(equalToConstant: 360).isActive = true
-        
-        scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(interactiveChart.count), height: 360)
-        
-        for index in 0..<interactiveChart.count {
-            let dataGeneralView = ChartView()
-            let info = interactiveChart[index]
-            dataGeneralView.setCellInfo(info)
-            dataGeneralView.translatesAutoresizingMaskIntoConstraints = false
-            scrollView.addSubview(dataGeneralView)
-            dataGeneralView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: CGFloat(index) * view.frame.width + 10).isActive = true
-            dataGeneralView.widthAnchor.constraint(equalToConstant: view.frame.width - 20).isActive = true
-            dataGeneralView.heightAnchor.constraint(equalTo: scrollView.heightAnchor).isActive = true
-        }
-        
-        pageControl.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(pageControl)
-        pageControl.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 10).isActive = true
-        pageControl.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30).isActive = true
-        pageControl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30).isActive = true
-        pageControl.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        
-        contentView.addSubview(radarChartView)
-        radarChartView.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 20).isActive = true
-        radarChartView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        radarChartView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        radarChartView.heightAnchor.constraint(equalToConstant: 300).isActive = true
-        
-        contentView.addSubview(legendButton)
-        legendButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
-        legendButton.bottomAnchor.constraint(equalTo: radarChartView.bottomAnchor).isActive = true
-        
-        contentView.addSubview(helpButton)
-        helpButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
-        helpButton.bottomAnchor.constraint(equalTo: legendButton.topAnchor, constant: -10).isActive = true
-        
-        contentView.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: radarChartView.bottomAnchor, constant: 20).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        tableView.heightAnchor.constraint(equalToConstant: 272).isActive = true
+//        contentView.addSubview(levelLabel)
+//        levelLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 7).isActive = true
+//        levelLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
+//        
+//        contentView.addSubview(nameLabel)
+//        nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 22).isActive = true
+//        nameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+//        
+//        contentView.addSubview(xpLabel)
+//        xpLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 16).isActive = true
+//        xpLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+//        
+//        stackView.addArrangedSubview(buttonWeapons)
+//        stackView.addArrangedSubview(buttonSurvival)
+//        stackView.addArrangedSubview(buttonModes)
+//        contentView.addSubview(stackView)
+//        stackView.topAnchor.constraint(equalTo: xpLabel.bottomAnchor, constant: 30).isActive = true
+//        stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+//        stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+//        
+//        buttonWeapons.widthAnchor.constraint(equalTo: buttonSurvival.widthAnchor).isActive = true
+//        buttonWeapons.widthAnchor.constraint(equalTo: buttonModes.widthAnchor).isActive = true
+//        
+//        dataGeneralPlayer.translatesAutoresizingMaskIntoConstraints = false
+//        contentView.addSubview(dataGeneralPlayer)
+//        dataGeneralPlayer.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30).isActive = true
+//        dataGeneralPlayer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+//        dataGeneralPlayer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+//        
+//        scrollView.translatesAutoresizingMaskIntoConstraints = false
+//        contentView.addSubview(scrollView)
+//        scrollView.topAnchor.constraint(equalTo: dataGeneralPlayer.bottomAnchor, constant: 30).isActive = true
+//        scrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+//        scrollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+//        scrollView.heightAnchor.constraint(equalToConstant: 360).isActive = true
+//        
+//        scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(interactiveChart.count), height: 360)
+//        
+//        for index in 0..<interactiveChart.count {
+//            let dataGeneralView = ChartView()
+//            let info = interactiveChart[index]
+//            dataGeneralView.setCellInfo(info)
+//            dataGeneralView.translatesAutoresizingMaskIntoConstraints = false
+//            scrollView.addSubview(dataGeneralView)
+//            dataGeneralView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: CGFloat(index) * view.frame.width + 10).isActive = true
+//            dataGeneralView.widthAnchor.constraint(equalToConstant: view.frame.width - 20).isActive = true
+//            dataGeneralView.heightAnchor.constraint(equalTo: scrollView.heightAnchor).isActive = true
+//        }
+//        
+//        pageControl.translatesAutoresizingMaskIntoConstraints = false
+//        contentView.addSubview(pageControl)
+//        pageControl.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 10).isActive = true
+//        pageControl.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30).isActive = true
+//        pageControl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30).isActive = true
+//        pageControl.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//        
+//        contentView.addSubview(radarChartView)
+//        radarChartView.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 20).isActive = true
+//        radarChartView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+//        radarChartView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+//        radarChartView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+//        
+//        contentView.addSubview(legendButton)
+//        legendButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+//        legendButton.bottomAnchor.constraint(equalTo: radarChartView.bottomAnchor).isActive = true
+//        
+//        contentView.addSubview(helpButton)
+//        helpButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+//        helpButton.bottomAnchor.constraint(equalTo: legendButton.topAnchor, constant: -10).isActive = true
+//        
+//        contentView.addSubview(tableView)
+//        tableView.topAnchor.constraint(equalTo: radarChartView.bottomAnchor, constant: 20).isActive = true
+//        tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
+//        tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
+//        tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+//        tableView.heightAnchor.constraint(equalToConstant: 272).isActive = true
     }
     @objc private func backButtonAction() {
         viewModel.backButton()

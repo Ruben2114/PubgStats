@@ -31,8 +31,8 @@ final class LoginViewModel {
         subscribeDataGeneralPublisher()
     }
     
-    func goToProfile(player: String, id: String) {
-        coordinator.goToProfile(player: player, id: id)
+    func goToProfile(data: IdAccountDataProfileRepresentable) {
+        coordinator.goToProfile(data: data)
     }
     
     func checkPlayer(player: String, platform: String) {
