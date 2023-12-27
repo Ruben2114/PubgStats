@@ -11,8 +11,8 @@ import Combine
 enum ProfileState {
     case idle
     case sendGamesMode(GamesModesDataProfileRepresentable)
-    case sendGamesModeError
-    case showLoading //TODO: ver donde poner la pantalla de carga
+    case showErrorPlayerDetails
+    case hideLoading
 }
 
 final class ProfileViewModel: DataBindable {
@@ -20,7 +20,7 @@ final class ProfileViewModel: DataBindable {
     private let dependencies: ProfileDependency
     private let stateSubject = CurrentValueSubject<ProfileState, Never>(.idle)
     var state: AnyPublisher<ProfileState, Never>
-    private let getGamesModeSubject = PassthroughSubject<IdAccountDataProfileRepresentable, Never>()
+    private let getPlayerDetailsSubject = PassthroughSubject<IdAccountDataProfileRepresentable, Never>()
     @BindingOptional private var dataProfile: IdAccountDataProfileRepresentable?
   
     init(dependencies: ProfileDependency) {
@@ -33,16 +33,8 @@ final class ProfileViewModel: DataBindable {
     }
     
     func viewDidLoad() {
-        guard let representable = dataProfile else { return }
-        subscribeGamesModePublisher()
-        getGamesModeSubject.send(representable)
-    }
-   
-    func backButton() {
-        coordinator.performTransition(.goBackView)
-    }
-    func didTapStatsgAccountButton() {
-        coordinator.performTransition(.goStatsGeneral)
+        subscribePlayerDetailsPublisher()
+        getPlayerDetailsSubject.send(dataProfile ?? DefaultIdAccountDataProfile(id: "", name: "", platform: ""))
     }
 }
 
@@ -59,16 +51,19 @@ private extension ProfileViewModel {
 
 //MARK: - Subscriptions
 private extension ProfileViewModel {
-    func subscribeGamesModePublisher() {
-        dataGamesModePublisher().sink { [weak self] completion in
+    func subscribePlayerDetailsPublisher() {
+        playerDetailsPublisher().sink { [weak self] completion in
             switch completion {
             case .failure(_):
-                self?.stateSubject.send(.sendGamesModeError)
-                self?.subscribeGamesModePublisher()
+                self?.stateSubject.send(.showErrorPlayerDetails)
+                self?.stateSubject.send(.hideLoading)
+                self?.subscribePlayerDetailsPublisher()
             default: break
             }
         } receiveValue: { [weak self] data in
-            self?.stateSubject.send(.sendGamesMode(data))
+            //TODO: aqui ya tengo toda la info ahora seria ir enviando a las vistas la información
+            self?.stateSubject.send(.sendGamesMode(data.infoGamesModes))
+            self?.stateSubject.send(.hideLoading)
         }.store(in: &anySubscription)
     }
 }
@@ -76,14 +71,10 @@ private extension ProfileViewModel {
 //MARK: - Publishers
 
 private extension ProfileViewModel {
-    func dataGamesModePublisher() -> AnyPublisher<GamesModesDataProfileRepresentable, Error> {
-        return getGamesModeSubject.flatMap { [unowned self] data in
-            self.profileDataUseCase.fetchGamesModeData(name: data.name, account: data.id, platform: data.platform)
+    func playerDetailsPublisher() -> AnyPublisher<PlayerDetailsRepresentable, Error> {
+        return getPlayerDetailsSubject.flatMap { [unowned self] data in
+            self.profileDataUseCase.fetchPlayerDetails(data)
         }.receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 }
-
-
-
-

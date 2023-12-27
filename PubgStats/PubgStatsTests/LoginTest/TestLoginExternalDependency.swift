@@ -20,7 +20,7 @@ final class TestLoginExternalDependency: LoginExternalDependency {
         navigationController
     }
     
-    func resolve() -> DataProfleRepository {
+    func resolve() -> DataProfileRepository {
         MockDataProfleRepository()
     }
 }

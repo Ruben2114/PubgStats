@@ -9,16 +9,38 @@ import Foundation
 import Combine
 
 protocol ProfileDataUseCase {
-    func fetchGamesModeData(name: String, account: String, platform: String) -> AnyPublisher<GamesModesDataProfileRepresentable, Error>
+    func fetchPlayerDetails(_ profile: IdAccountDataProfileRepresentable) -> AnyPublisher<PlayerDetailsRepresentable, Error>
 }
 
-struct ProfileDataUseCaseImp: ProfileDataUseCase{
-    private let profileRepository: DataProfleRepository
+struct ProfileDataUseCaseImp {
+    private let profileRepository: DataProfileRepository
+    
     init(dependencies: ProfileDependency) {
         self.profileRepository = dependencies.external.resolve()
     }
-    
-    func fetchGamesModeData(name: String, account: String, platform: String) -> AnyPublisher<GamesModesDataProfileRepresentable, Error>  {
-        profileRepository.fetchGamesModeData(name: name, account: account, platform: platform).eraseToAnyPublisher()
+}
+
+extension ProfileDataUseCaseImp: ProfileDataUseCase {
+    func fetchPlayerDetails(_ profile: IdAccountDataProfileRepresentable) -> AnyPublisher<PlayerDetailsRepresentable, Error> {
+        return Publishers.CombineLatest3(profileRepository.fetchSurvivalData(representable: profile).eraseToAnyPublisher(),
+                                         profileRepository.fetchGamesModeData(representable: profile).eraseToAnyPublisher(),
+                                         profileRepository.fetchWeaponData(representable: profile).eraseToAnyPublisher())
+        .map { (SurvivalDataProfileRepresentable, GamesModesDataProfileRepresentable, WeaponDataProfileRepresentable) in
+            DefaultPlayerDetails(infoSurvival: SurvivalDataProfileRepresentable,
+                                 infoGamesModes: GamesModesDataProfileRepresentable,
+                                 infoWeapon: WeaponDataProfileRepresentable)
+        }.eraseToAnyPublisher()
     }
+}
+
+protocol PlayerDetailsRepresentable {
+    var infoSurvival: SurvivalDataProfileRepresentable { get }
+    var infoGamesModes: GamesModesDataProfileRepresentable { get }
+    var infoWeapon: WeaponDataProfileRepresentable { get }
+}
+
+struct DefaultPlayerDetails: PlayerDetailsRepresentable {
+    var infoSurvival: SurvivalDataProfileRepresentable
+    var infoGamesModes: GamesModesDataProfileRepresentable
+    var infoWeapon: WeaponDataProfileRepresentable
 }

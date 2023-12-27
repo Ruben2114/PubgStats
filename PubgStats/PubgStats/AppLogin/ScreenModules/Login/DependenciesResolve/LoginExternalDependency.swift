@@ -10,7 +10,7 @@ import UIKit
 protocol LoginExternalDependency {
     func loginCoordinator() -> Coordinator
     func loginNavigationController() -> UINavigationController
-    func resolve() -> DataProfleRepository
+    func resolve() -> DataProfileRepository
 }
 
 extension LoginExternalDependency {

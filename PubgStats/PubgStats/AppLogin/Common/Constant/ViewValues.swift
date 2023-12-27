@@ -12,7 +12,6 @@ struct ViewValues {
     static let doublePadding: CGFloat = 20
     static let multiplierTwo: CGFloat = 2
     static let tagIdentifierSpinner = 123
-    static let opacityContainerSpinner: CGFloat = 1
     static let normalPadding: CGFloat = 10
     static let defaultCornerRadius: CGFloat = 0.6
     static let gradientTitleInit: NSNumber = 0.6

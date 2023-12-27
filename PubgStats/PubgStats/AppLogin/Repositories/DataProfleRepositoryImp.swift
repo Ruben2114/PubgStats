@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-struct DataProfleRepositoryImp: DataProfleRepository {
+struct DataProfleRepositoryImp: DataProfileRepository {
     private let dataSource: LocalDataProfileService
     private let remoteData: RemoteService
     init(dependencies: AppDependencies) {
@@ -26,32 +26,32 @@ struct DataProfleRepositoryImp: DataProfleRepository {
         }.eraseToAnyPublisher()
     }
     
-    func fetchSurvivalData(name: String, account: String, platform: String) -> AnyPublisher<SurvivalDataProfileRepresentable, Error> {
-        if let cache = self.dataSource.getSurvival(player: name, type: .profile), cache.stats.airDropsCalled != nil {
+    func fetchSurvivalData(representable: IdAccountDataProfileRepresentable) -> AnyPublisher<SurvivalDataProfileRepresentable, Error> {
+        if let cache = self.dataSource.getSurvival(player: representable.name, type: .profile), cache.stats.airDropsCalled != nil {
             return Just(cache).setFailureType(to: Error.self).eraseToAnyPublisher()
         }
-        return remoteData.getSurvivalData(account: account, platform: platform).map { data in
-            self.dataSource.saveSurvival(player: name, survivalData: [data], type: .profile)
+        return remoteData.getSurvivalData(account: representable.id, platform: representable.platform).map { data in
+            self.dataSource.saveSurvival(player: representable.name, survivalData: [data], type: .profile)
             return DefaultSurvivalDataProfile(data.data.attributes)
         }.eraseToAnyPublisher()
     }
     
-    func fetchGamesModeData(name: String, account: String, platform: String) -> AnyPublisher<GamesModesDataProfileRepresentable, Error> {
-        if let cache = self.dataSource.getGameMode(player: name, type: .profile), !cache.timePlayed.isEmpty {
+    func fetchGamesModeData(representable: IdAccountDataProfileRepresentable) -> AnyPublisher<GamesModesDataProfileRepresentable, Error> {
+        if let cache = self.dataSource.getGameMode(player: representable.name, type: .profile), !cache.timePlayed.isEmpty {
             return Just(cache).setFailureType(to: Error.self).eraseToAnyPublisher()
         }
-        return remoteData.getGamesModesData(account: account, platform: platform).map { data in
-            self.dataSource.saveGamesMode(player: name, gamesModeData: data, type: .profile)
+        return remoteData.getGamesModesData(account: representable.id, platform: representable.platform).map { data in
+            self.dataSource.saveGamesMode(player: representable.name, gamesModeData: data, type: .profile)
             return DefaultGamesModesDataProfile(data)
         }.eraseToAnyPublisher()
     }
     
-    func fetchWeaponData(name: String, account: String, platform: String) -> AnyPublisher<WeaponDataProfileRepresentable, Error> {
-        if let cache = self.dataSource.getDataWeaponDetail(player: name, type: .profile), !cache.weaponSummaries.isEmpty {
+    func fetchWeaponData(representable: IdAccountDataProfileRepresentable) -> AnyPublisher<WeaponDataProfileRepresentable, Error> {
+        if let cache = self.dataSource.getDataWeaponDetail(player: representable.name, type: .profile), !cache.weaponSummaries.isEmpty {
             return Just(cache).setFailureType(to: Error.self).eraseToAnyPublisher()
         }
-        return remoteData.getWeaponData(account: account, platform: platform).map { data in
-            self.dataSource.saveWeaponData(player: name, weaponData: data, type: .profile)
+        return remoteData.getWeaponData(account: representable.id, platform: representable.platform).map { data in
+            self.dataSource.saveWeaponData(player: representable.name, weaponData: data, type: .profile)
             return DefaultWeaponDataProfile(data.data)
         }.eraseToAnyPublisher()
     }

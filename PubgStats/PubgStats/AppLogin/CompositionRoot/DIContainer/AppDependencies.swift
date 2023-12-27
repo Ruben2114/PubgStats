@@ -30,7 +30,7 @@ struct AppDependencies {
         remoteDataService
     }
     
-    func resolve() -> DataProfleRepository {
+    func resolve() -> DataProfileRepository {
         DataProfleRepositoryImp(dependencies: self)
     }
     

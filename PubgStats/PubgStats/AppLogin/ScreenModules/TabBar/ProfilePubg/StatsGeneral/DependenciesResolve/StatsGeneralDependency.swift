@@ -10,8 +10,6 @@ protocol StatsGeneralDependency {
     func resolve() -> StatsGeneralCoordinator?
     func resolve() -> StatsGeneralViewController
     func resolve() -> StatsGeneralViewModel
-    func resolve() -> StatsGeneralDataUseCase
-    func resolve() -> StatsGeneralRepository
 }
 
 extension StatsGeneralDependency {
@@ -20,11 +18,5 @@ extension StatsGeneralDependency {
     }
     func resolve() -> StatsGeneralViewModel {
         StatsGeneralViewModel(dependencies: self)
-    }
-    func resolve() -> StatsGeneralDataUseCase {
-        StatsGeneralDataUseCaseImp(dependencies: self)
-    }
-    func resolve() -> StatsGeneralRepository {
-        StatsGeneralRepositoryImp(dependencies: self)
     }
 }

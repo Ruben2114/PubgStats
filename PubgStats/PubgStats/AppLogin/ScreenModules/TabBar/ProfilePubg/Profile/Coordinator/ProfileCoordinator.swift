@@ -7,12 +7,8 @@
 
 import UIKit
 
-enum ProfileTransition {
-    case goBackView
-    case goStatsGeneral
-}
 protocol ProfileCoordinator: BindableCoordinator {
-    func performTransition(_ transition: ProfileTransition)
+   
 }
 
 final class ProfileCoordinatorImp: ProfileCoordinator {
@@ -22,45 +18,32 @@ final class ProfileCoordinatorImp: ProfileCoordinator {
     private let externalDependencies: ProfileExternalDependency
     lazy var dataBinding: DataBinding = dependencies.resolve()
     private lazy var dependencies: Dependency = {
-        Dependency(external: externalDependencies,
-                   coordinator: self)
+        Dependency(dependencies: externalDependencies, coordinator: self)
     }()
     
     public init(dependencies: ProfileExternalDependency) {
         self.externalDependencies = dependencies
         self.navigation = dependencies.profileNavigationController()
     }
-    
+}
+
+extension ProfileCoordinatorImp {
     func start() {
         self.navigation?.pushViewController(dependencies.resolve(), animated: true)
     }
 }
 
-extension ProfileCoordinatorImp {
-    func performTransition(_ transition: ProfileTransition) {
-        switch transition {
-        case .goBackView:
-            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewAppCoordinator()
-        case .goStatsGeneral:
-            guard let navigationController = navigation else {return}
-            let statsGeneralCoordinator = dependencies.external.statsGeneralCoordinator(navigation: navigationController, type: .profile)
-            statsGeneralCoordinator.start()
-            append(child: statsGeneralCoordinator)
-        }
-    }
-}
-
 private extension ProfileCoordinatorImp {
     struct Dependency: ProfileDependency {
-        let external: ProfileExternalDependency
-        unowned var coordinator: ProfileCoordinator
+        let dependencies: ProfileExternalDependency
+        unowned let coordinator: ProfileCoordinator
         let dataBinding = DataBindingObject()
         
-        func resolve() -> ProfileCoordinator {
-            coordinator
+        var external: ProfileExternalDependency {
+            return dependencies
         }
         
-        func resolve() -> ProfileCoordinator? {
+        func resolve() -> ProfileCoordinator {
             return coordinator
         }
         

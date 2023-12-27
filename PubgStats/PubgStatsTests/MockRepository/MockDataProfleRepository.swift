@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import PubgStats
 
-struct MockDataProfleRepository: DataProfleRepository {
+struct MockDataProfleRepository: DataProfileRepository {
     func fetchSurvivalData(name: String, account: String, platform: String) -> AnyPublisher<SurvivalDataProfileRepresentable, Error> {
         Just(MockSurvivalDataProfile()).setFailureType(to: Error.self).eraseToAnyPublisher()
     }

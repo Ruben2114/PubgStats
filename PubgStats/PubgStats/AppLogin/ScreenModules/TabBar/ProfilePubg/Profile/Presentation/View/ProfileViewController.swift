@@ -9,11 +9,7 @@ import UIKit
 import Combine
 
 final class ProfileViewController: UIViewController {
-    
-    private let imageView = UIImageView(image: UIImage(named: "backgroundProfile"))
-    private lazy var nameLabel = makeLabelProfile(title: "sessionUser.name", color: .black, font: 20, style: .title2, isBold: true)
-    private lazy var emailLabel = makeLabelProfile(title:" sessionUser.email", color: .black, font: 20, style: .title2, isBold: false)
-    
+
     private var cancellable = Set<AnyCancellable>()
     private let viewModel: ProfileViewModel
     private let dependencies: ProfileDependency
@@ -34,6 +30,7 @@ final class ProfileViewController: UIViewController {
         self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)
     }
+    
     @available(*,unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -45,11 +42,6 @@ final class ProfileViewController: UIViewController {
         bind()
         viewModel.viewDidLoad()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        //TODO: crear componente y meter aqui la barra de navegacion
-    }
 }
 
 private extension ProfileViewController {
@@ -59,11 +51,9 @@ private extension ProfileViewController {
     }
     
     func configView() {
-        navigationItem.title = "profileViewControllerNavigationItem".localize()
-        backButton(action: #selector(backButtonAction))
-        //self.view.backgroundColor = .white
-        self.view.insertSubview(imageView, at: 0)
-        self.imageView.frame = view.bounds
+        configureNavigationBar()
+        view.backgroundColor = .white
+        showSpinner()
     }
     
     func bind() {
@@ -73,40 +63,26 @@ private extension ProfileViewController {
                 break
             case .sendGamesMode(let gamesModesData):
                 guard let self else { return }
-                self.hideSpinner()
-                print(gamesModesData)
                 self.chartView.setCellInfo(PieChartViewData(centerIconKey: "",
                                                             centerTitleText: "Prueba",
                                                             centerSubtitleText: "0",
                                                              categories: [CategoryRepresentable(percentage: 20, color: .red, secundaryColor: .blue, currentCenterTitleText: "balon", currentSubTitleText: "otro", iconUrl: ""),
                                                                           CategoryRepresentable(percentage: 40, color: .green, secundaryColor: .yellow, currentCenterTitleText: "pelota", currentSubTitleText: "otro", iconUrl: "")],
                                                             tooltipLabelTextKey: "prueba de la vista"))
-                self.scrollableStackView.addArrangedSubview(self.chartView)
-                //TODO: enviar info a la view para crearla
-            case .sendGamesModeError:
-                self?.hideSpinner()
+            case .showErrorPlayerDetails:
                 self?.presentAlert(message: "Error al cagar los datos de los modos de juego", title: "Error")
-            case .showLoading:
-                //TODO: cambiar el spinner por un lottie json
-                self?.showSpinner()
+            case .hideLoading:
+                self?.hideSpinner()
             }
         }.store(in: &cancellable)
     }
     
-    func addViewToScrollableStackView() {
-        scrollableStackView.addArrangedSubview(nameLabel)
-        scrollableStackView.addArrangedSubview(emailLabel)
+    func configureNavigationBar() {
+        navigationItem.title = "profileViewControllerNavigationItem".localize()
     }
     
-    @objc func backButtonAction() {
-        let alert = UIAlertController(title: "alertTitle".localize(), message: "profileBackButtonAction".localize(), preferredStyle: .alert)
-        let actionAccept = UIAlertAction(title: "actionAccept".localize(), style: .default) { [weak self]_ in
-            self?.viewModel.backButton()
-        }
-        let actionCancel = UIAlertAction(title: "actionCancel".localize(), style: .destructive)
-        alert.addAction(actionAccept)
-        alert.addAction(actionCancel)
-        present(alert, animated: true)
+    func addViewToScrollableStackView() {
+        scrollableStackView.addArrangedSubview(chartView)
     }
 }
 
