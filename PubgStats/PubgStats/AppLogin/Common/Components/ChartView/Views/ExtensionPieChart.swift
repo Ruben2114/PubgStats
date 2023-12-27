@@ -1,13 +1,14 @@
 //
-//  PieChartViewData.swift
+//  ExtensionPieChart.swift
 //  PubgStats
 //
-//  Created by Ruben Rodriguez on 12/7/23.
+//  Created by Ruben Rodriguez Cervigon on 7/7/23.
 //
 
 import Foundation
 import UIKit
 
+//TODO: refactor con protocol y struct
 struct PieChartViewData {
     var centerIconKey: String
     var centerTitleText: String

@@ -2,7 +2,7 @@
 //  PieChartView.swift
 //  PubgStats
 //
-//  Created by Ruben Rodriguez on 12/7/23.
+//  Created by Ruben Rodriguez Cervigon on 5/7/23.
 //
 
 import Foundation

@@ -13,6 +13,7 @@ final class ProfileViewController: UIViewController {
     private var cancellable = Set<AnyCancellable>()
     private let viewModel: ProfileViewModel
     private let dependencies: ProfileDependency
+    private var reloadButton = UIBarButtonItem()
     private lazy var scrollableStackView: ScrollableStackView = {
         let view = ScrollableStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -21,8 +22,12 @@ final class ProfileViewController: UIViewController {
         return view
     }()
     
-    private lazy var chartView: ChartView = {
-        return ChartView()
+    private lazy var headerView: ProfileHeaderView = {
+        return ProfileHeaderView()
+    }()
+    
+    private lazy var chartView: ChartsInfoView = {
+        return ChartsInfoView()
     }()
     
     init(dependencies: ProfileDependency) {
@@ -57,18 +62,20 @@ private extension ProfileViewController {
     }
     
     func bind() {
+        bindViewModel()
+        bindHeaderView()
+        bindChartView()
+    }
+    
+    func bindViewModel() {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
             switch state {
             case .idle:
                 break
-            case .sendGamesMode(let gamesModesData):
+            case .showChartView(let infoChartView):
                 guard let self else { return }
-                self.chartView.setCellInfo(PieChartViewData(centerIconKey: "",
-                                                            centerTitleText: "Prueba",
-                                                            centerSubtitleText: "0",
-                                                             categories: [CategoryRepresentable(percentage: 20, color: .red, secundaryColor: .blue, currentCenterTitleText: "balon", currentSubTitleText: "otro", iconUrl: ""),
-                                                                          CategoryRepresentable(percentage: 40, color: .green, secundaryColor: .yellow, currentCenterTitleText: "pelota", currentSubTitleText: "otro", iconUrl: "")],
-                                                            tooltipLabelTextKey: "prueba de la vista"))
+                self.chartView.isHidden = infoChartView?.count == 0 ? true : false
+                self.chartView.configureViewWith(DefaultChartViewData(charts: infoChartView ?? [], chartSelectedIndex: 0))
             case .showErrorPlayerDetails:
                 self?.presentAlert(message: "Error al cagar los datos de los modos de juego", title: "Error")
             case .hideLoading:
@@ -77,12 +84,63 @@ private extension ProfileViewController {
         }.store(in: &cancellable)
     }
     
+    func bindChartView() {
+        chartView.publisher.receive(on: DispatchQueue.main).sink { [weak self] state in
+            switch state {
+            case .didSelectChart(let chart):
+                break
+                //TODO: guardar para controlar el chart selecionado
+            case .didTapAverageTooltip:
+                break
+                //TODO: presentar el bottomSheet
+            }
+        }.store(in: &cancellable)
+    }
+    
+    func  bindHeaderView() {
+        headerView.publisher.receive(on: DispatchQueue.main).sink { [weak self] state in
+            switch state {
+            case .didSelectButton(let type):
+                break
+                //TODO: navegar hacia la vista indicada con un switch del type
+            case .didTapHelpTooltip:
+                break
+                //TODO: presentar el bottomSheet
+            }
+        }.store(in: &cancellable)
+    }
+    
     func configureNavigationBar() {
         navigationItem.title = "profileViewControllerNavigationItem".localize()
+        let helpReloadButton = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: #selector(helpReloadButtonAction))
+        reloadButton = UIBarButtonItem(image: UIImage(systemName: "arrow.clockwise.circle.fill"), style: .plain, target: self, action: #selector(reloadButtonAction))
+        self.navigationItem.setRightBarButtonItems([reloadButton, helpReloadButton], animated: true)
     }
     
     func addViewToScrollableStackView() {
+        scrollableStackView.addArrangedSubview(headerView)
+        //TODO: graphView
+        //TODO: totalizatorView
+        //TODO: title chart and image with gesture
         scrollableStackView.addArrangedSubview(chartView)
+        //TODO: matchesView
+    }
+    
+    @objc private func helpReloadButtonAction() {
+        print("mostrar info del reload en un botomsheet")
+    }
+    
+    @objc private func reloadButtonAction() {
+        UserDefaults.standard.set(Date(), forKey: "date")
+         guard UserDefaults.standard.bool(forKey: "refreshCount") == true else {
+             reloadButton.isEnabled = false
+             DispatchQueue.main.asyncAfter(deadline: .now() + 120) { [weak self] in
+                 self?.reloadButton.isEnabled = true
+                 UserDefaults.standard.set(false, forKey: "refreshCount")
+             }
+             viewModel.reload()
+             return
+         }
     }
 }
 

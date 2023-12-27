@@ -31,7 +31,6 @@ public class ScrollableStackView: UIView {
         self.view?.addSubview(scrollView)
         self.setupScrollView()
         self.setupStackView()
-        //self.backgroundColor = UIColor.white
     }
     
     public func setScrollInsect(_ insect: UIEdgeInsets) {

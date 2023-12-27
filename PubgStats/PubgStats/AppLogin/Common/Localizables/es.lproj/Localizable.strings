@@ -71,7 +71,7 @@
 "playerStatsMDLabel" = "Muerte por disparo en la cabeza ";
 "playerStatsKLabel" = "Muertes por partida ";
 "playerStatsDLabel" = "Derrota ";
-"profileViewControllerNavigationItem" = "Perfil Personal";
+"profileViewControllerNavigationItem" = "Detalle del jugador";
 "profileBackButtonAction" = "¿Estas seguro de cerrar sesión?";
 "actionAccept" = "Aceptar";
 "actionCancel" = "Cancelar";

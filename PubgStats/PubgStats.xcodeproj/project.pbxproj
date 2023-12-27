@@ -49,6 +49,26 @@
 		46B0CF2429E7027100BE95EB /* WeaponDataDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B0CF2329E7027100BE95EB /* WeaponDataDetailRepository.swift */; };
 		46B0CF2629E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B0CF2529E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift */; };
 		8C007E3429F1623A0029AF2F /* ItemCellStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C007E3329F1623A0029AF2F /* ItemCellStats.swift */; };
+		8C2460422B3C4E7A00AB98F3 /* ZoomAndSnapFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2460412B3C4E7A00AB98F3 /* ZoomAndSnapFlowLayout.swift */; };
+		8C2460562B3C4F6800AB98F3 /* Chip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2460542B3C4F6800AB98F3 /* Chip.swift */; };
+		8C2460572B3C4F6800AB98F3 /* Chip.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2460552B3C4F6800AB98F3 /* Chip.xib */; };
+		8C24605B2B3C4FD700AB98F3 /* XibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2460592B3C4FD700AB98F3 /* XibView.swift */; };
+		8C24605C2B3C4FD700AB98F3 /* FlameXibButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C24605A2B3C4FD700AB98F3 /* FlameXibButton.swift */; };
+		8C2460602B3C502700AB98F3 /* DoubleChartBarAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C24605E2B3C502700AB98F3 /* DoubleChartBarAdapter.swift */; };
+		8C2460612B3C502700AB98F3 /* DoubleChartBarAdapter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C24605F2B3C502700AB98F3 /* DoubleChartBarAdapter.xib */; };
+		8C2460632B3C503100AB98F3 /* PercentageRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2460622B3C503100AB98F3 /* PercentageRectangleView.swift */; };
+		8C24606A2B3C508100AB98F3 /* ExtensionPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2460682B3C508100AB98F3 /* ExtensionPieChart.swift */; };
+		8C24606B2B3C508100AB98F3 /* InteractiveSectoredPieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2460692B3C508100AB98F3 /* InteractiveSectoredPieChartView.swift */; };
+		8C24606C2B3C508100AB98F3 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2460672B3C508100AB98F3 /* PieChartView.swift */; };
+		8C2460702B3C50A700AB98F3 /* ChartCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C24606E2B3C50A700AB98F3 /* ChartCollectionView.xib */; };
+		8C2460712B3C50A700AB98F3 /* ChartCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C24606F2B3C50A700AB98F3 /* ChartCollectionView.swift */; };
+		8C2460752B3C50B800AB98F3 /* ChartCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2460732B3C50B800AB98F3 /* ChartCollectionViewCell.xib */; };
+		8C2460762B3C50B800AB98F3 /* ChartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2460742B3C50B800AB98F3 /* ChartCollectionViewCell.swift */; };
+		8C24607A2B3C511B00AB98F3 /* ChartsInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2460782B3C511B00AB98F3 /* ChartsInfoView.xib */; };
+		8C24607B2B3C511B00AB98F3 /* ChartsInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2460792B3C511B00AB98F3 /* ChartsInfoView.swift */; };
+		8C24607D2B3C520D00AB98F3 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C24607C2B3C520D00AB98F3 /* State.swift */; };
+		8C2460812B3C6E2500AB98F3 /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C24607F2B3C6E2500AB98F3 /* ProfileHeaderView.xib */; };
+		8C2460822B3C6E2500AB98F3 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2460802B3C6E2500AB98F3 /* ProfileHeaderView.swift */; };
 		8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */; };
 		8C31FDB729C329E500196704 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31FDB629C329E500196704 /* SettingsViewController.swift */; };
 		8C6E9C9429F1560600DE593D /* ItemCellHelpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6E9C9329F1560600DE593D /* ItemCellHelpData.swift */; };
@@ -95,11 +115,6 @@
 		8CAC3E2F29C3080600A1FE34 /* GuideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E2E29C3080600A1FE34 /* GuideViewModel.swift */; };
 		8CAC3E3129C31D4700A1FE34 /* UrlGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E3029C31D4700A1FE34 /* UrlGuide.swift */; };
 		8CAEB02029BB4968009282AF /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAEB01F29BB4968009282AF /* Coordinator.swift */; };
-		8CB05F952A5F3DD6000B4092 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB05F942A5F3DD6000B4092 /* PieChartView.swift */; };
-		8CB05F972A5F3DF6000B4092 /* InteractiveSectoredPieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB05F962A5F3DF6000B4092 /* InteractiveSectoredPieChartView.swift */; };
-		8CB05F992A5F3E3A000B4092 /* PieChartViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB05F982A5F3E3A000B4092 /* PieChartViewData.swift */; };
-		8CB05F9B2A5F3E50000B4092 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB05F9A2A5F3E50000B4092 /* ChartView.swift */; };
-		8CB05FA02A5F4F80000B4092 /* PercentageRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB05F9F2A5F4F80000B4092 /* PercentageRectangleView.swift */; };
 		8CB05FA22A5F5022000B4092 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB05FA12A5F5022000B4092 /* UILabel.swift */; };
 		8CB07E9629D17347000EE257 /* RemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07E9529D17347000EE257 /* RemoteService.swift */; };
 		8CB07EA629D1969A000EE257 /* UIViewController+BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07EA529D1969A000EE257 /* UIViewController+BackButton.swift */; };
@@ -240,6 +255,26 @@
 		46B0CF2329E7027100BE95EB /* WeaponDataDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailRepository.swift; sourceTree = "<group>"; };
 		46B0CF2529E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailRepositoryImp.swift; sourceTree = "<group>"; };
 		8C007E3329F1623A0029AF2F /* ItemCellStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellStats.swift; sourceTree = "<group>"; };
+		8C2460412B3C4E7A00AB98F3 /* ZoomAndSnapFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomAndSnapFlowLayout.swift; sourceTree = "<group>"; };
+		8C2460542B3C4F6800AB98F3 /* Chip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chip.swift; sourceTree = "<group>"; };
+		8C2460552B3C4F6800AB98F3 /* Chip.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Chip.xib; sourceTree = "<group>"; };
+		8C2460592B3C4FD700AB98F3 /* XibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XibView.swift; sourceTree = "<group>"; };
+		8C24605A2B3C4FD700AB98F3 /* FlameXibButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlameXibButton.swift; sourceTree = "<group>"; };
+		8C24605E2B3C502700AB98F3 /* DoubleChartBarAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleChartBarAdapter.swift; sourceTree = "<group>"; };
+		8C24605F2B3C502700AB98F3 /* DoubleChartBarAdapter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DoubleChartBarAdapter.xib; sourceTree = "<group>"; };
+		8C2460622B3C503100AB98F3 /* PercentageRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentageRectangleView.swift; sourceTree = "<group>"; };
+		8C2460672B3C508100AB98F3 /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
+		8C2460682B3C508100AB98F3 /* ExtensionPieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionPieChart.swift; sourceTree = "<group>"; };
+		8C2460692B3C508100AB98F3 /* InteractiveSectoredPieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveSectoredPieChartView.swift; sourceTree = "<group>"; };
+		8C24606E2B3C50A700AB98F3 /* ChartCollectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChartCollectionView.xib; sourceTree = "<group>"; };
+		8C24606F2B3C50A700AB98F3 /* ChartCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartCollectionView.swift; sourceTree = "<group>"; };
+		8C2460732B3C50B800AB98F3 /* ChartCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChartCollectionViewCell.xib; sourceTree = "<group>"; };
+		8C2460742B3C50B800AB98F3 /* ChartCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartCollectionViewCell.swift; sourceTree = "<group>"; };
+		8C2460782B3C511B00AB98F3 /* ChartsInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChartsInfoView.xib; sourceTree = "<group>"; };
+		8C2460792B3C511B00AB98F3 /* ChartsInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartsInfoView.swift; sourceTree = "<group>"; };
+		8C24607C2B3C520D00AB98F3 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		8C24607F2B3C6E2500AB98F3 /* ProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
+		8C2460802B3C6E2500AB98F3 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		8C31FDB629C329E500196704 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8C6E9C9329F1560600DE593D /* ItemCellHelpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellHelpData.swift; sourceTree = "<group>"; };
@@ -290,11 +325,6 @@
 		8CAC3E2E29C3080600A1FE34 /* GuideViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewModel.swift; sourceTree = "<group>"; };
 		8CAC3E3029C31D4700A1FE34 /* UrlGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlGuide.swift; sourceTree = "<group>"; };
 		8CAEB01F29BB4968009282AF /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		8CB05F942A5F3DD6000B4092 /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
-		8CB05F962A5F3DF6000B4092 /* InteractiveSectoredPieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveSectoredPieChartView.swift; sourceTree = "<group>"; };
-		8CB05F982A5F3E3A000B4092 /* PieChartViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartViewData.swift; sourceTree = "<group>"; };
-		8CB05F9A2A5F3E50000B4092 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
-		8CB05F9F2A5F4F80000B4092 /* PercentageRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentageRectangleView.swift; sourceTree = "<group>"; };
 		8CB05FA12A5F5022000B4092 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		8CB07E9529D17347000EE257 /* RemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteService.swift; sourceTree = "<group>"; };
 		8CB07EA529D1969A000EE257 /* UIViewController+BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+BackButton.swift"; sourceTree = "<group>"; };
@@ -425,6 +455,7 @@
 		46151CB529C1B9640054BCEA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8C24607E2B3C6DF600AB98F3 /* Header */,
 				46151CB629C1B9780054BCEA /* ProfileViewController.swift */,
 			);
 			path = View;
@@ -661,6 +692,82 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
+		8C2460532B3C4F4A00AB98F3 /* Chip */ = {
+			isa = PBXGroup;
+			children = (
+				8C2460542B3C4F6800AB98F3 /* Chip.swift */,
+				8C2460552B3C4F6800AB98F3 /* Chip.xib */,
+			);
+			path = Chip;
+			sourceTree = "<group>";
+		};
+		8C2460582B3C4FC800AB98F3 /* XibView */ = {
+			isa = PBXGroup;
+			children = (
+				8C24605A2B3C4FD700AB98F3 /* FlameXibButton.swift */,
+				8C2460592B3C4FD700AB98F3 /* XibView.swift */,
+			);
+			path = XibView;
+			sourceTree = "<group>";
+		};
+		8C24605D2B3C501A00AB98F3 /* DoubleChartBar */ = {
+			isa = PBXGroup;
+			children = (
+				8C24605E2B3C502700AB98F3 /* DoubleChartBarAdapter.swift */,
+				8C24605F2B3C502700AB98F3 /* DoubleChartBarAdapter.xib */,
+			);
+			path = DoubleChartBar;
+			sourceTree = "<group>";
+		};
+		8C2460642B3C506200AB98F3 /* ChartView */ = {
+			isa = PBXGroup;
+			children = (
+				8C2460792B3C511B00AB98F3 /* ChartsInfoView.swift */,
+				8C2460782B3C511B00AB98F3 /* ChartsInfoView.xib */,
+				8C2460772B3C50F900AB98F3 /* Views */,
+				8C24606D2B3C509A00AB98F3 /* Collection */,
+			);
+			path = ChartView;
+			sourceTree = "<group>";
+		};
+		8C24606D2B3C509A00AB98F3 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				8C2460722B3C50AB00AB98F3 /* Cell */,
+				8C24606F2B3C50A700AB98F3 /* ChartCollectionView.swift */,
+				8C24606E2B3C50A700AB98F3 /* ChartCollectionView.xib */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		8C2460722B3C50AB00AB98F3 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8C2460742B3C50B800AB98F3 /* ChartCollectionViewCell.swift */,
+				8C2460732B3C50B800AB98F3 /* ChartCollectionViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		8C2460772B3C50F900AB98F3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8C2460682B3C508100AB98F3 /* ExtensionPieChart.swift */,
+				8C2460692B3C508100AB98F3 /* InteractiveSectoredPieChartView.swift */,
+				8C2460672B3C508100AB98F3 /* PieChartView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8C24607E2B3C6DF600AB98F3 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				8C2460802B3C6E2500AB98F3 /* ProfileHeaderView.swift */,
+				8C24607F2B3C6E2500AB98F3 /* ProfileHeaderView.xib */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
 		8C7563DA29BB5169000373F9 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -680,9 +787,14 @@
 		8C7563DE29BB5E3C000373F9 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				8CB05F9C2A5F4E9A000B4092 /* DataGeneralPlayer */,
-				8CB05F932A5F3D20000B4092 /* ChartView */,
+				8C2460642B3C506200AB98F3 /* ChartView */,
+				8C24605D2B3C501A00AB98F3 /* DoubleChartBar */,
+				8C2460582B3C4FC800AB98F3 /* XibView */,
+				8C2460532B3C4F4A00AB98F3 /* Chip */,
 				8C7563DF29BB5E5E000373F9 /* SpinnerDisplayable.swift */,
+				8C24607C2B3C520D00AB98F3 /* State.swift */,
+				8C2460622B3C503100AB98F3 /* PercentageRectangleView.swift */,
+				8C2460412B3C4E7A00AB98F3 /* ZoomAndSnapFlowLayout.swift */,
 				8C7563E329BB5F17000373F9 /* MessageDisplayable.swift */,
 				8CB39BA629C0917000B1D8EF /* ViewScrollable.swift */,
 				8CA2FE3629F25C8100A4F475 /* StarChartView.swift */,
@@ -1164,25 +1276,6 @@
 				8CA398AC29B72A1F00C09746 /* AppDelegate.swift */,
 			);
 			path = System;
-			sourceTree = "<group>";
-		};
-		8CB05F932A5F3D20000B4092 /* ChartView */ = {
-			isa = PBXGroup;
-			children = (
-				8CB05F942A5F3DD6000B4092 /* PieChartView.swift */,
-				8CB05F962A5F3DF6000B4092 /* InteractiveSectoredPieChartView.swift */,
-				8CB05F982A5F3E3A000B4092 /* PieChartViewData.swift */,
-				8CB05F9A2A5F3E50000B4092 /* ChartView.swift */,
-			);
-			path = ChartView;
-			sourceTree = "<group>";
-		};
-		8CB05F9C2A5F4E9A000B4092 /* DataGeneralPlayer */ = {
-			isa = PBXGroup;
-			children = (
-				8CB05F9F2A5F4F80000B4092 /* PercentageRectangleView.swift */,
-			);
-			path = DataGeneralPlayer;
 			sourceTree = "<group>";
 		};
 		8CB07EAB29D1A577000EE257 /* StatsGeneral */ = {
@@ -1883,10 +1976,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C2460572B3C4F6800AB98F3 /* Chip.xib in Resources */,
+				8C2460702B3C50A700AB98F3 /* ChartCollectionView.xib in Resources */,
 				460ABACF29F7B8D700DD5797 /* Localizable.strings in Resources */,
+				8C24607A2B3C511B00AB98F3 /* ChartsInfoView.xib in Resources */,
 				8CA466C52A14293A00EDF672 /* ItemCollectionViewCell.xib in Resources */,
+				8C2460752B3C50B800AB98F3 /* ChartCollectionViewCell.xib in Resources */,
 				8CA398BC29B72A2000C09746 /* LaunchScreen.storyboard in Resources */,
+				8C2460612B3C502700AB98F3 /* DoubleChartBarAdapter.xib in Resources */,
 				8CA398B929B72A2000C09746 /* Assets.xcassets in Resources */,
+				8C2460812B3C6E2500AB98F3 /* ProfileHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1916,7 +2015,10 @@
 				8CCC92C829E3FCB70019BE72 /* FavouriteDataUseCase.swift in Sources */,
 				8CAEB02029BB4968009282AF /* Coordinator.swift in Sources */,
 				8CE9BDD429E5A01A00F45D3F /* GamesModesDataDetailViewController.swift in Sources */,
+				8C24606A2B3C508100AB98F3 /* ExtensionPieChart.swift in Sources */,
 				8CEB33FE29ED55C2006C2564 /* SettingsViewModel.swift in Sources */,
+				8C24607D2B3C520D00AB98F3 /* State.swift in Sources */,
+				8C2460632B3C503100AB98F3 /* PercentageRectangleView.swift in Sources */,
 				460ABAD429F7E23000DD5797 /* PlayerStats.swift in Sources */,
 				8CB39BAC29C0C88800B1D8EF /* String+Hash.swift in Sources */,
 				8CB07EBA29D1A6EC000EE257 /* StatsGeneralExternalDependency.swift in Sources */,
@@ -1937,6 +2039,7 @@
 				461C1F3E29C9C77C00540289 /* ApiClientService.swift in Sources */,
 				46B0CF2429E7027100BE95EB /* WeaponDataDetailRepository.swift in Sources */,
 				8CE9BDDA29E5B6CF00F45D3F /* KillsDataUseCase.swift in Sources */,
+				8C2460712B3C50A700AB98F3 /* ChartCollectionView.swift in Sources */,
 				8CAC3E2F29C3080600A1FE34 /* GuideViewModel.swift in Sources */,
 				8C7563E429BB5F17000373F9 /* MessageDisplayable.swift in Sources */,
 				8CE9BDAF29E57E4700F45D3F /* SurvivalDataRepositoryImp.swift in Sources */,
@@ -1947,9 +2050,11 @@
 				465550D829CC504100BF932A /* ProfileCoordinator.swift in Sources */,
 				465550FA29CC7E4600BF932A /* GuideExternalDependency.swift in Sources */,
 				8CB6396029D234C500763231 /* KillsDataViewModel.swift in Sources */,
+				8C2460762B3C50B800AB98F3 /* ChartCollectionViewCell.swift in Sources */,
 				8CE9BDCE29E59F1400F45D3F /* GamesModesDataDetailDependency.swift in Sources */,
 				8CB2CEEC29C9A35B00E79D29 /* ApiClientServiceImp.swift in Sources */,
 				8CB07EC829D1B446000EE257 /* GamesModesDTO.swift in Sources */,
+				8C2460602B3C502700AB98F3 /* DoubleChartBarAdapter.swift in Sources */,
 				8CB6395E29D2343C00763231 /* KillsDataViewController.swift in Sources */,
 				8CEB340729ED6183006C2564 /* SettingsDataRepository.swift in Sources */,
 				465926EF29EFCFB300A4091D /* ItemCellSettings.swift in Sources */,
@@ -1963,9 +2068,12 @@
 				8CCC92C429E3F8270019BE72 /* FavouriteRepositoryImp.swift in Sources */,
 				8CA9025629D2F2C0004E71D0 /* WeaponDataDetailViewController.swift in Sources */,
 				4670EDEC29D4433B00C1062E /* HelpDataExternalDependency.swift in Sources */,
+				8C24606C2B3C508100AB98F3 /* PieChartView.swift in Sources */,
 				461C1F5229CAE35300540289 /* AppDependencies.swift in Sources */,
 				8CA9024B29D2BCB4004E71D0 /* WeaponDataRepository.swift in Sources */,
 				8CE9BDAB29E57DD600F45D3F /* SurvivalDataRepository.swift in Sources */,
+				8C2460422B3C4E7A00AB98F3 /* ZoomAndSnapFlowLayout.swift in Sources */,
+				8C24607B2B3C511B00AB98F3 /* ChartsInfoView.swift in Sources */,
 				465550C429CC390200BF932A /* UIViewController+TextField.swift in Sources */,
 				8CE9BDE129E5B77100F45D3F /* KillsDataRepositoryImp.swift in Sources */,
 				8CBC02832AD99C99002449E1 /* SurvivalDataProfileRepresentable.swift in Sources */,
@@ -1990,10 +2098,8 @@
 				465550C629CC3A5600BF932A /* UIViewController+Image.swift in Sources */,
 				8CA1D2532ADB552800365A5C /* WeaponDataProfileRepresentable.swift in Sources */,
 				8C7563E029BB5E5E000373F9 /* SpinnerDisplayable.swift in Sources */,
-				8CB05FA02A5F4F80000B4092 /* PercentageRectangleView.swift in Sources */,
 				8CC118BC2AD98F4300839855 /* AnyBinding.swift in Sources */,
 				8CB07ED229D1CFF1000EE257 /* StatsGeneralDataUseCase.swift in Sources */,
-				8CB05F972A5F3DF6000B4092 /* InteractiveSectoredPieChartView.swift in Sources */,
 				465550DA29CC513100BF932A /* ProfileExternalDependency.swift in Sources */,
 				465550F829CC7DE800BF932A /* GuideDependency.swift in Sources */,
 				465550E729CC700400BF932A /* FavouriteExternalDependency.swift in Sources */,
@@ -2008,9 +2114,10 @@
 				8CEB341229ED6720006C2564 /* InfoAppDependency.swift in Sources */,
 				8CA398AD29B72A1F00C09746 /* AppDelegate.swift in Sources */,
 				8CEB341629ED67C5006C2564 /* InfoAppViewController.swift in Sources */,
+				8C2460562B3C4F6800AB98F3 /* Chip.swift in Sources */,
 				465550DC29CC51DF00BF932A /* ProfileDependency.swift in Sources */,
 				8CB07EA629D1969A000EE257 /* UIViewController+BackButton.swift in Sources */,
-				8CB05F952A5F3DD6000B4092 /* PieChartView.swift in Sources */,
+				8C24606B2B3C508100AB98F3 /* InteractiveSectoredPieChartView.swift in Sources */,
 				8CCC92D029E40DAF0019BE72 /* SurvivalDataCoordinator.swift in Sources */,
 				8CBC02852AD9AA32002449E1 /* GamesModesDataProfileRepresentable.swift in Sources */,
 				8CCC92D829E40F120019BE72 /* SurvivalDataViewController.swift in Sources */,
@@ -2022,13 +2129,13 @@
 				8CA9024D29D2BF49004E71D0 /* WeaponDataRepositoryImp.swift in Sources */,
 				8CAC3E2D29C3055300A1FE34 /* GuideViewController.swift in Sources */,
 				8CB05FA22A5F5022000B4092 /* UILabel.swift in Sources */,
+				8C24605C2B3C4FD700AB98F3 /* FlameXibButton.swift in Sources */,
 				8CBC70422AD7D40E00234420 /* DataProfileRepository.swift in Sources */,
 				8C7563E629BB5FBA000373F9 /* LoginViewModel.swift in Sources */,
 				8CA9024629D2BBF9004E71D0 /* WeaponDataUseCase.swift in Sources */,
 				8C9F824229C3CA02003000CD /* HelpDataViewController.swift in Sources */,
 				461C1F4029C9C86C00540289 /* EndPoint.swift in Sources */,
 				8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */,
-				8CB05F992A5F3E3A000B4092 /* PieChartViewData.swift in Sources */,
 				8CBC70472AD7D4CF00234420 /* IdAccountDataProfileRepresentable.swift in Sources */,
 				8CE9BDD029E59F4500F45D3F /* GamesModesDataDetailExternalDependency.swift in Sources */,
 				8CCC92D629E40EAB0019BE72 /* SurvivalDataViewModel.swift in Sources */,
@@ -2036,8 +2143,10 @@
 				8CC118BA2AD98F1700839855 /* AnyBindingOptional.swift in Sources */,
 				8CB6396F29D2457300763231 /* WeaponDataViewModel.swift in Sources */,
 				8CE9BDBB29E5815000F45D3F /* GamesModesDataCoordinator.swift in Sources */,
+				8C24605B2B3C4FD700AB98F3 /* XibView.swift in Sources */,
 				461C1F5429CAE59A00540289 /* LoginCoordinator.swift in Sources */,
 				8CCC92CA29E407980019BE72 /* UIViewController+TableView.swift in Sources */,
+				8C2460822B3C6E2500AB98F3 /* ProfileHeaderView.swift in Sources */,
 				465550E929CC705200BF932A /* FavouriteDependency.swift in Sources */,
 				46B0CF2629E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift in Sources */,
 				465550FF29CC820A00BF932A /* SettingsDependency.swift in Sources */,
@@ -2060,7 +2169,6 @@
 				8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */,
 				8C6E9C9429F1560600DE593D /* ItemCellHelpData.swift in Sources */,
 				8CB6397129D245B400763231 /* WeaponDataDependency.swift in Sources */,
-				8CB05F9B2A5F3E50000B4092 /* ChartView.swift in Sources */,
 				8CA9025C29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift in Sources */,
 				8CB07E9629D17347000EE257 /* RemoteService.swift in Sources */,
 				8C007E3429F1623A0029AF2F /* ItemCellStats.swift in Sources */,

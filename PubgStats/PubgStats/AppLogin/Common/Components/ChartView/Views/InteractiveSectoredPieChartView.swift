@@ -2,7 +2,7 @@
 //  InteractiveSectoredPieChartView.swift
 //  PubgStats
 //
-//  Created by Ruben Rodriguez on 12/7/23.
+//  Created by Ruben Rodriguez Cervigon on 5/7/23.
 //
 
 import UIKit
@@ -23,18 +23,6 @@ final class InteractiveSectoredPieChartView: PieChartView {
     private var sectorViews = [UIView]()
     private var subscriptions: Set<AnyCancellable> = []
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addGesture()
-        bindButton()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        addGesture()
-        bindButton()
-    }
-    
     override func build() {
         super.build()
         drawSteps.append(drawSelectionArc)
@@ -47,6 +35,16 @@ final class InteractiveSectoredPieChartView: PieChartView {
     
     func setChartInfoInteractive(_ representable: PieChartViewData) {
         super.setChartInfo(representable)
+        bindButton()
+    }
+    
+    func didTapNewView(_ gesture: UIPanGestureRecognizer) {
+        let point: CGPoint = gesture.location(in: self)
+        for sectorPath in paths where sectorPath.path.contains(point) && !innerCircle.contains(point) {
+            selectSectorFor(index: getIndexFor(category: sectorPath.sector))
+            return
+        }
+        selectSectorFor(index: -1)
     }
 }
 
@@ -64,21 +62,6 @@ private extension InteractiveSectoredPieChartView {
     func addSectors() {
         guard selectedSector.status == .notSet else { return }
         drawSectorIcons()
-    }
-    
-    func addGesture() {
-        isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapView(_:)))
-        addGestureRecognizer(tapGesture)
-    }
-
-    @objc func didTapView(_ gesture: UITapGestureRecognizer) {
-        let point: CGPoint = gesture.location(in: self)
-        for sectorPath in paths where sectorPath.path.contains(point) && !innerCircle.contains(point) {
-            selectSectorFor(index: getIndexFor(category: sectorPath.sector))
-            return
-        }
-        selectSectorFor(index: selectedSector.index)
     }
     
     func drawSectorIcons() {
@@ -123,39 +106,15 @@ private extension InteractiveSectoredPieChartView {
     }
     
     func selectSectorFor(index: Int) {
-        let isSectorSelectedAndNotTheCurrentOne = selectedSector.status == .selected &&
-                                                  index != Config.unsetIndex &&
-                                                  selectedSector.index != index
-        let isUnsetedSector = selectedSector.status == .none ||
-                              selectedSector.status == .notSet
-        guard isSectorSelectedAndNotTheCurrentOne else {
-            guard isUnsetedSector else {
-                updateSectorSelected()
-                return
-            }
-            updateSectorSelected(index: index, shouldUpdateText: false)
-            guard selectedSector.status == .selected else { return }
+        selectedSector = index == Config.unsetIndex ? Config.noneSector : (index, .selected)
+        if selectedSector.status == .selected {
             let sector = sectors[index].sector
             currentCenterTitleText = sector.currentCenterTitleText
             currentSubTitleText = sector.currentSubTitleText
-            setNeedsDisplay()
-            return
+        } else {
+            currentCenterTitleText = nil
+            currentSubTitleText = nil
         }
-        let sector = sectors[index].sector
-        let title = sector.currentCenterTitleText
-        let subTitle = sector.currentSubTitleText
-        updateSectorSelected(index: index, title: title, subTitle: subTitle)
-    }
-    
-    func updateSectorSelected(index: Int = Config.unsetIndex,
-                              title: String? = nil,
-                              subTitle: String? = nil,
-                              shouldUpdateText: Bool = true) {
-        if shouldUpdateText {
-            currentCenterTitleText = title
-            currentSubTitleText = subTitle
-        }
-        selectedSector = index == Config.unsetIndex ? Config.noneSector : (index, .selected)
         setNeedsDisplay()
     }
     
@@ -183,9 +142,7 @@ private extension InteractiveSectoredPieChartView {
     func bindButton() {
         publisherButton
             .sink { [weak self] in
-                guard let self = self
-                else { return }
-                selectSectorFor(index: -1)
+                self?.selectSectorFor(index: -1)
         }.store(in: &subscriptions)
     }
 }

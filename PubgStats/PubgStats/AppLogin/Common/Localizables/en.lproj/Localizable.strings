@@ -71,7 +71,7 @@
 "playerStatsMDLabel" = "headshot kills ";
 "playerStatsSLabel" = "Suicides ";
 "playerStatsKLabel" = "Kills per round ";
-"profileViewControllerNavigationItem" = "Personal Profile";
+"profileViewControllerNavigationItem" = "Player detail";
 "profileBackButtonAction" = "Are you sure to logout?";
 "actionAccept" = "Accept";
 "actionCancel" = "Cancel";

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChartsInfoView" customModule="PubgStats" customModuleProvider="target">
+            <connections>
+                <outlet property="chartCollectionHeight" destination="Kd1-pR-0AQ" id="j1Q-ue-lgW"/>
+                <outlet property="chartCollectionView" destination="Ied-D5-6nc" id="T6Z-Df-2Co"/>
+                <outlet property="containerStackView" destination="SI0-Uc-w6n" id="eEi-wH-aHw"/>
+                <outlet property="pageControl" destination="tUC-lM-41x" id="8ch-qA-zHt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SI0-Uc-w6n">
+                    <rect key="frame" x="0.0" y="16" width="414" height="880"/>
+                    <subviews>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ied-D5-6nc" customClass="ChartCollectionView" customModule="PubgStats" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="Kd1-pR-0AQ"/>
+                            </constraints>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Hi8-yR-xgW">
+                                <size key="itemSize" width="128" height="128"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                        </collectionView>
+                        <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="tUC-lM-41x">
+                            <rect key="frame" x="0.0" y="1" width="414" height="879"/>
+                            <connections>
+                                <action selector="pageControlValueChanged:" destination="-1" eventType="valueChanged" id="yCj-gs-PWp"/>
+                            </connections>
+                        </pageControl>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="SI0-Uc-w6n" secondAttribute="trailing" id="89U-1i-8Au"/>
+                <constraint firstItem="SI0-Uc-w6n" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8u1-FW-KUG"/>
+                <constraint firstItem="SI0-Uc-w6n" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="16" id="HjH-Uo-1te"/>
+                <constraint firstAttribute="bottom" secondItem="SI0-Uc-w6n" secondAttribute="bottom" id="jex-TH-pCT"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="33.5" y="54.5"/>
+        </view>
+    </objects>
+</document>
