@@ -9,10 +9,14 @@ import UIKit
 import Combine
 
 class LoginViewController: UIViewController {
-    private lazy var containerStackView = makeStack(space: 20)
-    private lazy var userTextField = makeTextFieldLogin(placeholder: "userTextField".localize(), isSecure: false)
+    private lazy var containerStackView = {
+        makeStack(space: 20)
+    }()
+    private lazy var userTextField = {
+        makeTextFieldLogin(placeholder: "userTextField".localize(), isSecure: false)
+    }()
     private lazy var segmentedControl: UISegmentedControl = {
-        let segmented = UISegmentedControl(items: ["Steam", "Survival"])
+        let segmented = UISegmentedControl(items: ["Steam", "Xbox"])
         segmented.translatesAutoresizingMaskIntoConstraints = false
         segmented.layer.cornerRadius = 15
         segmented.layer.borderColor = UIColor.orange.cgColor
@@ -23,12 +27,14 @@ class LoginViewController: UIViewController {
         segmented.selectedSegmentIndex = 0
         return segmented
     }()
-    private lazy var loginButton: UIButton = makeButtonBlue(title: "titleLoginButton".localize())
-    private lazy var imageView: UIImageView = {
-        return UIImageView(image: UIImage(named: "backgroundPubg"))
+    private lazy var loginButton: UIButton = {
+        makeButtonBlue(title: "titleLoginButton".localize())
     }()
-    private var platform: String = "steam"
+    private lazy var imageView: UIImageView = {
+        UIImageView(image: UIImage(named: "backgroundPubg"))
+    }()
     
+    private var platform: String = "steam"
     private let viewModel: LoginViewModel
     private var dependencies: LoginDependency
     private var cancellable = Set<AnyCancellable>()
@@ -78,6 +84,7 @@ private extension LoginViewController {
             case .sendInfoProfileError:
                 self?.hideSpinner()
                 self?.view.endEditing(true)
+                //TODO: poner localized key
                 self?.presentAlert(message: "El player no existe", title: "Error")
             case .showLoading:
                 //TODO: cambiar el spinner por un lottie json
@@ -148,8 +155,6 @@ extension LoginViewController {
     func addObserverKeyboard() {
         NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        
     }
     
     @objc func showKeyboard(notification: NSNotification) {
@@ -165,8 +170,5 @@ extension LoginViewController {
         UIView.animate(withDuration: 0.3) { [weak self] in
             self?.view.layoutIfNeeded()
         }
-        
     }
 }
-
-

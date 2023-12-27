@@ -154,7 +154,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         fetchRequest.predicate = NSPredicate(format: "player == %@", player)
         do {
             let profile = try context.fetch(fetchRequest)
-            return DefaultIdAccountDataProfileRepresentable(id: profile.first?.account ?? "",
+            return DefaultIdAccountDataProfile(id: profile.first?.account ?? "",
                                                             name: profile.first?.player ?? "",
                                                             platform: profile.first?.platform ?? "")
         } catch {
@@ -167,7 +167,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
         do {
             let profile = try context.fetch(fetchRequest)
-            return DefaultIdAccountDataProfileRepresentable(id: profile.first?.account ?? "",
+            return DefaultIdAccountDataProfile(id: profile.first?.account ?? "",
                                                             name: profile.first?.player ?? "",
                                                             platform: profile.first?.platform ?? "")
         } catch {
@@ -373,7 +373,7 @@ private extension LocalDataProfileServiceImp {
                 return nil
             }
             let gameModes = Array(gameModesSet)
-            return DefaultGamesModesDataProfileRepresentable(gameModes)
+            return DefaultGamesModesDataProfile(gameModes)
             
         } catch {
             print("Error en core data: \(error.localizedDescription)")
@@ -389,7 +389,7 @@ private extension LocalDataProfileServiceImp {
                 return nil
             }
             let weapon = Array(weaponSet)
-            return DefaultWeaponDataProfileRepresentable(weapon)
+            return DefaultWeaponDataProfile(weapon)
         } catch {
             print("Error en core data: \(error.localizedDescription)")
             return nil

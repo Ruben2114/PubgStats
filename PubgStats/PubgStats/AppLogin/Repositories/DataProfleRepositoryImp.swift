@@ -22,7 +22,7 @@ struct DataProfleRepositoryImp: DataProfleRepository {
         }
         return remoteData.getPlayerData(name: name, platform: platform).map { data in
             self.dataSource.save(player: name, account: data.id ?? "", platform: platform)
-            return DefaultIdAccountDataProfileRepresentable(id: data.id ?? "", name: name, platform: platform)
+            return DefaultIdAccountDataProfile(id: data.id ?? "", name: name, platform: platform)
         }.eraseToAnyPublisher()
     }
     
@@ -42,7 +42,7 @@ struct DataProfleRepositoryImp: DataProfleRepository {
         }
         return remoteData.getGamesModesData(account: account, platform: platform).map { data in
             self.dataSource.saveGamesMode(player: name, gamesModeData: data, type: .profile)
-            return DefaultGamesModesDataProfileRepresentable(data)
+            return DefaultGamesModesDataProfile(data)
         }.eraseToAnyPublisher()
     }
     
@@ -52,7 +52,7 @@ struct DataProfleRepositoryImp: DataProfleRepository {
         }
         return remoteData.getWeaponData(account: account, platform: platform).map { data in
             self.dataSource.saveWeaponData(player: name, weaponData: data, type: .profile)
-            return DefaultWeaponDataProfileRepresentable(data.data)
+            return DefaultWeaponDataProfile(data.data)
         }.eraseToAnyPublisher()
     }
 }

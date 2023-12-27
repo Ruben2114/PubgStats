@@ -13,7 +13,7 @@ public protocol IdAccountDataProfileRepresentable {
     var platform: String { get }
 }
 
-struct DefaultIdAccountDataProfileRepresentable: IdAccountDataProfileRepresentable {
+struct DefaultIdAccountDataProfile: IdAccountDataProfileRepresentable {
     var id: String
     var name: String
     var platform: String

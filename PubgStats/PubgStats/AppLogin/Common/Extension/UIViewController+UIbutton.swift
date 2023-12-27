@@ -8,9 +8,7 @@
 import UIKit
 
 extension UIViewController {
-    func makeButtonClear(
-        title: String
-    ) -> UIButton {
+    func makeButtonClear(title: String) -> UIButton {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(title, for: .normal)
@@ -20,9 +18,7 @@ extension UIViewController {
         button.heightAnchor.constraint(equalToConstant: 25).isActive = true
         return button
     }
-    func makeButtonBlue(
-        title: String
-    ) -> UIButton {
+    func makeButtonBlue(title: String) -> UIButton {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(title, for: .normal)
@@ -33,10 +29,7 @@ extension UIViewController {
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return button
     }
-    func makeButtonBlue2(
-        title: String,
-        height: CGFloat
-    ) -> UIButton {
+    func makeButtonBlue2(title: String, height: CGFloat) -> UIButton {
         let button = UIButton(type: .system)
         button.setTitle(title, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -49,9 +42,7 @@ extension UIViewController {
         button.setHeightConstraint(with: height)
         return button
     }
-    func makeButtonCorner(
-        title: String
-    ) -> UIButton {
+    func makeButtonCorner(title: String) -> UIButton {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(title, for: .normal)

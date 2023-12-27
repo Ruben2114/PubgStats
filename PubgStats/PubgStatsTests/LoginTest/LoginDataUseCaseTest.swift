@@ -24,7 +24,7 @@ final class LoginDataUseCaseTest: XCTestCase {
     func test_Given_LoginDataUseCaseTest_When_fetchPlayerData_Then_NotFail() throws {
         let useCase: LoginDataUseCase = dependencies.resolve()
         let _ = useCase.fetchPlayerData(name: "Leyenda21", platform: "steam").map{ data in
-            XCTAssertTrue(data.id != nil)
+            XCTAssertTrue(data.id == "1111")
         }.eraseToAnyPublisher()
     }
 }

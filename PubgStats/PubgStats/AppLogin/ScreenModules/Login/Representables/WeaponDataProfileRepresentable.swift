@@ -19,19 +19,19 @@ public protocol WeaponSummaryRepresentable {
     var statsTotal: [String: Double] { get }
 }
 
-struct DefaultWeaponDataProfileRepresentable: WeaponDataProfileRepresentable {
+struct DefaultWeaponDataProfile: WeaponDataProfileRepresentable {
     var weaponSummaries: [WeaponSummaryRepresentable]
     
     init(_ data: WeaponDataDTO){
-        weaponSummaries = data.attributes.weaponSummaries.compactMap { DefaultWeaponSummaryRepresentable($0) }
+        weaponSummaries = data.attributes.weaponSummaries.compactMap { DefaultWeaponSummary($0) }
     }
     
     init(_ data: [Weapon]){
-        weaponSummaries = data.compactMap { DefaultWeaponSummaryRepresentable($0) }
+        weaponSummaries = data.compactMap { DefaultWeaponSummary($0) }
     }
 }
 
-struct DefaultWeaponSummaryRepresentable: WeaponSummaryRepresentable {
+struct DefaultWeaponSummary: WeaponSummaryRepresentable {
     var name: String
     var xpTotal: Int
     var levelCurrent: Int 

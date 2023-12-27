@@ -30,7 +30,7 @@ final class LoginViewModelTest: XCTestCase {
     
     func test_LoginViewModel_When_goToProfile_Then_goToProfileCalled() throws {
         XCTAssertFalse(dependencies.coordinatorSpy.goToProfileCalled)
-        sut.goToProfile(player: "", id: "")
+        sut.goToProfile(data: DefaultIdAccountDataProfile(id: "", name: "", platform: ""))
         XCTAssertTrue(dependencies.coordinatorSpy.goToProfileCalled)
     }
     

@@ -57,7 +57,7 @@ public protocol StatisticsGameModesRepresentable {
     var wins: String { get }
 }
 
-struct DefaultGamesModesDataProfileRepresentable: GamesModesDataProfileRepresentable {
+struct DefaultGamesModesDataProfile: GamesModesDataProfileRepresentable {
     var bestRankPoint: Double?
     var killsTotal: Int
     var assistsTotal: Int
@@ -82,21 +82,21 @@ struct DefaultGamesModesDataProfileRepresentable: GamesModesDataProfileRepresent
         top10STotal = data.top10STotal
         headshotKillsTotal = data.headshotKillsTotal
         timePlayed = data.timePlayed
-        duo = DefaultStatisticsGameModesRepresentable(data.duo)
-        duoFpp = DefaultStatisticsGameModesRepresentable(data.duoFpp)
-        solo = DefaultStatisticsGameModesRepresentable(data.solo)
-        soloFpp = DefaultStatisticsGameModesRepresentable(data.soloFpp)
-        squad = DefaultStatisticsGameModesRepresentable(data.squad)
-        squadFpp = DefaultStatisticsGameModesRepresentable(data.squadFpp)
+        duo = DefaultStatisticsGameModes(data.duo)
+        duoFpp = DefaultStatisticsGameModes(data.duoFpp)
+        solo = DefaultStatisticsGameModes(data.solo)
+        soloFpp = DefaultStatisticsGameModes(data.soloFpp)
+        squad = DefaultStatisticsGameModes(data.squad)
+        squadFpp = DefaultStatisticsGameModes(data.squadFpp)
     }
     
     init(_ data: [GamesModes]) {
-        solo = DefaultStatisticsGameModesRepresentable(data.first(where: { gamesModes in gamesModes.mode == "solo"}))
-        soloFpp = DefaultStatisticsGameModesRepresentable(data.first(where: { gamesModes in gamesModes.mode == "soloFpp"}))
-        duo = DefaultStatisticsGameModesRepresentable(data.first(where: { gamesModes in gamesModes.mode == "duo"}))
-        duoFpp = DefaultStatisticsGameModesRepresentable(data.first(where: { gamesModes in gamesModes.mode == "duoFpp"}))
-        squad = DefaultStatisticsGameModesRepresentable(data.first(where: { gamesModes in gamesModes.mode == "squad"}))
-        squadFpp = DefaultStatisticsGameModesRepresentable(data.first(where: { gamesModes in gamesModes.mode == "squadFpp"}))
+        solo = DefaultStatisticsGameModes(data.first(where: { gamesModes in gamesModes.mode == "solo"}))
+        soloFpp = DefaultStatisticsGameModes(data.first(where: { gamesModes in gamesModes.mode == "soloFpp"}))
+        duo = DefaultStatisticsGameModes(data.first(where: { gamesModes in gamesModes.mode == "duo"}))
+        duoFpp = DefaultStatisticsGameModes(data.first(where: { gamesModes in gamesModes.mode == "duoFpp"}))
+        squad = DefaultStatisticsGameModes(data.first(where: { gamesModes in gamesModes.mode == "squad"}))
+        squadFpp = DefaultStatisticsGameModes(data.first(where: { gamesModes in gamesModes.mode == "squadFpp"}))
         bestRankPoint = data.first?.bestRankPoint
         killsTotal = Int(data.first?.killsTotal ?? 0)
         assistsTotal = Int(data.first?.assistsTotal ?? 0)
@@ -108,7 +108,7 @@ struct DefaultGamesModesDataProfileRepresentable: GamesModesDataProfileRepresent
     }
 }
 
-struct DefaultStatisticsGameModesRepresentable: StatisticsGameModesRepresentable {
+struct DefaultStatisticsGameModes: StatisticsGameModesRepresentable {
     var assists: String
     var boosts: String
     var dBNOS: String
