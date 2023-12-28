@@ -13,7 +13,7 @@ typealias PieChartPaths = (sector: CategoryRepresentable, path: UIBezierPath)
 typealias PieChartSector = (sector: CategoryRepresentable, startAngle: CGFloat, endAngle: CGFloat)
 
 class PieChartView: UIView {
-    private var representable: PieChartViewData?
+    private var representable: PieChartViewDataRepresentable?
     private var subjectButton = PassthroughSubject<Void, Never>()
     public var publisherButton: AnyPublisher<Void, Never> {
         return subjectButton.eraseToAnyPublisher()
@@ -116,7 +116,7 @@ class PieChartView: UIView {
         ]
     }
     
-    func setChartInfo(_ representable: PieChartViewData) {
+    func setChartInfo(_ representable: PieChartViewDataRepresentable) {
         self.categories = representable.categories
         self.representable = representable
         self.centerIcon = UIImage(systemName: representable.centerIconKey)

@@ -69,6 +69,8 @@
 		8C24607D2B3C520D00AB98F3 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C24607C2B3C520D00AB98F3 /* State.swift */; };
 		8C2460812B3C6E2500AB98F3 /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C24607F2B3C6E2500AB98F3 /* ProfileHeaderView.xib */; };
 		8C2460822B3C6E2500AB98F3 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2460802B3C6E2500AB98F3 /* ProfileHeaderView.swift */; };
+		8C2460862B3C8F5F00AB98F3 /* GraphInfoModesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2460842B3C8F5F00AB98F3 /* GraphInfoModesView.swift */; };
+		8C2460872B3C8F5F00AB98F3 /* GraphInfoModesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2460852B3C8F5F00AB98F3 /* GraphInfoModesView.xib */; };
 		8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */; };
 		8C31FDB729C329E500196704 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31FDB629C329E500196704 /* SettingsViewController.swift */; };
 		8C6E9C9429F1560600DE593D /* ItemCellHelpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6E9C9329F1560600DE593D /* ItemCellHelpData.swift */; };
@@ -111,6 +113,8 @@
 		8CA9025A29D2F3DD004E71D0 /* WeaponDataDetailDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025929D2F3DD004E71D0 /* WeaponDataDetailDependency.swift */; };
 		8CA9025C29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025B29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift */; };
 		8CA9025E29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025D29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift */; };
+		8CA97A312B3DDD83006D10AE /* DoubleChartBarAdapterRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA97A302B3DDD83006D10AE /* DoubleChartBarAdapterRepresentable.swift */; };
+		8CA97A332B3DDE42006D10AE /* GraphInfoModesRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA97A322B3DDE42006D10AE /* GraphInfoModesRepresentable.swift */; };
 		8CAC3E2D29C3055300A1FE34 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E2C29C3055300A1FE34 /* GuideViewController.swift */; };
 		8CAC3E2F29C3080600A1FE34 /* GuideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E2E29C3080600A1FE34 /* GuideViewModel.swift */; };
 		8CAC3E3129C31D4700A1FE34 /* UrlGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E3029C31D4700A1FE34 /* UrlGuide.swift */; };
@@ -275,6 +279,8 @@
 		8C24607C2B3C520D00AB98F3 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		8C24607F2B3C6E2500AB98F3 /* ProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		8C2460802B3C6E2500AB98F3 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		8C2460842B3C8F5F00AB98F3 /* GraphInfoModesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphInfoModesView.swift; sourceTree = "<group>"; };
+		8C2460852B3C8F5F00AB98F3 /* GraphInfoModesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GraphInfoModesView.xib; sourceTree = "<group>"; };
 		8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		8C31FDB629C329E500196704 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8C6E9C9329F1560600DE593D /* ItemCellHelpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellHelpData.swift; sourceTree = "<group>"; };
@@ -321,6 +327,8 @@
 		8CA9025929D2F3DD004E71D0 /* WeaponDataDetailDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailDependency.swift; sourceTree = "<group>"; };
 		8CA9025B29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailExternalDependency.swift; sourceTree = "<group>"; };
 		8CA9025D29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailCoordinator.swift; sourceTree = "<group>"; };
+		8CA97A302B3DDD83006D10AE /* DoubleChartBarAdapterRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleChartBarAdapterRepresentable.swift; sourceTree = "<group>"; };
+		8CA97A322B3DDE42006D10AE /* GraphInfoModesRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphInfoModesRepresentable.swift; sourceTree = "<group>"; };
 		8CAC3E2C29C3055300A1FE34 /* GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		8CAC3E2E29C3080600A1FE34 /* GuideViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewModel.swift; sourceTree = "<group>"; };
 		8CAC3E3029C31D4700A1FE34 /* UrlGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlGuide.swift; sourceTree = "<group>"; };
@@ -455,6 +463,7 @@
 		46151CB529C1B9640054BCEA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8C2460832B3C8F3A00AB98F3 /* GraphInfoModesView */,
 				8C24607E2B3C6DF600AB98F3 /* Header */,
 				46151CB629C1B9780054BCEA /* ProfileViewController.swift */,
 			);
@@ -715,6 +724,7 @@
 			children = (
 				8C24605E2B3C502700AB98F3 /* DoubleChartBarAdapter.swift */,
 				8C24605F2B3C502700AB98F3 /* DoubleChartBarAdapter.xib */,
+				8CA97A302B3DDD83006D10AE /* DoubleChartBarAdapterRepresentable.swift */,
 			);
 			path = DoubleChartBar;
 			sourceTree = "<group>";
@@ -766,6 +776,15 @@
 				8C24607F2B3C6E2500AB98F3 /* ProfileHeaderView.xib */,
 			);
 			path = Header;
+			sourceTree = "<group>";
+		};
+		8C2460832B3C8F3A00AB98F3 /* GraphInfoModesView */ = {
+			isa = PBXGroup;
+			children = (
+				8C2460842B3C8F5F00AB98F3 /* GraphInfoModesView.swift */,
+				8C2460852B3C8F5F00AB98F3 /* GraphInfoModesView.xib */,
+			);
+			path = GraphInfoModesView;
 			sourceTree = "<group>";
 		};
 		8C7563DA29BB5169000373F9 /* View */ = {
@@ -1024,6 +1043,14 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		8CA97A2D2B3DDA8B006D10AE /* Representables */ = {
+			isa = PBXGroup;
+			children = (
+				8CA97A322B3DDE42006D10AE /* GraphInfoModesRepresentable.swift */,
+			);
+			path = Representables;
+			sourceTree = "<group>";
+		};
 		8CAC3E2229C303A000A1FE34 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1038,10 +1065,12 @@
 		8CAC3E2329C303C800A1FE34 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				8CA97A2D2B3DDA8B006D10AE /* Representables */,
 				465550D629CC500200BF932A /* DependenciesResolve */,
 				465550D529CC4FFA00BF932A /* Coordinator */,
-				8CB2CEE629C9A20700E79D29 /* Domain */,
-				8CB2CEE429C9A1FB00E79D29 /* Presentation */,
+				461C1F4229C9F67000540289 /* UseCase */,
+				8CB2CEE729C9A22500E79D29 /* ViewModel */,
+				46151CB529C1B9640054BCEA /* View */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1347,23 +1376,6 @@
 				8CB07ED129D1CFF1000EE257 /* StatsGeneralDataUseCase.swift */,
 			);
 			path = UseCase;
-			sourceTree = "<group>";
-		};
-		8CB2CEE429C9A1FB00E79D29 /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				8CB2CEE729C9A22500E79D29 /* ViewModel */,
-				46151CB529C1B9640054BCEA /* View */,
-			);
-			path = Presentation;
-			sourceTree = "<group>";
-		};
-		8CB2CEE629C9A20700E79D29 /* Domain */ = {
-			isa = PBXGroup;
-			children = (
-				461C1F4229C9F67000540289 /* UseCase */,
-			);
-			path = Domain;
 			sourceTree = "<group>";
 		};
 		8CB2CEE729C9A22500E79D29 /* ViewModel */ = {
@@ -1985,6 +1997,7 @@
 				8CA398BC29B72A2000C09746 /* LaunchScreen.storyboard in Resources */,
 				8C2460612B3C502700AB98F3 /* DoubleChartBarAdapter.xib in Resources */,
 				8CA398B929B72A2000C09746 /* Assets.xcassets in Resources */,
+				8C2460872B3C8F5F00AB98F3 /* GraphInfoModesView.xib in Resources */,
 				8C2460812B3C6E2500AB98F3 /* ProfileHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2052,8 +2065,10 @@
 				8CB6396029D234C500763231 /* KillsDataViewModel.swift in Sources */,
 				8C2460762B3C50B800AB98F3 /* ChartCollectionViewCell.swift in Sources */,
 				8CE9BDCE29E59F1400F45D3F /* GamesModesDataDetailDependency.swift in Sources */,
+				8CA97A332B3DDE42006D10AE /* GraphInfoModesRepresentable.swift in Sources */,
 				8CB2CEEC29C9A35B00E79D29 /* ApiClientServiceImp.swift in Sources */,
 				8CB07EC829D1B446000EE257 /* GamesModesDTO.swift in Sources */,
+				8C2460862B3C8F5F00AB98F3 /* GraphInfoModesView.swift in Sources */,
 				8C2460602B3C502700AB98F3 /* DoubleChartBarAdapter.swift in Sources */,
 				8CB6395E29D2343C00763231 /* KillsDataViewController.swift in Sources */,
 				8CEB340729ED6183006C2564 /* SettingsDataRepository.swift in Sources */,
@@ -2078,6 +2093,7 @@
 				8CE9BDE129E5B77100F45D3F /* KillsDataRepositoryImp.swift in Sources */,
 				8CBC02832AD99C99002449E1 /* SurvivalDataProfileRepresentable.swift in Sources */,
 				8CB6396229D2356B00763231 /* KillsDataDependency.swift in Sources */,
+				8CA97A312B3DDD83006D10AE /* DoubleChartBarAdapterRepresentable.swift in Sources */,
 				8C9A32AB29DDB39500F81B34 /* FavouriteViewModel.swift in Sources */,
 				8CBC704A2AD7EBBA00234420 /* Bindable.swift in Sources */,
 				8CD7CD6F29BF04E200C57346 /* Profile.xcdatamodeld in Sources */,

@@ -26,6 +26,10 @@ final class ProfileViewController: UIViewController {
         return ProfileHeaderView()
     }()
     
+    private lazy var graphView: GraphInfoModesView = {
+        return GraphInfoModesView()
+    }()
+    
     private lazy var chartView: ChartsInfoView = {
         return ChartsInfoView()
     }()
@@ -80,6 +84,8 @@ private extension ProfileViewController {
                 self?.presentAlert(message: "Error al cagar los datos de los modos de juego", title: "Error")
             case .hideLoading:
                 self?.hideSpinner()
+            case .showGraphView(let data):
+                self?.graphView.configureWith(representable: data)
             }
         }.store(in: &cancellable)
     }
@@ -119,7 +125,7 @@ private extension ProfileViewController {
     
     func addViewToScrollableStackView() {
         scrollableStackView.addArrangedSubview(headerView)
-        //TODO: graphView
+        scrollableStackView.addArrangedSubview(graphView)
         //TODO: totalizatorView
         //TODO: title chart and image with gesture
         scrollableStackView.addArrangedSubview(chartView)

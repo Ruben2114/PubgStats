@@ -39,22 +39,6 @@ final class StatsGeneralViewController: UIViewController {
     
     private let scrollView = UIScrollView()
     private let pageControl = UIPageControl()
-    //TODO: esto al viewModel
-    private var interactiveChart = [
-        PieChartViewData(centerIconKey: "star", centerTitleText: "2552", centerSubtitleText: "Kills Total", categories: [
-            CategoryRepresentable(percentage: 60, color: .red, secundaryColor: .systemRed, currentCenterTitleText: "1111", currentSubTitleText: "TItle1", iconUrl: "star"),
-            CategoryRepresentable(percentage: 30, color: .blue, secundaryColor: .systemBlue, currentCenterTitleText: "2222", currentSubTitleText: "TItle2", iconUrl: "star"),
-            CategoryRepresentable(percentage: 10, color: .yellow, secundaryColor: .systemYellow, currentCenterTitleText: "3333", currentSubTitleText: "Muerte por disparo en la cabeza", iconUrl: "star")
-        ], tooltipLabelTextKey: "Gráfica de las muertes totales"),
-        PieChartViewData(centerIconKey: "star", centerTitleText: "10000", centerSubtitleText: "Muerte por disparo en la cabeza", categories: [
-            CategoryRepresentable(percentage: 10, color: .gray, secundaryColor: .systemGray, currentCenterTitleText: "1000", currentSubTitleText: "Modo Solo", iconUrl: "star"),
-            CategoryRepresentable(percentage: 30, color: .blue, secundaryColor: .systemBlue, currentCenterTitleText: "3000", currentSubTitleText: "Modo Duo", iconUrl: "star"),
-            CategoryRepresentable(percentage: 20, color: .red, secundaryColor: .systemRed, currentCenterTitleText: "2000", currentSubTitleText: "Modo Squad", iconUrl: "star"),
-            CategoryRepresentable(percentage: 10, color: .green, secundaryColor: .systemGreen, currentCenterTitleText: "1000", currentSubTitleText: "Modo Solo FPP", iconUrl: "star"),
-            CategoryRepresentable(percentage: 20, color: .brown, secundaryColor: .systemBrown, currentCenterTitleText: "2000", currentSubTitleText: "Modo Duo FPP", iconUrl: "star"),
-            CategoryRepresentable(percentage: 10, color: .yellow, secundaryColor: .systemYellow, currentCenterTitleText: "1000", currentSubTitleText: "Modo Squad FPP", iconUrl: "star")
-        ], tooltipLabelTextKey: "Gráfica de las partidas por modos de juego")
-    ]
     
     init(dependencies: StatsGeneralDependency) {
         self.dependencies = dependencies
@@ -109,7 +93,7 @@ final class StatsGeneralViewController: UIViewController {
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.delegate = self
 
-        pageControl.numberOfPages = interactiveChart.count
+        pageControl.numberOfPages = 2
         pageControl.currentPage = 0
         pageControl.backgroundColor = .red
         pageControl.addTarget(self, action: #selector(pageControlDidChange(_:)), for: .valueChanged)

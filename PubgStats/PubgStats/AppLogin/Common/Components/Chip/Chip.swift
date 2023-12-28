@@ -62,13 +62,6 @@ public final class Chip: FlameXibButton {
     func setLeftImage(_ image: UIImage?) {
         self.leftImageView?.image = image?.withRenderingMode(.alwaysTemplate)
     }
-    
-    func addTarget(selector: Selector) {
-        
-    }
-    @objc func tapInsideModesChip() {
-        subject.send()
-    }
 }
 
 private extension Chip {
@@ -77,7 +70,7 @@ private extension Chip {
         self.leftImageView?.isHidden = true
         self.rightImageView?.isHidden = true
         self.roundedView.isUserInteractionEnabled = true
-        self.roundedView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapInsideModesChip)))
+        self.roundedView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapInsideChip)))
         self.setViewData(viewData: self.viewData)
     }
     
@@ -141,6 +134,10 @@ private extension Chip {
     
     func setRemoveIcon() {
         self.rightImageView?.image = UIImage(systemName: "star")?.withRenderingMode(.alwaysTemplate)
+    }
+    
+    @objc func tapInsideChip() {
+        subject.send()
     }
 }
 

@@ -67,6 +67,28 @@ extension UIView {
         translatesAutoresizingMaskIntoConstraints = false
         widthAnchor.constraint(equalToConstant: width).isActive = true
     }
+    
+    func embedIntoCenter() -> UIView {
+        let container = UIView()
+        container.addSubview(self)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
+        self.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
+        self.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
+        return container
+    }
+    
+    @discardableResult
+    func roundCorners(corners: UIRectCorner,
+                      radius: CGFloat) -> CAShapeLayer {
+        let path = UIBezierPath(roundedRect: bounds,
+                                byRoundingCorners: corners,
+                                cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        layer.mask = mask
+        return mask
+    }
 }
 
 extension CGRect {

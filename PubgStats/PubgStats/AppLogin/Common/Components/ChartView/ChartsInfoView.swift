@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 enum ChartsInfoViewState: State {
-    case didSelectChart(PieChartViewData)
+    case didSelectChart(PieChartViewDataRepresentable)
     case didTapAverageTooltip
 }
 

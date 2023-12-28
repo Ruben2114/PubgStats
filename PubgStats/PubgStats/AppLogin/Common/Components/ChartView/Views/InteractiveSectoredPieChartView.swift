@@ -33,7 +33,7 @@ final class InteractiveSectoredPieChartView: PieChartView {
         self.resolveColorFor(category: category, color: category.color)
     }
     
-    func setChartInfoInteractive(_ representable: PieChartViewData) {
+    func setChartInfoInteractive(_ representable: PieChartViewDataRepresentable) {
         super.setChartInfo(representable)
         bindButton()
     }
@@ -81,7 +81,7 @@ private extension InteractiveSectoredPieChartView {
         self.sectorViews.append(view)
         let imgView = UIImageView(frame: view.frame)
         imgView.contentMode = .scaleAspectFit
-        imgView.image = UIImage(systemName: category.iconUrl)
+        imgView.image = UIImage(systemName: category.icon)
         view.addSubview(imgView)
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true

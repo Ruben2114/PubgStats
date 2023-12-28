@@ -2,15 +2,15 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DoubleChartBarAdapter" customModule="PruebaVistas" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DoubleChartBarAdapter" customModule="PubgStats" customModuleProvider="target">
             <connections>
                 <outlet property="barsStackView" destination="hBT-sX-v0u" id="SRX-oW-AdU"/>
-                <outlet property="baselineView" destination="RHe-ce-Pej" id="u1V-cW-xmu"/>
                 <outlet property="firstBarHeightConstraint" destination="Wdh-HV-l1k" id="q5F-Uj-6fh"/>
                 <outlet property="firstBarView" destination="t1q-Sc-lFM" id="pjD-iM-35f"/>
                 <outlet property="secondBarContainerView" destination="DOr-AR-Hah" id="VdD-Ux-1TG"/>
@@ -72,22 +72,12 @@
                                 </view>
                             </subviews>
                         </stackView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RHe-ce-Pej" userLabel="Baseline View">
-                            <rect key="frame" x="0.0" y="47" width="56" height="1"/>
-                            <color key="backgroundColor" systemColor="systemTealColor"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="1" id="uhM-k1-grM"/>
-                            </constraints>
-                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="56" id="1WM-YE-UsG"/>
                         <constraint firstItem="hBT-sX-v0u" firstAttribute="centerX" secondItem="Jlp-2w-2Kc" secondAttribute="centerX" id="2re-nn-2Cj"/>
-                        <constraint firstItem="RHe-ce-Pej" firstAttribute="leading" secondItem="Jlp-2w-2Kc" secondAttribute="leading" id="SMv-jX-1Qv"/>
                         <constraint firstAttribute="bottom" secondItem="hBT-sX-v0u" secondAttribute="bottom" id="iHZ-2a-6eE"/>
-                        <constraint firstAttribute="trailing" secondItem="RHe-ce-Pej" secondAttribute="trailing" id="ixI-uQ-Gfn"/>
-                        <constraint firstAttribute="bottom" secondItem="RHe-ce-Pej" secondAttribute="bottom" id="qWH-jV-hV0"/>
                         <constraint firstAttribute="height" constant="48" id="qiI-Pe-bOT"/>
                         <constraint firstItem="hBT-sX-v0u" firstAttribute="top" secondItem="Jlp-2w-2Kc" secondAttribute="top" id="r8t-dQ-0yd"/>
                         <constraint firstItem="hBT-sX-v0u" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Jlp-2w-2Kc" secondAttribute="leading" constant="8" id="vY5-be-VdS"/>
@@ -112,9 +102,6 @@
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

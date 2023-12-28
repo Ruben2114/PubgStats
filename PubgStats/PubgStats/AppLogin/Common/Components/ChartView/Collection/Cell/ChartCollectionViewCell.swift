@@ -19,7 +19,7 @@ class ChartCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var infoLabel: UILabel!
     @IBOutlet private weak var helpImageView: UIImageView!
     
-    private var representable: PieChartViewData?
+    private var representable: PieChartViewDataRepresentable?
     weak var delegate: ChartCollectionViewCellDelegate?
     
     override func awakeFromNib() {
@@ -32,7 +32,7 @@ class ChartCollectionViewCell: UICollectionViewCell {
         setDefaultConfiguration()
     }
     
-    func configureWith(viewData: PieChartViewData) {
+    func configureWith(viewData: PieChartViewDataRepresentable) {
         self.representable = viewData
         configureViews()
         interacticeChartView.setChartInfoInteractive(viewData)

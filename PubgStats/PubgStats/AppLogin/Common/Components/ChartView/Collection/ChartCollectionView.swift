@@ -10,24 +10,24 @@ import UIKit
 import Combine
 
 protocol ChartViewData {
-    var charts: [PieChartViewData] { get }
+    var charts: [PieChartViewDataRepresentable] { get }
     var chartSelectedIndex: Int { get }
 }
 
 struct DefaultChartViewData: ChartViewData {
-    var charts: [PieChartViewData]
+    var charts: [PieChartViewDataRepresentable]
     var chartSelectedIndex: Int
 }
 
 enum ChartCollectionViewState: State {
     case didChangeHeight(_ height: CGFloat)
-    case didSelectChart(Int, chart: PieChartViewData)
+    case didSelectChart(Int, chart: PieChartViewDataRepresentable)
     case didTapAverageTooltip
 }
 
 final class ChartCollectionView: UICollectionView {
     private let layout: ZoomAndSnapFlowLayout = ZoomAndSnapFlowLayout()
-    private var chartsData: [PieChartViewData] = []
+    private var chartsData: [PieChartViewDataRepresentable] = []
     private var chartSelectedIndex: Int = 0
     private var subject = PassthroughSubject<ChartCollectionViewState, Never>()
     public lazy var publisher: AnyPublisher<ChartCollectionViewState, Never> = {
@@ -47,11 +47,11 @@ final class ChartCollectionView: UICollectionView {
     func configureViews(_ representable: ChartViewData) {
         self.chartSelectedIndex = representable.chartSelectedIndex
         chartsData = representable.charts.map {
-            PieChartViewData(centerIconKey: $0.centerIconKey,
-                             centerTitleText: $0.centerTitleText,
-                             centerSubtitleText: $0.centerSubtitleText,
-                             categories: $0.categories,
-                             tooltipLabelTextKey: $0.tooltipLabelTextKey)
+            DefaultPieChartViewData(centerIconKey: $0.centerIconKey,
+                                    centerTitleText: $0.centerTitleText,
+                                    centerSubtitleText: $0.centerSubtitleText,
+                                    categories: $0.categories,
+                                    tooltipLabelTextKey: $0.tooltipLabelTextKey)
         }
         self.reloadData()
         self.setSelectedChart(chartSelectedIndex)
