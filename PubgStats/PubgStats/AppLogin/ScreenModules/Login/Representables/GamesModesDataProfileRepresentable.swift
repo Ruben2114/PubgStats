@@ -25,36 +25,36 @@ public protocol GamesModesDataProfileRepresentable {
 }
 
 public protocol StatisticsGameModesRepresentable {
-    var assists: String { get }
-    var boosts: String { get }
-    var dBNOS: String { get }
-    var dailyKills: String { get }
-    var dailyWINS: String { get }
-    var damageDealt: String { get }
-    var days: String { get }
-    var headshotKills: String { get }
-    var heals: String { get }
-    var kills: String { get }
-    var longestKill: String { get }
-    var losses: String { get }
-    var maxKillStreaks: String { get }
-    var timeSurvived: String { get }
-    var mostSurvivalTime: String { get }
-    var revives: String { get }
-    var rideDistance: String { get }
-    var roadKills: String { get }
-    var roundMostKills: String { get }
-    var roundsPlayed: String { get }
-    var suicides: String { get }
-    var swimDistance: String { get }
-    var teamKills: String { get }
-    var top10S: String { get }
-    var vehicleDestroys: String { get }
-    var walkDistance: String { get }
-    var weaponsAcquired: String { get }
-    var weeklyKills: String { get }
-    var weeklyWINS: String { get }
-    var wins: String { get }
+    var assists: Int { get }
+    var boosts: Int { get }
+    var dBNOS: Int { get }
+    var dailyKills: Int { get }
+    var dailyWINS: Int { get }
+    var damageDealt: Double { get }
+    var days: Int { get }
+    var headshotKills: Int { get }
+    var heals: Int { get }
+    var kills: Int { get }
+    var longestKill: Double { get }
+    var losses: Int { get }
+    var maxKillStreaks: Int { get }
+    var timeSurvived: Double { get }
+    var mostSurvivalTime: Double { get }
+    var revives: Int { get }
+    var rideDistance: Double { get }
+    var roadKills: Int { get }
+    var roundMostKills: Int { get }
+    var roundsPlayed: Int { get }
+    var suicides: Int { get }
+    var swimDistance: Double { get }
+    var teamKills: Int { get }
+    var top10S: Int { get }
+    var vehicleDestroys: Int { get }
+    var walkDistance: Double { get }
+    var weaponsAcquired: Int { get }
+    var weeklyKills: Int { get }
+    var weeklyWINS: Int { get }
+    var wins: Int { get }
 }
 
 struct DefaultGamesModesDataProfile: GamesModesDataProfileRepresentable {
@@ -109,100 +109,100 @@ struct DefaultGamesModesDataProfile: GamesModesDataProfileRepresentable {
 }
 
 struct DefaultStatisticsGameModes: StatisticsGameModesRepresentable {
-    var assists: String
-    var boosts: String
-    var dBNOS: String
-    var dailyKills: String
-    var dailyWINS: String
-    var damageDealt: String
-    var days: String
-    var headshotKills: String
-    var heals: String
-    var kills: String
-    var longestKill: String
-    var losses: String
-    var maxKillStreaks: String
-    var timeSurvived: String
-    var mostSurvivalTime: String
-    var revives: String
-    var rideDistance: String
-    var roadKills: String
-    var roundMostKills: String
-    var roundsPlayed: String
-    var suicides: String
-    var swimDistance: String
-    var teamKills: String
-    var top10S: String
-    var vehicleDestroys: String
-    var walkDistance: String
-    var weaponsAcquired: String
-    var weeklyKills: String
-    var weeklyWINS: String
-    var wins: String
+    var assists: Int
+    var boosts: Int
+    var dBNOS: Int
+    var dailyKills: Int
+    var dailyWINS: Int
+    var damageDealt: Double
+    var days: Int
+    var headshotKills: Int
+    var heals: Int
+    var kills: Int
+    var longestKill: Double
+    var losses: Int
+    var maxKillStreaks: Int
+    var timeSurvived: Double
+    var mostSurvivalTime: Double
+    var revives: Int
+    var rideDistance: Double
+    var roadKills: Int
+    var roundMostKills: Int
+    var roundsPlayed: Int
+    var suicides: Int
+    var swimDistance: Double
+    var teamKills: Int
+    var top10S: Int
+    var vehicleDestroys: Int
+    var walkDistance: Double
+    var weaponsAcquired: Int
+    var weeklyKills: Int
+    var weeklyWINS: Int
+    var wins: Int
     
     init(_ data: DuoDTO) {
-        assists = String(data.assists)
-        boosts = String(data.boosts)
-        dBNOS = String(data.dBNOS)
-        dailyKills = String(data.dailyKills)
-        dailyWINS = String(data.dailyWINS)
-        damageDealt = String(data.damageDealt)
-        days = String(data.days)
-        headshotKills = String(data.headshotKills)
-        heals = String(data.heals)
-        kills = String(data.kills)
-        longestKill = String(data.longestKill)
-        losses = String(data.losses)
-        maxKillStreaks = String(data.maxKillStreaks)
-        timeSurvived = String(data.timeSurvived)
-        mostSurvivalTime = String(data.mostSurvivalTime)
-        revives = String(data.revives)
-        rideDistance = String(data.rideDistance)
-        roadKills = String(data.roadKills)
-        roundMostKills = String(data.roundMostKills)
-        roundsPlayed = String(data.roundsPlayed)
-        suicides = String(data.suicides)
-        swimDistance = String(data.swimDistance)
-        teamKills = String(data.teamKills)
-        top10S = String(data.top10S)
-        vehicleDestroys = String(data.vehicleDestroys)
-        walkDistance = String(data.walkDistance)
-        weaponsAcquired = String(data.weaponsAcquired)
-        weeklyKills = String(data.weeklyKills)
-        weeklyWINS = String(data.weeklyWINS)
-        wins = String(data.wins)
+        assists = data.assists
+        boosts = data.boosts
+        dBNOS = data.dBNOS
+        dailyKills = data.dailyKills
+        dailyWINS = data.dailyWINS
+        damageDealt = data.damageDealt
+        days = data.days
+        headshotKills = data.headshotKills
+        heals = data.heals
+        kills = data.kills
+        longestKill = data.longestKill
+        losses = data.losses
+        maxKillStreaks = data.maxKillStreaks
+        timeSurvived = data.timeSurvived
+        mostSurvivalTime = data.mostSurvivalTime
+        revives = data.revives
+        rideDistance = data.rideDistance
+        roadKills = data.roadKills
+        roundMostKills = data.roundMostKills
+        roundsPlayed = data.roundsPlayed
+        suicides = data.suicides
+        swimDistance = data.swimDistance
+        teamKills = data.teamKills
+        top10S = data.top10S
+        vehicleDestroys = data.vehicleDestroys
+        walkDistance = data.walkDistance
+        weaponsAcquired = data.weaponsAcquired
+        weeklyKills = data.weeklyKills
+        weeklyWINS = data.weeklyWINS
+        wins = data.wins
     }
     
     init(_ data: GamesModes?) {
-        assists = data?.assists.description ?? ""
-        boosts = data?.boosts.description ?? ""
-        dBNOS = data?.dBNOS.description ?? ""
-        dailyKills = data?.dailyKills.description ?? ""
-        dailyWINS = data?.dailyWINS.description ?? ""
-        damageDealt = data?.damageDealt.description ?? ""
-        days = data?.days.description ?? ""
-        headshotKills = data?.headshotKills.description ?? ""
-        heals = data?.heals.description ?? ""
-        kills = data?.kills.description ?? ""
-        longestKill = data?.longestKill.description ?? ""
-        losses = data?.losses.description ?? ""
-        maxKillStreaks = data?.maxKillStreaks.description ?? ""
-        timeSurvived = data?.timeSurvived.description ?? ""
-        mostSurvivalTime = data?.mostSurvivalTime.description ?? ""
-        revives = data?.revives.description ?? ""
-        rideDistance = data?.rideDistance.description ?? ""
-        roadKills = data?.roadKills.description ?? ""
-        roundMostKills = data?.roundMostKills.description ?? ""
-        roundsPlayed = data?.roundsPlayed.description ?? ""
-        suicides = data?.suicides.description ?? ""
-        swimDistance = data?.swimDistance.description ?? ""
-        teamKills = data?.teamKills.description ?? ""
-        top10S = data?.top10S.description ?? ""
-        vehicleDestroys = data?.vehicleDestroys.description ?? ""
-        walkDistance = data?.walkDistance.description ?? ""
-        weaponsAcquired = data?.weaponsAcquired.description ?? ""
-        weeklyKills = data?.weeklyKills.description ?? ""
-        weeklyWINS = data?.weeklyWINS.description ?? ""
-        wins = data?.wins.description ?? ""
+        assists = Int(data?.assists ?? 0)
+        boosts = Int(data?.boosts ?? 0)
+        dBNOS = Int(data?.dBNOS ?? 0)
+        dailyKills = Int(data?.dailyKills ?? 0)
+        dailyWINS = Int(data?.dailyWINS ?? 0)
+        damageDealt = data?.damageDealt ?? 0
+        days = Int(data?.days ?? 0)
+        headshotKills = Int(data?.headshotKills ?? 0)
+        heals = Int(data?.heals ?? 0)
+        kills = Int(data?.kills ?? 0)
+        longestKill = data?.longestKill ?? 0
+        losses = Int(data?.losses ?? 0)
+        maxKillStreaks = Int(data?.maxKillStreaks ?? 0)
+        timeSurvived = data?.timeSurvived ?? 0
+        mostSurvivalTime = data?.mostSurvivalTime ?? 0
+        revives = Int(data?.revives ?? 0)
+        rideDistance = data?.rideDistance ?? 0
+        roadKills = Int(data?.roadKills ?? 0)
+        roundMostKills = Int(data?.roundMostKills ?? 0)
+        roundsPlayed = Int(data?.roundsPlayed ?? 0)
+        suicides = Int(data?.suicides ?? 0)
+        swimDistance = data?.swimDistance ?? 0
+        teamKills = Int(data?.teamKills ?? 0)
+        top10S = Int(data?.top10S ?? 0)
+        vehicleDestroys = Int(data?.vehicleDestroys ?? 0)
+        walkDistance = data?.walkDistance ?? 0
+        weaponsAcquired = Int(data?.weaponsAcquired ?? 0)
+        weeklyKills = Int(data?.weeklyKills ?? 0)
+        weeklyWINS = Int(data?.weeklyWINS ?? 0)
+        wins = Int(data?.wins ?? 0)
     }
 }

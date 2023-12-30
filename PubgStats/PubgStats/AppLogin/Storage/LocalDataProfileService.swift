@@ -231,7 +231,7 @@ private extension LocalDataProfileServiceImp {
         dataGamesMode.longestKill = result.longestKill
         dataGamesMode.losses = Int32(result.losses)
         dataGamesMode.maxKillStreaks = Int32(result.maxKillStreaks)
-        dataGamesMode.mostSurvivalTime = Int32(result.mostSurvivalTime)
+        dataGamesMode.mostSurvivalTime = result.mostSurvivalTime
         dataGamesMode.revives = Int32(data.solo.revives)
         dataGamesMode.rideDistance = result.rideDistance
         dataGamesMode.roadKills = Int32(result.roadKills)
@@ -240,7 +240,7 @@ private extension LocalDataProfileServiceImp {
         dataGamesMode.swimDistance = result.swimDistance
         dataGamesMode.suicides = Int32(result.suicides)
         dataGamesMode.teamKills = Int32(result.teamKills)
-        dataGamesMode.timeSurvived = Int32(result.timeSurvived)
+        dataGamesMode.timeSurvived = result.timeSurvived
         dataGamesMode.top10S = Int32(result.top10S)
         dataGamesMode.vehicleDestroys = Int32(result.vehicleDestroys)
         dataGamesMode.walkDistance = result.walkDistance

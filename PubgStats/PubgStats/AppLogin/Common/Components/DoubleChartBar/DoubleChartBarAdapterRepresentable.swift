@@ -8,15 +8,15 @@
 import Foundation
 
 public protocol DoubleChartBarAdapterRepresentable {
-    var firstBarValue: Double { get }
-    var secondBarValue: Double { get }
+    var firstBarValue: Int { get }
+    var secondBarValue: Int { get }
 }
 
 struct DefaultDoubleChartBarAdapter: DoubleChartBarAdapterRepresentable {
-    let firstBarValue: Double
-    let secondBarValue: Double
+    let firstBarValue: Int
+    let secondBarValue: Int
     
-    init(firstBarValue: Double, secondBarValue: Double) {
+    init(firstBarValue: Int, secondBarValue: Int) {
         self.firstBarValue = firstBarValue
         self.secondBarValue = secondBarValue
     }

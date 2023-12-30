@@ -81,8 +81,8 @@ private extension ProfileViewModel {
     }
     
     func getGraphAmounts(_ round: StatisticsGameModesRepresentable, _ roundFpp: StatisticsGameModesRepresentable) -> DoubleChartBarAdapterRepresentable {
-        DefaultDoubleChartBarAdapter(firstBarValue: Double(round.roundsPlayed) ?? 0,
-                                     secondBarValue: Double(roundFpp.roundsPlayed) ?? 0)
+        DefaultDoubleChartBarAdapter(firstBarValue: round.roundsPlayed,
+                                     secondBarValue: roundFpp.roundsPlayed)
     }
 }
 

@@ -48,10 +48,10 @@ private extension DoubleChartBarAdapter {
     func setDoubleBar() {
         guard let viewData else { return }
         secondBarContainerView.isHidden = false
-        let mostPositiveValue =  max(viewData.firstBarValue.doubleRounded(), viewData.secondBarValue.doubleRounded())
+        let mostPositiveValue =  max(viewData.firstBarValue, viewData.secondBarValue)
         let maxHeight = barsStackView.frame.height
-        let firstBarHeight = (viewData.firstBarValue.doubleRounded() / mostPositiveValue) * maxHeight
-        let secondBarHeight = (viewData.secondBarValue.doubleRounded() / mostPositiveValue) * maxHeight
+        let firstBarHeight = CGFloat(viewData.firstBarValue / mostPositiveValue) * maxHeight
+        let secondBarHeight = CGFloat(viewData.secondBarValue / mostPositiveValue) * maxHeight
         if mostPositiveValue != 0 {
             firstBarHeightConstraint.constant = firstBarHeight > 2 ? firstBarHeight : minBarHeight
             secondBarHeightConstraint.constant = secondBarHeight > 2 ? secondBarHeight : minBarHeight
@@ -62,13 +62,6 @@ private extension DoubleChartBarAdapter {
         layoutIfNeeded()
         firstBarView.backgroundColor = .systemBlue
         secondBarView.backgroundColor = .systemBlue.diagonalPatternColor(size: secondBarView.frame.size)
-    }
-}
-
-extension Double {
-    func doubleRounded(toPlaces places: Int = 2) -> Double {
-        let divisor = pow(10.0, Double(places))
-        return (self * divisor).rounded() / divisor
     }
 }
 
