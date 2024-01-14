@@ -26,46 +26,30 @@ final class MainTabBarCoordinatorImp: MainTabBarCoordinator {
     }
     
     func start() {
-        var viewControllers = [UIViewController]()
-        
         let profileCoordinator = dependencies.external.profileCoordinator()
-        let profileNavController = dependencies.external.profileNavigationController()
-        profileNavController.viewControllers = []
-        profileNavController.tabBarItem.title = "profileTabBarItem".localize()
-        profileNavController.tabBarItem.image = UIImage(systemName: "person.circle.fill")
-        viewControllers.append(profileNavController)
         profileCoordinator.set(dataProfile).start()
-        append(child: profileCoordinator)
+        let profile = createNavController(navigation: dependencies.external.profileNavigationController(),
+                                           coordinator: profileCoordinator,
+                                           title: "profileTabBarItem",
+                                           image: "person.circle.fill")
         
-        let favouriteCoordinator = dependencies.external.favouriteCoordinator()
-        let favouriteNavController = dependencies.external.favouriteNavigationController()
-        favouriteNavController.viewControllers = []
-        favouriteNavController.tabBarItem.title = "favouriteTabBarItem".localize()
-        favouriteNavController.tabBarItem.image = UIImage(systemName: "star.circle.fill")
-        viewControllers.append(favouriteNavController)
-        favouriteCoordinator.start()
-        append(child: favouriteCoordinator)
+        let favourite = createNavController(navigation: dependencies.external.favouriteNavigationController(),
+                                           coordinator: dependencies.external.favouriteCoordinator(),
+                                           title: "favouriteTabBarItem",
+                                           image: "star.circle.fill")
+        //TODO: cambiar esto por matches y guide en una totalizator en la view (en favoritos en matches se cambian por la view de noticias)
+        let guide = createNavController(navigation: dependencies.external.guideNavigationController(),
+                                           coordinator: dependencies.external.guideCoordinator(),
+                                           title: "guideTabBarItem",
+                                           image: "book.circle.fill")
         
-        let guideCoordinator = dependencies.external.guideCoordinator()
-        let guideNavController = dependencies.external.guideNavigationController()
-        guideNavController.viewControllers = []
-        guideNavController.tabBarItem.title = "guideTabBarItem".localize()
-        guideNavController.tabBarItem.image = UIImage(systemName: "book.circle.fill")
-        viewControllers.append(guideNavController)
-        guideCoordinator.start()
-        append(child: guideCoordinator)
-        
-        let settingsCoordinator = dependencies.external.settingsCoordinator()
-        let settingsNavController = dependencies.external.settingsNavigationController()
-        settingsNavController.viewControllers = []
-        settingsNavController.tabBarItem.title = "settingsTabBarItem".localize()
-        settingsNavController.tabBarItem.image = UIImage(systemName: "gear.circle.fill")
-        viewControllers.append(settingsNavController)
-        settingsCoordinator.start()
-        append(child: settingsCoordinator)
+        let settings = createNavController(navigation: dependencies.external.settingsNavigationController(),
+                                           coordinator: dependencies.external.settingsCoordinator(),
+                                           title: "settingsTabBarItem",
+                                           image: "gear.circle.fill")
         
         let tabBar = dependencies.external.tabBarController()
-        tabBar.viewControllers = viewControllers
+        tabBar.viewControllers = [profile, favourite ,guide ,settings]
         tabBar.tabBar.backgroundColor = .white
     }
     
@@ -75,6 +59,17 @@ final class MainTabBarCoordinatorImp: MainTabBarCoordinator {
         dependencies.external.guideNavigationController().viewControllers = []
         dependencies.external.favouriteNavigationController().viewControllers = []
         childCoordinators.removeAll()
+    }
+}
+
+private extension MainTabBarCoordinatorImp {
+    func createNavController(navigation: UINavigationController, coordinator: Coordinator, title: String, image: String) -> UINavigationController {
+        navigation.viewControllers = []
+        navigation.tabBarItem.title = title.localize()
+        navigation.tabBarItem.image = UIImage(systemName: image)
+        coordinator.start()
+        append(child: coordinator)
+        return navigation
     }
 }
 

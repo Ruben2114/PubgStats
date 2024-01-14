@@ -52,13 +52,13 @@
                             <rect key="frame" x="0.0" y="98" width="312" height="56"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="XQf-9t-5dn" userLabel="chipTitle">
-                                    <rect key="frame" x="0.0" y="16" width="312" height="40"/>
+                                    <rect key="frame" x="0.0" y="8" width="312" height="48"/>
                                 </stackView>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="XQf-9t-5dn" secondAttribute="bottom" id="8cs-KF-OJO"/>
-                                <constraint firstItem="XQf-9t-5dn" firstAttribute="top" secondItem="1jO-q4-euN" secondAttribute="top" constant="16" id="Fdj-gu-Ggv"/>
+                                <constraint firstItem="XQf-9t-5dn" firstAttribute="top" secondItem="1jO-q4-euN" secondAttribute="top" constant="8" id="Fdj-gu-Ggv"/>
                                 <constraint firstItem="XQf-9t-5dn" firstAttribute="leading" secondItem="1jO-q4-euN" secondAttribute="leading" id="HFz-oM-qqP"/>
                                 <constraint firstAttribute="trailing" secondItem="XQf-9t-5dn" secondAttribute="trailing" id="did-Pr-QA6"/>
                             </constraints>

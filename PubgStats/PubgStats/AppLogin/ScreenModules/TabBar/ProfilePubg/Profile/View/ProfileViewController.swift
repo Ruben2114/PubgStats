@@ -81,6 +81,7 @@ private extension ProfileViewController {
                 self.chartView.isHidden = infoChartView?.count == 0 ? true : false
                 self.chartView.configureViewWith(DefaultChartViewData(charts: infoChartView ?? [], chartSelectedIndex: 0))
             case .showErrorPlayerDetails:
+                //TODO: poner en hidden todo lo que tenga datos y que salga la alerta
                 self?.presentAlert(message: "Error al cagar los datos de los modos de juego", title: "Error")
             case .hideLoading:
                 self?.hideSpinner()
@@ -95,7 +96,7 @@ private extension ProfileViewController {
             switch state {
             case .didSelectChart(let chart):
                 break
-                //TODO: guardar para controlar el chart selecionado
+                //TODO: guardar para controlar el chart selecionado o borrar este aviso
             case .didTapAverageTooltip:
                 break
                 //TODO: presentar el bottomSheet

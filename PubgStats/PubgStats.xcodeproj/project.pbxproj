@@ -1047,6 +1047,7 @@
 			isa = PBXGroup;
 			children = (
 				8CA97A322B3DDE42006D10AE /* GraphInfoModesRepresentable.swift */,
+				460ABAD329F7E23000DD5797 /* PlayerStats.swift */,
 			);
 			path = Representables;
 			sourceTree = "<group>";
@@ -1365,7 +1366,6 @@
 			children = (
 				8CB07EB529D1A683000EE257 /* StatsGeneralViewModel.swift */,
 				8C007E3329F1623A0029AF2F /* ItemCellStats.swift */,
-				460ABAD329F7E23000DD5797 /* PlayerStats.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

@@ -55,22 +55,39 @@ private extension ProfileViewModel {
     }
     
     func getChartData(infoGamesModes: GamesModesDataProfileRepresentable) {
-        //TODO: crearlo a través de los datos de gamesmodes
-        let chartData = [DefaultPieChartViewData(centerIconKey: "star", centerTitleText: "2552", centerSubtitleText: "Kills Total", categories: [
-            DefaultCategory(percentage: 60, color: .red, secundaryColor: .systemRed, currentCenterTitleText: "1111", currentSubTitleText: "TItle1", icon: "star"),
-            DefaultCategory(percentage: 30, color: .blue, secundaryColor: .systemBlue, currentCenterTitleText: "2222", currentSubTitleText: "TItle2", icon: "star"),
-            DefaultCategory(percentage: 10, color: .yellow, secundaryColor: .systemYellow, currentCenterTitleText: "3333", currentSubTitleText: "Muerte por disparo en la cabeza", icon: "star")
-        ], tooltipLabelTextKey: "Gráfica de las muertes totales"),
-                         DefaultPieChartViewData(centerIconKey: "star", centerTitleText: "10000", centerSubtitleText: "Muerte por disparo en la cabeza", categories: [
-                            DefaultCategory(percentage: 10, color: .gray, secundaryColor: .systemGray, currentCenterTitleText: "1000", currentSubTitleText: "Modo Solo", icon: "star"),
-                            DefaultCategory(percentage: 30, color: .blue, secundaryColor: .systemBlue, currentCenterTitleText: "3000", currentSubTitleText: "Modo Duo", icon: "star"),
-                            DefaultCategory(percentage: 20, color: .red, secundaryColor: .systemRed, currentCenterTitleText: "2000", currentSubTitleText: "Modo Squad", icon: "star"),
-                            DefaultCategory(percentage: 10, color: .green, secundaryColor: .systemGreen, currentCenterTitleText: "1000", currentSubTitleText: "Modo Solo FPP", icon: "star"),
-                            DefaultCategory(percentage: 20, color: .brown, secundaryColor: .systemBrown, currentCenterTitleText: "2000", currentSubTitleText: "Modo Duo FPP", icon: "star"),
-                            DefaultCategory(percentage: 10, color: .yellow, secundaryColor: .systemYellow, currentCenterTitleText: "1000", currentSubTitleText: "Modo Squad FPP", icon: "star")
-                         ], tooltipLabelTextKey: "Gráfica de las partidas por modos de juego")
-        ]
+        let roadKillsTotal = infoGamesModes.solo.roadKills + infoGamesModes.soloFpp.roadKills + infoGamesModes.duo.roadKills + infoGamesModes.duoFpp.roadKills + infoGamesModes.squad.roadKills + infoGamesModes.soloFpp.roadKills
+        let restKills = infoGamesModes.killsTotal - roadKillsTotal - infoGamesModes.headshotKillsTotal
+        let kills = getCategoriesData(stats: PlayerStats.kills,
+                                      amount: String(infoGamesModes.killsTotal),
+                                      subcategories: [getSubcategoriesData(stats: PlayerStats.headshotKills, percentage: getSubcategoriesPercentage(valueTotal: infoGamesModes.killsTotal, valueSubcategory: infoGamesModes.headshotKillsTotal), amount: infoGamesModes.headshotKillsTotal.description),
+                                                      getSubcategoriesData(stats: PlayerStats.roadKills, percentage: getSubcategoriesPercentage(valueTotal: infoGamesModes.killsTotal, valueSubcategory: roadKillsTotal), amount: roadKillsTotal.description),
+                                                      getSubcategoriesData(stats: PlayerStats.rest, percentage: getSubcategoriesPercentage(valueTotal: infoGamesModes.killsTotal, valueSubcategory: restKills), amount: restKills.description)])
+   //TODO: pensar como meter el resto de forma mas practica o incluso en el componente si detecta que no llega al 100%
+
+        let chartData = [kills]
         stateSubject.send(.showChartView(chartData))
+    }
+    
+    func getCategoriesData(stats: PlayerStats, amount: String, subcategories: [CategoryRepresentable]) -> DefaultPieChartViewData {
+        DefaultPieChartViewData(centerIconKey: stats.icon(),
+                                centerTitleText: amount,
+                                centerSubtitleText: stats.title(),
+                                categories: subcategories,
+                                tooltipLabelTextKey: stats.tooltipLabel() ?? "")
+    }
+    
+    func getSubcategoriesData(stats: PlayerStats, percentage: Double, amount: String) -> CategoryRepresentable {
+        DefaultCategory(percentage: percentage,
+                        color: stats.color()?.0 ?? .gray,
+                        secundaryColor: stats.color()?.1 ?? .systemGray,
+                        currentCenterTitleText: amount,
+                        currentSubTitleText: stats.title(),
+                        icon: stats.icon())
+    }
+    
+    func getSubcategoriesPercentage(valueTotal: Int, valueSubcategory: Int) -> Double {
+        let amount: Decimal = Decimal(valueSubcategory * 100) / Decimal(valueTotal)
+        return NSDecimalNumber(decimal: amount).doubleValue
     }
     
     func getGraphData(infoGamesModes: GamesModesDataProfileRepresentable) {
