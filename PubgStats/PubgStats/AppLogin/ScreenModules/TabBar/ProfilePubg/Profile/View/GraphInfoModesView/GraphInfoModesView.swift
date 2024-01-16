@@ -55,9 +55,9 @@ private extension GraphInfoModesView {
     
     func configureChips()  {
         //TODO: poner localized y crear modo .discrete que tenga sombreado el chip
-        getChipButton(viewData: Chip.ViewData(text: "Solo", style: .active, type: .onlyText))
-        getChipButton(viewData: Chip.ViewData(text: "Duo", style: .active, type: .onlyText))
-        getChipButton(viewData: Chip.ViewData(text: "Squad", style: .active, type: .onlyText))
+        getChipButton(viewData: Chip.ViewData(text: "Solo", style: .enabled, type: .onlyText))
+        getChipButton(viewData: Chip.ViewData(text: "Duo", style: .enabled, type: .onlyText))
+        getChipButton(viewData: Chip.ViewData(text: "Squad", style: .enabled, type: .onlyText))
     }
     
     func getChipButton(viewData: Chip.ViewData) {

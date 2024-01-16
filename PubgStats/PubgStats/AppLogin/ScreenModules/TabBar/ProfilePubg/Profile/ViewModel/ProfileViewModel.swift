@@ -38,6 +38,18 @@ final class ProfileViewModel: DataBindable {
         getPlayerDetailsSubject.send(dataProfile ?? DefaultIdAccountDataProfile(id: "", name: "", platform: ""))
     }
     
+    func goToModes() {
+        //TODO: coodinator
+    }
+    
+    func goToWeapon() {
+        //TODO: coodinator
+    }
+    
+    func goToSurvival() {
+        //TODO: coodinator
+    }
+    
     func reload(){
         let userDefaults = UserDefaults.standard
         userDefaults.set(false, forKey: "reload")

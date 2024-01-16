@@ -145,6 +145,7 @@ public extension Chip {
     enum Style {
         case active
         case disabled
+        case enabled
     }
     
     struct ViewData {
@@ -180,6 +181,7 @@ extension Chip.Style {
     func textColor() -> UIColor {
         switch self {
         case .disabled: return UIColor(red: 0.800, green: 0.800, blue: 0.800, alpha: 1)
+        case .enabled: return .systemBlue
         default: return UIColor(red: 0.075, green: 0.494, blue: 0.518, alpha: 1)
         }
     }
@@ -200,6 +202,11 @@ extension Chip.Style {
     
     func setElevation(_ view: UIView) {
         switch self {
+        case .enabled :
+            view.layer.shadowOffset = CGSize(width: 0, height: 0)
+            view.layer.shadowRadius = 8
+            view.layer.shadowOpacity = 0.5
+            view.layer.shadowColor = UIColor.systemGray.cgColor
         default:
             view.layer.shadowOffset = CGSize(width: 0, height: 0)
             view.layer.shadowRadius = 0

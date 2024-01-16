@@ -21,7 +21,7 @@ struct DefaultChartViewData: ChartViewData {
 
 enum ChartCollectionViewState: State {
     case didChangeHeight(_ height: CGFloat)
-    case didSelectChart(Int, chart: PieChartViewDataRepresentable)
+    case didSelectChart(Int)
     case didTapAverageTooltip
 }
 
@@ -101,7 +101,7 @@ private extension ChartCollectionView {
         self.layoutIfNeeded()
         self.selectItem(at: indexPath, animated: false, scrollPosition: .centeredHorizontally)
         let cellInfo = chartsData[indexPath.item]
-        subject.send(.didSelectChart(indexPath.item, chart: cellInfo))
+        subject.send(.didSelectChart(indexPath.item))
     }
     
     func setMaxHeight() {
@@ -120,7 +120,7 @@ private extension ChartCollectionView {
         guard let indexPath = self.layout.indexPathForCenterRect(), indexPath.item != chartSelectedIndex else { return }
         chartSelectedIndex = indexPath.item
         let cellInfo = chartsData[indexPath.item]
-        subject.send(.didSelectChart(indexPath.item, chart: cellInfo))
+        subject.send(.didSelectChart(indexPath.item))
     }
 }
 
@@ -135,7 +135,7 @@ extension ChartCollectionView: UICollectionViewDataSource, UICollectionViewDeleg
             cell.didTapNewView(collectionView.panGestureRecognizer)
         }
         chartSelectedIndex = indexPath.item
-        subject.send(.didSelectChart(indexPath.item, chart: chartsData[indexPath.item]))
+        subject.send(.didSelectChart(indexPath.item))
         self.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     

@@ -36,22 +36,16 @@ public final class DoubleChartBarAdapter: XibView {
 
 private extension DoubleChartBarAdapter {
     func setupView() {
-        setAppearance()
-        secondBarContainerView.isHidden = true
-    }
-    
-    func setAppearance() {
         firstBarView.roundCorners(corners: [.topLeft, .topRight], radius: 4)
         secondBarView.roundCorners(corners: [.topLeft, .topRight], radius: 4)
     }
     
     func setDoubleBar() {
         guard let viewData else { return }
-        secondBarContainerView.isHidden = false
         let mostPositiveValue =  max(viewData.firstBarValue, viewData.secondBarValue)
         let maxHeight = barsStackView.frame.height
-        let firstBarHeight = CGFloat(viewData.firstBarValue / mostPositiveValue) * maxHeight
-        let secondBarHeight = CGFloat(viewData.secondBarValue / mostPositiveValue) * maxHeight
+        let firstBarHeight = maxHeight * (CGFloat(viewData.firstBarValue * 100 / mostPositiveValue)) / 100
+        let secondBarHeight = maxHeight * (CGFloat(viewData.secondBarValue * 100 / mostPositiveValue)) / 100
         if mostPositiveValue != 0 {
             firstBarHeightConstraint.constant = firstBarHeight > 2 ? firstBarHeight : minBarHeight
             secondBarHeightConstraint.constant = secondBarHeight > 2 ? secondBarHeight : minBarHeight

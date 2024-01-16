@@ -10,12 +10,14 @@ import Foundation
 import Combine
 
 enum ChartsInfoViewState: State {
-    case didSelectChart(PieChartViewDataRepresentable)
     case didTapAverageTooltip
+    case didTapHelpTooltip
 }
 
 final class ChartsInfoView: XibView {
     @IBOutlet private weak var containerStackView: UIStackView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var questionsImageView: UIImageView!
     @IBOutlet private weak var chartCollectionView: ChartCollectionView!
     @IBOutlet private weak var chartCollectionHeight: NSLayoutConstraint!
     @IBOutlet private weak var pageControl: UIPageControl!
@@ -29,6 +31,7 @@ final class ChartsInfoView: XibView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setAppearance()
         bind()
     }
     
@@ -49,6 +52,12 @@ final class ChartsInfoView: XibView {
 }
 
 private extension ChartsInfoView {
+    func setAppearance() {
+        titleLabel.text = "Datos por categorias"
+        questionsImageView.isUserInteractionEnabled = true
+        questionsImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapTooltip)))
+    }
+    
     func bind() {
         bindCollectionView()
     }
@@ -58,10 +67,9 @@ private extension ChartsInfoView {
             switch state {
             case .didChangeHeight(let height):
                 self?.chartCollectionHeight.constant = height
-            case .didSelectChart(let page, chart: let chart):
+            case .didSelectChart(let page):
                 self?.pageControl.currentPage = page
                 self?.updatePageControlDots()
-                self?.subject.send(.didSelectChart(chart))
             case .didTapAverageTooltip:
                 self?.subject.send(.didTapAverageTooltip)
             }
@@ -109,5 +117,9 @@ private extension ChartsInfoView {
                 subview.layer.borderColor = index == pageControl.currentPage ? currentIndicatorColor.cgColor : indicatorColor.cgColor
             }
         }
+    }
+    
+    @objc func didTapTooltip() {
+        subject.send(.didTapHelpTooltip)
     }
 }

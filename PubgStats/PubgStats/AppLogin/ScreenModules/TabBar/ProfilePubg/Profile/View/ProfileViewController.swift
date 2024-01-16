@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import SafariServices
 
 final class ProfileViewController: UIViewController {
 
@@ -30,8 +31,20 @@ final class ProfileViewController: UIViewController {
         return GraphInfoModesView()
     }()
     
+    private lazy var dataGeneralView: DataGeneralView = {
+        DataGeneralView()
+    }()
+    
     private lazy var chartView: ChartsInfoView = {
         return ChartsInfoView()
+    }()
+    
+    private lazy var bottomSheetView: BottomSheetView = {
+        BottomSheetView()
+    }()
+    
+    private lazy var newsCardView: NewsCardView = {
+        NewsCardView()
     }()
     
     init(dependencies: ProfileDependency) {
@@ -61,6 +74,7 @@ private extension ProfileViewController {
     
     func configView() {
         configureNavigationBar()
+        configureNewsCard()
         view.backgroundColor = .white
         showSpinner()
     }
@@ -69,6 +83,7 @@ private extension ProfileViewController {
         bindViewModel()
         bindHeaderView()
         bindChartView()
+        bindNewsCardView()
     }
     
     func bindViewModel() {
@@ -94,12 +109,10 @@ private extension ProfileViewController {
     func bindChartView() {
         chartView.publisher.receive(on: DispatchQueue.main).sink { [weak self] state in
             switch state {
-            case .didSelectChart(let chart):
-                break
-                //TODO: guardar para controlar el chart selecionado o borrar este aviso
             case .didTapAverageTooltip:
-                break
-                //TODO: presentar el bottomSheet
+                self?.configureBottomSheet(title: "Kills data", subtitle: "aqui podras observar las muertes totales y las muertes de noseque nose cuantas")
+            case .didTapHelpTooltip:
+                self?.configureBottomSheet(title: "datos por categorias", subtitle: "las tres secciones que podras ver aqui los kills, noseque")
             }
         }.store(in: &cancellable)
     }
@@ -108,8 +121,14 @@ private extension ProfileViewController {
         headerView.publisher.receive(on: DispatchQueue.main).sink { [weak self] state in
             switch state {
             case .didSelectButton(let type):
-                break
-                //TODO: navegar hacia la vista indicada con un switch del type
+                switch type {
+                case .modes:
+                    self?.viewModel.goToModes()
+                case .weapon:
+                    self?.viewModel.goToWeapon()
+                case .survival:
+                    self?.viewModel.goToSurvival()
+                }
             case .didTapHelpTooltip:
                 break
                 //TODO: presentar el bottomSheet
@@ -117,7 +136,14 @@ private extension ProfileViewController {
         }.store(in: &cancellable)
     }
     
+    func bindNewsCardView() {
+        newsCardView.publisher.sink { [weak self] in
+            self?.configureWeb()
+        }.store(in: &cancellable)
+    }
+    
     func configureNavigationBar() {
+        //TODO: poner arriba y ala izquierda un texto : PUBGSTATS
         navigationItem.title = "profileViewControllerNavigationItem".localize()
         let helpReloadButton = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: #selector(helpReloadButtonAction))
         reloadButton = UIBarButtonItem(image: UIImage(systemName: "arrow.clockwise.circle.fill"), style: .plain, target: self, action: #selector(reloadButtonAction))
@@ -125,12 +151,30 @@ private extension ProfileViewController {
     }
     
     func addViewToScrollableStackView() {
+        //TODO: dentro del header meter una vista con el name, level, xp, una foto de la platform ... datos mas generales
         scrollableStackView.addArrangedSubview(headerView)
         scrollableStackView.addArrangedSubview(graphView)
-        //TODO: totalizatorView
-        //TODO: title chart and image with gesture
+        scrollableStackView.addArrangedSubview(dataGeneralView)
         scrollableStackView.addArrangedSubview(chartView)
-        //TODO: matchesView
+        scrollableStackView.addArrangedSubview(newsCardView)
+    }
+    
+    func configureBottomSheet(title: String, subtitle: String) {
+        bottomSheetView.show(in: self, title: title, subtitle: subtitle)
+    }
+    
+    func configureNewsCard() {
+        let model = DefaultNewsCard(title: "Noticias",
+                                    subTitle: "Aqui podras ver las noticias de las ultimas novedades del juego",
+                                    customImageView: "star")
+        newsCardView.setupVersatilCard(model)
+    }
+    
+    func configureWeb() {
+        guard let url = URL(string: "https://pubg.com/es/news") else { return }
+        let safariService = SFSafariViewController(url: url)
+        safariService.dismissButtonStyle = .close
+        present(safariService, animated: true)
     }
     
     @objc private func helpReloadButtonAction() {
