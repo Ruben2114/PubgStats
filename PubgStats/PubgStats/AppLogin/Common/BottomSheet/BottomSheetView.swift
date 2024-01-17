@@ -59,7 +59,7 @@ public final class BottomSheetView {
             withHorizontalFittingPriority: UILayoutPriority.required,
             verticalFittingPriority: UILayoutPriority.fittingSizeLevel
         )
-        return viewSize.height + 40
+        return viewSize.height + 60
     }
     
     private func createView(title: String, subtitle: String) -> UIView {

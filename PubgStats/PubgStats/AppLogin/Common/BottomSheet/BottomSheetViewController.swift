@@ -28,8 +28,8 @@ private extension BottomSheetViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(view)
         view.topAnchor.constraint(equalTo: topBarView.bottomAnchor).isActive = true
-        view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16).isActive = true
+        view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16).isActive = true
         view.bottomAnchor.constraint(lessThanOrEqualTo: self.view.bottomAnchor, constant: 0).isActive = true
     }
     

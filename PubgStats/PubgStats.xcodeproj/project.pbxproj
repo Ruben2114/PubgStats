@@ -161,6 +161,7 @@
 		8CBC70472AD7D4CF00234420 /* IdAccountDataProfileRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC70462AD7D4CF00234420 /* IdAccountDataProfileRepresentable.swift */; };
 		8CBC704A2AD7EBBA00234420 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC70492AD7EBBA00234420 /* Bindable.swift */; };
 		8CBC704C2AD7F3B700234420 /* DataBindingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC704B2AD7F3B700234420 /* DataBindingObject.swift */; };
+		8CBE66AD2B587DF900C64481 /* ProfileHeaderViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBE66AC2B587DF900C64481 /* ProfileHeaderViewRepresentable.swift */; };
 		8CC118B82AD979A900839855 /* ScrollableStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC118B72AD979A900839855 /* ScrollableStackView.swift */; };
 		8CC118BA2AD98F1700839855 /* AnyBindingOptional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC118B92AD98F1700839855 /* AnyBindingOptional.swift */; };
 		8CC118BC2AD98F4300839855 /* AnyBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC118BB2AD98F4300839855 /* AnyBinding.swift */; };
@@ -383,6 +384,7 @@
 		8CBC70462AD7D4CF00234420 /* IdAccountDataProfileRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdAccountDataProfileRepresentable.swift; sourceTree = "<group>"; };
 		8CBC70492AD7EBBA00234420 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		8CBC704B2AD7F3B700234420 /* DataBindingObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBindingObject.swift; sourceTree = "<group>"; };
+		8CBE66AC2B587DF900C64481 /* ProfileHeaderViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewRepresentable.swift; sourceTree = "<group>"; };
 		8CC118B72AD979A900839855 /* ScrollableStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableStackView.swift; sourceTree = "<group>"; };
 		8CC118B92AD98F1700839855 /* AnyBindingOptional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyBindingOptional.swift; sourceTree = "<group>"; };
 		8CC118BB2AD98F4300839855 /* AnyBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyBinding.swift; sourceTree = "<group>"; };
@@ -1067,6 +1069,7 @@
 				8CA97A322B3DDE42006D10AE /* GraphInfoModesRepresentable.swift */,
 				460ABAD329F7E23000DD5797 /* PlayerStats.swift */,
 				8CABD0852B551CE4001AE2B2 /* NewsCardRepresentable.swift */,
+				8CBE66AC2B587DF900C64481 /* ProfileHeaderViewRepresentable.swift */,
 			);
 			path = Representables;
 			sourceTree = "<group>";
@@ -2102,6 +2105,7 @@
 				8CB07EB829D1A6B3000EE257 /* StatsGeneralDependency.swift in Sources */,
 				461C1F3E29C9C77C00540289 /* ApiClientService.swift in Sources */,
 				46B0CF2429E7027100BE95EB /* WeaponDataDetailRepository.swift in Sources */,
+				8CBE66AD2B587DF900C64481 /* ProfileHeaderViewRepresentable.swift in Sources */,
 				8CE9BDDA29E5B6CF00F45D3F /* KillsDataUseCase.swift in Sources */,
 				8C2460712B3C50A700AB98F3 /* ChartCollectionView.swift in Sources */,
 				8CAC3E2F29C3080600A1FE34 /* GuideViewModel.swift in Sources */,

@@ -22,27 +22,21 @@ final class ProfileViewController: UIViewController {
         view.setScrollInsect(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         return view
     }()
-    
     private lazy var headerView: ProfileHeaderView = {
         return ProfileHeaderView()
     }()
-    
     private lazy var graphView: GraphInfoModesView = {
         return GraphInfoModesView()
     }()
-    
     private lazy var dataGeneralView: DataGeneralView = {
         DataGeneralView()
     }()
-    
     private lazy var chartView: ChartsInfoView = {
         return ChartsInfoView()
     }()
-    
     private lazy var bottomSheetView: BottomSheetView = {
         BottomSheetView()
     }()
-    
     private lazy var newsCardView: NewsCardView = {
         NewsCardView()
     }()
@@ -62,6 +56,7 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         setAppearance()
         bind()
+        reloadData()
         viewModel.viewDidLoad()
     }
 }
@@ -73,9 +68,9 @@ private extension ProfileViewController {
     }
     
     func configView() {
+        view.backgroundColor = .white
         configureNavigationBar()
         configureNewsCard()
-        view.backgroundColor = .white
         showSpinner()
     }
     
@@ -102,11 +97,14 @@ private extension ProfileViewController {
                 self?.hideSpinner()
             case .showGraphView(let data):
                 self?.graphView.configureWith(representable: data)
+            case .showHeader(let data):
+                self?.headerView.configureView(representable: data)
             }
         }.store(in: &cancellable)
     }
     
     func bindChartView() {
+        //TODO: poner localized
         chartView.publisher.receive(on: DispatchQueue.main).sink { [weak self] state in
             switch state {
             case .didTapAverageTooltip:
@@ -131,7 +129,7 @@ private extension ProfileViewController {
                 }
             case .didTapHelpTooltip:
                 break
-                //TODO: presentar el bottomSheet
+                //TODO: presentar el bottomSheet explicando lo del modo de juego
             }
         }.store(in: &cancellable)
     }
@@ -143,15 +141,13 @@ private extension ProfileViewController {
     }
     
     func configureNavigationBar() {
-        //TODO: poner arriba y ala izquierda un texto : PUBGSTATS
         navigationItem.title = "profileViewControllerNavigationItem".localize()
         let helpReloadButton = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: #selector(helpReloadButtonAction))
         reloadButton = UIBarButtonItem(image: UIImage(systemName: "arrow.clockwise.circle.fill"), style: .plain, target: self, action: #selector(reloadButtonAction))
-        self.navigationItem.setRightBarButtonItems([reloadButton, helpReloadButton], animated: true)
+        navigationItem.setRightBarButtonItems([reloadButton, helpReloadButton], animated: true)
     }
     
     func addViewToScrollableStackView() {
-        //TODO: dentro del header meter una vista con el name, level, xp, una foto de la platform ... datos mas generales
         scrollableStackView.addArrangedSubview(headerView)
         scrollableStackView.addArrangedSubview(graphView)
         scrollableStackView.addArrangedSubview(dataGeneralView)
@@ -164,6 +160,7 @@ private extension ProfileViewController {
     }
     
     func configureNewsCard() {
+        //TODO: poner localized
         let model = DefaultNewsCard(title: "Noticias",
                                     subTitle: "Aqui podras ver las noticias de las ultimas novedades del juego",
                                     customImageView: "star")
@@ -178,7 +175,9 @@ private extension ProfileViewController {
     }
     
     @objc private func helpReloadButtonAction() {
-        print("mostrar info del reload en un botomsheet")
+        //TODO: poner localized
+        configureBottomSheet(title: "Información sobre la recarga",
+                             subtitle: "Si necesitas recargar la vista puedes pulsar el botón de recarga que esta justo a la derecha del punto de información que acabas de pulsar. una vez pulsda la recarga volverá a estar activa a los dos minutos.")
     }
     
     @objc private func reloadButtonAction() {
@@ -192,6 +191,19 @@ private extension ProfileViewController {
              viewModel.reload()
              return
          }
+    }
+    
+    func reloadData() {
+        let valueDate = UserDefaults.standard.object(forKey: "date")
+        if valueDate != nil {
+            let interval = Date().timeIntervalSince(valueDate as? Date ?? Date())
+            if interval > 86400 {
+                viewModel.reload()
+                UserDefaults.standard.set(nil, forKey: "date")
+            }
+        } else {
+            UserDefaults.standard.set(Date(), forKey: "date")
+        }
     }
 }
 

@@ -100,3 +100,7 @@
 "profileFieldLogin" = "Registro cuenta Pubg";
 "profileFieldStats" = "Estadísticas cuenta";
 "profileFieldDelete" = "Borrar cuenta Pubg";
+"profileHeaderTitleGraph" = "Detalle modos de juego";
+"profileHeaderModes" = "Modos";
+"profileHeaderWeapon" = "Armas";
+"profileHeaderSurvival" = "Supervivencia";

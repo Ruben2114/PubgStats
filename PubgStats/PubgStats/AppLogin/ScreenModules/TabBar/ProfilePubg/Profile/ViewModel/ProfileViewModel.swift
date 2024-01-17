@@ -14,6 +14,7 @@ enum ProfileState {
     case showErrorPlayerDetails
     case showGraphView(GraphInfoModesRepresentable?)
     case hideLoading
+    case showHeader(ProfileHeaderViewRepresentable)
 }
 
 final class ProfileViewModel: DataBindable {
@@ -51,8 +52,6 @@ final class ProfileViewModel: DataBindable {
     }
     
     func reload(){
-        let userDefaults = UserDefaults.standard
-        userDefaults.set(false, forKey: "reload")
         //TODO: hacer las llamadas sin ser cacheadas
     }
 }
@@ -113,6 +112,13 @@ private extension ProfileViewModel {
         DefaultDoubleChartBarAdapter(firstBarValue: round.roundsPlayed,
                                      secondBarValue: roundFpp.roundsPlayed)
     }
+    
+    func getProfileHeader(_ info: SurvivalDataProfileRepresentable) {
+        let profileHeader = DefaultProfileHeaderView(dataPlayer: dataProfile ?? DefaultIdAccountDataProfile(id: "", name: "", platform: ""),
+                                                     level: info.level,
+                                                     xp: info.xp)
+        stateSubject.send(.showHeader(profileHeader))
+    }
 }
 
 
@@ -129,6 +135,7 @@ private extension ProfileViewModel {
             }
         } receiveValue: { [weak self] data in
             //TODO: aqui ya tengo toda la info ahora seria ir enviando a las vistas la información
+            self?.getProfileHeader(data.infoSurvival)
             self?.getChartData(infoGamesModes: data.infoGamesModes)
             self?.getGraphData(infoGamesModes: data.infoGamesModes)
             self?.stateSubject.send(.hideLoading)

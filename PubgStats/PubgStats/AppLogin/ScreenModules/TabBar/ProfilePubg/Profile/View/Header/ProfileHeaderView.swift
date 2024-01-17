@@ -21,6 +21,13 @@ enum ProfileHeaderViewState: State {
 }
 
 final class ProfileHeaderView: XibView {
+    @IBOutlet private weak var containerView: UIView!
+    @IBOutlet private weak var namePlayerLabel: UILabel!
+    @IBOutlet private weak var platformImage: UIImageView!
+    @IBOutlet private weak var levelDescriptionLabel: UILabel!
+    @IBOutlet private weak var levelAmountLabel: UILabel!
+    @IBOutlet private weak var xpDescriptionLabel: UILabel!
+    @IBOutlet private weak var xpAmountLabel: UILabel!
     @IBOutlet private weak var titleGraph: UILabel!
     @IBOutlet private weak var containerChips: UIStackView!
     @IBOutlet private weak var iconHelpImage: UIImageView!
@@ -30,6 +37,7 @@ final class ProfileHeaderView: XibView {
     public lazy var publisher: AnyPublisher<ProfileHeaderViewState, Never> = {
         return subject.eraseToAnyPublisher()
     }()
+    private var representable: ProfileHeaderViewRepresentable?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,13 +48,26 @@ final class ProfileHeaderView: XibView {
     required init?(coder: NSCoder) {
         fatalError()
     }
+    
+    func configureView(representable: ProfileHeaderViewRepresentable) {
+        self.representable = representable
+        configureLabel()
+        configureImagePlatform()
+    }
 }
 
 private extension ProfileHeaderView {
     func configureViews() {
+        configureContainer()
         configureChips()
         configureImage()
-        titleGraph.text = "Modos de juego"
+    }
+    
+    func configureContainer() {
+        containerView.layer.cornerRadius = 8
+        containerView.layer.borderColor = UIColor.systemGray.cgColor
+        containerView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        containerView.layer.shadowOpacity = 0.2
     }
     
     func configureImage() {
@@ -54,19 +75,33 @@ private extension ProfileHeaderView {
         iconHelpImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapTooltip)))
     }
     
+    func configureImagePlatform() {
+        if representable?.dataPlayer.platform == "steam" {
+            platformImage.image = UIImage(named: "Steam_icon_logo")
+        }
+    }
+    
+    func configureLabel() {
+        titleGraph.text = "profileHeaderTitleGraph".localize()
+        namePlayerLabel.text = representable?.dataPlayer.name
+        levelDescriptionLabel.text = "levelLabel".localize()
+        levelAmountLabel.text = representable?.level
+        xpDescriptionLabel.text = "XP"
+        xpAmountLabel.text = representable?.xp
+    }
+    
     func configureChips()  {
-        //TODO: poner localized
-        let chipModes = getChipButton(viewData: Chip.ViewData(text: "Modes", style: .active, type: .onlyText), type: .modes)
+        let chipModes = getChipButton(viewData: Chip.ViewData(text: "profileHeaderModes".localize(), style: .enabled, type: .onlyText), type: .modes)
         chipModes.publisher.receive(on: DispatchQueue.main).sink { [weak self] in
             self?.subject.send(.didSelectButton(.modes))
         }.store(in: &cancellable)
         
-        let chipWeapon = getChipButton(viewData: Chip.ViewData(text: "Weapon", style: .active, type: .onlyText), type: .weapon)
+        let chipWeapon = getChipButton(viewData: Chip.ViewData(text: "profileHeaderWeapon".localize(), style: .enabled, type: .onlyText), type: .weapon)
         chipWeapon.publisher.receive(on: DispatchQueue.main).sink { [weak self] in
             self?.subject.send(.didSelectButton(.weapon))
         }.store(in: &cancellable)
         
-        let chipSurvival = getChipButton(viewData: Chip.ViewData(text: "Survival", style: .active, type: .onlyText), type: .survival)
+        let chipSurvival = getChipButton(viewData: Chip.ViewData(text: "profileHeaderSurvival".localize(), style: .enabled, type: .onlyText), type: .survival)
         chipSurvival.publisher.receive(on: DispatchQueue.main).sink { [weak self] in
             self?.subject.send(.didSelectButton(.survival))
         }.store(in: &cancellable)

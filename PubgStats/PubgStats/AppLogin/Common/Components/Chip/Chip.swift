@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import Combine
-
+//TODO: borrar todos los tipos que no utilizo tanto de style como de type
 public final class Chip: FlameXibButton {
     @IBOutlet private weak var roundedView: UIView!
     @IBOutlet private weak var leftImageView: UIImageView?
@@ -129,7 +129,7 @@ private extension Chip {
     
     func setLabels() {
         self.textLabel?.text = self.viewData.text
-        self.textLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        self.textLabel?.font = UIFont.systemFont(ofSize: 16)
     }
     
     func setRemoveIcon() {
@@ -181,7 +181,7 @@ extension Chip.Style {
     func textColor() -> UIColor {
         switch self {
         case .disabled: return UIColor(red: 0.800, green: 0.800, blue: 0.800, alpha: 1)
-        case .enabled: return .systemBlue
+        case .enabled: return .black
         default: return UIColor(red: 0.075, green: 0.494, blue: 0.518, alpha: 1)
         }
     }
