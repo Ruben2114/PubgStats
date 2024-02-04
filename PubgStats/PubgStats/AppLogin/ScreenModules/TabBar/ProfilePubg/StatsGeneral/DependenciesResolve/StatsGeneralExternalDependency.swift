@@ -12,7 +12,6 @@ protocol StatsGeneralExternalDependency {
     func statsGeneralCoordinator(navigation: UINavigationController, type: NavigationStats) -> Coordinator
     func killsDataCoordinator(navigation: UINavigationController, type: NavigationStats) -> Coordinator
     func weaponDataCoordinator(navigation: UINavigationController, type: NavigationStats) -> Coordinator
-    func gamesModesDataCoordinator(navigation: UINavigationController, type: NavigationStats) -> Coordinator
     func survivalDataCoordinator(navigation: UINavigationController, type: NavigationStats) -> Coordinator
     func profileNavigationController() -> UINavigationController
     func favouriteNavigationController() -> UINavigationController

@@ -10,7 +10,6 @@ enum StatsGeneralTransition {
     case goKillsData
     case goWeapons
     case goSurvival
-    case goGamesModes
 }
 protocol StatsGeneralCoordinator: Coordinator {
     func performTransition(_ transition: StatsGeneralTransition)
@@ -56,11 +55,6 @@ extension StatsGeneralCoordinatorImp: StatsGeneralCoordinator {
             let survivalDataCoordinator = dependencies.external.survivalDataCoordinator(navigation: navigationController, type: type)
             survivalDataCoordinator.start()
             append(child: survivalDataCoordinator)
-        case .goGamesModes:
-            guard let navigationController = navigation else {return}
-            let gamesModeDataCoordinator = dependencies.external.gamesModesDataCoordinator(navigation: navigationController, type: type)
-            gamesModeDataCoordinator.start()
-            append(child: gamesModeDataCoordinator)
         }
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 extension UIViewController {
     func backButton(action: Selector?) {
         let backButton = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.backward.circle.fill"), style: .plain, target: self, action: action)
+        backButton.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
         navigationItem.leftBarButtonItem = backButton
     }
     func legendButton() -> UIButton  {

@@ -7,19 +7,14 @@
 
 import UIKit
 
-//TODO: refactorizar esta clase, sin didset
-
 class PercentageRectangleView: UIView {
     private let fillLayer = CALayer()
-    var percentage: CGFloat = 0 {
-        didSet{
-            setNeedsDisplay()
-        }
-    }
-    let label: UILabel = {
+    private var percentage: CGFloat = 0
+    private lazy var label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
     
@@ -27,12 +22,22 @@ class PercentageRectangleView: UIView {
         super.init(frame: frame)
         self.backgroundColor = .black
         configUI()
-        label.text = "Victorias \(percentage) %"
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configUI()
+    }
+    //TODO: meterlo en un struct
+    func configureView(text: String = "", percentage: CGFloat, backgroundColor: UIColor = .black, cornerRadius: CGFloat = 0, withText: Bool = true) {
+        if withText {
+            let percentageLabel = String(format: "%.0f", percentage)
+            self.label.text = "\(text) \(percentageLabel) %"
+        }
+        self.percentage = percentage
+        self.backgroundColor = backgroundColor
+        self.layer.cornerRadius = cornerRadius
+        fillLayer.cornerRadius = cornerRadius
     }
     
     override func layoutSubviews() {
@@ -43,7 +48,7 @@ class PercentageRectangleView: UIView {
     }
     
     private func configUI() {
-        fillLayer.backgroundColor = UIColor.orange.cgColor
+        fillLayer.backgroundColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1).cgColor
         self.layer.addSublayer(fillLayer)
         
         label.translatesAutoresizingMaskIntoConstraints = false

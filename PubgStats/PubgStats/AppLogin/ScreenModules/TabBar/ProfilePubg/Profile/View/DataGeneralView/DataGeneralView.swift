@@ -49,8 +49,8 @@ private extension DataGeneralView {
         gamesPlayedLabel.text = "Partidas: 200"
         wonLabel.text = "Victorias: 200"
         
-        percentageRectangleView.percentage = 20
-        percentageRectangleView.label.text = "Victorias 20 %"
+//        percentageRectangleView.percentage = 20
+//        percentageRectangleView.label.text = "Victorias 20 %"
 
         isHiddenTotalStackView(true)
     }

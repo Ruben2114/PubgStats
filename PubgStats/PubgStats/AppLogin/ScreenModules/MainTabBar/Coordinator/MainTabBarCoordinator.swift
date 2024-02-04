@@ -26,7 +26,7 @@ final class MainTabBarCoordinatorImp: MainTabBarCoordinator {
     }
     
     func start() {
-        let profileCoordinator = dependencies.external.profileCoordinator()
+        let profileCoordinator = dependencies.external.profileCoordinator(navigation: dependencies.external.profileNavigationController())
         profileCoordinator.set(dataProfile).start()
         let profile = createNavController(navigation: dependencies.external.profileNavigationController(),
                                            coordinator: profileCoordinator,

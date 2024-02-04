@@ -9,7 +9,7 @@ import UIKit
 
 protocol MainTabBarExternalDependency {
     func mainTabBarCoordinator(data: IdAccountDataProfileRepresentable) -> Coordinator
-    func profileCoordinator() -> BindableCoordinator
+    func profileCoordinator(navigation: UINavigationController) -> BindableCoordinator
     func favouriteCoordinator() -> Coordinator
     func guideCoordinator() -> Coordinator
     func settingsCoordinator() -> Coordinator

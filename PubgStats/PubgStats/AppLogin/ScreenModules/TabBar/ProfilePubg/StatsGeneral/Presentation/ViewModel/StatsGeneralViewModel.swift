@@ -101,6 +101,6 @@ final class StatsGeneralViewModel {
         coordinator?.performTransition(.goSurvival)
     }
     func goGamesModes() {
-        coordinator?.performTransition(.goGamesModes)
+        
     }
 }

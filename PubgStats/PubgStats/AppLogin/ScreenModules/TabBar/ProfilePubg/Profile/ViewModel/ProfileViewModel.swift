@@ -24,6 +24,7 @@ final class ProfileViewModel: DataBindable {
     var state: AnyPublisher<ProfileState, Never>
     private let getPlayerDetailsSubject = PassthroughSubject<IdAccountDataProfileRepresentable, Never>()
     @BindingOptional private var dataProfile: IdAccountDataProfileRepresentable?
+    private var representable: PlayerDetailsRepresentable?
     
     init(dependencies: ProfileDependency) {
         self.dependencies = dependencies
@@ -40,7 +41,7 @@ final class ProfileViewModel: DataBindable {
     }
     
     func goToModes() {
-        //TODO: coodinator
+        coordinator.goToAttributes(attributes: getAttributesModeGames(), type: .modeGames)
     }
     
     func goToWeapon() {
@@ -134,6 +135,7 @@ private extension ProfileViewModel {
             default: break
             }
         } receiveValue: { [weak self] data in
+            self?.representable = data
             //TODO: aqui ya tengo toda la info ahora seria ir enviando a las vistas la información
             self?.getProfileHeader(data.infoSurvival)
             self?.getChartData(infoGamesModes: data.infoGamesModes)
@@ -151,5 +153,151 @@ private extension ProfileViewModel {
             self.profileDataUseCase.fetchPlayerDetails(data)
         }.receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
+    }
+}
+
+//MARK: - Attributes Mode Games
+private extension ProfileViewModel {
+    func getAttributesModeGames() -> [AttributesViewRepresentable] {
+        var attributes: [AttributesViewRepresentable] = []
+        let attributesSolo = getAttributesDetailsModeGames(statistics: representable?.infoGamesModes.solo, type: .solo)
+        let attributesSoloFpp = getAttributesDetailsModeGames(statistics: representable?.infoGamesModes.soloFpp, type: .soloFpp)
+        let attributesDuo = getAttributesDetailsModeGames(statistics: representable?.infoGamesModes.duo, type: .duo)
+        let attributesDuoFpp = getAttributesDetailsModeGames(statistics: representable?.infoGamesModes.duoFpp, type: .duoFpp)
+        let attributesSquad = getAttributesDetailsModeGames(statistics: representable?.infoGamesModes.squad, type: .squad)
+        let attributesSquadFpp = getAttributesDetailsModeGames(statistics: representable?.infoGamesModes.squadFpp, type: .squadFpp)
+        
+        [attributesSolo, attributesSoloFpp, attributesDuo, attributesDuoFpp, attributesSquad, attributesSquadFpp].forEach { data in
+            attributes.append(data)
+        }
+        return attributes
+    }
+    
+    func getAttributesDetailsModeGames(statistics: StatisticsGameModesRepresentable?, type: GamesModeType) -> AttributesViewRepresentable {
+        return DefaultAttributesViewRepresentable(title: type.getTitle(),
+                                                  attributesHeaderDetails: getAttributesHeaderDetails(statistics: statistics),
+                                                  attributesDetails: getAttributesDetails(statistics: statistics),
+                                                  attributesHome: DefaultAttributesHome(rightAmount: statistics?.wins,
+                                                                                                 leftAmount: statistics?.roundsPlayed,
+                                                                                                 percentage: getPercentage(statistic: statistics?.wins,
+                                                                                                                           total: statistics?.roundsPlayed),
+                                                                                                 image: type.setImage()),
+                                                  isDetails: false,
+                                                  type: .modeGames)
+    }
+    
+    func getAttributesDetails(statistics: StatisticsGameModesRepresentable?) -> [[AttributesDetails]] {
+        guard let statistics = statistics else { return []}
+        var attributes: [[AttributesDetails]] = []
+        let attributesSectionOne: [AttributesDetails] = [DefaultAttributesDetails(titleSection: "Kills",
+                                                                                  title: "max Kill Streaks",
+                                                                                  amount: "\(statistics.maxKillStreaks)"),
+                                                         DefaultAttributesDetails(title: "round Most Kills",
+                                                                                  amount: "\(statistics.roundMostKills)"),
+                                                         DefaultAttributesDetails(title: "player killed a teammate",
+                                                                                  amount: "\(statistics.teamKills)"),
+                                                         DefaultAttributesDetails(title: "road Kills",
+                                                                                  amount: "\(statistics.roadKills)"),
+                                                         DefaultAttributesDetails(title: "kills",
+                                                                                  amount: "\(statistics.kills)"),
+                                                         DefaultAttributesDetails(title: "longest Kill",
+                                                                                  amount: "\(statistics.longestKill)")]
+        
+        let attributesSectionTwo: [AttributesDetails] = [DefaultAttributesDetails(titleSection: "General",
+                                                                                  title: "longest Time Survived",
+                                                                                  amount: "\(statistics.mostSurvivalTime)"),
+                                                         DefaultAttributesDetails(title: "losses",
+                                                                                  amount: "\(statistics.losses)"),
+                                                         DefaultAttributesDetails(title: "damage dealt",
+                                                                                  amount: "\(statistics.damageDealt)"),
+                                                         DefaultAttributesDetails(title: "Asistencias",
+                                                                                  amount: "\(statistics.assists)"),
+                                                         DefaultAttributesDetails(title: "players knocked",
+                                                                                  amount: "\(statistics.dBNOS)"),
+                                                         DefaultAttributesDetails(title: "suicides",
+                                                                                  amount: "\(statistics.suicides)"),
+                                                         DefaultAttributesDetails(title: "time Survived",
+                                                                                  amount: "\(statistics.timeSurvived)"),
+                                                         DefaultAttributesDetails(title: "vehicle Destroys",
+                                                                                  amount: "\(statistics.vehicleDestroys)"),
+                                                         DefaultAttributesDetails(title: "revives",
+                                                                                  amount: "\(statistics.revives)")]
+        
+        let attributesSectionThree: [AttributesDetails] = [DefaultAttributesDetails(titleSection: "Distance",
+                                                                                    title: "Distancia andando",
+                                                                                    amount: "\(statistics.walkDistance)"),
+                                                           DefaultAttributesDetails(title: "Distancia conduciendo",
+                                                                                    amount: "\(statistics.rideDistance)"),
+                                                           DefaultAttributesDetails(title: "Distancia nadando",
+                                                                                    amount: "\(statistics.swimDistance)")]
+        let attributesSectionFour: [AttributesDetails] = [DefaultAttributesDetails(titleSection: "Items",
+                                                                                   title: "boost items",
+                                                                                   amount: "\(statistics.boosts)"),
+                                                          DefaultAttributesDetails(title: "healing items",
+                                                                                   amount: "\(statistics.heals)"),
+                                                          DefaultAttributesDetails(title: "weaponsAcquired",
+                                                                                   amount: "\(statistics.weaponsAcquired)")]
+        [attributesSectionOne, attributesSectionTwo, attributesSectionThree, attributesSectionFour].forEach { data in
+            attributes.append(data)
+        }
+        return attributes
+    }
+    
+    func getAttributesHeaderDetails(statistics: StatisticsGameModesRepresentable?) -> [AttributesHeaderDetails] {
+        let killsDay = getPercentage(statistic: statistics?.kills, total: statistics?.days, optional: true)
+        let winsDay = getPercentage(statistic: statistics?.wins, total: statistics?.days, optional: true)
+        return [DefaultAttributesHeaderDetails(title: "Tops 10: \(statistics?.top10S ?? 0) %",
+                                      percentage: getPercentage(statistic: statistics?.top10S, total: statistics?.roundsPlayed)),
+                DefaultAttributesHeaderDetails(title: "Headshot Kills: \(statistics?.headshotKills ?? 0) %",
+                                      percentage: getPercentage(statistic: statistics?.headshotKills, total: statistics?.kills)),
+                DefaultAttributesHeaderDetails(title: "kills per day: \(killsDay) %",
+                                      percentage: killsDay),
+                DefaultAttributesHeaderDetails(title: "Wins per day: \(winsDay) %",
+                                      percentage: winsDay)]
+    }
+    
+    func getPercentage(statistic: Int?, total: Int?, optional: Bool = false) -> CGFloat {
+        if !optional {
+            return statistic != 0 && total != 0 ? (CGFloat(statistic ?? 0) / CGFloat(total ?? 0) * 100).rounded() : 0
+        } else {
+            let percentage = statistic != 0 && total != 0 ? (CGFloat(statistic ?? 0) / CGFloat(total ?? 0)).rounded() : 0
+            let percentageOptional = (percentage * CGFloat(statistic ?? 0) / 100 ).rounded()
+            return percentageOptional
+        }
+    }
+}
+
+enum GamesModeType {
+    case solo
+    case soloFpp
+    case duo
+    case duoFpp
+    case squad
+    case squadFpp
+    
+    func getTitle() -> String {
+        //TODO: poner localized
+        switch self {
+        case .solo:
+            return "solo"
+        case .soloFpp:
+            return "soloFpp"
+        case .duo:
+            return "duo"
+        case .duoFpp:
+            return "duoFpp"
+        case .squad:
+            return "squad"
+        case .squadFpp:
+            return "squadFpp"
+        }
+    }
+    
+    func setImage() -> String {
+        switch self {
+        case .solo, .soloFpp: return "soloGamesModes"
+        case .duo, .duoFpp: return "duoGamesModes"
+        case .squad, .squadFpp: return "squadGamesModes"
+        }
     }
 }

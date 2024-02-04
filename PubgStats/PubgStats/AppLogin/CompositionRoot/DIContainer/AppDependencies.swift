@@ -80,6 +80,6 @@ extension AppDependencies:
     WeaponDataDetailExternalDependency,
     HelpDataExternalDependency,
     SurvivalDataExternalDependency,
-    GamesModesDataExternalDependency,
-    GamesModesDataDetailExternalDependency,
+    AttributesHomeExternalDependencies,
+    AttributesDetailExternalDependencies,
     InfoAppExternalDependency{}
