@@ -46,7 +46,8 @@ private extension DetailsCardView {
     func createDetails() {
         representableDetails?.attributesHeaderDetails.forEach({ data in
             let stack = getDetailsStack()
-            let label = getTitleLabel(text: data.title)
+            let text = representableDetails?.type == .modeGames ? setType(data.title)?.setTitle() : data.title
+            let label = getTitleLabel(text: text ?? data.title)
             let percentageRectangleView = PercentageRectangleView()
             percentageRectangleView.configureView(percentage: data.percentage, cornerRadius: 4, withText: false)
             percentageRectangleView.heightAnchor.constraint(equalToConstant: 4).isActive = true
@@ -55,19 +56,34 @@ private extension DetailsCardView {
             stack.addArrangedSubview(percentageRectangleView)
             detailsStackView.addArrangedSubview(stack)
         })
-        imageView.image = UIImage(named: representableDetails?.image ?? "")
+        let image = representableDetails?.type == .modeGames ? setType(representableDetails?.image ?? "")?.setImage() : representableDetails?.image
+        imageView.image = UIImage(named: image ?? "")
     }
     
     func createCards() {
         guard let representable = representableHome else { return }
         let labelRectangle = representable.type.getRectangleHeaderLabel()
-        rectangleView.configureView(text: labelRectangle, percentage: representable.percentage, cornerRadius: 8)
-        imageView.image = UIImage(named: representable.image)
+        rectangleView.configureView(text: labelRectangle, percentage: representable.percentage, cornerRadius: 8, withPercentageSymbol: representableDetails?.type == .modeGames)
+        let image = representable.type == .modeGames ? setType(representable.image)?.setImage() : representable.image
+        imageView.image = UIImage(named: image ?? "")
         leftLabel.text = representable.type.getLeftHeaderLabel()
         leftAmountLabel.text = "\(representable.leftAmount ?? 0)"
         rightLabel.text = representable.type.getRightHeaderLabel()
         rightAmountLabel.text = "\(representable.rightAmount ?? 0)"
-        titleLabel.text = representable.title.uppercased()
+        let title = representable.type == .modeGames ? setType(representable.title)?.setTitle() : representable.title
+        titleLabel.text = title?.uppercased()
         titleLabel.textColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
+    }
+    
+    func setType(_ mode: String) -> GamesModesTypes? {
+        switch mode {
+        case "solo": return .solo
+        case "soloFpp": return .soloFpp
+        case "duo": return .duo
+        case "duoFpp": return .duoFpp
+        case "squad": return .squad
+        case "squadFpp": return .squadFpp
+        default: return nil
+        }
     }
 }

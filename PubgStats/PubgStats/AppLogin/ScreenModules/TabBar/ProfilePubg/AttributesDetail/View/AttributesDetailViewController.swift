@@ -119,7 +119,7 @@ private extension AttributesDetailViewController {
         var maxHeigth: CGFloat = 0
         subcategoriesCollection.subviews.forEach { subview in
             if let cell = subview as? AttributesDetailsCollectionViewCell {
-                maxHeigth += (cell.frame.height / 3) + (16 / 1.5)
+                maxHeigth += (cell.frame.height / 2) + 8
             } else {
                 maxHeigth += subview.frame.height
             }
@@ -144,8 +144,8 @@ extension AttributesDetailViewController: UICollectionViewDataSource, UICollecti
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width: CGFloat = (self.view.frame.width - 32 - 32) / 3.0
-        return CGSize(width: width, height: width)
+        let width: CGFloat = (self.view.frame.width - 16 - 32) / 2.0
+        return CGSize(width: width, height: width / 2)
     }
         
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {

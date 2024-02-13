@@ -135,8 +135,8 @@ extension AttributesHomeViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let select = listAttributes[indexPath.row].type
-        viewModel.goToAttributesDetails(type: select)
+        let select = listAttributes[indexPath.row]
+        viewModel.goToAttributesDetails(select)
     }
 }
 

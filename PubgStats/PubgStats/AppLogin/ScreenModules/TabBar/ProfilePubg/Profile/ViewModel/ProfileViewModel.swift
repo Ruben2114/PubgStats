@@ -49,7 +49,7 @@ final class ProfileViewModel: DataBindable {
     }
     
     func goToSurvival() {
-        coordinator.goToAttributes(attributes: representable, type: .survival)
+        //TODO: directamente a details
     }
     
     func reload(){
@@ -160,96 +160,3 @@ private extension ProfileViewModel {
             .eraseToAnyPublisher()
     }
 }
-
-//private extension ProfileViewModel {
-//    
-//    func getAttributesDetailsModeGames(statistics: StatisticsGameModesRepresentable?, type: GamesModeType) -> AttributesViewRepresentable {
-//        return DefaultAttributesViewRepresentable(title: type.getTitle(),
-//                                                  attributesHeaderDetails: getAttributesHeaderDetails(statistics: statistics),
-//                                                  attributesDetails: getAttributesDetails(statistics: statistics),
-//                                                  attributesHome: DefaultAttributesHome(rightAmount: statistics?.wins,
-//                                                                                        leftAmount: statistics?.roundsPlayed,
-//                                                                                        percentage: getPercentage(statistic: statistics?.wins,
-//                                                                                                                  total: statistics?.roundsPlayed),
-//                                                                                        image: type.setImage()),
-//                                                  isDetails: false,
-//                                                  type: .modeGames)
-//    }
-//    
-//    func getAttributesDetails(statistics: StatisticsGameModesRepresentable?) -> [[AttributesDetails]] {
-//        guard let statistics = statistics else { return []}
-//        var attributes: [[AttributesDetails]] = []
-//        
-//        
-//        
-//        let attributesSectionOne: [AttributesDetails] = [getAttributesDetails("max Kill Streaks", "\(statistics.maxKillStreaks)", "Kills"),
-//                                                         getAttributesDetails("round Most Kills", "\(statistics.roundMostKills)"),
-//                                                         getAttributesDetails("killed a teammate", "\(statistics.teamKills)"),
-//                                                         getAttributesDetails("road Kills", "\(statistics.roadKills)"),
-//                                                         getAttributesDetails("kills", "\(statistics.kills)"),
-//                                                         getAttributesDetails("longest Kill", "\(String(format: "%.0f", statistics.longestKill)) m")]
-//        
-//        let attributesSectionTwo: [AttributesDetails] = [getAttributesDetails("longest Time Survived", getTime(statistics.mostSurvivalTime, true), "General"),
-//                                                         getAttributesDetails("losses", "\(statistics.losses)"),
-//                                                         getAttributesDetails("damage", String(format: "%.0f", statistics.damageDealt)),
-//                                                         getAttributesDetails("Asistencias", "\(statistics.assists)"),
-//                                                         getAttributesDetails("knocked", "\(statistics.dBNOS)"),
-//                                                         getAttributesDetails("suicides", "\(statistics.suicides)"),
-//                                                         getAttributesDetails("time Survived", getTime(statistics.timeSurvived)),
-//                                                         getAttributesDetails("vehicle Destroys", "\(statistics.vehicleDestroys)"),
-//                                                         getAttributesDetails("revives", "\(statistics.revives)")]
-//        
-//        let attributesSectionThree: [AttributesDetails] = [getAttributesDetails("Andando", getDistance(statistics.walkDistance), "Distance"),
-//                                                           getAttributesDetails("Conduciendo", getDistance(statistics.rideDistance)),
-//                                                           getAttributesDetails("Nadando", getDistance(statistics.swimDistance))]
-//        
-//        let attributesSectionFour: [AttributesDetails] = [getAttributesDetails("boost", "\(statistics.boosts)", "Items"),
-//                                                          getAttributesDetails("healing", "\(statistics.heals)"),
-//                                                          getAttributesDetails("weapons", "\(statistics.weaponsAcquired)")]
-//        [attributesSectionOne, attributesSectionTwo, attributesSectionThree, attributesSectionFour].forEach { data in
-//            attributes.append(data)
-//        }
-//        return attributes
-//    }
-//    
-//    func getAttributesDetails(_ title: String, _ amount: String, _ titleSection: String? = nil) -> AttributesDetails {
-//        return DefaultAttributesDetails(titleSection: titleSection,
-//                                        title: title,
-//                                        amount: amount)
-//    }
-//    
-//    func getAttributesHeaderDetails(statistics: StatisticsGameModesRepresentable?) -> [AttributesHeaderDetails] {
-//        let killsDay = getPercentage(statistic: statistics?.kills, total: statistics?.roundsPlayed, optional: true)
-//        let winsDay = getPercentage(statistic: statistics?.wins, total: statistics?.days, optional: true)
-//        
-//        return [DefaultAttributesHeaderDetails(title: "Tops 10: \(statistics?.top10S ?? 0)",
-//                                               percentage: getPercentage(statistic: statistics?.top10S, total: statistics?.roundsPlayed)),
-//                DefaultAttributesHeaderDetails(title: "Headshot Kills: \(statistics?.headshotKills ?? 0)",
-//                                               percentage: getPercentage(statistic: statistics?.headshotKills, total: statistics?.kills)),
-//                DefaultAttributesHeaderDetails(title: "kills per game: \(String(format: "%.2f", killsDay))",
-//                                               percentage: killsDay),
-//                DefaultAttributesHeaderDetails(title: "Wins per day: \(String(format: "%.2f", winsDay))",
-//                                               percentage: winsDay)]
-//    }
-//}
-//
-////MARK: - Attributes Mode Games
-//private extension ProfileViewModel {
-//    func getPercentage(statistic: Int?, total: Int?, optional: Bool = false) -> CGFloat {
-//        let percentage = statistic != 0 && total != 0 ? (Double(statistic ?? 0) / Double(total ?? 0)) : 0
-//        let optionalPercentage = optional ? percentage : percentage * 100
-//        return CGFloat(optionalPercentage)
-//    }
-//    
-//    func getDistance(_ distance: Double) -> String {
-//        let distanceKM = distance / 1000
-//        return "\(String(format: "%.2f", distanceKM)) km"
-//    }
-//    
-//    func getTime(_ time: Double, _ withMinutes: Bool = false) -> String {
-//        let days = Int(round(time / 86400))
-//        let hours = Int(round((time.truncatingRemainder(dividingBy: 86400)) / 3600))
-//        let minutes = Int(round((time.truncatingRemainder(dividingBy: 3600)) / 60))
-//        return withMinutes ? "\(hours) h \(minutes) m" : "\(days) d \(hours) h"
-//    }
-//}

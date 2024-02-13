@@ -29,10 +29,11 @@ class PercentageRectangleView: UIView {
         configUI()
     }
     //TODO: meterlo en un struct
-    func configureView(text: String = "", percentage: CGFloat, backgroundColor: UIColor = .black, cornerRadius: CGFloat = 0, withText: Bool = true) {
+    func configureView(text: String = "", percentage: CGFloat, backgroundColor: UIColor = .black, cornerRadius: CGFloat = 0, withText: Bool = true, withPercentageSymbol: Bool = true) {
         if withText {
             let percentageLabel = String(format: "%.0f", percentage)
-            self.label.text = "\(text) \(percentageLabel) %"
+            let percentageSymbol = withPercentageSymbol ? "%" : ""
+            self.label.text = "\(text) \(percentageLabel) \(percentageSymbol)"
         }
         self.percentage = percentage
         self.backgroundColor = backgroundColor

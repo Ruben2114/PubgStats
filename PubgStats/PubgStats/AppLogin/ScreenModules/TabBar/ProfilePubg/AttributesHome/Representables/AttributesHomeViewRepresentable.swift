@@ -92,10 +92,10 @@ struct DefaultAttributesHeaderDetails: AttributesHeaderDetails {
     }
 }
 
+//TODO: poner localized
 enum AttributesType {
     case weapons
     case modeGames
-    case survival
     
     func getTitle() -> String {
         switch self {
@@ -103,8 +103,6 @@ enum AttributesType {
             return "Weapons"
         case .modeGames:
             return "gamesModesDataViewControllerTitle".localize()
-        case .survival:
-            return "Survival"
         }
     }
     
@@ -115,8 +113,6 @@ enum AttributesType {
             return "gamesModesDetailsPubg"
         case .modeGames:
             return "gamesModesDetailsPubg"
-        case .survival:
-            return "gamesModesDetailsPubg"
         }
     }
     
@@ -125,8 +121,6 @@ enum AttributesType {
         case .weapons:
             return "Nivel"
         case .modeGames:
-            return "Victorias"
-        case .survival:
             return "Victorias"
         }
     }
@@ -137,8 +131,6 @@ enum AttributesType {
             return "Tier"
         case .modeGames:
             return "Partidas"
-        case .survival:
-            return "Partidas"
         }
     }
     
@@ -148,8 +140,44 @@ enum AttributesType {
             return "XP"
         case .modeGames:
             return "Victorias"
-        case .survival:
-            return "Victorias"
+        }
+    }
+}
+
+//TODO: poner localized
+enum GamesModesTypes {
+    case solo
+    case soloFpp
+    case duo
+    case duoFpp
+    case squad
+    case squadFpp
+    
+    func setTitle() -> String {
+        switch self {
+        case .solo:
+            return "solo"
+        case .soloFpp:
+            return "solo Fpp"
+        case .duo:
+            return "duo"
+        case .duoFpp:
+            return "duo Fpp"
+        case .squad:
+            return "squad"
+        case .squadFpp:
+            return "squad Fpp"
+        }
+    }
+    
+    func setImage() -> String {
+        switch self {
+        case .solo, .soloFpp:
+            return "soloGamesModes"
+        case .duo, .duoFpp:
+            return "duoGamesModes"
+        case .squad, .squadFpp:
+            return "squadGamesModes"
         }
     }
 }
