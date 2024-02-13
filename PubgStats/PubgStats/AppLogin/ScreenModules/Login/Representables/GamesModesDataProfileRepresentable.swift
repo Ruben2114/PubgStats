@@ -16,15 +16,11 @@ public protocol GamesModesDataProfileRepresentable {
     var top10STotal: Int { get }
     var headshotKillsTotal: Int { get }
     var timePlayed: String { get }
-    var duo: StatisticsGameModesRepresentable { get }
-    var duoFpp: StatisticsGameModesRepresentable { get }
-    var solo: StatisticsGameModesRepresentable { get }
-    var soloFpp: StatisticsGameModesRepresentable { get }
-    var squad: StatisticsGameModesRepresentable { get }
-    var squadFpp: StatisticsGameModesRepresentable { get }
+    var modes: [StatisticsGameModesRepresentable] { get }
 }
 
 public protocol StatisticsGameModesRepresentable {
+    var mode: String { get }
     var assists: Int { get }
     var boosts: Int { get }
     var dBNOS: Int { get }
@@ -66,12 +62,7 @@ struct DefaultGamesModesDataProfile: GamesModesDataProfileRepresentable {
     var top10STotal: Int
     var headshotKillsTotal: Int
     var timePlayed: String
-    var duo: StatisticsGameModesRepresentable
-    var duoFpp: StatisticsGameModesRepresentable
-    var solo: StatisticsGameModesRepresentable
-    var soloFpp: StatisticsGameModesRepresentable
-    var squad: StatisticsGameModesRepresentable
-    var squadFpp: StatisticsGameModesRepresentable
+    var modes: [StatisticsGameModesRepresentable]
     
     init(_ data: GamesModesDTO) {
         bestRankPoint = data.bestRank
@@ -82,21 +73,10 @@ struct DefaultGamesModesDataProfile: GamesModesDataProfileRepresentable {
         top10STotal = data.top10STotal
         headshotKillsTotal = data.headshotKillsTotal
         timePlayed = data.timePlayed
-        duo = DefaultStatisticsGameModes(data.duo)
-        duoFpp = DefaultStatisticsGameModes(data.duoFpp)
-        solo = DefaultStatisticsGameModes(data.solo)
-        soloFpp = DefaultStatisticsGameModes(data.soloFpp)
-        squad = DefaultStatisticsGameModes(data.squad)
-        squadFpp = DefaultStatisticsGameModes(data.squadFpp)
+        modes = data.modes.map{DefaultStatisticsGameModes($0.value, title: $0.key)}
     }
     
     init(_ data: [GamesModes]) {
-        solo = DefaultStatisticsGameModes(data.first(where: { gamesModes in gamesModes.mode == "solo"}))
-        soloFpp = DefaultStatisticsGameModes(data.first(where: { gamesModes in gamesModes.mode == "soloFpp"}))
-        duo = DefaultStatisticsGameModes(data.first(where: { gamesModes in gamesModes.mode == "duo"}))
-        duoFpp = DefaultStatisticsGameModes(data.first(where: { gamesModes in gamesModes.mode == "duoFpp"}))
-        squad = DefaultStatisticsGameModes(data.first(where: { gamesModes in gamesModes.mode == "squad"}))
-        squadFpp = DefaultStatisticsGameModes(data.first(where: { gamesModes in gamesModes.mode == "squadFpp"}))
         bestRankPoint = data.first?.bestRankPoint
         killsTotal = Int(data.first?.killsTotal ?? 0)
         assistsTotal = Int(data.first?.assistsTotal ?? 0)
@@ -105,10 +85,12 @@ struct DefaultGamesModesDataProfile: GamesModesDataProfileRepresentable {
         top10STotal = Int(data.first?.top10STotal ?? 0)
         headshotKillsTotal = Int(data.first?.headshotKillsTotal ?? 0)
         timePlayed = data.first?.timePlayed ?? ""
+        modes = data.map{DefaultStatisticsGameModes($0, title: $0.mode ?? "")}
     }
 }
 
 struct DefaultStatisticsGameModes: StatisticsGameModesRepresentable {
+    var mode: String
     var assists: Int
     var boosts: Int
     var dBNOS: Int
@@ -140,7 +122,8 @@ struct DefaultStatisticsGameModes: StatisticsGameModesRepresentable {
     var weeklyWINS: Int
     var wins: Int
     
-    init(_ data: DuoDTO) {
+    init(_ data: DuoDTO, title: String) {
+        mode = title
         assists = data.assists
         boosts = data.boosts
         dBNOS = data.dBNOS
@@ -173,36 +156,37 @@ struct DefaultStatisticsGameModes: StatisticsGameModesRepresentable {
         wins = data.wins
     }
     
-    init(_ data: GamesModes?) {
-        assists = Int(data?.assists ?? 0)
-        boosts = Int(data?.boosts ?? 0)
-        dBNOS = Int(data?.dBNOS ?? 0)
-        dailyKills = Int(data?.dailyKills ?? 0)
-        dailyWINS = Int(data?.dailyWINS ?? 0)
-        damageDealt = data?.damageDealt ?? 0
-        days = Int(data?.days ?? 0)
-        headshotKills = Int(data?.headshotKills ?? 0)
-        heals = Int(data?.heals ?? 0)
-        kills = Int(data?.kills ?? 0)
-        longestKill = data?.longestKill ?? 0
-        losses = Int(data?.losses ?? 0)
-        maxKillStreaks = Int(data?.maxKillStreaks ?? 0)
-        timeSurvived = data?.timeSurvived ?? 0
-        mostSurvivalTime = data?.mostSurvivalTime ?? 0
-        revives = Int(data?.revives ?? 0)
-        rideDistance = data?.rideDistance ?? 0
-        roadKills = Int(data?.roadKills ?? 0)
-        roundMostKills = Int(data?.roundMostKills ?? 0)
-        roundsPlayed = Int(data?.roundsPlayed ?? 0)
-        suicides = Int(data?.suicides ?? 0)
-        swimDistance = data?.swimDistance ?? 0
-        teamKills = Int(data?.teamKills ?? 0)
-        top10S = Int(data?.top10S ?? 0)
-        vehicleDestroys = Int(data?.vehicleDestroys ?? 0)
-        walkDistance = data?.walkDistance ?? 0
-        weaponsAcquired = Int(data?.weaponsAcquired ?? 0)
-        weeklyKills = Int(data?.weeklyKills ?? 0)
-        weeklyWINS = Int(data?.weeklyWINS ?? 0)
-        wins = Int(data?.wins ?? 0)
+    init(_ data: GamesModes, title: String) {
+        mode = title
+        assists = Int(data.assists)
+        boosts = Int(data.boosts)
+        dBNOS = Int(data.dBNOS)
+        dailyKills = Int(data.dailyKills)
+        dailyWINS = Int(data.dailyWINS)
+        damageDealt = data.damageDealt
+        days = Int(data.days)
+        headshotKills = Int(data.headshotKills)
+        heals = Int(data.heals)
+        kills = Int(data.kills)
+        longestKill = data.longestKill
+        losses = Int(data.losses)
+        maxKillStreaks = Int(data.maxKillStreaks)
+        timeSurvived = data.timeSurvived
+        mostSurvivalTime = data.mostSurvivalTime
+        revives = Int(data.revives)
+        rideDistance = data.rideDistance
+        roadKills = Int(data.roadKills)
+        roundMostKills = Int(data.roundMostKills)
+        roundsPlayed = Int(data.roundsPlayed)
+        suicides = Int(data.suicides)
+        swimDistance = data.swimDistance
+        teamKills = Int(data.teamKills)
+        top10S = Int(data.top10S)
+        vehicleDestroys = Int(data.vehicleDestroys)
+        walkDistance = data.walkDistance
+        weaponsAcquired = Int(data.weaponsAcquired)
+        weeklyKills = Int(data.weeklyKills)
+        weeklyWINS = Int(data.weeklyWINS)
+        wins = Int(data.wins)
     }
 }

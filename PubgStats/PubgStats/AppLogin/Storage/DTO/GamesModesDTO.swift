@@ -8,23 +8,14 @@ import Foundation
 
 struct GamesModesDTO: Decodable {
     private let data: GamesModesDataDTO
-    var duo: DuoDTO {
-        data.attributes.gameModeStats.duo
-    }
-    var duoFpp: DuoDTO {
-        data.attributes.gameModeStats.duoFpp
-    }
-    var solo: DuoDTO {
-        data.attributes.gameModeStats.solo
-    }
-    var soloFpp: DuoDTO {
-        data.attributes.gameModeStats.soloFpp
-    }
-    var squad: DuoDTO {
-        data.attributes.gameModeStats.squad
-    }
-    var squadFpp: DuoDTO {
-        data.attributes.gameModeStats.squadFpp
+    var modes: [String : DuoDTO] {
+        let gameModeStats = data.attributes.gameModeStats
+        return [ModesValues.duo : gameModeStats.duo,
+                ModesValues.duoFpp : gameModeStats.duoFpp ,
+                ModesValues.solo : gameModeStats.solo,
+                ModesValues.soloFpp : gameModeStats.soloFpp,
+                ModesValues.squad : gameModeStats.squad,
+                ModesValues.squadFpp : gameModeStats.squadFpp]
     }
     var bestRank: Double {
         data.attributes.bestRankPoint
@@ -95,11 +86,4 @@ struct DuoDTO: Decodable {
     let teamKills, top10S, vehicleDestroys: Int
     let walkDistance: Double
     let weaponsAcquired, weeklyKills, weeklyWINS, wins: Int
-    enum CodingKeys: String, CodingKey {
-        case dBNOS = "dBNOs"
-        case dailyWINS = "dailyWins"
-        case damageDealt, days, headshotKills, heals, kills, longestKill, losses, maxKillStreaks, mostSurvivalTime, revives, rideDistance, roadKills, roundMostKills, roundsPlayed, suicides, swimDistance, teamKills, timeSurvived, dailyKills, vehicleDestroys, walkDistance, weaponsAcquired, weeklyKills, wins, assists, boosts
-        case top10S = "top10s"
-        case weeklyWINS = "weeklyWins"
-    }
 }

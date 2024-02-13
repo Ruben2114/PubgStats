@@ -85,7 +85,7 @@ private extension AttributesDetailViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] attributes in
                 self?.listAttributes = attributes
-                self?.detailsCardView.configureView(attributes) //TODO: si son weapon pues otra
+                self?.detailsCardView.configureDetailsView(attributes) //TODO: si son weapon pues otra
                 self?.configureUI()
                 self?.subcategoriesCollection.reloadData()
                 self?.getMaxHeight()

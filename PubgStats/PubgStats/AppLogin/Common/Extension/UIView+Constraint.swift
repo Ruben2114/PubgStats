@@ -89,6 +89,37 @@ extension UIView {
         layer.mask = mask
         return mask
     }
+
+    func getTitleLabel(text: String) -> UILabel {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = UIFont(name: "AmericanTypewriter-Bold", size: 16)
+        label.numberOfLines = 0
+        label.text = text
+        return label
+    }
+    
+    func getDetailsStack() -> UIStackView {
+        let stack = UIStackView()
+        stack.spacing = 2
+        stack.axis = .vertical
+        stack.alignment = .fill
+        stack.distribution = .fill
+        return stack
+    }
+    
+    func embedIntoView(topMargin: CGFloat = 0, bottomMargin: CGFloat = 0, leftMargin: CGFloat = 0, rightMargin: CGFloat = 0) -> UIView {
+        let container = UIView()
+        container.addSubview(self)
+        translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            self.leftAnchor.constraint(equalTo: container.leftAnchor, constant: leftMargin),
+            self.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -rightMargin),
+            self.topAnchor.constraint(equalTo: container.topAnchor, constant: topMargin),
+            self.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -bottomMargin)
+        ])
+        return container
+    }
 }
 
 extension CGRect {

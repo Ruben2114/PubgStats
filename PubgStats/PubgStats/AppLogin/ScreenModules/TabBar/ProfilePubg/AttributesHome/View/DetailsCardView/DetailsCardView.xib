@@ -26,7 +26,7 @@
             <rect key="frame" x="0.0" y="0.0" width="588" height="266"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SI0-Uc-w6n">
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="SI0-Uc-w6n">
                     <rect key="frame" x="16" y="16" width="556" height="250"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ePG-A1-BFC">
@@ -43,7 +43,7 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </stackView>
                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ABl-UR-mm4">
-                            <rect key="frame" x="150" y="0.0" width="0.0" height="250"/>
+                            <rect key="frame" x="152" y="0.0" width="0.0" height="250"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hze-ep-SoX">
                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="238"/>
@@ -59,19 +59,19 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fy4-tC-8l1">
-                            <rect key="frame" x="150" y="0.0" width="406" height="250"/>
+                            <rect key="frame" x="154" y="0.0" width="402" height="250"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ADv-M8-09Z">
-                                    <rect key="frame" x="4" y="0.0" width="398" height="106"/>
+                                    <rect key="frame" x="4" y="0.0" width="394" height="106"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITLE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tZ5-aJ-w6s">
-                                            <rect key="frame" x="0.0" y="0.0" width="398" height="21"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="21"/>
                                             <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Itl-bQ-O3q">
-                                            <rect key="frame" x="0.0" y="33" width="398" height="45"/>
+                                            <rect key="frame" x="0.0" y="33" width="394" height="45"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="h0u-1H-dBK">
                                                     <rect key="frame" x="0.0" y="0.0" width="39.5" height="45"/>
@@ -91,7 +91,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="e4G-J8-fzH">
-                                                    <rect key="frame" x="350.5" y="0.0" width="47.5" height="45"/>
+                                                    <rect key="frame" x="346.5" y="0.0" width="47.5" height="45"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RIGHT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mpD-hd-IVJ">
                                                             <rect key="frame" x="0.0" y="0.0" width="47.5" height="19.5"/>
@@ -110,7 +110,7 @@
                                             </subviews>
                                         </stackView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fvm-RA-dXL" customClass="PercentageRectangleView" customModule="PubgStats" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="90" width="398" height="16"/>
+                                            <rect key="frame" x="0.0" y="90" width="394" height="16"/>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="pGa-JT-y7C"/>

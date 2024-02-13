@@ -10,15 +10,15 @@ import Combine
 import PubgStats
 
 struct MockDataProfleRepository: DataProfileRepository {
-    func fetchSurvivalData(name: String, account: String, platform: String) -> AnyPublisher<SurvivalDataProfileRepresentable, Error> {
+    func fetchSurvivalData(representable: IdAccountDataProfileRepresentable) -> AnyPublisher<PubgStats.SurvivalDataProfileRepresentable, Error> {
         Just(MockSurvivalDataProfile()).setFailureType(to: Error.self).eraseToAnyPublisher()
     }
     
-    func fetchGamesModeData(name: String, account: String, platform: String) -> AnyPublisher<GamesModesDataProfileRepresentable, Error> {
+    func fetchGamesModeData(representable: IdAccountDataProfileRepresentable) -> AnyPublisher<PubgStats.GamesModesDataProfileRepresentable, Error> {
         Just(MockGamesModesDataProfile()).setFailureType(to: Error.self).eraseToAnyPublisher()
     }
     
-    func fetchWeaponData(name: String, account: String, platform: String) -> AnyPublisher<WeaponDataProfileRepresentable, Error> {
+    func fetchWeaponData(representable: IdAccountDataProfileRepresentable) -> AnyPublisher<PubgStats.WeaponDataProfileRepresentable, Error> {
         Just(MockWeaponDataProfile()).setFailureType(to: Error.self).eraseToAnyPublisher()
     }
     
@@ -104,94 +104,86 @@ struct MockGamesModesDataProfile: GamesModesDataProfileRepresentable {
     var top10STotal: Int
     var headshotKillsTotal: Int
     var timePlayed: String
-    var duo: StatisticsGameModesRepresentable
-    var duoFpp: StatisticsGameModesRepresentable
-    var solo: StatisticsGameModesRepresentable
-    var soloFpp: StatisticsGameModesRepresentable
-    var squad: StatisticsGameModesRepresentable
-    var squadFpp: StatisticsGameModesRepresentable
+    var modes: [StatisticsGameModesRepresentable]
     
     init() {
         self.bestRankPoint = nil
-        self.killsTotal = 1
-        self.assistsTotal = 2
-        self.gamesPlayed = 3
-        self.wonTotal = 4
-        self.top10STotal = 5
-        self.headshotKillsTotal = 6
-        self.timePlayed = "7d"
-        self.duo = MockStatisticsGameModes()
-        self.duoFpp = MockStatisticsGameModes()
-        self.solo = MockStatisticsGameModes()
-        self.soloFpp = MockStatisticsGameModes()
-        self.squad = MockStatisticsGameModes()
-        self.squadFpp = MockStatisticsGameModes()
+        self.killsTotal = 0
+        self.assistsTotal = 0
+        self.gamesPlayed = 0
+        self.wonTotal = 0
+        self.top10STotal = 0
+        self.headshotKillsTotal = 0
+        self.timePlayed = "timePlayed"
+        self.modes = []
     }
 }
 
 struct MockStatisticsGameModes: StatisticsGameModesRepresentable {
-    var assists: String
-    var boosts: String
-    var dBNOS: String
-    var dailyKills: String
-    var dailyWINS: String
-    var damageDealt: String
-    var days: String
-    var headshotKills: String
-    var heals: String
-    var kills: String
-    var longestKill: String
-    var losses: String
-    var maxKillStreaks: String
-    var timeSurvived: String
-    var mostSurvivalTime: String
-    var revives: String
-    var rideDistance: String
-    var roadKills: String
-    var roundMostKills: String
-    var roundsPlayed: String
-    var suicides: String
-    var swimDistance: String
-    var teamKills: String
-    var top10S: String
-    var vehicleDestroys: String
-    var walkDistance: String
-    var weaponsAcquired: String
-    var weeklyKills: String
-    var weeklyWINS: String
-    var wins: String
+    var mode: String
+    var assists: Int
+    var boosts: Int
+    var dBNOS: Int
+    var dailyKills: Int
+    var dailyWINS: Int
+    var damageDealt: Double
+    var days: Int
+    var headshotKills: Int
+    var heals: Int
+    var kills: Int
+    var longestKill: Double
+    var losses: Int
+    var maxKillStreaks: Int
+    var timeSurvived: Double
+    var mostSurvivalTime: Double
+    var revives: Int
+    var rideDistance: Double
+    var roadKills: Int
+    var roundMostKills: Int
+    var roundsPlayed: Int
+    var suicides: Int
+    var swimDistance: Double
+    var teamKills: Int
+    var top10S: Int
+    var vehicleDestroys: Int
+    var walkDistance: Double
+    var weaponsAcquired: Int
+    var weeklyKills: Int
+    var weeklyWINS: Int
+    var wins: Int
     
     init() {
-        self.assists = "assists"
-        self.boosts = "boosts"
-        self.dBNOS = "dBNOS"
-        self.dailyKills = "dailyKills"
-        self.dailyWINS = "dailyWINS"
-        self.damageDealt = "damageDealt"
-        self.days = "days"
-        self.headshotKills = "headshotKills"
-        self.heals = "heals"
-        self.kills = "kills"
-        self.longestKill = "longestKill"
-        self.losses = "losses"
-        self.maxKillStreaks = "maxKillStreaks"
-        self.timeSurvived = "timeSurvived"
-        self.mostSurvivalTime = "mostSurvivalTime"
-        self.revives = "revives"
-        self.rideDistance = "rideDistance"
-        self.roadKills = "roadKills"
-        self.roundMostKills = "roundMostKills"
-        self.roundsPlayed = "roundsPlayed"
-        self.suicides = "suicides"
-        self.swimDistance = "swimDistance"
-        self.teamKills = "teamKills"
-        self.top10S = "top10S"
-        self.vehicleDestroys = "vehicleDestroys"
-        self.walkDistance = "walkDistance"
-        self.weaponsAcquired = "weaponsAcquired"
-        self.weeklyKills = "weeklyKills"
-        self.weeklyWINS = "weeklyWINS"
-        self.wins = "wins"
+        self.mode = "mode"
+        self.assists = 0
+        self.boosts = 0
+        self.dBNOS = 0
+        self.dailyKills = 0
+        self.dailyWINS = 0
+        self.damageDealt = 0
+        self.days = 0
+        self.headshotKills = 0
+        self.heals = 0
+        self.kills = 0
+        self.longestKill = 0
+        self.losses = 0
+        self.maxKillStreaks = 0
+        self.timeSurvived = 0
+        self.mostSurvivalTime = 0
+        self.revives = 0
+        self.rideDistance = 0
+        self.roadKills = 0
+        self.roundMostKills = 0
+        self.roundsPlayed = 0
+        self.suicides = 0
+        self.swimDistance = 0
+        self.teamKills = 0
+        self.top10S = 0
+        self.vehicleDestroys = 0
+        self.walkDistance = 0
+        self.weaponsAcquired = 0
+        self.weeklyKills = 0
+        self.weeklyWINS = 0
+        self.wins = 0
     }
 }
 

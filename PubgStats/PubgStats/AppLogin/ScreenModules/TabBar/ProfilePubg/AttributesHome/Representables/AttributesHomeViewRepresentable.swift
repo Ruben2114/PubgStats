@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol AttributesViewRepresentable {
-    var title: String { get }
-    var attributesHeaderDetails: [AttributesHeaderDetails] { get }
-    var attributesDetails: [[AttributesDetails]] { get }
-    var attributesHome: AttributesHome { get }
-    var isDetails: Bool { get set }
-    var type: AttributesType { get }
-}
+
+ protocol AttributesViewRepresentable {
+     var title: String { get }
+     var image: String { get }
+     var attributesHeaderDetails: [AttributesHeaderDetails] { get }
+     var attributesDetails: [[AttributesDetails]] { get }
+     var type: AttributesType { get }
+ }
 
 protocol AttributesHeaderDetails {
     var title: String { get }
@@ -28,26 +28,26 @@ protocol AttributesDetails {
 }
 
 protocol AttributesHome {
+    var title: String { get }
     var rightAmount: Int? { get }
     var leftAmount: Int? { get }
     var percentage: CGFloat { get }
     var image: String { get }
+    var type: AttributesType { get }
 }
 
 struct DefaultAttributesViewRepresentable: AttributesViewRepresentable {
     var title: String
+    var image: String
     var attributesHeaderDetails: [AttributesHeaderDetails]
     var attributesDetails: [[AttributesDetails]]
-    var attributesHome: AttributesHome
-    var isDetails: Bool
     var type: AttributesType
     
-    init(title: String, attributesHeaderDetails: [AttributesHeaderDetails], attributesDetails: [[AttributesDetails]], attributesHome: AttributesHome, isDetails: Bool, type: AttributesType) {
+    init(title: String, image: String, attributesHeaderDetails: [AttributesHeaderDetails], attributesDetails: [[AttributesDetails]], type: AttributesType) {
         self.title = title
+        self.image = image
         self.attributesHeaderDetails = attributesHeaderDetails
         self.attributesDetails = attributesDetails
-        self.attributesHome = attributesHome
-        self.isDetails = isDetails
         self.type = type
     }
 }
@@ -65,16 +65,20 @@ struct DefaultAttributesDetails: AttributesDetails {
 }
 
 struct DefaultAttributesHome: AttributesHome {
+    var title: String
     var rightAmount: Int?
     var leftAmount: Int?
     var percentage: CGFloat
     var image: String
+    var type: AttributesType
     
-    init(rightAmount: Int? = nil, leftAmount: Int? = nil, percentage: CGFloat, image: String) {
+    init(title: String, rightAmount: Int? = nil, leftAmount: Int? = nil, percentage: CGFloat, image: String, type: AttributesType) {
+        self.title = title
         self.rightAmount = rightAmount
         self.leftAmount = leftAmount
         self.percentage = percentage
         self.image = image
+        self.type = type
     }
 }
 
@@ -91,7 +95,7 @@ struct DefaultAttributesHeaderDetails: AttributesHeaderDetails {
 enum AttributesType {
     case weapons
     case modeGames
-    case matches
+    case survival
     
     func getTitle() -> String {
         switch self {
@@ -99,8 +103,8 @@ enum AttributesType {
             return "Weapons"
         case .modeGames:
             return "gamesModesDataViewControllerTitle".localize()
-        case .matches:
-            return "Matches"
+        case .survival:
+            return "Survival"
         }
     }
     
@@ -111,7 +115,7 @@ enum AttributesType {
             return "gamesModesDetailsPubg"
         case .modeGames:
             return "gamesModesDetailsPubg"
-        case .matches:
+        case .survival:
             return "gamesModesDetailsPubg"
         }
     }
@@ -122,8 +126,8 @@ enum AttributesType {
             return "Nivel"
         case .modeGames:
             return "Victorias"
-        case .matches:
-            return "Partidas"
+        case .survival:
+            return "Victorias"
         }
     }
     
@@ -133,7 +137,7 @@ enum AttributesType {
             return "Tier"
         case .modeGames:
             return "Partidas"
-        case .matches:
+        case .survival:
             return "Partidas"
         }
     }
@@ -144,8 +148,8 @@ enum AttributesType {
             return "XP"
         case .modeGames:
             return "Victorias"
-        case .matches:
-            return "Partidas"
+        case .survival:
+            return "Victorias"
         }
     }
 }

@@ -25,8 +25,7 @@ final class AttributesDetailViewModel: DataBindable {
     }
     
     func viewDidLoad() {
-        guard var attributes = attributesDetailList else { return }
-        attributes.isDetails = true
+        guard let attributes = attributesDetailList else { return }
         stateSubject.send(attributes)
     }
     

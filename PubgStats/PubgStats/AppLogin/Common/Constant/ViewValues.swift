@@ -17,3 +17,12 @@ struct ViewValues {
     static let gradientTitleInit: NSNumber = 0.6
     static let gradientTitleEnd: NSNumber = 0.9
 }
+
+struct ModesValues {
+    static let duo = "duo"
+    static let duoFpp = "duoFpp"
+    static let solo = "solo"
+    static let soloFpp = "soloFpp"
+    static let squad = "squad"
+    static let squadFpp = "squadFpp"
+}

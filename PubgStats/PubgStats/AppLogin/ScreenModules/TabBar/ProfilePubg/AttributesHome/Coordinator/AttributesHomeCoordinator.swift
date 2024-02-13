@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AttributesHomeCoordinator: BindableCoordinator {
-    func goGameMode(_ attributes: AttributesViewRepresentable)
+    func goToAttributesDetails(_ attributes: AttributesViewRepresentable?)
     func goBack()
 }
 
@@ -33,7 +33,7 @@ extension AttributesHomeCoordinatorImp {
         self.navigation?.pushViewController(dependencies.resolve(), animated: true)
     }
     
-    func goGameMode(_ attributes: AttributesViewRepresentable) {
+    func goToAttributesDetails(_ attributes: AttributesViewRepresentable?) {
         //TODO: ver como quitar el !
         let coordinator = dependencies.external.attributesDetailCoordinator(navigation: navigation!)
         coordinator

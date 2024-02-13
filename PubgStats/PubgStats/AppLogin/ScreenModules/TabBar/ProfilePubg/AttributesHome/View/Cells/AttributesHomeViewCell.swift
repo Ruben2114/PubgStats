@@ -25,7 +25,7 @@ class AttributesHomeViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func configureWith(representable: AttributesViewRepresentable) {
-        detailsCardView.configureView(representable)
+    func configureWith(representable: AttributesHome) {
+        detailsCardView.configureHomeView(representable)
     }
 }

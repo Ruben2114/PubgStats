@@ -28,8 +28,7 @@ class AttributesHomeViewController: UIViewController {
         return tableView
     }()
     
-    private var listAttributes: [AttributesViewRepresentable] = []
-    private var type: AttributesType?
+    private var listAttributes: [AttributesHome] = []
     private let viewModel: AttributesHomeViewModel
     private let dependencies: AttributesHomeDependencies
     private var cancellable = Set<AnyCancellable>()
@@ -74,9 +73,8 @@ private extension AttributesHomeViewController {
     func bindViewModel() {
         viewModel.state
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] type, representable in
-                self?.listAttributes = representable
-                self?.type = type
+            .sink { [weak self] representable in
+                self?.listAttributes = representable ?? []
                 self?.configureUI()
                 self?.tableView.reloadData()
                 self?.hideSpinner()
@@ -84,11 +82,11 @@ private extension AttributesHomeViewController {
     }
     
     func configureUI() {
-        let image = type?.getImage() ?? ""
+        let image = listAttributes.first?.type.getImage() ?? ""
         imageBackground.image = UIImage(named: image)
         view.insertSubview(imageBackground, at: 0)
         imageBackground.frame = view.bounds
-        title = type?.getTitle()
+        title = listAttributes.first?.type.getTitle()
     }
     
     func setupTableView() {
@@ -137,8 +135,8 @@ extension AttributesHomeViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let select = listAttributes[indexPath.row]
-        viewModel.goGameMode(representable: select)
+        let select = listAttributes[indexPath.row].type
+        viewModel.goToAttributesDetails(type: select)
     }
 }
 

@@ -232,7 +232,7 @@ private extension LocalDataProfileServiceImp {
         dataGamesMode.losses = Int32(result.losses)
         dataGamesMode.maxKillStreaks = Int32(result.maxKillStreaks)
         dataGamesMode.mostSurvivalTime = result.mostSurvivalTime
-        dataGamesMode.revives = Int32(data.solo.revives)
+        dataGamesMode.revives = Int32(result.revives)
         dataGamesMode.rideDistance = result.rideDistance
         dataGamesMode.roadKills = Int32(result.roadKills)
         dataGamesMode.roundMostKills = Int32(result.roundMostKills)
@@ -301,15 +301,7 @@ private extension LocalDataProfileServiceImp {
         do {
             let result = try context.fetch(request)
             if let profile = result.first{
-                let gameModes = [
-                    "solo": gamesModeData.solo,
-                    "soloFpp": gamesModeData.soloFpp,
-                    "duo": gamesModeData.duo,
-                    "duoFpp": gamesModeData.duoFpp,
-                    "squad": gamesModeData.squad,
-                    "squadFpp": gamesModeData.squadFpp
-                ]
-                gameModes.forEach { mode in
+                gamesModeData.modes.forEach { mode in
                     saveGameData(profile: profile, mode: mode.key, result: mode.value, data: gamesModeData)
                 }
             }
