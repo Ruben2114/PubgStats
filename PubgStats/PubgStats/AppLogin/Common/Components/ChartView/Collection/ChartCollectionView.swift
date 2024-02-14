@@ -100,7 +100,6 @@ private extension ChartCollectionView {
         let indexPath = IndexPath(item: transactionSelected, section: 0)
         self.layoutIfNeeded()
         self.selectItem(at: indexPath, animated: false, scrollPosition: .centeredHorizontally)
-        let cellInfo = chartsData[indexPath.item]
         subject.send(.didSelectChart(indexPath.item))
     }
     
@@ -119,7 +118,6 @@ private extension ChartCollectionView {
     func endScrollingAndSelectChart() {
         guard let indexPath = self.layout.indexPathForCenterRect(), indexPath.item != chartSelectedIndex else { return }
         chartSelectedIndex = indexPath.item
-        let cellInfo = chartsData[indexPath.item]
         subject.send(.didSelectChart(indexPath.item))
     }
 }

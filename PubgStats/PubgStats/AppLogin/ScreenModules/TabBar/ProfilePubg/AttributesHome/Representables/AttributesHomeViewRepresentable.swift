@@ -7,14 +7,34 @@
 
 import Foundation
 
+protocol ProfileAttributesDetailsRepresentable {
+    var infoGamesModesDetails: StatisticsGameModesRepresentable? { get }
+    var infoWeaponDetails: WeaponSummaryRepresentable? { get }
+    var infoSurvivalDetails: SurvivalDataProfileRepresentable? { get }
+    var type: AttributesType { get }
+}
 
- protocol AttributesViewRepresentable {
-     var title: String { get }
-     var image: String { get }
-     var attributesHeaderDetails: [AttributesHeaderDetails] { get }
-     var attributesDetails: [[AttributesDetails]] { get }
-     var type: AttributesType { get }
- }
+struct DefaultProfileAttributesDetails: ProfileAttributesDetailsRepresentable {
+    var infoGamesModesDetails: StatisticsGameModesRepresentable?
+    var infoWeaponDetails: WeaponSummaryRepresentable?
+    var infoSurvivalDetails: SurvivalDataProfileRepresentable?
+    var type: AttributesType
+    
+    init(infoGamesModesDetails: StatisticsGameModesRepresentable? = nil, infoWeaponDetails: WeaponSummaryRepresentable? = nil, infoSurvivalDetails: SurvivalDataProfileRepresentable? = nil, type: AttributesType) {
+        self.infoGamesModesDetails = infoGamesModesDetails
+        self.infoWeaponDetails = infoWeaponDetails
+        self.infoSurvivalDetails = infoSurvivalDetails
+        self.type = type
+    }
+}
+
+protocol AttributesViewRepresentable {
+    var title: String { get }
+    var image: String { get }
+    var attributesHeaderDetails: [AttributesHeaderDetails] { get }
+    var attributesDetails: [[AttributesDetails]] { get }
+    var type: AttributesType { get }
+}
 
 protocol AttributesHeaderDetails {
     var title: String { get }
@@ -96,6 +116,7 @@ struct DefaultAttributesHeaderDetails: AttributesHeaderDetails {
 enum AttributesType {
     case weapons
     case modeGames
+    case survival
     
     func getTitle() -> String {
         switch self {
@@ -103,6 +124,8 @@ enum AttributesType {
             return "Weapons"
         case .modeGames:
             return "gamesModesDataViewControllerTitle".localize()
+        case .survival:
+            return "Survival"
         }
     }
     
@@ -113,6 +136,8 @@ enum AttributesType {
             return "gamesModesDetailsPubg"
         case .modeGames:
             return "gamesModesDetailsPubg"
+        case .survival:
+            return "gamesModesDetailsPubg"
         }
     }
     
@@ -122,6 +147,8 @@ enum AttributesType {
             return "Nivel"
         case .modeGames:
             return "Victorias"
+        case .survival:
+            return ""
         }
     }
     
@@ -131,6 +158,8 @@ enum AttributesType {
             return "Tier"
         case .modeGames:
             return "Partidas"
+        case .survival:
+            return ""
         }
     }
     
@@ -140,6 +169,8 @@ enum AttributesType {
             return "XP"
         case .modeGames:
             return "Victorias"
+        case .survival:
+            return ""
         }
     }
 }

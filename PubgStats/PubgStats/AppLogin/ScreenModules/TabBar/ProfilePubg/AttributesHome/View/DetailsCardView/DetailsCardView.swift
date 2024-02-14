@@ -24,7 +24,7 @@ final class DetailsCardView: XibView {
     private var representableDetails: AttributesViewRepresentable?
     private var representableHome: AttributesHome?
     
-    func configureDetailsView(_ representable: AttributesViewRepresentable) {
+    func configureDetailsView(_ representable: AttributesViewRepresentable?) {
         self.representableDetails = representable
         createDetails()
         containerView.isHidden = true

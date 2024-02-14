@@ -116,13 +116,20 @@ private extension AttributesDetailViewController {
     
     func getMaxHeight() {
         subcategoriesCollection.layoutIfNeeded()
-        var maxHeigth: CGFloat = 0
+        var cellHeigth: CGFloat = 0
+        var headerHeigth: CGFloat = 0
+        var countCell: CGFloat = 0
         subcategoriesCollection.subviews.forEach { subview in
             if let cell = subview as? AttributesDetailsCollectionViewCell {
-                maxHeigth += (cell.frame.height / 2) + 8
+                cellHeigth += (cell.frame.height)
+                countCell += 1
             } else {
-                maxHeigth += subview.frame.height
+                headerHeigth += subview.frame.height
             }
+        }
+        var maxHeigth: CGFloat = (cellHeigth / 2) + CGFloat((countCell * 8)) + headerHeigth
+        if cellHeigth.remainder(dividingBy: 2) != 0 {
+            maxHeigth += (cellHeigth / countCell) * 2
         }
         collectionViewHeight?.constant = maxHeigth
     }

@@ -41,11 +41,13 @@ final class ProfileViewModel: DataBindable {
     }
     
     func goToModes() {
-        coordinator.goToAttributes(attributes: representable, type: .modeGames)
+        let attributes = DefaultProfileAttributes(infoGamesModes: representable?.infoGamesModes)
+        coordinator.goToAttributes(attributes: attributes)
     }
     
     func goToWeapon() {
-        coordinator.goToAttributes(attributes: representable, type: .weapons)
+        let attributes = DefaultProfileAttributes(infoWeapon: representable?.infoWeapon)
+        coordinator.goToAttributes(attributes: attributes)
     }
     
     func goToSurvival() {
