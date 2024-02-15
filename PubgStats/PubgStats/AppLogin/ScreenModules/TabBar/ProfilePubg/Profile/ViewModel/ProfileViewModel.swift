@@ -51,7 +51,8 @@ final class ProfileViewModel: DataBindable {
     }
     
     func goToSurvival() {
-        //TODO: directamente a details
+        let attributesDetails = DefaultProfileAttributesDetails(infoSurvivalDetails: representable?.infoSurvival, type: .survival)
+        coordinator.goToAttributesDetails(attributesDetails)
     }
     
     func reload(){

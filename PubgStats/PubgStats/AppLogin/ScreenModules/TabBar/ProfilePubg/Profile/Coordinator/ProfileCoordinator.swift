@@ -9,6 +9,7 @@ import UIKit
 
 protocol ProfileCoordinator: BindableCoordinator {
     func goToAttributes(attributes: ProfileAttributesRepresentable)
+    func goToAttributesDetails(_ attributes: ProfileAttributesDetailsRepresentable?)
 }
 
 final class ProfileCoordinatorImp: ProfileCoordinator {
@@ -35,6 +36,14 @@ extension ProfileCoordinatorImp {
     func goToAttributes(attributes: ProfileAttributesRepresentable) {
         //TODO: ver como se hace en la app para no forzar !
         let coordinator = dependencies.external.attributesHomeCoordinator(navigation: navigation!)
+        coordinator
+            .set(attributes)
+            .start()
+        append(child: coordinator)
+    }
+    
+    func goToAttributesDetails(_ attributes: ProfileAttributesDetailsRepresentable?) {
+        let coordinator = dependencies.external.attributesDetailCoordinator(navigation: navigation!)
         coordinator
             .set(attributes)
             .start()

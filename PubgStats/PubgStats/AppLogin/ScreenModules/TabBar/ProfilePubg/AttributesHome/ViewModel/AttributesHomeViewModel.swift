@@ -34,7 +34,12 @@ final class AttributesHomeViewModel: DataBindable {
             guard let summary = attributesHomeList?.infoWeapon?.weaponSummaries
                 .filter({ $0.name == select.title })
                 .first else { return }
-            let attributesDetails = DefaultProfileAttributesDetails(infoWeaponDetails: summary, type: .weapons)
+            let weaponSummary = DefaultAttributesWeaponDetails(weaponDetails: summary,
+                                                               killsTotal: getAmountTotal("Kills"),
+                                                               damagePlayerTotal: getAmountTotal("DamagePlayer"),
+                                                               headShotsTotal: getAmountTotal("HeadShots"),
+                                                               groggiesTotal: getAmountTotal("Groggies"))
+            let attributesDetails = DefaultProfileAttributesDetails(infoWeaponDetails: weaponSummary, type: .weapons)
             coordinator.goToAttributesDetails(attributesDetails)
         case .modeGames:
             guard let summary = attributesHomeList?.infoGamesModes?.modes
@@ -92,5 +97,13 @@ private extension AttributesHomeViewModel {
         let percentage = statistic != 0 && total != 0 ? ((statistic ?? 0) / (total ?? 0)) : 0
         let optionalPercentage = optional ? percentage : percentage * 100
         return CGFloat(optionalPercentage)
+    }
+    
+    func getAmountTotal(_ key: String) -> Double{
+        var value: Double = 0
+        attributesHomeList?.infoWeapon?.weaponSummaries.forEach({ summary in
+            value += summary.statsTotal.filter({$0.key == key}).compactMap({$0.value}).reduce(0, +)
+        })
+        return value
     }
 }

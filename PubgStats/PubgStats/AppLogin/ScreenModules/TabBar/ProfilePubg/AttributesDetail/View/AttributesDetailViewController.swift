@@ -63,7 +63,8 @@ private extension AttributesDetailViewController {
     }
     
     func configureScrollableStackView() {
-        scrollableStackView.addArrangedSubview(detailsCardView)
+        let cardView = detailsCardView.embedIntoView(topMargin: 16, leftMargin: 16, rightMargin: 16)
+        scrollableStackView.addArrangedSubview(cardView)
         let newCollection = subcategoriesCollection.embedIntoView(leftMargin: 16, rightMargin: 16)
         scrollableStackView.addArrangedSubview(newCollection)
     }
@@ -83,9 +84,17 @@ private extension AttributesDetailViewController {
     func bindViewModel() {
         viewModel.state
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] attributes in
-                self?.listAttributes = attributes
-                self?.detailsCardView.configureDetailsView(attributes) //TODO: si son weapon pues otra
+            .sink { [weak self] state in
+                switch state {
+                case .idle:
+                    break
+                case .showWeaponOrGamesModes(let attributes):
+                    self?.listAttributes = attributes
+                    self?.detailsCardView.configureDetailsView(attributes)
+                case .showSurvival(let attributeHome, let attributeDetails):
+                    self?.listAttributes = attributeDetails
+                    self?.detailsCardView.configureHomeView(attributeHome)
+                }
                 self?.configureUI()
                 self?.subcategoriesCollection.reloadData()
                 self?.getMaxHeight()

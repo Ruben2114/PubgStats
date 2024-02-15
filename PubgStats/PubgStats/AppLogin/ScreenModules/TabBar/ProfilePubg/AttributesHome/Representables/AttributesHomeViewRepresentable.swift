@@ -9,22 +9,46 @@ import Foundation
 
 protocol ProfileAttributesDetailsRepresentable {
     var infoGamesModesDetails: StatisticsGameModesRepresentable? { get }
-    var infoWeaponDetails: WeaponSummaryRepresentable? { get }
+    var infoWeaponDetails: AttributesWeaponDetailsRepresentable? { get }
     var infoSurvivalDetails: SurvivalDataProfileRepresentable? { get }
     var type: AttributesType { get }
 }
 
+protocol AttributesWeaponDetailsRepresentable {
+    var weaponDetails: WeaponSummaryRepresentable { get }
+    var killsTotal: Double { get }
+    var damagePlayerTotal: Double { get }
+    var headShotsTotal: Double { get }
+    var groggiesTotal: Double { get }
+}
+
 struct DefaultProfileAttributesDetails: ProfileAttributesDetailsRepresentable {
     var infoGamesModesDetails: StatisticsGameModesRepresentable?
-    var infoWeaponDetails: WeaponSummaryRepresentable?
+    var infoWeaponDetails: AttributesWeaponDetailsRepresentable?
     var infoSurvivalDetails: SurvivalDataProfileRepresentable?
     var type: AttributesType
     
-    init(infoGamesModesDetails: StatisticsGameModesRepresentable? = nil, infoWeaponDetails: WeaponSummaryRepresentable? = nil, infoSurvivalDetails: SurvivalDataProfileRepresentable? = nil, type: AttributesType) {
+    init(infoGamesModesDetails: StatisticsGameModesRepresentable? = nil, infoWeaponDetails: AttributesWeaponDetailsRepresentable? = nil, infoSurvivalDetails: SurvivalDataProfileRepresentable? = nil, type: AttributesType) {
         self.infoGamesModesDetails = infoGamesModesDetails
         self.infoWeaponDetails = infoWeaponDetails
         self.infoSurvivalDetails = infoSurvivalDetails
         self.type = type
+    }
+}
+
+struct DefaultAttributesWeaponDetails: AttributesWeaponDetailsRepresentable {
+    var weaponDetails: WeaponSummaryRepresentable
+    var killsTotal: Double
+    var damagePlayerTotal: Double
+    var headShotsTotal: Double
+    var groggiesTotal: Double
+    
+    init(weaponDetails: WeaponSummaryRepresentable, killsTotal: Double, damagePlayerTotal: Double, headShotsTotal: Double, groggiesTotal: Double) {
+        self.weaponDetails = weaponDetails
+        self.killsTotal = killsTotal
+        self.damagePlayerTotal = damagePlayerTotal
+        self.headShotsTotal = headShotsTotal
+        self.groggiesTotal = groggiesTotal
     }
 }
 
@@ -148,7 +172,7 @@ enum AttributesType {
         case .modeGames:
             return "Victorias"
         case .survival:
-            return ""
+            return "Top 10: "
         }
     }
     
@@ -159,7 +183,7 @@ enum AttributesType {
         case .modeGames:
             return "Partidas"
         case .survival:
-            return ""
+            return "Partidas"
         }
     }
     
@@ -170,7 +194,7 @@ enum AttributesType {
         case .modeGames:
             return "Victorias"
         case .survival:
-            return ""
+            return "XP"
         }
     }
 }

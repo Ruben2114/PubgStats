@@ -12,6 +12,7 @@ protocol ProfileExternalDependency {
     func profileCoordinator(navigation: UINavigationController) -> BindableCoordinator
     func resolve() -> DataProfileRepository
     func attributesHomeCoordinator(navigation: UINavigationController) -> BindableCoordinator
+    func attributesDetailCoordinator(navigation: UINavigationController) -> BindableCoordinator
 }
 
 extension ProfileExternalDependency {

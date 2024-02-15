@@ -8,11 +8,17 @@
 import Combine
 import Foundation
 
+enum AttributesDetailState {
+    case idle
+    case showWeaponOrGamesModes(AttributesViewRepresentable?)
+    case showSurvival(AttributesHome, AttributesViewRepresentable)
+}
+
 final class AttributesDetailViewModel: DataBindable {
     private var anySubscription: Set<AnyCancellable> = []
     private let dependencies: AttributesDetailDependencies
-    private let stateSubject = PassthroughSubject<AttributesViewRepresentable?, Never>()
-    var state: AnyPublisher<AttributesViewRepresentable?, Never>
+    private let stateSubject = PassthroughSubject<AttributesDetailState, Never>()
+    var state: AnyPublisher<AttributesDetailState, Never>
     @BindingOptional private var attributesDetailList: ProfileAttributesDetailsRepresentable?
     
     init(dependencies: AttributesDetailDependencies) {
@@ -25,7 +31,7 @@ final class AttributesDetailViewModel: DataBindable {
     }
     
     func viewDidLoad() {
-        stateSubject.send(getAttributes())
+        getAttributes()
     }
     
     func backButton() {
@@ -38,127 +44,56 @@ private extension AttributesDetailViewModel {
         return dependencies.resolve()
     }
     
-    func getAttributes() -> AttributesViewRepresentable? {
-        guard let attributes = attributesDetailList else { return nil }
+    func getAttributes() {
+        guard let attributes = attributesDetailList else { return }
         switch attributes.type {
         case .weapons:
-            return getAttributesDetailsWeapons()
+            return stateSubject.send(.showWeaponOrGamesModes(getAttributesDetailsWeapons()))
         case .modeGames:
-            return getAttributesDetailsModeGames(statistics: attributes.infoGamesModesDetails)
+            return stateSubject.send(.showWeaponOrGamesModes(getAttributesDetailsModeGames()))
         case .survival:
-            return nil
+            return getAttributesDetailsSurvival()
         }
     }
 }
 
 //MARK: - Games Modes Attributes
 private extension AttributesDetailViewModel {
-    enum AttributesHeaderGamesModes: CaseIterable {
-        case tops10, headshot, killsRound, winsDay
-    }
-    
-    func getAttributesDetailsModeGames(statistics: StatisticsGameModesRepresentable?) -> AttributesViewRepresentable {
-        return DefaultAttributesViewRepresentable(title: statistics?.mode ?? "",
-                                                  image: statistics?.mode ?? "",
+    func getAttributesDetailsModeGames() -> AttributesViewRepresentable {
+        return DefaultAttributesViewRepresentable(title: attributesDetailList?.infoGamesModesDetails?.mode ?? "",
+                                                  image: attributesDetailList?.infoGamesModesDetails?.mode ?? "",
                                                   attributesHeaderDetails: getAttributesHeaderGamesModes(),
-                                                  attributesDetails: getAttributesDetailsGamesModes(statistics),
+                                                  attributesDetails: getAttributesDetailsGamesModes(),
                                                   type: .modeGames)
     }
     
     func getAttributesHeaderGamesModes() -> [AttributesHeaderDetails] {
         guard let statistics = attributesDetailList?.infoGamesModesDetails else { return [] }
-        var attributesHeaderDetails: [AttributesHeaderDetails] = []
-        for type in AttributesHeaderGamesModes.allCases {
-            attributesHeaderDetails.append(createAttributesHeaderGamesModes(type, statistics))
-        }
-        return attributesHeaderDetails
+        let attributesHeader = AttributesDetailsGamesModes.getHeaderStatistics(statistics)
+            .map({DefaultAttributesHeaderDetails(title: $0.getHeader().0, percentage: $0.getHeader().1)})
+        return attributesHeader
     }
     
-    func createAttributesHeaderGamesModes(_ type: AttributesHeaderGamesModes, _ statistics: StatisticsGameModesRepresentable) -> AttributesHeaderDetails {
-        switch type {
-        case .tops10:
-            return DefaultAttributesHeaderDetails(title: "Tops 10: \(statistics.top10S)",
-                                                  percentage: getPercentage(statistic: Double(statistics.top10S), total: Double(statistics.roundsPlayed)))
-        case .headshot:
-            return DefaultAttributesHeaderDetails(title: "Headshot Kills: \(statistics.headshotKills)",
-                                                  percentage: getPercentage(statistic: Double(statistics.headshotKills), total: Double(statistics.kills)))
-        case .killsRound:
-            let killsRound = getPercentage(statistic: Double(statistics.kills), total: Double(statistics.roundsPlayed), optional: true)
-            return DefaultAttributesHeaderDetails(title: "kills per round: \(String(format: "%.2f", killsRound))",
-                                                  percentage: killsRound)
-        case .winsDay:
-            let winsDay = getPercentage(statistic: Double(statistics.wins), total: Double(statistics.days), optional: true)
-            return DefaultAttributesHeaderDetails(title: "Wins per day: \(String(format: "%.2f", winsDay))",
-                                                  percentage: winsDay)
-        }
-    }
-    
-    func getAttributesDetailsGamesModes(_ statistics: StatisticsGameModesRepresentable?) -> [[AttributesDetails]] {
-        guard let statistics = statistics else { return []}
+    func getAttributesDetailsGamesModes() -> [[AttributesDetails]] {
+        guard let statistics = attributesDetailList?.infoGamesModesDetails else { return []}
         var attributes: [[AttributesDetails]] = []
-        
-        let attributesSectionOne: [AttributesDetails] = [getAttributesDetails("max Kill Streaks", "\(statistics.maxKillStreaks)", "Kills"),
-                                                         getAttributesDetails("round Most Kills", "\(statistics.roundMostKills)"),
-                                                         getAttributesDetails("killed a teammate", "\(statistics.teamKills)"),
-                                                         getAttributesDetails("road Kills", "\(statistics.roadKills)"),
-                                                         getAttributesDetails("kills", "\(statistics.kills)"),
-                                                         getAttributesDetails("longest Kill", "\(String(format: "%.0f", statistics.longestKill)) m")]
-        
-        let attributesSectionTwo: [AttributesDetails] = [getAttributesDetails("longest Time Survived", getTime(statistics.mostSurvivalTime, true), "General"),
-                                                         getAttributesDetails("losses", "\(statistics.losses)"),
-                                                         getAttributesDetails("damage", String(format: "%.0f", statistics.damageDealt)),
-                                                         getAttributesDetails("Asistencias", "\(statistics.assists)"),
-                                                         getAttributesDetails("knocked", "\(statistics.dBNOS)"),
-                                                         getAttributesDetails("suicides", "\(statistics.suicides)"),
-                                                         getAttributesDetails("time Survived", getTime(statistics.timeSurvived)),
-                                                         getAttributesDetails("vehicle Destroys", "\(statistics.vehicleDestroys)"),
-                                                         getAttributesDetails("revives", "\(statistics.revives)")]
-        
-        let attributesSectionThree: [AttributesDetails] = [getAttributesDetails("Andando", getDistance(statistics.walkDistance), "Distance"),
-                                                           getAttributesDetails("Conduciendo", getDistance(statistics.rideDistance)),
-                                                           getAttributesDetails("Nadando", getDistance(statistics.swimDistance))]
-        
-        let attributesSectionFour: [AttributesDetails] = [getAttributesDetails("boost", "\(statistics.boosts)", "Items"),
-                                                          getAttributesDetails("healing", "\(statistics.heals)"),
-                                                          getAttributesDetails("weapons", "\(statistics.weaponsAcquired)")]
-        [attributesSectionOne, attributesSectionTwo, attributesSectionThree, attributesSectionFour].forEach { data in
+        let attributesDetails = AttributesDetailsGamesModes.getStatistics(statistics)
+        for detail in attributesDetails {
+            let data = detail.0.map({ DefaultAttributesDetails(titleSection: detail.1, title: $0.getStats().0, amount: $0.getStats().1)})
             attributes.append(data)
         }
         return attributes
-    }
-    
-    func getAttributesDetails(_ title: String, _ amount: String, _ titleSection: String? = nil) -> AttributesDetails {
-        return DefaultAttributesDetails(titleSection: titleSection,
-                                        title: title,
-                                        amount: amount)
-    }
-    
-    func getPercentage(statistic: Double?, total: Double?, optional: Bool = false) -> CGFloat {
-        let percentage = statistic != 0 && total != 0 ? ((statistic ?? 0) / (total ?? 0)) : 0
-        let optionalPercentage = optional ? percentage : percentage * 100
-        return CGFloat(optionalPercentage)
-    }
-    
-    func getDistance(_ distance: Double) -> String {
-        let distanceKM = distance / 1000
-        return "\(String(format: "%.2f", distanceKM)) km"
-    }
-    
-    func getTime(_ time: Double, _ withMinutes: Bool = false) -> String {
-        let days = Int(round(time / 86400))
-        let hours = Int(round((time.truncatingRemainder(dividingBy: 86400)) / 3600))
-        let minutes = Int(round((time.truncatingRemainder(dividingBy: 3600)) / 60))
-        return withMinutes ? "\(hours) h \(minutes) m" : "\(days) d \(hours) h"
     }
 }
 
 //MARK: - Weapons Attributes
 private extension AttributesDetailViewModel {
     func getAttributesDetailsWeapons() -> AttributesViewRepresentable? {
-        guard let statistics = attributesDetailList?.infoWeaponDetails?.statsTotal else { return nil }
-        let attributesDetails = statistics.map {DefaultAttributesDetails(title: $0.key, //TODO: hacer esto localized
+        guard let statistics = attributesDetailList?.infoWeaponDetails?.weaponDetails.statsTotal else { return nil }
+        let attributesDetails = statistics.map {DefaultAttributesDetails(titleSection: "Detalles",
+                                                                         title: $0.key, //TODO: hacer esto localized
                                                                          amount: String(format: "%.0f", $0.value))}
-        let name = attributesDetailList?.infoWeaponDetails?.name ?? ""
+        let name = attributesDetailList?.infoWeaponDetails?.weaponDetails.name ?? ""
         return DefaultAttributesViewRepresentable(title: name,
                                                   image: name,
                                                   attributesHeaderDetails: getAttributesHeaderDetails(),
@@ -168,26 +103,57 @@ private extension AttributesDetailViewModel {
     
     func getAttributesHeaderDetails() -> [AttributesHeaderDetails] {
         guard let statistics = attributesDetailList?.infoWeaponDetails else { return []}
-        return statistics.statsTotal.filter({ weapon in
+        return statistics.weaponDetails.statsTotal.filter({ weapon in
             weapon.key == "Kills" ||
             weapon.key == "DamagePlayer" ||
             weapon.key == "HeadShots" ||
             weapon.key == "Groggies"
         }).map{ value in
-            let percentage = getPercentage(statistic: value.value,
-                                           total: getTotalPercentageWeapons(value.key))
-            return DefaultAttributesHeaderDetails(title: "\(value.key): \(String(format: "%.2f", percentage)) %",
-                                                  percentage: percentage)
+            let totalWeapons = getTotalWeapons(value.key, statistics)
+            return DefaultAttributesHeaderDetails(title: "\(totalWeapons.0): \(String(format: "%.2f", totalWeapons.1)) %",
+                                                  percentage: getPercentage(statistic: value.value,
+                                                                            total: totalWeapons.1))
         }
     }
     
-    func getTotalPercentageWeapons(_ key: String) -> Double? {
-//        var value: Double = 0
-//        //TODO: enviar en el representable estos 4 datos o el representable del weapons, todo como un strut
-//        attributesHomeList?.infoWeapon?.weaponSummaries.forEach({ summary in
-//            value += summary.statsTotal.filter({$0.key == key}).compactMap({$0.value}).reduce(0, +)
-//        })
-//        return value
-        return 0
+    func getPercentage(statistic: Double?, total: Double?, optional: Bool = false) -> CGFloat {
+        let percentage = statistic != 0 && total != 0 ? ((statistic ?? 0) / (total ?? 0)) : 0
+        let optionalPercentage = optional ? percentage : percentage * 100
+        return CGFloat(optionalPercentage)
+    }
+    
+    func getTotalWeapons(_ key: String,_ statistics: AttributesWeaponDetailsRepresentable) -> (String, Double) {
+        switch key {
+        case "Kills": return ("Kills", statistics.killsTotal)
+        case "DamagePlayer": return ("Damage", statistics.damagePlayerTotal)
+        case "HeadShots": return ("HeadShots", statistics.headShotsTotal)
+        case "Groggies": return ("Groggies", statistics.groggiesTotal)
+        default:
+            return ("", 0)
+        }
+    }
+}
+
+//MARK: - Survival
+extension AttributesDetailViewModel {
+    func getAttributesDetailsSurvival() {
+        guard let statistics = attributesDetailList?.infoSurvivalDetails else { return }
+        let attributesDetails = AttributesDetailsSurvival.getStatistics(statistics)
+            .map({DefaultAttributesDetails(titleSection: "Detalles", title: $0.getStats().0, amount: $0.getStats().1)})
+        
+        let attributesHome = DefaultAttributesHome(title: "Level \(statistics.level)",
+                                                   rightAmount: Int(statistics.totalMatchesPlayed),
+                                                   leftAmount: Int(statistics.xp),
+                                                   percentage: getPercentage(statistic: Double(statistics.stats.top10 ?? "0"),
+                                                                             total: Double(statistics.totalMatchesPlayed)),
+                                                   image: "star",
+                                                   type: .survival)
+        
+        let attributes = DefaultAttributesViewRepresentable(title: "Survival",
+                                                            image: "star",
+                                                            attributesHeaderDetails: [],
+                                                            attributesDetails: [attributesDetails],
+                                                            type: .survival)
+        stateSubject.send(.showSurvival(attributesHome, attributes))
     }
 }
