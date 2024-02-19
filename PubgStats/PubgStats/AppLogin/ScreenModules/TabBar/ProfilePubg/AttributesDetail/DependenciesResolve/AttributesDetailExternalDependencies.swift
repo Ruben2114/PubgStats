@@ -9,11 +9,11 @@ import UIKit
 
 protocol AttributesDetailExternalDependencies {
     func resolve() -> AppDependencies
-    func attributesDetailCoordinator(navigation: UINavigationController) -> BindableCoordinator
+    func attributesDetailCoordinator(navigation: UINavigationController?) -> BindableCoordinator
 }
 
 extension AttributesDetailExternalDependencies {
-    func attributesDetailCoordinator(navigation: UINavigationController) -> BindableCoordinator {
+    func attributesDetailCoordinator(navigation: UINavigationController?) -> BindableCoordinator {
         AttributesDetailCoordinatorImp(dependencies: self, navigation: navigation)
     }
 }

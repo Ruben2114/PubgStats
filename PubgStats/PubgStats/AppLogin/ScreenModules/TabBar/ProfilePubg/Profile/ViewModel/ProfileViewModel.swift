@@ -19,14 +19,14 @@ enum ProfileState {
 
 final class ProfileViewModel: DataBindable {
     private var anySubscription: Set<AnyCancellable> = []
-    private let dependencies: ProfileDependency
+    private let dependencies: ProfileDependencies
     private let stateSubject = CurrentValueSubject<ProfileState, Never>(.idle)
     var state: AnyPublisher<ProfileState, Never>
     private let getPlayerDetailsSubject = PassthroughSubject<IdAccountDataProfileRepresentable, Never>()
     @BindingOptional private var dataProfile: IdAccountDataProfileRepresentable?
     private var representable: PlayerDetailsRepresentable?
     
-    init(dependencies: ProfileDependency) {
+    init(dependencies: ProfileDependencies) {
         self.dependencies = dependencies
         state = stateSubject.eraseToAnyPublisher()
     }
@@ -48,6 +48,7 @@ final class ProfileViewModel: DataBindable {
     func goToWeapon() {
         let attributes = DefaultProfileAttributes(infoWeapon: representable?.infoWeapon)
         coordinator.goToAttributes(attributes: attributes)
+        //        coordinator.goWeaponData(representable?.infoWeapon)
     }
     
     func goToSurvival() {

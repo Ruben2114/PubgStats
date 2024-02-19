@@ -14,7 +14,6 @@ final class StatsGeneralViewController: UIViewController {
     private lazy var  buttonSurvival = createButtonStack(title: "Survival", selector: #selector(didTapSurvival))
     private lazy var  buttonModes = createButtonStack(title: "Modos", selector: #selector(didTapModes))
     private lazy var tableView = makeTableView()
-    private lazy var levelLabel = makeLabelStatsLevel(height: 80, width: 80)
     private lazy var nameLabel = makeLabelStats(height: 21)
     private lazy var xpLabel = makeLabelStats(height: 21)
     private lazy var radarChartView: RadarChartView = {

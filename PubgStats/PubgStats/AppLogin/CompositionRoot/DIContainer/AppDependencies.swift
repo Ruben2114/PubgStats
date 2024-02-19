@@ -68,18 +68,15 @@ struct AppDependencies {
 }
 
 extension AppDependencies:
-    LoginExternalDependency,
+    LoginExternalDependencies,
     MainTabBarExternalDependency,
-    ProfileExternalDependency,
+    ProfileExternalDependencies,
     FavouriteExternalDependency,
     GuideExternalDependency,
     SettingsExternalDependency,
     StatsGeneralExternalDependency,
     KillsDataExternalDependency,
-    WeaponDataExternalDependency,
-    WeaponDataDetailExternalDependency,
     HelpDataExternalDependency,
-    SurvivalDataExternalDependency,
     AttributesHomeExternalDependencies,
     AttributesDetailExternalDependencies,
     InfoAppExternalDependency{}

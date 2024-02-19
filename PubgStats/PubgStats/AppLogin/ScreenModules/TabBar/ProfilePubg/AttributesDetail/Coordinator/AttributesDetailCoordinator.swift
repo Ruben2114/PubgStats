@@ -21,7 +21,7 @@ final class AttributesDetailCoordinatorImp: AttributesDetailCoordinator {
         Dependency(dependencies: externalDependencies, coordinator: self)
     }()
     
-    public init(dependencies: AttributesDetailExternalDependencies, navigation: UINavigationController) {
+    public init(dependencies: AttributesDetailExternalDependencies, navigation: UINavigationController?) {
         self.navigation = navigation
         self.externalDependencies = dependencies
     }

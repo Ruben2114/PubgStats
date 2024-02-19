@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ProfileCoordinator: BindableCoordinator {
+public protocol ProfileCoordinator: BindableCoordinator {
     func goToAttributes(attributes: ProfileAttributesRepresentable)
     func goToAttributesDetails(_ attributes: ProfileAttributesDetailsRepresentable?)
 }
@@ -16,13 +16,13 @@ final class ProfileCoordinatorImp: ProfileCoordinator {
     weak var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
-    private let externalDependencies: ProfileExternalDependency
+    private let externalDependencies: ProfileExternalDependencies
     lazy var dataBinding: DataBinding = dependencies.resolve()
     private lazy var dependencies: Dependency = {
         Dependency(dependencies: externalDependencies, coordinator: self)
     }()
     
-    public init(dependencies: ProfileExternalDependency, navigation: UINavigationController) {
+    public init(dependencies: ProfileExternalDependencies, navigation: UINavigationController?) {
         self.externalDependencies = dependencies
         self.navigation = navigation
     }
@@ -34,8 +34,7 @@ extension ProfileCoordinatorImp {
     }
     
     func goToAttributes(attributes: ProfileAttributesRepresentable) {
-        //TODO: ver como se hace en la app para no forzar !
-        let coordinator = dependencies.external.attributesHomeCoordinator(navigation: navigation!)
+        let coordinator = dependencies.external.attributesHomeCoordinator(navigation: navigation)
         coordinator
             .set(attributes)
             .start()
@@ -43,7 +42,7 @@ extension ProfileCoordinatorImp {
     }
     
     func goToAttributesDetails(_ attributes: ProfileAttributesDetailsRepresentable?) {
-        let coordinator = dependencies.external.attributesDetailCoordinator(navigation: navigation!)
+        let coordinator = dependencies.external.attributesDetailCoordinator(navigation: navigation)
         coordinator
             .set(attributes)
             .start()
@@ -52,12 +51,12 @@ extension ProfileCoordinatorImp {
 }
 
 private extension ProfileCoordinatorImp {
-    struct Dependency: ProfileDependency {
-        let dependencies: ProfileExternalDependency
+    struct Dependency: ProfileDependencies {
+        let dependencies: ProfileExternalDependencies
         unowned let coordinator: ProfileCoordinator
         let dataBinding = DataBindingObject()
         
-        var external: ProfileExternalDependency {
+        var external: ProfileExternalDependencies {
             return dependencies
         }
         

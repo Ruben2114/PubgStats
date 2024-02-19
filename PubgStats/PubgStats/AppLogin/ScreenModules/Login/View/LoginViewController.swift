@@ -36,11 +36,11 @@ class LoginViewController: UIViewController {
     
     private var platform: String = "steam"
     private let viewModel: LoginViewModel
-    private var dependencies: LoginDependency
+    private var dependencies: LoginDependencies
     private var cancellable = Set<AnyCancellable>()
     private var bottomConstraint: NSLayoutConstraint?
     
-    init(dependencies: LoginDependency) {
+    init(dependencies: LoginDependencies) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)

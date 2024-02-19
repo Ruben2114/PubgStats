@@ -8,13 +8,12 @@
 import UIKit
 
 protocol AttributesHomeExternalDependencies {
-    func resolve() -> AppDependencies
-    func attributesHomeCoordinator(navigation: UINavigationController) -> BindableCoordinator
-    func attributesDetailCoordinator(navigation: UINavigationController) -> BindableCoordinator
+    func attributesHomeCoordinator(navigation: UINavigationController?) -> BindableCoordinator
+    func attributesDetailCoordinator(navigation: UINavigationController?) -> BindableCoordinator
 }
 
 extension AttributesHomeExternalDependencies {
-    func attributesHomeCoordinator(navigation: UINavigationController) -> BindableCoordinator {
+    func attributesHomeCoordinator(navigation: UINavigationController?) -> BindableCoordinator {
         AttributesHomeCoordinatorImp(dependencies: self, navigation: navigation)
     }
 }

@@ -10,7 +10,6 @@ import Combine
 
 class AttributesHomeViewController: UIViewController {
     private let cellIdentifier = "AttributesHomeViewCell"
-    private let emptyCellIdentifier = "AttributesHomeEmtpyViewCell"
     private lazy var imageBackground: UIImageView = {
         UIImageView()
     }()
@@ -53,7 +52,6 @@ class AttributesHomeViewController: UIViewController {
 
 private extension AttributesHomeViewController {
     func setAppearance() {
-        showSpinner()
         configureNavigationBar()
         setupTableView()
     }
@@ -67,17 +65,12 @@ private extension AttributesHomeViewController {
     }
     
     func bind() {
-        bindViewModel()
-    }
-    
-    func bindViewModel() {
         viewModel.state
             .receive(on: DispatchQueue.main)
             .sink { [weak self] representable in
                 self?.listAttributes = representable ?? []
                 self?.configureUI()
                 self?.tableView.reloadData()
-                self?.hideSpinner()
             }.store(in: &cancellable)
     }
     
@@ -90,16 +83,12 @@ private extension AttributesHomeViewController {
     }
     
     func setupTableView() {
-        registerCells()
+        tableView.register(AttributesHomeViewCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.bounces = false
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
-    }
-    
-    func registerCells() {
-        self.tableView.register(AttributesHomeViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        //self.tableView.register(AttributesHomeEmtpyViewCell.self, forCellReuseIdentifier: emptyCellIdentifier)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
     }
     
     @objc func backButtonAction() {
@@ -113,14 +102,6 @@ extension AttributesHomeViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if listAttributes.count == 0 {
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: emptyCellIdentifier, for: indexPath) as? AttributesHomeEmtpyViewCell else {
-//                return UITableViewCell()
-//            }
-//            cell.configurewith()
-//            return cell
-//        }
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? AttributesHomeViewCell else {
             return UITableViewCell()
         }
@@ -139,5 +120,3 @@ extension AttributesHomeViewController: UITableViewDelegate, UITableViewDataSour
         viewModel.goToAttributesDetails(select)
     }
 }
-
-extension AttributesHomeViewController: SpinnerDisplayable { }

@@ -13,7 +13,7 @@ final class ProfileViewController: UIViewController {
 
     private var cancellable = Set<AnyCancellable>()
     private let viewModel: ProfileViewModel
-    private let dependencies: ProfileDependency
+    private let dependencies: ProfileDependencies
     private var reloadButton = UIBarButtonItem()
     private lazy var scrollableStackView: ScrollableStackView = {
         let view = ScrollableStackView()
@@ -41,7 +41,7 @@ final class ProfileViewController: UIViewController {
         NewsCardView()
     }()
     
-    init(dependencies: ProfileDependency) {
+    init(dependencies: ProfileDependencies) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)

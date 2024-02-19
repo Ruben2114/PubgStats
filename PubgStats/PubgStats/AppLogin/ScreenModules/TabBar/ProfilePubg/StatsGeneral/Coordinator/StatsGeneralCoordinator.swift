@@ -7,9 +7,7 @@
 
 import UIKit
 enum StatsGeneralTransition {
-    case goKillsData
-    case goWeapons
-    case goSurvival
+  
 }
 protocol StatsGeneralCoordinator: Coordinator {
     func performTransition(_ transition: StatsGeneralTransition)
@@ -39,23 +37,7 @@ final class StatsGeneralCoordinatorImp: Coordinator {
 }
 extension StatsGeneralCoordinatorImp: StatsGeneralCoordinator {
     func performTransition(_ transition: StatsGeneralTransition) {
-        switch transition {
-        case .goKillsData:
-            guard let navigationController = navigation else {return}
-            let killsDataCoordinator = dependencies.external.killsDataCoordinator(navigation: navigationController, type: type)
-            killsDataCoordinator.start()
-            append(child: killsDataCoordinator)
-        case .goWeapons:
-            guard let navigationController = navigation else {return}
-            let weaponDataCoordinator = dependencies.external.weaponDataCoordinator(navigation: navigationController, type: type)
-            weaponDataCoordinator.start()
-            append(child: weaponDataCoordinator)
-        case .goSurvival:
-            guard let navigationController = navigation else {return}
-            let survivalDataCoordinator = dependencies.external.survivalDataCoordinator(navigation: navigationController, type: type)
-            survivalDataCoordinator.start()
-            append(child: survivalDataCoordinator)
-        }
+    
     }
 }
 

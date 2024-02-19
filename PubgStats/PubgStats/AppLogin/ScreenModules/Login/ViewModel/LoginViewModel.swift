@@ -17,12 +17,12 @@ enum LoginState {
 
 final class LoginViewModel {
     private var anySubscription: Set<AnyCancellable> = []
-    private let dependencies: LoginDependency
+    private let dependencies: LoginDependencies
     private let stateSubject = CurrentValueSubject<LoginState, Never>(.idle)
     var state: AnyPublisher<LoginState, Never>
     private let getAccountProfileSubject = PassthroughSubject<(String, String), Never>()
     
-    init(dependencies: LoginDependency) {
+    init(dependencies: LoginDependencies) {
         self.dependencies = dependencies
         state = stateSubject.eraseToAnyPublisher()
     }

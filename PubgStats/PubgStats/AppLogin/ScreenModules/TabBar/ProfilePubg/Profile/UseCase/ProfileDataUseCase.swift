@@ -15,7 +15,7 @@ protocol ProfileDataUseCase {
 struct ProfileDataUseCaseImp {
     private let profileRepository: DataProfileRepository
     
-    init(dependencies: ProfileDependency) {
+    init(dependencies: ProfileDependencies) {
         self.profileRepository = dependencies.external.resolve()
     }
 }

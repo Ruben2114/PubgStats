@@ -13,7 +13,7 @@ protocol LoginDataUseCase {
 
 struct LoginDataUseCaseImp: LoginDataUseCase {
     private let profileRepository: DataProfileRepository
-    init(dependencies: LoginDependency) {
+    init(dependencies: LoginDependencies) {
         self.profileRepository = dependencies.external.resolve()
     }
     

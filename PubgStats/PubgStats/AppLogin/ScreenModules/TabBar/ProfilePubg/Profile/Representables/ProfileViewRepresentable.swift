@@ -23,7 +23,7 @@ struct DefaultProfileHeaderView: ProfileHeaderViewRepresentable {
     }
 }
 
-protocol ProfileAttributesRepresentable {
+public protocol ProfileAttributesRepresentable {
     var infoGamesModes: GamesModesDataProfileRepresentable? { get }
     var infoWeapon: WeaponDataProfileRepresentable? { get }
 }

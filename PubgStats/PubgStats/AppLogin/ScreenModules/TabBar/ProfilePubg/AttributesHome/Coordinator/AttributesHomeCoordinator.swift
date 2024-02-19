@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol AttributesHomeCoordinator: BindableCoordinator {
+public protocol AttributesHomeCoordinator: BindableCoordinator {
     func goToAttributesDetails(_ attributes: ProfileAttributesDetailsRepresentable?)
     func goBack()
 }
@@ -22,7 +22,7 @@ final class AttributesHomeCoordinatorImp: AttributesHomeCoordinator {
         Dependency(dependencies: externalDependencies, coordinator: self)
     }()
     
-    public init(dependencies: AttributesHomeExternalDependencies, navigation: UINavigationController) {
+    public init(dependencies: AttributesHomeExternalDependencies, navigation: UINavigationController?) {
         self.navigation = navigation
         self.externalDependencies = dependencies
     }
@@ -34,8 +34,7 @@ extension AttributesHomeCoordinatorImp {
     }
     
     func goToAttributesDetails(_ attributes: ProfileAttributesDetailsRepresentable?) {
-        //TODO: ver como quitar el !
-        let coordinator = dependencies.external.attributesDetailCoordinator(navigation: navigation!)
+        let coordinator = dependencies.external.attributesDetailCoordinator(navigation: navigation)
         coordinator
             .set(attributes)
             .start()
@@ -60,6 +59,7 @@ private extension AttributesHomeCoordinatorImp {
         func resolve()  -> DataBinding {
             return dataBinding
         }
+        
         func resolve() -> AttributesHomeCoordinator {
             return coordinator
         }

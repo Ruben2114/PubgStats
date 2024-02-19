@@ -25,10 +25,11 @@ final class AttributesHomeViewModel: DataBindable {
     }
     
     func viewDidLoad() {
-        stateSubject.send(getAttributes())
+        getAttributes()
     }
    
     func goToAttributesDetails(_ select: AttributesHome){
+        let attributesDetails: ProfileAttributesDetailsRepresentable?
         switch select.type {
         case .weapons:
             guard let summary = attributesHomeList?.infoWeapon?.weaponSummaries
@@ -39,17 +40,16 @@ final class AttributesHomeViewModel: DataBindable {
                                                                damagePlayerTotal: getAmountTotal("DamagePlayer"),
                                                                headShotsTotal: getAmountTotal("HeadShots"),
                                                                groggiesTotal: getAmountTotal("Groggies"))
-            let attributesDetails = DefaultProfileAttributesDetails(infoWeaponDetails: weaponSummary, type: .weapons)
-            coordinator.goToAttributesDetails(attributesDetails)
+            attributesDetails = DefaultProfileAttributesDetails(infoWeaponDetails: weaponSummary, type: .weapons)
         case .modeGames:
             guard let summary = attributesHomeList?.infoGamesModes?.modes
                 .filter({ $0.mode == select.title })
                 .first else { return }
-            let attributesDetails = DefaultProfileAttributesDetails(infoGamesModesDetails: summary, type: .modeGames)
-            coordinator.goToAttributesDetails(attributesDetails)
+            attributesDetails = DefaultProfileAttributesDetails(infoGamesModesDetails: summary, type: .modeGames)
         case .survival:
-            break
+            attributesDetails = nil
         }
+        coordinator.goToAttributesDetails(attributesDetails)
     }
     
     func backButton() {
@@ -62,35 +62,32 @@ private extension AttributesHomeViewModel {
         return dependencies.resolve()
     }
     
-    func getAttributes() -> [AttributesHome] {
-        let type: AttributesType = attributesHomeList?.infoGamesModes != nil ? .modeGames : .weapons
-        switch type {
-        case .weapons:
-            return attributesHomeList?.infoWeapon?.weaponSummaries.map{getAttributesWeapons(statistics: $0)} ?? []
-        case .modeGames:
-            return attributesHomeList?.infoGamesModes?.modes.map{getAttributesModeGames(statistics: $0)} ?? []
-        case .survival:
-            return []
+    func getAttributes() {
+        let attributes: [AttributesHome]? = attributesHomeList?.infoGamesModes != nil ? getAttributesModeGames() : getAttributesWeapons()
+        stateSubject.send(attributes)
+    }
+    
+    func getAttributesWeapons() -> [AttributesHome]? {
+        return attributesHomeList?.infoWeapon?.weaponSummaries.map{
+            DefaultAttributesHome(title: $0.name,
+                                  rightAmount: $0.xpTotal,
+                                  leftAmount: $0.tierCurrent,
+                                  percentage: CGFloat($0.levelCurrent),
+                                  image: $0.name,
+                                  type: .weapons)
         }
     }
     
-    func getAttributesWeapons(statistics: WeaponSummaryRepresentable) -> AttributesHome {
-        return DefaultAttributesHome(title: statistics.name,
-                                     rightAmount: statistics.xpTotal,
-                                     leftAmount: statistics.tierCurrent,
-                                     percentage: CGFloat(statistics.levelCurrent),
-                                     image: statistics.name,
-                                     type: .weapons)
-    }
-    
-    func getAttributesModeGames(statistics: StatisticsGameModesRepresentable) -> AttributesHome {
-        return DefaultAttributesHome(title: statistics.mode,
-                                     rightAmount: statistics.wins,
-                                     leftAmount: statistics.roundsPlayed,
-                                     percentage: getPercentage(statistic: Double(statistics.wins),
-                                                               total: Double(statistics.roundsPlayed)),
-                                     image: statistics.mode,
-                                     type: .modeGames)
+    func getAttributesModeGames() -> [AttributesHome]? {
+        return attributesHomeList?.infoGamesModes?.modes.map{
+            DefaultAttributesHome(title: $0.mode,
+                                  rightAmount: $0.wins,
+                                  leftAmount: $0.roundsPlayed,
+                                  percentage: getPercentage(statistic: Double($0.wins),
+                                                            total: Double($0.roundsPlayed)),
+                                  image: $0.mode,
+                                  type: .modeGames)
+        }
     }
     
     func getPercentage(statistic: Double?, total: Double?, optional: Bool = false) -> CGFloat {

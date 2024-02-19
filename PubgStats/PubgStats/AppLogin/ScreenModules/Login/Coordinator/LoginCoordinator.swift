@@ -15,13 +15,13 @@ final class LoginCoordinatorImp: LoginCoordinator {
     weak var navigation: UINavigationController?
     var onFinish: (() -> Void)?
     var childCoordinators: [Coordinator] = []
-    private let externalDependencies: LoginExternalDependency
+    private let externalDependencies: LoginExternalDependencies
     
     private lazy var dependencies: Dependency = {
         Dependency(dependencies: externalDependencies, coordinator: self)
     }()
 
-    public init(dependencies: LoginExternalDependency, navigation: UINavigationController?) {
+    public init(dependencies: LoginExternalDependencies, navigation: UINavigationController?) {
         self.externalDependencies = dependencies
         self.navigation = navigation
     }
@@ -43,12 +43,12 @@ extension LoginCoordinatorImp {
 }
 
 private extension LoginCoordinatorImp {
-    struct Dependency: LoginDependency {
-        let dependencies: LoginExternalDependency
+    struct Dependency: LoginDependencies {
+        let dependencies: LoginExternalDependencies
         unowned let coordinator: LoginCoordinator
         let dataBinding = DataBindingObject()
         
-        var external: LoginExternalDependency {
+        var external: LoginExternalDependencies {
             return  dependencies
         }
         

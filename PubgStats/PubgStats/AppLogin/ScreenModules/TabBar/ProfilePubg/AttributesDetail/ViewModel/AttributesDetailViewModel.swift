@@ -146,14 +146,27 @@ extension AttributesDetailViewModel {
                                                    leftAmount: Int(statistics.xp),
                                                    percentage: getPercentage(statistic: Double(statistics.stats.top10 ?? "0"),
                                                                              total: Double(statistics.totalMatchesPlayed)),
-                                                   image: "star",
+                                                   image: getImage(Int(statistics.level) ?? 0),
                                                    type: .survival)
         
         let attributes = DefaultAttributesViewRepresentable(title: "Survival",
-                                                            image: "star",
+                                                            image: "",
                                                             attributesHeaderDetails: [],
                                                             attributesDetails: [attributesDetails],
                                                             type: .survival)
         stateSubject.send(.showSurvival(attributesHome, attributes))
+    }
+    
+    func getImage(_ level: Int) -> String {
+        switch level {
+        case 0: return "Rookie"
+        case 1..<40: return "Bronze"
+        case 40..<80: return "Diamond"
+        case 80..<120: return "Gold"
+        case 120..<160: return "Platinum"
+        case 160..<200: return "Silver"
+        default:
+            return "Rookie"
+        }
     }
 }

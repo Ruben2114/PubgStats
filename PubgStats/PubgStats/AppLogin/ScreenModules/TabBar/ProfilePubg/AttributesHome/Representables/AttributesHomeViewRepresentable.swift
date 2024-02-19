@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol ProfileAttributesDetailsRepresentable {
+public protocol ProfileAttributesDetailsRepresentable {
     var infoGamesModesDetails: StatisticsGameModesRepresentable? { get }
     var infoWeaponDetails: AttributesWeaponDetailsRepresentable? { get }
     var infoSurvivalDetails: SurvivalDataProfileRepresentable? { get }
     var type: AttributesType { get }
 }
 
-protocol AttributesWeaponDetailsRepresentable {
+public protocol AttributesWeaponDetailsRepresentable {
     var weaponDetails: WeaponSummaryRepresentable { get }
     var killsTotal: Double { get }
     var damagePlayerTotal: Double { get }
@@ -137,7 +137,7 @@ struct DefaultAttributesHeaderDetails: AttributesHeaderDetails {
 }
 
 //TODO: poner localized
-enum AttributesType {
+public enum AttributesType {
     case weapons
     case modeGames
     case survival

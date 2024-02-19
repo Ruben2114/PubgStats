@@ -14,8 +14,8 @@
 		461C1F3E29C9C77C00540289 /* ApiClientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461C1F3D29C9C77C00540289 /* ApiClientService.swift */; };
 		461C1F4029C9C86C00540289 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461C1F3F29C9C86C00540289 /* EndPoint.swift */; };
 		461C1F4429C9F68400540289 /* ProfileDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461C1F4329C9F68400540289 /* ProfileDataUseCase.swift */; };
-		461C1F4D29CAE0F600540289 /* LoginDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461C1F4C29CAE0F600540289 /* LoginDependency.swift */; };
-		461C1F4F29CAE10600540289 /* LoginExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461C1F4E29CAE10600540289 /* LoginExternalDependency.swift */; };
+		461C1F4D29CAE0F600540289 /* LoginDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461C1F4C29CAE0F600540289 /* LoginDependencies.swift */; };
+		461C1F4F29CAE10600540289 /* LoginExternalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461C1F4E29CAE10600540289 /* LoginExternalDependencies.swift */; };
 		461C1F5229CAE35300540289 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461C1F5129CAE35300540289 /* AppDependencies.swift */; };
 		461C1F5429CAE59A00540289 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461C1F5329CAE59A00540289 /* LoginCoordinator.swift */; };
 		465550C229CC33B000BF932A /* UIViewController+UIbutton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550C129CC33B000BF932A /* UIViewController+UIbutton.swift */; };
@@ -26,8 +26,8 @@
 		465550CF29CC471400BF932A /* MainTabBarExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550CE29CC471400BF932A /* MainTabBarExternalDependency.swift */; };
 		465550D129CC47A700BF932A /* MainTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550D029CC47A700BF932A /* MainTabBarCoordinator.swift */; };
 		465550D829CC504100BF932A /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550D729CC504100BF932A /* ProfileCoordinator.swift */; };
-		465550DA29CC513100BF932A /* ProfileExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550D929CC513100BF932A /* ProfileExternalDependency.swift */; };
-		465550DC29CC51DF00BF932A /* ProfileDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550DB29CC51DF00BF932A /* ProfileDependency.swift */; };
+		465550DA29CC513100BF932A /* ProfileExternalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550D929CC513100BF932A /* ProfileExternalDependencies.swift */; };
+		465550DC29CC51DF00BF932A /* ProfileDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550DB29CC51DF00BF932A /* ProfileDependencies.swift */; };
 		465550E329CC6F1F00BF932A /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550E229CC6F1F00BF932A /* FavouriteViewController.swift */; };
 		465550E529CC6F6300BF932A /* FavouriteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550E429CC6F6300BF932A /* FavouriteCoordinator.swift */; };
 		465550E729CC700400BF932A /* FavouriteExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550E629CC700400BF932A /* FavouriteExternalDependency.swift */; };
@@ -45,9 +45,6 @@
 		4670EDEA29D442FD00C1062E /* HelpDataDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE929D442FD00C1062E /* HelpDataDependency.swift */; };
 		4670EDEC29D4433B00C1062E /* HelpDataExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDEB29D4433B00C1062E /* HelpDataExternalDependency.swift */; };
 		4670EDEF29D4438500C1062E /* HelpDataCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDEE29D4438500C1062E /* HelpDataCoordinator.swift */; };
-		46B0CF2229E701D400BE95EB /* WeaponDataDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B0CF2129E701D400BE95EB /* WeaponDataDetailUseCase.swift */; };
-		46B0CF2429E7027100BE95EB /* WeaponDataDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B0CF2329E7027100BE95EB /* WeaponDataDetailRepository.swift */; };
-		46B0CF2629E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B0CF2529E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift */; };
 		8C007E3429F1623A0029AF2F /* ItemCellStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C007E3329F1623A0029AF2F /* ItemCellStats.swift */; };
 		8C2460422B3C4E7A00AB98F3 /* ZoomAndSnapFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2460412B3C4E7A00AB98F3 /* ZoomAndSnapFlowLayout.swift */; };
 		8C2460562B3C4F6800AB98F3 /* Chip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2460542B3C4F6800AB98F3 /* Chip.swift */; };
@@ -73,6 +70,19 @@
 		8C2460872B3C8F5F00AB98F3 /* GraphInfoModesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2460852B3C8F5F00AB98F3 /* GraphInfoModesView.xib */; };
 		8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */; };
 		8C31FDB729C329E500196704 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31FDB629C329E500196704 /* SettingsViewController.swift */; };
+		8C3A012E2B84003F00211AF3 /* TestProfileDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A012D2B84003F00211AF3 /* TestProfileDependencies.swift */; };
+		8C3A01302B84033100211AF3 /* TestProfileExternalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A012F2B84033100211AF3 /* TestProfileExternalDependencies.swift */; };
+		8C3A01322B84041400211AF3 /* ProfileCoordinatorSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A01312B84041400211AF3 /* ProfileCoordinatorSpy.swift */; };
+		8C3A01342B84050C00211AF3 /* ProfileCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A01332B84050C00211AF3 /* ProfileCoordinatorTest.swift */; };
+		8C3A01362B84062D00211AF3 /* ProfileViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A01352B84062D00211AF3 /* ProfileViewModelTest.swift */; };
+		8C3A01382B84082C00211AF3 /* ProfileViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A01372B84082C00211AF3 /* ProfileViewControllerTest.swift */; };
+		8C3A013A2B840BAD00211AF3 /* LoginViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A01392B840BAD00211AF3 /* LoginViewControllerTest.swift */; };
+		8C3A013C2B840C5700211AF3 /* TestAttributesHomeDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A013B2B840C5700211AF3 /* TestAttributesHomeDependencies.swift */; };
+		8C3A013E2B840CF000211AF3 /* TestAttributesHomeExternalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A013D2B840CF000211AF3 /* TestAttributesHomeExternalDependencies.swift */; };
+		8C3A01402B840D6700211AF3 /* AttributesHomeCoordinatorSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A013F2B840D6700211AF3 /* AttributesHomeCoordinatorSpy.swift */; };
+		8C3A01422B840DFB00211AF3 /* AttributesHomeCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A01412B840DFB00211AF3 /* AttributesHomeCoordinatorTest.swift */; };
+		8C3A01442B840E5400211AF3 /* AttributesHomeViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A01432B840E5400211AF3 /* AttributesHomeViewControllerTest.swift */; };
+		8C3A01462B840E9A00211AF3 /* AttributesHomeViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A01452B840E9A00211AF3 /* AttributesHomeViewModelTest.swift */; };
 		8C6E9C9429F1560600DE593D /* ItemCellHelpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6E9C9329F1560600DE593D /* ItemCellHelpData.swift */; };
 		8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */; };
 		8C7563E029BB5E5E000373F9 /* SpinnerDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563DF29BB5E5E000373F9 /* SpinnerDisplayable.swift */; };
@@ -81,8 +91,8 @@
 		8C7563E629BB5FBA000373F9 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563E529BB5FBA000373F9 /* LoginViewModel.swift */; };
 		8C7563EC29BB6073000373F9 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563EB29BB6073000373F9 /* StateController.swift */; };
 		8C9A32AB29DDB39500F81B34 /* FavouriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9A32AA29DDB39500F81B34 /* FavouriteViewModel.swift */; };
-		8C9ABEEE2AD830A000552101 /* TestLoginDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9ABEED2AD830A000552101 /* TestLoginDependency.swift */; };
-		8C9ABEF02AD8318200552101 /* TestLoginExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9ABEEF2AD8318200552101 /* TestLoginExternalDependency.swift */; };
+		8C9ABEEE2AD830A000552101 /* TestLoginDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9ABEED2AD830A000552101 /* TestLoginDependencies.swift */; };
+		8C9ABEF02AD8318200552101 /* TestLoginExternalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9ABEEF2AD8318200552101 /* TestLoginExternalDependencies.swift */; };
 		8C9ABEF62AD8352900552101 /* MockDataProfleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9ABEF52AD8352900552101 /* MockDataProfleRepository.swift */; };
 		8C9ABEF92AD8368F00552101 /* LoginCoordinatorSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9ABEF82AD8368F00552101 /* LoginCoordinatorSpy.swift */; };
 		8C9ABEFB2AD83A4700552101 /* LoginCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9ABEFA2AD83A4700552101 /* LoginCoordinatorTest.swift */; };
@@ -102,19 +112,8 @@
 		8CA398C729B72A2000C09746 /* PubgStatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398C629B72A2000C09746 /* PubgStatsTests.swift */; };
 		8CA398D129B72A2000C09746 /* PubgStatsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398D029B72A2000C09746 /* PubgStatsUITests.swift */; };
 		8CA398D329B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398D229B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift */; };
-		8CA466C42A14293A00EDF672 /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA466C22A14293A00EDF672 /* ItemCollectionViewCell.swift */; };
-		8CA466C52A14293A00EDF672 /* ItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA466C32A14293A00EDF672 /* ItemCollectionViewCell.xib */; };
 		8CA720B029DAE3F6001E3EFA /* UIViewController+Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA720AF29DAE3F6001E3EFA /* UIViewController+Label.swift */; };
 		8CA85D8629DC46160050C19B /* UIViewController+func.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA85D8529DC46160050C19B /* UIViewController+func.swift */; };
-		8CA9024629D2BBF9004E71D0 /* WeaponDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9024529D2BBF9004E71D0 /* WeaponDataUseCase.swift */; };
-		8CA9024B29D2BCB4004E71D0 /* WeaponDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9024A29D2BCB4004E71D0 /* WeaponDataRepository.swift */; };
-		8CA9024D29D2BF49004E71D0 /* WeaponDataRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9024C29D2BF49004E71D0 /* WeaponDataRepositoryImp.swift */; };
-		8CA9025029D2E20A004E71D0 /* ItemDataCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9024F29D2E20A004E71D0 /* ItemDataCollectionViewCell.swift */; };
-		8CA9025629D2F2C0004E71D0 /* WeaponDataDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025529D2F2C0004E71D0 /* WeaponDataDetailViewController.swift */; };
-		8CA9025829D2F382004E71D0 /* WeaponDataDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025729D2F382004E71D0 /* WeaponDataDetailViewModel.swift */; };
-		8CA9025A29D2F3DD004E71D0 /* WeaponDataDetailDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025929D2F3DD004E71D0 /* WeaponDataDetailDependency.swift */; };
-		8CA9025C29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025B29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift */; };
-		8CA9025E29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9025D29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift */; };
 		8CA97A312B3DDD83006D10AE /* DoubleChartBarAdapterRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA97A302B3DDD83006D10AE /* DoubleChartBarAdapterRepresentable.swift */; };
 		8CA97A332B3DDE42006D10AE /* GraphInfoModesRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA97A322B3DDE42006D10AE /* GraphInfoModesRepresentable.swift */; };
 		8CA9B8E02B57339300B44683 /* DataGeneralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9B8DE2B57339300B44683 /* DataGeneralView.swift */; };
@@ -153,11 +152,6 @@
 		8CB6396229D2356B00763231 /* KillsDataDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6396129D2356B00763231 /* KillsDataDependency.swift */; };
 		8CB6396429D235B900763231 /* KillsDataExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6396329D235B900763231 /* KillsDataExternalDependency.swift */; };
 		8CB6396629D2363100763231 /* KillsDataCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6396529D2363100763231 /* KillsDataCoordinator.swift */; };
-		8CB6396D29D244F300763231 /* WeaponDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6396C29D244F300763231 /* WeaponDataViewController.swift */; };
-		8CB6396F29D2457300763231 /* WeaponDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6396E29D2457300763231 /* WeaponDataViewModel.swift */; };
-		8CB6397129D245B400763231 /* WeaponDataDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6397029D245B400763231 /* WeaponDataDependency.swift */; };
-		8CB6397329D245FF00763231 /* WeaponDataExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6397229D245FF00763231 /* WeaponDataExternalDependency.swift */; };
-		8CB6397529D2463900763231 /* WeaponDataCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6397429D2463900763231 /* WeaponDataCoordinator.swift */; };
 		8CBC02832AD99C99002449E1 /* SurvivalDataProfileRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC02822AD99C99002449E1 /* SurvivalDataProfileRepresentable.swift */; };
 		8CBC02852AD9AA32002449E1 /* GamesModesDataProfileRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC02842AD9AA32002449E1 /* GamesModesDataProfileRepresentable.swift */; };
 		8CBC70422AD7D40E00234420 /* DataProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC70412AD7D40E00234420 /* DataProfileRepository.swift */; };
@@ -173,16 +167,8 @@
 		8CCC92C629E3FC3C0019BE72 /* FavouriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC92C529E3FC3C0019BE72 /* FavouriteRepository.swift */; };
 		8CCC92C829E3FCB70019BE72 /* FavouriteDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC92C729E3FCB70019BE72 /* FavouriteDataUseCase.swift */; };
 		8CCC92CA29E407980019BE72 /* UIViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC92C929E407980019BE72 /* UIViewController+TableView.swift */; };
-		8CCC92D029E40DAF0019BE72 /* SurvivalDataCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC92CF29E40DAF0019BE72 /* SurvivalDataCoordinator.swift */; };
-		8CCC92D229E40E240019BE72 /* SurvivalDataExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC92D129E40E240019BE72 /* SurvivalDataExternalDependency.swift */; };
-		8CCC92D429E40E610019BE72 /* SurvivalDataDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC92D329E40E610019BE72 /* SurvivalDataDependency.swift */; };
-		8CCC92D629E40EAB0019BE72 /* SurvivalDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC92D529E40EAB0019BE72 /* SurvivalDataViewModel.swift */; };
-		8CCC92D829E40F120019BE72 /* SurvivalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC92D729E40F120019BE72 /* SurvivalDataViewController.swift */; };
 		8CD7CD6229BEFF5700C57346 /* LocalDataProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD6129BEFF5700C57346 /* LocalDataProfileService.swift */; };
 		8CD7CD6F29BF04E200C57346 /* Profile.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD6D29BF04E200C57346 /* Profile.xcdatamodeld */; };
-		8CE9BDA929E57D5E00F45D3F /* SurvivalDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDA829E57D5E00F45D3F /* SurvivalDataUseCase.swift */; };
-		8CE9BDAB29E57DD600F45D3F /* SurvivalDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDAA29E57DD600F45D3F /* SurvivalDataRepository.swift */; };
-		8CE9BDAF29E57E4700F45D3F /* SurvivalDataRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDAE29E57E4700F45D3F /* SurvivalDataRepositoryImp.swift */; };
 		8CE9BDB729E5807F00F45D3F /* AttributesHomeDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDB629E5807F00F45D3F /* AttributesHomeDependencies.swift */; };
 		8CE9BDB929E580E200F45D3F /* AttributesHomeExternalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDB829E580E200F45D3F /* AttributesHomeExternalDependencies.swift */; };
 		8CE9BDBB29E5815000F45D3F /* AttributesHomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDBA29E5815000F45D3F /* AttributesHomeCoordinator.swift */; };
@@ -238,8 +224,8 @@
 		461C1F3D29C9C77C00540289 /* ApiClientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientService.swift; sourceTree = "<group>"; };
 		461C1F3F29C9C86C00540289 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		461C1F4329C9F68400540289 /* ProfileDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataUseCase.swift; sourceTree = "<group>"; };
-		461C1F4C29CAE0F600540289 /* LoginDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDependency.swift; sourceTree = "<group>"; };
-		461C1F4E29CAE10600540289 /* LoginExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginExternalDependency.swift; sourceTree = "<group>"; };
+		461C1F4C29CAE0F600540289 /* LoginDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDependencies.swift; sourceTree = "<group>"; };
+		461C1F4E29CAE10600540289 /* LoginExternalDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginExternalDependencies.swift; sourceTree = "<group>"; };
 		461C1F5129CAE35300540289 /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
 		461C1F5329CAE59A00540289 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		465550C129CC33B000BF932A /* UIViewController+UIbutton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+UIbutton.swift"; sourceTree = "<group>"; };
@@ -250,8 +236,8 @@
 		465550CE29CC471400BF932A /* MainTabBarExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarExternalDependency.swift; sourceTree = "<group>"; };
 		465550D029CC47A700BF932A /* MainTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarCoordinator.swift; sourceTree = "<group>"; };
 		465550D729CC504100BF932A /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
-		465550D929CC513100BF932A /* ProfileExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileExternalDependency.swift; sourceTree = "<group>"; };
-		465550DB29CC51DF00BF932A /* ProfileDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDependency.swift; sourceTree = "<group>"; };
+		465550D929CC513100BF932A /* ProfileExternalDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileExternalDependencies.swift; sourceTree = "<group>"; };
+		465550DB29CC51DF00BF932A /* ProfileDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDependencies.swift; sourceTree = "<group>"; };
 		465550E229CC6F1F00BF932A /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
 		465550E429CC6F6300BF932A /* FavouriteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCoordinator.swift; sourceTree = "<group>"; };
 		465550E629CC700400BF932A /* FavouriteExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteExternalDependency.swift; sourceTree = "<group>"; };
@@ -269,9 +255,6 @@
 		4670EDE929D442FD00C1062E /* HelpDataDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataDependency.swift; sourceTree = "<group>"; };
 		4670EDEB29D4433B00C1062E /* HelpDataExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataExternalDependency.swift; sourceTree = "<group>"; };
 		4670EDEE29D4438500C1062E /* HelpDataCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataCoordinator.swift; sourceTree = "<group>"; };
-		46B0CF2129E701D400BE95EB /* WeaponDataDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailUseCase.swift; sourceTree = "<group>"; };
-		46B0CF2329E7027100BE95EB /* WeaponDataDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailRepository.swift; sourceTree = "<group>"; };
-		46B0CF2529E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailRepositoryImp.swift; sourceTree = "<group>"; };
 		8C007E3329F1623A0029AF2F /* ItemCellStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellStats.swift; sourceTree = "<group>"; };
 		8C2460412B3C4E7A00AB98F3 /* ZoomAndSnapFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomAndSnapFlowLayout.swift; sourceTree = "<group>"; };
 		8C2460542B3C4F6800AB98F3 /* Chip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chip.swift; sourceTree = "<group>"; };
@@ -297,6 +280,19 @@
 		8C2460852B3C8F5F00AB98F3 /* GraphInfoModesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GraphInfoModesView.xib; sourceTree = "<group>"; };
 		8C2FC1A029BF786D00FDE5DC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		8C31FDB629C329E500196704 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8C3A012D2B84003F00211AF3 /* TestProfileDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProfileDependencies.swift; sourceTree = "<group>"; };
+		8C3A012F2B84033100211AF3 /* TestProfileExternalDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProfileExternalDependencies.swift; sourceTree = "<group>"; };
+		8C3A01312B84041400211AF3 /* ProfileCoordinatorSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinatorSpy.swift; sourceTree = "<group>"; };
+		8C3A01332B84050C00211AF3 /* ProfileCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinatorTest.swift; sourceTree = "<group>"; };
+		8C3A01352B84062D00211AF3 /* ProfileViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModelTest.swift; sourceTree = "<group>"; };
+		8C3A01372B84082C00211AF3 /* ProfileViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerTest.swift; sourceTree = "<group>"; };
+		8C3A01392B840BAD00211AF3 /* LoginViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerTest.swift; sourceTree = "<group>"; };
+		8C3A013B2B840C5700211AF3 /* TestAttributesHomeDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAttributesHomeDependencies.swift; sourceTree = "<group>"; };
+		8C3A013D2B840CF000211AF3 /* TestAttributesHomeExternalDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAttributesHomeExternalDependencies.swift; sourceTree = "<group>"; };
+		8C3A013F2B840D6700211AF3 /* AttributesHomeCoordinatorSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesHomeCoordinatorSpy.swift; sourceTree = "<group>"; };
+		8C3A01412B840DFB00211AF3 /* AttributesHomeCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesHomeCoordinatorTest.swift; sourceTree = "<group>"; };
+		8C3A01432B840E5400211AF3 /* AttributesHomeViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesHomeViewControllerTest.swift; sourceTree = "<group>"; };
+		8C3A01452B840E9A00211AF3 /* AttributesHomeViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesHomeViewModelTest.swift; sourceTree = "<group>"; };
 		8C6E9C9329F1560600DE593D /* ItemCellHelpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellHelpData.swift; sourceTree = "<group>"; };
 		8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraint.swift"; sourceTree = "<group>"; };
 		8C7563DF29BB5E5E000373F9 /* SpinnerDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerDisplayable.swift; sourceTree = "<group>"; };
@@ -305,8 +301,8 @@
 		8C7563E529BB5FBA000373F9 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		8C7563EB29BB6073000373F9 /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
 		8C9A32AA29DDB39500F81B34 /* FavouriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewModel.swift; sourceTree = "<group>"; };
-		8C9ABEED2AD830A000552101 /* TestLoginDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginDependency.swift; sourceTree = "<group>"; };
-		8C9ABEEF2AD8318200552101 /* TestLoginExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginExternalDependency.swift; sourceTree = "<group>"; };
+		8C9ABEED2AD830A000552101 /* TestLoginDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginDependencies.swift; sourceTree = "<group>"; };
+		8C9ABEEF2AD8318200552101 /* TestLoginExternalDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginExternalDependencies.swift; sourceTree = "<group>"; };
 		8C9ABEF52AD8352900552101 /* MockDataProfleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataProfleRepository.swift; sourceTree = "<group>"; };
 		8C9ABEF82AD8368F00552101 /* LoginCoordinatorSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinatorSpy.swift; sourceTree = "<group>"; };
 		8C9ABEFA2AD83A4700552101 /* LoginCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinatorTest.swift; sourceTree = "<group>"; };
@@ -330,19 +326,8 @@
 		8CA398CC29B72A2000C09746 /* PubgStatsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PubgStatsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA398D029B72A2000C09746 /* PubgStatsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PubgStatsUITests.swift; sourceTree = "<group>"; };
 		8CA398D229B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PubgStatsUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		8CA466C22A14293A00EDF672 /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
-		8CA466C32A14293A00EDF672 /* ItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		8CA720AF29DAE3F6001E3EFA /* UIViewController+Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Label.swift"; sourceTree = "<group>"; };
 		8CA85D8529DC46160050C19B /* UIViewController+func.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+func.swift"; sourceTree = "<group>"; };
-		8CA9024529D2BBF9004E71D0 /* WeaponDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataUseCase.swift; sourceTree = "<group>"; };
-		8CA9024A29D2BCB4004E71D0 /* WeaponDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataRepository.swift; sourceTree = "<group>"; };
-		8CA9024C29D2BF49004E71D0 /* WeaponDataRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataRepositoryImp.swift; sourceTree = "<group>"; };
-		8CA9024F29D2E20A004E71D0 /* ItemDataCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDataCollectionViewCell.swift; sourceTree = "<group>"; };
-		8CA9025529D2F2C0004E71D0 /* WeaponDataDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailViewController.swift; sourceTree = "<group>"; };
-		8CA9025729D2F382004E71D0 /* WeaponDataDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailViewModel.swift; sourceTree = "<group>"; };
-		8CA9025929D2F3DD004E71D0 /* WeaponDataDetailDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailDependency.swift; sourceTree = "<group>"; };
-		8CA9025B29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailExternalDependency.swift; sourceTree = "<group>"; };
-		8CA9025D29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDetailCoordinator.swift; sourceTree = "<group>"; };
 		8CA97A302B3DDD83006D10AE /* DoubleChartBarAdapterRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleChartBarAdapterRepresentable.swift; sourceTree = "<group>"; };
 		8CA97A322B3DDE42006D10AE /* GraphInfoModesRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphInfoModesRepresentable.swift; sourceTree = "<group>"; };
 		8CA9B8DE2B57339300B44683 /* DataGeneralView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataGeneralView.swift; sourceTree = "<group>"; };
@@ -381,11 +366,6 @@
 		8CB6396129D2356B00763231 /* KillsDataDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillsDataDependency.swift; sourceTree = "<group>"; };
 		8CB6396329D235B900763231 /* KillsDataExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillsDataExternalDependency.swift; sourceTree = "<group>"; };
 		8CB6396529D2363100763231 /* KillsDataCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillsDataCoordinator.swift; sourceTree = "<group>"; };
-		8CB6396C29D244F300763231 /* WeaponDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataViewController.swift; sourceTree = "<group>"; };
-		8CB6396E29D2457300763231 /* WeaponDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataViewModel.swift; sourceTree = "<group>"; };
-		8CB6397029D245B400763231 /* WeaponDataDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataDependency.swift; sourceTree = "<group>"; };
-		8CB6397229D245FF00763231 /* WeaponDataExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataExternalDependency.swift; sourceTree = "<group>"; };
-		8CB6397429D2463900763231 /* WeaponDataCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDataCoordinator.swift; sourceTree = "<group>"; };
 		8CBC02822AD99C99002449E1 /* SurvivalDataProfileRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataProfileRepresentable.swift; sourceTree = "<group>"; };
 		8CBC02842AD9AA32002449E1 /* GamesModesDataProfileRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesDataProfileRepresentable.swift; sourceTree = "<group>"; };
 		8CBC70412AD7D40E00234420 /* DataProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProfileRepository.swift; sourceTree = "<group>"; };
@@ -401,16 +381,8 @@
 		8CCC92C529E3FC3C0019BE72 /* FavouriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteRepository.swift; sourceTree = "<group>"; };
 		8CCC92C729E3FCB70019BE72 /* FavouriteDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteDataUseCase.swift; sourceTree = "<group>"; };
 		8CCC92C929E407980019BE72 /* UIViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+TableView.swift"; sourceTree = "<group>"; };
-		8CCC92CF29E40DAF0019BE72 /* SurvivalDataCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataCoordinator.swift; sourceTree = "<group>"; };
-		8CCC92D129E40E240019BE72 /* SurvivalDataExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataExternalDependency.swift; sourceTree = "<group>"; };
-		8CCC92D329E40E610019BE72 /* SurvivalDataDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataDependency.swift; sourceTree = "<group>"; };
-		8CCC92D529E40EAB0019BE72 /* SurvivalDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataViewModel.swift; sourceTree = "<group>"; };
-		8CCC92D729E40F120019BE72 /* SurvivalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataViewController.swift; sourceTree = "<group>"; };
 		8CD7CD6129BEFF5700C57346 /* LocalDataProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataProfileService.swift; sourceTree = "<group>"; };
 		8CD7CD6E29BF04E200C57346 /* Profile.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Profile.xcdatamodel; sourceTree = "<group>"; };
-		8CE9BDA829E57D5E00F45D3F /* SurvivalDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataUseCase.swift; sourceTree = "<group>"; };
-		8CE9BDAA29E57DD600F45D3F /* SurvivalDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataRepository.swift; sourceTree = "<group>"; };
-		8CE9BDAE29E57E4700F45D3F /* SurvivalDataRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataRepositoryImp.swift; sourceTree = "<group>"; };
 		8CE9BDB629E5807F00F45D3F /* AttributesHomeDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesHomeDependencies.swift; sourceTree = "<group>"; };
 		8CE9BDB829E580E200F45D3F /* AttributesHomeExternalDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesHomeExternalDependencies.swift; sourceTree = "<group>"; };
 		8CE9BDBA29E5815000F45D3F /* AttributesHomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesHomeCoordinator.swift; sourceTree = "<group>"; };
@@ -479,9 +451,6 @@
 				8CAC3E2329C303C800A1FE34 /* Profile */,
 				8CB07EAB29D1A577000EE257 /* StatsGeneral */,
 				8CB6395729D233C200763231 /* KillsData */,
-				8CB6396729D242FB00763231 /* WeaponData */,
-				8CA9025129D2F24E004E71D0 /* WeaponDataDetail */,
-				8CCC92CB29E40D110019BE72 /* SurvivalData */,
 				8CE9BDB029E57FA900F45D3F /* AttributesHome */,
 				8CE9BDC929E59EAE00F45D3F /* AttributesDetail */,
 			);
@@ -538,8 +507,8 @@
 		461C1F4B29CAE0A200540289 /* DependenciesResolve */ = {
 			isa = PBXGroup;
 			children = (
-				461C1F4C29CAE0F600540289 /* LoginDependency.swift */,
-				461C1F4E29CAE10600540289 /* LoginExternalDependency.swift */,
+				461C1F4C29CAE0F600540289 /* LoginDependencies.swift */,
+				461C1F4E29CAE10600540289 /* LoginExternalDependencies.swift */,
 			);
 			path = DependenciesResolve;
 			sourceTree = "<group>";
@@ -589,8 +558,8 @@
 		465550D629CC500200BF932A /* DependenciesResolve */ = {
 			isa = PBXGroup;
 			children = (
-				465550D929CC513100BF932A /* ProfileExternalDependency.swift */,
-				465550DB29CC51DF00BF932A /* ProfileDependency.swift */,
+				465550D929CC513100BF932A /* ProfileExternalDependencies.swift */,
+				465550DB29CC51DF00BF932A /* ProfileDependencies.swift */,
 			);
 			path = DependenciesResolve;
 			sourceTree = "<group>";
@@ -680,53 +649,13 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		46B0CF1C29E7015900BE95EB /* Domain */ = {
-			isa = PBXGroup;
-			children = (
-				46B0CF1E29E7016C00BE95EB /* InterfaceRepository */,
-				46B0CF1D29E7016100BE95EB /* UseCase */,
-			);
-			path = Domain;
-			sourceTree = "<group>";
-		};
-		46B0CF1D29E7016100BE95EB /* UseCase */ = {
-			isa = PBXGroup;
-			children = (
-				46B0CF2129E701D400BE95EB /* WeaponDataDetailUseCase.swift */,
-			);
-			path = UseCase;
-			sourceTree = "<group>";
-		};
-		46B0CF1E29E7016C00BE95EB /* InterfaceRepository */ = {
-			isa = PBXGroup;
-			children = (
-				46B0CF2329E7027100BE95EB /* WeaponDataDetailRepository.swift */,
-			);
-			path = InterfaceRepository;
-			sourceTree = "<group>";
-		};
-		46B0CF1F29E7017100BE95EB /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				46B0CF2029E7017E00BE95EB /* RepositoryImplementation */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		46B0CF2029E7017E00BE95EB /* RepositoryImplementation */ = {
-			isa = PBXGroup;
-			children = (
-				46B0CF2529E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift */,
-			);
-			path = RepositoryImplementation;
-			sourceTree = "<group>";
-		};
 		8C2460402B3C3B0100AB98F3 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
 				8CB2CEF029C9A63B00E79D29 /* PlayerDTO.swift */,
 				8CB07EC229D1B246000EE257 /* SurvivalDTO.swift */,
 				8CB07EC729D1B446000EE257 /* GamesModesDTO.swift */,
+				8CB07EC429D1B393000EE257 /* WeaponDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -817,6 +746,30 @@
 			path = GraphInfoModesView;
 			sourceTree = "<group>";
 		};
+		8C3A012B2B83FFE600211AF3 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				8C3A012D2B84003F00211AF3 /* TestProfileDependencies.swift */,
+				8C3A012F2B84033100211AF3 /* TestProfileExternalDependencies.swift */,
+				8C3A01332B84050C00211AF3 /* ProfileCoordinatorTest.swift */,
+				8C3A01352B84062D00211AF3 /* ProfileViewModelTest.swift */,
+				8C3A01372B84082C00211AF3 /* ProfileViewControllerTest.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		8C3A012C2B83FFFC00211AF3 /* AttributesHome */ = {
+			isa = PBXGroup;
+			children = (
+				8C3A013B2B840C5700211AF3 /* TestAttributesHomeDependencies.swift */,
+				8C3A013D2B840CF000211AF3 /* TestAttributesHomeExternalDependencies.swift */,
+				8C3A01412B840DFB00211AF3 /* AttributesHomeCoordinatorTest.swift */,
+				8C3A01432B840E5400211AF3 /* AttributesHomeViewControllerTest.swift */,
+				8C3A01452B840E9A00211AF3 /* AttributesHomeViewModelTest.swift */,
+			);
+			path = AttributesHome;
+			sourceTree = "<group>";
+		};
 		8C7563DA29BB5169000373F9 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -888,16 +841,17 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
-		8C9ABEEC2AD8302B00552101 /* LoginTest */ = {
+		8C9ABEEC2AD8302B00552101 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				8C9ABEED2AD830A000552101 /* TestLoginDependency.swift */,
-				8C9ABEEF2AD8318200552101 /* TestLoginExternalDependency.swift */,
+				8C9ABEED2AD830A000552101 /* TestLoginDependencies.swift */,
+				8C9ABEEF2AD8318200552101 /* TestLoginExternalDependencies.swift */,
 				8C9ABEFA2AD83A4700552101 /* LoginCoordinatorTest.swift */,
 				8C9ABEFF2AD8426000552101 /* LoginViewModelTest.swift */,
 				8C9ABF012AD8450100552101 /* LoginDataUseCaseTest.swift */,
+				8C3A01392B840BAD00211AF3 /* LoginViewControllerTest.swift */,
 			);
-			path = LoginTest;
+			path = Login;
 			sourceTree = "<group>";
 		};
 		8C9ABEF42AD8350400552101 /* MockRepository */ = {
@@ -912,6 +866,8 @@
 			isa = PBXGroup;
 			children = (
 				8C9ABEF82AD8368F00552101 /* LoginCoordinatorSpy.swift */,
+				8C3A01312B84041400211AF3 /* ProfileCoordinatorSpy.swift */,
+				8C3A013F2B840D6700211AF3 /* AttributesHomeCoordinatorSpy.swift */,
 			);
 			path = Spies;
 			sourceTree = "<group>";
@@ -973,10 +929,12 @@
 		8CA398C529B72A2000C09746 /* PubgStatsTests */ = {
 			isa = PBXGroup;
 			children = (
+				8C3A012C2B83FFFC00211AF3 /* AttributesHome */,
+				8C3A012B2B83FFE600211AF3 /* Profile */,
 				8C9ABEFC2AD83B0F00552101 /* Commons */,
 				8C9ABEF72AD8368200552101 /* Spies */,
 				8C9ABEF42AD8350400552101 /* MockRepository */,
-				8C9ABEEC2AD8302B00552101 /* LoginTest */,
+				8C9ABEEC2AD8302B00552101 /* Login */,
 				8CA398C629B72A2000C09746 /* PubgStatsTests.swift */,
 			);
 			path = PubgStatsTests;
@@ -989,105 +947,6 @@
 				8CA398D229B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift */,
 			);
 			path = PubgStatsUITests;
-			sourceTree = "<group>";
-		};
-		8CA9024229D2B970004E71D0 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				8CA9024829D2BC94004E71D0 /* RepositoryImplementation */,
-				8CA9024729D2BC82004E71D0 /* DTO */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		8CA9024329D2B977004E71D0 /* Domain */ = {
-			isa = PBXGroup;
-			children = (
-				8CA9024929D2BCA8004E71D0 /* InterfaceRepository */,
-				8CA9024429D2BBE6004E71D0 /* UseCase */,
-			);
-			path = Domain;
-			sourceTree = "<group>";
-		};
-		8CA9024429D2BBE6004E71D0 /* UseCase */ = {
-			isa = PBXGroup;
-			children = (
-				8CA9024529D2BBF9004E71D0 /* WeaponDataUseCase.swift */,
-			);
-			path = UseCase;
-			sourceTree = "<group>";
-		};
-		8CA9024729D2BC82004E71D0 /* DTO */ = {
-			isa = PBXGroup;
-			children = (
-				8CB07EC429D1B393000EE257 /* WeaponDTO.swift */,
-			);
-			path = DTO;
-			sourceTree = "<group>";
-		};
-		8CA9024829D2BC94004E71D0 /* RepositoryImplementation */ = {
-			isa = PBXGroup;
-			children = (
-				8CA9024C29D2BF49004E71D0 /* WeaponDataRepositoryImp.swift */,
-			);
-			path = RepositoryImplementation;
-			sourceTree = "<group>";
-		};
-		8CA9024929D2BCA8004E71D0 /* InterfaceRepository */ = {
-			isa = PBXGroup;
-			children = (
-				8CA9024A29D2BCB4004E71D0 /* WeaponDataRepository.swift */,
-			);
-			path = InterfaceRepository;
-			sourceTree = "<group>";
-		};
-		8CA9024E29D2E1E6004E71D0 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				8CA9024F29D2E20A004E71D0 /* ItemDataCollectionViewCell.swift */,
-				8CA466C22A14293A00EDF672 /* ItemCollectionViewCell.swift */,
-				8CA466C32A14293A00EDF672 /* ItemCollectionViewCell.xib */,
-			);
-			name = Cell;
-			path = ../../ScreenModules/TabBar/ProfilePubg/WeaponData/Presentation/Cell;
-			sourceTree = "<group>";
-		};
-		8CA9025129D2F24E004E71D0 /* WeaponDataDetail */ = {
-			isa = PBXGroup;
-			children = (
-				46B0CF1F29E7017100BE95EB /* Data */,
-				46B0CF1C29E7015900BE95EB /* Domain */,
-				8CA9025429D2F294004E71D0 /* Coordinator */,
-				8CA9025329D2F287004E71D0 /* DependenciesResolve */,
-				8CA9025229D2F27E004E71D0 /* Presentation */,
-			);
-			path = WeaponDataDetail;
-			sourceTree = "<group>";
-		};
-		8CA9025229D2F27E004E71D0 /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				8CA9025529D2F2C0004E71D0 /* WeaponDataDetailViewController.swift */,
-				8CA9025729D2F382004E71D0 /* WeaponDataDetailViewModel.swift */,
-			);
-			path = Presentation;
-			sourceTree = "<group>";
-		};
-		8CA9025329D2F287004E71D0 /* DependenciesResolve */ = {
-			isa = PBXGroup;
-			children = (
-				8CA9025929D2F3DD004E71D0 /* WeaponDataDetailDependency.swift */,
-				8CA9025B29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift */,
-			);
-			path = DependenciesResolve;
-			sourceTree = "<group>";
-		};
-		8CA9025429D2F294004E71D0 /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				8CA9025D29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift */,
-			);
-			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		8CA97A2D2B3DDA8B006D10AE /* Representables */ = {
@@ -1338,7 +1197,6 @@
 		8CAEB01229BB4721009282AF /* Layer */ = {
 			isa = PBXGroup;
 			children = (
-				8CA9024E29D2E1E6004E71D0 /* Cell */,
 				8CAEB01529BB4738009282AF /* Presentation */,
 				461C1F4129C9C92B00540289 /* Data */,
 			);
@@ -1528,44 +1386,6 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		8CB6396729D242FB00763231 /* WeaponData */ = {
-			isa = PBXGroup;
-			children = (
-				8CA9024329D2B977004E71D0 /* Domain */,
-				8CA9024229D2B970004E71D0 /* Data */,
-				8CB6396B29D2437A00763231 /* Coordinator */,
-				8CB6396A29D2437200763231 /* DependenciesResolve */,
-				8CB6396829D2431A00763231 /* Presentation */,
-			);
-			path = WeaponData;
-			sourceTree = "<group>";
-		};
-		8CB6396829D2431A00763231 /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				8CB6396C29D244F300763231 /* WeaponDataViewController.swift */,
-				8CB6396E29D2457300763231 /* WeaponDataViewModel.swift */,
-			);
-			path = Presentation;
-			sourceTree = "<group>";
-		};
-		8CB6396A29D2437200763231 /* DependenciesResolve */ = {
-			isa = PBXGroup;
-			children = (
-				8CB6397029D245B400763231 /* WeaponDataDependency.swift */,
-				8CB6397229D245FF00763231 /* WeaponDataExternalDependency.swift */,
-			);
-			path = DependenciesResolve;
-			sourceTree = "<group>";
-		};
-		8CB6396B29D2437A00763231 /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				8CB6397429D2463900763231 /* WeaponDataCoordinator.swift */,
-			);
-			path = Coordinator;
-			sourceTree = "<group>";
-		};
 		8CBC70402AD7D3E600234420 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -1629,91 +1449,12 @@
 			path = RepositoryImplementation;
 			sourceTree = "<group>";
 		};
-		8CCC92CB29E40D110019BE72 /* SurvivalData */ = {
-			isa = PBXGroup;
-			children = (
-				8CE9BDA429E57D0D00F45D3F /* Data */,
-				8CE9BDA329E57D0600F45D3F /* Domain */,
-				8CCC92CE29E40D810019BE72 /* Coordinator */,
-				8CCC92CD29E40D770019BE72 /* DependenciesResolve */,
-				8CCC92CC29E40D6F0019BE72 /* Presentation */,
-			);
-			path = SurvivalData;
-			sourceTree = "<group>";
-		};
-		8CCC92CC29E40D6F0019BE72 /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				8CCC92D529E40EAB0019BE72 /* SurvivalDataViewModel.swift */,
-				8CCC92D729E40F120019BE72 /* SurvivalDataViewController.swift */,
-			);
-			path = Presentation;
-			sourceTree = "<group>";
-		};
-		8CCC92CD29E40D770019BE72 /* DependenciesResolve */ = {
-			isa = PBXGroup;
-			children = (
-				8CCC92D129E40E240019BE72 /* SurvivalDataExternalDependency.swift */,
-				8CCC92D329E40E610019BE72 /* SurvivalDataDependency.swift */,
-			);
-			path = DependenciesResolve;
-			sourceTree = "<group>";
-		};
-		8CCC92CE29E40D810019BE72 /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				8CCC92CF29E40DAF0019BE72 /* SurvivalDataCoordinator.swift */,
-			);
-			path = Coordinator;
-			sourceTree = "<group>";
-		};
 		8CD7CD6329BF014700C57346 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
 				8CB39B9429C05D2500B1D8EF /* LoginDataUseCase.swift */,
 			);
 			path = UseCase;
-			sourceTree = "<group>";
-		};
-		8CE9BDA329E57D0600F45D3F /* Domain */ = {
-			isa = PBXGroup;
-			children = (
-				8CE9BDA629E57D1B00F45D3F /* UseCase */,
-				8CE9BDA529E57D1700F45D3F /* InterfaceRepository */,
-			);
-			path = Domain;
-			sourceTree = "<group>";
-		};
-		8CE9BDA429E57D0D00F45D3F /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				8CE9BDA729E57D2900F45D3F /* RepositoryImplementation */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		8CE9BDA529E57D1700F45D3F /* InterfaceRepository */ = {
-			isa = PBXGroup;
-			children = (
-				8CE9BDAA29E57DD600F45D3F /* SurvivalDataRepository.swift */,
-			);
-			path = InterfaceRepository;
-			sourceTree = "<group>";
-		};
-		8CE9BDA629E57D1B00F45D3F /* UseCase */ = {
-			isa = PBXGroup;
-			children = (
-				8CE9BDA829E57D5E00F45D3F /* SurvivalDataUseCase.swift */,
-			);
-			path = UseCase;
-			sourceTree = "<group>";
-		};
-		8CE9BDA729E57D2900F45D3F /* RepositoryImplementation */ = {
-			isa = PBXGroup;
-			children = (
-				8CE9BDAE29E57E4700F45D3F /* SurvivalDataRepositoryImp.swift */,
-			);
-			path = RepositoryImplementation;
 			sourceTree = "<group>";
 		};
 		8CE9BDB029E57FA900F45D3F /* AttributesHome */ = {
@@ -2066,7 +1807,6 @@
 				8C2460702B3C50A700AB98F3 /* ChartCollectionView.xib in Resources */,
 				460ABACF29F7B8D700DD5797 /* Localizable.strings in Resources */,
 				8C24607A2B3C511B00AB98F3 /* ChartsInfoView.xib in Resources */,
-				8CA466C52A14293A00EDF672 /* ItemCollectionViewCell.xib in Resources */,
 				8CA9B8E12B57339300B44683 /* DataGeneralView.xib in Resources */,
 				8C2460752B3C50B800AB98F3 /* ChartCollectionViewCell.xib in Resources */,
 				8CA398BC29B72A2000C09746 /* LaunchScreen.storyboard in Resources */,
@@ -2102,7 +1842,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CCC92D429E40E610019BE72 /* SurvivalDataDependency.swift in Sources */,
 				8CE9BDD629E5A12200F45D3F /* AttributesDetailViewModel.swift in Sources */,
 				8CCC92C829E3FCB70019BE72 /* FavouriteDataUseCase.swift in Sources */,
 				8CAEB02029BB4968009282AF /* Coordinator.swift in Sources */,
@@ -2118,26 +1857,21 @@
 				8CA720B029DAE3F6001E3EFA /* UIViewController+Label.swift in Sources */,
 				8CB07EC329D1B246000EE257 /* SurvivalDTO.swift in Sources */,
 				8CE9BDB929E580E200F45D3F /* AttributesHomeExternalDependencies.swift in Sources */,
-				8CA9025029D2E20A004E71D0 /* ItemDataCollectionViewCell.swift in Sources */,
 				8CEB341029ED66C1006C2564 /* InfoAppCoordinator.swift in Sources */,
 				4670EDE729D442C600C1062E /* HelpDataViewModel.swift in Sources */,
 				465550CF29CC471400BF932A /* MainTabBarExternalDependency.swift in Sources */,
 				8CB2CEF329C9A87900E79D29 /* ProfileViewModel.swift in Sources */,
 				4655510429CC829800BF932A /* SettingsCoordinator.swift in Sources */,
 				8CEB340529ED60E1006C2564 /* SettingsDataUseCase.swift in Sources */,
-				8CB6397529D2463900763231 /* WeaponDataCoordinator.swift in Sources */,
-				461C1F4D29CAE0F600540289 /* LoginDependency.swift in Sources */,
+				461C1F4D29CAE0F600540289 /* LoginDependencies.swift in Sources */,
 				8CB07EB829D1A6B3000EE257 /* StatsGeneralDependency.swift in Sources */,
 				461C1F3E29C9C77C00540289 /* ApiClientService.swift in Sources */,
-				46B0CF2429E7027100BE95EB /* WeaponDataDetailRepository.swift in Sources */,
 				8CBE66AD2B587DF900C64481 /* ProfileViewRepresentable.swift in Sources */,
 				8CE9BDDA29E5B6CF00F45D3F /* KillsDataUseCase.swift in Sources */,
 				8C2460712B3C50A700AB98F3 /* ChartCollectionView.swift in Sources */,
 				8CAC3E2F29C3080600A1FE34 /* GuideViewModel.swift in Sources */,
 				8C7563E429BB5F17000373F9 /* MessageDisplayable.swift in Sources */,
-				8CE9BDAF29E57E4700F45D3F /* SurvivalDataRepositoryImp.swift in Sources */,
 				4670EDEA29D442FD00C1062E /* HelpDataDependency.swift in Sources */,
-				8CA466C42A14293A00EDF672 /* ItemCollectionViewCell.swift in Sources */,
 				8CE9BDDD29E5B72400F45D3F /* KillsDataRepository.swift in Sources */,
 				8CAE34B42B7EAC4900191927 /* GamesModesAttributesDetailsRepresentable.swift in Sources */,
 				465550D829CC504100BF932A /* ProfileCoordinator.swift in Sources */,
@@ -2163,13 +1897,10 @@
 				8CEB340929ED61A3006C2564 /* SettingsDataRepositoryImp.swift in Sources */,
 				465550FC29CC7E8E00BF932A /* GuideCoordinator.swift in Sources */,
 				8CCC92C429E3F8270019BE72 /* FavouriteRepositoryImp.swift in Sources */,
-				8CA9025629D2F2C0004E71D0 /* WeaponDataDetailViewController.swift in Sources */,
 				4670EDEC29D4433B00C1062E /* HelpDataExternalDependency.swift in Sources */,
 				8CAE34B62B7EC78A00191927 /* SurvivalAttributesDetailsRepresentable.swift in Sources */,
 				8C24606C2B3C508100AB98F3 /* PieChartView.swift in Sources */,
 				461C1F5229CAE35300540289 /* AppDependencies.swift in Sources */,
-				8CA9024B29D2BCB4004E71D0 /* WeaponDataRepository.swift in Sources */,
-				8CE9BDAB29E57DD600F45D3F /* SurvivalDataRepository.swift in Sources */,
 				8C2460422B3C4E7A00AB98F3 /* ZoomAndSnapFlowLayout.swift in Sources */,
 				8C24607B2B3C511B00AB98F3 /* ChartsInfoView.swift in Sources */,
 				465550C429CC390200BF932A /* UIViewController+TextField.swift in Sources */,
@@ -2181,15 +1912,11 @@
 				8CBC704A2AD7EBBA00234420 /* Bindable.swift in Sources */,
 				8CD7CD6F29BF04E200C57346 /* Profile.xcdatamodeld in Sources */,
 				465550E329CC6F1F00BF932A /* FavouriteViewController.swift in Sources */,
-				8CB6397329D245FF00763231 /* WeaponDataExternalDependency.swift in Sources */,
 				465550CD29CC46ED00BF932A /* MainTabBarDependency.swift in Sources */,
-				8CE9BDA929E57D5E00F45D3F /* SurvivalDataUseCase.swift in Sources */,
 				8C7563EC29BB6073000373F9 /* StateController.swift in Sources */,
 				8C7563E229BB5E8A000373F9 /* ViewValues.swift in Sources */,
 				4670EDEF29D4438500C1062E /* HelpDataCoordinator.swift in Sources */,
 				8CE9BDD229E59F9200F45D3F /* AttributesDetailCoordinator.swift in Sources */,
-				8CA9025E29D2F475004E71D0 /* WeaponDataDetailCoordinator.swift in Sources */,
-				8CCC92D229E40E240019BE72 /* SurvivalDataExternalDependency.swift in Sources */,
 				8CBC70442AD7D44300234420 /* DataProfleRepositoryImp.swift in Sources */,
 				8CEB341829ED67DF006C2564 /* InfoAppViewModel.swift in Sources */,
 				465550C629CC3A5600BF932A /* UIViewController+Image.swift in Sources */,
@@ -2197,11 +1924,10 @@
 				8C7563E029BB5E5E000373F9 /* SpinnerDisplayable.swift in Sources */,
 				8CC118BC2AD98F4300839855 /* AnyBinding.swift in Sources */,
 				8CB07ED229D1CFF1000EE257 /* StatsGeneralDataUseCase.swift in Sources */,
-				465550DA29CC513100BF932A /* ProfileExternalDependency.swift in Sources */,
+				465550DA29CC513100BF932A /* ProfileExternalDependencies.swift in Sources */,
 				8CECA6372B6EF21A00775650 /* AttributesHomeViewCell.swift in Sources */,
 				465550F829CC7DE800BF932A /* GuideDependency.swift in Sources */,
 				465550E729CC700400BF932A /* FavouriteExternalDependency.swift in Sources */,
-				8CA9025829D2F382004E71D0 /* WeaponDataDetailViewModel.swift in Sources */,
 				4655510129CC824000BF932A /* SettingsExternalDependency.swift in Sources */,
 				8CA9B8E02B57339300B44683 /* DataGeneralView.swift in Sources */,
 				8CB07EB629D1A683000EE257 /* StatsGeneralViewModel.swift in Sources */,
@@ -2209,40 +1935,32 @@
 				460ABACB29F7B75000DD5797 /* ExtensionString.swift in Sources */,
 				8CA398B129B72A1F00C09746 /* LoginViewController.swift in Sources */,
 				8CB6396629D2363100763231 /* KillsDataCoordinator.swift in Sources */,
-				8CA9025A29D2F3DD004E71D0 /* WeaponDataDetailDependency.swift in Sources */,
 				8CEB341229ED6720006C2564 /* InfoAppDependency.swift in Sources */,
 				8CA398AD29B72A1F00C09746 /* AppDelegate.swift in Sources */,
 				8CEB341629ED67C5006C2564 /* InfoAppViewController.swift in Sources */,
 				8C2460562B3C4F6800AB98F3 /* Chip.swift in Sources */,
-				465550DC29CC51DF00BF932A /* ProfileDependency.swift in Sources */,
+				465550DC29CC51DF00BF932A /* ProfileDependencies.swift in Sources */,
 				8CB07EA629D1969A000EE257 /* UIViewController+BackButton.swift in Sources */,
 				8C24606B2B3C508100AB98F3 /* InteractiveSectoredPieChartView.swift in Sources */,
-				8CCC92D029E40DAF0019BE72 /* SurvivalDataCoordinator.swift in Sources */,
 				8CBC02852AD9AA32002449E1 /* GamesModesDataProfileRepresentable.swift in Sources */,
-				8CCC92D829E40F120019BE72 /* SurvivalDataViewController.swift in Sources */,
 				8CA125322B70106B00FF2C83 /* AttributesDetailsCollectionViewCell.swift in Sources */,
 				8CAC3E3129C31D4700A1FE34 /* UrlGuide.swift in Sources */,
 				8CEB341429ED6753006C2564 /* InfoAppExternalDependency.swift in Sources */,
 				8CC118B82AD979A900839855 /* ScrollableStackView.swift in Sources */,
 				8CB6396429D235B900763231 /* KillsDataExternalDependency.swift in Sources */,
 				465550C829CC3C1E00BF932A /* UIViewController+Stack.swift in Sources */,
-				8CA9024D29D2BF49004E71D0 /* WeaponDataRepositoryImp.swift in Sources */,
 				8CAC3E2D29C3055300A1FE34 /* GuideViewController.swift in Sources */,
 				8CB05FA22A5F5022000B4092 /* UILabel.swift in Sources */,
 				8C24605C2B3C4FD700AB98F3 /* FlameXibButton.swift in Sources */,
 				8CBC70422AD7D40E00234420 /* DataProfileRepository.swift in Sources */,
 				8C7563E629BB5FBA000373F9 /* LoginViewModel.swift in Sources */,
-				8CA9024629D2BBF9004E71D0 /* WeaponDataUseCase.swift in Sources */,
 				8CABD0832B551AD8001AE2B2 /* NewsCardView.swift in Sources */,
 				8C9F824229C3CA02003000CD /* HelpDataViewController.swift in Sources */,
 				461C1F4029C9C86C00540289 /* EndPoint.swift in Sources */,
 				8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */,
 				8CBC70472AD7D4CF00234420 /* IdAccountDataProfileRepresentable.swift in Sources */,
 				8CE9BDD029E59F4500F45D3F /* AttributesDetailExternalDependencies.swift in Sources */,
-				8CCC92D629E40EAB0019BE72 /* SurvivalDataViewModel.swift in Sources */,
-				8CB6396D29D244F300763231 /* WeaponDataViewController.swift in Sources */,
 				8CC118BA2AD98F1700839855 /* AnyBindingOptional.swift in Sources */,
-				8CB6396F29D2457300763231 /* WeaponDataViewModel.swift in Sources */,
 				8CE9BDBB29E5815000F45D3F /* AttributesHomeCoordinator.swift in Sources */,
 				8CABD07E2B551722001AE2B2 /* BottomSheetView.swift in Sources */,
 				8C24605B2B3C4FD700AB98F3 /* XibView.swift in Sources */,
@@ -2250,16 +1968,14 @@
 				8CCC92CA29E407980019BE72 /* UIViewController+TableView.swift in Sources */,
 				8C2460822B3C6E2500AB98F3 /* ProfileHeaderView.swift in Sources */,
 				465550E929CC705200BF932A /* FavouriteDependency.swift in Sources */,
-				46B0CF2629E7029B00BE95EB /* WeaponDataDetailRepositoryImp.swift in Sources */,
 				465550FF29CC820A00BF932A /* SettingsDependency.swift in Sources */,
 				8CCC92C629E3FC3C0019BE72 /* FavouriteRepository.swift in Sources */,
 				466BCE152A02657B002896B7 /* UIViewController+CollectionView.swift in Sources */,
-				461C1F4F29CAE10600540289 /* LoginExternalDependency.swift in Sources */,
+				461C1F4F29CAE10600540289 /* LoginExternalDependencies.swift in Sources */,
 				8CE9BDB729E5807F00F45D3F /* AttributesHomeDependencies.swift in Sources */,
 				8CB07EBC29D1A764000EE257 /* StatsGeneralCoordinator.swift in Sources */,
 				8CA2FE3729F25C8100A4F475 /* StarChartView.swift in Sources */,
 				8C31FDB729C329E500196704 /* SettingsViewController.swift in Sources */,
-				46B0CF2229E701D400BE95EB /* WeaponDataDetailUseCase.swift in Sources */,
 				8CECA63B2B6EF2C900775650 /* DetailsCardView.swift in Sources */,
 				8CB2CEF129C9A63B00E79D29 /* PlayerDTO.swift in Sources */,
 				46151CB729C1B9780054BCEA /* ProfileViewController.swift in Sources */,
@@ -2271,9 +1987,7 @@
 				4670EDE429D4325200C1062E /* StatsGeneralViewController.swift in Sources */,
 				8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */,
 				8C6E9C9429F1560600DE593D /* ItemCellHelpData.swift in Sources */,
-				8CB6397129D245B400763231 /* WeaponDataDependency.swift in Sources */,
 				8CECA6332B6EBCDE00775650 /* AttributesHomeViewRepresentable.swift in Sources */,
-				8CA9025C29D2F41A004E71D0 /* WeaponDataDetailExternalDependency.swift in Sources */,
 				8CB07E9629D17347000EE257 /* RemoteService.swift in Sources */,
 				8C007E3429F1623A0029AF2F /* ItemCellStats.swift in Sources */,
 				465550E529CC6F6300BF932A /* FavouriteCoordinator.swift in Sources */,
@@ -2284,15 +1998,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C3A013A2B840BAD00211AF3 /* LoginViewControllerTest.swift in Sources */,
 				8C9ABF022AD8450100552101 /* LoginDataUseCaseTest.swift in Sources */,
+				8C3A01442B840E5400211AF3 /* AttributesHomeViewControllerTest.swift in Sources */,
+				8C3A01342B84050C00211AF3 /* ProfileCoordinatorTest.swift in Sources */,
 				8C9ABF002AD8426000552101 /* LoginViewModelTest.swift in Sources */,
+				8C3A012E2B84003F00211AF3 /* TestProfileDependencies.swift in Sources */,
+				8C3A01402B840D6700211AF3 /* AttributesHomeCoordinatorSpy.swift in Sources */,
+				8C3A01422B840DFB00211AF3 /* AttributesHomeCoordinatorTest.swift in Sources */,
+				8C3A01322B84041400211AF3 /* ProfileCoordinatorSpy.swift in Sources */,
 				8C9ABEF92AD8368F00552101 /* LoginCoordinatorSpy.swift in Sources */,
-				8C9ABEEE2AD830A000552101 /* TestLoginDependency.swift in Sources */,
+				8C9ABEEE2AD830A000552101 /* TestLoginDependencies.swift in Sources */,
 				8C9ABEF62AD8352900552101 /* MockDataProfleRepository.swift in Sources */,
+				8C3A013C2B840C5700211AF3 /* TestAttributesHomeDependencies.swift in Sources */,
+				8C3A01362B84062D00211AF3 /* ProfileViewModelTest.swift in Sources */,
+				8C3A01462B840E9A00211AF3 /* AttributesHomeViewModelTest.swift in Sources */,
 				8CA398C729B72A2000C09746 /* PubgStatsTests.swift in Sources */,
 				8C9ABEFB2AD83A4700552101 /* LoginCoordinatorTest.swift in Sources */,
+				8C3A01382B84082C00211AF3 /* ProfileViewControllerTest.swift in Sources */,
 				8C9ABEFE2AD83B3D00552101 /* XCTesCase+Extension.swift in Sources */,
-				8C9ABEF02AD8318200552101 /* TestLoginExternalDependency.swift in Sources */,
+				8C3A013E2B840CF000211AF3 /* TestAttributesHomeExternalDependencies.swift in Sources */,
+				8C9ABEF02AD8318200552101 /* TestLoginExternalDependencies.swift in Sources */,
+				8C3A01302B84033100211AF3 /* TestProfileExternalDependencies.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
