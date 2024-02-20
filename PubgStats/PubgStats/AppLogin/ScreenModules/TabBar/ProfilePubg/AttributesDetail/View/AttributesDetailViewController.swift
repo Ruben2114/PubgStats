@@ -155,7 +155,8 @@ extension AttributesDetailViewController: UICollectionViewDataSource, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? AttributesDetailsCollectionViewCell else { return UICollectionViewCell() }
-        cell.configureWith(listAttributes?.attributesDetails[indexPath.section][indexPath.item])
+        let list = listAttributes?.attributesDetails[indexPath.section].sorted { $0.title < $1.title}
+        cell.configureWith(list?[indexPath.item])
         return cell
     }
 

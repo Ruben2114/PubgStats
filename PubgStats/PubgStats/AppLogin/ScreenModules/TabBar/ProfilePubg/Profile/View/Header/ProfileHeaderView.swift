@@ -84,7 +84,7 @@ private extension ProfileHeaderView {
     func configureLabel() {
         titleGraph.text = "profileHeaderTitleGraph".localize()
         namePlayerLabel.text = representable?.dataPlayer.name
-        levelDescriptionLabel.text = "levelLabel".localize()
+        levelDescriptionLabel.text = "level".localize()
         levelAmountLabel.text = representable?.level
         xpDescriptionLabel.text = "XP"
         xpAmountLabel.text = representable?.xp

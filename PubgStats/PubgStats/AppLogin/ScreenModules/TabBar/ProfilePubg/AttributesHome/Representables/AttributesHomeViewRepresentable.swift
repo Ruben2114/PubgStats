@@ -145,11 +145,11 @@ public enum AttributesType {
     func getTitle() -> String {
         switch self {
         case .weapons:
-            return "Weapons"
+            return "weaponDataViewControllerTitle".localize()
         case .modeGames:
             return "gamesModesDataViewControllerTitle".localize()
         case .survival:
-            return "Survival"
+            return "survivalDataViewControllerTitle".localize()
         }
     }
     
@@ -168,9 +168,9 @@ public enum AttributesType {
     func getRectangleHeaderLabel() -> String {
         switch self {
         case .weapons:
-            return "Nivel"
+            return "level".localize()
         case .modeGames:
-            return "Victorias"
+            return "wins".localize()
         case .survival:
             return "Top 10: "
         }
@@ -179,11 +179,11 @@ public enum AttributesType {
     func getLeftHeaderLabel() -> String {
         switch self {
         case .weapons:
-            return "Tier"
+            return "tier".localize()
         case .modeGames:
-            return "Partidas"
+            return "gamesPlayed".localize()
         case .survival:
-            return "Partidas"
+            return "gamesPlayed".localize()
         }
     }
     
@@ -192,7 +192,7 @@ public enum AttributesType {
         case .weapons:
             return "XP"
         case .modeGames:
-            return "Victorias"
+            return "wins".localize()
         case .survival:
             return "XP"
         }
@@ -211,17 +211,17 @@ enum GamesModesTypes {
     func setTitle() -> String {
         switch self {
         case .solo:
-            return "solo"
+            return "solo".localize()
         case .soloFpp:
-            return "solo Fpp"
+            return "soloFpp".localize()
         case .duo:
-            return "duo"
+            return "duo".localize()
         case .duoFpp:
-            return "duo Fpp"
+            return "duoFpp".localize()
         case .squad:
-            return "squad"
+            return "squad".localize()
         case .squadFpp:
-            return "squad Fpp"
+            return "squadFpp".localize()
         }
     }
     

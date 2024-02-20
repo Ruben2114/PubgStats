@@ -64,50 +64,50 @@ enum AttributesDetailsGamesModes {
         let items: [AttributesDetailsGamesModes] = [.boost(stats),
                                                     .healing(stats),
                                                     .weaponsAcquired(stats)]
-        return [(kills, "Kills"),
-                (general, "General"),
-                (distance, "Distance"),
-                (items, "Items")]
+        return [(kills, "Kills".localize()),
+                (general, "general".localize()),
+                (distance, "distance".localize()),
+                (items, "items".localize())]
     }
     
     func getStats() -> (String, String) {
         switch self {
         case .kills(let stat):
-            return ("Kills", "\(stat.kills)")
+            return ("kills", "\(stat.kills)")
         case .maxKillStreaks(let stat):
-            return ("max Kill Streaks", "\(stat.maxKillStreaks)")
+            return ("maxKillStreaks", "\(stat.maxKillStreaks)")
         case .roundMostKills(let stat):
-            return ("round Most Kills", "\(stat.roundMostKills)")
+            return ("roundMostKills", "\(stat.roundMostKills)")
         case .killedTeammate(let stat):
-            return ("killed a teammate", "\(stat.teamKills)")
+            return ("killedTeammate", "\(stat.teamKills)")
         case .roadKills(let stat):
-            return ("road Kills", "\(stat.roadKills)")
+            return ("roadKills", "\(stat.roadKills)")
         case .longestKill(let stat):
-            return ("longest Kill", "\(String(format: "%.0f", stat.longestKill)) m")
+            return ("longestKill", "\(String(format: "%.0f", stat.longestKill)) m")
         case .longestTimeSurvived(let stat):
-            return ("longest Time Survived", getTime(stat.mostSurvivalTime, true))
+            return ("longestTimeSurvived", getTime(stat.mostSurvivalTime, true))
         case .losses(let stat):
             return ("losses", "\(stat.losses)")
         case .damage(let stat):
             return ("damage", String(format: "%.0f", stat.damageDealt))
         case .assists(let stat):
-            return ("Asistencias", "\(stat.assists)")
+            return ("assists", "\(stat.assists)")
         case .knocked(let stat):
             return ("knocked", "\(stat.dBNOS)")
         case .suicides(let stat):
             return ("suicides", "\(stat.suicides)")
         case .timeSurvived(let stat):
-            return ("time Survived", getTime(stat.timeSurvived))
+            return ("timeSurvived", getTime(stat.timeSurvived))
         case .vehicleDestroys(let stat):
-            return ("vehicle Destroys", "\(stat.vehicleDestroys)")
+            return ("vehicleDestroys", "\(stat.vehicleDestroys)")
         case .revives(let stat):
             return ("revives", "\(stat.revives)")
         case .walkDistance(let stat):
-            return ("Andando", getDistance(stat.walkDistance))
+            return ("walkDistance", getDistance(stat.walkDistance))
         case .rideDistance(let stat):
-            return ("Conduciendo", getDistance(stat.rideDistance))
+            return ("rideDistance", getDistance(stat.rideDistance))
         case .swimDistance(let stat):
-            return ("Nadando", getDistance(stat.swimDistance))
+            return ("swimDistance", getDistance(stat.swimDistance))
         case .boost(let stat):
             return ("boost", "\(stat.boosts)")
         case .healing(let stat):
@@ -124,13 +124,13 @@ enum AttributesDetailsGamesModes {
         case .tops10(let stat):
             return ("Tops 10: \(stat.top10S)", getPercentage(statistic: Double(stat.top10S), total: Double(stat.roundsPlayed)))
         case .headshot(let stat):
-            return ("Headshot Kills: \(stat.headshotKills)", getPercentage(statistic: Double(stat.headshotKills), total: Double(stat.kills)))
+            return ("\("headshotKills".localize()): \(stat.headshotKills)", getPercentage(statistic: Double(stat.headshotKills), total: Double(stat.kills)))
         case .killsRound(let stat):
             let killsRound = getPercentage(statistic: Double(stat.kills), total: Double(stat.roundsPlayed), optional: true)
-            return ("kills per round: \(String(format: "%.2f", killsRound))", killsRound)
+            return ("\("killsRound".localize()): \(String(format: "%.2f", killsRound))", killsRound)
         case .winsDay(let stat):
             let winsDay = getPercentage(statistic: Double(stat.wins), total: Double(stat.days), optional: true)
-            return ("Wins per day: \(String(format: "%.2f", winsDay))", winsDay)
+            return ("\("winsDay".localize()): \(String(format: "%.2f", winsDay))", winsDay)
         default:
             return ("", 0)
         }

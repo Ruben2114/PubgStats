@@ -5,6 +5,8 @@
 //  Created by Ruben Rodriguez on 15/2/24.
 //
 
+import Foundation
+
 enum AttributesDetailsSurvival {
     case airDropsCalled(SurvivalDataProfileRepresentable)
     case damageDealt(SurvivalDataProfileRepresentable)
@@ -17,7 +19,6 @@ enum AttributesDetailsSurvival {
     case hotDropLandings(SurvivalDataProfileRepresentable)
     case enemyCratesLooted(SurvivalDataProfileRepresentable)
     case uniqueItemsLooted(SurvivalDataProfileRepresentable)
-    case position(SurvivalDataProfileRepresentable)
     case revived(SurvivalDataProfileRepresentable)
     case teammatesRevived(SurvivalDataProfileRepresentable)
     case timeSurvived(SurvivalDataProfileRepresentable)
@@ -35,7 +36,6 @@ enum AttributesDetailsSurvival {
                  .hotDropLandings(stats),
                  .enemyCratesLooted(stats),
                  .uniqueItemsLooted(stats),
-                 .position(stats),
                  .revived(stats),
                  .teammatesRevived(stats),
                  .timeSurvived(stats),
@@ -51,31 +51,41 @@ enum AttributesDetailsSurvival {
         case .damageTaken(let stat):
             return ("damageTaken", (stat.stats.damageTaken ?? ""))
         case .distanceBySwimming(let stat):
-            return ("distanceBySwimming", (stat.stats.distanceBySwimming ?? ""))
+            return ("swimDistance", getDistance(stat.stats.distanceBySwimming ?? ""))
         case .distanceByVehicle(let stat):
-            return ("distanceByVehicle", (stat.stats.distanceByVehicle ?? ""))
+            return ("rideDistance", getDistance(stat.stats.distanceByVehicle ?? ""))
         case .distanceOnFoot(let stat):
-            return ("distanceOnFoot", (stat.stats.distanceOnFoot ?? ""))
+            return ("walkDistance", getDistance(stat.stats.distanceOnFoot ?? ""))
         case .distanceTotal(let stat):
-            return ("distanceTotal", (stat.stats.distanceTotal ?? ""))
+            return ("distanceTotal", getDistance(stat.stats.distanceTotal))
         case .healed(let stat):
-            return ("healed", (stat.stats.healed ?? ""))
+            return ("healing", (stat.stats.healed ?? ""))
         case .hotDropLandings(let stat):
             return ("hotDropLandings", (stat.stats.hotDropLandings ?? ""))
         case .enemyCratesLooted(let stat):
             return ("enemyCratesLooted", (stat.stats.enemyCratesLooted ?? ""))
         case .uniqueItemsLooted(let stat):
             return ("uniqueItemsLooted", (stat.stats.uniqueItemsLooted ?? ""))
-        case .position(let stat):
-            return ("position", (stat.stats.position ?? ""))
         case .revived(let stat):
-            return ("revived", (stat.stats.revived ?? ""))
+            return ("revives", (stat.stats.revived ?? ""))
         case .teammatesRevived(let stat):
             return ("teammatesRevived", (stat.stats.teammatesRevived ?? ""))
         case .timeSurvived(let stat):
-            return ("timeSurvived", (stat.stats.timeSurvived ?? ""))
+            return ("timeSurvived", getTime(stat.stats.timeSurvived ?? ""))
         case .throwablesThrown(let stat):
             return ("throwablesThrown", (stat.stats.throwablesThrown ?? ""))
         }
+    }
+    
+    func getTime(_ timeSurvived: String) -> String {
+        let time = Double(timeSurvived) ?? 0
+        let days = Int(round(time / 86400))
+        let hours = Int(round((time.truncatingRemainder(dividingBy: 86400)) / 3600))
+        return "\(days) d \(hours) h"
+    }
+    
+    func getDistance(_ distance: String?) -> String {
+        let distanceKM = (Double(distance ?? "") ?? 0) / 1000
+        return "\(String(format: "%.0f", distanceKM)) km"
     }
 }

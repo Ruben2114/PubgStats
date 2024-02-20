@@ -79,7 +79,7 @@ private extension AttributesDetailViewModel {
         var attributes: [[AttributesDetails]] = []
         let attributesDetails = AttributesDetailsGamesModes.getStatistics(statistics)
         for detail in attributesDetails {
-            let data = detail.0.map({ DefaultAttributesDetails(titleSection: detail.1, title: $0.getStats().0, amount: $0.getStats().1)})
+            let data = detail.0.map({ DefaultAttributesDetails(titleSection: detail.1.capitalized, title: $0.getStats().0.localize(), amount: $0.getStats().1)})
             attributes.append(data)
         }
         return attributes
@@ -90,9 +90,9 @@ private extension AttributesDetailViewModel {
 private extension AttributesDetailViewModel {
     func getAttributesDetailsWeapons() -> AttributesViewRepresentable? {
         guard let statistics = attributesDetailList?.infoWeaponDetails?.weaponDetails.statsTotal else { return nil }
-        let attributesDetails = statistics.map {DefaultAttributesDetails(titleSection: "Detalles",
-                                                                         title: $0.key, //TODO: hacer esto localized
-                                                                         amount: String(format: "%.0f", $0.value))}
+        let attributesDetails = statistics.map {DefaultAttributesDetails(titleSection: "details".localize(),
+                                                                         title: $0.key.localize(),
+                                                                         amount: $0.key == "LongestDefeat" ? "\(String(format: "%.0f", $0.value)) m": String(format: "%.0f", $0.value))}
         let name = attributesDetailList?.infoWeaponDetails?.weaponDetails.name ?? ""
         return DefaultAttributesViewRepresentable(title: name,
                                                   image: name,
@@ -110,7 +110,7 @@ private extension AttributesDetailViewModel {
             weapon.key == "Groggies"
         }).map{ value in
             let totalWeapons = getTotalWeapons(value.key, statistics)
-            return DefaultAttributesHeaderDetails(title: "\(totalWeapons.0): \(String(format: "%.2f", totalWeapons.1)) %",
+            return DefaultAttributesHeaderDetails(title: "\(totalWeapons.0.localize()): \(String(format: "%.2f", totalWeapons.1)) %",
                                                   percentage: getPercentage(statistic: value.value,
                                                                             total: totalWeapons.1))
         }
@@ -125,8 +125,8 @@ private extension AttributesDetailViewModel {
     func getTotalWeapons(_ key: String,_ statistics: AttributesWeaponDetailsRepresentable) -> (String, Double) {
         switch key {
         case "Kills": return ("Kills", statistics.killsTotal)
-        case "DamagePlayer": return ("Damage", statistics.damagePlayerTotal)
-        case "HeadShots": return ("HeadShots", statistics.headShotsTotal)
+        case "DamagePlayer": return ("DamagePlayer", statistics.damagePlayerTotal)
+        case "HeadShots": return ("headShots", statistics.headShotsTotal)
         case "Groggies": return ("Groggies", statistics.groggiesTotal)
         default:
             return ("", 0)
@@ -139,7 +139,7 @@ extension AttributesDetailViewModel {
     func getAttributesDetailsSurvival() {
         guard let statistics = attributesDetailList?.infoSurvivalDetails else { return }
         let attributesDetails = AttributesDetailsSurvival.getStatistics(statistics)
-            .map({DefaultAttributesDetails(titleSection: "Detalles", title: $0.getStats().0, amount: $0.getStats().1)})
+            .map({DefaultAttributesDetails(titleSection: "details".localize(), title: $0.getStats().0.localize(), amount: $0.getStats().1)})
         
         let attributesHome = DefaultAttributesHome(title: "Level \(statistics.level)",
                                                    rightAmount: Int(statistics.totalMatchesPlayed),
@@ -149,7 +149,7 @@ extension AttributesDetailViewModel {
                                                    image: getImage(Int(statistics.level) ?? 0),
                                                    type: .survival)
         
-        let attributes = DefaultAttributesViewRepresentable(title: "Survival",
+        let attributes = DefaultAttributesViewRepresentable(title: "survivalDataViewControllerTitle".localize(),
                                                             image: "",
                                                             attributesHeaderDetails: [],
                                                             attributesDetails: [attributesDetails],

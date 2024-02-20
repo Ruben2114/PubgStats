@@ -29,9 +29,9 @@ final class MainTabBarCoordinatorImp: MainTabBarCoordinator {
         let profileCoordinator = dependencies.external.profileCoordinator(navigation: dependencies.external.profileNavigationController())
         profileCoordinator.set(dataProfile).start()
         let profile = createNavController(navigation: dependencies.external.profileNavigationController(),
-                                           coordinator: profileCoordinator,
-                                           title: "profileTabBarItem",
-                                           image: "person.circle.fill")
+                                          coordinator: profileCoordinator,
+                                          title: "profileTabBarItem",
+                                          image: "person.circle.fill")
         
         let favourite = createNavController(navigation: dependencies.external.favouriteNavigationController(),
                                            coordinator: dependencies.external.favouriteCoordinator(),
