@@ -27,6 +27,10 @@ final class AttributesHomeViewModel: DataBindable {
     func viewDidLoad() {
         getAttributes()
     }
+    
+    func getType() -> AttributesType {
+        return attributesHomeList?.infoGamesModes != nil ? .modeGames : .weapons
+    }
    
     func goToAttributesDetails(_ select: AttributesHome){
         let attributesDetails: ProfileAttributesDetailsRepresentable?

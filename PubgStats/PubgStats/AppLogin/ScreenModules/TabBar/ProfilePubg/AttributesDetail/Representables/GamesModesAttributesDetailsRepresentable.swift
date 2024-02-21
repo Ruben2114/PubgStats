@@ -48,7 +48,8 @@ enum AttributesDetailsGamesModes {
                                                     .roundMostKills(stats),
                                                     .killedTeammate(stats),
                                                     .roadKills(stats),
-                                                    .longestKill(stats)]
+                                                    .longestKill(stats),
+                                                    .headshot(stats)]
         let general: [AttributesDetailsGamesModes] = [.longestTimeSurvived(stats),
                                                       .losses(stats),
                                                       .damage(stats),
@@ -57,7 +58,8 @@ enum AttributesDetailsGamesModes {
                                                       .suicides(stats),
                                                       .timeSurvived(stats),
                                                       .vehicleDestroys(stats),
-                                                      .revives(stats)]
+                                                      .revives(stats),
+                                                      .tops10(stats)]
         let distance: [AttributesDetailsGamesModes] = [.rideDistance(stats),
                                                        .swimDistance(stats),
                                                        .walkDistance(stats)]
@@ -114,41 +116,48 @@ enum AttributesDetailsGamesModes {
             return ("healing", "\(stat.heals)")
         case .weaponsAcquired(let stat):
             return ("weaponsAcquired", "\(stat.weaponsAcquired)")
+        case .tops10(let stat):
+            return ("Tops 10", "\(stat.top10S)")
+        case .headshot(let stat):
+            return ("headshotKills", "\(stat.headshotKills)")
         default:
             return ("", "")
         }
     }
     
     func getHeader() -> (String, CGFloat) {
+        //TODO: meter top10 y heasshot en la vista y en el header mostrar su %
         switch self {
         case .tops10(let stat):
-            return ("Tops 10: \(stat.top10S)", getPercentage(statistic: Double(stat.top10S), total: Double(stat.roundsPlayed)))
+            let top10 = getPercentage(statistic: Double(stat.top10S), total: Double(stat.roundsPlayed))
+            return ("Tops 10: \(String(format: "%.0f", top10)) %", top10)
         case .headshot(let stat):
-            return ("\("headshotKills".localize()): \(stat.headshotKills)", getPercentage(statistic: Double(stat.headshotKills), total: Double(stat.kills)))
+            let headshotKills = getPercentage(statistic: Double(stat.headshotKills), total: Double(stat.kills))
+            return ("\("headshotKills".localize()): \(String(format: "%.0f", headshotKills)) %", headshotKills)
         case .killsRound(let stat):
             let killsRound = getPercentage(statistic: Double(stat.kills), total: Double(stat.roundsPlayed), optional: true)
-            return ("\("killsRound".localize()): \(String(format: "%.2f", killsRound))", killsRound)
+            return ("\("killsRound".localize()): \(String(format: "%.1f", killsRound))", killsRound)
         case .winsDay(let stat):
             let winsDay = getPercentage(statistic: Double(stat.wins), total: Double(stat.days), optional: true)
-            return ("\("winsDay".localize()): \(String(format: "%.2f", winsDay))", winsDay)
+            return ("\("winsDay".localize()): \(String(format: "%.1f", winsDay))", winsDay)
         default:
             return ("", 0)
         }
     }
     
-    func getTime(_ time: Double, _ withMinutes: Bool = false) -> String {
+    private func getTime(_ time: Double, _ withMinutes: Bool = false) -> String {
         let days = Int(round(time / 86400))
         let hours = Int(round((time.truncatingRemainder(dividingBy: 86400)) / 3600))
         let minutes = Int(round((time.truncatingRemainder(dividingBy: 3600)) / 60))
         return withMinutes ? "\(hours) h \(minutes) m" : "\(days) d \(hours) h"
     }
     
-    func getDistance(_ distance: Double) -> String {
+    private func getDistance(_ distance: Double) -> String {
         let distanceKM = distance / 1000
         return "\(String(format: "%.2f", distanceKM)) km"
     }
     
-    func getPercentage(statistic: Double?, total: Double?, optional: Bool = false) -> CGFloat {
+    private func getPercentage(statistic: Double?, total: Double?, optional: Bool = false) -> CGFloat {
         let percentage = statistic != 0 && total != 0 ? ((statistic ?? 0) / (total ?? 0)) : 0
         let optionalPercentage = optional ? percentage : percentage * 100
         return CGFloat(optionalPercentage)

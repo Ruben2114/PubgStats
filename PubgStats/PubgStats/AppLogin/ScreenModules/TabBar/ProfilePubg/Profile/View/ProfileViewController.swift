@@ -92,7 +92,8 @@ private extension ProfileViewController {
                 self.chartView.configureViewWith(DefaultChartViewData(charts: infoChartView ?? [], chartSelectedIndex: 0))
             case .showErrorPlayerDetails:
                 //TODO: poner en hidden todo lo que tenga datos y que salga la alerta
-                self?.presentAlert(message: "Error al cagar los datos de los modos de juego", title: "Error")
+                //TODO: key
+                self?.presentAlert(message: "Error al cargar los datos de los modos de juego", title: "Error")
             case .hideLoading:
                 self?.hideSpinner()
             case .showGraphView(let data):

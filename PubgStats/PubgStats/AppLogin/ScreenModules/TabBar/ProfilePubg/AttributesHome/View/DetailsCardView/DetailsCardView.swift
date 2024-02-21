@@ -44,7 +44,7 @@ final class DetailsCardView: XibView {
 private extension DetailsCardView {
     
     func createDetails() {
-        representableDetails?.attributesHeaderDetails.forEach({ data in
+        representableDetails?.attributesHeaderDetails.sorted { $0.title < $1.title}.forEach({ data in
             let stack = getDetailsStack()
             let text = representableDetails?.type == .modeGames ? setType(data.title)?.setTitle() : data.title
             let label = getTitleLabel(text: text ?? data.title)
@@ -63,7 +63,7 @@ private extension DetailsCardView {
     func createCards() {
         guard let representable = representableHome else { return }
         let labelRectangle = representable.type.getRectangleHeaderLabel()
-        rectangleView.configureView(text: labelRectangle, percentage: representable.percentage, cornerRadius: 8, withPercentageSymbol: representableDetails?.type == .modeGames)
+        rectangleView.configureView(text: labelRectangle, percentage: representable.percentage, cornerRadius: 8, withPercentageSymbol: representable.type == .modeGames)
         let image = representable.type == .modeGames ? setType(representable.image)?.setImage() : representable.image
         imageView.image = UIImage(named: image ?? "")
         leftLabel.text = representable.type.getLeftHeaderLabel()

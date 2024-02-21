@@ -9,6 +9,9 @@ import UIKit
 import Combine
 
 class AttributesDetailViewController: UIViewController {
+    enum Constant {
+        static let spacing: CGFloat = 16
+    }
     private var cancellable = Set<AnyCancellable>()
     private let viewModel: AttributesDetailViewModel
     private let dependencies: AttributesDetailDependencies
@@ -52,6 +55,11 @@ class AttributesDetailViewController: UIViewController {
         bind()
         viewModel.viewDidLoad()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNavigationBar()
+    }
 }
 
 private extension AttributesDetailViewController {
@@ -59,13 +67,12 @@ private extension AttributesDetailViewController {
         configureScrollableStackView()
         expandCollapseSubcategoriesAppearence()
         registerCell()
-        configureNavigationBar()
     }
     
     func configureScrollableStackView() {
-        let cardView = detailsCardView.embedIntoView(topMargin: 16, leftMargin: 16, rightMargin: 16)
+        let cardView = detailsCardView.embedIntoView(topMargin: Constant.spacing, leftMargin: Constant.spacing, rightMargin: Constant.spacing)
         scrollableStackView.addArrangedSubview(cardView)
-        let newCollection = subcategoriesCollection.embedIntoView(leftMargin: 16, rightMargin: 16)
+        let newCollection = subcategoriesCollection.embedIntoView(leftMargin: Constant.spacing, rightMargin: Constant.spacing)
         scrollableStackView.addArrangedSubview(newCollection)
     }
     
@@ -75,6 +82,11 @@ private extension AttributesDetailViewController {
             .foregroundColor : UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1),
             .font : UIFont(name: "AmericanTypewriter-Bold", size: 20) ?? UIFont.systemFont(ofSize: 16)
         ]
+        let image = viewModel.model?.type.getImage() ?? ""
+        imageBackground.image = UIImage(named: image)
+        view.insertSubview(imageBackground, at: 0)
+        imageBackground.frame = view.bounds
+        title = viewModel.model?.title.capitalized
     }
     
     func bind() {
@@ -95,18 +107,9 @@ private extension AttributesDetailViewController {
                     self?.listAttributes = attributeDetails
                     self?.detailsCardView.configureHomeView(attributeHome)
                 }
-                self?.configureUI()
                 self?.subcategoriesCollection.reloadData()
                 self?.getMaxHeight()
             }.store(in: &cancellable)
-    }
-    
-    func configureUI() {
-        let image = listAttributes?.type.getImage() ?? ""
-        imageBackground.image = UIImage(named: image)
-        view.insertSubview(imageBackground, at: 0)
-        imageBackground.frame = view.bounds
-        title = listAttributes?.title.capitalized
     }
     
     func expandCollapseSubcategoriesAppearence() {
@@ -132,14 +135,16 @@ private extension AttributesDetailViewController {
             if let cell = subview as? AttributesDetailsCollectionViewCell {
                 cellHeigth += (cell.frame.height)
                 countCell += 1
-            } else {
+            } else if let header = subview as? UICollectionReusableView {
                 headerHeigth += subview.frame.height
             }
         }
-        var maxHeigth: CGFloat = (cellHeigth / 2) + CGFloat((countCell * 8)) + headerHeigth
-        if cellHeigth.remainder(dividingBy: 2) != 0 {
-            maxHeigth += (cellHeigth / countCell) * 2
-        }
+        var maxHeigth: CGFloat = (cellHeigth / 2) + CGFloat((countCell * (Constant.spacing / 2))) + headerHeigth
+        listAttributes?.attributesDetails.forEach({ attributes in
+            if attributes.count % 2 != 0 {
+                maxHeigth += (cellHeigth / countCell) - Constant.spacing
+            }
+        })
         collectionViewHeight?.constant = maxHeigth
     }
     
@@ -161,7 +166,7 @@ extension AttributesDetailViewController: UICollectionViewDataSource, UICollecti
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width: CGFloat = (self.view.frame.width - 16 - 32) / 2.0
+        let width: CGFloat = (self.view.frame.width - (Constant.spacing * 3)) / 2.0
         return CGSize(width: width, height: width / 2)
     }
         
@@ -185,6 +190,6 @@ extension AttributesDetailViewController: UICollectionViewDataSource, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+        return UIEdgeInsets(top: Constant.spacing, left: 0, bottom: Constant.spacing, right: 0)
     }
 }

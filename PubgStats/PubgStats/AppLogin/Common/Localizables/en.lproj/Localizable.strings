@@ -51,7 +51,7 @@
 "healing" = "heals";
 "weaponsAcquired" = "weapons acquired";
 "headshotKills" = "Headshot kills";
-"killsRound" = "kills per round";
+"killsRound" = "Average kills";
 "winsDay" = "Wins per day";
 "general" = "general";
 "distance" = "distance";
@@ -87,6 +87,7 @@
 "LongestDefeat" = "Longest distance that the player got a defeat";
 "MostKillsInAGame" = "Most Kills in a match";
 "MostGroggiesInAGame" = "Most Groggies in a match";
+"BestData" = "Record per game";
 "Kills" = "Kills";
 "Groggies" = "Groggies";
 "airDropsCalled" = "airDrops";

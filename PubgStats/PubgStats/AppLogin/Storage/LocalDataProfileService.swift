@@ -167,9 +167,10 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
         do {
             let profile = try context.fetch(fetchRequest)
-            return DefaultIdAccountDataProfile(id: profile.first?.account ?? "",
+            let response = DefaultIdAccountDataProfile(id: profile.first?.account ?? "",
                                                             name: profile.first?.player ?? "",
                                                             platform: profile.first?.platform ?? "")
+            return profile.isEmpty ? nil : response
         } catch {
             print("Error en core data: \(error.localizedDescription)")
             return nil

@@ -73,17 +73,31 @@ struct StatisticsGameModes: Decodable {
     }
 }
 struct DuoDTO: Decodable {
-    let assists, boosts, dBNOS, dailyKills, dailyWINS: Int
-    let damageDealt: Double
-    let days, headshotKills, heals, kills: Int
-    let longestKill: Double
-    let losses, maxKillStreaks: Int
-    let timeSurvived, mostSurvivalTime: Double
-    let revives: Int
-    let rideDistance: Double
-    let roadKills, roundMostKills, roundsPlayed, suicides: Int
-    let swimDistance: Double
-    let teamKills, top10S, vehicleDestroys: Int
-    let walkDistance: Double
-    let weaponsAcquired, weeklyKills, weeklyWINS, wins: Int
-}
+    let assists, boosts, dBNOS, dailyKills: Int
+     let dailyWINS: Int
+     let damageDealt: Double
+     let days, headshotKills, heals: Int
+     let kills: Int
+     let longestKill: Double
+     let losses, maxKillStreaks: Int
+     let timeSurvived, mostSurvivalTime: Double
+     let revives: Int
+     let rideDistance: Double
+     let roadKills, roundMostKills, roundsPlayed, suicides: Int
+     let swimDistance: Double
+     let teamKills, top10S, vehicleDestroys: Int
+     let walkDistance: Double
+     let weaponsAcquired, weeklyKills, weeklyWINS: Int
+     let wins: Int
+     enum CodingKeys: String, CodingKey {
+         case assists, boosts
+         case dBNOS = "dBNOs"
+         case dailyKills
+         case dailyWINS = "dailyWins"
+         case damageDealt, days, headshotKills, heals, kills, longestKill, losses, maxKillStreaks, mostSurvivalTime, revives, rideDistance, roadKills, roundMostKills, roundsPlayed, suicides, swimDistance, teamKills, timeSurvived
+         case top10S = "top10s"
+         case vehicleDestroys, walkDistance, weaponsAcquired, weeklyKills
+         case weeklyWINS = "weeklyWins"
+         case wins
+     }
+ }

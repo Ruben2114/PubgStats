@@ -48,6 +48,11 @@ class AttributesHomeViewController: UIViewController {
         bind()
         viewModel.viewDidLoad()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureUI()
+    }
 }
 
 private extension AttributesHomeViewController {
@@ -69,17 +74,16 @@ private extension AttributesHomeViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] representable in
                 self?.listAttributes = representable ?? []
-                self?.configureUI()
                 self?.tableView.reloadData()
             }.store(in: &cancellable)
     }
     
     func configureUI() {
-        let image = listAttributes.first?.type.getImage() ?? ""
+        let image = viewModel.getType().getImage()
         imageBackground.image = UIImage(named: image)
         view.insertSubview(imageBackground, at: 0)
         imageBackground.frame = view.bounds
-        title = listAttributes.first?.type.getTitle()
+        title = viewModel.getType().getTitle()
     }
     
     func setupTableView() {
@@ -117,7 +121,7 @@ extension AttributesHomeViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let select = listAttributes[indexPath.row]
+        let select = listAttributes.sorted { $0.title < $1.title}[indexPath.row]
         viewModel.goToAttributesDetails(select)
     }
 }

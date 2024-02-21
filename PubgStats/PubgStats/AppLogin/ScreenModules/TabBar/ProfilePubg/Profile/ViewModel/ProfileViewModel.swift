@@ -48,7 +48,6 @@ final class ProfileViewModel: DataBindable {
     func goToWeapon() {
         let attributes = DefaultProfileAttributes(infoWeapon: representable?.infoWeapon)
         coordinator.goToAttributes(attributes: attributes)
-        //        coordinator.goWeaponData(representable?.infoWeapon)
     }
     
     func goToSurvival() {
