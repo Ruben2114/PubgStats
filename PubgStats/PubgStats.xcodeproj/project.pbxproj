@@ -168,6 +168,12 @@
 		8CCC92C629E3FC3C0019BE72 /* FavouriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC92C529E3FC3C0019BE72 /* FavouriteRepository.swift */; };
 		8CCC92C829E3FCB70019BE72 /* FavouriteDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC92C729E3FCB70019BE72 /* FavouriteDataUseCase.swift */; };
 		8CCC92CA29E407980019BE72 /* UIViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC92C929E407980019BE72 /* UIViewController+TableView.swift */; };
+		8CCF413E2B86A6820061823E /* TestAttributesDetailDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCF413D2B86A6820061823E /* TestAttributesDetailDependencies.swift */; };
+		8CCF41402B86A6EE0061823E /* TestAttributesDetailExternalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCF413F2B86A6EE0061823E /* TestAttributesDetailExternalDependencies.swift */; };
+		8CCF41422B86A7630061823E /* AttributesDetailCoordinatorSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCF41412B86A7630061823E /* AttributesDetailCoordinatorSpy.swift */; };
+		8CCF41442B86A7DF0061823E /* AttributesDetailCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCF41432B86A7DF0061823E /* AttributesDetailCoordinatorTest.swift */; };
+		8CCF41462B86A8190061823E /* AttributesDetailViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCF41452B86A8190061823E /* AttributesDetailViewControllerTest.swift */; };
+		8CCF41482B86A85E0061823E /* AttributesDetailViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCF41472B86A85E0061823E /* AttributesDetailViewModelTest.swift */; };
 		8CD7CD6229BEFF5700C57346 /* LocalDataProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD6129BEFF5700C57346 /* LocalDataProfileService.swift */; };
 		8CD7CD6F29BF04E200C57346 /* Profile.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7CD6D29BF04E200C57346 /* Profile.xcdatamodeld */; };
 		8CE9BDB729E5807F00F45D3F /* AttributesHomeDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDB629E5807F00F45D3F /* AttributesHomeDependencies.swift */; };
@@ -383,6 +389,12 @@
 		8CCC92C529E3FC3C0019BE72 /* FavouriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteRepository.swift; sourceTree = "<group>"; };
 		8CCC92C729E3FCB70019BE72 /* FavouriteDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteDataUseCase.swift; sourceTree = "<group>"; };
 		8CCC92C929E407980019BE72 /* UIViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+TableView.swift"; sourceTree = "<group>"; };
+		8CCF413D2B86A6820061823E /* TestAttributesDetailDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAttributesDetailDependencies.swift; sourceTree = "<group>"; };
+		8CCF413F2B86A6EE0061823E /* TestAttributesDetailExternalDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAttributesDetailExternalDependencies.swift; sourceTree = "<group>"; };
+		8CCF41412B86A7630061823E /* AttributesDetailCoordinatorSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesDetailCoordinatorSpy.swift; sourceTree = "<group>"; };
+		8CCF41432B86A7DF0061823E /* AttributesDetailCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesDetailCoordinatorTest.swift; sourceTree = "<group>"; };
+		8CCF41452B86A8190061823E /* AttributesDetailViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesDetailViewControllerTest.swift; sourceTree = "<group>"; };
+		8CCF41472B86A85E0061823E /* AttributesDetailViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesDetailViewModelTest.swift; sourceTree = "<group>"; };
 		8CD7CD6129BEFF5700C57346 /* LocalDataProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataProfileService.swift; sourceTree = "<group>"; };
 		8CD7CD6E29BF04E200C57346 /* Profile.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Profile.xcdatamodel; sourceTree = "<group>"; };
 		8CE9BDB629E5807F00F45D3F /* AttributesHomeDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesHomeDependencies.swift; sourceTree = "<group>"; };
@@ -870,6 +882,7 @@
 				8C9ABEF82AD8368F00552101 /* LoginCoordinatorSpy.swift */,
 				8C3A01312B84041400211AF3 /* ProfileCoordinatorSpy.swift */,
 				8C3A013F2B840D6700211AF3 /* AttributesHomeCoordinatorSpy.swift */,
+				8CCF41412B86A7630061823E /* AttributesDetailCoordinatorSpy.swift */,
 			);
 			path = Spies;
 			sourceTree = "<group>";
@@ -931,6 +944,7 @@
 		8CA398C529B72A2000C09746 /* PubgStatsTests */ = {
 			isa = PBXGroup;
 			children = (
+				8CCF413C2B86A6580061823E /* AttributesDetails */,
 				8C3A012C2B83FFFC00211AF3 /* AttributesHome */,
 				8C3A012B2B83FFE600211AF3 /* Profile */,
 				8C9ABEFC2AD83B0F00552101 /* Commons */,
@@ -1459,6 +1473,18 @@
 				8CCC92C329E3F8270019BE72 /* FavouriteRepositoryImp.swift */,
 			);
 			path = RepositoryImplementation;
+			sourceTree = "<group>";
+		};
+		8CCF413C2B86A6580061823E /* AttributesDetails */ = {
+			isa = PBXGroup;
+			children = (
+				8CCF413D2B86A6820061823E /* TestAttributesDetailDependencies.swift */,
+				8CCF413F2B86A6EE0061823E /* TestAttributesDetailExternalDependencies.swift */,
+				8CCF41432B86A7DF0061823E /* AttributesDetailCoordinatorTest.swift */,
+				8CCF41452B86A8190061823E /* AttributesDetailViewControllerTest.swift */,
+				8CCF41472B86A85E0061823E /* AttributesDetailViewModelTest.swift */,
+			);
+			path = AttributesDetails;
 			sourceTree = "<group>";
 		};
 		8CD7CD6329BF014700C57346 /* UseCase */ = {
@@ -2014,22 +2040,28 @@
 				8C9ABF022AD8450100552101 /* LoginDataUseCaseTest.swift in Sources */,
 				8C3A01442B840E5400211AF3 /* AttributesHomeViewControllerTest.swift in Sources */,
 				8C3A01342B84050C00211AF3 /* ProfileCoordinatorTest.swift in Sources */,
+				8CCF41442B86A7DF0061823E /* AttributesDetailCoordinatorTest.swift in Sources */,
 				8C9ABF002AD8426000552101 /* LoginViewModelTest.swift in Sources */,
 				8C3A012E2B84003F00211AF3 /* TestProfileDependencies.swift in Sources */,
+				8CCF41462B86A8190061823E /* AttributesDetailViewControllerTest.swift in Sources */,
 				8C3A01402B840D6700211AF3 /* AttributesHomeCoordinatorSpy.swift in Sources */,
 				8C3A01422B840DFB00211AF3 /* AttributesHomeCoordinatorTest.swift in Sources */,
 				8C3A01322B84041400211AF3 /* ProfileCoordinatorSpy.swift in Sources */,
 				8C9ABEF92AD8368F00552101 /* LoginCoordinatorSpy.swift in Sources */,
 				8C9ABEEE2AD830A000552101 /* TestLoginDependencies.swift in Sources */,
 				8C9ABEF62AD8352900552101 /* MockDataProfleRepository.swift in Sources */,
+				8CCF41422B86A7630061823E /* AttributesDetailCoordinatorSpy.swift in Sources */,
 				8C3A013C2B840C5700211AF3 /* TestAttributesHomeDependencies.swift in Sources */,
+				8CCF41402B86A6EE0061823E /* TestAttributesDetailExternalDependencies.swift in Sources */,
 				8C3A01362B84062D00211AF3 /* ProfileViewModelTest.swift in Sources */,
 				8C3A01462B840E9A00211AF3 /* AttributesHomeViewModelTest.swift in Sources */,
 				8CA398C729B72A2000C09746 /* PubgStatsTests.swift in Sources */,
+				8CCF41482B86A85E0061823E /* AttributesDetailViewModelTest.swift in Sources */,
 				8C9ABEFB2AD83A4700552101 /* LoginCoordinatorTest.swift in Sources */,
 				8C3A01382B84082C00211AF3 /* ProfileViewControllerTest.swift in Sources */,
 				8C9ABEFE2AD83B3D00552101 /* XCTesCase+Extension.swift in Sources */,
 				8C3A013E2B840CF000211AF3 /* TestAttributesHomeExternalDependencies.swift in Sources */,
+				8CCF413E2B86A6820061823E /* TestAttributesDetailDependencies.swift in Sources */,
 				8C9ABEF02AD8318200552101 /* TestLoginExternalDependencies.swift in Sources */,
 				8C3A01302B84033100211AF3 /* TestProfileExternalDependencies.swift in Sources */,
 			);

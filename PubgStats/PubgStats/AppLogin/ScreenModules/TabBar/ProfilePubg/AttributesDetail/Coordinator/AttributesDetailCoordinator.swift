@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol AttributesDetailCoordinator: BindableCoordinator {
+public protocol AttributesDetailCoordinator: BindableCoordinator {
     func goBack()
 }
 

@@ -8,7 +8,6 @@
 import UIKit
 
 protocol AttributesDetailExternalDependencies {
-    func resolve() -> AppDependencies
     func attributesDetailCoordinator(navigation: UINavigationController?) -> BindableCoordinator
 }
 

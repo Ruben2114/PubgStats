@@ -17,7 +17,6 @@ final class ProfileCoordinatorSpy: ProfileCoordinator {
     var goToAttributesDetails = false
     
     init() {
-        childCoordinators = []
         dataBinding = DataBindingObject()
     }
     
