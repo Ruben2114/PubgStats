@@ -29,6 +29,8 @@ final class DetailsCardView: XibView {
         createDetails()
         containerView.isHidden = true
         containerDetailsView.isHidden = false
+        backgroundColor = .gray.withAlphaComponent(0.9)
+        layer.cornerRadius = 8
     }
     
     func configureHomeView(_ representable: AttributesHome) {
@@ -36,7 +38,8 @@ final class DetailsCardView: XibView {
         createCards()
         containerView.isHidden = false
         containerDetailsView.isHidden = true
-        backgroundColor = .black.withAlphaComponent(0.8)
+        let color: UIColor = representable.type == .survival ? .gray : .black
+        backgroundColor = color.withAlphaComponent(0.8)
         layer.cornerRadius = 8
     }
 }
