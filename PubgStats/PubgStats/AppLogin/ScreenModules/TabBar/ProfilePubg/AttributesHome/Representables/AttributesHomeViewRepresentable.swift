@@ -153,15 +153,14 @@ public enum AttributesType {
         }
     }
     
-    //TODO: poner bien las fotos
     func getImage() -> String {
         switch self {
         case .weapons:
-            return "gamesModesDetailsPubg"
+            return "weaponsDetailsPubg"
         case .modeGames:
             return "gamesModesDetailsPubg"
         case .survival:
-            return "gamesModesDetailsPubg"
+            return "survivalDetailsPubg"
         }
     }
     

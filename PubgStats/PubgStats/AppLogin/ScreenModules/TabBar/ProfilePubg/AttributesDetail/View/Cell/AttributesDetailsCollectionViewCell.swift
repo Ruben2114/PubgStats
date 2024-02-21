@@ -33,6 +33,6 @@ private extension AttributesDetailsCollectionViewCell {
     
     func setContainerAppearence() {
         containerView.layer.cornerRadius = 8
-        containerView.backgroundColor = .black.withAlphaComponent(0.6)
+        containerView.backgroundColor = .black.withAlphaComponent(0.8)
     }
 }

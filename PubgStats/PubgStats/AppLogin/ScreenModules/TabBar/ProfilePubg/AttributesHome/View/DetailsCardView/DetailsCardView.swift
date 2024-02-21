@@ -36,7 +36,7 @@ final class DetailsCardView: XibView {
         createCards()
         containerView.isHidden = false
         containerDetailsView.isHidden = true
-        backgroundColor = .black.withAlphaComponent(0.6)
+        backgroundColor = .black.withAlphaComponent(0.8)
         layer.cornerRadius = 8
     }
 }
