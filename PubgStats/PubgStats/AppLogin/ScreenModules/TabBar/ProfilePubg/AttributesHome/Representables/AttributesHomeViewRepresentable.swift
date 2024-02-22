@@ -136,7 +136,6 @@ struct DefaultAttributesHeaderDetails: AttributesHeaderDetails {
     }
 }
 
-//TODO: poner localized
 public enum AttributesType {
     case weapons
     case modeGames

@@ -20,36 +20,17 @@ final class MainTabBarCoordinatorImp: MainTabBarCoordinator {
     }()
     private var dataProfile: IdAccountDataProfileRepresentable?
     
-    public init(dependencies: MainTabBarExternalDependency, data: IdAccountDataProfileRepresentable) {
+    public init(dependencies: MainTabBarExternalDependency, data: IdAccountDataProfileRepresentable?) {
         self.externalDependencies = dependencies
         self.dataProfile = data
     }
     
     func start() {
-        let profileCoordinator = dependencies.external.profileCoordinator(navigation: dependencies.external.profileNavigationController())
-        profileCoordinator.set(dataProfile).start()
-        let profile = createNavController(navigation: dependencies.external.profileNavigationController(),
-                                          coordinator: profileCoordinator,
-                                          title: "profileTabBarItem",
-                                          image: "person.circle.fill")
-        
-        let favourite = createNavController(navigation: dependencies.external.favouriteNavigationController(),
-                                           coordinator: dependencies.external.favouriteCoordinator(),
-                                           title: "favouriteTabBarItem",
-                                           image: "star.circle.fill")
+        let tabBarView = TabBarView.getTabBar(externalDependencies)
+            .map({createNavController(tabBar: $0, data: dataProfile)})
         //TODO: cambiar esto por matches y guide en una totalizator en la view (en favoritos en matches se cambian por la view de noticias)
-        let guide = createNavController(navigation: dependencies.external.guideNavigationController(),
-                                           coordinator: dependencies.external.guideCoordinator(),
-                                           title: "guideTabBarItem",
-                                           image: "book.circle.fill")
-        
-        let settings = createNavController(navigation: dependencies.external.settingsNavigationController(),
-                                           coordinator: dependencies.external.settingsCoordinator(),
-                                           title: "settingsTabBarItem",
-                                           image: "gear.circle.fill")
-        
         let tabBar = dependencies.external.tabBarController()
-        tabBar.viewControllers = [profile, favourite ,guide ,settings]
+        tabBar.viewControllers = tabBarView
         tabBar.tabBar.backgroundColor = .white
     }
     
@@ -63,11 +44,18 @@ final class MainTabBarCoordinatorImp: MainTabBarCoordinator {
 }
 
 private extension MainTabBarCoordinatorImp {
-    func createNavController(navigation: UINavigationController, coordinator: Coordinator, title: String, image: String) -> UINavigationController {
+    func createNavController(tabBar: TabBarView, data: IdAccountDataProfileRepresentable?) -> UINavigationController {
+        let navigation = tabBar.getNavigation()
+        var coordinator = tabBar.getCoordinator()
         navigation.viewControllers = []
-        navigation.tabBarItem.title = title.localize()
-        navigation.tabBarItem.image = UIImage(systemName: image)
-        coordinator.start()
+        navigation.tabBarItem.title = tabBar.getTitle().localize()
+        navigation.tabBarItem.image = UIImage(systemName: tabBar.getImage())
+        if let bindableCoordinator = coordinator as? BindableCoordinator {
+            coordinator = bindableCoordinator.set(data)
+            coordinator.start()
+        } else {
+            coordinator.start()
+        }
         append(child: coordinator)
         return navigation
     }

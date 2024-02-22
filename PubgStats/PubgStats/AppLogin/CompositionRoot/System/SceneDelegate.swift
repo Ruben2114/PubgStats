@@ -12,42 +12,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     lazy var dependencies = AppDependencies(window: window)
     lazy var childCoordinators: [Coordinator] = []
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
+        //TODO: cambiarlo al appdelegate!! importante
         guard let scene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: scene)
         window?.makeKeyAndVisible()
-        if let user = dependencies.resolve().getAnyProfile() {
-            window?.rootViewController = dependencies.tabBarController()
-            let rootCoordinatorTabBar = dependencies.mainTabBarCoordinator(data: user)
-            rootCoordinatorTabBar.start()
-            childCoordinators.append(rootCoordinatorTabBar)
-        } else {
-            window?.rootViewController = dependencies.loginNavigationController()
-            let rootCoordinatorLogin = dependencies.loginCoordinator()
-            rootCoordinatorLogin.start()
-            childCoordinators.append(rootCoordinatorLogin)
+        let user = dependencies.resolve().getAnyProfile()
+        window?.rootViewController = user == nil ? dependencies.loginNavigationController() : dependencies.tabBarController()
+        let rootCoordinator = user == nil ? dependencies.loginCoordinator() : dependencies.mainTabBarCoordinator(data: user!)
+        rootCoordinator.start()
+        childCoordinators.append(rootCoordinator)
+    }
+    
+    func changeRootViewCoordinator(data: IdAccountDataProfileRepresentable? = nil, goToProfile: Bool = false) {
+        if !goToProfile {
+            childCoordinators.first?.dismiss()
         }
-    }
-    
-    func changeRootViewTabCoordinator(animated: Bool? = true, data: IdAccountDataProfileRepresentable) {
         childCoordinators.removeAll()
-        window?.rootViewController = dependencies.tabBarController()
+        window?.rootViewController = goToProfile ? dependencies.tabBarController() : dependencies.loginNavigationController()
         window?.makeKeyAndVisible()
-        let rootCoordinatorTabBar = dependencies.mainTabBarCoordinator(data: data)
-        rootCoordinatorTabBar.start()
-        childCoordinators.append(rootCoordinatorTabBar)
-    }
-    
-    func changeRootViewAppCoordinator(animated: Bool? = true) {
-        childCoordinators.first?.dismiss()
-        childCoordinators.removeAll()
-        window?.rootViewController = dependencies.loginNavigationController()
-        window?.makeKeyAndVisible()
-        let rootCoordinatorLogin = dependencies.loginCoordinator()
-        rootCoordinatorLogin.start()
-        childCoordinators.append(rootCoordinatorLogin)
+        let rootCoordinator = goToProfile ? dependencies.mainTabBarCoordinator(data: data) : dependencies.loginCoordinator()
+        rootCoordinator.start()
+        childCoordinators.append(rootCoordinator)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
