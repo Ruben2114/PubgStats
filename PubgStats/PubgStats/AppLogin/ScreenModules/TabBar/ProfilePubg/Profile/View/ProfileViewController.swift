@@ -95,7 +95,9 @@ private extension ProfileViewController {
                 //TODO: key
                 self?.presentAlert(message: "Error al cargar los datos de los modos de juego", title: "Error")
             case .hideLoading:
-                self?.hideSpinner()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [ weak self] in
+                    self?.hideSpinner()
+                }
             case .showGraphView(let data):
                 self?.graphView.configureWith(representable: data)
             case .showHeader(let data):

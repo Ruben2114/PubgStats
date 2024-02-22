@@ -57,7 +57,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
                 try? context.save()
             }
         } catch {
-            print("Error en core data")
+            print("Error en core data saveFav")
         }
     }
     
@@ -307,7 +307,7 @@ private extension LocalDataProfileServiceImp {
                 }
             }
         } catch {
-            print("Error en core data")
+            print("Error en core data saveGames")
         }
     }
     
@@ -342,7 +342,7 @@ private extension LocalDataProfileServiceImp {
                 }
             }
         } catch {
-            print("Error en core data")
+            print("Error en core data saveWeapon")
         }
     }
     

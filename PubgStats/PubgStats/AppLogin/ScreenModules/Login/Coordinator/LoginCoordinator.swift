@@ -34,11 +34,8 @@ extension LoginCoordinatorImp {
     }
     
     func goToProfile(data: IdAccountDataProfileRepresentable) {
-        dismiss()
-        DispatchQueue.main.async {
-            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewTabCoordinator(data: data)
-        }
         dependencies.external.loginNavigationController().viewControllers = []
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewCoordinator(data: data, goToProfile: true)
     }
 }
 

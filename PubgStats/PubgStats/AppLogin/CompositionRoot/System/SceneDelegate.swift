@@ -31,7 +31,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         childCoordinators.removeAll()
         window?.rootViewController = goToProfile ? dependencies.tabBarController() : dependencies.loginNavigationController()
-        window?.makeKeyAndVisible()
         let rootCoordinator = goToProfile ? dependencies.mainTabBarCoordinator(data: data) : dependencies.loginCoordinator()
         rootCoordinator.start()
         childCoordinators.append(rootCoordinator)

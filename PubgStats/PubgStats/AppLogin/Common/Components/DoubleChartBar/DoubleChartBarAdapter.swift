@@ -44,8 +44,8 @@ private extension DoubleChartBarAdapter {
         guard let viewData else { return }
         let mostPositiveValue =  max(viewData.firstBarValue, viewData.secondBarValue)
         let maxHeight = barsStackView.frame.height
-        let firstBarHeight = maxHeight * (CGFloat(viewData.firstBarValue * 100 / mostPositiveValue)) / 100
-        let secondBarHeight = maxHeight * (CGFloat(viewData.secondBarValue * 100 / mostPositiveValue)) / 100
+        let firstBarHeight = maxHeight * (CGFloat(viewData.firstBarValue * 100 / max(mostPositiveValue, 1))) / 100
+        let secondBarHeight = maxHeight * (CGFloat(viewData.secondBarValue * 100 / max(mostPositiveValue, 1))) / 100
         if mostPositiveValue != 0 {
             firstBarHeightConstraint.constant = firstBarHeight > 2 ? firstBarHeight : minBarHeight
             secondBarHeightConstraint.constant = secondBarHeight > 2 ? secondBarHeight : minBarHeight
