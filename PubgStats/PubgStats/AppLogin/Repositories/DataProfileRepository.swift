@@ -10,7 +10,7 @@ import Combine
 
 public protocol DataProfileRepository {
     func fetchPlayerData(name: String, platform: String) -> AnyPublisher<IdAccountDataProfileRepresentable, Error>
-    func fetchSurvivalData(representable: IdAccountDataProfileRepresentable) -> AnyPublisher<SurvivalDataProfileRepresentable, Error>
-    func fetchGamesModeData(representable: IdAccountDataProfileRepresentable) -> AnyPublisher<GamesModesDataProfileRepresentable, Error>
-    func fetchWeaponData(representable: IdAccountDataProfileRepresentable) -> AnyPublisher<WeaponDataProfileRepresentable, Error>
+    func fetchSurvivalData(representable: IdAccountDataProfileRepresentable, reload: Bool) -> AnyPublisher<SurvivalDataProfileRepresentable, Error>
+    func fetchGamesModeData(representable: IdAccountDataProfileRepresentable, reload: Bool) -> AnyPublisher<GamesModesDataProfileRepresentable, Error>
+    func fetchWeaponData(representable: IdAccountDataProfileRepresentable, reload: Bool) -> AnyPublisher<WeaponDataProfileRepresentable, Error>
 }

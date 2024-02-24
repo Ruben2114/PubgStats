@@ -22,7 +22,7 @@ final class ProfileViewModel: DataBindable {
     private let dependencies: ProfileDependencies
     private let stateSubject = CurrentValueSubject<ProfileState, Never>(.idle)
     var state: AnyPublisher<ProfileState, Never>
-    private let getPlayerDetailsSubject = PassthroughSubject<IdAccountDataProfileRepresentable, Never>()
+    private let getPlayerDetailsSubject = PassthroughSubject<(IdAccountDataProfileRepresentable, Bool), Never>()
     @BindingOptional private var dataProfile: IdAccountDataProfileRepresentable?
     private var representable: PlayerDetailsRepresentable?
     
@@ -37,7 +37,7 @@ final class ProfileViewModel: DataBindable {
     
     func viewDidLoad() {
         subscribePlayerDetailsPublisher()
-        getPlayerDetailsSubject.send(dataProfile ?? DefaultIdAccountDataProfile(id: "", name: "", platform: ""))
+        reloadData()
     }
     
     func goToModes() {
@@ -56,7 +56,7 @@ final class ProfileViewModel: DataBindable {
     }
     
     func reload(){
-        //TODO: hacer las llamadas sin ser cacheadas
+        getPlayerDetailsSubject.send((dataProfile ?? DefaultIdAccountDataProfile(id: "", name: "", platform: ""), true))
     }
 }
 
@@ -86,6 +86,18 @@ private extension ProfileViewModel {
 
         let chartData = [kills]
         stateSubject.send(.showChartView(chartData))
+    }
+    
+    func reloadData() {
+        let valueDate = UserDefaults.standard.object(forKey: "date")
+        if valueDate != nil {
+            let interval = Date().timeIntervalSince(valueDate as? Date ?? Date()) > 86400
+            if interval { UserDefaults.standard.set(nil, forKey: "date") }
+            getPlayerDetailsSubject.send((dataProfile ?? DefaultIdAccountDataProfile(id: "", name: "", platform: ""), interval))
+        } else {
+            getPlayerDetailsSubject.send((dataProfile ?? DefaultIdAccountDataProfile(id: "", name: "", platform: ""), false))
+            UserDefaults.standard.set(Date(), forKey: "date")
+        }
     }
     
     func getCategoriesData(stats: PlayerStats, amount: String, subcategories: [CategoryRepresentable]) -> DefaultPieChartViewData {
@@ -157,8 +169,8 @@ private extension ProfileViewModel {
 
 private extension ProfileViewModel {
     func playerDetailsPublisher() -> AnyPublisher<PlayerDetailsRepresentable, Error> {
-        return getPlayerDetailsSubject.flatMap { [unowned self] data in
-            self.profileDataUseCase.fetchPlayerDetails(data)
+        return getPlayerDetailsSubject.flatMap { [unowned self] data, reload in
+            self.profileDataUseCase.fetchPlayerDetails(data, reload: reload)
         }.receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }

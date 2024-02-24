@@ -56,7 +56,6 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         setAppearance()
         bind()
-        reloadData()
         viewModel.viewDidLoad()
     }
 }
@@ -194,19 +193,6 @@ private extension ProfileViewController {
              viewModel.reload()
              return
          }
-    }
-    
-    func reloadData() {
-        let valueDate = UserDefaults.standard.object(forKey: "date")
-        if valueDate != nil {
-            let interval = Date().timeIntervalSince(valueDate as? Date ?? Date())
-            if interval > 86400 {
-                viewModel.reload()
-                UserDefaults.standard.set(nil, forKey: "date")
-            }
-        } else {
-            UserDefaults.standard.set(Date(), forKey: "date")
-        }
     }
 }
 

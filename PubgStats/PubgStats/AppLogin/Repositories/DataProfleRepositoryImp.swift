@@ -26,8 +26,8 @@ struct DataProfleRepositoryImp: DataProfileRepository {
         }.eraseToAnyPublisher()
     }
     
-    func fetchSurvivalData(representable: IdAccountDataProfileRepresentable) -> AnyPublisher<SurvivalDataProfileRepresentable, Error> {
-        if let cache = self.dataSource.getSurvival(player: representable.name, type: .profile), cache.stats.airDropsCalled != nil {
+    func fetchSurvivalData(representable: IdAccountDataProfileRepresentable, reload: Bool) -> AnyPublisher<SurvivalDataProfileRepresentable, Error> {
+        if let cache = self.dataSource.getSurvival(player: representable.name, type: .profile), cache.stats.airDropsCalled != nil && !reload {
             return Just(cache).setFailureType(to: Error.self).eraseToAnyPublisher()
         }
         return remoteData.getSurvivalData(account: representable.id, platform: representable.platform).map { data in
@@ -36,8 +36,8 @@ struct DataProfleRepositoryImp: DataProfileRepository {
         }.eraseToAnyPublisher()
     }
     
-    func fetchGamesModeData(representable: IdAccountDataProfileRepresentable) -> AnyPublisher<GamesModesDataProfileRepresentable, Error> {
-        if let cache = self.dataSource.getGameMode(player: representable.name, type: .profile), !cache.timePlayed.isEmpty {
+    func fetchGamesModeData(representable: IdAccountDataProfileRepresentable, reload: Bool) -> AnyPublisher<GamesModesDataProfileRepresentable, Error> {
+        if let cache = self.dataSource.getGameMode(player: representable.name, type: .profile), !cache.timePlayed.isEmpty && !reload {
             return Just(cache).setFailureType(to: Error.self).eraseToAnyPublisher()
         }
         return remoteData.getGamesModesData(account: representable.id, platform: representable.platform).map { data in
@@ -46,8 +46,8 @@ struct DataProfleRepositoryImp: DataProfileRepository {
         }.eraseToAnyPublisher()
     }
     
-    func fetchWeaponData(representable: IdAccountDataProfileRepresentable) -> AnyPublisher<WeaponDataProfileRepresentable, Error> {
-        if let cache = self.dataSource.getDataWeaponDetail(player: representable.name, type: .profile), !cache.weaponSummaries.isEmpty {
+    func fetchWeaponData(representable: IdAccountDataProfileRepresentable, reload: Bool) -> AnyPublisher<WeaponDataProfileRepresentable, Error> {
+        if let cache = self.dataSource.getDataWeaponDetail(player: representable.name, type: .profile), !cache.weaponSummaries.isEmpty && !reload {
             return Just(cache).setFailureType(to: Error.self).eraseToAnyPublisher()
         }
         return remoteData.getWeaponData(account: representable.id, platform: representable.platform).map { data in

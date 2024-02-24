@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol ProfileDataUseCase {
-    func fetchPlayerDetails(_ profile: IdAccountDataProfileRepresentable) -> AnyPublisher<PlayerDetailsRepresentable, Error>
+    func fetchPlayerDetails(_ profile: IdAccountDataProfileRepresentable, reload: Bool) -> AnyPublisher<PlayerDetailsRepresentable, Error>
 }
 
 struct ProfileDataUseCaseImp {
@@ -21,10 +21,10 @@ struct ProfileDataUseCaseImp {
 }
 
 extension ProfileDataUseCaseImp: ProfileDataUseCase {
-    func fetchPlayerDetails(_ profile: IdAccountDataProfileRepresentable) -> AnyPublisher<PlayerDetailsRepresentable, Error> {
-        return Publishers.CombineLatest3(profileRepository.fetchSurvivalData(representable: profile).eraseToAnyPublisher(),
-                                         profileRepository.fetchGamesModeData(representable: profile).eraseToAnyPublisher(),
-                                         profileRepository.fetchWeaponData(representable: profile).eraseToAnyPublisher())
+    func fetchPlayerDetails(_ profile: IdAccountDataProfileRepresentable, reload: Bool) -> AnyPublisher<PlayerDetailsRepresentable, Error> {
+        return Publishers.CombineLatest3(profileRepository.fetchSurvivalData(representable: profile, reload: reload).eraseToAnyPublisher(),
+                                         profileRepository.fetchGamesModeData(representable: profile, reload: reload).eraseToAnyPublisher(),
+                                         profileRepository.fetchWeaponData(representable: profile, reload: reload).eraseToAnyPublisher())
         .map { (SurvivalDataProfileRepresentable, GamesModesDataProfileRepresentable, WeaponDataProfileRepresentable) in
             DefaultPlayerDetails(infoSurvival: SurvivalDataProfileRepresentable,
                                  infoGamesModes: GamesModesDataProfileRepresentable,

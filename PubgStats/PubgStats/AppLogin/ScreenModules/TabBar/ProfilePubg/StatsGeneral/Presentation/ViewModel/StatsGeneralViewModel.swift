@@ -27,8 +27,6 @@ final class StatsGeneralViewModel {
     }
 
     func reload(){
-        let userDefaults = UserDefaults.standard
-        userDefaults.set(false, forKey: "reload")
         //TODO: hacer las llamadas sin ser cacheadas
     }
     private func searchData() -> [String?] {
