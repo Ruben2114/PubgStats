@@ -30,10 +30,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             childCoordinators.first?.dismiss()
         }
         childCoordinators.removeAll()
-        window?.rootViewController = goToProfile ? dependencies.tabBarController() : dependencies.loginNavigationController()
         let rootCoordinator = goToProfile ? dependencies.mainTabBarCoordinator(data: data) : dependencies.loginCoordinator()
         rootCoordinator.start()
         childCoordinators.append(rootCoordinator)
+        
+        UIView.transition(with: window!,
+                          duration: 0.5,
+                          options: .transitionCrossDissolve,
+                          animations: { [weak self] in
+            self?.window?.rootViewController = goToProfile ? self?.dependencies.tabBarController() : self?.dependencies.loginNavigationController()
+                          },
+                          completion: nil)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
