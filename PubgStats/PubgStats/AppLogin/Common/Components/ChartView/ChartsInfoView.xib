@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,7 +13,6 @@
                 <outlet property="chartCollectionView" destination="Ied-D5-6nc" id="T6Z-Df-2Co"/>
                 <outlet property="containerStackView" destination="SI0-Uc-w6n" id="eEi-wH-aHw"/>
                 <outlet property="pageControl" destination="tUC-lM-41x" id="8ch-qA-zHt"/>
-                <outlet property="questionsImageView" destination="EH2-bX-1lL" id="xwT-dE-VlI"/>
                 <outlet property="titleLabel" destination="imc-xz-WJY" id="G8h-n7-rF8"/>
             </connections>
         </placeholder>
@@ -29,31 +27,19 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLm-P3-ZQa">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="98"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Cq7-6T-EPe">
-                                    <rect key="frame" x="16" y="0.0" width="382" height="90"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imc-xz-WJY">
-                                            <rect key="frame" x="0.0" y="0.0" width="41.5" height="90"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="questionmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="EH2-bX-1lL">
-                                            <rect key="frame" x="47.5" y="0.5" width="20" height="89"/>
-                                        </imageView>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WFS-k7-QV0">
-                                            <rect key="frame" x="73.5" y="0.0" width="308.5" height="90"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </view>
-                                    </subviews>
-                                </stackView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imc-xz-WJY">
+                                    <rect key="frame" x="16" y="0.0" width="398" height="98"/>
+                                    <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="20"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="Cq7-6T-EPe" secondAttribute="trailing" constant="16" id="JEQ-93-dr4"/>
-                                <constraint firstItem="Cq7-6T-EPe" firstAttribute="leading" secondItem="dLm-P3-ZQa" secondAttribute="leading" constant="16" id="T61-gw-Y3d"/>
-                                <constraint firstAttribute="bottom" secondItem="Cq7-6T-EPe" secondAttribute="bottom" constant="8" id="ePL-cV-oWP"/>
-                                <constraint firstItem="Cq7-6T-EPe" firstAttribute="top" secondItem="dLm-P3-ZQa" secondAttribute="top" id="rgM-bf-5qC"/>
+                                <constraint firstItem="imc-xz-WJY" firstAttribute="top" secondItem="dLm-P3-ZQa" secondAttribute="top" id="9tj-aQ-shA"/>
+                                <constraint firstAttribute="bottom" secondItem="imc-xz-WJY" secondAttribute="bottom" id="Pta-aE-pXQ"/>
+                                <constraint firstAttribute="trailing" secondItem="imc-xz-WJY" secondAttribute="trailing" id="Zzc-kI-nNN"/>
+                                <constraint firstItem="imc-xz-WJY" firstAttribute="leading" secondItem="dLm-P3-ZQa" secondAttribute="leading" constant="16" id="cAT-VF-V4Z"/>
                             </constraints>
                         </view>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ied-D5-6nc" customClass="ChartCollectionView" customModule="PubgStats" customModuleProvider="target">
@@ -90,10 +76,4 @@
             <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="questionmark.circle" catalog="system" width="128" height="123"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

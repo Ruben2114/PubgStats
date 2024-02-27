@@ -197,7 +197,6 @@ public enum AttributesType {
     }
 }
 
-//TODO: poner localized
 enum GamesModesTypes {
     case solo
     case soloFpp

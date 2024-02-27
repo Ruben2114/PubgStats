@@ -1,5 +1,5 @@
 //
-//  NewsCardView.swift
+//  VersatilCardView.swift
 //  PubgStats
 //
 //  Created by Rubén Rodríguez Cervigón on 15/3/23.
@@ -9,14 +9,14 @@ import UIKit
 import Foundation
 import Combine
 
-public final class NewsCardView: XibView {
+public final class VersatilCardView: XibView {
     
     @IBOutlet private weak var contentView: UIStackView!
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var subtitleLabel: UILabel!
     
-    private var representable: NewsCardRepresentable?
+    private var representable: VersatilCardRepresentable?
     private var subscriptions = Set<AnyCancellable>()
     private var subject = PassthroughSubject<Void, Never>()
     lazy var publisher: AnyPublisher<Void, Never> = {
@@ -33,33 +33,30 @@ public final class NewsCardView: XibView {
         configureView()
     }
     
-    func setupVersatilCard(_ representable: NewsCardRepresentable) {
+    func setupVersatilCard(_ representable: VersatilCardRepresentable) {
         self.representable = representable
-        configureRightImage()
+        configureImage()
         configureLabels()
     }
 }
 
-private extension NewsCardView {
+private extension VersatilCardView {
     
     func configureLabels() {
         titleLabel.text = representable?.title
         subtitleLabel.text = representable?.subTitle
     }
     
-    func configureRightImage() {
-        guard let rightView = representable?.customImageView else { return }
-        imageView.image = UIImage(systemName: rightView)
+    func configureImage() {
+        guard let image = representable?.customImageView else { return }
+        imageView.image = UIImage(systemName: image)
     }
     
     func configureView() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapCard))
         contentView.addGestureRecognizer(gesture)
-        contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 8
-        contentView.layer.borderColor = UIColor.systemGray.cgColor
-        contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        contentView.layer.shadowOpacity = 0.2
+        contentView.backgroundColor = .black.withAlphaComponent(0.8)
     }
     
     @objc func didTapCard() {

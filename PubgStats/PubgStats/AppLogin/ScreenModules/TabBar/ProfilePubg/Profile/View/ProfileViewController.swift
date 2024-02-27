@@ -10,7 +10,6 @@ import Combine
 import SafariServices
 
 final class ProfileViewController: UIViewController {
-
     private var cancellable = Set<AnyCancellable>()
     private let viewModel: ProfileViewModel
     private let dependencies: ProfileDependencies
@@ -22,12 +21,14 @@ final class ProfileViewController: UIViewController {
         view.setScrollInsect(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         return view
     }()
+    private lazy var imageBackground: UIImageView = {
+        UIImageView()
+    }()
     private lazy var headerView: ProfileHeaderView = {
         return ProfileHeaderView()
     }()
-    
-    private lazy var dataGeneralView: DataGeneralView = {
-        DataGeneralView()
+    private lazy var dataGeneralView: ProfileGeneralView = {
+        ProfileGeneralView()
     }()
     private lazy var chartView: ChartsInfoView = {
         return ChartsInfoView()
@@ -35,11 +36,13 @@ final class ProfileViewController: UIViewController {
     private lazy var bottomSheetView: BottomSheetView = {
         BottomSheetView()
     }()
-    //TODO: hacer esta vista general ya que hay que poner la de news y la de survival
-    private lazy var newsCardView: NewsCardView = {
-        NewsCardView()
+    private lazy var newsCardView: VersatilCardView = {
+        VersatilCardView()
     }()
-    
+    private lazy var survivalCardView: VersatilCardView = {
+        VersatilCardView()
+    }()
+        
     init(dependencies: ProfileDependencies) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
@@ -67,9 +70,13 @@ private extension ProfileViewController {
     }
     
     func configView() {
-        view.backgroundColor = .white
+        //TODO: cambiar imagen de fondo
+        imageBackground.image = UIImage(named: "gamesModesDetailsPubg")
+        view.insertSubview(imageBackground, at: 0)
+        imageBackground.frame = view.bounds
         configureNavigationBar()
         configureNewsCard()
+        configureSurvivalCard()
     }
     
     func bind() {
@@ -77,6 +84,7 @@ private extension ProfileViewController {
         bindHeaderView()
         bindChartView()
         bindNewsCardView()
+        bindSurvivalCardView()
     }
     
     func bindViewModel() {
@@ -85,32 +93,27 @@ private extension ProfileViewController {
             case .idle:
                 break
             case .showChartView(let infoChartView):
-                guard let self else { return }
-                self.chartView.isHidden = infoChartView?.count == 0 ? true : false
-                self.chartView.configureViewWith(DefaultChartViewData(charts: infoChartView ?? [], chartSelectedIndex: 0))
+                self?.chartView.isHidden = infoChartView?.count == 0 ? true : false
+                self?.chartView.configureViewWith(DefaultChartViewData(charts: infoChartView ?? [], chartSelectedIndex: 0))
             case .showErrorPlayerDetails:
                 //TODO: poner en hidden todo lo que tenga datos y que salga la alerta
                 //TODO: key
                 self?.presentAlert(message: "Error al cargar los datos de los modos de juego", title: "Error")
+            case .showHeader(let data):
+                self?.headerView.configureView(representable: data)
+            case .showDataGeneral(let data):
+                self?.dataGeneralView.configureView(data)
             case .hideLoading:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [ weak self] in
                     self?.hideLoading()
                 }
-            case .showHeader(let data):
-                self?.headerView.configureView(representable: data)
             }
         }.store(in: &cancellable)
     }
     
     func bindChartView() {
-        //TODO: poner localized
-        chartView.publisher.receive(on: DispatchQueue.main).sink { [weak self] state in
-            switch state {
-            case .didTapAverageTooltip:
-                self?.configureBottomSheet(title: "Kills data", subtitle: "aqui podras observar las muertes totales y las muertes de noseque nose cuantas")
-            case .didTapHelpTooltip:
-                self?.configureBottomSheet(title: "datos por categorias", subtitle: "las tres secciones que podras ver aqui los kills, noseque")
-            }
+        chartView.publisher.receive(on: DispatchQueue.main).sink { [weak self] data in
+            self?.configureBottomSheet(title: data.0, subtitle: data.1)
         }.store(in: &cancellable)
     }
     
@@ -123,8 +126,6 @@ private extension ProfileViewController {
                     self?.viewModel.goToModes()
                 case .weapon:
                     self?.viewModel.goToWeapon()
-                case .survival:
-                    self?.viewModel.goToSurvival()
                 }
             }
         }.store(in: &cancellable)
@@ -136,10 +137,18 @@ private extension ProfileViewController {
         }.store(in: &cancellable)
     }
     
+    func bindSurvivalCardView() {
+        survivalCardView.publisher.sink { [weak self] in
+            self?.viewModel.goToSurvival()
+        }.store(in: &cancellable)
+    }
+    
     func configureNavigationBar() {
         titleNavigation("profileViewControllerNavigationItem")
         let helpReloadButton = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: #selector(helpReloadButtonAction))
+        helpReloadButton.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
         reloadButton = UIBarButtonItem(image: UIImage(systemName: "arrow.clockwise.circle.fill"), style: .plain, target: self, action: #selector(reloadButtonAction))
+        reloadButton.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
         navigationItem.setRightBarButtonItems([reloadButton, helpReloadButton], animated: true)
     }
     
@@ -147,6 +156,7 @@ private extension ProfileViewController {
         scrollableStackView.addArrangedSubview(headerView)
         scrollableStackView.addArrangedSubview(dataGeneralView)
         scrollableStackView.addArrangedSubview(chartView)
+        scrollableStackView.addArrangedSubview(survivalCardView)
         scrollableStackView.addArrangedSubview(newsCardView)
     }
     
@@ -156,10 +166,18 @@ private extension ProfileViewController {
     
     func configureNewsCard() {
         //TODO: poner localized
-        let model = DefaultNewsCard(title: "Noticias",
-                                    subTitle: "Aqui podras ver las noticias de las ultimas novedades del juego",
-                                    customImageView: "star")
+        let model = DefaultVersatilCard(title: "Noticias",
+                                        subTitle: "Aqui podras ver las noticias de las ultimas novedades del juego",
+                                        customImageView: "star")
         newsCardView.setupVersatilCard(model)
+    }
+    
+    func configureSurvivalCard() {
+        //TODO: poner localized
+        let model = DefaultVersatilCard(title: "profileCardSurvival".localize(),
+                                        subTitle: "Aqui podras tus estadísticas en el modo supervivencia",
+                                        customImageView: "star")
+        survivalCardView.setupVersatilCard(model)
     }
     
     func configureWeb() {

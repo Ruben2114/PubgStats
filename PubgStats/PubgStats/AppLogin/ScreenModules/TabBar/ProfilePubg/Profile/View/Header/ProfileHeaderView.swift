@@ -9,10 +9,16 @@ import UIKit
 import Foundation
 import Combine
 
-enum ProfileButton {
+enum ProfileButton: CaseIterable {
     case modes
     case weapon
-    case survival
+    
+    func getTitle() -> String {
+        switch self {
+        case .modes: return "profileHeaderModes"
+        case .weapon: return "profileHeaderWeapon"
+        }
+    }
 }
 
 enum ProfileHeaderViewState: State {
@@ -27,7 +33,7 @@ final class ProfileHeaderView: XibView {
     @IBOutlet private weak var levelAmountLabel: UILabel!
     @IBOutlet private weak var xpDescriptionLabel: UILabel!
     @IBOutlet private weak var xpAmountLabel: UILabel!
-    @IBOutlet private weak var titleGraph: UILabel!
+    @IBOutlet private weak var titleDataGeneral: UILabel!
     @IBOutlet private weak var containerChips: UIStackView!
     
     private var cancellable = Set<AnyCancellable>()
@@ -62,9 +68,9 @@ private extension ProfileHeaderView {
     
     func configureContainer() {
         containerView.layer.cornerRadius = 8
-        containerView.layer.borderColor = UIColor.systemGray.cgColor
-        containerView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        containerView.layer.shadowOpacity = 0.2
+        containerView.backgroundColor = .black.withAlphaComponent(0.8)
+        
+        titleDataGeneral.textColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
     }
     
     func configureImagePlatform() {
@@ -74,7 +80,7 @@ private extension ProfileHeaderView {
     }
     
     func configureLabel() {
-        titleGraph.text = "profileHeaderTitleGraph".localize()
+        titleDataGeneral.text = "profileHeaderTitleDataGeneral".localize()
         namePlayerLabel.text = representable?.dataPlayer.name
         levelDescriptionLabel.text = "level".localize()
         levelAmountLabel.text = representable?.level
@@ -83,30 +89,18 @@ private extension ProfileHeaderView {
     }
     
     func configureChips()  {
-        let chipModes = getChipButton(viewData: Chip.ViewData(text: "profileHeaderModes".localize(), style: .enabled, type: .onlyText), type: .modes)
-        chipModes.publisher.receive(on: DispatchQueue.main).sink { [weak self] in
-            self?.subject.send(.didSelectButton(.modes))
-        }.store(in: &cancellable)
-        
-        let chipWeapon = getChipButton(viewData: Chip.ViewData(text: "profileHeaderWeapon".localize(), style: .enabled, type: .onlyText), type: .weapon)
-        chipWeapon.publisher.receive(on: DispatchQueue.main).sink { [weak self] in
-            self?.subject.send(.didSelectButton(.weapon))
-        }.store(in: &cancellable)
-        
-        let chipSurvival = getChipButton(viewData: Chip.ViewData(text: "profileHeaderSurvival".localize(), style: .enabled, type: .onlyText), type: .survival)
-        chipSurvival.publisher.receive(on: DispatchQueue.main).sink { [weak self] in
-            self?.subject.send(.didSelectButton(.survival))
-        }.store(in: &cancellable)
-        
-        containerChips.addArrangedSubview(chipModes)
-        containerChips.addArrangedSubview(chipWeapon)
-        containerChips.addArrangedSubview(chipSurvival)
+        ProfileButton.allCases.forEach { type in
+            getChipButton(viewData: Chip.ViewData(text: type.getTitle().localize(), style: .enabled, type: .onlyText), type: type)
+        }
     }
     
-    func getChipButton(viewData: Chip.ViewData, type: ProfileButton) -> Chip {
+    func getChipButton(viewData: Chip.ViewData, type: ProfileButton) {
         let button: Chip = Chip.loadFromXib() ?? Chip()
         button.setViewData(viewData: viewData)
         button.isEnabled = true
-        return button
+        button.publisher.receive(on: DispatchQueue.main).sink { [weak self] in
+            self?.subject.send(.didSelectButton(type))
+        }.store(in: &cancellable)
+        containerChips.addArrangedSubview(button)
     }
 }

@@ -73,10 +73,10 @@
 "actionAccept" = "Aceptar";
 "actionCancel" = "Cancelar";
 "profileLoginCellInvalid" = "No existen jugadores sin nombre";
-"profileHeaderTitleGraph" = "Detalle modos de juego";
+"profileHeaderTitleDataGeneral" = "Detalles Generales";
 "profileHeaderModes" = "Modos";
 "profileHeaderWeapon" = "Armas";
-"profileHeaderSurvival" = "Supervivencia";
+"profileCardSurvival" = "Supervivencia";
 "MostDefeatsInAGame" = "Record abatidos";
 "Defeats" = "Abatidos";
 "MostDamagePlayerInAGame" = "Record daño";

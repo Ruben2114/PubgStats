@@ -174,14 +174,14 @@ extension Chip.Style {
     func backgroundColor() -> UIColor {
         switch self {
         case .disabled: return UIColor(red: 0.941, green: 0.941, blue: 0.941, alpha: 1)
-        default: return .white
+        default: return .systemGray
         }
     }
     
     func textColor() -> UIColor {
         switch self {
         case .disabled: return UIColor(red: 0.800, green: 0.800, blue: 0.800, alpha: 1)
-        case .enabled: return .black
+        case .enabled: return .white
         default: return UIColor(red: 0.075, green: 0.494, blue: 0.518, alpha: 1)
         }
     }

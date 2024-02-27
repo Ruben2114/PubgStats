@@ -73,10 +73,10 @@
 "actionAccept" = "Accept";
 "actionCancel" = "Cancel";
 "profileLoginCellInvalid" = "No unnamed players exist";
-"profileHeaderTitleGraph" = "Game modes detail";
+"profileHeaderTitleDataGeneral" = "General details";
 "profileHeaderModes" = "Modes";
 "profileHeaderWeapon" = "Weapon";
-"profileHeaderSurvival" = "Survival";
+"profileCardSurvival" = "Survival";
 "MostDefeatsInAGame" = "Most defeats in a match";
 "Defeats" = "Defeats";
 "MostDamagePlayerInAGame" = "Most damage in a match";

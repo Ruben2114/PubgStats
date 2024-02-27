@@ -112,14 +112,12 @@
 		8CA398D329B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA398D229B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift */; };
 		8CA720B029DAE3F6001E3EFA /* UIViewController+Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA720AF29DAE3F6001E3EFA /* UIViewController+Label.swift */; };
 		8CA85D8629DC46160050C19B /* UIViewController+func.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA85D8529DC46160050C19B /* UIViewController+func.swift */; };
-		8CA9B8E02B57339300B44683 /* DataGeneralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9B8DE2B57339300B44683 /* DataGeneralView.swift */; };
-		8CA9B8E12B57339300B44683 /* DataGeneralView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA9B8DF2B57339300B44683 /* DataGeneralView.xib */; };
 		8CABD07C2B551722001AE2B2 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CABD0792B551722001AE2B2 /* BottomSheetViewController.swift */; };
 		8CABD07D2B551722001AE2B2 /* BottomSheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CABD07A2B551722001AE2B2 /* BottomSheetViewController.xib */; };
 		8CABD07E2B551722001AE2B2 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CABD07B2B551722001AE2B2 /* BottomSheetView.swift */; };
-		8CABD0832B551AD8001AE2B2 /* NewsCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CABD0812B551AD8001AE2B2 /* NewsCardView.swift */; };
-		8CABD0842B551AD8001AE2B2 /* NewsCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CABD0822B551AD8001AE2B2 /* NewsCardView.xib */; };
-		8CABD0862B551CE4001AE2B2 /* NewsCardRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CABD0852B551CE4001AE2B2 /* NewsCardRepresentable.swift */; };
+		8CABD0832B551AD8001AE2B2 /* VersatilCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CABD0812B551AD8001AE2B2 /* VersatilCardView.swift */; };
+		8CABD0842B551AD8001AE2B2 /* VersatilCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CABD0822B551AD8001AE2B2 /* VersatilCardView.xib */; };
+		8CABD0862B551CE4001AE2B2 /* VersatilCardRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CABD0852B551CE4001AE2B2 /* VersatilCardRepresentable.swift */; };
 		8CAC3E2D29C3055300A1FE34 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E2C29C3055300A1FE34 /* GuideViewController.swift */; };
 		8CAC3E2F29C3080600A1FE34 /* GuideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E2E29C3080600A1FE34 /* GuideViewModel.swift */; };
 		8CAC3E3129C31D4700A1FE34 /* UrlGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E3029C31D4700A1FE34 /* UrlGuide.swift */; };
@@ -159,6 +157,8 @@
 		8CC118B82AD979A900839855 /* ScrollableStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC118B72AD979A900839855 /* ScrollableStackView.swift */; };
 		8CC118BA2AD98F1700839855 /* AnyBindingOptional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC118B92AD98F1700839855 /* AnyBindingOptional.swift */; };
 		8CC118BC2AD98F4300839855 /* AnyBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC118BB2AD98F4300839855 /* AnyBinding.swift */; };
+		8CC95B3F2B8E96A600152CB5 /* ProfileGeneralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC95B3D2B8E96A500152CB5 /* ProfileGeneralView.swift */; };
+		8CC95B402B8E96A600152CB5 /* ProfileGeneralView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CC95B3E2B8E96A500152CB5 /* ProfileGeneralView.xib */; };
 		8CCC92C429E3F8270019BE72 /* FavouriteRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC92C329E3F8270019BE72 /* FavouriteRepositoryImp.swift */; };
 		8CCC92C629E3FC3C0019BE72 /* FavouriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC92C529E3FC3C0019BE72 /* FavouriteRepository.swift */; };
 		8CCC92C829E3FCB70019BE72 /* FavouriteDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC92C729E3FCB70019BE72 /* FavouriteDataUseCase.swift */; };
@@ -328,14 +328,12 @@
 		8CA398D229B72A2000C09746 /* PubgStatsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PubgStatsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8CA720AF29DAE3F6001E3EFA /* UIViewController+Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Label.swift"; sourceTree = "<group>"; };
 		8CA85D8529DC46160050C19B /* UIViewController+func.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+func.swift"; sourceTree = "<group>"; };
-		8CA9B8DE2B57339300B44683 /* DataGeneralView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataGeneralView.swift; sourceTree = "<group>"; };
-		8CA9B8DF2B57339300B44683 /* DataGeneralView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataGeneralView.xib; sourceTree = "<group>"; };
 		8CABD0792B551722001AE2B2 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		8CABD07A2B551722001AE2B2 /* BottomSheetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomSheetViewController.xib; sourceTree = "<group>"; };
 		8CABD07B2B551722001AE2B2 /* BottomSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
-		8CABD0812B551AD8001AE2B2 /* NewsCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCardView.swift; sourceTree = "<group>"; };
-		8CABD0822B551AD8001AE2B2 /* NewsCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCardView.xib; sourceTree = "<group>"; };
-		8CABD0852B551CE4001AE2B2 /* NewsCardRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCardRepresentable.swift; sourceTree = "<group>"; };
+		8CABD0812B551AD8001AE2B2 /* VersatilCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersatilCardView.swift; sourceTree = "<group>"; };
+		8CABD0822B551AD8001AE2B2 /* VersatilCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VersatilCardView.xib; sourceTree = "<group>"; };
+		8CABD0852B551CE4001AE2B2 /* VersatilCardRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersatilCardRepresentable.swift; sourceTree = "<group>"; };
 		8CAC3E2C29C3055300A1FE34 /* GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		8CAC3E2E29C3080600A1FE34 /* GuideViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewModel.swift; sourceTree = "<group>"; };
 		8CAC3E3029C31D4700A1FE34 /* UrlGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlGuide.swift; sourceTree = "<group>"; };
@@ -375,6 +373,8 @@
 		8CC118B72AD979A900839855 /* ScrollableStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableStackView.swift; sourceTree = "<group>"; };
 		8CC118B92AD98F1700839855 /* AnyBindingOptional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyBindingOptional.swift; sourceTree = "<group>"; };
 		8CC118BB2AD98F4300839855 /* AnyBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyBinding.swift; sourceTree = "<group>"; };
+		8CC95B3D2B8E96A500152CB5 /* ProfileGeneralView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileGeneralView.swift; sourceTree = "<group>"; };
+		8CC95B3E2B8E96A500152CB5 /* ProfileGeneralView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileGeneralView.xib; sourceTree = "<group>"; };
 		8CCC92C329E3F8270019BE72 /* FavouriteRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteRepositoryImp.swift; sourceTree = "<group>"; };
 		8CCC92C529E3FC3C0019BE72 /* FavouriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteRepository.swift; sourceTree = "<group>"; };
 		8CCC92C729E3FCB70019BE72 /* FavouriteDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteDataUseCase.swift; sourceTree = "<group>"; };
@@ -465,7 +465,7 @@
 			isa = PBXGroup;
 			children = (
 				46151CB629C1B9780054BCEA /* ProfileViewController.swift */,
-				8CA9B8DD2B57334800B44683 /* DataGeneralView */,
+				8CC95B3C2B8E960600152CB5 /* GeneralView */,
 				8CABD0802B551A3A001AE2B2 /* NewsCardView */,
 				8C24607E2B3C6DF600AB98F3 /* Header */,
 			);
@@ -947,7 +947,7 @@
 			isa = PBXGroup;
 			children = (
 				460ABAD329F7E23000DD5797 /* PlayerStats.swift */,
-				8CABD0852B551CE4001AE2B2 /* NewsCardRepresentable.swift */,
+				8CABD0852B551CE4001AE2B2 /* VersatilCardRepresentable.swift */,
 				8CBE66AC2B587DF900C64481 /* ProfileViewRepresentable.swift */,
 			);
 			path = Representables;
@@ -963,15 +963,6 @@
 			path = Representables;
 			sourceTree = "<group>";
 		};
-		8CA9B8DD2B57334800B44683 /* DataGeneralView */ = {
-			isa = PBXGroup;
-			children = (
-				8CA9B8DE2B57339300B44683 /* DataGeneralView.swift */,
-				8CA9B8DF2B57339300B44683 /* DataGeneralView.xib */,
-			);
-			path = DataGeneralView;
-			sourceTree = "<group>";
-		};
 		8CABD0782B5516D8001AE2B2 /* BottomSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -985,8 +976,8 @@
 		8CABD0802B551A3A001AE2B2 /* NewsCardView */ = {
 			isa = PBXGroup;
 			children = (
-				8CABD0812B551AD8001AE2B2 /* NewsCardView.swift */,
-				8CABD0822B551AD8001AE2B2 /* NewsCardView.xib */,
+				8CABD0812B551AD8001AE2B2 /* VersatilCardView.swift */,
+				8CABD0822B551AD8001AE2B2 /* VersatilCardView.xib */,
 			);
 			path = NewsCardView;
 			sourceTree = "<group>";
@@ -1420,6 +1411,15 @@
 			path = Bindable;
 			sourceTree = "<group>";
 		};
+		8CC95B3C2B8E960600152CB5 /* GeneralView */ = {
+			isa = PBXGroup;
+			children = (
+				8CC95B3D2B8E96A500152CB5 /* ProfileGeneralView.swift */,
+				8CC95B3E2B8E96A500152CB5 /* ProfileGeneralView.xib */,
+			);
+			path = GeneralView;
+			sourceTree = "<group>";
+		};
 		8CCC92BF29E3F7310019BE72 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
@@ -1821,15 +1821,15 @@
 				8C2460702B3C50A700AB98F3 /* ChartCollectionView.xib in Resources */,
 				460ABACF29F7B8D700DD5797 /* Localizable.strings in Resources */,
 				8C24607A2B3C511B00AB98F3 /* ChartsInfoView.xib in Resources */,
-				8CA9B8E12B57339300B44683 /* DataGeneralView.xib in Resources */,
 				8C2460752B3C50B800AB98F3 /* ChartCollectionViewCell.xib in Resources */,
 				8CA398BC29B72A2000C09746 /* LaunchScreen.storyboard in Resources */,
 				8CA398B929B72A2000C09746 /* Assets.xcassets in Resources */,
-				8CABD0842B551AD8001AE2B2 /* NewsCardView.xib in Resources */,
+				8CABD0842B551AD8001AE2B2 /* VersatilCardView.xib in Resources */,
 				8CA125312B70106B00FF2C83 /* AttributesDetailsCollectionViewCell.xib in Resources */,
 				8C2460812B3C6E2500AB98F3 /* ProfileHeaderView.xib in Resources */,
 				8CABD07D2B551722001AE2B2 /* BottomSheetViewController.xib in Resources */,
 				8CECA63C2B6EF2C900775650 /* DetailsCardView.xib in Resources */,
+				8CC95B402B8E96A600152CB5 /* ProfileGeneralView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1893,7 +1893,7 @@
 				8CE9BDCE29E59F1400F45D3F /* AttributesDetailDependencies.swift in Sources */,
 				8CB2CEEC29C9A35B00E79D29 /* ApiClientServiceImp.swift in Sources */,
 				8CB07EC829D1B446000EE257 /* GamesModesDTO.swift in Sources */,
-				8CABD0862B551CE4001AE2B2 /* NewsCardRepresentable.swift in Sources */,
+				8CABD0862B551CE4001AE2B2 /* VersatilCardRepresentable.swift in Sources */,
 				8CB6395E29D2343C00763231 /* KillsDataViewController.swift in Sources */,
 				8CEB340729ED6183006C2564 /* SettingsDataRepository.swift in Sources */,
 				465926EF29EFCFB300A4091D /* ItemCellSettings.swift in Sources */,
@@ -1938,8 +1938,8 @@
 				8CECA6372B6EF21A00775650 /* AttributesHomeViewCell.swift in Sources */,
 				465550F829CC7DE800BF932A /* GuideDependency.swift in Sources */,
 				465550E729CC700400BF932A /* FavouriteExternalDependency.swift in Sources */,
+				8CC95B3F2B8E96A600152CB5 /* ProfileGeneralView.swift in Sources */,
 				4655510129CC824000BF932A /* SettingsExternalDependency.swift in Sources */,
-				8CA9B8E02B57339300B44683 /* DataGeneralView.swift in Sources */,
 				8CB07EB629D1A683000EE257 /* StatsGeneralViewModel.swift in Sources */,
 				8CB39BA729C0917000B1D8EF /* ViewScrollable.swift in Sources */,
 				460ABACB29F7B75000DD5797 /* ExtensionString.swift in Sources */,
@@ -1964,7 +1964,7 @@
 				8C24605C2B3C4FD700AB98F3 /* FlameXibButton.swift in Sources */,
 				8CBC70422AD7D40E00234420 /* DataProfileRepository.swift in Sources */,
 				8C7563E629BB5FBA000373F9 /* LoginViewModel.swift in Sources */,
-				8CABD0832B551AD8001AE2B2 /* NewsCardView.swift in Sources */,
+				8CABD0832B551AD8001AE2B2 /* VersatilCardView.swift in Sources */,
 				8C9F824229C3CA02003000CD /* HelpDataViewController.swift in Sources */,
 				461C1F4029C9C86C00540289 /* EndPoint.swift in Sources */,
 				8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */,

@@ -14,6 +14,7 @@ enum ProfileState {
     case showErrorPlayerDetails
     case hideLoading
     case showHeader(ProfileHeaderViewRepresentable)
+    case showDataGeneral(GamesModesDataProfileRepresentable)
 }
 
 final class ProfileViewModel: DataBindable {
@@ -143,7 +144,7 @@ private extension ProfileViewModel {
             }
         } receiveValue: { [weak self] data in
             self?.representable = data
-            //TODO: aqui ya tengo toda la info ahora seria ir enviando a las vistas la información
+            self?.stateSubject.send(.showDataGeneral(data.infoGamesModes))
             self?.getProfileHeader(data.infoSurvival)
             self?.getChartData(infoGamesModes: data.infoGamesModes)
             self?.stateSubject.send(.hideLoading)
