@@ -17,7 +17,6 @@ enum ProfileButton {
 
 enum ProfileHeaderViewState: State {
     case didSelectButton(ProfileButton)
-    case didTapHelpTooltip
 }
 
 final class ProfileHeaderView: XibView {
@@ -30,7 +29,6 @@ final class ProfileHeaderView: XibView {
     @IBOutlet private weak var xpAmountLabel: UILabel!
     @IBOutlet private weak var titleGraph: UILabel!
     @IBOutlet private weak var containerChips: UIStackView!
-    @IBOutlet private weak var iconHelpImage: UIImageView!
     
     private var cancellable = Set<AnyCancellable>()
     private var subject = PassthroughSubject<ProfileHeaderViewState, Never>()
@@ -60,7 +58,6 @@ private extension ProfileHeaderView {
     func configureViews() {
         configureContainer()
         configureChips()
-        configureImage()
     }
     
     func configureContainer() {
@@ -68,11 +65,6 @@ private extension ProfileHeaderView {
         containerView.layer.borderColor = UIColor.systemGray.cgColor
         containerView.layer.shadowOffset = CGSize(width: 0, height: 0)
         containerView.layer.shadowOpacity = 0.2
-    }
-    
-    func configureImage() {
-        iconHelpImage.isUserInteractionEnabled = true
-        iconHelpImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapTooltip)))
     }
     
     func configureImagePlatform() {
@@ -116,9 +108,5 @@ private extension ProfileHeaderView {
         button.setViewData(viewData: viewData)
         button.isEnabled = true
         return button
-    }
-    
-    @objc func didTapTooltip() {
-        subject.send(.didTapHelpTooltip)
     }
 }

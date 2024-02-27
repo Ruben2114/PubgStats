@@ -51,22 +51,13 @@ class AttributesHomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureUI()
+        configureNavigationBar()
     }
 }
 
 private extension AttributesHomeViewController {
     func setAppearance() {
-        configureNavigationBar()
         setupTableView()
-    }
-    
-    func configureNavigationBar() {
-        backButton(action: #selector(backButtonAction))
-        self.navigationController?.navigationBar.titleTextAttributes = [
-            .foregroundColor : UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1),
-            .font : UIFont(name: "AmericanTypewriter-Bold", size: 20) ?? UIFont.systemFont(ofSize: 16)
-        ]
     }
     
     func bind() {
@@ -78,12 +69,12 @@ private extension AttributesHomeViewController {
             }.store(in: &cancellable)
     }
     
-    func configureUI() {
+    func configureNavigationBar() {
         let image = viewModel.getType().getImage()
         imageBackground.image = UIImage(named: image)
         view.insertSubview(imageBackground, at: 0)
         imageBackground.frame = view.bounds
-        title = viewModel.getType().getTitle()
+        titleNavigation(viewModel.getType().getTitle(), backButton: #selector(backButtonAction))
     }
     
     func setupTableView() {

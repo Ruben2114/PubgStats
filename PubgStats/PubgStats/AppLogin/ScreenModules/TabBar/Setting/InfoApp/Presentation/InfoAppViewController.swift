@@ -27,8 +27,7 @@ class InfoAppViewController: UIViewController {
     }
     private func configUI() {
         view.backgroundColor = .systemBackground
-        title = "infoAppViewControllerTitle".localize()
-        backButton(action: #selector(backButtonAction))
+        titleNavigation("infoAppViewControllerTitle", backButton: #selector(backButtonAction))
         configScroll()
         configConstraints()
     }

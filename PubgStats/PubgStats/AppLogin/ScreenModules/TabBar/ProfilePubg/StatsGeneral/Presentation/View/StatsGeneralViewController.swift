@@ -25,8 +25,6 @@ final class StatsGeneralViewController: UIViewController {
         })
         return radar
     }()
-    private lazy var legendButton = legendButton()
-    private lazy var helpButton = helpButton(selector: #selector(helpButtonAction))
     var contentView: UIView = UIView()
     var mainScrollView: UIScrollView = UIScrollView()
     private var cancellable = Set<AnyCancellable>()
@@ -79,8 +77,7 @@ final class StatsGeneralViewController: UIViewController {
     }
     private func configUI() {
         view.backgroundColor = .systemBackground
-        title = "statsGeneralViewControllerTitle".localize()
-        backButton(action: #selector(backButtonAction))
+        titleNavigation("statsGeneralViewControllerTitle", backButton: #selector(backButtonAction))
         reloadButton = UIBarButtonItem(image: UIImage(systemName: "arrow.clockwise.circle.fill"), style: .plain, target: self, action: #selector(reloadButtonAction))
         navigationItem.rightBarButtonItem = reloadButton
         tableView.dataSource = self
@@ -228,10 +225,6 @@ final class StatsGeneralViewController: UIViewController {
              return
          }
     }
-    @objc private func helpButtonAction() {
-        //TODO: cambio idioma
-        presentAlert(message: "Puedes cambiar los datos de cada vértice de la gráfica, solo debes pulsar en los datos y elegir el nuevo. Si tienes alguna duda sobre el significado de las siglas pulsa el botón menú que está justo debajo de la gráfica.", title: "Información")
-    }
     @objc private func handleMenuButtonTapped(_ sender: UIButton) {
         let wins = createUIAction(title: "playerStatsVLabel".localize(), sender: sender, index: 0)
         let losses = createUIAction(title: "playerStatsDLabel".localize(), sender: sender, index: 1)
@@ -255,7 +248,6 @@ final class StatsGeneralViewController: UIViewController {
     }
     private func helpButtonAlert() {
         guard userDefaults.bool(forKey: "helpButtonBool") == true else{
-            helpButtonAction()
             userDefaults.set(true, forKey: "helpButtonBool")
             return
         }
@@ -264,7 +256,7 @@ final class StatsGeneralViewController: UIViewController {
 
 extension StatsGeneralViewController: ViewScrollable { }
 extension StatsGeneralViewController: MessageDisplayable { }
-extension StatsGeneralViewController: SpinnerDisplayable { }
+extension StatsGeneralViewController: LoadingPresentationDisplayable { }
 extension StatsGeneralViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.itemCellStats.count

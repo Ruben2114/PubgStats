@@ -7,31 +7,35 @@
 
 import UIKit
 
-protocol SpinnerDisplayable: AnyObject {
-    func showSpinner()
-    func hideSpinner()
+protocol LoadingPresentationDisplayable: AnyObject {
+    func showLoading()
+    func hideLoading()
 }
 
-extension SpinnerDisplayable where Self: UIViewController{
-    func showSpinner(){
+extension LoadingPresentationDisplayable where Self: UIViewController{
+    func showLoading(){
         guard doesNotExistAnotherSpinner else {return}
-        configureSpinner()
+        configureLoading()
     }
-    private func configureSpinner(){
+    
+    private func configureLoading(){
         let containerView = UIView()
         containerView.tag = ViewValues.tagIdentifierSpinner
         parentView.addSubview(containerView)
         containerView.fillSuperView()
-        containerView.backgroundColor = .white
+        containerView.backgroundColor = .black
         addSpinnerIndicatorToContainer(containerView: containerView)
     }
+    
     private func addSpinnerIndicatorToContainer(containerView: UIView){
         let spinner = UIActivityIndicatorView(style: .large)
+        spinner.color = .white
         spinner.startAnimating()
         containerView.addSubview(spinner)
         spinner.centerXY()
     }
-    func hideSpinner() {
+    
+    func hideLoading() {
         if let foundView = parentView.viewWithTag(ViewValues.tagIdentifierSpinner){
             foundView.removeFromSuperview()
         }

@@ -79,16 +79,16 @@ private extension LoginViewController {
             case .idle:
                 break
             case .sendInfoProfile(let data):
-                self?.hideSpinner()
+                self?.hideLoading()
                 self?.viewModel.goToProfile(data: data)
             case .sendInfoProfileError:
-                self?.hideSpinner()
+                self?.hideLoading()
                 self?.view.endEditing(true)
                 //TODO: poner localized key
                 self?.presentAlert(message: "El player no existe", title: "Error")
             case .showLoading:
                 //TODO: cambiar el spinner por un lottie json
-                self?.showSpinner()
+                self?.showLoading()
             }
         }.store(in: &cancellable)
     }
@@ -149,7 +149,7 @@ private extension LoginViewController {
     }
 }
 
-extension LoginViewController: SpinnerDisplayable { }
+extension LoginViewController: LoadingPresentationDisplayable { }
 extension LoginViewController: MessageDisplayable { }
 extension LoginViewController {
     func addObserverKeyboard() {

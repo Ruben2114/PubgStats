@@ -77,16 +77,11 @@ private extension AttributesDetailViewController {
     }
     
     func configureNavigationBar() {
-        backButton(action: #selector(backButtonAction))
-        self.navigationController?.navigationBar.titleTextAttributes = [
-            .foregroundColor : UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1),
-            .font : UIFont(name: "AmericanTypewriter-Bold", size: 20) ?? UIFont.systemFont(ofSize: 16)
-        ]
+        titleNavigation(viewModel.model?.title.capitalized, backButton: #selector(backButtonAction))
         let image = viewModel.model?.type.getImage() ?? ""
         imageBackground.image = UIImage(named: image)
         view.insertSubview(imageBackground, at: 0)
         imageBackground.frame = view.bounds
-        title = viewModel.model?.title.capitalized
     }
     
     func bind() {

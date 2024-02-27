@@ -27,10 +27,9 @@ class KillsDataViewController: UIViewController {
         configUI()
     }
     private func configUI(){
-        title = "killsDataViewControllerTitle".localize()
+        titleNavigation("killsDataViewControllerTitle", backButton: #selector(backButtonAction))
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        backButton(action: #selector(backButtonAction))
         configConstraint()
         fetchData()
     }

@@ -25,9 +25,7 @@ final class ProfileViewController: UIViewController {
     private lazy var headerView: ProfileHeaderView = {
         return ProfileHeaderView()
     }()
-    private lazy var graphView: GraphInfoModesView = {
-        return GraphInfoModesView()
-    }()
+    
     private lazy var dataGeneralView: DataGeneralView = {
         DataGeneralView()
     }()
@@ -37,6 +35,7 @@ final class ProfileViewController: UIViewController {
     private lazy var bottomSheetView: BottomSheetView = {
         BottomSheetView()
     }()
+    //TODO: hacer esta vista general ya que hay que poner la de news y la de survival
     private lazy var newsCardView: NewsCardView = {
         NewsCardView()
     }()
@@ -54,6 +53,7 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        showLoading()
         setAppearance()
         bind()
         viewModel.viewDidLoad()
@@ -70,7 +70,6 @@ private extension ProfileViewController {
         view.backgroundColor = .white
         configureNavigationBar()
         configureNewsCard()
-        showSpinner()
     }
     
     func bind() {
@@ -95,10 +94,8 @@ private extension ProfileViewController {
                 self?.presentAlert(message: "Error al cargar los datos de los modos de juego", title: "Error")
             case .hideLoading:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [ weak self] in
-                    self?.hideSpinner()
+                    self?.hideLoading()
                 }
-            case .showGraphView(let data):
-                self?.graphView.configureWith(representable: data)
             case .showHeader(let data):
                 self?.headerView.configureView(representable: data)
             }
@@ -129,9 +126,6 @@ private extension ProfileViewController {
                 case .survival:
                     self?.viewModel.goToSurvival()
                 }
-            case .didTapHelpTooltip:
-                break
-                //TODO: presentar el bottomSheet explicando lo del modo de juego
             }
         }.store(in: &cancellable)
     }
@@ -143,7 +137,7 @@ private extension ProfileViewController {
     }
     
     func configureNavigationBar() {
-        navigationItem.title = "profileViewControllerNavigationItem".localize()
+        titleNavigation("profileViewControllerNavigationItem")
         let helpReloadButton = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: #selector(helpReloadButtonAction))
         reloadButton = UIBarButtonItem(image: UIImage(systemName: "arrow.clockwise.circle.fill"), style: .plain, target: self, action: #selector(reloadButtonAction))
         navigationItem.setRightBarButtonItems([reloadButton, helpReloadButton], animated: true)
@@ -151,7 +145,6 @@ private extension ProfileViewController {
     
     func addViewToScrollableStackView() {
         scrollableStackView.addArrangedSubview(headerView)
-        scrollableStackView.addArrangedSubview(graphView)
         scrollableStackView.addArrangedSubview(dataGeneralView)
         scrollableStackView.addArrangedSubview(chartView)
         scrollableStackView.addArrangedSubview(newsCardView)
@@ -197,4 +190,4 @@ private extension ProfileViewController {
 }
 
 extension ProfileViewController: MessageDisplayable { }
-extension ProfileViewController: SpinnerDisplayable { }
+extension ProfileViewController: LoadingPresentationDisplayable { }

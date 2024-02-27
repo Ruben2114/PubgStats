@@ -17,7 +17,7 @@ final class DataGeneralView: XibView {
     @IBOutlet private weak var wonLabel: UILabel!
     @IBOutlet private weak var medalImageView: UIImageView!
     @IBOutlet private weak var percentageRectangleView: PercentageRectangleView!
-    
+    //TODO: meter aqui el dato del header y no el la otra vista
     var state: ResizableState = .colapsed
     
     override init(frame: CGRect) {

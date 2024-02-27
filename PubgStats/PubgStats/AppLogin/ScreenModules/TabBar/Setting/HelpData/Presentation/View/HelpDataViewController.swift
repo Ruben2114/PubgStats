@@ -26,11 +26,10 @@ final class HelpDataViewController: UIViewController {
     }
     private func configUI() {
         view.backgroundColor = .systemBackground
-        title = "helpDataViewControllerTitle".localize()
+        titleNavigation("helpDataViewControllerTitle", backButton: #selector(backButtonAction))
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        backButton(action: #selector(backButtonAction))
         configConstraints()
     }
     private func configConstraints(){

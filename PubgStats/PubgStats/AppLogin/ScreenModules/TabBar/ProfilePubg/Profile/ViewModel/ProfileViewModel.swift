@@ -12,7 +12,6 @@ enum ProfileState {
     case idle
     case showChartView([PieChartViewDataRepresentable]?)
     case showErrorPlayerDetails
-    case showGraphView(GraphInfoModesRepresentable?)
     case hideLoading
     case showHeader(ProfileHeaderViewRepresentable)
 }
@@ -122,18 +121,6 @@ private extension ProfileViewModel {
         return NSDecimalNumber(decimal: amount).doubleValue
     }
     
-    func getGraphData() {
-        let graphData = DefaultGraphInfoModes(firstGraph: getGraphAmounts(ModesValues.solo, ModesValues.soloFpp),
-                                              secondGraph: getGraphAmounts(ModesValues.duo, ModesValues.duoFpp),
-                                              thirdGraph: getGraphAmounts(ModesValues.squad, ModesValues.squadFpp))
-        stateSubject.send(.showGraphView(graphData))
-    }
-    
-    func getGraphAmounts(_ round: String ,_ roundFpp: String) -> DoubleChartBarAdapterRepresentable {
-        DefaultDoubleChartBarAdapter(firstBarValue: representable?.infoGamesModes.modes.first(where: {$0.mode == round})?.roundsPlayed ?? 0,
-                                     secondBarValue: representable?.infoGamesModes.modes.first(where: {$0.mode == roundFpp})?.roundsPlayed ?? 0)
-    }
-    
     func getProfileHeader(_ info: SurvivalDataProfileRepresentable) {
         let profileHeader = DefaultProfileHeaderView(dataPlayer: dataProfile ?? DefaultIdAccountDataProfile(id: "", name: "", platform: ""),
                                                      level: info.level,
@@ -159,7 +146,6 @@ private extension ProfileViewModel {
             //TODO: aqui ya tengo toda la info ahora seria ir enviando a las vistas la información
             self?.getProfileHeader(data.infoSurvival)
             self?.getChartData(infoGamesModes: data.infoGamesModes)
-            self?.getGraphData()
             self?.stateSubject.send(.hideLoading)
         }.store(in: &anySubscription)
     }
