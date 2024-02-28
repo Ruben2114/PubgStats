@@ -90,7 +90,7 @@ private extension ChartCollectionView {
     }
     
     func getItemWidth() -> CGFloat {
-        let horizontalPading = CGFloat(2 * 24)
+        let horizontalPading = CGFloat(24)
         let width = UIScreen.main.bounds.size.width - horizontalPading
         return width
     }

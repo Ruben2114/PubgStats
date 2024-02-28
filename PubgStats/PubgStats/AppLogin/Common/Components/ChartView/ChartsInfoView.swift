@@ -95,21 +95,12 @@ private extension ChartsInfoView {
         let backgroundColorForPriorIOS14 = UIColor.clear
         let currentIndicatorColor: UIColor = .black
         pageControl.currentPageIndicatorTintColor = currentIndicatorColor
-        if #available(iOS 14.0, *) {
-            pageControl.pageIndicatorTintColor = indicatorColor
-            let symbolDotConfiguration = UIImage.SymbolConfiguration(pointSize: 8, weight: .regular, scale: .medium)
-            let dotFillImage = UIImage(systemName: "circle.fill", withConfiguration: symbolDotConfiguration)
-            let dotImage = UIImage(systemName: "circle", withConfiguration: symbolDotConfiguration)
-            for index in 0..<pageControl.numberOfPages {
-                pageControl.setIndicatorImage(index == pageControl.currentPage ? dotFillImage : dotImage, forPage: index)
-            }
-        } else {
-            pageControl.pageIndicatorTintColor = backgroundColorForPriorIOS14
-            pageControl.subviews.enumerated().forEach { index, subview in
-                subview.layer.cornerRadius = subview.frame.size.height / 2
-                subview.layer.borderWidth = 3
-                subview.layer.borderColor = index == pageControl.currentPage ? currentIndicatorColor.cgColor : indicatorColor.cgColor
-            }
+        pageControl.pageIndicatorTintColor = indicatorColor
+        let symbolDotConfiguration = UIImage.SymbolConfiguration(pointSize: 8, weight: .regular, scale: .medium)
+        let dotFillImage = UIImage(systemName: "circle.fill", withConfiguration: symbolDotConfiguration)
+        let dotImage = UIImage(systemName: "circle", withConfiguration: symbolDotConfiguration)
+        for index in 0..<pageControl.numberOfPages {
+            pageControl.setIndicatorImage(index == pageControl.currentPage ? dotFillImage : dotImage, forPage: index)
         }
     }
 }

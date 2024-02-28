@@ -115,7 +115,7 @@ enum PlayerStats {
     func tooltipLabel() -> String? {
         switch self{
         case .kills:
-            return "estas on las kills totales...."
+            return "Datos específicos de las muertes en total"
         case .weapons:
             return "las 5 armas con mas xp son...."
         case .distance:

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,10 +20,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="469" height="520"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCb-iY-QeQ" userLabel="Content View">
-                                <rect key="frame" x="8" y="8" width="453" height="336"/>
+                                <rect key="frame" x="8" y="8" width="453" height="380"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MM1-2Q-Zso">
-                                        <rect key="frame" x="0.0" y="4" width="453" height="324"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="MM1-2Q-Zso">
+                                        <rect key="frame" x="0.0" y="4" width="453" height="368"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bus-XT-VNs" customClass="InteractiveSectoredPieChartView" customModule="PubgStats" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="453" height="300"/>
@@ -32,30 +32,42 @@
                                                     <constraint firstAttribute="height" constant="300" id="0jp-0z-TXS"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="bea-EL-0O9">
-                                                <rect key="frame" x="0.0" y="300" width="453" height="24"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dY4-AH-4c1">
+                                                <rect key="frame" x="0.0" y="304" width="453" height="64"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="P6I-PI-kdw">
-                                                        <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="bea-EL-0O9">
+                                                        <rect key="frame" x="16" y="0.0" width="421" height="56"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="questionmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XkP-vX-aQA" userLabel="Bank Image View">
-                                                                <rect key="frame" x="0.0" y="0.99999999999999822" width="24" height="22.666666666666664"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="24" id="5Ci-3L-RFp"/>
-                                                                    <constraint firstAttribute="height" constant="24" id="hA8-HU-lBi"/>
-                                                                </constraints>
-                                                            </imageView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="P6I-PI-kdw">
+                                                                <rect key="frame" x="0.0" y="0.0" width="24" height="56"/>
+                                                                <subviews>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="questionmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XkP-vX-aQA" userLabel="Bank Image View">
+                                                                        <rect key="frame" x="0.0" y="17" width="24" height="22.666666666666671"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="24" id="5Ci-3L-RFp"/>
+                                                                            <constraint firstAttribute="height" constant="24" id="hA8-HU-lBi"/>
+                                                                        </constraints>
+                                                                    </imageView>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="751" text="LabelName " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBD-hB-dz8">
+                                                                <rect key="frame" x="36" y="0.0" width="385" height="56"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </stackView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="751" text="LabelName " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBD-hB-dz8">
-                                                        <rect key="frame" x="36" y="0.0" width="417" height="24"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </stackView>
+                                                <constraints>
+                                                    <constraint firstItem="bea-EL-0O9" firstAttribute="top" secondItem="dY4-AH-4c1" secondAttribute="top" id="6HE-3u-ez7"/>
+                                                    <constraint firstItem="bea-EL-0O9" firstAttribute="leading" secondItem="dY4-AH-4c1" secondAttribute="leading" constant="16" id="Jmd-2X-vpM"/>
+                                                    <constraint firstAttribute="trailing" secondItem="bea-EL-0O9" secondAttribute="trailing" constant="16" id="ZTK-Dz-G6R"/>
+                                                    <constraint firstAttribute="bottom" secondItem="bea-EL-0O9" secondAttribute="bottom" constant="8" id="t7o-jD-5uL"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                     </stackView>
                                 </subviews>

@@ -71,7 +71,7 @@ private extension ProfileGeneralView {
         assistsLabel.text = "assistsTotal"
         assistsAmount.text = String(representable.assistsTotal)
         
-        percentageView.configureView(text: "Victorias ", percentage: percentage, cornerRadius: 8, withPercentageSymbol: true)
+        percentageView.configureView(text: "Victorias ", percentage: percentage, backgroundColor: .systemGray ,cornerRadius: 8, withPercentageSymbol: true)
     }
     
     func getTitle(_ level: CGFloat) -> String {

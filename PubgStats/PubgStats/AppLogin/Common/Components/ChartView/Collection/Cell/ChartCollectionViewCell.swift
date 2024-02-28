@@ -55,14 +55,12 @@ private extension ChartCollectionViewCell {
         infoLabel.text = representable?.tooltipLabelTextKey ?? ""
         helpImageView.isUserInteractionEnabled = true
         helpImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapTooltip)))
+        helpImageView.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
     }
     
     func setViewAppearence() {
         customContentView.layer.cornerRadius = 8
-        customContentView.layer.borderColor = UIColor.systemGray3.cgColor
-        customContentView.backgroundColor = .white
-        customContentView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        customContentView.layer.shadowOpacity = 0.2
+        customContentView.backgroundColor = .black.withAlphaComponent(0.8)
     }
     
     func setDefaultConfiguration() {

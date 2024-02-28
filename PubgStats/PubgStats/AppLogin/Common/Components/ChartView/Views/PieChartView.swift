@@ -46,8 +46,8 @@ class PieChartView: UIView {
     private var centerTitleLabel: UILabel {
         let label = UILabel(frame: .zero)
         label.text = currentCenterTitleText ?? representable?.centerTitleText
-        label.textColor = .black
-        label.backgroundColor = .white
+        label.textColor = .white
+        label.backgroundColor = .clear
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
@@ -58,7 +58,7 @@ class PieChartView: UIView {
     private var centerDescriptionLabel: UILabel {
         let bottomLabel = UILabel(frame: .zero)
         bottomLabel.text = currentSubTitleText ?? representable?.centerSubtitleText
-        bottomLabel.textColor = .gray
+        bottomLabel.textColor = .white
         bottomLabel.font = UIFont.systemFont(ofSize: 14)
         bottomLabel.textAlignment = .center
         bottomLabel.numberOfLines = 2
@@ -141,7 +141,7 @@ private extension PieChartView {
     }
     
     func drawInnerCircle() {
-        UIColor.white.setFill()
+        UIColor.black.setFill()
         innerCircle.fill()
     }
     

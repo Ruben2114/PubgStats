@@ -81,7 +81,8 @@ private extension InteractiveSectoredPieChartView {
         self.sectorViews.append(view)
         let imgView = UIImageView(frame: view.frame)
         imgView.contentMode = .scaleAspectFit
-        imgView.image = UIImage(systemName: category.icon)
+        imgView.image = UIImage(systemName: category.icon)?.withRenderingMode(.alwaysTemplate)
+        imgView.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
         view.addSubview(imgView)
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -133,7 +134,9 @@ private extension InteractiveSectoredPieChartView {
         sectors.forEach {
             let path = UIBezierPath(arcCenter: viewCenter, radius: graphRadius - selectionArcWidth/2, startAngle: $0.startAngle, endAngle: $0.endAngle, clockwise: true)
             path.lineWidth = selectionArcWidth
-            resolveColorFor(category: $0.sector, color: .black).setStroke()
+            resolveColorFor(category: $0.sector, 
+                            color: UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1))
+            .setStroke()
             path.stroke()
         }
         
