@@ -5,126 +5,216 @@
 //  Created by Rubén Rodríguez Cervigón on 25/4/23.
 //
 
-import Foundation
 import UIKit
-//TODO: poner localized y los colores meterlos en el objeto y por orden ascendente y con un maximo de 5 elementos y el resto en gray
+
 enum PlayerStats {
-    case kills
-    case headshotKills
-    case roadKills
+    case wins(GamesModesDataProfileRepresentable)
+    case soloWins(GamesModesDataProfileRepresentable)
+    case soloFppWins(GamesModesDataProfileRepresentable)
+    case duoWins(GamesModesDataProfileRepresentable)
+    case duoFppWins(GamesModesDataProfileRepresentable)
+    case squadWins(GamesModesDataProfileRepresentable)
+    case squadFppWins(GamesModesDataProfileRepresentable)
+    case rounds(GamesModesDataProfileRepresentable)
+    case soloRounds(GamesModesDataProfileRepresentable)
+    case soloFppRounds(GamesModesDataProfileRepresentable)
+    case duoRounds(GamesModesDataProfileRepresentable)
+    case duoFppRounds(GamesModesDataProfileRepresentable)
+    case squadRounds(GamesModesDataProfileRepresentable)
+    case squadFppRounds(GamesModesDataProfileRepresentable)
+    case kills(GamesModesDataProfileRepresentable)
+    case soloKills(GamesModesDataProfileRepresentable)
+    case soloFppKills(GamesModesDataProfileRepresentable)
+    case duoKills(GamesModesDataProfileRepresentable)
+    case duoFppKills(GamesModesDataProfileRepresentable)
+    case squadKills(GamesModesDataProfileRepresentable)
+    case squadFppKills(GamesModesDataProfileRepresentable)
     
-    case weapons
-    
-    case distance
-    case rideDistance
-    case swimDistance
-    case walkDistance
-    case top10
-    case topSolo
-    case topDuo
-    case topSquad
-    case rest
+    static func getPlayerCategories(_ data: GamesModesDataProfileRepresentable) -> [(PlayerStats, [PlayerStats])] {
+        let kills: (PlayerStats, [PlayerStats]) = (.kills(data) ,[.soloKills(data),
+                                                                  .soloFppKills(data),
+                                                                  .duoKills(data),
+                                                                  .duoFppKills(data),
+                                                                  .squadKills(data),
+                                                                  .squadFppKills(data)])
+        let wins: (PlayerStats, [PlayerStats]) = (.wins(data) ,[.soloWins(data),
+                                                                .soloFppWins(data),
+                                                                .duoWins(data),
+                                                                .duoFppWins(data),
+                                                                .squadWins(data),
+                                                                .squadFppWins(data)])
+        let rounds: (PlayerStats, [PlayerStats]) = (.rounds(data) ,[.soloRounds(data),
+                                                                .soloFppRounds(data),
+                                                                .duoRounds(data),
+                                                                .duoFppRounds(data),
+                                                                .squadRounds(data),
+                                                                .squadFppRounds(data)])
+        return [kills, wins, rounds]
+    }
     
     func title() -> String {
         switch self{
-        case .kills:
-            return "Kills total"
-        case .headshotKills:
-            return "headshot"
-        case .roadKills:
-            return "road"
-        case .weapons:
-            return "Best weapons"
-        case .distance:
-            return "Distance total"
-        case .rideDistance:
-            return "ride"
-        case .swimDistance:
-            return "swim"
-        case .walkDistance:
-            return "walk"
-        case .top10:
-            return "top 10 total"
-        case .topSolo:
-            return "solo"
-        case .topDuo:
-            return "duo"
-        case .topSquad:
-            return "squad"
-        case .rest:
-            return "resto"
+        case .soloWins(_), .soloFppWins(_), .duoWins(_), .duoFppWins(_), .squadWins(_), .squadFppWins(_):
+            return "\(type()) wins"
+        case .soloRounds(_), .soloFppRounds(_), .duoRounds(_), .duoFppRounds(_), .squadRounds(_), .squadFppRounds(_):
+            return "\(type()) rounds"
+        case .soloKills(_), .soloFppKills(_), .duoKills(_), .duoFppKills(_), .squadKills(_), .squadFppKills(_):
+            return "\(type()) kills"
+        case .wins(_):
+            return "wins"
+        case .kills(_):
+            return "kills"
+        case .rounds(_):
+            return "rounds"
+        }
+    }
+    
+    func tooltip() -> String {
+        switch self{
+        case .wins(_):
+            return "victorias en los diferentes modos"
+        case .kills(_):
+            return "Muertes en los diferentes  modos"
+        case .rounds(_):
+            return "Partidas en los diferentes  modos"
+        default:
+            return ""
+        }
+    }
+    
+    func bottomSheetKey() -> (String, String) {
+        switch self{
+        case .wins(let data):
+            guard let maxWin = data.modes.sorted(by: {$0.wins > $1.wins}).first else { return ("", "") }
+            return ("Datos de las victorias", "Si pulsas en cada uno de los sectores de la gráfica podrás ver tus victorias en cada uno de los modos de juegos que existen. Tu máximo de victorias es: \(maxWin.wins) y lo has conseguido en el modo: \(maxWin.mode.localize())")
+        case .kills(let data):
+            guard let maxKills = data.modes.sorted(by: {$0.kills > $1.kills}).first else { return ("", "") }
+            return ("Datos de las muertes", "Si pulsas en cada uno de los sectores de la gráfica podrás ver tus muertes en cada uno de los modos de juegos que existen. Tu máximo de muertes es: \(maxKills.kills) y lo has conseguido en el modo: \(maxKills.mode.localize())")
+        case .rounds(let data):
+            guard let maxRound = data.modes.sorted(by: {$0.roundsPlayed > $1.roundsPlayed}).first else { return ("", "") }
+            return ("Datos de las partidas", "Según tus datos en el modo que has jugado más partidas: \(maxRound.roundsPlayed) es: \(maxRound.mode.localize())")
+        default:
+            return ("", "")
         }
     }
     
     func icon() -> String {
-        switch self{
-        case .kills:
-            return "star"
-        case .headshotKills:
-            return "star"
-        case .roadKills:
-            return "star"
-        case .weapons:
-            return "star"
-        case .distance:
-            return "star"
-        case .rideDistance:
-            return "star"
-        case .swimDistance:
-            return "star"
-        case .walkDistance:
-            return "star"
-        case .top10:
-            return "star"
-        case .topSolo:
-            return "star"
-        case .topDuo:
-            return "star"
-        case .topSquad:
-            return "star"
-        case .rest:
-            return "star"
-        }
+        return "star"
+//        switch self{
+//        case .soloWins(_):
+//            return "star"
+//        case .soloFppWins(_):
+//            return "star"
+//        case .duoWins(_):
+//            return "star"
+//        case .duoFppWins(_):
+//            return "star"
+//        case .squadWins(_):
+//            return "star"
+//        case .squadFppWins(_):
+//            return "star"
+//        case .soloRounds(_):
+//            return "star"
+//        case .soloFppRounds(_):
+//            return "star"
+//        case .duoRounds(_):
+//            return "star"
+//        case .duoFppRounds(_):
+//            return "star"
+//        case .squadRounds(_):
+//            return "star"
+//        case .squadFppRounds(_):
+//            return "star"
+//        case .kills(_):
+//            return "star"
+//        case .soloKills(_):
+//            return "star"
+//        case .soloFppKills(_):
+//            return "star"
+//        case .duoKills(_):
+//            return "star"
+//        case .duoFppKills(_):
+//            return "star"
+//        case .squadKills(_):
+//            return "star"
+//        case .squadFppKills(_):
+//            return "star"
+//        }
     }
     
     func color() -> (UIColor, UIColor)? {
         switch self{
-        case .headshotKills:
-            return (.red, .systemRed)
-        case .roadKills:
-            return (.blue, .systemBlue)
-        case .rideDistance:
-            return (.red, .systemRed)
-        case .swimDistance:
-            return (.blue, .systemBlue)
-        case .walkDistance:
+        case .soloWins(_), .soloRounds(_), .soloKills(_):
             return (.green, .systemGreen)
-        case .topSolo:
+        case .soloFppWins(_), .soloFppRounds(_), .soloFppKills(_):
             return (.red, .systemRed)
-        case .topDuo:
+        case .duoWins(_), .duoRounds(_), .duoKills(_):
             return (.blue, .systemBlue)
-        case .topSquad:
-            return (.green, .systemGreen)
-        case.rest:
-            return (.gray, .systemGray)
+        case .duoFppWins(_), .duoFppRounds(_), .duoFppKills(_):
+            return (.brown, .systemBrown)
+        case .squadWins(_), .squadRounds(_), .squadKills(_):
+            return (.purple, .systemPurple)
+        case .squadFppWins(_), .squadFppRounds(_), .squadFppKills(_):
+            return (.orange, .systemOrange)
         default:
             return nil
         }
     }
     
-    func tooltipLabel() -> String? {
+    func percentage() -> Double {
         switch self{
-        case .kills:
-            return "Datos específicos de las muertes en total"
-        case .weapons:
-            return "las 5 armas con mas xp son...."
-        case .distance:
-            return "distancia recorrida en total...."
-        case .top10:
-            return "tpo 10 en las diferenets categorias...."
+        case .soloWins(let data), .soloFppWins(let data), .duoWins(let data), .duoFppWins(let data), .squadWins(let data), .squadFppWins(let data):
+            let valueSubcategory = data.modes.first(where: {$0.mode == type()})?.wins
+            return getSubcategoriesPercentage(valueTotal: data.wonTotal, valueSubcategory: valueSubcategory)
+        case .soloRounds(let data), .soloFppRounds(let data), .duoRounds(let data), .duoFppRounds(let data), .squadRounds(let data), .squadFppRounds(let data):
+            let valueSubcategory = data.modes.first(where: {$0.mode == type()})?.roundsPlayed
+            return getSubcategoriesPercentage(valueTotal: data.gamesPlayed, valueSubcategory: valueSubcategory)
+        case .soloKills(let data), .soloFppKills(let data), .duoKills(let data), .duoFppKills(let data), .squadKills(let data), .squadFppKills(let data):
+            let valueSubcategory = data.modes.first(where: {$0.mode == type()})?.kills
+            return getSubcategoriesPercentage(valueTotal: data.killsTotal, valueSubcategory: valueSubcategory)
         default:
-            return nil
+            return 0
         }
+    }
+    
+    func amount() -> String {
+        switch self{
+        case .soloWins(let data), .soloFppWins(let data), .duoWins(let data), .duoFppWins(let data), .squadWins(let data), .squadFppWins(let data):
+            return String(data.modes.first(where: {$0.mode == type()})?.wins ?? 0)
+        case .soloRounds(let data), .soloFppRounds(let data), .duoRounds(let data), .duoFppRounds(let data), .squadRounds(let data), .squadFppRounds(let data):
+            return String(data.modes.first(where: {$0.mode == type()})?.roundsPlayed ?? 0)
+        case .soloKills(let data), .soloFppKills(let data), .duoKills(let data), .duoFppKills(let data), .squadKills(let data), .squadFppKills(let data):
+            return String(data.modes.first(where: {$0.mode == type()})?.kills ?? 0)
+        case .kills(let data):
+            return String(data.killsTotal)
+        case .wins(let data):
+            return String(data.wonTotal)
+        case .rounds(let data):
+            return String(data.gamesPlayed)
+        }
+    }
+    
+    private func type() -> String {
+        switch self{
+        case .soloWins(_), .soloRounds(_), .soloKills(_):
+            return "solo"
+        case .soloFppWins(_), .soloFppRounds(_), .soloFppKills(_):
+            return "soloFpp"
+        case .duoWins(_), .duoRounds(_), .duoKills(_):
+            return "duo"
+        case .duoFppWins(_), .duoFppRounds(_), .duoFppKills(_):
+            return "duoFpp"
+        case .squadWins(_), .squadRounds(_), .squadKills(_):
+            return "squad"
+        case .squadFppWins(_), .squadFppRounds(_), .squadFppKills(_):
+            return "squadFpp"
+        default:
+            return ""
+        }
+    }
+    
+    func getSubcategoriesPercentage(valueTotal: Int, valueSubcategory: Int?) -> Double {
+        return Double((valueSubcategory ?? 0) * 100) / Double(valueTotal)
     }
 }
 

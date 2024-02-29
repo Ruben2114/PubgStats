@@ -70,21 +70,14 @@ private extension ProfileViewModel {
     }
     
     func getChartData(infoGamesModes: GamesModesDataProfileRepresentable) {
-        //TODO: refactor con el dato desde la llamada
-        var roadKillsTotal: Int = 0
-        let roadKills = infoGamesModes.modes.map({$0.roadKills})
-        roadKills.forEach { kills in
-            roadKillsTotal += kills
-        }
-        let restKills = infoGamesModes.killsTotal - roadKillsTotal - infoGamesModes.headshotKillsTotal
-        let kills = getCategoriesData(stats: PlayerStats.kills,
-                                      amount: String(infoGamesModes.killsTotal),
-                                      subcategories: [getSubcategoriesData(stats: PlayerStats.headshotKills, percentage: getSubcategoriesPercentage(valueTotal: infoGamesModes.killsTotal, valueSubcategory: infoGamesModes.headshotKillsTotal), amount: infoGamesModes.headshotKillsTotal.description),
-                                                      getSubcategoriesData(stats: PlayerStats.roadKills, percentage: getSubcategoriesPercentage(valueTotal: infoGamesModes.killsTotal, valueSubcategory: roadKillsTotal), amount: roadKillsTotal.description),
-                                                      getSubcategoriesData(stats: PlayerStats.rest, percentage: getSubcategoriesPercentage(valueTotal: infoGamesModes.killsTotal, valueSubcategory: restKills), amount: restKills.description)])
-   //TODO: pensar como meter el resto de forma mas practica o incluso en el componente si detecta que no llega al 100%
-
-        let chartData = [kills]
+        let chartData = PlayerStats.getPlayerCategories(infoGamesModes)
+            .map {DefaultPieChartViewData(centerIconKey: $0.0.icon(),
+                                          centerTitleText: $0.0.amount(),
+                                          centerSubtitleText: $0.0.title(),
+                                          categories: $0.1.filter({$0.percentage() != 0})
+                .map { getSubcategoriesData(stats: $0)},
+                                          tooltipLabelTextKey: $0.0.tooltip(), 
+                                          bottomSheetKey: $0.0.bottomSheetKey()) }
         stateSubject.send(.showChartView(chartData))
     }
     
@@ -100,19 +93,11 @@ private extension ProfileViewModel {
         }
     }
     
-    func getCategoriesData(stats: PlayerStats, amount: String, subcategories: [CategoryRepresentable]) -> DefaultPieChartViewData {
-        DefaultPieChartViewData(centerIconKey: stats.icon(),
-                                centerTitleText: amount,
-                                centerSubtitleText: stats.title(),
-                                categories: subcategories,
-                                tooltipLabelTextKey: stats.tooltipLabel() ?? "")
-    }
-    
-    func getSubcategoriesData(stats: PlayerStats, percentage: Double, amount: String) -> CategoryRepresentable {
-        DefaultCategory(percentage: percentage,
+    func getSubcategoriesData(stats: PlayerStats) -> CategoryRepresentable {
+        DefaultCategory(percentage: stats.percentage(),
                         color: stats.color()?.0 ?? .gray,
                         secundaryColor: stats.color()?.1 ?? .systemGray,
-                        currentCenterTitleText: amount,
+                        currentCenterTitleText: stats.amount(),
                         currentSubTitleText: stats.title(),
                         icon: stats.icon())
     }

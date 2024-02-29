@@ -56,7 +56,7 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showLoading()
+        showLoading() //TODO: cuando entra directamente por aqui no deberia hacer loading
         setAppearance()
         bind()
         viewModel.viewDidLoad()
@@ -191,20 +191,17 @@ private extension ProfileViewController {
     @objc private func helpReloadButtonAction() {
         //TODO: poner localized
         configureBottomSheet(title: "Información sobre la recarga",
-                             subtitle: "Si necesitas recargar la vista puedes pulsar el botón de recarga que esta justo a la derecha del punto de información que acabas de pulsar. una vez pulsda la recarga volverá a estar activa a los dos minutos.")
+                             subtitle: "Si necesitas recargar la vista puedes pulsar el botón de recarga que esta justo a la derecha del punto de información que acabas de pulsar. una vez pulsada la recarga volverá a estar activa a los dos minutos.")
     }
     
     @objc private func reloadButtonAction() {
         UserDefaults.standard.set(Date(), forKey: "date")
-         guard UserDefaults.standard.bool(forKey: "refreshCount") == true else {
-             reloadButton.isEnabled = false
-             DispatchQueue.main.asyncAfter(deadline: .now() + 120) { [weak self] in
-                 self?.reloadButton.isEnabled = true
-                 UserDefaults.standard.set(false, forKey: "refreshCount")
-             }
-             viewModel.reload()
-             return
-         }
+        reloadButton.isEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 120) { [weak self] in
+            self?.reloadButton.isEnabled = true
+        }
+        showLoading()
+        viewModel.reload()
     }
 }
 

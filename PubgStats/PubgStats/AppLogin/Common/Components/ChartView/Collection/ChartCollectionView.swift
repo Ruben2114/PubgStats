@@ -22,7 +22,7 @@ struct DefaultChartViewData: ChartViewData {
 enum ChartCollectionViewState: State {
     case didChangeHeight(_ height: CGFloat)
     case didSelectChart(Int)
-    case didTapAverageTooltip
+    case didTapAverageTooltip((String, String)?)
 }
 
 final class ChartCollectionView: UICollectionView {
@@ -51,7 +51,8 @@ final class ChartCollectionView: UICollectionView {
                                     centerTitleText: $0.centerTitleText,
                                     centerSubtitleText: $0.centerSubtitleText,
                                     categories: $0.categories,
-                                    tooltipLabelTextKey: $0.tooltipLabelTextKey)
+                                    tooltipLabelTextKey: $0.tooltipLabelTextKey, 
+                                    bottomSheetKey: $0.bottomSheetKey)
         }
         self.reloadData()
         self.setSelectedChart(chartSelectedIndex)
@@ -156,7 +157,7 @@ extension ChartCollectionView: UICollectionViewDataSource, UICollectionViewDeleg
 }
 
 extension ChartCollectionView: ChartCollectionViewCellDelegate {
-    func didTapTooltip() {
-        subject.send(.didTapAverageTooltip)
+    func didTapTooltip(_ text: (String, String)?) {
+        subject.send(.didTapAverageTooltip(text))
     }
 }

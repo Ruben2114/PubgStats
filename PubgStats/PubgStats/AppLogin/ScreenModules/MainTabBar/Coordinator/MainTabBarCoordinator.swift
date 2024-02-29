@@ -31,7 +31,9 @@ final class MainTabBarCoordinatorImp: MainTabBarCoordinator {
         //TODO: cambiar esto por matches y guide en una totalizator en la view (en favoritos en matches se cambian por la view de noticias)
         let tabBar = dependencies.external.tabBarController()
         tabBar.viewControllers = tabBarView
-        tabBar.tabBar.backgroundColor = .white
+        tabBar.tabBar.backgroundColor = .black
+        tabBar.tabBar.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
+        tabBar.tabBar.unselectedItemTintColor = .systemGray
     }
     
     func dismiss() {

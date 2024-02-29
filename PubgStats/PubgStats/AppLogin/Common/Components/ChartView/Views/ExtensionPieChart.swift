@@ -16,6 +16,7 @@ protocol PieChartViewDataRepresentable {
     var centerSubtitleText: String { get }
     var categories: [CategoryRepresentable] { get }
     var tooltipLabelTextKey: String { get }
+    var bottomSheetKey: (String, String) { get }
 }
 
 struct DefaultPieChartViewData: PieChartViewDataRepresentable {
@@ -24,13 +25,15 @@ struct DefaultPieChartViewData: PieChartViewDataRepresentable {
     let centerSubtitleText: String
     let categories: [CategoryRepresentable]
     let tooltipLabelTextKey: String
+    let bottomSheetKey: (String, String)
     
-    init(centerIconKey: String, centerTitleText: String, centerSubtitleText: String, categories: [CategoryRepresentable], tooltipLabelTextKey: String) {
+    init(centerIconKey: String, centerTitleText: String, centerSubtitleText: String, categories: [CategoryRepresentable], tooltipLabelTextKey: String, bottomSheetKey: (String, String)) {
         self.centerIconKey = centerIconKey
         self.centerTitleText = centerTitleText
         self.centerSubtitleText = centerSubtitleText
         self.categories = categories
         self.tooltipLabelTextKey = tooltipLabelTextKey
+        self.bottomSheetKey = bottomSheetKey
     }
 }
 

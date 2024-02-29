@@ -64,8 +64,8 @@ private extension ChartsInfoView {
             case .didSelectChart(let page):
                 self?.pageControl.currentPage = page
                 self?.updatePageControlDots()
-            case .didTapAverageTooltip:
-                self?.subject.send(("Kills", "tipos de kills..."))
+            case .didTapAverageTooltip(let text):
+                self?.subject.send(text ?? ("", ""))
             }
         }.store(in: &subscriptions)
     }

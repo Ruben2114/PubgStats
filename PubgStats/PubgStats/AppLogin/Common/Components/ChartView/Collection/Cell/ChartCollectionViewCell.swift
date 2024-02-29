@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 
 protocol ChartCollectionViewCellDelegate: AnyObject {
-    func didTapTooltip()
+    func didTapTooltip(_ text: (String, String)?)
 }
 
 class ChartCollectionViewCell: UICollectionViewCell {
@@ -68,6 +68,6 @@ private extension ChartCollectionViewCell {
     }
     
     @objc func didTapTooltip() {
-        delegate?.didTapTooltip()
+        delegate?.didTapTooltip(representable?.bottomSheetKey)
     }
 }
