@@ -129,7 +129,7 @@ private extension Chip {
     
     func setLabels() {
         self.textLabel?.text = self.viewData.text
-        self.textLabel?.font = UIFont.systemFont(ofSize: 16)
+        self.textLabel?.font = UIFont(name: "AmericanTypewriter", size: 16)
     }
     
     func setRemoveIcon() {

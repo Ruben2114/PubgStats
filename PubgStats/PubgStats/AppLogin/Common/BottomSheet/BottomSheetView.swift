@@ -20,7 +20,7 @@ public final class BottomSheetView {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont(name: "AmericanTypewriter-Bold", size: 16)
         label.textColor = .black
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -29,7 +29,7 @@ public final class BottomSheetView {
     
     private lazy var subtitleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont(name: "AmericanTypewriter", size: 16)
         label.textColor = .black
         label.textAlignment = .center
         label.numberOfLines = 0

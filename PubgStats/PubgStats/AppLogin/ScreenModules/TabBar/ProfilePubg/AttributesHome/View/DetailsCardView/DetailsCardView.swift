@@ -66,7 +66,8 @@ private extension DetailsCardView {
     func createCards() {
         guard let representable = representableHome else { return }
         let labelRectangle = representable.type.getRectangleHeaderLabel()
-        rectangleView.configureView(text: labelRectangle, percentage: representable.percentage, cornerRadius: 8, withPercentageSymbol: representable.type == .modeGames)
+        let backgroundColor: UIColor = representable.type == .survival ? .black : .systemGray
+        rectangleView.configureView(text: labelRectangle, percentage: representable.percentage, backgroundColor: backgroundColor, cornerRadius: 8, withPercentageSymbol: representable.type == .modeGames)
         let image = representable.type == .modeGames ? setType(representable.image)?.setImage() : representable.image
         imageView.image = UIImage(named: image ?? "")
         leftLabel.text = representable.type.getLeftHeaderLabel()
