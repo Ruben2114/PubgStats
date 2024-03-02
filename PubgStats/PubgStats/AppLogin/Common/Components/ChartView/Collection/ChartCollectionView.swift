@@ -46,14 +46,7 @@ final class ChartCollectionView: UICollectionView {
     
     func configureViews(_ representable: ChartViewData) {
         self.chartSelectedIndex = representable.chartSelectedIndex
-        chartsData = representable.charts.map {
-            DefaultPieChartViewData(centerIconKey: $0.centerIconKey,
-                                    centerTitleText: $0.centerTitleText,
-                                    centerSubtitleText: $0.centerSubtitleText,
-                                    categories: $0.categories,
-                                    tooltipLabelTextKey: $0.tooltipLabelTextKey, 
-                                    bottomSheetKey: $0.bottomSheetKey)
-        }
+        chartsData = representable.charts
         self.reloadData()
         self.setSelectedChart(chartSelectedIndex)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [ weak self] in
@@ -100,7 +93,6 @@ private extension ChartCollectionView {
         let indexPath = IndexPath(item: transactionSelected, section: 0)
         self.layoutIfNeeded()
         self.selectItem(at: indexPath, animated: false, scrollPosition: .centeredHorizontally)
-        subject.send(.didSelectChart(indexPath.item))
     }
     
     func setMaxHeight() {
@@ -116,7 +108,7 @@ private extension ChartCollectionView {
     }
     
     func endScrollingAndSelectChart() {
-        guard let indexPath = self.layout.indexPathForCenterRect(), indexPath.item != chartSelectedIndex else { return }
+        guard let indexPath = self.layout.indexPathForCenterRect() else { return }
         chartSelectedIndex = indexPath.item
         subject.send(.didSelectChart(indexPath.item))
     }
@@ -133,7 +125,6 @@ extension ChartCollectionView: UICollectionViewDataSource, UICollectionViewDeleg
             cell.didTapNewView(collectionView.panGestureRecognizer)
         }
         chartSelectedIndex = indexPath.item
-        subject.send(.didSelectChart(indexPath.item))
         self.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     

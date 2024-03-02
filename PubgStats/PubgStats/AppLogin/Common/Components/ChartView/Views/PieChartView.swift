@@ -40,7 +40,6 @@ class PieChartView: UIView {
                      endAngle: 2 * .pi, clockwise: true)
     }
    
-    private var centerIcon: UIImage?
     var currentCenterTitleText: String?
     var currentSubTitleText: String?
     private var centerTitleLabel: UILabel {
@@ -50,21 +49,18 @@ class PieChartView: UIView {
         label.backgroundColor = .clear
         label.textAlignment = .center
         label.font = UIFont(name: "AmericanTypewriter-Bold", size: 20)
-        label.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
         label.adjustsFontSizeToFitWidth = true
         return label
     }
     
     private var centerDescriptionLabel: UILabel {
         let bottomLabel = UILabel(frame: .zero)
-        bottomLabel.text = currentSubTitleText ?? representable?.centerSubtitleText
+        bottomLabel.text = currentSubTitleText ?? "Total" //TODO: falta la key
         bottomLabel.textColor = .white
-        bottomLabel.font = UIFont(name: "AmericanTypewriter", size: 14)
+        bottomLabel.font = UIFont(name: "AmericanTypewriter", size: 20)
         bottomLabel.textAlignment = .center
         bottomLabel.numberOfLines = 2
         bottomLabel.adjustsFontSizeToFitWidth = true
-        bottomLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 20).isActive = true
-        bottomLabel.widthAnchor.constraint(lessThanOrEqualToConstant: innerRect.width).isActive = true
         return bottomLabel
     }
     
@@ -87,13 +83,6 @@ class PieChartView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    private var totalImage: UIImageView {
-        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
-        image.contentMode = .scaleAspectFit
-        image.image = centerIcon
-        return image
-    }
     
     private var innerRect: CGRect {
         let side = ((innerCircleDiameter*innerCircleDiameter) / 2).squareRoot()
@@ -119,7 +108,6 @@ class PieChartView: UIView {
     func setChartInfo(_ representable: PieChartViewDataRepresentable) {
         self.categories = representable.categories
         self.representable = representable
-        self.centerIcon = UIImage(systemName: representable.centerIconKey)
     }
     
     func getPathColor(for category: CategoryRepresentable) -> UIColor {
@@ -150,16 +138,12 @@ private extension PieChartView {
             stackViewCenter.removeArrangedSubview(subview)
             subview.removeFromSuperview()
         }
-        let titleLabel = centerTitleLabel
         addSubview(stackViewCenter)
-        stackViewCenter.addArrangedSubview(totalImage)
-        stackViewCenter.addArrangedSubview(titleLabel)
+        stackViewCenter.addArrangedSubview(centerTitleLabel)
         stackViewCenter.addArrangedSubview(centerDescriptionLabel)
         addSubview(buttonCenter)
         
         NSLayoutConstraint.activate([
-            titleLabel.centerYAnchor.constraint(equalTo: stackViewCenter.centerYAnchor),
-            
             buttonCenter.topAnchor.constraint(equalTo: stackViewCenter.topAnchor),
             buttonCenter.leadingAnchor.constraint(equalTo: stackViewCenter.leadingAnchor, constant: 20),
             buttonCenter.trailingAnchor.constraint(equalTo: stackViewCenter.trailingAnchor, constant: -20),

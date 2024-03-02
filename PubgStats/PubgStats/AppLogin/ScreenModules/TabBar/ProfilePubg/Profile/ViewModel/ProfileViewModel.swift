@@ -71,9 +71,8 @@ private extension ProfileViewModel {
     
     func getChartData(infoGamesModes: GamesModesDataProfileRepresentable) {
         let chartData = PlayerStats.getPlayerCategories(infoGamesModes)
-            .map {DefaultPieChartViewData(centerIconKey: $0.0.icon(),
-                                          centerTitleText: $0.0.amount(),
-                                          centerSubtitleText: $0.0.title(),
+            .map {DefaultPieChartViewData(centerTitleText: $0.0.amount(),
+                                          titletext: $0.0.title(),
                                           categories: $0.1.filter({$0.percentage() != 0})
                 .map { getSubcategoriesData(stats: $0)},
                                           tooltipLabelTextKey: $0.0.tooltip(), 
@@ -98,8 +97,7 @@ private extension ProfileViewModel {
                         color: stats.color()?.0 ?? .gray,
                         secundaryColor: stats.color()?.1 ?? .systemGray,
                         currentCenterTitleText: stats.amount(),
-                        currentSubTitleText: stats.title(),
-                        icon: stats.icon())
+                        currentSubTitleText: stats.title())
     }
     
     func getSubcategoriesPercentage(valueTotal: Int, valueSubcategory: Int) -> Double {

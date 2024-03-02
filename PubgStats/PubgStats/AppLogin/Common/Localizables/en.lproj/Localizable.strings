@@ -30,6 +30,7 @@
 "weaponDataViewControllerTitle" = "Weapons";
 "killsDataViewControllerTitle" = "Total kills data";
 "Kills" = "kills";
+"rounds" = "Rounds";
 "maxKillStreaks" = "max kill streaks";
 "roundMostKills" = "round most kills";
 "killedTeammate" = "killed a teammate";

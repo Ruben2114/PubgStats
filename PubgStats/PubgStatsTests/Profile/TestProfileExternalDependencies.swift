@@ -23,7 +23,7 @@ final class TestProfileExternalDependencies: ProfileExternalDependencies {
         fatalError()
     }
     
-    func resolve() -> DataProfileRepository {
-        MockDataProfleRepository()
+    func resolve() -> DataPlayerRepository {
+        MockDataPlayerRepository()
     }
 }

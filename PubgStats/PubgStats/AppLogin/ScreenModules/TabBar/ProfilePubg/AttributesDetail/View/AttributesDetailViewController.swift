@@ -131,7 +131,7 @@ private extension AttributesDetailViewController {
                 cellHeigth += (cell.frame.height)
                 countCell += 1
             } else if let header = subview as? UICollectionReusableView {
-                headerHeigth += subview.frame.height
+                headerHeigth += header.frame.height
             }
         }
         var maxHeigth: CGFloat = (cellHeigth / 2) + CGFloat((countCell * (Constant.spacing / 2))) + headerHeigth

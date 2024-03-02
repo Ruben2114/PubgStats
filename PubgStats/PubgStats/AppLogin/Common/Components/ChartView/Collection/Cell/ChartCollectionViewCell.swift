@@ -13,7 +13,7 @@ protocol ChartCollectionViewCellDelegate: AnyObject {
 }
 
 class ChartCollectionViewCell: UICollectionViewCell {
-    
+    @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var interacticeChartView: InteractiveSectoredPieChartView!
     @IBOutlet private weak var customContentView: UIView!
     @IBOutlet private weak var infoLabel: UILabel!
@@ -52,7 +52,8 @@ private extension ChartCollectionViewCell {
     }
     
     func configureViews() {
-        infoLabel.text = representable?.tooltipLabelTextKey ?? ""
+        infoLabel.text = representable?.tooltipLabelTextKey
+        titleLabel.text = representable?.titletext
         helpImageView.isUserInteractionEnabled = true
         helpImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapTooltip)))
         helpImageView.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)

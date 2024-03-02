@@ -89,6 +89,7 @@
 "MostGroggiesInAGame" = "Record aturdidos";
 "BestData" = "Record por partida";
 "Kills" = "Muertes";
+"rounds" = "Partidas";
 "Groggies" = "Aturdidos";
 "airDropsCalled" = "AirDrops";
 "damageDealt" = "Daño infligido";

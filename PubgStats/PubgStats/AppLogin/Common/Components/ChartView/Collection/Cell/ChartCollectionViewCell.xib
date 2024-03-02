@@ -20,20 +20,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="469" height="520"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCb-iY-QeQ" userLabel="Content View">
-                                <rect key="frame" x="8" y="8" width="453" height="380"/>
+                                <rect key="frame" x="8" y="8" width="453" height="362.66666666666669"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="MM1-2Q-Zso">
-                                        <rect key="frame" x="0.0" y="4" width="453" height="368"/>
+                                        <rect key="frame" x="0.0" y="8" width="453" height="346.66666666666669"/>
                                         <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="krT-O4-Bkd">
+                                                <rect key="frame" x="0.0" y="0.0" width="453" height="24.666666666666668"/>
+                                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="20"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bus-XT-VNs" customClass="InteractiveSectoredPieChartView" customModule="PubgStats" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="453" height="300"/>
+                                                <rect key="frame" x="0.0" y="28.666666666666657" width="453" height="249.99999999999997"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="300" id="0jp-0z-TXS"/>
+                                                    <constraint firstAttribute="height" constant="250" id="0jp-0z-TXS"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dY4-AH-4c1">
-                                                <rect key="frame" x="0.0" y="304" width="453" height="64"/>
+                                                <rect key="frame" x="0.0" y="282.66666666666669" width="453" height="64"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="bea-EL-0O9">
                                                         <rect key="frame" x="16" y="0.0" width="421" height="56"/>
@@ -75,7 +81,7 @@
                                 <constraints>
                                     <constraint firstItem="MM1-2Q-Zso" firstAttribute="leading" secondItem="oCb-iY-QeQ" secondAttribute="leading" id="EEJ-9N-NvR"/>
                                     <constraint firstAttribute="bottom" secondItem="MM1-2Q-Zso" secondAttribute="bottom" constant="8" id="KvP-cE-h0G"/>
-                                    <constraint firstItem="MM1-2Q-Zso" firstAttribute="top" secondItem="oCb-iY-QeQ" secondAttribute="top" constant="4" id="R0h-tK-7bJ"/>
+                                    <constraint firstItem="MM1-2Q-Zso" firstAttribute="top" secondItem="oCb-iY-QeQ" secondAttribute="top" constant="8" id="R0h-tK-7bJ"/>
                                     <constraint firstAttribute="trailing" secondItem="MM1-2Q-Zso" secondAttribute="trailing" id="wLQ-7J-jVM"/>
                                 </constraints>
                             </view>
@@ -101,6 +107,7 @@
                 <outlet property="helpImageView" destination="XkP-vX-aQA" id="8lC-9m-Qzh"/>
                 <outlet property="infoLabel" destination="EBD-hB-dz8" id="n0h-ya-WuT"/>
                 <outlet property="interacticeChartView" destination="bus-XT-VNs" id="Jna-4M-9oN"/>
+                <outlet property="titleLabel" destination="krT-O4-Bkd" id="SG4-fL-KEg"/>
             </connections>
             <point key="canvasLocation" x="72.51908396946564" y="84.507042253521135"/>
         </collectionViewCell>

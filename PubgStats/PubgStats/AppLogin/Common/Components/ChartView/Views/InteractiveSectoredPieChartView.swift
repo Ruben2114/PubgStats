@@ -18,7 +18,6 @@ final class InteractiveSectoredPieChartView: PieChartView {
         static let noneSector: SectorStatus = (Config.unsetIndex, .none)
     }
     
-    private var iconSize: CGFloat = 32.0
     private var selectedSector: SectorStatus = Config.notSetSector
     private var sectorViews = [UIView]()
     private var subscriptions: Set<AnyCancellable> = []
@@ -26,7 +25,6 @@ final class InteractiveSectoredPieChartView: PieChartView {
     override func build() {
         super.build()
         drawSteps.append(drawSelectionArc)
-        drawSteps.append(addSectors)
     }
     
     override func getPathColor(for category: CategoryRepresentable) -> UIColor {
@@ -49,48 +47,6 @@ final class InteractiveSectoredPieChartView: PieChartView {
 }
 
 private extension InteractiveSectoredPieChartView {
-    var distanceToIcon: CGFloat {
-        let distanceFromArcToNonRotatedIconCenter: CGFloat = 12
-        let iconDiagonal = sqrt((iconSize*iconSize) + (iconSize*iconSize))
-        let normalDistance = distanceFromArcToNonRotatedIconCenter + iconSize/2
-        let rotatedDistance = normalDistance - iconDiagonal/2
-        let distanceFromArcToIcon = rotatedDistance + iconDiagonal/2
-        let minimumDistance = graphRadius + distanceFromArcToIcon
-        return minimumDistance
-    }
-    
-    func addSectors() {
-        guard selectedSector.status == .notSet else { return }
-        drawSectorIcons()
-    }
-    
-    func drawSectorIcons() {
-        self.sectors.forEach { sector, startAngle, endAngle in
-            let midAngle = getMidAngle(between: startAngle, and: endAngle)
-            setIcon(in: sector, angle: midAngle)
-        }
-    }
-    
-    func setIcon(in category: CategoryRepresentable, angle: CGFloat) {
-        let iconCenter =  CGPoint(x: bounds.midX + distanceToIcon * cos(angle), y: bounds.midY + distanceToIcon * sin(angle))
-        let view = UIView(frame: CGRect(centeredOn: iconCenter, size: CGSize(width: iconSize, height: iconSize)))
-        view.tag = getIndexFor(category: category)
-        view.isUserInteractionEnabled = true
-        view.gestureRecognizers = [UITapGestureRecognizer(target: self, action: #selector(didSelectSector(_:)))]
-        self.addSubview(view)
-        self.sectorViews.append(view)
-        let imgView = UIImageView(frame: view.frame)
-        imgView.contentMode = .scaleAspectFit
-        imgView.image = UIImage(systemName: category.icon)?.withRenderingMode(.alwaysTemplate)
-        imgView.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
-        view.addSubview(imgView)
-        imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        imgView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        imgView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        imgView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    }
-    
     func getMidAngle(between startAngle: CGFloat, and endAngle: CGFloat) -> CGFloat {
         return (startAngle + endAngle) / 2
     }

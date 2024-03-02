@@ -54,18 +54,14 @@ enum PlayerStats {
     
     func title() -> String {
         switch self{
-        case .soloWins(_), .soloFppWins(_), .duoWins(_), .duoFppWins(_), .squadWins(_), .squadFppWins(_):
-            return "\(type()) wins"
-        case .soloRounds(_), .soloFppRounds(_), .duoRounds(_), .duoFppRounds(_), .squadRounds(_), .squadFppRounds(_):
-            return "\(type()) rounds"
-        case .soloKills(_), .soloFppKills(_), .duoKills(_), .duoFppKills(_), .squadKills(_), .squadFppKills(_):
-            return "\(type()) kills"
         case .wins(_):
-            return "wins"
+            return "wins".localize()
         case .kills(_):
-            return "kills"
+            return "Kills".localize()
         case .rounds(_):
-            return "rounds"
+            return "rounds".localize()
+        default:
+            return type()
         }
     }
     
@@ -96,50 +92,6 @@ enum PlayerStats {
         default:
             return ("", "")
         }
-    }
-    
-    func icon() -> String {
-        return "star"
-//        switch self{
-//        case .soloWins(_):
-//            return "star"
-//        case .soloFppWins(_):
-//            return "star"
-//        case .duoWins(_):
-//            return "star"
-//        case .duoFppWins(_):
-//            return "star"
-//        case .squadWins(_):
-//            return "star"
-//        case .squadFppWins(_):
-//            return "star"
-//        case .soloRounds(_):
-//            return "star"
-//        case .soloFppRounds(_):
-//            return "star"
-//        case .duoRounds(_):
-//            return "star"
-//        case .duoFppRounds(_):
-//            return "star"
-//        case .squadRounds(_):
-//            return "star"
-//        case .squadFppRounds(_):
-//            return "star"
-//        case .kills(_):
-//            return "star"
-//        case .soloKills(_):
-//            return "star"
-//        case .soloFppKills(_):
-//            return "star"
-//        case .duoKills(_):
-//            return "star"
-//        case .duoFppKills(_):
-//            return "star"
-//        case .squadKills(_):
-//            return "star"
-//        case .squadFppKills(_):
-//            return "star"
-//        }
     }
     
     func color() -> (UIColor, UIColor)? {

@@ -9,16 +9,18 @@ import Foundation
 import Combine
 import PubgStats
 
-struct MockDataProfleRepository: DataProfileRepository {
-    func fetchSurvivalData(representable: IdAccountDataProfileRepresentable) -> AnyPublisher<PubgStats.SurvivalDataProfileRepresentable, Error> {
+struct MockDataPlayerRepository: DataPlayerRepository {
+    func fetchSurvivalData(representable: PubgStats.IdAccountDataProfileRepresentable, type: NavigationStats, reload: Bool) -> AnyPublisher<PubgStats.SurvivalDataProfileRepresentable, Error> {
         Just(MockSurvivalDataProfile()).setFailureType(to: Error.self).eraseToAnyPublisher()
+
     }
     
-    func fetchGamesModeData(representable: IdAccountDataProfileRepresentable) -> AnyPublisher<PubgStats.GamesModesDataProfileRepresentable, Error> {
+    func fetchGamesModeData(representable: PubgStats.IdAccountDataProfileRepresentable, type: NavigationStats, reload: Bool) -> AnyPublisher<PubgStats.GamesModesDataProfileRepresentable, Error> {
         Just(MockGamesModesDataProfile()).setFailureType(to: Error.self).eraseToAnyPublisher()
+
     }
     
-    func fetchWeaponData(representable: IdAccountDataProfileRepresentable) -> AnyPublisher<PubgStats.WeaponDataProfileRepresentable, Error> {
+    func fetchWeaponData(representable: PubgStats.IdAccountDataProfileRepresentable, type: NavigationStats, reload: Bool) -> AnyPublisher<PubgStats.WeaponDataProfileRepresentable, Error> {
         Just(MockWeaponDataProfile()).setFailureType(to: Error.self).eraseToAnyPublisher()
     }
     

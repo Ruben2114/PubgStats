@@ -49,7 +49,7 @@ private extension VersatilCardView {
     
     func configureImage() {
         guard let image = representable?.customImageView else { return }
-        imageView.image = UIImage(systemName: image)
+        imageView.image = UIImage(named: image)
     }
     
     func configureView() {

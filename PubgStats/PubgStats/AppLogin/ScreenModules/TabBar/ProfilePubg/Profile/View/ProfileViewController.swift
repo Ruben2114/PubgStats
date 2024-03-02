@@ -169,7 +169,7 @@ private extension ProfileViewController {
         //TODO: poner localized
         let model = DefaultVersatilCard(title: "Noticias",
                                         subTitle: "Aqui podras ver las noticias de las ultimas novedades del juego",
-                                        customImageView: "star")
+                                        customImageView: "survivalSerie")
         newsCardView.setupVersatilCard(model)
     }
     

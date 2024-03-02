@@ -63,7 +63,6 @@ private extension ChartsInfoView {
                 self?.chartCollectionHeight.constant = height
             case .didSelectChart(let page):
                 self?.pageControl.currentPage = page
-                self?.updatePageControlDots()
             case .didTapAverageTooltip(let text):
                 self?.subject.send(text ?? ("", ""))
             }
@@ -78,29 +77,22 @@ private extension ChartsInfoView {
                                             at: .centeredHorizontally,
                                             animated: false)
     }
-    
+
     func updatePageControl(_ numberOfItems: Int) {
         pageControl.numberOfPages = numberOfItems
-        pageControl.isHidden = numberOfItems <= 1
         pageControl.hidesForSinglePage = true
         pageControl.currentPage = representable?.chartSelectedIndex ?? 0
+        pageControl.currentPageIndicatorTintColor = .black
+        pageControl.pageIndicatorTintColor = .systemGray
+        pageControl.backgroundStyle = .minimal
         updatePageControlDots()
-        if #available(iOS 14.0, *) {
-            pageControl.backgroundStyle = .minimal
-        }
     }
     
     func updatePageControlDots() {
-        let indicatorColor: UIColor = .systemGray
-        let backgroundColorForPriorIOS14 = UIColor.clear
-        let currentIndicatorColor: UIColor = .black
-        pageControl.currentPageIndicatorTintColor = currentIndicatorColor
-        pageControl.pageIndicatorTintColor = indicatorColor
         let symbolDotConfiguration = UIImage.SymbolConfiguration(pointSize: 8, weight: .regular, scale: .medium)
         let dotFillImage = UIImage(systemName: "circle.fill", withConfiguration: symbolDotConfiguration)
-        let dotImage = UIImage(systemName: "circle", withConfiguration: symbolDotConfiguration)
         for index in 0..<pageControl.numberOfPages {
-            pageControl.setIndicatorImage(index == pageControl.currentPage ? dotFillImage : dotImage, forPage: index)
+            pageControl.setIndicatorImage(dotFillImage, forPage: index)
         }
     }
 }

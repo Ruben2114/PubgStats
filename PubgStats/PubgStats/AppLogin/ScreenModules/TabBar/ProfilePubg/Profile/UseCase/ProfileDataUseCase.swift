@@ -13,7 +13,7 @@ protocol ProfileDataUseCase {
 }
 
 struct ProfileDataUseCaseImp {
-    private let profileRepository: DataProfileRepository
+    private let profileRepository: DataPlayerRepository
     
     init(dependencies: ProfileDependencies) {
         self.profileRepository = dependencies.external.resolve()
@@ -22,9 +22,9 @@ struct ProfileDataUseCaseImp {
 
 extension ProfileDataUseCaseImp: ProfileDataUseCase {
     func fetchPlayerDetails(_ profile: IdAccountDataProfileRepresentable, reload: Bool) -> AnyPublisher<PlayerDetailsRepresentable, Error> {
-        return Publishers.CombineLatest3(profileRepository.fetchSurvivalData(representable: profile, reload: reload).eraseToAnyPublisher(),
-                                         profileRepository.fetchGamesModeData(representable: profile, reload: reload).eraseToAnyPublisher(),
-                                         profileRepository.fetchWeaponData(representable: profile, reload: reload).eraseToAnyPublisher())
+        return Publishers.CombineLatest3(profileRepository.fetchSurvivalData(representable: profile, type: .profile, reload: reload).eraseToAnyPublisher(),
+                                         profileRepository.fetchGamesModeData(representable: profile, type: .profile, reload: reload).eraseToAnyPublisher(),
+                                         profileRepository.fetchWeaponData(representable: profile, type: .profile, reload: reload).eraseToAnyPublisher())
         .map { (SurvivalDataProfileRepresentable, GamesModesDataProfileRepresentable, WeaponDataProfileRepresentable) in
             DefaultPlayerDetails(infoSurvival: SurvivalDataProfileRepresentable,
                                  infoGamesModes: GamesModesDataProfileRepresentable,

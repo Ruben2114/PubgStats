@@ -40,12 +40,10 @@
 		4655510429CC829800BF932A /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510329CC829800BF932A /* SettingsCoordinator.swift */; };
 		465926EF29EFCFB300A4091D /* ItemCellSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465926EE29EFCFB300A4091D /* ItemCellSettings.swift */; };
 		466BCE152A02657B002896B7 /* UIViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466BCE142A02657B002896B7 /* UIViewController+CollectionView.swift */; };
-		4670EDE429D4325200C1062E /* StatsGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE329D4325200C1062E /* StatsGeneralViewController.swift */; };
 		4670EDE729D442C600C1062E /* HelpDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE629D442C600C1062E /* HelpDataViewModel.swift */; };
 		4670EDEA29D442FD00C1062E /* HelpDataDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE929D442FD00C1062E /* HelpDataDependency.swift */; };
 		4670EDEC29D4433B00C1062E /* HelpDataExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDEB29D4433B00C1062E /* HelpDataExternalDependency.swift */; };
 		4670EDEF29D4438500C1062E /* HelpDataCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDEE29D4438500C1062E /* HelpDataCoordinator.swift */; };
-		8C007E3429F1623A0029AF2F /* ItemCellStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C007E3329F1623A0029AF2F /* ItemCellStats.swift */; };
 		8C2460422B3C4E7A00AB98F3 /* ZoomAndSnapFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2460412B3C4E7A00AB98F3 /* ZoomAndSnapFlowLayout.swift */; };
 		8C2460562B3C4F6800AB98F3 /* Chip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2460542B3C4F6800AB98F3 /* Chip.swift */; };
 		8C2460572B3C4F6800AB98F3 /* Chip.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2460552B3C4F6800AB98F3 /* Chip.xib */; };
@@ -91,7 +89,7 @@
 		8C9A56042B88031800C52093 /* TabBarViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9A56032B88031800C52093 /* TabBarViewRepresentable.swift */; };
 		8C9ABEEE2AD830A000552101 /* TestLoginDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9ABEED2AD830A000552101 /* TestLoginDependencies.swift */; };
 		8C9ABEF02AD8318200552101 /* TestLoginExternalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9ABEEF2AD8318200552101 /* TestLoginExternalDependencies.swift */; };
-		8C9ABEF62AD8352900552101 /* MockDataProfleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9ABEF52AD8352900552101 /* MockDataProfleRepository.swift */; };
+		8C9ABEF62AD8352900552101 /* MockDataPlayerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9ABEF52AD8352900552101 /* MockDataPlayerRepository.swift */; };
 		8C9ABEF92AD8368F00552101 /* LoginCoordinatorSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9ABEF82AD8368F00552101 /* LoginCoordinatorSpy.swift */; };
 		8C9ABEFB2AD83A4700552101 /* LoginCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9ABEFA2AD83A4700552101 /* LoginCoordinatorTest.swift */; };
 		8C9ABEFE2AD83B3D00552101 /* XCTesCase+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9ABEFD2AD83B3D00552101 /* XCTesCase+Extension.swift */; };
@@ -127,29 +125,19 @@
 		8CB05FA22A5F5022000B4092 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB05FA12A5F5022000B4092 /* UILabel.swift */; };
 		8CB07E9629D17347000EE257 /* RemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07E9529D17347000EE257 /* RemoteService.swift */; };
 		8CB07EA629D1969A000EE257 /* UIViewController+BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07EA529D1969A000EE257 /* UIViewController+BackButton.swift */; };
-		8CB07EB629D1A683000EE257 /* StatsGeneralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07EB529D1A683000EE257 /* StatsGeneralViewModel.swift */; };
-		8CB07EB829D1A6B3000EE257 /* StatsGeneralDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07EB729D1A6B3000EE257 /* StatsGeneralDependency.swift */; };
-		8CB07EBA29D1A6EC000EE257 /* StatsGeneralExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07EB929D1A6EC000EE257 /* StatsGeneralExternalDependency.swift */; };
-		8CB07EBC29D1A764000EE257 /* StatsGeneralCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07EBB29D1A764000EE257 /* StatsGeneralCoordinator.swift */; };
 		8CB07EC329D1B246000EE257 /* SurvivalDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07EC229D1B246000EE257 /* SurvivalDTO.swift */; };
 		8CB07EC529D1B393000EE257 /* WeaponDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07EC429D1B393000EE257 /* WeaponDTO.swift */; };
 		8CB07EC829D1B446000EE257 /* GamesModesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07EC729D1B446000EE257 /* GamesModesDTO.swift */; };
-		8CB07ED229D1CFF1000EE257 /* StatsGeneralDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB07ED129D1CFF1000EE257 /* StatsGeneralDataUseCase.swift */; };
 		8CB2CEEC29C9A35B00E79D29 /* ApiClientServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2CEEB29C9A35B00E79D29 /* ApiClientServiceImp.swift */; };
 		8CB2CEF129C9A63B00E79D29 /* PlayerDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2CEF029C9A63B00E79D29 /* PlayerDTO.swift */; };
 		8CB2CEF329C9A87900E79D29 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2CEF229C9A87900E79D29 /* ProfileViewModel.swift */; };
 		8CB39B9529C05D2500B1D8EF /* LoginDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB39B9429C05D2500B1D8EF /* LoginDataUseCase.swift */; };
 		8CB39BA729C0917000B1D8EF /* ViewScrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB39BA629C0917000B1D8EF /* ViewScrollable.swift */; };
 		8CB39BAC29C0C88800B1D8EF /* String+Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB39BAB29C0C88800B1D8EF /* String+Hash.swift */; };
-		8CB6395E29D2343C00763231 /* KillsDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6395D29D2343C00763231 /* KillsDataViewController.swift */; };
-		8CB6396029D234C500763231 /* KillsDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6395F29D234C500763231 /* KillsDataViewModel.swift */; };
-		8CB6396229D2356B00763231 /* KillsDataDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6396129D2356B00763231 /* KillsDataDependency.swift */; };
-		8CB6396429D235B900763231 /* KillsDataExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6396329D235B900763231 /* KillsDataExternalDependency.swift */; };
-		8CB6396629D2363100763231 /* KillsDataCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6396529D2363100763231 /* KillsDataCoordinator.swift */; };
 		8CBC02832AD99C99002449E1 /* SurvivalDataProfileRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC02822AD99C99002449E1 /* SurvivalDataProfileRepresentable.swift */; };
 		8CBC02852AD9AA32002449E1 /* GamesModesDataProfileRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC02842AD9AA32002449E1 /* GamesModesDataProfileRepresentable.swift */; };
-		8CBC70422AD7D40E00234420 /* DataProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC70412AD7D40E00234420 /* DataProfileRepository.swift */; };
-		8CBC70442AD7D44300234420 /* DataProfleRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC70432AD7D44300234420 /* DataProfleRepositoryImp.swift */; };
+		8CBC70422AD7D40E00234420 /* DataPlayerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC70412AD7D40E00234420 /* DataPlayerRepository.swift */; };
+		8CBC70442AD7D44300234420 /* DataPlayerRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC70432AD7D44300234420 /* DataPlayerRepositoryImp.swift */; };
 		8CBC70472AD7D4CF00234420 /* IdAccountDataProfileRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC70462AD7D4CF00234420 /* IdAccountDataProfileRepresentable.swift */; };
 		8CBC704A2AD7EBBA00234420 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC70492AD7EBBA00234420 /* Bindable.swift */; };
 		8CBC704C2AD7F3B700234420 /* DataBindingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC704B2AD7F3B700234420 /* DataBindingObject.swift */; };
@@ -181,9 +169,6 @@
 		8CE9BDD229E59F9200F45D3F /* AttributesDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDD129E59F9200F45D3F /* AttributesDetailCoordinator.swift */; };
 		8CE9BDD429E5A01A00F45D3F /* AttributesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDD329E5A01A00F45D3F /* AttributesDetailViewController.swift */; };
 		8CE9BDD629E5A12200F45D3F /* AttributesDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDD529E5A12200F45D3F /* AttributesDetailViewModel.swift */; };
-		8CE9BDDA29E5B6CF00F45D3F /* KillsDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDD929E5B6CF00F45D3F /* KillsDataUseCase.swift */; };
-		8CE9BDDD29E5B72400F45D3F /* KillsDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDDC29E5B72400F45D3F /* KillsDataRepository.swift */; };
-		8CE9BDE129E5B77100F45D3F /* KillsDataRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9BDE029E5B77100F45D3F /* KillsDataRepositoryImp.swift */; };
 		8CEB33FE29ED55C2006C2564 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEB33FD29ED55C2006C2564 /* SettingsViewModel.swift */; };
 		8CEB340529ED60E1006C2564 /* SettingsDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEB340429ED60E1006C2564 /* SettingsDataUseCase.swift */; };
 		8CEB340729ED6183006C2564 /* SettingsDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEB340629ED6183006C2564 /* SettingsDataRepository.swift */; };
@@ -252,12 +237,10 @@
 		4655510329CC829800BF932A /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		465926EE29EFCFB300A4091D /* ItemCellSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellSettings.swift; sourceTree = "<group>"; };
 		466BCE142A02657B002896B7 /* UIViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CollectionView.swift"; sourceTree = "<group>"; };
-		4670EDE329D4325200C1062E /* StatsGeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGeneralViewController.swift; sourceTree = "<group>"; };
 		4670EDE629D442C600C1062E /* HelpDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataViewModel.swift; sourceTree = "<group>"; };
 		4670EDE929D442FD00C1062E /* HelpDataDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataDependency.swift; sourceTree = "<group>"; };
 		4670EDEB29D4433B00C1062E /* HelpDataExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataExternalDependency.swift; sourceTree = "<group>"; };
 		4670EDEE29D4438500C1062E /* HelpDataCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataCoordinator.swift; sourceTree = "<group>"; };
-		8C007E3329F1623A0029AF2F /* ItemCellStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellStats.swift; sourceTree = "<group>"; };
 		8C2460412B3C4E7A00AB98F3 /* ZoomAndSnapFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomAndSnapFlowLayout.swift; sourceTree = "<group>"; };
 		8C2460542B3C4F6800AB98F3 /* Chip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chip.swift; sourceTree = "<group>"; };
 		8C2460552B3C4F6800AB98F3 /* Chip.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Chip.xib; sourceTree = "<group>"; };
@@ -303,7 +286,7 @@
 		8C9A56032B88031800C52093 /* TabBarViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewRepresentable.swift; sourceTree = "<group>"; };
 		8C9ABEED2AD830A000552101 /* TestLoginDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginDependencies.swift; sourceTree = "<group>"; };
 		8C9ABEEF2AD8318200552101 /* TestLoginExternalDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginExternalDependencies.swift; sourceTree = "<group>"; };
-		8C9ABEF52AD8352900552101 /* MockDataProfleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataProfleRepository.swift; sourceTree = "<group>"; };
+		8C9ABEF52AD8352900552101 /* MockDataPlayerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataPlayerRepository.swift; sourceTree = "<group>"; };
 		8C9ABEF82AD8368F00552101 /* LoginCoordinatorSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinatorSpy.swift; sourceTree = "<group>"; };
 		8C9ABEFA2AD83A4700552101 /* LoginCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinatorTest.swift; sourceTree = "<group>"; };
 		8C9ABEFD2AD83B3D00552101 /* XCTesCase+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTesCase+Extension.swift"; sourceTree = "<group>"; };
@@ -343,29 +326,19 @@
 		8CB05FA12A5F5022000B4092 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		8CB07E9529D17347000EE257 /* RemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteService.swift; sourceTree = "<group>"; };
 		8CB07EA529D1969A000EE257 /* UIViewController+BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+BackButton.swift"; sourceTree = "<group>"; };
-		8CB07EB529D1A683000EE257 /* StatsGeneralViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGeneralViewModel.swift; sourceTree = "<group>"; };
-		8CB07EB729D1A6B3000EE257 /* StatsGeneralDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGeneralDependency.swift; sourceTree = "<group>"; };
-		8CB07EB929D1A6EC000EE257 /* StatsGeneralExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGeneralExternalDependency.swift; sourceTree = "<group>"; };
-		8CB07EBB29D1A764000EE257 /* StatsGeneralCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGeneralCoordinator.swift; sourceTree = "<group>"; };
 		8CB07EC229D1B246000EE257 /* SurvivalDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDTO.swift; sourceTree = "<group>"; };
 		8CB07EC429D1B393000EE257 /* WeaponDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDTO.swift; sourceTree = "<group>"; };
 		8CB07EC729D1B446000EE257 /* GamesModesDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesDTO.swift; sourceTree = "<group>"; };
-		8CB07ED129D1CFF1000EE257 /* StatsGeneralDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGeneralDataUseCase.swift; sourceTree = "<group>"; };
 		8CB2CEEB29C9A35B00E79D29 /* ApiClientServiceImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientServiceImp.swift; sourceTree = "<group>"; };
 		8CB2CEF029C9A63B00E79D29 /* PlayerDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDTO.swift; sourceTree = "<group>"; };
 		8CB2CEF229C9A87900E79D29 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		8CB39B9429C05D2500B1D8EF /* LoginDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataUseCase.swift; sourceTree = "<group>"; };
 		8CB39BA629C0917000B1D8EF /* ViewScrollable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScrollable.swift; sourceTree = "<group>"; };
 		8CB39BAB29C0C88800B1D8EF /* String+Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Hash.swift"; sourceTree = "<group>"; };
-		8CB6395D29D2343C00763231 /* KillsDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillsDataViewController.swift; sourceTree = "<group>"; };
-		8CB6395F29D234C500763231 /* KillsDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillsDataViewModel.swift; sourceTree = "<group>"; };
-		8CB6396129D2356B00763231 /* KillsDataDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillsDataDependency.swift; sourceTree = "<group>"; };
-		8CB6396329D235B900763231 /* KillsDataExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillsDataExternalDependency.swift; sourceTree = "<group>"; };
-		8CB6396529D2363100763231 /* KillsDataCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillsDataCoordinator.swift; sourceTree = "<group>"; };
 		8CBC02822AD99C99002449E1 /* SurvivalDataProfileRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalDataProfileRepresentable.swift; sourceTree = "<group>"; };
 		8CBC02842AD9AA32002449E1 /* GamesModesDataProfileRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesDataProfileRepresentable.swift; sourceTree = "<group>"; };
-		8CBC70412AD7D40E00234420 /* DataProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProfileRepository.swift; sourceTree = "<group>"; };
-		8CBC70432AD7D44300234420 /* DataProfleRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProfleRepositoryImp.swift; sourceTree = "<group>"; };
+		8CBC70412AD7D40E00234420 /* DataPlayerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPlayerRepository.swift; sourceTree = "<group>"; };
+		8CBC70432AD7D44300234420 /* DataPlayerRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPlayerRepositoryImp.swift; sourceTree = "<group>"; };
 		8CBC70462AD7D4CF00234420 /* IdAccountDataProfileRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdAccountDataProfileRepresentable.swift; sourceTree = "<group>"; };
 		8CBC70492AD7EBBA00234420 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		8CBC704B2AD7F3B700234420 /* DataBindingObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBindingObject.swift; sourceTree = "<group>"; };
@@ -397,9 +370,6 @@
 		8CE9BDD129E59F9200F45D3F /* AttributesDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesDetailCoordinator.swift; sourceTree = "<group>"; };
 		8CE9BDD329E5A01A00F45D3F /* AttributesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesDetailViewController.swift; sourceTree = "<group>"; };
 		8CE9BDD529E5A12200F45D3F /* AttributesDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesDetailViewModel.swift; sourceTree = "<group>"; };
-		8CE9BDD929E5B6CF00F45D3F /* KillsDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillsDataUseCase.swift; sourceTree = "<group>"; };
-		8CE9BDDC29E5B72400F45D3F /* KillsDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillsDataRepository.swift; sourceTree = "<group>"; };
-		8CE9BDE029E5B77100F45D3F /* KillsDataRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillsDataRepositoryImp.swift; sourceTree = "<group>"; };
 		8CEB33FD29ED55C2006C2564 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		8CEB340429ED60E1006C2564 /* SettingsDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataUseCase.swift; sourceTree = "<group>"; };
 		8CEB340629ED6183006C2564 /* SettingsDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataRepository.swift; sourceTree = "<group>"; };
@@ -453,8 +423,6 @@
 			isa = PBXGroup;
 			children = (
 				8CAC3E2329C303C800A1FE34 /* Profile */,
-				8CB07EAB29D1A577000EE257 /* StatsGeneral */,
-				8CB6395729D233C200763231 /* KillsData */,
 				8CE9BDB029E57FA900F45D3F /* AttributesHome */,
 				8CE9BDC929E59EAE00F45D3F /* AttributesDetail */,
 			);
@@ -849,7 +817,7 @@
 		8C9ABEF42AD8350400552101 /* MockRepository */ = {
 			isa = PBXGroup;
 			children = (
-				8C9ABEF52AD8352900552101 /* MockDataProfleRepository.swift */,
+				8C9ABEF52AD8352900552101 /* MockDataPlayerRepository.swift */,
 			);
 			path = MockRepository;
 			sourceTree = "<group>";
@@ -1238,76 +1206,6 @@
 			path = System;
 			sourceTree = "<group>";
 		};
-		8CB07EAB29D1A577000EE257 /* StatsGeneral */ = {
-			isa = PBXGroup;
-			children = (
-				8CB07EB029D1A5AC000EE257 /* Coordinator */,
-				8CB07EAF29D1A5A3000EE257 /* DependenciesResolve */,
-				8CB07EAE29D1A59B000EE257 /* Domain */,
-				8CB07EAC29D1A58F000EE257 /* Presentation */,
-			);
-			path = StatsGeneral;
-			sourceTree = "<group>";
-		};
-		8CB07EAC29D1A58F000EE257 /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				8CB07EB229D1A5DE000EE257 /* ViewModel */,
-				8CB07EB129D1A5D8000EE257 /* View */,
-			);
-			path = Presentation;
-			sourceTree = "<group>";
-		};
-		8CB07EAE29D1A59B000EE257 /* Domain */ = {
-			isa = PBXGroup;
-			children = (
-				8CB07ECB29D1CE8E000EE257 /* UseCase */,
-			);
-			path = Domain;
-			sourceTree = "<group>";
-		};
-		8CB07EAF29D1A5A3000EE257 /* DependenciesResolve */ = {
-			isa = PBXGroup;
-			children = (
-				8CB07EB729D1A6B3000EE257 /* StatsGeneralDependency.swift */,
-				8CB07EB929D1A6EC000EE257 /* StatsGeneralExternalDependency.swift */,
-			);
-			path = DependenciesResolve;
-			sourceTree = "<group>";
-		};
-		8CB07EB029D1A5AC000EE257 /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				8CB07EBB29D1A764000EE257 /* StatsGeneralCoordinator.swift */,
-			);
-			path = Coordinator;
-			sourceTree = "<group>";
-		};
-		8CB07EB129D1A5D8000EE257 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				4670EDE329D4325200C1062E /* StatsGeneralViewController.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		8CB07EB229D1A5DE000EE257 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				8CB07EB529D1A683000EE257 /* StatsGeneralViewModel.swift */,
-				8C007E3329F1623A0029AF2F /* ItemCellStats.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		8CB07ECB29D1CE8E000EE257 /* UseCase */ = {
-			isa = PBXGroup;
-			children = (
-				8CB07ED129D1CFF1000EE257 /* StatsGeneralDataUseCase.swift */,
-			);
-			path = UseCase;
-			sourceTree = "<group>";
-		};
 		8CB2CEE729C9A22500E79D29 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1342,49 +1240,11 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		8CB6395729D233C200763231 /* KillsData */ = {
-			isa = PBXGroup;
-			children = (
-				8CE9BDDE29E5B75400F45D3F /* Data */,
-				8CE9BDD729E5B6BF00F45D3F /* Domain */,
-				8CB6395C29D2341000763231 /* Coordinator */,
-				8CB6395B29D233FC00763231 /* DependenciesResolve */,
-				8CB6395829D233E400763231 /* Presentation */,
-			);
-			path = KillsData;
-			sourceTree = "<group>";
-		};
-		8CB6395829D233E400763231 /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				8CB6395D29D2343C00763231 /* KillsDataViewController.swift */,
-				8CB6395F29D234C500763231 /* KillsDataViewModel.swift */,
-			);
-			path = Presentation;
-			sourceTree = "<group>";
-		};
-		8CB6395B29D233FC00763231 /* DependenciesResolve */ = {
-			isa = PBXGroup;
-			children = (
-				8CB6396129D2356B00763231 /* KillsDataDependency.swift */,
-				8CB6396329D235B900763231 /* KillsDataExternalDependency.swift */,
-			);
-			path = DependenciesResolve;
-			sourceTree = "<group>";
-		};
-		8CB6395C29D2341000763231 /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				8CB6396529D2363100763231 /* KillsDataCoordinator.swift */,
-			);
-			path = Coordinator;
-			sourceTree = "<group>";
-		};
 		8CBC70402AD7D3E600234420 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				8CBC70412AD7D40E00234420 /* DataProfileRepository.swift */,
-				8CBC70432AD7D44300234420 /* DataProfleRepositoryImp.swift */,
+				8CBC70412AD7D40E00234420 /* DataPlayerRepository.swift */,
+				8CBC70432AD7D44300234420 /* DataPlayerRepositoryImp.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1555,47 +1415,6 @@
 				8CE9BDD129E59F9200F45D3F /* AttributesDetailCoordinator.swift */,
 			);
 			path = Coordinator;
-			sourceTree = "<group>";
-		};
-		8CE9BDD729E5B6BF00F45D3F /* Domain */ = {
-			isa = PBXGroup;
-			children = (
-				8CE9BDDB29E5B71700F45D3F /* InterfaceRepository */,
-				8CE9BDD829E5B6C600F45D3F /* UseCase */,
-			);
-			path = Domain;
-			sourceTree = "<group>";
-		};
-		8CE9BDD829E5B6C600F45D3F /* UseCase */ = {
-			isa = PBXGroup;
-			children = (
-				8CE9BDD929E5B6CF00F45D3F /* KillsDataUseCase.swift */,
-			);
-			path = UseCase;
-			sourceTree = "<group>";
-		};
-		8CE9BDDB29E5B71700F45D3F /* InterfaceRepository */ = {
-			isa = PBXGroup;
-			children = (
-				8CE9BDDC29E5B72400F45D3F /* KillsDataRepository.swift */,
-			);
-			path = InterfaceRepository;
-			sourceTree = "<group>";
-		};
-		8CE9BDDE29E5B75400F45D3F /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				8CE9BDDF29E5B76200F45D3F /* RepositoryImplementation */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		8CE9BDDF29E5B76200F45D3F /* RepositoryImplementation */ = {
-			isa = PBXGroup;
-			children = (
-				8CE9BDE029E5B77100F45D3F /* KillsDataRepositoryImp.swift */,
-			);
-			path = RepositoryImplementation;
 			sourceTree = "<group>";
 		};
 		8CEB33FF29ED6036006C2564 /* Domain */ = {
@@ -1864,7 +1683,6 @@
 				8C2460632B3C503100AB98F3 /* PercentageRectangleView.swift in Sources */,
 				460ABAD429F7E23000DD5797 /* PlayerStats.swift in Sources */,
 				8CB39BAC29C0C88800B1D8EF /* String+Hash.swift in Sources */,
-				8CB07EBA29D1A6EC000EE257 /* StatsGeneralExternalDependency.swift in Sources */,
 				8CB07EC529D1B393000EE257 /* WeaponDTO.swift in Sources */,
 				8CA720B029DAE3F6001E3EFA /* UIViewController+Label.swift in Sources */,
 				8CB07EC329D1B246000EE257 /* SurvivalDTO.swift in Sources */,
@@ -1876,25 +1694,20 @@
 				4655510429CC829800BF932A /* SettingsCoordinator.swift in Sources */,
 				8CEB340529ED60E1006C2564 /* SettingsDataUseCase.swift in Sources */,
 				461C1F4D29CAE0F600540289 /* LoginDependencies.swift in Sources */,
-				8CB07EB829D1A6B3000EE257 /* StatsGeneralDependency.swift in Sources */,
 				461C1F3E29C9C77C00540289 /* ApiClientService.swift in Sources */,
 				8CBE66AD2B587DF900C64481 /* ProfileViewRepresentable.swift in Sources */,
-				8CE9BDDA29E5B6CF00F45D3F /* KillsDataUseCase.swift in Sources */,
 				8C2460712B3C50A700AB98F3 /* ChartCollectionView.swift in Sources */,
 				8CAC3E2F29C3080600A1FE34 /* GuideViewModel.swift in Sources */,
 				8C7563E429BB5F17000373F9 /* MessageDisplayable.swift in Sources */,
 				4670EDEA29D442FD00C1062E /* HelpDataDependency.swift in Sources */,
-				8CE9BDDD29E5B72400F45D3F /* KillsDataRepository.swift in Sources */,
 				8CAE34B42B7EAC4900191927 /* GamesModesAttributesDetailsRepresentable.swift in Sources */,
 				465550D829CC504100BF932A /* ProfileCoordinator.swift in Sources */,
 				465550FA29CC7E4600BF932A /* GuideExternalDependency.swift in Sources */,
-				8CB6396029D234C500763231 /* KillsDataViewModel.swift in Sources */,
 				8C2460762B3C50B800AB98F3 /* ChartCollectionViewCell.swift in Sources */,
 				8CE9BDCE29E59F1400F45D3F /* AttributesDetailDependencies.swift in Sources */,
 				8CB2CEEC29C9A35B00E79D29 /* ApiClientServiceImp.swift in Sources */,
 				8CB07EC829D1B446000EE257 /* GamesModesDTO.swift in Sources */,
 				8CABD0862B551CE4001AE2B2 /* VersatilCardRepresentable.swift in Sources */,
-				8CB6395E29D2343C00763231 /* KillsDataViewController.swift in Sources */,
 				8CEB340729ED6183006C2564 /* SettingsDataRepository.swift in Sources */,
 				465926EF29EFCFB300A4091D /* ItemCellSettings.swift in Sources */,
 				8CBC704C2AD7F3B700234420 /* DataBindingObject.swift in Sources */,
@@ -1914,9 +1727,7 @@
 				8C2460422B3C4E7A00AB98F3 /* ZoomAndSnapFlowLayout.swift in Sources */,
 				8C24607B2B3C511B00AB98F3 /* ChartsInfoView.swift in Sources */,
 				465550C429CC390200BF932A /* UIViewController+TextField.swift in Sources */,
-				8CE9BDE129E5B77100F45D3F /* KillsDataRepositoryImp.swift in Sources */,
 				8CBC02832AD99C99002449E1 /* SurvivalDataProfileRepresentable.swift in Sources */,
-				8CB6396229D2356B00763231 /* KillsDataDependency.swift in Sources */,
 				8C9A32AB29DDB39500F81B34 /* FavouriteViewModel.swift in Sources */,
 				8CBC704A2AD7EBBA00234420 /* Bindable.swift in Sources */,
 				8CD7CD6F29BF04E200C57346 /* Profile.xcdatamodeld in Sources */,
@@ -1927,24 +1738,21 @@
 				8C7563E229BB5E8A000373F9 /* ViewValues.swift in Sources */,
 				4670EDEF29D4438500C1062E /* HelpDataCoordinator.swift in Sources */,
 				8CE9BDD229E59F9200F45D3F /* AttributesDetailCoordinator.swift in Sources */,
-				8CBC70442AD7D44300234420 /* DataProfleRepositoryImp.swift in Sources */,
+				8CBC70442AD7D44300234420 /* DataPlayerRepositoryImp.swift in Sources */,
 				8CEB341829ED67DF006C2564 /* InfoAppViewModel.swift in Sources */,
 				465550C629CC3A5600BF932A /* UIViewController+Image.swift in Sources */,
 				8CA1D2532ADB552800365A5C /* WeaponDataProfileRepresentable.swift in Sources */,
 				8C7563E029BB5E5E000373F9 /* LoadingPresentationDisplayable.swift in Sources */,
 				8CC118BC2AD98F4300839855 /* AnyBinding.swift in Sources */,
-				8CB07ED229D1CFF1000EE257 /* StatsGeneralDataUseCase.swift in Sources */,
 				465550DA29CC513100BF932A /* ProfileExternalDependencies.swift in Sources */,
 				8CECA6372B6EF21A00775650 /* AttributesHomeViewCell.swift in Sources */,
 				465550F829CC7DE800BF932A /* GuideDependency.swift in Sources */,
 				465550E729CC700400BF932A /* FavouriteExternalDependency.swift in Sources */,
 				8CC95B3F2B8E96A600152CB5 /* ProfileGeneralView.swift in Sources */,
 				4655510129CC824000BF932A /* SettingsExternalDependency.swift in Sources */,
-				8CB07EB629D1A683000EE257 /* StatsGeneralViewModel.swift in Sources */,
 				8CB39BA729C0917000B1D8EF /* ViewScrollable.swift in Sources */,
 				460ABACB29F7B75000DD5797 /* ExtensionString.swift in Sources */,
 				8CA398B129B72A1F00C09746 /* LoginViewController.swift in Sources */,
-				8CB6396629D2363100763231 /* KillsDataCoordinator.swift in Sources */,
 				8CEB341229ED6720006C2564 /* InfoAppDependency.swift in Sources */,
 				8CA398AD29B72A1F00C09746 /* AppDelegate.swift in Sources */,
 				8CEB341629ED67C5006C2564 /* InfoAppViewController.swift in Sources */,
@@ -1957,12 +1765,11 @@
 				8CAC3E3129C31D4700A1FE34 /* UrlGuide.swift in Sources */,
 				8CEB341429ED6753006C2564 /* InfoAppExternalDependency.swift in Sources */,
 				8CC118B82AD979A900839855 /* ScrollableStackView.swift in Sources */,
-				8CB6396429D235B900763231 /* KillsDataExternalDependency.swift in Sources */,
 				465550C829CC3C1E00BF932A /* UIViewController+Stack.swift in Sources */,
 				8CAC3E2D29C3055300A1FE34 /* GuideViewController.swift in Sources */,
 				8CB05FA22A5F5022000B4092 /* UILabel.swift in Sources */,
 				8C24605C2B3C4FD700AB98F3 /* FlameXibButton.swift in Sources */,
-				8CBC70422AD7D40E00234420 /* DataProfileRepository.swift in Sources */,
+				8CBC70422AD7D40E00234420 /* DataPlayerRepository.swift in Sources */,
 				8C7563E629BB5FBA000373F9 /* LoginViewModel.swift in Sources */,
 				8CABD0832B551AD8001AE2B2 /* VersatilCardView.swift in Sources */,
 				8C9F824229C3CA02003000CD /* HelpDataViewController.swift in Sources */,
@@ -1983,7 +1790,6 @@
 				466BCE152A02657B002896B7 /* UIViewController+CollectionView.swift in Sources */,
 				461C1F4F29CAE10600540289 /* LoginExternalDependencies.swift in Sources */,
 				8CE9BDB729E5807F00F45D3F /* AttributesHomeDependencies.swift in Sources */,
-				8CB07EBC29D1A764000EE257 /* StatsGeneralCoordinator.swift in Sources */,
 				8CA2FE3729F25C8100A4F475 /* StarChartView.swift in Sources */,
 				8C31FDB729C329E500196704 /* SettingsViewController.swift in Sources */,
 				8CECA63B2B6EF2C900775650 /* DetailsCardView.swift in Sources */,
@@ -1994,12 +1800,10 @@
 				8CE9BDBF29E582DF00F45D3F /* AttributesHomeViewModel.swift in Sources */,
 				8CA398AF29B72A1F00C09746 /* SceneDelegate.swift in Sources */,
 				8CD7CD6229BEFF5700C57346 /* LocalDataProfileService.swift in Sources */,
-				4670EDE429D4325200C1062E /* StatsGeneralViewController.swift in Sources */,
 				8C2FC1A129BF786D00FDE5DC /* CoreDataManager.swift in Sources */,
 				8C6E9C9429F1560600DE593D /* ItemCellHelpData.swift in Sources */,
 				8CECA6332B6EBCDE00775650 /* AttributesHomeViewRepresentable.swift in Sources */,
 				8CB07E9629D17347000EE257 /* RemoteService.swift in Sources */,
-				8C007E3429F1623A0029AF2F /* ItemCellStats.swift in Sources */,
 				465550E529CC6F6300BF932A /* FavouriteCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2021,7 +1825,7 @@
 				8C3A01322B84041400211AF3 /* ProfileCoordinatorSpy.swift in Sources */,
 				8C9ABEF92AD8368F00552101 /* LoginCoordinatorSpy.swift in Sources */,
 				8C9ABEEE2AD830A000552101 /* TestLoginDependencies.swift in Sources */,
-				8C9ABEF62AD8352900552101 /* MockDataProfleRepository.swift in Sources */,
+				8C9ABEF62AD8352900552101 /* MockDataPlayerRepository.swift in Sources */,
 				8CCF41422B86A7630061823E /* AttributesDetailCoordinatorSpy.swift in Sources */,
 				8C3A013C2B840C5700211AF3 /* TestAttributesHomeDependencies.swift in Sources */,
 				8CCF41402B86A6EE0061823E /* TestAttributesDetailExternalDependencies.swift in Sources */,

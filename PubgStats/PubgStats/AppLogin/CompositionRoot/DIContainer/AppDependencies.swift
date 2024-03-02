@@ -30,8 +30,8 @@ struct AppDependencies {
         remoteDataService
     }
     
-    func resolve() -> DataProfileRepository {
-        DataProfleRepositoryImp(dependencies: self)
+    func resolve() -> DataPlayerRepository {
+        DataPlayerRepositoryImp(dependencies: self)
     }
     
     func resolve() -> AppDependencies {
@@ -74,8 +74,6 @@ extension AppDependencies:
     FavouriteExternalDependency,
     GuideExternalDependency,
     SettingsExternalDependency,
-    StatsGeneralExternalDependency,
-    KillsDataExternalDependency,
     HelpDataExternalDependency,
     AttributesHomeExternalDependencies,
     AttributesDetailExternalDependencies,
