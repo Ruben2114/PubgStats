@@ -176,8 +176,8 @@ private extension ProfileViewController {
     func configureSurvivalCard() {
         //TODO: poner localized
         let model = DefaultVersatilCard(title: "profileCardSurvival".localize(),
-                                        subTitle: "Aqui podras tus estadísticas en el modo supervivencia",
-                                        customImageView: "star")
+                                        subTitle: "Aqui podras ver tus estadísticas en el modo supervivencia",
+                                        customImageView: "survivalSerie")
         survivalCardView.setupVersatilCard(model)
     }
     

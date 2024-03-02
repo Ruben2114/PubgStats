@@ -90,14 +90,13 @@ private extension ProfileHeaderView {
     
     func configureChips()  {
         ProfileButton.allCases.forEach { type in
-            getChipButton(viewData: Chip.ViewData(text: type.getTitle().localize(), style: .enabled, type: .onlyText), type: type)
+            getChipButton(type: type)
         }
     }
     
-    func getChipButton(viewData: Chip.ViewData, type: ProfileButton) {
+    func getChipButton(type: ProfileButton) {
         let button: Chip = Chip.loadFromXib() ?? Chip()
-        button.setViewData(viewData: viewData)
-        button.isEnabled = true
+        button.setViewData(text: type.getTitle().localize())
         button.publisher.receive(on: DispatchQueue.main).sink { [weak self] in
             self?.subject.send(.didSelectButton(type))
         }.store(in: &cancellable)
