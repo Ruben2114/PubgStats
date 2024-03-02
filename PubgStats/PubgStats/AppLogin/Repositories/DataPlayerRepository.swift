@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-public protocol DataProfileRepository {
+public protocol DataPlayerRepository {
     func fetchPlayerData(name: String, platform: String) -> AnyPublisher<IdAccountDataProfileRepresentable, Error>
     func fetchSurvivalData(representable: IdAccountDataProfileRepresentable, reload: Bool) -> AnyPublisher<SurvivalDataProfileRepresentable, Error>
     func fetchGamesModeData(representable: IdAccountDataProfileRepresentable, reload: Bool) -> AnyPublisher<GamesModesDataProfileRepresentable, Error>

@@ -8,7 +8,12 @@
 import Foundation
 import Combine
 
-struct DataProfleRepositoryImp: DataProfileRepository {
+enum NavigationStats {
+    case profile
+    case favourite
+}
+//TODO: no deberia ser solo profile sino el enum navigationitem
+struct DataPlayerRepositoryImp: DataProfileRepository {
     private let dataSource: LocalDataProfileService
     private let remoteData: RemoteService
     init(dependencies: AppDependencies) {
