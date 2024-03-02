@@ -34,12 +34,9 @@ struct AppDependencies {
         DataPlayerRepositoryImp(dependencies: self)
     }
     
+    //TODO: intentar borrarla de todos lados
     func resolve() -> AppDependencies {
         self
-    }
-    
-    func resolve() -> UIWindow? {
-        window
     }
     
     func loginNavigationController() -> UINavigationController {
