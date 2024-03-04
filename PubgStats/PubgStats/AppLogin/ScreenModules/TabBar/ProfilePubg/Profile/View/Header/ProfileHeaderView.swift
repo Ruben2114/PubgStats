@@ -23,6 +23,7 @@ enum ProfileButton: CaseIterable {
 
 enum ProfileHeaderViewState: State {
     case didSelectButton(ProfileButton)
+    case didSelectHelpIcon
 }
 
 final class ProfileHeaderView: XibView {
@@ -35,6 +36,7 @@ final class ProfileHeaderView: XibView {
     @IBOutlet private weak var xpAmountLabel: UILabel!
     @IBOutlet private weak var titleDataGeneral: UILabel!
     @IBOutlet private weak var containerChips: UIStackView!
+    @IBOutlet private weak var helpGeneralIcon: UIImageView!
     
     private var cancellable = Set<AnyCancellable>()
     private var subject = PassthroughSubject<ProfileHeaderViewState, Never>()
@@ -64,6 +66,7 @@ private extension ProfileHeaderView {
     func configureViews() {
         configureContainer()
         configureChips()
+        configureImage()
     }
     
     func configureContainer() {
@@ -88,6 +91,11 @@ private extension ProfileHeaderView {
         xpAmountLabel.text = representable?.xp
     }
     
+    func configureImage() {
+        helpGeneralIcon.isUserInteractionEnabled = true
+        helpGeneralIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapGeneralIcon)))
+    }
+    
     func configureChips()  {
         ProfileButton.allCases.forEach { type in
             getChipButton(type: type)
@@ -101,5 +109,9 @@ private extension ProfileHeaderView {
             self?.subject.send(.didSelectButton(type))
         }.store(in: &cancellable)
         containerChips.addArrangedSubview(button)
+    }
+    
+    @objc func didTapGeneralIcon() {
+        subject.send(.didSelectHelpIcon)
     }
 }

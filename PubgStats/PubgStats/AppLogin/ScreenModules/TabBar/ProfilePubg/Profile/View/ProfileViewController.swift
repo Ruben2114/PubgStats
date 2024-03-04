@@ -127,6 +127,9 @@ private extension ProfileViewController {
                 case .weapon:
                     self?.viewModel.goToWeapon()
                 }
+            case .didSelectHelpIcon:
+                //TODO: key
+                self?.configureBottomSheet(title: "Novato", subtitle: "explicar porque eres novato y los rango que exinten")
             }
         }.store(in: &cancellable)
     }

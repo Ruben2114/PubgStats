@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="containerChips" destination="a9G-SA-XYP" id="0Bi-gZ-aP9"/>
                 <outlet property="containerView" destination="peN-ZA-5Ej" id="bxJ-58-MXx"/>
+                <outlet property="helpGeneralIcon" destination="yPe-3J-fEs" id="uJI-Pd-msX"/>
                 <outlet property="levelAmountLabel" destination="pOl-z4-JkS" id="IYt-eX-Ccq"/>
                 <outlet property="levelDescriptionLabel" destination="mz1-Ba-CbS" id="tdI-9F-vnZ"/>
                 <outlet property="namePlayerLabel" destination="Meg-mZ-fKc" id="Eeg-Fu-jnH"/>
@@ -30,10 +31,10 @@
                     <rect key="frame" x="16" y="16" width="312" height="162"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="peN-ZA-5Ej">
-                            <rect key="frame" x="0.0" y="0.0" width="312" height="135"/>
+                            <rect key="frame" x="0.0" y="0.0" width="312" height="122"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="2vu-kQ-T4W">
-                                    <rect key="frame" x="8" y="8" width="296" height="119"/>
+                                    <rect key="frame" x="8" y="8" width="296" height="106"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yf9-Ae-pv8">
                                             <rect key="frame" x="0.0" y="0.0" width="296" height="24"/>
@@ -122,7 +123,7 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="a9G-SA-XYP" userLabel="ChipsStack">
-                                            <rect key="frame" x="0.0" y="98" width="296" height="21"/>
+                                            <rect key="frame" x="0.0" y="98" width="296" height="8"/>
                                         </stackView>
                                     </subviews>
                                 </stackView>
@@ -136,14 +137,31 @@
                             </constraints>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="2TF-PO-d4E">
-                            <rect key="frame" x="0.0" y="151" width="312" height="11"/>
+                            <rect key="frame" x="0.0" y="138" width="312" height="24"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PjU-CD-FpS">
-                                    <rect key="frame" x="0.0" y="0.0" width="312" height="11"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="56" height="24"/>
                                     <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="20"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8cg-r3-UHt">
+                                    <rect key="frame" x="62" y="0.0" width="250" height="24"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="questionmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="yPe-3J-fEs" userLabel="Help Image View">
+                                            <rect key="frame" x="0.0" y="0.5" width="24" height="23"/>
+                                            <color key="tintColor" red="1" green="0.80412748379999999" blue="0.23855967710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="24" id="BrV-vd-svK"/>
+                                                <constraint firstAttribute="height" constant="24" id="eQj-Me-b1g"/>
+                                            </constraints>
+                                        </imageView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yqc-uj-SK0">
+                                            <rect key="frame" x="24" y="0.0" width="226" height="24"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
+                                    </subviews>
+                                </stackView>
                             </subviews>
                         </stackView>
                     </subviews>
@@ -162,6 +180,7 @@
         </view>
     </objects>
     <resources>
+        <image name="questionmark.circle" catalog="system" width="128" height="123"/>
         <image name="xbox.logo" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
