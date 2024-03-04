@@ -86,6 +86,6 @@ enum AttributesDetailsSurvival {
     
     func getDistance(_ distance: String?) -> String {
         let distanceKM = (Double(distance ?? "") ?? 0) / 1000
-        return "\(String(format: "%.0f", distanceKM)) km"
+        return String(format: "%.0f km", distanceKM)
     }
 }

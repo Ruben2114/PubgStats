@@ -64,13 +64,13 @@ enum AttributesDetailsWeapon {
                 .filter{$0.key.contains("InAGame")}
                 .map {DefaultAttributesDetails(titleSection: "BestData".localize(),
                                                title: $0.key.localize(),
-                                               amount: String(format: "%.0f", $0.value))}
+                                               amount: $0.value.formattedDouble())}
         case .bestData(let statistics):
             return statistics.weaponDetails.statsTotal
                 .filter{!$0.key.contains("InAGame")}
                 .map {DefaultAttributesDetails(titleSection: "details".localize(),
                                                title: $0.key.localize(),
-                                               amount: $0.key == "LongestDefeat" ? "\(String(format: "%.0f", $0.value)) m": String(format: "%.0f", $0.value))}
+                                               amount: $0.key == "LongestDefeat" ? String(format: "%.0f m", $0.value) : String(format: "%.0f", $0.value))}
         default:
             return []
         }

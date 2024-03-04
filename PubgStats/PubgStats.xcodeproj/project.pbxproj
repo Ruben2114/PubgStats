@@ -79,6 +79,7 @@
 		8C3A01462B840E9A00211AF3 /* AttributesHomeViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A01452B840E9A00211AF3 /* AttributesHomeViewModelTest.swift */; };
 		8C3B45D22B866E7F00A40B0B /* WeaponAttributesDetailsRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3B45D12B866E7F00A40B0B /* WeaponAttributesDetailsRepresentable.swift */; };
 		8C6E9C9429F1560600DE593D /* ItemCellHelpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6E9C9329F1560600DE593D /* ItemCellHelpData.swift */; };
+		8C7165622B96701B0018B6B4 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7165612B96701B0018B6B4 /* Double+Extension.swift */; };
 		8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */; };
 		8C7563E029BB5E5E000373F9 /* LoadingPresentationDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563DF29BB5E5E000373F9 /* LoadingPresentationDisplayable.swift */; };
 		8C7563E229BB5E8A000373F9 /* ViewValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563E129BB5E8A000373F9 /* ViewValues.swift */; };
@@ -276,6 +277,7 @@
 		8C3A01452B840E9A00211AF3 /* AttributesHomeViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesHomeViewModelTest.swift; sourceTree = "<group>"; };
 		8C3B45D12B866E7F00A40B0B /* WeaponAttributesDetailsRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponAttributesDetailsRepresentable.swift; sourceTree = "<group>"; };
 		8C6E9C9329F1560600DE593D /* ItemCellHelpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellHelpData.swift; sourceTree = "<group>"; };
+		8C7165612B96701B0018B6B4 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraint.swift"; sourceTree = "<group>"; };
 		8C7563DF29BB5E5E000373F9 /* LoadingPresentationDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingPresentationDisplayable.swift; sourceTree = "<group>"; };
 		8C7563E129BB5E8A000373F9 /* ViewValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewValues.swift; sourceTree = "<group>"; };
@@ -1136,6 +1138,7 @@
 				8CCC92C929E407980019BE72 /* UIViewController+TableView.swift */,
 				466BCE142A02657B002896B7 /* UIViewController+CollectionView.swift */,
 				8CB05FA12A5F5022000B4092 /* UILabel.swift */,
+				8C7165612B96701B0018B6B4 /* Double+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1703,6 +1706,7 @@
 				8CAE34B42B7EAC4900191927 /* GamesModesAttributesDetailsRepresentable.swift in Sources */,
 				465550D829CC504100BF932A /* ProfileCoordinator.swift in Sources */,
 				465550FA29CC7E4600BF932A /* GuideExternalDependency.swift in Sources */,
+				8C7165622B96701B0018B6B4 /* Double+Extension.swift in Sources */,
 				8C2460762B3C50B800AB98F3 /* ChartCollectionViewCell.swift in Sources */,
 				8CE9BDCE29E59F1400F45D3F /* AttributesDetailDependencies.swift in Sources */,
 				8CB2CEEC29C9A35B00E79D29 /* ApiClientServiceImp.swift in Sources */,

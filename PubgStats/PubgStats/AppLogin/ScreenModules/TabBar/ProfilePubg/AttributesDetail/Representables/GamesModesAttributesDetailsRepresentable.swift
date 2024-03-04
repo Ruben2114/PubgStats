@@ -85,7 +85,7 @@ enum AttributesDetailsGamesModes {
         case .roadKills(let stat):
             return ("roadKills", "\(stat.roadKills)")
         case .longestKill(let stat):
-            return ("longestKill", "\(String(format: "%.0f", stat.longestKill)) m")
+            return ("longestKill", String(format: "%.0f m", stat.longestKill))
         case .longestTimeSurvived(let stat):
             return ("longestTimeSurvived", getTime(stat.mostSurvivalTime, true))
         case .losses(let stat):
@@ -126,7 +126,6 @@ enum AttributesDetailsGamesModes {
     }
     
     func getHeader() -> (String, CGFloat) {
-        //TODO: meter top10 y heasshot en la vista y en el header mostrar su %
         switch self {
         case .tops10(let stat):
             let top10 = getPercentage(statistic: Double(stat.top10S), total: Double(stat.roundsPlayed))
@@ -136,13 +135,18 @@ enum AttributesDetailsGamesModes {
             return ("\("headshotKills".localize()): \(String(format: "%.0f", headshotKills)) %", headshotKills)
         case .killsRound(let stat):
             let killsRound = getPercentage(statistic: Double(stat.kills), total: Double(stat.roundsPlayed), optional: true)
-            return ("\("killsRound".localize()): \(String(format: "%.1f", killsRound))", killsRound)
+            return ("\("killsRound".localize()): \(getPercentageString(killsRound))", killsRound)
         case .winsDay(let stat):
             let winsDay = getPercentage(statistic: Double(stat.wins), total: Double(stat.days), optional: true)
-            return ("\("winsDay".localize()): \(String(format: "%.1f", winsDay))", winsDay)
+            return ("\("winsDay".localize()): \(getPercentageString(winsDay))", winsDay)
         default:
             return ("", 0)
         }
+    }
+    
+    private func getPercentageString(_ amount: CGFloat) -> String {
+        let decimal = amount == 0.0 ? "%.0f" : "%.1f"
+        return String(format: decimal, amount)
     }
     
     private func getTime(_ time: Double, _ withMinutes: Bool = false) -> String {
@@ -154,7 +158,7 @@ enum AttributesDetailsGamesModes {
     
     private func getDistance(_ distance: Double) -> String {
         let distanceKM = distance / 1000
-        return "\(String(format: "%.2f", distanceKM)) km"
+        return String(format: "%.0f km", distanceKM)
     }
     
     private func getPercentage(statistic: Double?, total: Double?, optional: Bool = false) -> CGFloat {

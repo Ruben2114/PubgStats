@@ -81,7 +81,7 @@ private extension AttributesDetailViewModel {
         var attributes: [[AttributesDetails]] = []
         let attributesDetails = AttributesDetailsGamesModes.getStatistics(statistics)
         for detail in attributesDetails {
-            let data = detail.0.map({ DefaultAttributesDetails(titleSection: detail.1.capitalized, title: $0.getStats().0.localize(), amount: $0.getStats().1)})
+            let data = detail.0.map({ DefaultAttributesDetails(titleSection: detail.1.capitalized, title: $0.getStats().0.localize(), amount: $0.getStats().1.formattedString())})
             attributes.append(data)
         }
         return attributes
@@ -107,7 +107,7 @@ private extension AttributesDetailViewModel {
     func getAttributesDetailsSurvival() {
         guard let statistics = attributesDetailList?.infoSurvivalDetails else { return }
         let attributesDetails = AttributesDetailsSurvival.getStatistics(statistics)
-            .map({DefaultAttributesDetails(titleSection: "details".localize(), title: $0.getStats().0.localize(), amount: $0.getStats().1)})
+            .map({DefaultAttributesDetails(titleSection: "details".localize(), title: $0.getStats().0.localize(), amount: $0.getStats().1.formattedString())})
         
         let attributesHome = DefaultAttributesHome(title: "Level \(statistics.level)",
                                                    rightAmount: Int(statistics.xp),
