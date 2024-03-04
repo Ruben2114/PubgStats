@@ -55,7 +55,7 @@ class PieChartView: UIView {
     
     private var centerDescriptionLabel: UILabel {
         let bottomLabel = UILabel(frame: .zero)
-        bottomLabel.text = currentSubTitleText ?? "Total" //TODO: falta la key
+        bottomLabel.text = currentSubTitleText ?? "currentSubTitleText".localize()
         bottomLabel.textColor = .white
         bottomLabel.font = UIFont(name: "AmericanTypewriter", size: 20)
         bottomLabel.textAlignment = .center

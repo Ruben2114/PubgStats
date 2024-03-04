@@ -28,17 +28,17 @@ class PercentageRectangleView: UIView {
         super.init(coder: coder)
         configUI()
     }
-    //TODO: meterlo en un struct
-    func configureView(text: String = "", percentage: CGFloat, backgroundColor: UIColor = .black, cornerRadius: CGFloat = 0, withText: Bool = true, withPercentageSymbol: Bool = true) {
-        if withText {
-            let percentageLabel = String(format: "%.0f", percentage)
-            let percentageSymbol = withPercentageSymbol ? "%" : ""
-            self.label.text = "\(text) \(percentageLabel) \(percentageSymbol)"
+
+    func configureView(_ data: PercentageRectangleRepresentable) {
+        if data.withText == true {
+            let percentageLabel = String(format: "%.0f", data.percentage)
+            let percentageSymbol = data.withPercentageSymbol == true ? "%" : ""
+            self.label.text = "\(data.text ?? "") \(percentageLabel) \(percentageSymbol)"
         }
-        self.percentage = percentage
-        self.backgroundColor = backgroundColor
-        self.layer.cornerRadius = cornerRadius
-        fillLayer.cornerRadius = cornerRadius
+        self.percentage = data.percentage
+        self.backgroundColor = data.backgroundColor
+        self.layer.cornerRadius = data.cornerRadius ?? 0
+        fillLayer.cornerRadius = data.cornerRadius ?? 0
     }
     
     override func layoutSubviews() {

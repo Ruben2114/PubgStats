@@ -56,7 +56,7 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showLoading() //TODO: cuando entra directamente por aqui no deberia hacer loading
+        showLoading()
         setAppearance()
         bind()
         viewModel.viewDidLoad()
@@ -96,8 +96,7 @@ private extension ProfileViewController {
                 self?.chartView.isHidden = infoChartView?.count == 0 ? true : false
                 self?.chartView.configureViewWith(DefaultChartViewData(charts: infoChartView ?? [], chartSelectedIndex: 0))
             case .showErrorPlayerDetails:
-                //TODO: poner en hidden todo lo que tenga datos y que salga la alerta
-                //TODO: key
+                //TODO: poner en hidden todo lo que tenga datos y que salga la alerta + keys
                 self?.presentAlert(message: "Error al cargar los datos de los modos de juego", title: "Error")
             case .showHeader(let data):
                 self?.headerView.configureView(representable: data)
@@ -129,7 +128,7 @@ private extension ProfileViewController {
                 }
             case .didSelectHelpIcon:
                 //TODO: key
-                self?.configureBottomSheet(title: "Novato", subtitle: "explicar porque eres novato y los rango que exinten")
+                self?.configureBottomSheet(title: "Novato (tu rango)", subtitle: "explicar porque eres novato y los rango que exinten")
             }
         }.store(in: &cancellable)
     }

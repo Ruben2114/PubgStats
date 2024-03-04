@@ -47,8 +47,7 @@ final class ChartsInfoView: XibView {
 
 private extension ChartsInfoView {
     func setAppearance() {
-        //TODO: key
-        titleLabel.text = "Gráfica por categorias"
+        titleLabel.text = "chartsInfoViewTitleLabel".localize()
         titleLabel.textColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
     }
     

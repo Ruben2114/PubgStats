@@ -52,7 +52,9 @@ private extension DetailsCardView {
             let text = representableDetails?.type == .modeGames ? setType(data.title)?.setTitle() : data.title
             let label = getTitleLabel(text: text ?? data.title)
             let percentageRectangleView = PercentageRectangleView()
-            percentageRectangleView.configureView(percentage: data.percentage, cornerRadius: 4, withText: false)
+            percentageRectangleView.configureView(DefaultPercentageRectangle(percentage: data.percentage,
+                                                                             cornerRadius: 4,
+                                                                             withText: false))
             percentageRectangleView.heightAnchor.constraint(equalToConstant: 4).isActive = true
             
             stack.addArrangedSubview(label)
@@ -67,7 +69,11 @@ private extension DetailsCardView {
         guard let representable = representableHome else { return }
         let labelRectangle = representable.type.getRectangleHeaderLabel()
         let backgroundColor: UIColor = representable.type == .survival ? .black : .systemGray
-        rectangleView.configureView(text: labelRectangle, percentage: representable.percentage, backgroundColor: backgroundColor, cornerRadius: 8, withPercentageSymbol: representable.type == .modeGames)
+        rectangleView.configureView(DefaultPercentageRectangle(text: labelRectangle,
+                                                               percentage: representable.percentage,
+                                                               backgroundColor: backgroundColor,
+                                                               cornerRadius: 8,
+                                                               withPercentageSymbol: representable.type == .modeGames))
         let image = representable.type == .modeGames ? setType(representable.image)?.setImage() : representable.image
         imageView.image = UIImage(named: image ?? "")
         leftLabel.text = representable.type.getLeftHeaderLabel()

@@ -8,9 +8,7 @@
 import CoreData
 import UIKit
 
-// <>
-
-//TODO: todo esto ponerlo con combine y que devuelva un bool minimo y la cache que se gestione cuando se hace la llamda no como otro metodo
+//TODO: manejar errores
 
 protocol LocalDataProfileService {
     func save(player: String, account: String, platform: String)

@@ -80,6 +80,7 @@
 		8C3B45D22B866E7F00A40B0B /* WeaponAttributesDetailsRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3B45D12B866E7F00A40B0B /* WeaponAttributesDetailsRepresentable.swift */; };
 		8C6E9C9429F1560600DE593D /* ItemCellHelpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6E9C9329F1560600DE593D /* ItemCellHelpData.swift */; };
 		8C7165622B96701B0018B6B4 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7165612B96701B0018B6B4 /* Double+Extension.swift */; };
+		8C7165652B9687F10018B6B4 /* PercentageRectangleRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7165642B9687F10018B6B4 /* PercentageRectangleRepresentable.swift */; };
 		8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */; };
 		8C7563E029BB5E5E000373F9 /* LoadingPresentationDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563DF29BB5E5E000373F9 /* LoadingPresentationDisplayable.swift */; };
 		8C7563E229BB5E8A000373F9 /* ViewValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563E129BB5E8A000373F9 /* ViewValues.swift */; };
@@ -278,6 +279,7 @@
 		8C3B45D12B866E7F00A40B0B /* WeaponAttributesDetailsRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponAttributesDetailsRepresentable.swift; sourceTree = "<group>"; };
 		8C6E9C9329F1560600DE593D /* ItemCellHelpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellHelpData.swift; sourceTree = "<group>"; };
 		8C7165612B96701B0018B6B4 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		8C7165642B9687F10018B6B4 /* PercentageRectangleRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentageRectangleRepresentable.swift; sourceTree = "<group>"; };
 		8C7563DC29BB54AE000373F9 /* UIView+Constraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraint.swift"; sourceTree = "<group>"; };
 		8C7563DF29BB5E5E000373F9 /* LoadingPresentationDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingPresentationDisplayable.swift; sourceTree = "<group>"; };
 		8C7563E129BB5E8A000373F9 /* ViewValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewValues.swift; sourceTree = "<group>"; };
@@ -725,6 +727,15 @@
 			path = AttributesHome;
 			sourceTree = "<group>";
 		};
+		8C7165632B9687DD0018B6B4 /* PercentageRectangle */ = {
+			isa = PBXGroup;
+			children = (
+				8C2460622B3C503100AB98F3 /* PercentageRectangleView.swift */,
+				8C7165642B9687F10018B6B4 /* PercentageRectangleRepresentable.swift */,
+			);
+			path = PercentageRectangle;
+			sourceTree = "<group>";
+		};
 		8C7563DA29BB5169000373F9 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -744,12 +755,12 @@
 		8C7563DE29BB5E3C000373F9 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				8C7165632B9687DD0018B6B4 /* PercentageRectangle */,
 				8C2460642B3C506200AB98F3 /* ChartView */,
 				8C2460582B3C4FC800AB98F3 /* XibView */,
 				8C2460532B3C4F4A00AB98F3 /* Chip */,
 				8C7563DF29BB5E5E000373F9 /* LoadingPresentationDisplayable.swift */,
 				8C24607C2B3C520D00AB98F3 /* State.swift */,
-				8C2460622B3C503100AB98F3 /* PercentageRectangleView.swift */,
 				8C2460412B3C4E7A00AB98F3 /* ZoomAndSnapFlowLayout.swift */,
 				8C7563E329BB5F17000373F9 /* MessageDisplayable.swift */,
 				8CB39BA629C0917000B1D8EF /* ViewScrollable.swift */,
@@ -1722,6 +1733,7 @@
 				8CA85D8629DC46160050C19B /* UIViewController+func.swift in Sources */,
 				8C3B45D22B866E7F00A40B0B /* WeaponAttributesDetailsRepresentable.swift in Sources */,
 				8CEB340929ED61A3006C2564 /* SettingsDataRepositoryImp.swift in Sources */,
+				8C7165652B9687F10018B6B4 /* PercentageRectangleRepresentable.swift in Sources */,
 				465550FC29CC7E8E00BF932A /* GuideCoordinator.swift in Sources */,
 				8CCC92C429E3F8270019BE72 /* FavouriteRepositoryImp.swift in Sources */,
 				4670EDEC29D4433B00C1062E /* HelpDataExternalDependency.swift in Sources */,

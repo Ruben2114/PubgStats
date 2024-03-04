@@ -69,12 +69,11 @@ private extension ProfileGeneralView {
         headshotAmount.text = String(representable.headshotKillsTotal)
         assistsLabel.text = "assists".localize()
         assistsAmount.text = String(representable.assistsTotal)
-        
-        percentageView.configureView(text: "wins".localize(),
-                                     percentage: percentage,
-                                     backgroundColor: .systemGray,
-                                     cornerRadius: 8, 
-                                     withPercentageSymbol: true)
+        percentageView.configureView(DefaultPercentageRectangle(text: "wins".localize(),
+                                                                percentage: percentage,
+                                                                backgroundColor: .systemGray,
+                                                                cornerRadius: 8,
+                                                                withPercentageSymbol: true))
     }
     
     func getTitle(_ level: CGFloat) -> String {
