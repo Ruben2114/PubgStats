@@ -75,7 +75,7 @@ enum AttributesDetailsGamesModes {
     func getStats() -> (String, String) {
         switch self {
         case .kills(let stat):
-            return ("kills", "\(stat.kills)")
+            return ("Kills", "\(stat.kills)")
         case .maxKillStreaks(let stat):
             return ("maxKillStreaks", "\(stat.maxKillStreaks)")
         case .roundMostKills(let stat):

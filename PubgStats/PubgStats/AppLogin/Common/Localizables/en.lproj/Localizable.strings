@@ -29,7 +29,6 @@
 "survivalDataViewControllerTitle" = "Survival";
 "weaponDataViewControllerTitle" = "Weapons";
 "killsDataViewControllerTitle" = "Total kills data";
-"Kills" = "kills";
 "rounds" = "Rounds";
 "maxKillStreaks" = "max kill streaks";
 "roundMostKills" = "round most kills";
@@ -68,7 +67,6 @@
 "duo" = "duo";
 "duoFpp" = "duo Fpp";
 "details" = "Details";
-"headShots" = "HeadShots";
 "groggies" = "Groggies";
 "profileViewControllerNavigationItem" = "Player detail";
 "actionAccept" = "Accept";
@@ -100,3 +98,9 @@
 "uniqueItemsLooted" = "unique items looted";
 "throwablesThrown" = "throwables thrown";
 "teammatesRevived" = "teammates revived";
+"Rookie" = "Rookie";
+"Private" = "Private";
+"Sergeant" = "Sergeant";
+"Captain" = "Captain";
+"Legend" = "Legend";
+"Apprentice" = "Apprentice";

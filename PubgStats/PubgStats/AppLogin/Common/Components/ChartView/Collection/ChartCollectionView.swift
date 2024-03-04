@@ -120,12 +120,8 @@ extension ChartCollectionView: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == chartSelectedIndex {
-            guard let cell = collectionView.cellForItem(at: indexPath) as? ChartCollectionViewCell else { return }
-            cell.didTapNewView(collectionView.panGestureRecognizer)
-        }
-        chartSelectedIndex = indexPath.item
-        self.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ChartCollectionViewCell else { return }
+        cell.didTapNewView(collectionView.panGestureRecognizer)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

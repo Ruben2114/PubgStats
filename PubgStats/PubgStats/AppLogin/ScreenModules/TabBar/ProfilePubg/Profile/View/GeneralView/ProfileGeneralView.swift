@@ -54,35 +54,38 @@ private extension ProfileGeneralView {
     }
     
     func configureView() {
-        //TODO: poner key
         guard let representable else { return }
         let percentage = representable.wonTotal != 0 && representable.gamesPlayed != 0 ? CGFloat(Double(representable.wonTotal) / Double(representable.gamesPlayed) * 100) : 0
         titleLabel.text = getTitle(percentage)
-        winsLabel.text = "Wins"
+        winsLabel.text = "wins".localize()
         winsAmount.text = String(representable.wonTotal)
         topLabel.text = "Top 10"
         topAmount.text = String(representable.top10STotal)
-        gamesPlayedLabel.text = "Matches"
+        gamesPlayedLabel.text = "rounds".localize()
         gamesPlayedAmount.text = String(representable.gamesPlayed)
-        killsLabel.text = "Kills"
+        killsLabel.text = "Kills".localize()
         killsAmount.text = String(representable.killsTotal)
-        headshotLabel.text = "headshot"
+        headshotLabel.text = "HeadShots".localize()
         headshotAmount.text = String(representable.headshotKillsTotal)
-        assistsLabel.text = "assistsTotal"
+        assistsLabel.text = "assists".localize()
         assistsAmount.text = String(representable.assistsTotal)
         
-        percentageView.configureView(text: "Victorias ", percentage: percentage, backgroundColor: .systemGray ,cornerRadius: 8, withPercentageSymbol: true)
+        percentageView.configureView(text: "wins".localize(),
+                                     percentage: percentage,
+                                     backgroundColor: .systemGray,
+                                     cornerRadius: 8, 
+                                     withPercentageSymbol: true)
     }
     
     func getTitle(_ level: CGFloat) -> String {
         switch level {
-        case 0..<20: return "Novato"
-        case 20..<40: return "Sargento"
-        case 40..<60: return "Teniente"
-        case 60..<80: return "Coronel"
-        case 80..<100: return "Leyenda"
+        case 0..<20: return "Rookie".localize()
+        case 20..<40: return "Private".localize()
+        case 40..<60: return "Sergeant".localize()
+        case 60..<80: return "Captain".localize()
+        case 80..<100: return "Legend".localize()
         default:
-            return "Rookie"
+            return "Apprentice".localize()
         }
     }
 }

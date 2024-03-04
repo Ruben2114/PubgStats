@@ -29,7 +29,6 @@
 "survivalDataViewControllerTitle" = "Supervivencia";
 "weaponDataViewControllerTitle" = "Armas";
 "killsDataViewControllerTitle" = "Datos muertes totales";
-"kills" = "Muertes";
 "maxKillStreaks" = "Record rachas de muertes";
 "roundMostKills" = "Record muerte en partida";
 "killedTeammate" = "Asesinato a compañeros";
@@ -67,7 +66,6 @@
 "duo" = "duo";
 "duoFpp" = "duo Fpp";
 "details" = "Detalles";
-"headShots" = "Tiro a la cabeza";
 "groggies" = "Aturdidos";
 "profileViewControllerNavigationItem" = "Detalle del jugador";
 "actionAccept" = "Aceptar";
@@ -100,3 +98,9 @@
 "uniqueItemsLooted" = "Objetos únicos saqueados";
 "throwablesThrown" = "Arrojables arrojados";
 "teammatesRevived" = "Compañeros de equipo revividos";
+"Rookie" = "Novato";
+"Private" = "Soldado";
+"Sergeant" = "Sargento";
+"Captain" = "Capitán";
+"Legend" = "Leyenda";
+"Apprentice" = "Aprendiz";
