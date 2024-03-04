@@ -28,7 +28,6 @@ final class MainTabBarCoordinatorImp: MainTabBarCoordinator {
     func start() {
         let tabBarView = TabBarView.getTabBar(externalDependencies)
             .map({createNavController(tabBar: $0, data: dataProfile)})
-        //TODO: cambiar esto por matches y guide en una totalizator en la view (en favoritos en matches se cambian por la view de noticias)
         let tabBar = dependencies.external.tabBarController()
         tabBar.viewControllers = tabBarView
         tabBar.tabBar.backgroundColor = .black
@@ -52,8 +51,11 @@ private extension MainTabBarCoordinatorImp {
         navigation.viewControllers = []
         navigation.tabBarItem.title = tabBar.getTitle().localize()
         navigation.tabBarItem.image = UIImage(systemName: tabBar.getImage())
-        if let bindableCoordinator = coordinator as? BindableCoordinator {
-            coordinator = bindableCoordinator.set(data)
+        if let bindableCoordinator = coordinator as? ProfileCoordinator {
+            let type: NavigationStats = .profile
+            coordinator = bindableCoordinator
+                .set(type)
+                .set(data)
             coordinator.start()
         } else {
             coordinator.start()

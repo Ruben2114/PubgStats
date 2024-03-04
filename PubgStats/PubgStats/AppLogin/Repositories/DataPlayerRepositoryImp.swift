@@ -32,7 +32,7 @@ struct DataPlayerRepositoryImp: DataPlayerRepository {
     }
     
     func fetchSurvivalData(representable: IdAccountDataProfileRepresentable, type: NavigationStats, reload: Bool) -> AnyPublisher<SurvivalDataProfileRepresentable, Error> {
-        if let cache = self.dataSource.getSurvival(player: representable.name, type: .profile), cache.stats.airDropsCalled != nil && !reload {
+        if let cache = self.dataSource.getSurvival(player: representable.name, type: type), cache.stats.airDropsCalled != nil && !reload {
             return Just(cache).setFailureType(to: Error.self).eraseToAnyPublisher()
         }
         return remoteData.getSurvivalData(account: representable.id, platform: representable.platform).map { data in
@@ -42,7 +42,7 @@ struct DataPlayerRepositoryImp: DataPlayerRepository {
     }
     
     func fetchGamesModeData(representable: IdAccountDataProfileRepresentable, type: NavigationStats, reload: Bool) -> AnyPublisher<GamesModesDataProfileRepresentable, Error> {
-        if let cache = self.dataSource.getGameMode(player: representable.name, type: .profile), !cache.timePlayed.isEmpty && !reload {
+        if let cache = self.dataSource.getGameMode(player: representable.name, type: type), !cache.timePlayed.isEmpty && !reload {
             return Just(cache).setFailureType(to: Error.self).eraseToAnyPublisher()
         }
         return remoteData.getGamesModesData(account: representable.id, platform: representable.platform).map { data in
@@ -52,7 +52,7 @@ struct DataPlayerRepositoryImp: DataPlayerRepository {
     }
     
     func fetchWeaponData(representable: IdAccountDataProfileRepresentable, type: NavigationStats, reload: Bool) -> AnyPublisher<WeaponDataProfileRepresentable, Error> {
-        if let cache = self.dataSource.getDataWeaponDetail(player: representable.name, type: .profile), !cache.weaponSummaries.isEmpty && !reload {
+        if let cache = self.dataSource.getDataWeaponDetail(player: representable.name, type: type), !cache.weaponSummaries.isEmpty && !reload {
             return Just(cache).setFailureType(to: Error.self).eraseToAnyPublisher()
         }
         return remoteData.getWeaponData(account: representable.id, platform: representable.platform).map { data in

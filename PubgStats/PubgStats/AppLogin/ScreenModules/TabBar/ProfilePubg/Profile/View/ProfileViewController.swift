@@ -145,7 +145,6 @@ private extension ProfileViewController {
     
     func configureNavigationBar() {
         titleNavigation("profileViewControllerNavigationItem")
-        //TODO: meter el reload como una propiedad del scroll de la tabla y meterle un loading de carga
         let helpReloadButton = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: #selector(helpReloadButtonAction))
         helpReloadButton.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
         reloadButton = UIBarButtonItem(image: UIImage(systemName: "arrow.clockwise.circle.fill"), style: .plain, target: self, action: #selector(reloadButtonAction))

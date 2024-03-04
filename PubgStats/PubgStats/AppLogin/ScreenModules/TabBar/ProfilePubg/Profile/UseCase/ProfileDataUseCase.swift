@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol ProfileDataUseCase {
-    func fetchPlayerDetails(_ profile: IdAccountDataProfileRepresentable, reload: Bool) -> AnyPublisher<PlayerDetailsRepresentable, Error>
+    func fetchPlayerDetails(_ profile: IdAccountDataProfileRepresentable, reload: Bool, type: NavigationStats) -> AnyPublisher<PlayerDetailsRepresentable, Error>
 }
 
 struct ProfileDataUseCaseImp {
@@ -21,10 +21,10 @@ struct ProfileDataUseCaseImp {
 }
 
 extension ProfileDataUseCaseImp: ProfileDataUseCase {
-    func fetchPlayerDetails(_ profile: IdAccountDataProfileRepresentable, reload: Bool) -> AnyPublisher<PlayerDetailsRepresentable, Error> {
-        return Publishers.CombineLatest3(profileRepository.fetchSurvivalData(representable: profile, type: .profile, reload: reload).eraseToAnyPublisher(),
-                                         profileRepository.fetchGamesModeData(representable: profile, type: .profile, reload: reload).eraseToAnyPublisher(),
-                                         profileRepository.fetchWeaponData(representable: profile, type: .profile, reload: reload).eraseToAnyPublisher())
+    func fetchPlayerDetails(_ profile: IdAccountDataProfileRepresentable, reload: Bool, type: NavigationStats) -> AnyPublisher<PlayerDetailsRepresentable, Error> {
+        return Publishers.CombineLatest3(profileRepository.fetchSurvivalData(representable: profile, type: type, reload: reload).eraseToAnyPublisher(),
+                                         profileRepository.fetchGamesModeData(representable: profile, type: type, reload: reload).eraseToAnyPublisher(),
+                                         profileRepository.fetchWeaponData(representable: profile, type: type, reload: reload).eraseToAnyPublisher())
         .map { (SurvivalDataProfileRepresentable, GamesModesDataProfileRepresentable, WeaponDataProfileRepresentable) in
             DefaultPlayerDetails(infoSurvival: SurvivalDataProfileRepresentable,
                                  infoGamesModes: GamesModesDataProfileRepresentable,

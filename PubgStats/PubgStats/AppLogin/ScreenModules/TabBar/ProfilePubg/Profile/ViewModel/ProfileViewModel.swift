@@ -22,8 +22,9 @@ final class ProfileViewModel: DataBindable {
     private let dependencies: ProfileDependencies
     private let stateSubject = CurrentValueSubject<ProfileState, Never>(.idle)
     var state: AnyPublisher<ProfileState, Never>
-    private let getPlayerDetailsSubject = PassthroughSubject<(IdAccountDataProfileRepresentable, Bool), Never>()
+    private let getPlayerDetailsSubject = PassthroughSubject<Bool, Never>()
     @BindingOptional private var dataProfile: IdAccountDataProfileRepresentable?
+    @BindingOptional private var type: NavigationStats?
     private var representable: PlayerDetailsRepresentable?
     
     init(dependencies: ProfileDependencies) {
@@ -56,7 +57,7 @@ final class ProfileViewModel: DataBindable {
     }
     
     func reload(){
-        getPlayerDetailsSubject.send((dataProfile ?? DefaultIdAccountDataProfile(id: "", name: "", platform: ""), true))
+        getPlayerDetailsSubject.send(true)
     }
 }
 
@@ -85,9 +86,9 @@ private extension ProfileViewModel {
         if valueDate != nil {
             let interval = Date().timeIntervalSince(valueDate as? Date ?? Date()) > 86400
             if interval { UserDefaults.standard.set(nil, forKey: "date") }
-            getPlayerDetailsSubject.send((dataProfile ?? DefaultIdAccountDataProfile(id: "", name: "", platform: ""), interval))
+            getPlayerDetailsSubject.send(interval)
         } else {
-            getPlayerDetailsSubject.send((dataProfile ?? DefaultIdAccountDataProfile(id: "", name: "", platform: ""), false))
+            getPlayerDetailsSubject.send(false)
             UserDefaults.standard.set(Date(), forKey: "date")
         }
     }
@@ -126,11 +127,12 @@ private extension ProfileViewModel {
             default: break
             }
         } receiveValue: { [weak self] data in
-            self?.representable = data
-            self?.stateSubject.send(.showDataGeneral(data.infoGamesModes))
-            self?.getProfileHeader(data.infoSurvival)
-            self?.getChartData(infoGamesModes: data.infoGamesModes)
-            self?.stateSubject.send(.hideLoading)
+            guard let self else { return }
+            self.representable = data
+            self.stateSubject.send(.showDataGeneral(data.infoGamesModes))
+            self.getProfileHeader(data.infoSurvival)
+            self.getChartData(infoGamesModes: data.infoGamesModes)
+            self.stateSubject.send(.hideLoading)
         }.store(in: &anySubscription)
     }
 }
@@ -139,8 +141,10 @@ private extension ProfileViewModel {
 
 private extension ProfileViewModel {
     func playerDetailsPublisher() -> AnyPublisher<PlayerDetailsRepresentable, Error> {
-        return getPlayerDetailsSubject.flatMap { [unowned self] data, reload in
-            self.profileDataUseCase.fetchPlayerDetails(data, reload: reload)
+        return getPlayerDetailsSubject.flatMap { [unowned self] reload in
+            self.profileDataUseCase.fetchPlayerDetails(dataProfile ?? DefaultIdAccountDataProfile(id: "", name: "", platform: ""),
+                                                       reload: reload,
+                                                       type: type ?? .profile)
         }.receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
