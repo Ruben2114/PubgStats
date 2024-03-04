@@ -71,6 +71,7 @@
 "actionAccept" = "Aceptar";
 "actionCancel" = "Cancelar";
 "profileLoginCellInvalid" = "No existen jugadores sin nombre";
+"profileLoginNotExitname" = "No existen jugadores con ese nombre";
 "profileHeaderTitleDataGeneral" = "Detalles Generales";
 "profileHeaderModes" = "Modos";
 "profileHeaderWeapon" = "Armas";

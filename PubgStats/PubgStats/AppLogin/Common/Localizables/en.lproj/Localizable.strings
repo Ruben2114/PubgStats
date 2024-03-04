@@ -72,6 +72,7 @@
 "actionAccept" = "Accept";
 "actionCancel" = "Cancel";
 "profileLoginCellInvalid" = "No unnamed players exist";
+"profileLoginNotExitname" = "There are no players with that name";
 "profileHeaderTitleDataGeneral" = "General details";
 "profileHeaderModes" = "Modes";
 "profileHeaderWeapon" = "Weapon";
