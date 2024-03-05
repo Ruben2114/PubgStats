@@ -52,9 +52,6 @@ class LoginViewController: UIViewController {
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return button
     }()
-    private lazy var imageView: UIImageView = {
-        UIImageView(image: UIImage(named: "backgroundPubg"))
-    }()
     
     private var platform: String = "steam"
     private let viewModel: LoginViewModel
@@ -91,6 +88,7 @@ private extension LoginViewController {
     }
     
     func configView() {
+        configureImageBackground("backgroundPubg")
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
@@ -115,8 +113,6 @@ private extension LoginViewController {
     }
     
     func configConstraints() {
-        view.insertSubview(imageView, at: 0)
-        imageView.frame = view.bounds
         view.addSubview(containerStackView)
         containerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
         containerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true

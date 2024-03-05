@@ -20,6 +20,19 @@ extension MessageDisplayable where Self: UIViewController{
         self.present(alertController, animated: true)
     }
     
+    func presentAlertOutOrRetry(message: String, title: String, completion: (() -> Void)?){
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert)
+
+        let actionRetry = UIAlertAction(title: "actionRetry".localize(), style: .default) { _ in
+            completion?()
+        }
+        alertController.addAction(actionRetry)
+        self.present(alertController, animated: true)
+    }
+    
     func presentAlertTimer(message: String, title: String, timer: Double){
         let alertController = UIAlertController(
             title: title,

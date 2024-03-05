@@ -70,6 +70,7 @@
 "groggies" = "Groggies";
 "profileViewControllerNavigationItem" = "Player detail";
 "actionAccept" = "Accept";
+"actionRetry" = "Retry";
 "actionCancel" = "Cancel";
 "profileLoginCellInvalid" = "No unnamed players exist";
 "profileLoginNotExitname" = "There are no players with that name";
@@ -107,3 +108,6 @@
 "Apprentice" = "Apprentice";
 "chartsInfoViewTitleLabel" = "Chart by category";
 "currentSubTitleText" = "Total";
+"errorPlayerDetails" = "Sorry, the data could not be loaded. Please try again in a few seconds";
+"profileGeneralIconTitle" = "Range calculation";
+"profileGeneralIconSubtitle" = "If your winning percentage is between:\n\n0 to 19 you are Rookie\n20 to 39 you are Private\n40 to 59 you are Sergeant\n60 to 79 you are Captain\n80 to 100 you are Legend";

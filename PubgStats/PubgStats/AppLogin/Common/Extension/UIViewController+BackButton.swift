@@ -20,4 +20,10 @@ extension UIViewController {
             navigationItem.leftBarButtonItem = backButton
         }
     }
+    
+    func configureImageBackground(_ image: String) {
+        let imageBackground = UIImageView(image: UIImage(named: image))
+        view.insertSubview(imageBackground, at: 0)
+        imageBackground.frame = view.bounds
+    }
 }

@@ -17,9 +17,6 @@ class AttributesDetailViewController: UIViewController {
     private let dependencies: AttributesDetailDependencies
     private var listAttributes: AttributesViewRepresentable?
     private let identifier = "AttributesDetailsCollectionViewCell"
-    private lazy var imageBackground: UIImageView = {
-        UIImageView()
-    }()
     private lazy var scrollableStackView: ScrollableStackView = {
         let view = ScrollableStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -77,11 +74,9 @@ private extension AttributesDetailViewController {
     }
     
     func configureNavigationBar() {
-        titleNavigation(viewModel.model?.title.capitalized, backButton: #selector(backButtonAction))
+        titleNavigation(viewModel.model?.title.localize().capitalized, backButton: #selector(backButtonAction))
         let image = viewModel.model?.type.getImage() ?? ""
-        imageBackground.image = UIImage(named: image)
-        view.insertSubview(imageBackground, at: 0)
-        imageBackground.frame = view.bounds
+        configureImageBackground(image)
     }
     
     func bind() {

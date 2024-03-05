@@ -64,7 +64,7 @@ enum PlayerStats {
             return type()
         }
     }
-    
+    //TODO: poner key tooltip
     func tooltip() -> String {
         switch self{
         case .wins(_):
@@ -77,7 +77,7 @@ enum PlayerStats {
             return ""
         }
     }
-    
+    //TODO: poner key bottomSheetKey
     func bottomSheetKey() -> (String, String) {
         switch self{
         case .wins(let data):

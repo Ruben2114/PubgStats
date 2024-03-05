@@ -21,11 +21,6 @@ enum ProfileButton: CaseIterable {
     }
 }
 
-enum ProfileHeaderViewState: State {
-    case didSelectButton(ProfileButton)
-    case didSelectHelpIcon
-}
-
 final class ProfileHeaderView: XibView {
     @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var namePlayerLabel: UILabel!
@@ -34,13 +29,11 @@ final class ProfileHeaderView: XibView {
     @IBOutlet private weak var levelAmountLabel: UILabel!
     @IBOutlet private weak var xpDescriptionLabel: UILabel!
     @IBOutlet private weak var xpAmountLabel: UILabel!
-    @IBOutlet private weak var titleDataGeneral: UILabel!
     @IBOutlet private weak var containerChips: UIStackView!
-    @IBOutlet private weak var helpGeneralIcon: UIImageView!
     
     private var cancellable = Set<AnyCancellable>()
-    private var subject = PassthroughSubject<ProfileHeaderViewState, Never>()
-    public lazy var publisher: AnyPublisher<ProfileHeaderViewState, Never> = {
+    private var subject = PassthroughSubject<ProfileButton, Never>()
+    public lazy var publisher: AnyPublisher<ProfileButton, Never> = {
         return subject.eraseToAnyPublisher()
     }()
     private var representable: ProfileHeaderViewRepresentable?
@@ -66,14 +59,11 @@ private extension ProfileHeaderView {
     func configureViews() {
         configureContainer()
         configureChips()
-        configureImage()
     }
     
     func configureContainer() {
         containerView.layer.cornerRadius = 8
         containerView.backgroundColor = .black.withAlphaComponent(0.8)
-        
-        titleDataGeneral.textColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
     }
     
     func configureImagePlatform() {
@@ -83,17 +73,11 @@ private extension ProfileHeaderView {
     }
     
     func configureLabel() {
-        titleDataGeneral.text = "profileHeaderTitleDataGeneral".localize()
         namePlayerLabel.text = representable?.dataPlayer.name
         levelDescriptionLabel.text = "level".localize()
         levelAmountLabel.text = representable?.level
         xpDescriptionLabel.text = "XP"
         xpAmountLabel.text = representable?.xp
-    }
-    
-    func configureImage() {
-        helpGeneralIcon.isUserInteractionEnabled = true
-        helpGeneralIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapGeneralIcon)))
     }
     
     func configureChips()  {
@@ -106,12 +90,8 @@ private extension ProfileHeaderView {
         let button: Chip = Chip.loadFromXib() ?? Chip()
         button.setViewData(text: type.getTitle().localize())
         button.publisher.receive(on: DispatchQueue.main).sink { [weak self] in
-            self?.subject.send(.didSelectButton(type))
+            self?.subject.send(type)
         }.store(in: &cancellable)
         containerChips.addArrangedSubview(button)
-    }
-    
-    @objc func didTapGeneralIcon() {
-        subject.send(.didSelectHelpIcon)
     }
 }

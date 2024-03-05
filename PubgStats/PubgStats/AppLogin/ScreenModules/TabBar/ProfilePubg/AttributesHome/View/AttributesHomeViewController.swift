@@ -10,9 +10,6 @@ import Combine
 
 class AttributesHomeViewController: UIViewController {
     private let cellIdentifier = "AttributesHomeViewCell"
-    private lazy var imageBackground: UIImageView = {
-        UIImageView()
-    }()
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.frame, style: .plain)
         tableView.backgroundColor = .clear
@@ -71,9 +68,7 @@ private extension AttributesHomeViewController {
     
     func configureNavigationBar() {
         let image = viewModel.getType().getImage()
-        imageBackground.image = UIImage(named: image)
-        view.insertSubview(imageBackground, at: 0)
-        imageBackground.frame = view.bounds
+        configureImageBackground(image)
         titleNavigation(viewModel.getType().getTitle(), backButton: #selector(backButtonAction))
     }
     

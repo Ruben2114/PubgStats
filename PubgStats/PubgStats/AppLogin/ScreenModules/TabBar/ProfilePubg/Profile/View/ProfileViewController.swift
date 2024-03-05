@@ -21,9 +21,6 @@ final class ProfileViewController: UIViewController {
         view.setScrollInsect(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         return view
     }()
-    private lazy var imageBackground: UIImageView = {
-        UIImageView()
-    }()
     private lazy var headerView: ProfileHeaderView = {
         return ProfileHeaderView()
     }()
@@ -70,10 +67,7 @@ private extension ProfileViewController {
     }
     
     func configView() {
-        //TODO: cambiar imagen de fondo
-        imageBackground.image = UIImage(named: "gamesModesDetailsPubg")
-        view.insertSubview(imageBackground, at: 0)
-        imageBackground.frame = view.bounds
+        configureImageBackground("backgroundProfile")
         configureNavigationBar()
         configureNewsCard()
         configureSurvivalCard()
@@ -85,6 +79,7 @@ private extension ProfileViewController {
         bindChartView()
         bindNewsCardView()
         bindSurvivalCardView()
+        bindGeneralView()
     }
     
     func bindViewModel() {
@@ -96,8 +91,10 @@ private extension ProfileViewController {
                 self?.chartView.isHidden = infoChartView?.count == 0 ? true : false
                 self?.chartView.configureViewWith(DefaultChartViewData(charts: infoChartView ?? [], chartSelectedIndex: 0))
             case .showErrorPlayerDetails:
-                //TODO: poner en hidden todo lo que tenga datos y que salga la alerta + keys
-                self?.presentAlert(message: "Error al cargar los datos de los modos de juego", title: "Error")
+                self?.scrollableStackView.stackView.isHidden = true
+                self?.presentAlertOutOrRetry(message: "errorPlayerDetails".localize(), title: "Error", completion: { [weak self] in
+                    self?.viewModel.reload()
+                })
             case .showHeader(let data):
                 self?.headerView.configureView(representable: data)
             case .showDataGeneral(let data):
@@ -116,20 +113,20 @@ private extension ProfileViewController {
         }.store(in: &cancellable)
     }
     
-    func  bindHeaderView() {
-        headerView.publisher.receive(on: DispatchQueue.main).sink { [weak self] state in
-            switch state {
-            case .didSelectButton(let type):
-                switch type {
-                case .modes:
-                    self?.viewModel.goToModes()
-                case .weapon:
-                    self?.viewModel.goToWeapon()
-                }
-            case .didSelectHelpIcon:
-                //TODO: key
-                self?.configureBottomSheet(title: "Novato (tu rango)", subtitle: "explicar porque eres novato y los rango que exinten")
+    func bindHeaderView() {
+        headerView.publisher.receive(on: DispatchQueue.main).sink { [weak self] type in
+            switch type {
+            case .modes:
+                self?.viewModel.goToModes()
+            case .weapon:
+                self?.viewModel.goToWeapon()
             }
+        }.store(in: &cancellable)
+    }
+    
+    func bindGeneralView() {
+        dataGeneralView.publisher.receive(on: DispatchQueue.main).sink { [weak self] state in
+            self?.configureBottomSheet(title: state.0, subtitle: state.1)
         }.store(in: &cancellable)
     }
     

@@ -69,6 +69,7 @@
 "groggies" = "Aturdidos";
 "profileViewControllerNavigationItem" = "Detalle del jugador";
 "actionAccept" = "Aceptar";
+"actionRetry" = "Reintentar";
 "actionCancel" = "Cancelar";
 "profileLoginCellInvalid" = "No existen jugadores sin nombre";
 "profileLoginNotExitname" = "No existen jugadores con ese nombre";
@@ -107,3 +108,6 @@
 "Apprentice" = "Aprendiz";
 "chartsInfoViewTitleLabel" = "Gráfica por categorias";
 "currentSubTitleText" = "Total";
+"errorPlayerDetails" = "Lo siento, no se han podido cargar los datos. Vuelve a intentarlo en unos segundos";
+"profileGeneralIconTitle" = "Cálculo del rango";
+"profileGeneralIconSubtitle" = "Si tu porcentaje de victorias esta entre:\n\n0 a 19 eres Novato\n20 a 39 eres Soldado\n40 a 59 eres Sargento\n60 a 79 eres Capitán\n80 a 100 eres Aprendiz";

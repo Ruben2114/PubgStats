@@ -7,6 +7,7 @@
 
 import UIKit
 import Foundation
+import Combine
 
 final class ProfileGeneralView: XibView {
     @IBOutlet private weak var containerView: UIView!
@@ -24,6 +25,14 @@ final class ProfileGeneralView: XibView {
     @IBOutlet private weak var assistsLabel: UILabel!
     @IBOutlet private weak var assistsAmount: UILabel!
     @IBOutlet private weak var percentageView: PercentageRectangleView!
+    @IBOutlet private weak var helpGeneralIcon: UIImageView!
+    @IBOutlet private weak var titleDataGeneral: UILabel!
+
+    private var cancellable = Set<AnyCancellable>()
+    private var subject = PassthroughSubject<(String, String), Never>()
+    public lazy var publisher: AnyPublisher<(String, String), Never> = {
+        return subject.eraseToAnyPublisher()
+    }()
     
     private var representable: GamesModesDataProfileRepresentable?
 
@@ -46,6 +55,7 @@ final class ProfileGeneralView: XibView {
 private extension ProfileGeneralView {
     func configureViews() {
         configureContainer()
+        configureImage()
     }
     
     func configureContainer() {
@@ -56,6 +66,7 @@ private extension ProfileGeneralView {
     func configureView() {
         guard let representable else { return }
         let percentage = representable.wonTotal != 0 && representable.gamesPlayed != 0 ? CGFloat(Double(representable.wonTotal) / Double(representable.gamesPlayed) * 100) : 0
+        titleDataGeneral.text = "profileHeaderTitleDataGeneral".localize()
         titleLabel.text = getTitle(percentage)
         winsLabel.text = "wins".localize()
         winsAmount.text = String(representable.wonTotal)
@@ -74,6 +85,15 @@ private extension ProfileGeneralView {
                                                                 backgroundColor: .systemGray,
                                                                 cornerRadius: 8,
                                                                 withPercentageSymbol: true))
+    }
+    
+    func configureImage() {
+        helpGeneralIcon.isUserInteractionEnabled = true
+        helpGeneralIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapGeneralIcon)))
+    }
+    
+    @objc func didTapGeneralIcon() {
+        subject.send(("profileGeneralIconTitle".localize(), "profileGeneralIconSubtitle".localize()))
     }
     
     func getTitle(_ level: CGFloat) -> String {
