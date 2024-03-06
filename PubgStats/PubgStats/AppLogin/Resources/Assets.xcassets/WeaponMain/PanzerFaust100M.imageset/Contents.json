@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "Item_Weapon_PanzerFaust100M_C.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Item_Weapon_PanzerFaust100M_C.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

@@ -10,19 +10,19 @@ import Combine
 
 enum LoginState {
     case idle
-    case sendInfoProfile(IdAccountDataProfile)
+    case sendInfoProfile(IdAccountDataProfileRepresentable)
     case sendInfoProfileError
     case showLoading
 }
 
 final class LoginViewModel {
     private var anySubscription: Set<AnyCancellable> = []
-    private let dependencies: LoginDependency
+    private let dependencies: LoginDependencies
     private let stateSubject = CurrentValueSubject<LoginState, Never>(.idle)
     var state: AnyPublisher<LoginState, Never>
     private let getAccountProfileSubject = PassthroughSubject<(String, String), Never>()
     
-    init(dependencies: LoginDependency) {
+    init(dependencies: LoginDependencies) {
         self.dependencies = dependencies
         state = stateSubject.eraseToAnyPublisher()
     }
@@ -31,8 +31,8 @@ final class LoginViewModel {
         subscribeDataGeneralPublisher()
     }
     
-    func goToProfile(player: String, id: String) {
-        coordinator.goToProfile(player: player, id: id)
+    func goToProfile(data: IdAccountDataProfileRepresentable) {
+        coordinator.goToProfile(data: data)
     }
     
     func checkPlayer(player: String, platform: String) {
@@ -69,7 +69,7 @@ private extension LoginViewModel {
 //MARK: - Publishers
 
 private extension LoginViewModel {
-    func dataGeneralPublisher() -> AnyPublisher<IdAccountDataProfile, Error> {
+    func dataGeneralPublisher() -> AnyPublisher<IdAccountDataProfileRepresentable, Error> {
         return getAccountProfileSubject.flatMap { [unowned self] name, platform in
             self.profileDataUseCase.fetchPlayerData(name: name, platform: platform)
         }.receive(on: DispatchQueue.main)

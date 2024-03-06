@@ -23,16 +23,11 @@ enum OutputPlayer {
     case success (model: PubgPlayerDTO)
     case loading
 }
-enum OutputWeapon {
-    case fail(error: String)
-    case success
-    case loading
-}
+
 enum OutputStats {
     case loading
     case fail(error: String)
     case getSurvival (model: Survival?)
-    case getDataGeneral (model: DataGeneralPlayerRepresentable)
     case getName (model: String)
     case getItemRadarChar (title: [String], values: [CGFloat])
     case success

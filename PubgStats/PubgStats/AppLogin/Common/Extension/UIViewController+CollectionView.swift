@@ -21,14 +21,4 @@ extension UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }
-    func makeCollectionView2() -> UICollectionView {
-        let layout = UICollectionViewFlowLayout()
-        //TODO: que la altura se ajuste automaticamente
-        layout.itemSize = CGSize(width: view.frame.size.width - 20, height: 300)
-        layout.minimumLineSpacing = 10
-        layout.scrollDirection = .vertical
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        return collectionView
-    }
 }

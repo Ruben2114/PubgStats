@@ -18,26 +18,26 @@ extension XCTestCase {
         XCAssertDeallocation(given: viewModel, action: { $0.viewDidLoad() })
     }
     
-//    public func XCAssertDeallocation<ViewController: UIViewController>(given viewController: () -> ViewController, timeout: TimeInterval = 5.0, file: StaticString = #file, line: UInt = #line) {
-//        weak var weakReferenceViewController: UIViewController?
-//        let autoreleasepoolExpectation = expectation(description: "Autoreleasepool should train")
-//        autoreleasepool {
-//            let rootViewController = UIViewController()
-//            let window = UIWindow(frame: CGRect(x: 0, y: 0, width: 400, height: 400))
-//            window.rootViewController = rootViewController
-//            window.makeKeyAndVisible()
-//
-//            rootViewController.present(ViewController(), animated: false) {
-//                weakReferenceViewController = rootViewController.presentedViewController
-//                XCTAssertNotNil(weakReferenceViewController)
-//                rootViewController.dismiss(animated: false) {
-//                    autoreleasepoolExpectation.fulfill()
-//                }
-//            }
-//        }
-//        wait(for: [autoreleasepoolExpectation], timeout: timeout)
-//        wait(for: weakReferenceViewController == nil, timeout: timeout, description: "The view controller should be deallocated since no strong reference points to it.", file: file, line: line)
-//    }
+    public func XCAssertDeallocation<ViewController: UIViewController>(given viewController: () -> ViewController, timeout: TimeInterval = 5.0, file: StaticString = #file, line: UInt = #line) {
+        weak var weakReferenceViewController: UIViewController?
+        let autoreleasepoolExpectation = expectation(description: "Autoreleasepool should train")
+        autoreleasepool {
+            let rootViewController = UIViewController()
+            let window = UIWindow(frame: CGRect(x: 0, y: 0, width: 400, height: 400))
+            window.rootViewController = rootViewController
+            window.makeKeyAndVisible()
+
+            rootViewController.present(ViewController(), animated: false) {
+                weakReferenceViewController = rootViewController.presentedViewController
+                XCTAssertNotNil(weakReferenceViewController)
+                rootViewController.dismiss(animated: false) {
+                    autoreleasepoolExpectation.fulfill()
+                }
+            }
+        }
+        wait(for: [autoreleasepoolExpectation], timeout: timeout)
+        wait(for: weakReferenceViewController == nil, timeout: timeout, description: "The view controller should be deallocated since no strong reference points to it.", file: file, line: line)
+    }
     
     public func XCAssertDeallocation<Object: AnyObject>(given object: () -> Object, action: (Object) -> Void, timeout: TimeInterval = 1.0, file: StaticString = #file, line: UInt = #line) {
         weak var weakReferenceObject: Object?

@@ -30,7 +30,6 @@ extension UIViewController {
         stack.alignment = .fill
         stack.distribution = .fillEqually
         stack.spacing = space
-        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }
 }

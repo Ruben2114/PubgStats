@@ -8,21 +8,20 @@
 import UIKit
 
 public protocol LoginCoordinator: Coordinator {
-    func goToProfile(player: String, id: String)
+    func goToProfile(data: IdAccountDataProfileRepresentable)
 }
 
 final class LoginCoordinatorImp: LoginCoordinator {
     weak var navigation: UINavigationController?
     var onFinish: (() -> Void)?
     var childCoordinators: [Coordinator] = []
-    private let externalDependencies: LoginExternalDependency
+    private let externalDependencies: LoginExternalDependencies
     
     private lazy var dependencies: Dependency = {
-        Dependency(dependencies: externalDependencies,
-                   coordinator: self)
+        Dependency(dependencies: externalDependencies, coordinator: self)
     }()
 
-    public init(dependencies: LoginExternalDependency, navigation: UINavigationController?) {
+    public init(dependencies: LoginExternalDependencies, navigation: UINavigationController?) {
         self.externalDependencies = dependencies
         self.navigation = navigation
     }
@@ -34,20 +33,19 @@ extension LoginCoordinatorImp {
         
     }
     
-    func goToProfile(player: String, id: String) {
-        DispatchQueue.main.async {
-            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewTabCoordinator(player: player, id: id)
-        }
+    func goToProfile(data: IdAccountDataProfileRepresentable) {
+        dependencies.external.loginNavigationController().viewControllers = []
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewCoordinator(data: data, goToProfile: true)
     }
 }
 
 private extension LoginCoordinatorImp {
-    struct Dependency: LoginDependency {
-        let dependencies: LoginExternalDependency
-        unowned var coordinator: LoginCoordinator
+    struct Dependency: LoginDependencies {
+        let dependencies: LoginExternalDependencies
+        unowned let coordinator: LoginCoordinator
         let dataBinding = DataBindingObject()
         
-        var external: LoginExternalDependency {
+        var external: LoginExternalDependencies {
             return  dependencies
         }
         

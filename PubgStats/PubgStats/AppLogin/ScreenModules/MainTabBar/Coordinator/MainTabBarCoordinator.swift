@@ -9,7 +9,8 @@ import UIKit
 
 protocol MainTabBarCoordinator: Coordinator { }
 
-final class MainTabBarCoordinatorImp: Coordinator {
+final class MainTabBarCoordinatorImp: MainTabBarCoordinator {
+    lazy var dataBinding: DataBinding = dependencies.resolve()
     weak var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
@@ -17,70 +18,65 @@ final class MainTabBarCoordinatorImp: Coordinator {
     private lazy var dependencies: Dependency = {
         Dependency(external: externalDependencies, coordinator: self)
     }()
+    private var dataProfile: IdAccountDataProfileRepresentable?
     
-    public init(dependencies: MainTabBarExternalDependency, player: String, id: String) {
+    public init(dependencies: MainTabBarExternalDependency, data: IdAccountDataProfileRepresentable?) {
         self.externalDependencies = dependencies
+        self.dataProfile = data
     }
     
     func start() {
-        
-        var viewControllers = [UIViewController]()
-        
-        let profileCoordinator = dependencies.external.profileCoordinator()
-        let profileNavController = dependencies.external.profileNavigationController()
-        profileNavController.viewControllers = []
-        profileNavController.tabBarItem.title = "profileTabBarItem".localize()
-        profileNavController.tabBarItem.image = UIImage(systemName: "person.circle.fill")
-        viewControllers.append(profileNavController)
-        profileCoordinator.start()
-        append(child: profileCoordinator)
-        
-        let favouriteCoordinator = dependencies.external.favouriteCoordinator()
-        let favouriteNavController = dependencies.external.favouriteNavigationController()
-        favouriteNavController.viewControllers = []
-        favouriteNavController.tabBarItem.title = "favouriteTabBarItem".localize()
-        favouriteNavController.tabBarItem.image = UIImage(systemName: "star.circle.fill")
-        viewControllers.append(favouriteNavController)
-        favouriteCoordinator.start()
-        append(child: favouriteCoordinator)
-        
-        let guideCoordinator = dependencies.external.guideCoordinator()
-        let guideNavController = dependencies.external.guideNavigationController()
-        guideNavController.viewControllers = []
-        guideNavController.tabBarItem.title = "guideTabBarItem".localize()
-        guideNavController.tabBarItem.image = UIImage(systemName: "book.circle.fill")
-        viewControllers.append(guideNavController)
-        guideCoordinator.start()
-        append(child: guideCoordinator)
-        
-        let settingsCoordinator = dependencies.external.settingsCoordinator()
-        let settingsNavController = dependencies.external.settingsNavigationController()
-        settingsNavController.viewControllers = []
-        settingsNavController.tabBarItem.title = "settingsTabBarItem".localize()
-        settingsNavController.tabBarItem.image = UIImage(systemName: "gear.circle.fill")
-        viewControllers.append(settingsNavController)
-        settingsCoordinator.start()
-        append(child: settingsCoordinator)
-        
+        let tabBarView = TabBarView.getTabBar(externalDependencies)
+            .map({createNavController(tabBar: $0, data: dataProfile)})
         let tabBar = dependencies.external.tabBarController()
-        tabBar.viewControllers = viewControllers
-        tabBar.tabBar.backgroundColor = .white
+        tabBar.viewControllers = tabBarView
+        tabBar.tabBar.backgroundColor = .black
+        tabBar.tabBar.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
+        tabBar.tabBar.unselectedItemTintColor = .systemGray
     }
+    
     func dismiss() {
         dependencies.external.settingsNavigationController().viewControllers = []
         dependencies.external.profileNavigationController().viewControllers = []
         dependencies.external.guideNavigationController().viewControllers = []
         dependencies.external.favouriteNavigationController().viewControllers = []
+        childCoordinators.removeAll()
     }
 }
-extension MainTabBarCoordinatorImp: MainTabBarCoordinator{ }
+
+private extension MainTabBarCoordinatorImp {
+    func createNavController(tabBar: TabBarView, data: IdAccountDataProfileRepresentable?) -> UINavigationController {
+        let navigation = tabBar.getNavigation()
+        var coordinator = tabBar.getCoordinator()
+        navigation.viewControllers = []
+        navigation.tabBarItem.title = tabBar.getTitle().localize()
+        navigation.tabBarItem.image = UIImage(systemName: tabBar.getImage())
+        if let bindableCoordinator = coordinator as? ProfileCoordinator {
+            let type: NavigationStats = .profile
+            coordinator = bindableCoordinator
+                .set(type)
+                .set(data)
+            coordinator.start()
+        } else {
+            coordinator.start()
+        }
+        append(child: coordinator)
+        return navigation
+    }
+}
+
 private extension MainTabBarCoordinatorImp {
     struct Dependency: MainTabBarDependency {
         let external: MainTabBarExternalDependency
-        weak var coordinator: MainTabBarCoordinator?
+        unowned var coordinator: MainTabBarCoordinator
+        let dataBinding = DataBindingObject()
         
-        func resolve() -> MainTabBarCoordinator? {
+        func resolve() -> MainTabBarCoordinator {
             return coordinator
+        }
+        
+        func resolve() -> DataBinding {
+            dataBinding
         }
     }
 }

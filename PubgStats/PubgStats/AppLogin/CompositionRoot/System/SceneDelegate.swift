@@ -11,36 +11,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     lazy var dependencies = AppDependencies(window: window)
-    var rootCoordinatorLogin: Coordinator?
-    var rootCoordinatorTabBar: Coordinator?
-
+    lazy var childCoordinators: [Coordinator] = []
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
+        //TODO: cambiarlo al appdelegate!! importante
         guard let scene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: scene)
-        window?.rootViewController = dependencies.loginNavigationController()
         window?.makeKeyAndVisible()
-        rootCoordinatorLogin = dependencies.loginCoordinator()
-        rootCoordinatorLogin?.start()
+        let user = dependencies.resolve().getAnyProfile()
+        window?.rootViewController = user == nil ? dependencies.loginNavigationController() : dependencies.tabBarController()
+        let rootCoordinator = user == nil ? dependencies.loginCoordinator() : dependencies.mainTabBarCoordinator(data: user!)
+        rootCoordinator.start()
+        childCoordinators.append(rootCoordinator)
     }
     
-    func changeRootViewTabCoordinator(animated: Bool? = true, player: String, id: String) {
-        window?.rootViewController = dependencies.tabBarController()
-        window?.makeKeyAndVisible()
-        rootCoordinatorTabBar = dependencies.mainTabBarCoordinator(player: player, id: id)
-        rootCoordinatorTabBar?.start()
-        rootCoordinatorLogin?.dismiss()
-        rootCoordinatorLogin = nil
-        dependencies.loginNavigationController().viewControllers = []
-    }
-    func changeRootViewAppCoordinator(animated: Bool? = true) {
-        window?.rootViewController = dependencies.loginNavigationController()
-        window?.makeKeyAndVisible()
-        rootCoordinatorLogin = dependencies.loginCoordinator()
-        rootCoordinatorLogin?.start()
-        rootCoordinatorTabBar?.dismiss()
-        rootCoordinatorTabBar = nil
-        dependencies.tabBarController().viewControllers = []
+    func changeRootViewCoordinator(data: IdAccountDataProfileRepresentable? = nil, goToProfile: Bool = false) {
+        if !goToProfile {
+            childCoordinators.first?.dismiss()
+        }
+        childCoordinators.removeAll()
+        let rootCoordinator = goToProfile ? dependencies.mainTabBarCoordinator(data: data) : dependencies.loginCoordinator()
+        rootCoordinator.start()
+        childCoordinators.append(rootCoordinator)
+        
+        UIView.transition(with: window!,
+                          duration: 0.5,
+                          options: .transitionCrossDissolve,
+                          animations: { [weak self] in
+            self?.window?.rootViewController = goToProfile ? self?.dependencies.tabBarController() : self?.dependencies.loginNavigationController()
+                          },
+                          completion: nil)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

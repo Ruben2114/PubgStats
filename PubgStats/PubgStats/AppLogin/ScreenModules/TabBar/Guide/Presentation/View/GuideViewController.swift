@@ -49,12 +49,12 @@ class GuideViewController: UIViewController  {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
             switch state{
             case .success(let modelo):
-                self?.hideSpinner()
+                self?.hideLoading()
                 self?.webView.load(modelo)
             case .loading:
-                self?.showSpinner()
+                self?.showLoading()
             case .fail(error: let error):
-                self?.hideSpinner()
+                self?.hideLoading()
                 self?.presentAlert(message: error, title: "Error")
             }
         }.store(in: &cancellable)
@@ -66,5 +66,5 @@ extension GuideViewController: WKNavigationDelegate {
         decisionHandler(.allow)
     }
 }
-extension GuideViewController: SpinnerDisplayable {}
+extension GuideViewController: LoadingPresentationDisplayable {}
 extension GuideViewController: MessageDisplayable { }

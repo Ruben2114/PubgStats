@@ -16,7 +16,7 @@ final class LoginCoordinatorSpy: LoginCoordinator {
     
     func start() {}
     
-    func goToProfile(player: String, id: String) {
+    func goToProfile(data: IdAccountDataProfileRepresentable) {
         goToProfileCalled = true
     }
 }

@@ -6,7 +6,6 @@
 //
 
 enum ApisUrl {
-    //TODO: llamadas tanto en profile como en favourite, en favourite dentro
     private var baseUrl: String { return "https://api.pubg.com/shards"}
     case generalData(name: String, platform: String)
     case survivalData(id: String, platform: String)

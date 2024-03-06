@@ -47,14 +47,14 @@ class FavouriteViewController: UIViewController {
         viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
             switch state {
             case .fail(error: let error):
-                self?.hideSpinner()
+                self?.hideLoading()
                 self?.presentAlert(message: error, title: "Error")
             case .success(_):
                 self?.searchFavourite()
-                self?.hideSpinner()
+                self?.hideLoading()
                 self?.tableView.reloadData()
             case .loading:
-                self?.showSpinner()
+                self?.showLoading()
             }
         }.store(in: &cancellable)
     }
@@ -92,7 +92,7 @@ class FavouriteViewController: UIViewController {
     }
 }
 
-extension FavouriteViewController: SpinnerDisplayable{ }
+extension FavouriteViewController: LoadingPresentationDisplayable{ }
 extension FavouriteViewController: MessageDisplayable{ }
 extension FavouriteViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar){

@@ -9,32 +9,57 @@ import UIKit
 import Combine
 
 class LoginViewController: UIViewController {
-    private lazy var containerStackView = makeStack(space: 20)
-    private lazy var userTextField = makeTextFieldLogin(placeholder: "userTextField".localize(), isSecure: false)
+    private lazy var containerStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        stack.spacing = 20
+        return stack
+    }()
+    private lazy var userTextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .white
+        textField.placeholder = "userTextField".localize()
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        textField.leftViewMode = .always
+        textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        textField.font = UIFont(name: "AmericanTypewriter-Bold", size: 20)
+        textField.layer.cornerRadius = 20
+        textField.isSecureTextEntry = false
+        return textField
+    }()
     private lazy var segmentedControl: UISegmentedControl = {
-        let segmented = UISegmentedControl(items: ["Steam", "Survival"])
+        let segmented = UISegmentedControl(items: ["Steam", "Xbox"])
         segmented.translatesAutoresizingMaskIntoConstraints = false
         segmented.layer.cornerRadius = 15
-        segmented.layer.borderColor = UIColor.orange.cgColor
+        segmented.layer.borderColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1).cgColor
         segmented.layer.borderWidth = 1
         segmented.backgroundColor = .systemGray2
         segmented.selectedSegmentTintColor = .black
-        segmented.setTitleTextAttributes([.foregroundColor : UIColor.white], for: .normal)
+        segmented.setTitleTextAttributes([.foregroundColor : UIColor.white,
+                                          .font : UIFont(name: "AmericanTypewriter-Bold", size: 16) ?? .systemFont(ofSize: 16)], for: .normal)
         segmented.selectedSegmentIndex = 0
         return segmented
     }()
-    private lazy var loginButton: UIButton = makeButtonBlue(title: "titleLoginButton".localize())
-    private lazy var imageView: UIImageView = {
-        return UIImageView(image: UIImage(named: "backgroundPubg"))
+    private lazy var loginButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("titleLoginButton".localize(), for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont(name: "AmericanTypewriter-Bold", size: 20)
+        button.layer.cornerRadius = 20
+        button.backgroundColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        return button
     }()
-    private var platform: String = "steam"
     
+    private var platform: String = "steam"
     private let viewModel: LoginViewModel
-    private var dependencies: LoginDependency
+    private var dependencies: LoginDependencies
     private var cancellable = Set<AnyCancellable>()
     private var bottomConstraint: NSLayoutConstraint?
     
-    init(dependencies: LoginDependency) {
+    init(dependencies: LoginDependencies) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)
@@ -63,6 +88,7 @@ private extension LoginViewController {
     }
     
     func configView() {
+        configureImageBackground("backgroundPubg")
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
@@ -73,23 +99,20 @@ private extension LoginViewController {
             case .idle:
                 break
             case .sendInfoProfile(let data):
-                self?.hideSpinner()
-                self?.viewModel.goToProfile(player: data.name ?? "", id: data.id ?? "")
+                self?.hideLoading()
+                self?.viewModel.goToProfile(data: data)
             case .sendInfoProfileError:
-                self?.hideSpinner()
+                self?.hideLoading()
                 self?.view.endEditing(true)
-                self?.presentAlert(message: "El player no existe", title: "Error")
+                self?.presentAlert(message: "profileLoginNotExitname".localize(),
+                                   title: "Error")
             case .showLoading:
-                //TODO: cambiar el spinner por un lottie json
-                self?.showSpinner()
+                self?.showLoading()
             }
         }.store(in: &cancellable)
     }
     
     func configConstraints() {
-        view.insertSubview(imageView, at: 0)
-        imageView.frame = view.bounds
-        
         view.addSubview(containerStackView)
         containerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
         containerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
@@ -142,31 +165,26 @@ private extension LoginViewController {
     }
 }
 
-extension LoginViewController: SpinnerDisplayable { }
+extension LoginViewController: LoadingPresentationDisplayable { }
 extension LoginViewController: MessageDisplayable { }
 extension LoginViewController {
     func addObserverKeyboard() {
         NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        
     }
     
     @objc func showKeyboard(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         bottomConstraint?.constant = -(keyboardSize.height + self.view.safeAreaInsets.bottom)
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.3) {  [weak self] in
+            self?.view.layoutIfNeeded()
         }
     }
     
     @objc func hideKeyboard(notification: NSNotification) {
         bottomConstraint?.constant = -50
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.view.layoutIfNeeded()
         }
-        
     }
 }
-
-

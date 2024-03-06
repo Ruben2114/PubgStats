@@ -30,16 +30,13 @@ struct AppDependencies {
         remoteDataService
     }
     
-    func resolve() -> DataProfleRepository {
-        DataProfleRepositoryImp(dependencies: self)
+    func resolve() -> DataPlayerRepository {
+        DataPlayerRepositoryImp(dependencies: self)
     }
     
+    //TODO: intentar borrarla de todos lados
     func resolve() -> AppDependencies {
         self
-    }
-    
-    func resolve() -> UIWindow? {
-        window
     }
     
     func loginNavigationController() -> UINavigationController {
@@ -68,18 +65,13 @@ struct AppDependencies {
 }
 
 extension AppDependencies:
-    LoginExternalDependency,
+    LoginExternalDependencies,
     MainTabBarExternalDependency,
-    ProfileExternalDependency,
+    ProfileExternalDependencies,
     FavouriteExternalDependency,
     GuideExternalDependency,
     SettingsExternalDependency,
-    StatsGeneralExternalDependency,
-    KillsDataExternalDependency,
-    WeaponDataExternalDependency,
-    WeaponDataDetailExternalDependency,
     HelpDataExternalDependency,
-    SurvivalDataExternalDependency,
-    GamesModesDataExternalDependency,
-    GamesModesDataDetailExternalDependency,
+    AttributesHomeExternalDependencies,
+    AttributesDetailExternalDependencies,
     InfoAppExternalDependency{}

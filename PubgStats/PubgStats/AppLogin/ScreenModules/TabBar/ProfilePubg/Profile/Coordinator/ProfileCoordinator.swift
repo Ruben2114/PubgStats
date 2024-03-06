@@ -7,59 +7,65 @@
 
 import UIKit
 
-enum ProfileTransition {
-    case goBackView
-    case goStatsGeneral
-}
-protocol ProfileCoordinator: Coordinator {
-    func performTransition(_ transition: ProfileTransition)
+public protocol ProfileCoordinator: BindableCoordinator {
+    func goToAttributes(attributes: ProfileAttributesRepresentable)
+    func goToAttributesDetails(_ attributes: ProfileAttributesDetailsRepresentable?)
 }
 
-final class ProfileCoordinatorImp: Coordinator {
+final class ProfileCoordinatorImp: ProfileCoordinator {
     weak var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
-    private let externalDependencies: ProfileExternalDependency
+    private let externalDependencies: ProfileExternalDependencies
+    lazy var dataBinding: DataBinding = dependencies.resolve()
     private lazy var dependencies: Dependency = {
-        Dependency(external: externalDependencies,
-                   coordinator: self)
+        Dependency(dependencies: externalDependencies, coordinator: self)
     }()
     
-    public init(dependencies: ProfileExternalDependency) {
+    public init(dependencies: ProfileExternalDependencies, navigation: UINavigationController?) {
         self.externalDependencies = dependencies
-        self.navigation = dependencies.profileNavigationController()
-    }
-    
-    func start() {
-        self.navigation?.pushViewController(dependencies.resolve(), animated: true)
+        self.navigation = navigation
     }
 }
 
-extension ProfileCoordinatorImp: ProfileCoordinator {
-    func performTransition(_ transition: ProfileTransition) {
-        switch transition {
-        case .goBackView:
-            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewAppCoordinator()
-        case .goStatsGeneral:
-            guard let navigationController = navigation else {return}
-            let statsGeneralCoordinator = dependencies.external.statsGeneralCoordinator(navigation: navigationController, type: .profile)
-            statsGeneralCoordinator.start()
-            append(child: statsGeneralCoordinator)
-        }
+extension ProfileCoordinatorImp {
+    func start() {
+        self.navigation?.pushViewController(dependencies.resolve(), animated: true)
+    }
+    
+    func goToAttributes(attributes: ProfileAttributesRepresentable) {
+        let coordinator = dependencies.external.attributesHomeCoordinator(navigation: navigation)
+        coordinator
+            .set(attributes)
+            .start()
+        append(child: coordinator)
+    }
+    
+    func goToAttributesDetails(_ attributes: ProfileAttributesDetailsRepresentable?) {
+        let coordinator = dependencies.external.attributesDetailCoordinator(navigation: navigation)
+        coordinator
+            .set(attributes)
+            .start()
+        append(child: coordinator)
     }
 }
 
 private extension ProfileCoordinatorImp {
-    struct Dependency: ProfileDependency {
-        func resolve() -> ProfileCoordinator {
-            coordinator
+    struct Dependency: ProfileDependencies {
+        let dependencies: ProfileExternalDependencies
+        unowned let coordinator: ProfileCoordinator
+        let dataBinding = DataBindingObject()
+        
+        var external: ProfileExternalDependencies {
+            return dependencies
         }
         
-        let external: ProfileExternalDependency
-        unowned var coordinator: ProfileCoordinator
-        
-        func resolve() -> ProfileCoordinator? {
+        func resolve() -> ProfileCoordinator {
             return coordinator
+        }
+        
+        func resolve()  -> DataBinding {
+            return dataBinding
         }
     }
 }
