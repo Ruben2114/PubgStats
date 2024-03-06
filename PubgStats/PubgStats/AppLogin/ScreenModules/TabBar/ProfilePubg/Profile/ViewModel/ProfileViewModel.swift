@@ -138,7 +138,6 @@ private extension ProfileViewModel {
 }
 
 //MARK: - Publishers
-
 private extension ProfileViewModel {
     func playerDetailsPublisher() -> AnyPublisher<PlayerDetailsRepresentable, Error> {
         return getPlayerDetailsSubject.flatMap { [unowned self] reload in

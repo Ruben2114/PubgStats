@@ -77,6 +77,9 @@
 "profileHeaderModes" = "Modos";
 "profileHeaderWeapon" = "Armas";
 "profileCardSurvival" = "Supervivencia";
+"profileCardSurvivalSubtitle" = "Visualiza tus estadísticas en el modo supervivencia";
+"profileCardNews" = "Noticias";
+"profileCardNewsSubtitle" = "Descubre las últimas notas de parches, colaboraciones y actualizaciones de objetos";
 "MostDefeatsInAGame" = "Record abatidos";
 "Defeats" = "Abatidos";
 "MostDamagePlayerInAGame" = "Record daño";
@@ -111,3 +114,15 @@
 "errorPlayerDetails" = "Lo siento, no se han podido cargar los datos. Vuelve a intentarlo en unos segundos";
 "profileGeneralIconTitle" = "Cálculo del rango";
 "profileGeneralIconSubtitle" = "Si tu porcentaje de victorias esta entre:\n\n0 a 19 eres Novato\n20 a 39 eres Soldado\n40 a 59 eres Sargento\n60 a 79 eres Capitán\n80 a 100 eres Aprendiz";
+"profileChartRoundTitle" = "Datos de las partidas";
+"profileChartRoundSubtitle" = "Si pulsas en cada uno de los sectores de la gráfica podrás ver la cantidad de partidas jugadas en cada uno de los modos de juegos que existen.\n\nEn el modo que has jugado más partidas es en {{NAME}} con {{NUMBER}}";
+"profileChartKillsTitle" = "Datos de las muertes";
+"profileChartKillsSubtitle" = "Si pulsas en cada uno de los sectores de la gráfica podrás ver tus muertes en cada uno de los modos de juegos que existen.\n\nTu máximo número de muertes es: {{NUMBER}}, conseguido en el modo {{NAME}}";
+"profileChartWinsTitle" = "Datos de las victorias";
+"profileChartWinsSubtitle" = "Si pulsas en cada uno de los sectores de la gráfica podrás ver tus victorias en cada uno de los modos de juegos que existen.\n\nTu máximo de victorias es {{NUMBER}}, conseguido en el modo {{NAME}}";
+"profileChartWinsTooltip" = "Victorias en los diferentes modos";
+"profileChartKillsTooltip" = "Muertes en los diferentes modos";
+"profileChartRoundTooltip" = "Partidas en los diferentes modos";
+"profileHelpReloadTitle" = "Información sobre la recarga";
+"profileHelpReloadSubtitle" = "La recarga de los datos se realiza automáticamente cada 24 horas.\n\nSi necesitas recargar la vista puedes pulsar el botón de recarga.\n\nEl botón de recarga será activado dos minutos después de la última actualización.";
+

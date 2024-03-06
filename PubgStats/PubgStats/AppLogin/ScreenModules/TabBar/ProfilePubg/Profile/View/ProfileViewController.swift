@@ -164,17 +164,15 @@ private extension ProfileViewController {
     }
     
     func configureNewsCard() {
-        //TODO: poner localized
-        let model = DefaultVersatilCard(title: "Noticias",
-                                        subTitle: "Aqui podras ver las noticias de las ultimas novedades del juego",
-                                        customImageView: "survivalSerie")
+        let model = DefaultVersatilCard(title: "profileCardNews".localize(),
+                                        subTitle: "profileCardNewsSubtitle".localize(),
+                                        customImageView: "NewsSerie")
         newsCardView.setupVersatilCard(model)
     }
     
     func configureSurvivalCard() {
-        //TODO: poner localized
         let model = DefaultVersatilCard(title: "profileCardSurvival".localize(),
-                                        subTitle: "Aqui podras ver tus estadísticas en el modo supervivencia",
+                                        subTitle: "profileCardSurvivalSubtitle".localize(),
                                         customImageView: "survivalSerie")
         survivalCardView.setupVersatilCard(model)
     }
@@ -187,9 +185,8 @@ private extension ProfileViewController {
     }
     
     @objc private func helpReloadButtonAction() {
-        //TODO: poner localized
-        configureBottomSheet(title: "Información sobre la recarga",
-                             subtitle: "Si necesitas recargar la vista puedes pulsar el botón de recarga que esta justo a la derecha del punto de información que acabas de pulsar. una vez pulsada la recarga volverá a estar activa a los dos minutos.")
+        configureBottomSheet(title: "profileHelpReloadTitle".localize(),
+                             subtitle: "profileHelpReloadSubtitle".localize())
     }
     
     @objc private func reloadButtonAction() {

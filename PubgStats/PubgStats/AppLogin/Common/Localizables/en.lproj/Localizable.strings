@@ -78,6 +78,9 @@
 "profileHeaderModes" = "Modes";
 "profileHeaderWeapon" = "Weapon";
 "profileCardSurvival" = "Survival";
+"profileCardSurvivalSubtitle" = "View your statistics in survival mode";
+"profileCardNews" = "News";
+"profileCardNewsSubtitle" = "Discover the latest patch notes, collaborations and item updates";
 "MostDefeatsInAGame" = "Most defeats in a match";
 "Defeats" = "Defeats";
 "MostDamagePlayerInAGame" = "Most damage in a match";
@@ -111,3 +114,14 @@
 "errorPlayerDetails" = "Sorry, the data could not be loaded. Please try again in a few seconds";
 "profileGeneralIconTitle" = "Range calculation";
 "profileGeneralIconSubtitle" = "If your winning percentage is between:\n\n0 to 19 you are Rookie\n20 to 39 you are Private\n40 to 59 you are Sergeant\n60 to 79 you are Captain\n80 to 100 you are Legend";
+"profileChartRoundTitle" = "Match data";
+"profileChartRoundSubtitle" = "If you click on each of the sectors of the graph you will be able to see the number of games played in each of the game modes that exist.\nThe mode in which you have played the most games is in {{NAME}} with {{NUMBER}}";
+"profileChartKillsTitle" = "Death Data";
+"profileChartKillsSubtitle" = "If you click on each of the sectors of the graph you will be able to see your kills in each of the game modes that exist.\nYour maximum number of kills is: {{NUMBER}}, achieved in the mode {{NAME}}";
+"profileChartWinsTitle" = "Win Data";
+"profileChartWinsSubtitle" = "If you click on each of the sectors of the graph you will be able to see your victories in each of the game modes that exist.\nYour maximum number of victories is {{NUMBER}}, achieved in the mode {{NAME}}";
+"profileChartWinsTooltip" = "Wins in different modes";
+"profileChartKillsTooltip" = "Kills in different modes";
+"profileChartRoundTooltip" = "Matches in different modes";
+"profileHelpReloadTitle" = "Reload information";
+"profileHelpReloadSubtitle" = "Data reload is done automatically every 24 hours.\n\nIf you need to reload the view you can press the reload button.\n\nThe reload button will be activated two minutes after the last update.";

@@ -64,31 +64,37 @@ enum PlayerStats {
             return type()
         }
     }
-    //TODO: poner key tooltip
+
     func tooltip() -> String {
         switch self{
         case .wins(_):
-            return "victorias en los diferentes modos"
+            return "profileChartWinsTooltip".localize()
         case .kills(_):
-            return "Muertes en los diferentes  modos"
+            return "profileChartKillsTooltip".localize()
         case .rounds(_):
-            return "Partidas en los diferentes  modos"
+            return "profileChartRoundTooltip".localize()
         default:
             return ""
         }
     }
-    //TODO: poner key bottomSheetKey
+    
     func bottomSheetKey() -> (String, String) {
         switch self{
         case .wins(let data):
             guard let maxWin = data.modes.sorted(by: {$0.wins > $1.wins}).first else { return ("", "") }
-            return ("Datos de las victorias", "Si pulsas en cada uno de los sectores de la gráfica podrás ver tus victorias en cada uno de los modos de juegos que existen. Tu máximo de victorias es: \(maxWin.wins) y lo has conseguido en el modo: \(maxWin.mode.localize())")
+            return ("profileChartWinsTitle".localize(), "profileChartWinsSubtitle".localize()
+                .placeholderString(replace: .name, value: maxWin.mode.localize())
+                .placeholderString(replace: .number, value: String(maxWin.wins)))
         case .kills(let data):
             guard let maxKills = data.modes.sorted(by: {$0.kills > $1.kills}).first else { return ("", "") }
-            return ("Datos de las muertes", "Si pulsas en cada uno de los sectores de la gráfica podrás ver tus muertes en cada uno de los modos de juegos que existen. Tu máximo de muertes es: \(maxKills.kills) y lo has conseguido en el modo: \(maxKills.mode.localize())")
+            return ("profileChartKillsTitle".localize(), "profileChartKillsSubtitle".localize()
+                .placeholderString(replace: .name, value: maxKills.mode.localize())
+                .placeholderString(replace: .number, value: String(maxKills.kills)))
         case .rounds(let data):
             guard let maxRound = data.modes.sorted(by: {$0.roundsPlayed > $1.roundsPlayed}).first else { return ("", "") }
-            return ("Datos de las partidas", "Según tus datos en el modo que has jugado más partidas: \(maxRound.roundsPlayed) es: \(maxRound.mode.localize())")
+            return ("profileChartRoundTitle".localize(), "profileChartRoundSubtitle".localize()
+                .placeholderString(replace: .name, value: maxRound.mode.localize())
+                .placeholderString(replace: .number, value: String(maxRound.roundsPlayed)))
         default:
             return ("", "")
         }
@@ -169,4 +175,3 @@ enum PlayerStats {
         return Double((valueSubcategory ?? 0) * 100) / Double(valueTotal)
     }
 }
-
