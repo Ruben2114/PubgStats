@@ -34,6 +34,10 @@ struct AppDependencies {
         DataPlayerRepositoryImp(dependencies: self)
     }
     
+    func resolve() -> FavouritePlayerRepository {
+        FavouriteRepositoryImp(dependencies: self)
+    }
+    
     //TODO: intentar borrarla de todos lados
     func resolve() -> AppDependencies {
         self
@@ -68,7 +72,7 @@ extension AppDependencies:
     LoginExternalDependencies,
     MainTabBarExternalDependency,
     ProfileExternalDependencies,
-    FavouriteExternalDependency,
+    FavouriteExternalDependencies,
     GuideExternalDependency,
     SettingsExternalDependency,
     HelpDataExternalDependency,

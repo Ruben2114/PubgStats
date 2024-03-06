@@ -6,51 +6,52 @@
 //
 
 import UIKit
-enum FavouriteTransition {
-    case goStats
-}
-protocol FavouriteCoordinator: Coordinator {
-    func performTransition(_ transition: FavouriteTransition)
+
+public protocol FavouriteCoordinator: Coordinator {
+    func goToProfile(data: IdAccountDataProfileRepresentable?)
 }
 
-final class FavouriteCoordinatorImp: Coordinator {
+final class FavouriteCoordinatorImp: FavouriteCoordinator {
     weak var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
-    private let externalDependencies: FavouriteExternalDependency
+    private let externalDependencies: FavouriteExternalDependencies
     private lazy var dependencies: Dependency = {
-        Dependency(external: externalDependencies,
+        Dependency(dependencies: externalDependencies,
                    coordinator: self)
     }()
     
-    public init(dependencies: FavouriteExternalDependency) {
+    public init(dependencies: FavouriteExternalDependencies, navigation: UINavigationController?) {
         self.externalDependencies = dependencies
-        self.navigation = dependencies.favouriteNavigationController()
+        self.navigation = navigation
     }
-        
+}
+extension FavouriteCoordinatorImp {
     func start() {
         self.navigation?.pushViewController(dependencies.resolve(), animated: true)
     }
-}
-extension FavouriteCoordinatorImp: FavouriteCoordinator {
-    func performTransition(_ transition: FavouriteTransition) {
-        switch transition {
-        case .goStats:
-//            guard let navigationController = navigation else {return}
-//            let statsGeneralCoordinator = dependencies.external.statsGeneralCoordinator(navigation: navigationController, type: .favourite)
-//            statsGeneralCoordinator.start()
-//            append(child: statsGeneralCoordinator)
-            break
-        }
+    
+    func goToProfile(data: IdAccountDataProfileRepresentable?) {
+        let coordinator = dependencies.external.profileCoordinator(navigation: navigation)
+        let type: NavigationStats = .profile
+        coordinator
+            .set(type)
+            .set(data)
+            .start()
+        append(child: coordinator)
     }
 }
 
 private extension FavouriteCoordinatorImp {
-    struct Dependency: FavouriteDependency {
-        let external: FavouriteExternalDependency
-        weak var coordinator: FavouriteCoordinator?
+    struct Dependency: FavouriteDependencies {
+        let dependencies: FavouriteExternalDependencies
+        unowned let coordinator: FavouriteCoordinator
         
-        func resolve() -> FavouriteCoordinator? {
+        var external: FavouriteExternalDependencies {
+            return dependencies
+        }
+        
+        func resolve() -> FavouriteCoordinator {
             return coordinator
         }
     }
