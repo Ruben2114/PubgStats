@@ -8,7 +8,6 @@
 import Combine
 
 protocol FavouriteDataUseCase {
-    func saveFavouritePlayer(_ player: IdAccountDataProfileRepresentable)
     func getFavouritesPlayers() -> AnyPublisher<[IdAccountDataProfileRepresentable], Error>
     func deleteFavouritePlayer(_ player: IdAccountDataProfileRepresentable)
     func fetchPlayerData(name: String, platform: String) -> AnyPublisher<IdAccountDataProfileRepresentable, Error>
@@ -22,19 +21,15 @@ struct FavouriteDataUseCaseImp: FavouriteDataUseCase{
         self.profileRepository = dependencies.external.resolve()
     }
     
-    func saveFavouritePlayer(_ player: IdAccountDataProfileRepresentable) {
-        favouriteRepository.actionFavouritePlayer(player, action: .save)
-    }
-    
     func getFavouritesPlayers() -> AnyPublisher<[IdAccountDataProfileRepresentable], Error> {
         favouriteRepository.getFavouritesPlayers().eraseToAnyPublisher()
     }
     
     func deleteFavouritePlayer(_ player: IdAccountDataProfileRepresentable){
-        favouriteRepository.actionFavouritePlayer(player, action: .delete)
+        favouriteRepository.deleteFavouritePlayer(player)
     }
     
     func fetchPlayerData(name: String, platform: String) -> AnyPublisher<IdAccountDataProfileRepresentable, Error> {
-        profileRepository.fetchPlayerData(name: name, platform: platform).eraseToAnyPublisher()
+        profileRepository.fetchPlayerData(name: name, platform: platform, type: .favourite).eraseToAnyPublisher()
     }
 }

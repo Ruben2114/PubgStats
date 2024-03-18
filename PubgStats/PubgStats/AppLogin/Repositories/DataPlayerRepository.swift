@@ -14,7 +14,7 @@ public enum NavigationStats {
 }
 
 public protocol DataPlayerRepository {
-    func fetchPlayerData(name: String, platform: String) -> AnyPublisher<IdAccountDataProfileRepresentable, Error>
+    func fetchPlayerData(name: String, platform: String, type: NavigationStats) -> AnyPublisher<IdAccountDataProfileRepresentable, Error>
     func fetchSurvivalData(representable: IdAccountDataProfileRepresentable, type: NavigationStats, reload: Bool) -> AnyPublisher<SurvivalDataProfileRepresentable, Error>
     func fetchGamesModeData(representable: IdAccountDataProfileRepresentable, type: NavigationStats, reload: Bool) -> AnyPublisher<GamesModesDataProfileRepresentable, Error>
     func fetchWeaponData(representable: IdAccountDataProfileRepresentable, type: NavigationStats,reload: Bool) -> AnyPublisher<WeaponDataProfileRepresentable, Error>
@@ -28,13 +28,14 @@ struct DataPlayerRepositoryImp: DataPlayerRepository {
         self.remoteData = dependencies.resolve()
     }
     
-    func fetchPlayerData(name: String, platform: String) -> AnyPublisher<IdAccountDataProfileRepresentable, Error> {
+    func fetchPlayerData(name: String, platform: String, type: NavigationStats) -> AnyPublisher<IdAccountDataProfileRepresentable, Error> {
         if let cache = self.dataSource.getAccountProfile(player: name), !cache.name.isEmpty {
             return Just(cache).setFailureType(to: Error.self).eraseToAnyPublisher()
         }
         return remoteData.getPlayerData(name: name, platform: platform).map { data in
-            self.dataSource.save(player: name, account: data.id ?? "", platform: platform)
-            return DefaultIdAccountDataProfile(id: data.id ?? "", name: name, platform: platform)
+            let player = DefaultIdAccountDataProfile(id: data.id ?? "", name: name, platform: platform)
+            self.dataSource.save(player: player, type: type)
+            return player
         }.eraseToAnyPublisher()
     }
     

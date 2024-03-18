@@ -16,7 +16,8 @@ class LoginViewController: UIViewController {
         stack.spacing = 20
         return stack
     }()
-    private lazy var userTextField = {
+    //TODO: una vista a la izquierda para que?
+    private lazy var userTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.placeholder = "userTextField".localize()

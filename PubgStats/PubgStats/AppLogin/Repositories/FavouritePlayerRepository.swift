@@ -7,14 +7,9 @@
 
 import Combine
 
-public enum ActionFavourite {
-    case save
-    case delete
-}
-
 protocol FavouritePlayerRepository {
     func getFavouritesPlayers() -> AnyPublisher<[IdAccountDataProfileRepresentable], Error>
-    func actionFavouritePlayer(_ profile: IdAccountDataProfileRepresentable, action: ActionFavourite)
+    func deleteFavouritePlayer(_ profile: IdAccountDataProfileRepresentable)
 }
 
 struct FavouriteRepositoryImp: FavouritePlayerRepository {
@@ -25,18 +20,10 @@ struct FavouriteRepositoryImp: FavouritePlayerRepository {
     }
     
     func getFavouritesPlayers() -> AnyPublisher<[IdAccountDataProfileRepresentable], Error> {
-        //TODO: implementar
-        Just([]).setFailureType(to: Error.self).eraseToAnyPublisher()
+        dataSource.getFavourites().eraseToAnyPublisher()
     }
     
-    func actionFavouritePlayer(_ profile: IdAccountDataProfileRepresentable, action: ActionFavourite) {
-        //TODO: implementar
-        switch action {
-        case .save:
-            break
-        case .delete:
-            break
-        }
+    func deleteFavouritePlayer(_ profile: IdAccountDataProfileRepresentable) {
+        dataSource.deleteFavouriteTableView(profile)
     }
-
 }

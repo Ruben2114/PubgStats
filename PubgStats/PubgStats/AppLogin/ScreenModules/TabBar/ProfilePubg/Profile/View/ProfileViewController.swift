@@ -58,6 +58,11 @@ final class ProfileViewController: UIViewController {
         bind()
         viewModel.viewDidLoad()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNavigationBar()
+    }
 }
 
 private extension ProfileViewController {
@@ -68,7 +73,6 @@ private extension ProfileViewController {
     
     func configView() {
         configureImageBackground("backgroundProfile")
-        configureNavigationBar()
         configureNewsCard()
         configureSurvivalCard()
     }
@@ -143,7 +147,8 @@ private extension ProfileViewController {
     }
     
     func configureNavigationBar() {
-        titleNavigation("profileViewControllerNavigationItem")
+        titleNavigation("profileViewControllerNavigationItem",
+                        backButton: viewModel.type == .favourite ? #selector(backButtonAction) : nil)
         let helpReloadButton = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: #selector(helpReloadButtonAction))
         helpReloadButton.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
         reloadButton = UIBarButtonItem(image: UIImage(systemName: "arrow.clockwise.circle.fill"), style: .plain, target: self, action: #selector(reloadButtonAction))
@@ -197,6 +202,10 @@ private extension ProfileViewController {
         }
         showLoading()
         viewModel.reload()
+    }
+    
+    @objc func backButtonAction() {
+        viewModel.backButton()
     }
 }
 

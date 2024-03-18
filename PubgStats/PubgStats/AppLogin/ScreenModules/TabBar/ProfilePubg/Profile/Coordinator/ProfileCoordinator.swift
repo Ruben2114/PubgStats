@@ -10,6 +10,7 @@ import UIKit
 public protocol ProfileCoordinator: BindableCoordinator {
     func goToAttributes(attributes: ProfileAttributesRepresentable)
     func goToAttributesDetails(_ attributes: ProfileAttributesDetailsRepresentable?)
+    func goBack()
 }
 
 final class ProfileCoordinatorImp: ProfileCoordinator {
@@ -31,6 +32,10 @@ final class ProfileCoordinatorImp: ProfileCoordinator {
 extension ProfileCoordinatorImp {
     func start() {
         self.navigation?.pushViewController(dependencies.resolve(), animated: true)
+    }
+    
+    func goBack() {
+        self.dismiss()
     }
     
     func goToAttributes(attributes: ProfileAttributesRepresentable) {

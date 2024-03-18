@@ -90,7 +90,6 @@ private extension FavouriteViewModel {
             }
         } receiveValue: { [weak self] data in
             guard let self else { return }
-            self.favouriteUseCase.saveFavouritePlayer(data)
             self.stateSubject.send(.showNewPlayer(data))
             self.stateSubject.send(.hideLoading)
         }.store(in: &anySubscription)

@@ -33,7 +33,7 @@ extension FavouriteCoordinatorImp {
     
     func goToProfile(data: IdAccountDataProfileRepresentable?) {
         let coordinator = dependencies.external.profileCoordinator(navigation: navigation)
-        let type: NavigationStats = .profile
+        let type: NavigationStats = .favourite
         coordinator
             .set(type)
             .set(data)

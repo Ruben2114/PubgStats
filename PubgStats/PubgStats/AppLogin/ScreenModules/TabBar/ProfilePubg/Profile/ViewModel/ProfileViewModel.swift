@@ -24,7 +24,7 @@ final class ProfileViewModel: DataBindable {
     var state: AnyPublisher<ProfileState, Never>
     private let getPlayerDetailsSubject = PassthroughSubject<Bool, Never>()
     @BindingOptional private var dataProfile: IdAccountDataProfileRepresentable?
-    @BindingOptional private var type: NavigationStats?
+    @BindingOptional var type: NavigationStats?
     private var representable: PlayerDetailsRepresentable?
     
     init(dependencies: ProfileDependencies) {
@@ -58,6 +58,10 @@ final class ProfileViewModel: DataBindable {
     
     func reload(){
         getPlayerDetailsSubject.send(true)
+    }
+    
+    func backButton() {
+        coordinator.goBack()
     }
 }
 

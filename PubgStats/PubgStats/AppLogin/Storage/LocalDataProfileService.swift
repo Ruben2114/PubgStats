@@ -7,55 +7,34 @@
 
 import CoreData
 import UIKit
+import Combine
 
 //TODO: manejar errores
 
 protocol LocalDataProfileService {
-    func save(player: String, account: String, platform: String)
-    func saveFav(player: String, playerFav: String, account: String, platform: String)
+    func save(player: IdAccountDataProfileRepresentable, type: NavigationStats)
     func saveSurvival(player: String?, survivalData: [SurvivalDTO], type: NavigationStats)
     func saveGamesMode(player: String?, gamesModeData: GamesModesDTO, type: NavigationStats)
     func saveWeaponData(player: String?, weaponData: WeaponDTO, type: NavigationStats)
-    func getFavourites(player: String) -> [Favourite]?
+    func getFavourites() -> AnyPublisher<[IdAccountDataProfileRepresentable], Error>
     func getSurvival(player: String, type: NavigationStats) -> SurvivalDataProfileRepresentable?
     func getGameMode(player: String, type: NavigationStats) -> GamesModesDataProfileRepresentable?
     func getDataWeaponDetail(player: String, type: NavigationStats) -> WeaponDataProfileRepresentable?
     func getAccountProfile(player: String) -> IdAccountDataProfileRepresentable?
     func getAnyProfile() -> IdAccountDataProfileRepresentable?
-    func deleteFavouriteTableView(_ profile: Favourite)
+    func deleteFavouriteTableView(_ profile: IdAccountDataProfileRepresentable)
     func deleteProfile(player: String)
 }
 
 struct LocalDataProfileServiceImp: LocalDataProfileService {
     private let context: NSManagedObjectContext = CoreDataManager.shared.persistentContainer.viewContext
     
-    func save(player: String, account: String, platform: String) {
-        let newUser = Profile(context: context)
-        newUser.player = player
-        newUser.account = account
-        newUser.platform = platform
-        do{
-            try context.save()
-        } catch {
-            print("Error en core data \(error)")
-        }
-    }
-    
-    func saveFav(player: String, playerFav: String, account: String, platform: String) {
-        let fetchRequest = Profile.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "player == %@", player)
-        do {
-            let result = try context.fetch(fetchRequest)
-            if let perfil = result.first{
-                let newFav = Favourite(context: context)
-                newFav.name = playerFav
-                newFav.account = account
-                newFav.platform = platform
-                perfil.addToFavourites(newFav)
-                try? context.save()
-            }
-        } catch {
-            print("Error en core data saveFav")
+    func save(player: IdAccountDataProfileRepresentable, type: NavigationStats) {
+        switch type {
+        case .profile:
+            saveProfile(player: player)
+        case .favourite:
+            saveFavourite(player: player)
         }
     }
     
@@ -63,10 +42,10 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         switch type {
         case .profile:
             let fetchRequest = Profile.fetchRequest()
-            setSurvival(survivalData: survivalData, key: "player", value: player ?? "", fetchRequest: fetchRequest)
+            setSurvival(survivalData: survivalData, value: player ?? "", fetchRequest: fetchRequest)
         case .favourite:
             let fetchRequest = Favourite.fetchRequest()
-            setSurvival(survivalData: survivalData, key: "player", value: player ?? "", fetchRequest: fetchRequest)
+            setSurvival(survivalData: survivalData, value: player ?? "", fetchRequest: fetchRequest)
         }
     }
     
@@ -74,10 +53,10 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         switch type {
         case .profile:
             let fetchRequest = Profile.fetchRequest()
-            saveGames(gamesModeData: gamesModeData, type: .profile, request: fetchRequest, name: player ?? "")
+            saveGames(gamesModeData: gamesModeData, request: fetchRequest, name: player ?? "")
         case .favourite:
             let fetchRequest = Favourite.fetchRequest()
-            saveGames(gamesModeData: gamesModeData, type: .favourite, request: fetchRequest, name: player ?? "")
+            saveGames(gamesModeData: gamesModeData, request: fetchRequest, name: player ?? "")
         }
     }
     
@@ -85,38 +64,40 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         switch type {
         case .profile:
             let fetchRequest = Profile.fetchRequest()
-            saveWeapon(weaponData: weaponData, type: .profile, request: fetchRequest, name: player ?? "")
+            saveWeapon(weaponData: weaponData, request: fetchRequest, name: player ?? "")
         case .favourite:
             let fetchRequest = Favourite.fetchRequest()
-            saveWeapon(weaponData: weaponData, type: .favourite, request: fetchRequest, name: player ?? "")
+            saveWeapon(weaponData: weaponData, request: fetchRequest, name: player ?? "")
         }
     }
-    
-    func getFavourites(player: String) -> [Favourite]? {
+    //TODO: poner todos como estos?
+    func getFavourites() -> AnyPublisher<[IdAccountDataProfileRepresentable], Error> {
+        let profile = getAnyProfile()
         let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "player == %@", player)
-        do {
-            let profile = try context.fetch(fetchRequest)
-            guard let favouritesSet = profile.first?.favourites as? Set<Favourite> else {
-                return nil
+        fetchRequest.predicate = NSPredicate(format: "player == %@", profile?.name ?? "")
+        return Future<[IdAccountDataProfileRepresentable], Error> { promise in
+            do {
+                let profile = try context.fetch(fetchRequest)
+                guard let favouritesSet = profile.first?.favourites as? Set<Favourite> else {
+                    return
+                }
+                promise(.success(favouritesSet.map {
+                     DefaultIdAccountDataProfile(id: $0.account ?? "",
+                                                       name: $0.player ?? "",
+                                                       platform: $0.platform ?? "")
+                }))
+            } catch {
+                promise(.failure(error))
             }
-            return Array(favouritesSet)
-        } catch {
-            print("Error en core data: \(error.localizedDescription)")
-            return nil
-        }
+        }.eraseToAnyPublisher()
     }
     
     func getSurvival(player: String, type: NavigationStats) -> SurvivalDataProfileRepresentable? {
         switch type {
         case .profile:
-            let fetchRequest = Profile.fetchRequest()
-            let survival = getDataSulvival(fetchRequest: fetchRequest, name: player)
-            return survival
+            return getDataSulvival(fetchRequest: Profile.fetchRequest(), name: player)
         case .favourite:
-            let fetchRequest = Favourite.fetchRequest()
-            let survival = getDataSulvival(fetchRequest: fetchRequest, name: player)
-            return survival
+            return getDataSulvival(fetchRequest: Favourite.fetchRequest(), name: player)
         }
     }
     
@@ -124,26 +105,18 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
     func getGameMode(player: String, type: NavigationStats) -> GamesModesDataProfileRepresentable? {
         switch type {
         case .profile:
-            let fetchRequest = Profile.fetchRequest()
-            let gameModes = getDataGameModes(fetchRequest: fetchRequest, name: player)
-            return gameModes
+            return getDataGameModes(fetchRequest: Profile.fetchRequest(), name: player)
         case .favourite:
-            let fetchRequest = Favourite.fetchRequest()
-            let gameModes = getDataGameModes(fetchRequest: fetchRequest, name: player)
-            return gameModes
+            return getDataGameModes(fetchRequest: Favourite.fetchRequest(), name: player)
         }
     }
   
     func getDataWeaponDetail(player: String, type: NavigationStats) -> WeaponDataProfileRepresentable? {
         switch type {
         case .profile:
-            let fetchRequest = Profile.fetchRequest()
-            let weapon = getDataWeapon(fetchRequest: fetchRequest, name: player)
-            return weapon
+            return getDataWeapon(fetchRequest: Profile.fetchRequest(), name: player)
         case .favourite:
-            let fetchRequest = Favourite.fetchRequest()
-            let weapon = getDataWeapon(fetchRequest: fetchRequest, name: player)
-            return weapon
+            return getDataWeapon(fetchRequest: Favourite.fetchRequest(), name: player)
         }
     }
     
@@ -153,8 +126,8 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         do {
             let profile = try context.fetch(fetchRequest)
             return DefaultIdAccountDataProfile(id: profile.first?.account ?? "",
-                                                            name: profile.first?.player ?? "",
-                                                            platform: profile.first?.platform ?? "")
+                                               name: profile.first?.player ?? "",
+                                               platform: profile.first?.platform ?? "")
         } catch {
             print("Error en core data: \(error.localizedDescription)")
             return nil
@@ -175,10 +148,9 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         }
     }
   
-    func deleteFavouriteTableView(_ profile: Favourite) {
+    func deleteFavouriteTableView(_ profile: IdAccountDataProfileRepresentable) {
         let deleteFavouriteTableView = Favourite.fetchRequest()
-        guard let profileFav = profile.name else {return}
-        deleteFavouriteTableView.predicate = NSPredicate(format: "name == %@", profileFav)
+        deleteFavouriteTableView.predicate = NSPredicate(format: "name == %@", profile.name)
         do {
             let result = try context.fetch(deleteFavouriteTableView).first
             if let profileDelete = result {
@@ -259,8 +231,8 @@ private extension LocalDataProfileServiceImp {
         try? context.save()
     }
     
-    func setSurvival<T: NSManagedObject & HasEntities>(survivalData: [SurvivalDTO], key: String, value: String, fetchRequest: NSFetchRequest<T>) {
-        fetchRequest.predicate = NSPredicate(format: "\(key) == %@", value)
+    func setSurvival<T: NSManagedObject & HasEntities>(survivalData: [SurvivalDTO], value: String, fetchRequest: NSFetchRequest<T>) {
+        fetchRequest.predicate = NSPredicate(format: "player == %@", value)
         do {
             let result = try context.fetch(fetchRequest)
             if var perfil = result.first{
@@ -295,7 +267,7 @@ private extension LocalDataProfileServiceImp {
         }
     }
     
-    func saveGames<T: HasEntities>(gamesModeData: GamesModesDTO, type: NavigationStats, request: NSFetchRequest<T>, name: String){
+    func saveGames<T: HasEntities>(gamesModeData: GamesModesDTO, request: NSFetchRequest<T>, name: String){
         request.predicate = NSPredicate(format: "player == %@", name)
         do {
             let result = try context.fetch(request)
@@ -309,7 +281,7 @@ private extension LocalDataProfileServiceImp {
         }
     }
     
-    func saveWeapon<T: HasEntities>(weaponData: WeaponDTO, type: NavigationStats, request: NSFetchRequest<T>, name: String){
+    func saveWeapon<T: HasEntities>(weaponData: WeaponDTO, request: NSFetchRequest<T>, name: String){
         request.predicate = NSPredicate(format: "player == %@", name)
         do {
             let result = try context.fetch(request)
@@ -384,6 +356,37 @@ private extension LocalDataProfileServiceImp {
         } catch {
             print("Error en core data: \(error.localizedDescription)")
             return nil
+        }
+    }
+    
+    private func saveProfile(player: IdAccountDataProfileRepresentable) {
+        let newUser = Profile(context: context)
+        newUser.player = player.name
+        newUser.account = player.id
+        newUser.platform = player.platform
+        do{
+            try context.save()
+        } catch {
+            print("Error en core data \(error)")
+        }
+    }
+    
+    private func saveFavourite(player: IdAccountDataProfileRepresentable) {
+        let profile = getAnyProfile()
+        let fetchRequest = Profile.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "player == %@", profile?.name ?? "")
+        do {
+            let result = try context.fetch(fetchRequest)
+            if let perfil = result.first{
+                let newFav = Favourite(context: context)
+                newFav.player = player.name
+                newFav.account = player.id
+                newFav.platform = player.platform
+                perfil.addToFavourites(newFav)
+                try? context.save()
+            }
+        } catch {
+            print("Error en core data saveFav")
         }
     }
 }

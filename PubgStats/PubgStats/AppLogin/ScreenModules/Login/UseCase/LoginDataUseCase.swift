@@ -18,6 +18,6 @@ struct LoginDataUseCaseImp: LoginDataUseCase {
     }
     
     func fetchPlayerData(name: String, platform: String) -> AnyPublisher<IdAccountDataProfileRepresentable, Error> {
-        profileRepository.fetchPlayerData(name: name, platform: platform).eraseToAnyPublisher()
+        profileRepository.fetchPlayerData(name: name, platform: platform, type: .profile).eraseToAnyPublisher()
     }
 }
