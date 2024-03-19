@@ -87,6 +87,8 @@
 		8C7563E429BB5F17000373F9 /* MessageDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563E329BB5F17000373F9 /* MessageDisplayable.swift */; };
 		8C7563E629BB5FBA000373F9 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563E529BB5FBA000373F9 /* LoginViewModel.swift */; };
 		8C7563EC29BB6073000373F9 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7563EB29BB6073000373F9 /* StateController.swift */; };
+		8C826AF82BAA40D200ED98BB /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C826AF62BAA40D200ED98BB /* FavouriteTableViewCell.swift */; };
+		8C826AF92BAA40D200ED98BB /* FavouriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C826AF72BAA40D200ED98BB /* FavouriteTableViewCell.xib */; };
 		8C9A32AB29DDB39500F81B34 /* FavouriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9A32AA29DDB39500F81B34 /* FavouriteViewModel.swift */; };
 		8C9A56042B88031800C52093 /* TabBarViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9A56032B88031800C52093 /* TabBarViewRepresentable.swift */; };
 		8C9ABEEE2AD830A000552101 /* TestLoginDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9ABEED2AD830A000552101 /* TestLoginDependencies.swift */; };
@@ -284,6 +286,8 @@
 		8C7563E329BB5F17000373F9 /* MessageDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDisplayable.swift; sourceTree = "<group>"; };
 		8C7563E529BB5FBA000373F9 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		8C7563EB29BB6073000373F9 /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
+		8C826AF62BAA40D200ED98BB /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
+		8C826AF72BAA40D200ED98BB /* FavouriteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouriteTableViewCell.xib; sourceTree = "<group>"; };
 		8C9A32AA29DDB39500F81B34 /* FavouriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewModel.swift; sourceTree = "<group>"; };
 		8C9A56032B88031800C52093 /* TabBarViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewRepresentable.swift; sourceTree = "<group>"; };
 		8C9ABEED2AD830A000552101 /* TestLoginDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginDependencies.swift; sourceTree = "<group>"; };
@@ -556,6 +560,7 @@
 		465550E129CC6EFA00BF932A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8C826AF52BAA40AC00ED98BB /* Cell */,
 				465550E229CC6F1F00BF932A /* FavouriteViewController.swift */,
 			);
 			path = View;
@@ -774,6 +779,15 @@
 				465926EE29EFCFB300A4091D /* ItemCellSettings.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		8C826AF52BAA40AC00ED98BB /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8C826AF62BAA40D200ED98BB /* FavouriteTableViewCell.swift */,
+				8C826AF72BAA40D200ED98BB /* FavouriteTableViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		8C9A32A929DDB38800F81B34 /* ViewModel */ = {
@@ -1609,6 +1623,7 @@
 				460ABACF29F7B8D700DD5797 /* Localizable.strings in Resources */,
 				8C24607A2B3C511B00AB98F3 /* ChartsInfoView.xib in Resources */,
 				8C2460752B3C50B800AB98F3 /* ChartCollectionViewCell.xib in Resources */,
+				8C826AF92BAA40D200ED98BB /* FavouriteTableViewCell.xib in Resources */,
 				8CA398BC29B72A2000C09746 /* LaunchScreen.storyboard in Resources */,
 				8CA398B929B72A2000C09746 /* Assets.xcassets in Resources */,
 				8CABD0842B551AD8001AE2B2 /* VersatilCardView.xib in Resources */,
@@ -1701,6 +1716,7 @@
 				8CBC704A2AD7EBBA00234420 /* Bindable.swift in Sources */,
 				8CD7CD6F29BF04E200C57346 /* Profile.xcdatamodeld in Sources */,
 				465550E329CC6F1F00BF932A /* FavouriteViewController.swift in Sources */,
+				8C826AF82BAA40D200ED98BB /* FavouriteTableViewCell.swift in Sources */,
 				465550CD29CC46ED00BF932A /* MainTabBarDependency.swift in Sources */,
 				8C7563EC29BB6073000373F9 /* StateController.swift in Sources */,
 				8C9A56042B88031800C52093 /* TabBarViewRepresentable.swift in Sources */,

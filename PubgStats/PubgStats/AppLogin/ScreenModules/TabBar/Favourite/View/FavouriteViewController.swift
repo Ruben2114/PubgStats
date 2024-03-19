@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class FavouriteViewController: UIViewController {
-    private var profilesFavourite: [IdAccountDataProfileRepresentable] = []
+    private var filteredProfilesFavourite: [IdAccountDataProfileRepresentable] = []
     private let dependencies: FavouriteDependencies
     private var cancellable = Set<AnyCancellable>()
     private let viewModel: FavouriteViewModel
@@ -38,6 +38,7 @@ class FavouriteViewController: UIViewController {
         search.searchTextField.backgroundColor = .systemGroupedBackground
         search.backgroundImage = UIImage()
         search.barTintColor = .clear
+        search.delegate = self
         return search
     }()
     
@@ -69,10 +70,10 @@ private extension FavouriteViewController {
     
     func configView() {
         showLoading()
-        searchBar.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(UINib(nibName: "FavouriteTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        //TODO: falta bajar el keyboard
         //hideKeyboard()
         configConstraint()
     }
@@ -85,15 +86,14 @@ private extension FavouriteViewController {
             case .hideLoading:
                 self?.hideLoading()
             case .showPlayerDetails(let data):
-                self?.profilesFavourite = data
-                self?.tableView.reloadData()
-            case .showNewPlayer(let player):
-                self?.profilesFavourite.append(player)
+                self?.filteredProfilesFavourite = data
                 self?.tableView.reloadData()
             case .showErrorSearchPlayer:
-                self?.presentAlert(message: "error", title: "Error")
+                self?.tableView.reloadData()
+                self?.presentAlert(message: "error al cargar los datos", title: "Error")
             case .showErrorPlayerDetails:
-                self?.presentAlert(message: "error", title: "Error")
+                self?.tableView.reloadData()
+                self?.presentAlert(message: "no existe un usuario con este nombre", title: "Error")
             }
         }.store(in: &cancellable)
     }
@@ -117,16 +117,14 @@ extension FavouriteViewController: LoadingPresentationDisplayable{ }
 extension FavouriteViewController: MessageDisplayable{ }
 extension FavouriteViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
-        guard var text = searchBar.text else { return }
-        guard !profilesFavourite.contains(where: {$0.name == text}) else {
-            presentAlert(message: "searchBarSearchButtonClickedError".localize(), title: "Error")
-            return
-        }
+        guard var text = searchBar.text,
+              !filteredProfilesFavourite.contains(where: {$0.name == text}) else { return }
+        
         if text.contains(" ") {
             let updatedText = text.replacingOccurrences(of: " ", with: "%20")
             text = updatedText
         }
-        //TODO: elegir la plataforma antes con el nuevo componente del searchButton
+        //TODO: poner key
         let alertController = UIAlertController(title: "¿De qué plataforma?", message: nil, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Steam", style: .default, handler: { (action) in
@@ -140,23 +138,24 @@ extension FavouriteViewController: UISearchBarDelegate {
         present(alertController, animated: true, completion: nil)
         searchBar.text = ""
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let filterProfile = viewModel.profilesFavourite.filter{ $0.name.range(of: searchText, options: .caseInsensitive) != nil }
+        filteredProfilesFavourite = searchText.isEmpty ? viewModel.profilesFavourite : filterProfile
+        tableView.reloadData()
+    }
 }
 extension FavouriteViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tableView.backgroundView = profilesFavourite.isEmpty ? messageEmptyLabel : nil
-        return profilesFavourite.isEmpty ? 0 : profilesFavourite.count
+        tableView.backgroundView = viewModel.profilesFavourite.isEmpty ? messageEmptyLabel : nil
+        return filteredProfilesFavourite.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //TODO: crear una celda para esto donde se vea el nombre a la izquierda y la plataforma a la derecha
-        //TODO: celdas individuales con espacio entre medias, con borde redondo
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let nameModel = profilesFavourite[indexPath.row].name
-        //TODO: oodenarlos alfabeticamente
-        var listContent = UIListContentConfiguration.cell()
-        listContent.textProperties.font = UIFont.systemFont(ofSize: 20)
-        listContent.text = nameModel
-        cell.contentConfiguration = listContent
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? FavouriteTableViewCell else { return UITableViewCell() }
+        let nameModel = filteredProfilesFavourite.sorted { $0.name.lowercased() < $1.name.lowercased() }[indexPath.row]
+        cell.configureWith(nameModel)
+        cell.backgroundColor = .clear
         return cell
     }
 
@@ -164,11 +163,13 @@ extension FavouriteViewController: UITableViewDataSource, UITableViewDelegate {
         let delete = UIContextualAction(
             style: .destructive,
             title: "profilesFavouriteDelete".localize(),
-            handler: { _, _, _  in
-                let perfilFavorito = self.profilesFavourite[indexPath.row]
+            handler: { [weak self] _, _, _  in
+                guard let self else { return }
+                let perfilFavorito = self.filteredProfilesFavourite[indexPath.row]
                 self.viewModel.deleteFavouriteTableView(perfilFavorito)
-                if let indice = self.profilesFavourite.firstIndex(where: {$0.name == perfilFavorito.name}) {
-                    self.profilesFavourite.remove(at: indice)
+                if let indice = self.filteredProfilesFavourite.firstIndex(where: {$0.name == perfilFavorito.name}) {
+                    self.filteredProfilesFavourite.remove(at: indice)
+                    self.viewModel.updateProfilesFavourite(perfilFavorito.name)
                     self.tableView.deleteRows(at: [IndexPath(row: indice, section: 0)], with: .automatic)
                     self.tableView.reloadData()
                 }
@@ -180,7 +181,7 @@ extension FavouriteViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let favourite = profilesFavourite[indexPath.row]
+        let favourite = filteredProfilesFavourite[indexPath.row]
         viewModel.goToProfile(favourite)
     }
 }

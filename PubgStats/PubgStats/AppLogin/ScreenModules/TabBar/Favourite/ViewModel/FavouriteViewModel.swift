@@ -12,7 +12,6 @@ enum FavouriteState {
     case idle
     case showPlayerDetails([IdAccountDataProfileRepresentable])
     case showErrorPlayerDetails
-    case showNewPlayer(IdAccountDataProfileRepresentable)
     case showErrorSearchPlayer
     case hideLoading
 }
@@ -24,6 +23,7 @@ final class FavouriteViewModel {
     var state: AnyPublisher<FavouriteState, Never>
     private let getFavouritesSubject = PassthroughSubject<Void, Never>()
     private let searchFavouriteSubject = PassthroughSubject<(String, String), Never>()
+    var profilesFavourite: [IdAccountDataProfileRepresentable] = []
     
     init(dependencies: FavouriteDependencies) {
         self.dependencies = dependencies
@@ -46,6 +46,10 @@ final class FavouriteViewModel {
     
     func searchFavourite(name: String, platform: String){
         searchFavouriteSubject.send((name, platform))
+    }
+    
+    func updateProfilesFavourite(_ name: String) {
+        profilesFavourite.removeAll(where: {$0.name == name})
     }
 }
 
@@ -73,6 +77,7 @@ private extension FavouriteViewModel {
             }
         } receiveValue: { [weak self] data in
             guard let self else { return }
+            self.profilesFavourite = data
             self.stateSubject.send(.showPlayerDetails(data))
             self.stateSubject.send(.hideLoading)
         }.store(in: &anySubscription)
@@ -90,7 +95,8 @@ private extension FavouriteViewModel {
             }
         } receiveValue: { [weak self] data in
             guard let self else { return }
-            self.stateSubject.send(.showNewPlayer(data))
+            self.profilesFavourite.append(data)
+            self.stateSubject.send(.showPlayerDetails(profilesFavourite))
             self.stateSubject.send(.hideLoading)
         }.store(in: &anySubscription)
     }

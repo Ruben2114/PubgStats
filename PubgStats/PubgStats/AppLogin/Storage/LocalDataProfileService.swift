@@ -150,7 +150,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
   
     func deleteFavouriteTableView(_ profile: IdAccountDataProfileRepresentable) {
         let deleteFavouriteTableView = Favourite.fetchRequest()
-        deleteFavouriteTableView.predicate = NSPredicate(format: "name == %@", profile.name)
+        deleteFavouriteTableView.predicate = NSPredicate(format: "player == %@", profile.name)
         do {
             let result = try context.fetch(deleteFavouriteTableView).first
             if let profileDelete = result {
