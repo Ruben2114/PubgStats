@@ -13,16 +13,16 @@ import Combine
 
 protocol LocalDataProfileService {
     func save(player: IdAccountDataProfileRepresentable, type: NavigationStats)
-    func saveSurvival(player: String?, survivalData: [SurvivalDTO], type: NavigationStats)
-    func saveGamesMode(player: String?, gamesModeData: GamesModesDTO, type: NavigationStats)
-    func saveWeaponData(player: String?, weaponData: WeaponDTO, type: NavigationStats)
+    func saveSurvival(player: String?, survivalData: SurvivalDataProfileRepresentable, type: NavigationStats)
+    func saveGamesMode(player: String?, gamesModeData: GamesModesDataProfileRepresentable, type: NavigationStats)
+    func saveWeaponData(player: String?, weaponData: WeaponDataProfileRepresentable, type: NavigationStats)
     func getFavourites() -> AnyPublisher<[IdAccountDataProfileRepresentable], Error>
     func getSurvival(player: String, type: NavigationStats) -> SurvivalDataProfileRepresentable?
     func getGameMode(player: String, type: NavigationStats) -> GamesModesDataProfileRepresentable?
     func getDataWeaponDetail(player: String, type: NavigationStats) -> WeaponDataProfileRepresentable?
     func getAccountProfile(player: String) -> IdAccountDataProfileRepresentable?
     func getAnyProfile() -> IdAccountDataProfileRepresentable?
-    func deleteFavouriteTableView(_ profile: IdAccountDataProfileRepresentable)
+    func deleteFavourite(_ profile: IdAccountDataProfileRepresentable)
     func deleteProfile(player: String)
 }
 
@@ -38,18 +38,18 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         }
     }
     
-    func saveSurvival(player: String?, survivalData: [SurvivalDTO], type: NavigationStats) {
+    func saveSurvival(player: String?, survivalData: SurvivalDataProfileRepresentable, type: NavigationStats) {
         switch type {
         case .profile:
             let fetchRequest = Profile.fetchRequest()
-            setSurvival(survivalData: survivalData, value: player ?? "", fetchRequest: fetchRequest)
+            saveSurvival(survivalData: survivalData, value: player ?? "", fetchRequest: fetchRequest)
         case .favourite:
             let fetchRequest = Favourite.fetchRequest()
-            setSurvival(survivalData: survivalData, value: player ?? "", fetchRequest: fetchRequest)
+            saveSurvival(survivalData: survivalData, value: player ?? "", fetchRequest: fetchRequest)
         }
     }
     
-    func saveGamesMode(player: String?, gamesModeData: GamesModesDTO, type: NavigationStats) {
+    func saveGamesMode(player: String?, gamesModeData: GamesModesDataProfileRepresentable, type: NavigationStats) {
         switch type {
         case .profile:
             let fetchRequest = Profile.fetchRequest()
@@ -60,7 +60,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         }
     }
     
-    func saveWeaponData(player: String?, weaponData: WeaponDTO, type: NavigationStats) {
+    func saveWeaponData(player: String?, weaponData: WeaponDataProfileRepresentable, type: NavigationStats) {
         switch type {
         case .profile:
             let fetchRequest = Profile.fetchRequest()
@@ -148,11 +148,11 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         }
     }
   
-    func deleteFavouriteTableView(_ profile: IdAccountDataProfileRepresentable) {
-        let deleteFavouriteTableView = Favourite.fetchRequest()
-        deleteFavouriteTableView.predicate = NSPredicate(format: "player == %@", profile.name)
+    func deleteFavourite(_ profile: IdAccountDataProfileRepresentable) {
+        let profileFavourite = Favourite.fetchRequest()
+        profileFavourite.predicate = NSPredicate(format: "player == %@", profile.name)
         do {
-            let result = try context.fetch(deleteFavouriteTableView).first
+            let result = try context.fetch(profileFavourite).first
             if let profileDelete = result {
                 context.delete(profileDelete)
                 try context.save()
@@ -186,9 +186,9 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
 }
 
 private extension LocalDataProfileServiceImp {
-    func saveGameData<T: HasEntities>(profile: T, mode: String, result: DuoDTO, data: GamesModesDTO) {
-        let dataGamesMode = profile.gamesMode?.first(where: {($0 as? GamesModes)?.mode == mode }) as? GamesModes ?? GamesModes(context: context)
-        dataGamesMode.mode = mode
+    func saveGameData<T: HasEntities>(profile: T, result: StatisticsGameModesRepresentable, data: GamesModesDataProfileRepresentable) {
+        let dataGamesMode = profile.gamesMode?.first(where: {($0 as? GamesModes)?.mode == result.mode }) as? GamesModes ?? GamesModes(context: context)
+        dataGamesMode.mode = result.mode
         dataGamesMode.assists = Int32(result.assists)
         dataGamesMode.boosts = Int32(result.boosts)
         dataGamesMode.dBNOS = Int32(result.dBNOS)
@@ -219,7 +219,7 @@ private extension LocalDataProfileServiceImp {
         dataGamesMode.weeklyKills = Int32(result.weeklyKills)
         dataGamesMode.weeklyWINS = Int32(result.weeklyWINS)
         dataGamesMode.wins = Int32(result.wins)
-        dataGamesMode.bestRankPoint = data.bestRank
+        dataGamesMode.bestRankPoint = data.bestRankPoint ?? 0
         dataGamesMode.killsTotal = Int32(data.killsTotal)
         dataGamesMode.gamesPlayed = Int32(data.gamesPlayed)
         dataGamesMode.timePlayed = data.timePlayed
@@ -227,38 +227,38 @@ private extension LocalDataProfileServiceImp {
         dataGamesMode.wonTotal = Int32(data.wonTotal)
         dataGamesMode.top10STotal = Int32(data.top10STotal)
         dataGamesMode.headshotKillsTotal = Int32(data.headshotKillsTotal)
+        let data = try? PropertyListSerialization.data(fromPropertyList: data.matches, format: .binary, options: 0)
+        dataGamesMode.matches = data
         profile.addToGamesMode(dataGamesMode)
         try? context.save()
     }
     
-    func setSurvival<T: NSManagedObject & HasEntities>(survivalData: [SurvivalDTO], value: String, fetchRequest: NSFetchRequest<T>) {
+    func saveSurvival<T: NSManagedObject & HasEntities>(survivalData: SurvivalDataProfileRepresentable, value: String, fetchRequest: NSFetchRequest<T>) {
         fetchRequest.predicate = NSPredicate(format: "player == %@", value)
         do {
             let result = try context.fetch(fetchRequest)
             if var perfil = result.first{
                 let newSurvival = perfil.survival ?? Survival(context: context)
-                guard let data = survivalData.first?.data.attributes else {return}
-                guard let dataStats = survivalData.first?.data.attributes.stats else {return}
-                newSurvival.airDropsCalled = String(format: "%.0f", dataStats.airDropsCalled.total ?? 0)
-                newSurvival.damageDealt = String(format: "%.0f", dataStats.damageDealt.total ?? 0)
-                newSurvival.damageTaken =  String(format: "%.0f", dataStats.damageTaken.total ?? 0)
-                newSurvival.distanceBySwimming =  String(format: "%.0f", dataStats.distanceBySwimming.total ?? 0)
-                newSurvival.distanceByVehicle =  String(format: "%.0f", dataStats.distanceByVehicle.total ?? 0)
-                newSurvival.distanceOnFoot =  String(format: "%.0f", dataStats.distanceOnFoot.total ?? 0)
-                newSurvival.distanceTotal =  String(format: "%.0f", dataStats.distanceTotal.total ?? 0)
-                newSurvival.healed = String(format: "%.0f", dataStats.healed.total ?? 0)
-                newSurvival.hotDropLandings = String(format: "%.0f", dataStats.hotDropLandings.total)
-                newSurvival.enemyCratesLooted = String(format: "%.0f", dataStats.enemyCratesLooted.total ?? 0)
-                newSurvival.uniqueItemsLooted = String(format: "%.0f", dataStats.uniqueItemsLooted.total ?? 0)
-                newSurvival.position = String(format: "%.0f", dataStats.position.total ?? 0)
-                newSurvival.revived = String(format: "%.0f", dataStats.revived.total ?? 0)
-                newSurvival.teammatesRevived = String(format: "%.0f", dataStats.teammatesRevived.total ?? 0)
-                newSurvival.timeSurvived = String(format: "%.0f", dataStats.timeSurvived.total ?? 0)
-                newSurvival.throwablesThrown = String(format: "%.0f", dataStats.throwablesThrown.total ?? 0)
-                newSurvival.top10 = String(format: "%.0f", dataStats.top10.total)
-                newSurvival.totalMatchesPlayed = String(data.totalMatchesPlayed)
-                newSurvival.xp = String(data.xp)
-                newSurvival.level = String(data.level)
+                newSurvival.airDropsCalled = survivalData.stats.airDropsCalled
+                newSurvival.damageDealt = survivalData.stats.damageDealt
+                newSurvival.damageTaken = survivalData.stats.damageTaken
+                newSurvival.distanceBySwimming = survivalData.stats.distanceBySwimming
+                newSurvival.distanceByVehicle = survivalData.stats.distanceByVehicle
+                newSurvival.distanceOnFoot = survivalData.stats.distanceOnFoot
+                newSurvival.distanceTotal = survivalData.stats.distanceTotal
+                newSurvival.healed = survivalData.stats.healed
+                newSurvival.hotDropLandings = survivalData.stats.hotDropLandings
+                newSurvival.enemyCratesLooted = survivalData.stats.enemyCratesLooted
+                newSurvival.uniqueItemsLooted = survivalData.stats.uniqueItemsLooted
+                newSurvival.position = survivalData.stats.position
+                newSurvival.revived = survivalData.stats.revived
+                newSurvival.teammatesRevived = survivalData.stats.teammatesRevived
+                newSurvival.timeSurvived = survivalData.stats.timeSurvived
+                newSurvival.throwablesThrown = survivalData.stats.throwablesThrown
+                newSurvival.top10 = survivalData.stats.top10
+                newSurvival.totalMatchesPlayed = survivalData.totalMatchesPlayed
+                newSurvival.xp = survivalData.xp
+                newSurvival.level = survivalData.level
                 perfil.survival = newSurvival
                 try context.save()
             }
@@ -267,13 +267,13 @@ private extension LocalDataProfileServiceImp {
         }
     }
     
-    func saveGames<T: HasEntities>(gamesModeData: GamesModesDTO, request: NSFetchRequest<T>, name: String){
+    func saveGames<T: HasEntities>(gamesModeData: GamesModesDataProfileRepresentable, request: NSFetchRequest<T>, name: String){
         request.predicate = NSPredicate(format: "player == %@", name)
         do {
             let result = try context.fetch(request)
             if let profile = result.first{
                 gamesModeData.modes.forEach { mode in
-                    saveGameData(profile: profile, mode: mode.key, result: mode.value, data: gamesModeData)
+                    saveGameData(profile: profile, result: mode, data: gamesModeData)
                 }
             }
         } catch {
@@ -281,34 +281,22 @@ private extension LocalDataProfileServiceImp {
         }
     }
     
-    func saveWeapon<T: HasEntities>(weaponData: WeaponDTO, request: NSFetchRequest<T>, name: String){
+    func saveWeapon<T: HasEntities>(weaponData: WeaponDataProfileRepresentable, request: NSFetchRequest<T>, name: String){
         request.predicate = NSPredicate(format: "player == %@", name)
         do {
             let result = try context.fetch(request)
             if let profile = result.first{
-                var weaponType: [String] = []
-                for data in weaponData.data.attributes.weaponSummaries.keys {
-                    weaponType.append(data)
-                }
-                weaponType.forEach { weaponName in
-                    weaponData.data.attributes.weaponSummaries.forEach { result in
-                        if weaponName == result.key {
-                            var weapon: [(String, Double)] = []
-                            for (key, value) in result.value.statsTotal {
-                                weapon.append((key, value))
-                            }
-                            let dict = NSDictionary(dictionary: Dictionary(uniqueKeysWithValues: weapon))
-                            guard let data = try? PropertyListSerialization.data(fromPropertyList: dict, format: .binary, options: 0) else {return}
-                            let dataWeapon = profile.weapon?.first(where: {($0 as? Weapon)?.name == weaponName }) as? Weapon ?? Weapon(context: context)
-                            dataWeapon.name = weaponName
-                            dataWeapon.level = Int32(result.value.levelCurrent)
-                            dataWeapon.xp = Int32(result.value.xpTotal)
-                            dataWeapon.tier = Int32(result.value.tierCurrent)
-                            dataWeapon.data = data
-                            profile.addToWeapon(dataWeapon)
-                            try? context.save()
-                        }
-                    }
+                weaponData.weaponSummaries.forEach { weapon in
+                    let dict = NSDictionary(dictionary: Dictionary(uniqueKeysWithValues: weapon.statsTotal.map { ($0.key, $0.value)}))
+                    guard let data = try? PropertyListSerialization.data(fromPropertyList: dict, format: .binary, options: 0) else {return}
+                    let dataWeapon = profile.weapon?.first(where: {($0 as? Weapon)?.name == weapon.name }) as? Weapon ?? Weapon(context: context)
+                    dataWeapon.name = weapon.name
+                    dataWeapon.level = Int32(weapon.levelCurrent)
+                    dataWeapon.xp = Int32(weapon.xpTotal)
+                    dataWeapon.tier = Int32(weapon.tierCurrent)
+                    dataWeapon.data = data
+                    profile.addToWeapon(dataWeapon)
+                    try? context.save()
                 }
             }
         } catch {

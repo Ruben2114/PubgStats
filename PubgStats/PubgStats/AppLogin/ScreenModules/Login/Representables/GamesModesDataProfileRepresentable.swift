@@ -17,6 +17,7 @@ public protocol GamesModesDataProfileRepresentable {
     var headshotKillsTotal: Int { get }
     var timePlayed: String { get }
     var modes: [StatisticsGameModesRepresentable] { get }
+    var matches: [String] { get }
 }
 
 public protocol StatisticsGameModesRepresentable {
@@ -63,6 +64,7 @@ struct DefaultGamesModesDataProfile: GamesModesDataProfileRepresentable {
     var headshotKillsTotal: Int
     var timePlayed: String
     var modes: [StatisticsGameModesRepresentable]
+    var matches: [String]
     
     init(_ data: GamesModesDTO) {
         bestRankPoint = data.bestRank
@@ -73,7 +75,8 @@ struct DefaultGamesModesDataProfile: GamesModesDataProfileRepresentable {
         top10STotal = data.top10STotal
         headshotKillsTotal = data.headshotKillsTotal
         timePlayed = data.timePlayed
-        modes = data.modes.map{DefaultStatisticsGameModes($0.value, title: $0.key)}
+        modes = data.modes.map { DefaultStatisticsGameModes($0.value, title: $0.key) }
+        matches = data.matches.flatMap { $0.data.map { $0.id} }
     }
     
     init(_ data: [GamesModes]) {
@@ -86,6 +89,11 @@ struct DefaultGamesModesDataProfile: GamesModesDataProfileRepresentable {
         headshotKillsTotal = Int(data.first?.headshotKillsTotal ?? 0)
         timePlayed = data.first?.timePlayed ?? ""
         modes = data.map{DefaultStatisticsGameModes($0, title: $0.mode ?? "")}
+        guard let modeData = data.first?.matches, let dataWeapon = try? PropertyListSerialization.propertyList(from: modeData, options: [],format: nil) as? [String] else {
+            matches = []
+            return
+        }
+        matches = dataWeapon
     }
 }
 

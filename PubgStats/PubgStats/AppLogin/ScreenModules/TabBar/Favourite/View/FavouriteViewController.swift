@@ -64,7 +64,7 @@ class FavouriteViewController: UIViewController {
 private extension FavouriteViewController {
     private func setAppearance() {
         titleNavigation("favouriteViewControllerNavigationItem")
-        configureImageBackground("backgroundCar")
+        configureImageBackground("backgroundFavourite")
         configView()
     }
     
@@ -156,6 +156,7 @@ extension FavouriteViewController: UITableViewDataSource, UITableViewDelegate {
         let nameModel = filteredProfilesFavourite.sorted { $0.name.lowercased() < $1.name.lowercased() }[indexPath.row]
         cell.configureWith(nameModel)
         cell.backgroundColor = .clear
+        cell.backgroundConfiguration = UIBackgroundConfiguration.clear()
         return cell
     }
 
@@ -166,7 +167,7 @@ extension FavouriteViewController: UITableViewDataSource, UITableViewDelegate {
             handler: { [weak self] _, _, _  in
                 guard let self else { return }
                 let perfilFavorito = self.filteredProfilesFavourite[indexPath.row]
-                self.viewModel.deleteFavouriteTableView(perfilFavorito)
+                self.viewModel.deleteFavourite(perfilFavorito)
                 if let indice = self.filteredProfilesFavourite.firstIndex(where: {$0.name == perfilFavorito.name}) {
                     self.filteredProfilesFavourite.remove(at: indice)
                     self.viewModel.updateProfilesFavourite(perfilFavorito.name)

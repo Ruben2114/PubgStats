@@ -44,8 +44,9 @@ struct DataPlayerRepositoryImp: DataPlayerRepository {
             return Just(cache).setFailureType(to: Error.self).eraseToAnyPublisher()
         }
         return remoteData.getSurvivalData(account: representable.id, platform: representable.platform).map { data in
-            self.dataSource.saveSurvival(player: representable.name, survivalData: [data], type: type)
-            return DefaultSurvivalDataProfile(data.data.attributes)
+            let survivalData = DefaultSurvivalDataProfile(data.data.attributes)
+            self.dataSource.saveSurvival(player: representable.name, survivalData: survivalData, type: type)
+            return survivalData
         }.eraseToAnyPublisher()
     }
     
@@ -54,8 +55,9 @@ struct DataPlayerRepositoryImp: DataPlayerRepository {
             return Just(cache).setFailureType(to: Error.self).eraseToAnyPublisher()
         }
         return remoteData.getGamesModesData(account: representable.id, platform: representable.platform).map { data in
-            self.dataSource.saveGamesMode(player: representable.name, gamesModeData: data, type: type)
-            return DefaultGamesModesDataProfile(data)
+            let gamesModeData = DefaultGamesModesDataProfile(data)
+            self.dataSource.saveGamesMode(player: representable.name, gamesModeData: gamesModeData, type: type)
+            return gamesModeData
         }.eraseToAnyPublisher()
     }
     
@@ -64,8 +66,9 @@ struct DataPlayerRepositoryImp: DataPlayerRepository {
             return Just(cache).setFailureType(to: Error.self).eraseToAnyPublisher()
         }
         return remoteData.getWeaponData(account: representable.id, platform: representable.platform).map { data in
-            self.dataSource.saveWeaponData(player: representable.name, weaponData: data, type: type)
-            return DefaultWeaponDataProfile(data.data)
+            let weaponData = DefaultWeaponDataProfile(data.data)
+            self.dataSource.saveWeaponData(player: representable.name, weaponData: weaponData, type: type)
+            return weaponData
         }.eraseToAnyPublisher()
     }
 }

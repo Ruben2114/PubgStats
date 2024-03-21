@@ -40,7 +40,7 @@ final class FavouriteViewModel {
         coordinator.goToProfile(data: player)
     }
     
-    func deleteFavouriteTableView(_ profile: IdAccountDataProfileRepresentable){
+    func deleteFavourite(_ profile: IdAccountDataProfileRepresentable){
         favouriteUseCase.deleteFavouritePlayer(profile)
     }
     

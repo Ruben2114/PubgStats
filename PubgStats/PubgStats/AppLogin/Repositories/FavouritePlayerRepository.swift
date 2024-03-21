@@ -24,6 +24,6 @@ struct FavouriteRepositoryImp: FavouritePlayerRepository {
     }
     
     func deleteFavouritePlayer(_ profile: IdAccountDataProfileRepresentable) {
-        dataSource.deleteFavouriteTableView(profile)
+        dataSource.deleteFavourite(profile)
     }
 }
