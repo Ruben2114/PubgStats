@@ -104,7 +104,7 @@ private extension ProfileViewController {
             case .showDataGeneral(let data):
                 self?.dataGeneralView.configureView(data)
             case .hideLoading:
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [ weak self] in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [ weak self] in
                     self?.hideLoading()
                 }
             }
