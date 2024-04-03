@@ -11,6 +11,7 @@ import Combine
 // usuario bueno: Aitzy, con id: account.3ea9a94f658446008f034ef343a4d619
 //TODO: introducir las partidas
 class ApiClientServiceImp: ApiClientService {
+    //TODO: meter los dos setValue en los schemes
     let apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzODNhYWY2MC05MzNmLTAxM2ItMDFmYy01NzVjNzBiMzFiMzkiLCJpc3MiOiJnYW1lbG9ja2VyIiwiaWF0IjoxNjc2ODkyMzM2LCJwdWIiOiJibHVlaG9sZSIsInRpdGxlIjoicHViZyIsImFwcCI6ImxleWVuZGEyMSJ9.OxjYiTYVbtFMNQt2gTwXskHksNex8IGsiCYN1RvGOQw"
     private var subscribers = Set<AnyCancellable>()
     

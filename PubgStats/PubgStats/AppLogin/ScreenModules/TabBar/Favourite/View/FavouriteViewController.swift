@@ -27,7 +27,9 @@ class FavouriteViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.backgroundColor = .clear
-        tableView.separatorStyle = .none
+        tableView.keyboardDismissMode = .onDrag
+        tableView.dataSource = self
+        tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -62,7 +64,7 @@ class FavouriteViewController: UIViewController {
 }
 
 private extension FavouriteViewController {
-    private func setAppearance() {
+    func setAppearance() {
         titleNavigation("favouriteViewControllerNavigationItem")
         configureImageBackground("backgroundFavourite")
         configView()
@@ -70,11 +72,7 @@ private extension FavouriteViewController {
     
     func configView() {
         showLoading()
-        tableView.dataSource = self
-        tableView.delegate = self
         tableView.register(UINib(nibName: "FavouriteTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
-        //TODO: falta bajar el keyboard
-        //hideKeyboard()
         configConstraint()
     }
     
@@ -83,22 +81,20 @@ private extension FavouriteViewController {
             switch state {
             case .idle:
                 break
-            case .hideLoading:
-                self?.hideLoading()
             case .showPlayerDetails(let data):
                 self?.filteredProfilesFavourite = data
                 self?.tableView.reloadData()
-            case .showErrorSearchPlayer:
+                self?.hideLoading()
+            case .showError(let message, let players):
+                self?.filteredProfilesFavourite = players
                 self?.tableView.reloadData()
-                self?.presentAlert(message: "error al cargar los datos", title: "Error")
-            case .showErrorPlayerDetails:
-                self?.tableView.reloadData()
-                self?.presentAlert(message: "no existe un usuario con este nombre", title: "Error")
+                self?.presentAlert(message: message, title: "Error")
+                self?.hideLoading()
             }
         }.store(in: &cancellable)
     }
     
-    private func configConstraint() {
+    func configConstraint() {
         view.addSubview(searchBar)
         searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
@@ -166,7 +162,7 @@ extension FavouriteViewController: UITableViewDataSource, UITableViewDelegate {
             title: "profilesFavouriteDelete".localize(),
             handler: { [weak self] _, _, _  in
                 guard let self else { return }
-                let perfilFavorito = self.filteredProfilesFavourite[indexPath.row]
+                let perfilFavorito = self.filteredProfilesFavourite.sorted { $0.name.lowercased() < $1.name.lowercased() }[indexPath.row]
                 self.viewModel.deleteFavourite(perfilFavorito)
                 if let indice = self.filteredProfilesFavourite.firstIndex(where: {$0.name == perfilFavorito.name}) {
                     self.filteredProfilesFavourite.remove(at: indice)
@@ -181,8 +177,18 @@ extension FavouriteViewController: UITableViewDataSource, UITableViewDelegate {
         return configuration
     }
     
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? FavouriteTableViewCell {
+            cell.superview?.subviews.forEach { swipe in
+                if type(of: swipe.self).description() == "UISwipeActionPullView" {
+                    swipe.frame.size.height = cell.getHeightContainer()
+                }
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let favourite = filteredProfilesFavourite[indexPath.row]
+        let favourite = filteredProfilesFavourite.sorted { $0.name.lowercased() < $1.name.lowercased() }[indexPath.row]
         viewModel.goToProfile(favourite)
     }
 }

@@ -8,7 +8,7 @@
 import CoreData
 
 class CoreDataManager {
-    
+    //TODO: borrar todo
     static let shared = CoreDataManager()
     
     let persistentContainer: NSPersistentContainer

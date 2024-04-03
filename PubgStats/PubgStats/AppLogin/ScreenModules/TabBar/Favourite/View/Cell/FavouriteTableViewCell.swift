@@ -23,6 +23,10 @@ class FavouriteTableViewCell: UITableViewCell {
         self.representable = representable
         configureViews()
     }
+    
+    func getHeightContainer() -> CGFloat {
+        containerView.frame.height
+    }
 }
 
 private extension FavouriteTableViewCell {

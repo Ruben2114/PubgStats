@@ -11,9 +11,7 @@ import Combine
 enum FavouriteState {
     case idle
     case showPlayerDetails([IdAccountDataProfileRepresentable])
-    case showErrorPlayerDetails
-    case showErrorSearchPlayer
-    case hideLoading
+    case showError(String, [IdAccountDataProfileRepresentable])
 }
 
 final class FavouriteViewModel {
@@ -70,8 +68,8 @@ private extension FavouriteViewModel {
             switch completion {
             case .failure(_):
                 guard let self else { return }
-                self.stateSubject.send(.showErrorPlayerDetails)
-                self.stateSubject.send(.hideLoading)
+                //TODO: poner keys
+                self.stateSubject.send(.showError("error al cargar los datos", profilesFavourite))
                 self.subscribeGetFavouritePublisher()
             default: break
             }
@@ -79,7 +77,6 @@ private extension FavouriteViewModel {
             guard let self else { return }
             self.profilesFavourite = data
             self.stateSubject.send(.showPlayerDetails(data))
-            self.stateSubject.send(.hideLoading)
         }.store(in: &anySubscription)
     }
     
@@ -88,8 +85,8 @@ private extension FavouriteViewModel {
             switch completion {
             case .failure(_):
                 guard let self else { return }
-                self.stateSubject.send(.showErrorSearchPlayer)
-                self.stateSubject.send(.hideLoading)
+                //TODO: poner keys
+                self.stateSubject.send(.showError("no existe un usuario con este nombre", profilesFavourite))
                 self.subscribeSearchFavouritePlayerPublisher()
             default: break
             }
@@ -97,7 +94,6 @@ private extension FavouriteViewModel {
             guard let self else { return }
             self.profilesFavourite.append(data)
             self.stateSubject.send(.showPlayerDetails(profilesFavourite))
-            self.stateSubject.send(.hideLoading)
         }.store(in: &anySubscription)
     }
 }
