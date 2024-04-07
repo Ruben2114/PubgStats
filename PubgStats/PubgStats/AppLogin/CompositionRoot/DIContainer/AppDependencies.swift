@@ -8,9 +8,6 @@
 import UIKit
 
 struct AppDependencies {
-    let window: UIWindow?
-    private let localDataService = LocalDataProfileServiceImp()
-    private let remoteDataService = RemoteServiceImp()
     private var tabController = UITabBarController()
     private let loginNavController = UINavigationController()
     private let profileNavController = UINavigationController()
@@ -18,16 +15,14 @@ struct AppDependencies {
     private let guideNavController = UINavigationController()
     private let settingsNavController = UINavigationController()
     
-    init(window: UIWindow?) {
-        self.window = window
-    }
+    init() { }
     
     func resolve() -> LocalDataProfileService {
-        localDataService
+        LocalDataProfileServiceImp()
     }
     
     func resolve() -> RemoteService {
-        remoteDataService
+        RemoteServiceImp()
     }
     
     func resolve() -> DataPlayerRepository {
