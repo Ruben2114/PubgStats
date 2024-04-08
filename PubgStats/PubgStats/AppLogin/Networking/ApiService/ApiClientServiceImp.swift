@@ -7,17 +7,17 @@
 
 import Foundation
 import Combine
+
  //account.a4ef7b3e986f42baa12a7583cdea40fb
 // usuario bueno: Aitzy, con id: account.3ea9a94f658446008f034ef343a4d619
-//TODO: introducir las partidas
+
 class ApiClientServiceImp: ApiClientService {
-    //TODO: meter los dos setValue en los schemes
-    let apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzODNhYWY2MC05MzNmLTAxM2ItMDFmYy01NzVjNzBiMzFiMzkiLCJpc3MiOiJnYW1lbG9ja2VyIiwiaWF0IjoxNjc2ODkyMzM2LCJwdWIiOiJibHVlaG9sZSIsInRpdGxlIjoicHViZyIsImFwcCI6ImxleWVuZGEyMSJ9.OxjYiTYVbtFMNQt2gTwXskHksNex8IGsiCYN1RvGOQw"
-    private var subscribers = Set<AnyCancellable>()
+    private let privateKey = "PUBG_PRIVATE_API_KEY"
     
     func dataPlayer<T: Decodable>(url: URL) -> AnyPublisher<T, Error> {
         var request = URLRequest(url: url)
-        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        let environment = ProcessInfo.processInfo.environment[privateKey]
+        request.setValue(environment, forHTTPHeaderField: "Authorization")
         request.setValue("application/vnd.api+json", forHTTPHeaderField: "accept")
         let publisher: AnyPublisher<T, Error> = URLSession.shared.dataTaskPublisher(for: request)
             .map{ $0.data }
@@ -26,4 +26,3 @@ class ApiClientServiceImp: ApiClientService {
         return publisher
     }
 }
-
