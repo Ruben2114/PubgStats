@@ -2,7 +2,6 @@
 "titleLoginButton" = "Iniciar sesion";
 "profileTabBarItem" = "Perfil";
 "favouriteTabBarItem" = "Favoritos";
-"guideTabBarItem" = "Guia";
 "settingsTabBarItem" = "Ajustes";
 "helpDataViewControllerTitle" = "Dudas Frecuentes";
 "itemCellHelpDataQuestionReload" = "¿Cuando se recargan los datos?";

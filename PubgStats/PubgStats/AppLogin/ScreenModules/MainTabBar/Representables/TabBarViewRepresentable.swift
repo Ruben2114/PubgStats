@@ -10,13 +10,11 @@ import UIKit
 enum TabBarView {
     case profile(MainTabBarExternalDependency)
     case favourite(MainTabBarExternalDependency)
-    case guide(MainTabBarExternalDependency)
     case setting(MainTabBarExternalDependency)
     
     static func getTabBar(_ dependencies: MainTabBarExternalDependency) -> [TabBarView] {
         return  [.profile(dependencies),
                  .favourite(dependencies),
-                 .guide(dependencies),
                  .setting(dependencies)]
     }
 
@@ -26,8 +24,6 @@ enum TabBarView {
             return "profileTabBarItem"
         case .favourite:
             return "favouriteTabBarItem"
-        case .guide:
-            return "guideTabBarItem"
         case .setting:
             return "settingsTabBarItem"
         }
@@ -39,8 +35,6 @@ enum TabBarView {
             return "person.circle.fill"
         case .favourite:
             return "star.circle.fill"
-        case .guide:
-            return "book.circle.fill"
         case .setting:
             return "gear.circle.fill"
         }
@@ -52,8 +46,6 @@ enum TabBarView {
             return dependencies.profileNavigationController()
         case .favourite(let dependencies):
             return dependencies.favouriteNavigationController()
-        case .guide(let dependencies):
-            return dependencies.guideNavigationController()
         case .setting(let dependencies):
             return dependencies.settingsNavigationController()
         }
@@ -65,8 +57,6 @@ enum TabBarView {
             return dependencies.profileCoordinator(navigation: dependencies.profileNavigationController())
         case .favourite(let dependencies):
             return dependencies.favouriteCoordinator(navigation: dependencies.favouriteNavigationController())
-        case .guide(let dependencies):
-            return dependencies.guideCoordinator()
         case .setting(let dependencies):
             return dependencies.settingsCoordinator()
         }

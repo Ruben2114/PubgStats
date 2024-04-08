@@ -2,7 +2,6 @@
 "titleLoginButton" = "Log in";
 "profileTabBarItem" = "Profile";
 "favouriteTabBarItem" = "Favourites";
-"guideTabBarItem" = "Guide";
 "settingsTabBarItem" = "Settings";
 "helpDataViewControllerTitle" = "Frequently Asked Questions";
 "itemCellHelpDataQuestionReload" = "When is the data reloaded?";

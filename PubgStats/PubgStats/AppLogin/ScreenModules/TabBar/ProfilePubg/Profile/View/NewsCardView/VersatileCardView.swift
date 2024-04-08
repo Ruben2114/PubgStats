@@ -9,14 +9,14 @@ import UIKit
 import Foundation
 import Combine
 
-public final class VersatilCardView: XibView {
+public final class VersatileCardView: XibView {
     
     @IBOutlet private weak var contentView: UIStackView!
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var subtitleLabel: UILabel!
     
-    private var representable: VersatilCardRepresentable?
+    private var representable: VersatileCardRepresentable?
     private var subscriptions = Set<AnyCancellable>()
     private var subject = PassthroughSubject<Void, Never>()
     lazy var publisher: AnyPublisher<Void, Never> = {
@@ -33,14 +33,14 @@ public final class VersatilCardView: XibView {
         configureView()
     }
     
-    func setupVersatilCard(_ representable: VersatilCardRepresentable) {
+    func setupVersatileCard(_ representable: VersatileCardRepresentable) {
         self.representable = representable
         configureImage()
         configureLabels()
     }
 }
 
-private extension VersatilCardView {
+private extension VersatileCardView {
     
     func configureLabels() {
         titleLabel.text = representable?.title

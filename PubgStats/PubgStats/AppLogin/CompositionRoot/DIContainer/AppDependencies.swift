@@ -12,7 +12,6 @@ struct AppDependencies {
     private let loginNavController = UINavigationController()
     private let profileNavController = UINavigationController()
     private let favouriteNavController = UINavigationController()
-    private let guideNavController = UINavigationController()
     private let settingsNavController = UINavigationController()
     
     init() { }
@@ -54,10 +53,6 @@ struct AppDependencies {
         favouriteNavController
     }
     
-    func guideNavigationController() -> UINavigationController {
-        guideNavController
-    }
-    
     func settingsNavigationController() -> UINavigationController {
         settingsNavController
     }
@@ -68,7 +63,6 @@ extension AppDependencies:
     MainTabBarExternalDependency,
     ProfileExternalDependencies,
     FavouriteExternalDependencies,
-    GuideExternalDependency,
     SettingsExternalDependency,
     HelpDataExternalDependency,
     AttributesHomeExternalDependencies,

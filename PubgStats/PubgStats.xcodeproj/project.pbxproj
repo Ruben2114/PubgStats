@@ -32,9 +32,6 @@
 		465550E529CC6F6300BF932A /* FavouriteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550E429CC6F6300BF932A /* FavouriteCoordinator.swift */; };
 		465550E729CC700400BF932A /* FavouriteExternalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550E629CC700400BF932A /* FavouriteExternalDependencies.swift */; };
 		465550E929CC705200BF932A /* FavouriteDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550E829CC705200BF932A /* FavouriteDependencies.swift */; };
-		465550F829CC7DE800BF932A /* GuideDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550F729CC7DE800BF932A /* GuideDependency.swift */; };
-		465550FA29CC7E4600BF932A /* GuideExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550F929CC7E4600BF932A /* GuideExternalDependency.swift */; };
-		465550FC29CC7E8E00BF932A /* GuideCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550FB29CC7E8E00BF932A /* GuideCoordinator.swift */; };
 		465550FF29CC820A00BF932A /* SettingsDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465550FE29CC820A00BF932A /* SettingsDependency.swift */; };
 		4655510129CC824000BF932A /* SettingsExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510029CC824000BF932A /* SettingsExternalDependency.swift */; };
 		4655510429CC829800BF932A /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655510329CC829800BF932A /* SettingsCoordinator.swift */; };
@@ -117,12 +114,9 @@
 		8CABD07C2B551722001AE2B2 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CABD0792B551722001AE2B2 /* BottomSheetViewController.swift */; };
 		8CABD07D2B551722001AE2B2 /* BottomSheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CABD07A2B551722001AE2B2 /* BottomSheetViewController.xib */; };
 		8CABD07E2B551722001AE2B2 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CABD07B2B551722001AE2B2 /* BottomSheetView.swift */; };
-		8CABD0832B551AD8001AE2B2 /* VersatilCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CABD0812B551AD8001AE2B2 /* VersatilCardView.swift */; };
-		8CABD0842B551AD8001AE2B2 /* VersatilCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CABD0822B551AD8001AE2B2 /* VersatilCardView.xib */; };
-		8CABD0862B551CE4001AE2B2 /* VersatilCardRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CABD0852B551CE4001AE2B2 /* VersatilCardRepresentable.swift */; };
-		8CAC3E2D29C3055300A1FE34 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E2C29C3055300A1FE34 /* GuideViewController.swift */; };
-		8CAC3E2F29C3080600A1FE34 /* GuideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E2E29C3080600A1FE34 /* GuideViewModel.swift */; };
-		8CAC3E3129C31D4700A1FE34 /* UrlGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAC3E3029C31D4700A1FE34 /* UrlGuide.swift */; };
+		8CABD0832B551AD8001AE2B2 /* VersatileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CABD0812B551AD8001AE2B2 /* VersatileCardView.swift */; };
+		8CABD0842B551AD8001AE2B2 /* VersatileCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CABD0822B551AD8001AE2B2 /* VersatileCardView.xib */; };
+		8CABD0862B551CE4001AE2B2 /* VersatileCardRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CABD0852B551CE4001AE2B2 /* VersatileCardRepresentable.swift */; };
 		8CAE34B42B7EAC4900191927 /* GamesModesAttributesDetailsRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAE34B32B7EAC4900191927 /* GamesModesAttributesDetailsRepresentable.swift */; };
 		8CAE34B62B7EC78A00191927 /* SurvivalAttributesDetailsRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAE34B52B7EC78A00191927 /* SurvivalAttributesDetailsRepresentable.swift */; };
 		8CAEB02029BB4968009282AF /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAEB01F29BB4968009282AF /* Coordinator.swift */; };
@@ -231,9 +225,6 @@
 		465550E429CC6F6300BF932A /* FavouriteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCoordinator.swift; sourceTree = "<group>"; };
 		465550E629CC700400BF932A /* FavouriteExternalDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteExternalDependencies.swift; sourceTree = "<group>"; };
 		465550E829CC705200BF932A /* FavouriteDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteDependencies.swift; sourceTree = "<group>"; };
-		465550F729CC7DE800BF932A /* GuideDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideDependency.swift; sourceTree = "<group>"; };
-		465550F929CC7E4600BF932A /* GuideExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideExternalDependency.swift; sourceTree = "<group>"; };
-		465550FB29CC7E8E00BF932A /* GuideCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideCoordinator.swift; sourceTree = "<group>"; };
 		465550FE29CC820A00BF932A /* SettingsDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDependency.swift; sourceTree = "<group>"; };
 		4655510029CC824000BF932A /* SettingsExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsExternalDependency.swift; sourceTree = "<group>"; };
 		4655510329CC829800BF932A /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
@@ -320,12 +311,9 @@
 		8CABD0792B551722001AE2B2 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		8CABD07A2B551722001AE2B2 /* BottomSheetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomSheetViewController.xib; sourceTree = "<group>"; };
 		8CABD07B2B551722001AE2B2 /* BottomSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
-		8CABD0812B551AD8001AE2B2 /* VersatilCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersatilCardView.swift; sourceTree = "<group>"; };
-		8CABD0822B551AD8001AE2B2 /* VersatilCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VersatilCardView.xib; sourceTree = "<group>"; };
-		8CABD0852B551CE4001AE2B2 /* VersatilCardRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersatilCardRepresentable.swift; sourceTree = "<group>"; };
-		8CAC3E2C29C3055300A1FE34 /* GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
-		8CAC3E2E29C3080600A1FE34 /* GuideViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewModel.swift; sourceTree = "<group>"; };
-		8CAC3E3029C31D4700A1FE34 /* UrlGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlGuide.swift; sourceTree = "<group>"; };
+		8CABD0812B551AD8001AE2B2 /* VersatileCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersatileCardView.swift; sourceTree = "<group>"; };
+		8CABD0822B551AD8001AE2B2 /* VersatileCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VersatileCardView.xib; sourceTree = "<group>"; };
+		8CABD0852B551CE4001AE2B2 /* VersatileCardRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersatileCardRepresentable.swift; sourceTree = "<group>"; };
 		8CAE34B32B7EAC4900191927 /* GamesModesAttributesDetailsRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModesAttributesDetailsRepresentable.swift; sourceTree = "<group>"; };
 		8CAE34B52B7EC78A00191927 /* SurvivalAttributesDetailsRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalAttributesDetailsRepresentable.swift; sourceTree = "<group>"; };
 		8CAEB01F29BB4968009282AF /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -564,23 +552,6 @@
 				465550E229CC6F1F00BF932A /* FavouriteViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		465550F529CC7DC000BF932A /* DependenciesResolve */ = {
-			isa = PBXGroup;
-			children = (
-				465550F729CC7DE800BF932A /* GuideDependency.swift */,
-				465550F929CC7E4600BF932A /* GuideExternalDependency.swift */,
-			);
-			path = DependenciesResolve;
-			sourceTree = "<group>";
-		};
-		465550F629CC7DC900BF932A /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				465550FB29CC7E8E00BF932A /* GuideCoordinator.swift */,
-			);
-			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		465550FD29CC81FC00BF932A /* DependenciesResolve */ = {
@@ -920,7 +891,7 @@
 			isa = PBXGroup;
 			children = (
 				460ABAD329F7E23000DD5797 /* PlayerStats.swift */,
-				8CABD0852B551CE4001AE2B2 /* VersatilCardRepresentable.swift */,
+				8CABD0852B551CE4001AE2B2 /* VersatileCardRepresentable.swift */,
 				8CBE66AC2B587DF900C64481 /* ProfileViewRepresentable.swift */,
 			);
 			path = Representables;
@@ -949,8 +920,8 @@
 		8CABD0802B551A3A001AE2B2 /* NewsCardView */ = {
 			isa = PBXGroup;
 			children = (
-				8CABD0812B551AD8001AE2B2 /* VersatilCardView.swift */,
-				8CABD0822B551AD8001AE2B2 /* VersatilCardView.xib */,
+				8CABD0812B551AD8001AE2B2 /* VersatileCardView.swift */,
+				8CABD0822B551AD8001AE2B2 /* VersatileCardView.xib */,
 			);
 			path = NewsCardView;
 			sourceTree = "<group>";
@@ -960,7 +931,6 @@
 			children = (
 				46151CB429C1B9480054BCEA /* ProfilePubg */,
 				8CAC3E2629C3047D00A1FE34 /* Favourite */,
-				8CAC3E2429C3045300A1FE34 /* Guide */,
 				46151CC429C1E9AD0054BCEA /* Setting */,
 			);
 			path = TabBar;
@@ -979,17 +949,6 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		8CAC3E2429C3045300A1FE34 /* Guide */ = {
-			isa = PBXGroup;
-			children = (
-				465550F629CC7DC900BF932A /* Coordinator */,
-				465550F529CC7DC000BF932A /* DependenciesResolve */,
-				8CAC3E2929C304FF00A1FE34 /* Data */,
-				8CAC3E2729C304E700A1FE34 /* Presentation */,
-			);
-			path = Guide;
-			sourceTree = "<group>";
-		};
 		8CAC3E2629C3047D00A1FE34 /* Favourite */ = {
 			isa = PBXGroup;
 			children = (
@@ -1000,39 +959,6 @@
 				465550E129CC6EFA00BF932A /* View */,
 			);
 			path = Favourite;
-			sourceTree = "<group>";
-		};
-		8CAC3E2729C304E700A1FE34 /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				8CAC3E2B29C3054300A1FE34 /* View */,
-				8CAC3E2A29C3053B00A1FE34 /* ViewModel */,
-			);
-			path = Presentation;
-			sourceTree = "<group>";
-		};
-		8CAC3E2929C304FF00A1FE34 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				8CAC3E3029C31D4700A1FE34 /* UrlGuide.swift */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		8CAC3E2A29C3053B00A1FE34 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				8CAC3E2E29C3080600A1FE34 /* GuideViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		8CAC3E2B29C3054300A1FE34 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				8CAC3E2C29C3055300A1FE34 /* GuideViewController.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		8CAEB00529BB460F009282AF /* AppLogin */ = {
@@ -1626,7 +1552,7 @@
 				8C826AF92BAA40D200ED98BB /* FavouriteTableViewCell.xib in Resources */,
 				8CA398BC29B72A2000C09746 /* LaunchScreen.storyboard in Resources */,
 				8CA398B929B72A2000C09746 /* Assets.xcassets in Resources */,
-				8CABD0842B551AD8001AE2B2 /* VersatilCardView.xib in Resources */,
+				8CABD0842B551AD8001AE2B2 /* VersatileCardView.xib in Resources */,
 				8CA125312B70106B00FF2C83 /* AttributesDetailsCollectionViewCell.xib in Resources */,
 				8C2460812B3C6E2500AB98F3 /* ProfileHeaderView.xib in Resources */,
 				8CABD07D2B551722001AE2B2 /* BottomSheetViewController.xib in Resources */,
@@ -1680,18 +1606,16 @@
 				461C1F3E29C9C77C00540289 /* ApiClientService.swift in Sources */,
 				8CBE66AD2B587DF900C64481 /* ProfileViewRepresentable.swift in Sources */,
 				8C2460712B3C50A700AB98F3 /* ChartCollectionView.swift in Sources */,
-				8CAC3E2F29C3080600A1FE34 /* GuideViewModel.swift in Sources */,
 				8C7563E429BB5F17000373F9 /* MessageDisplayable.swift in Sources */,
 				4670EDEA29D442FD00C1062E /* HelpDataDependency.swift in Sources */,
 				8CAE34B42B7EAC4900191927 /* GamesModesAttributesDetailsRepresentable.swift in Sources */,
 				465550D829CC504100BF932A /* ProfileCoordinator.swift in Sources */,
-				465550FA29CC7E4600BF932A /* GuideExternalDependency.swift in Sources */,
 				8C7165622B96701B0018B6B4 /* Double+Extension.swift in Sources */,
 				8C2460762B3C50B800AB98F3 /* ChartCollectionViewCell.swift in Sources */,
 				8CE9BDCE29E59F1400F45D3F /* AttributesDetailDependencies.swift in Sources */,
 				8CB2CEEC29C9A35B00E79D29 /* ApiClientServiceImp.swift in Sources */,
 				8CB07EC829D1B446000EE257 /* GamesModesDTO.swift in Sources */,
-				8CABD0862B551CE4001AE2B2 /* VersatilCardRepresentable.swift in Sources */,
+				8CABD0862B551CE4001AE2B2 /* VersatileCardRepresentable.swift in Sources */,
 				8CEB340729ED6183006C2564 /* SettingsDataRepository.swift in Sources */,
 				465926EF29EFCFB300A4091D /* ItemCellSettings.swift in Sources */,
 				8CBC704C2AD7F3B700234420 /* DataBindingObject.swift in Sources */,
@@ -1703,7 +1627,6 @@
 				8C3B45D22B866E7F00A40B0B /* WeaponAttributesDetailsRepresentable.swift in Sources */,
 				8CEB340929ED61A3006C2564 /* SettingsDataRepositoryImp.swift in Sources */,
 				8C7165652B9687F10018B6B4 /* PercentageRectangleRepresentable.swift in Sources */,
-				465550FC29CC7E8E00BF932A /* GuideCoordinator.swift in Sources */,
 				4670EDEC29D4433B00C1062E /* HelpDataExternalDependency.swift in Sources */,
 				8CAE34B62B7EC78A00191927 /* SurvivalAttributesDetailsRepresentable.swift in Sources */,
 				8C24606C2B3C508100AB98F3 /* PieChartView.swift in Sources */,
@@ -1731,7 +1654,6 @@
 				8CC118BC2AD98F4300839855 /* AnyBinding.swift in Sources */,
 				465550DA29CC513100BF932A /* ProfileExternalDependencies.swift in Sources */,
 				8CECA6372B6EF21A00775650 /* AttributesHomeViewCell.swift in Sources */,
-				465550F829CC7DE800BF932A /* GuideDependency.swift in Sources */,
 				465550E729CC700400BF932A /* FavouriteExternalDependencies.swift in Sources */,
 				8CC95B3F2B8E96A600152CB5 /* ProfileGeneralView.swift in Sources */,
 				4655510129CC824000BF932A /* SettingsExternalDependency.swift in Sources */,
@@ -1747,16 +1669,14 @@
 				8C24606B2B3C508100AB98F3 /* InteractiveSectoredPieChartView.swift in Sources */,
 				8CBC02852AD9AA32002449E1 /* GamesModesDataProfileRepresentable.swift in Sources */,
 				8CA125322B70106B00FF2C83 /* AttributesDetailsCollectionViewCell.swift in Sources */,
-				8CAC3E3129C31D4700A1FE34 /* UrlGuide.swift in Sources */,
 				8CEB341429ED6753006C2564 /* InfoAppExternalDependency.swift in Sources */,
 				8CC118B82AD979A900839855 /* ScrollableStackView.swift in Sources */,
 				465550C829CC3C1E00BF932A /* UIViewController+Stack.swift in Sources */,
-				8CAC3E2D29C3055300A1FE34 /* GuideViewController.swift in Sources */,
 				8CB05FA22A5F5022000B4092 /* UILabel.swift in Sources */,
 				8C24605C2B3C4FD700AB98F3 /* FlameXibButton.swift in Sources */,
 				8CBC70422AD7D40E00234420 /* DataPlayerRepository.swift in Sources */,
 				8C7563E629BB5FBA000373F9 /* LoginViewModel.swift in Sources */,
-				8CABD0832B551AD8001AE2B2 /* VersatilCardView.swift in Sources */,
+				8CABD0832B551AD8001AE2B2 /* VersatileCardView.swift in Sources */,
 				8C9F824229C3CA02003000CD /* HelpDataViewController.swift in Sources */,
 				461C1F4029C9C86C00540289 /* EndPoint.swift in Sources */,
 				8C7563DD29BB54AE000373F9 /* UIView+Constraint.swift in Sources */,

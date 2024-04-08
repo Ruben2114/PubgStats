@@ -38,7 +38,6 @@ final class MainTabBarCoordinatorImp: MainTabBarCoordinator {
     func dismiss() {
         dependencies.external.settingsNavigationController().viewControllers = []
         dependencies.external.profileNavigationController().viewControllers = []
-        dependencies.external.guideNavigationController().viewControllers = []
         dependencies.external.favouriteNavigationController().viewControllers = []
         childCoordinators.removeAll()
     }
