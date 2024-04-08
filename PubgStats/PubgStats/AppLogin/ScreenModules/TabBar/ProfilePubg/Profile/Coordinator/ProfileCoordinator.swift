@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import SafariServices
 
 public protocol ProfileCoordinator: BindableCoordinator {
     func goToAttributes(attributes: ProfileAttributesRepresentable)
     func goToAttributesDetails(_ attributes: ProfileAttributesDetailsRepresentable?)
     func goBack()
+    func goToWeb(urlString: UrlType)
+    func goToMatches()
 }
 
 final class ProfileCoordinatorImp: ProfileCoordinator {
@@ -52,6 +55,19 @@ extension ProfileCoordinatorImp {
             .set(attributes)
             .start()
         append(child: coordinator)
+    }
+    
+    func goToWeb(urlString: UrlType) {
+        guard let url = URL(string: urlString.rawValue) else { return }
+        let safariService = SFSafariViewController(url: url)
+        safariService.preferredBarTintColor = .black
+        safariService.preferredControlTintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
+        safariService.dismissButtonStyle = .close
+        navigation?.present(safariService, animated: true)
+    }
+    
+    func goToMatches() {
+        
     }
 }
 

@@ -12,7 +12,6 @@ import SafariServices
 final class ProfileViewController: UIViewController {
     private var cancellable = Set<AnyCancellable>()
     private let viewModel: ProfileViewModel
-    private let dependencies: ProfileDependencies
     private var reloadButton = UIBarButtonItem()
     private lazy var scrollableStackView: ScrollableStackView = {
         let view = ScrollableStackView()
@@ -33,15 +32,17 @@ final class ProfileViewController: UIViewController {
     private lazy var bottomSheetView: BottomSheetView = {
         BottomSheetView()
     }()
-    private lazy var newsCardView: VersatilCardView = {
-        VersatilCardView()
+    private lazy var newsCardView: VersatileCardView = {
+        VersatileCardView()
     }()
-    private lazy var survivalCardView: VersatilCardView = {
-        VersatilCardView()
+    private lazy var survivalCardView: VersatileCardView = {
+        VersatileCardView()
+    }()
+    private lazy var matchesCardView: VersatileCardView = {
+        VersatileCardView()
     }()
         
     init(dependencies: ProfileDependencies) {
-        self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)
     }
@@ -67,22 +68,15 @@ final class ProfileViewController: UIViewController {
 
 private extension ProfileViewController {
     func setAppearance() {
-        configView()
-        addViewToScrollableStackView()
-    }
-    
-    func configView() {
         configureImageBackground("backgroundProfile")
-        configureNewsCard()
-        configureSurvivalCard()
+        addViewToScrollableStackView()
     }
     
     func bind() {
         bindViewModel()
         bindHeaderView()
         bindChartView()
-        bindNewsCardView()
-        bindSurvivalCardView()
+        bindVersatileCard()
         bindGeneralView()
     }
     
@@ -107,6 +101,8 @@ private extension ProfileViewController {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [ weak self] in
                     self?.hideLoading()
                 }
+            case .infoVersatileCard(let versatileCardTypes, let matches):
+                self?.configureVersatilCard(versatileCardTypes, matches)
             }
         }.store(in: &cancellable)
     }
@@ -134,15 +130,17 @@ private extension ProfileViewController {
         }.store(in: &cancellable)
     }
     
-    func bindNewsCardView() {
+    func bindVersatileCard() {
         newsCardView.publisher.sink { [weak self] in
-            self?.configureWeb()
+            self?.viewModel.goToWeb(urlString: .news)
         }.store(in: &cancellable)
-    }
-    
-    func bindSurvivalCardView() {
+        
         survivalCardView.publisher.sink { [weak self] in
             self?.viewModel.goToSurvival()
+        }.store(in: &cancellable)
+        
+        matchesCardView.publisher.sink { [weak self] in
+            self?.viewModel.goToMatches()
         }.store(in: &cancellable)
     }
     
@@ -159,8 +157,9 @@ private extension ProfileViewController {
     func addViewToScrollableStackView() {
         scrollableStackView.addArrangedSubview(headerView)
         scrollableStackView.addArrangedSubview(dataGeneralView)
-        scrollableStackView.addArrangedSubview(chartView)
+        scrollableStackView.addArrangedSubview(matchesCardView)
         scrollableStackView.addArrangedSubview(survivalCardView)
+        scrollableStackView.addArrangedSubview(chartView)
         scrollableStackView.addArrangedSubview(newsCardView)
     }
     
@@ -168,25 +167,21 @@ private extension ProfileViewController {
         bottomSheetView.show(in: self, title: title, subtitle: subtitle)
     }
     
-    func configureNewsCard() {
-        let model = DefaultVersatilCard(title: "profileCardNews".localize(),
-                                        subTitle: "profileCardNewsSubtitle".localize(),
-                                        customImageView: "NewsSerie")
-        newsCardView.setupVersatilCard(model)
-    }
-    
-    func configureSurvivalCard() {
-        let model = DefaultVersatilCard(title: "profileCardSurvival".localize(),
-                                        subTitle: "profileCardSurvivalSubtitle".localize(),
-                                        customImageView: "survivalSerie")
-        survivalCardView.setupVersatilCard(model)
-    }
-    
-    func configureWeb() {
-        guard let url = URL(string: "https://pubg.com/es/news") else { return }
-        let safariService = SFSafariViewController(url: url)
-        safariService.dismissButtonStyle = .close
-        present(safariService, animated: true)
+    func configureVersatilCard(_ types: [ProfileVersatileCardType], _ matches: Int) {
+        types.forEach { type in
+            let data = type.getData(matchesCount: matches)
+            switch type {
+            case .matches:
+                matchesCardView.setupVersatileCard(data)
+            case .survival:
+                survivalCardView.setupVersatileCard(data)
+            case .news:
+                newsCardView.setupVersatileCard(data)
+            }
+        }
+        if !types.contains(.news) {
+            newsCardView.isHidden = true
+        }
     }
     
     @objc private func helpReloadButtonAction() {
