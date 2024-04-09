@@ -67,4 +67,5 @@ extension AppDependencies:
     HelpDataExternalDependency,
     AttributesHomeExternalDependencies,
     AttributesDetailExternalDependencies,
+    MatchesExternalDependencies,
     InfoAppExternalDependency{}

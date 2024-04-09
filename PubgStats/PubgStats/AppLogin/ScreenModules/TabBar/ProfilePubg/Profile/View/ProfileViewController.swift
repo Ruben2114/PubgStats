@@ -7,7 +7,6 @@
 
 import UIKit
 import Combine
-import SafariServices
 
 final class ProfileViewController: UIViewController {
     private var cancellable = Set<AnyCancellable>()

@@ -11,6 +11,7 @@ enum ApisUrl {
     case survivalData(id: String, platform: String)
     case weaponData(id: String, platform: String)
     case gameModeData(id: String, platform: String)
+    case matchesData(id: String, platform: String)
     var urlString: String {
         var endpoint: String
         switch self {
@@ -18,6 +19,7 @@ enum ApisUrl {
         case .survivalData(let id, let platform): endpoint = "/\(platform)/players/\(id)/survival_mastery"
         case .weaponData(let id, let platform): endpoint = "/\(platform)/players/\(id)/weapon_mastery"
         case .gameModeData(let id, let platform): endpoint = "/\(platform)/players/\(id)/seasons/lifetime?filter[gamepad]=false"
+        case .matchesData(let id, let platform): endpoint = "/\(platform)/matches/\(id)"
         }
         return baseUrl + endpoint
     }

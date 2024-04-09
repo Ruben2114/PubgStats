@@ -18,6 +18,7 @@ public protocol DataPlayerRepository {
     func fetchSurvivalData(representable: IdAccountDataProfileRepresentable, type: NavigationStats, reload: Bool) -> AnyPublisher<SurvivalDataProfileRepresentable, Error>
     func fetchGamesModeData(representable: IdAccountDataProfileRepresentable, type: NavigationStats, reload: Bool) -> AnyPublisher<GamesModesDataProfileRepresentable, Error>
     func fetchWeaponData(representable: IdAccountDataProfileRepresentable, type: NavigationStats,reload: Bool) -> AnyPublisher<WeaponDataProfileRepresentable, Error>
+    func fetchMatchesData(id: String, platform: String) -> AnyPublisher<MatchDataProfileRepresentable, Error>
 }
 
 struct DataPlayerRepositoryImp: DataPlayerRepository {
@@ -69,6 +70,12 @@ struct DataPlayerRepositoryImp: DataPlayerRepository {
             let weaponData = DefaultWeaponDataProfile(data.data)
             self.dataSource.saveWeaponData(player: representable.name, weaponData: weaponData, type: type)
             return weaponData
+        }.eraseToAnyPublisher()
+    }
+    
+    func fetchMatchesData(id: String, platform: String) -> AnyPublisher<MatchDataProfileRepresentable, Error> {
+        return remoteData.getMatchesData(id: id, platform: platform).map { data in
+            return DefaultMatchDataProfile(data)
         }.eraseToAnyPublisher()
     }
 }

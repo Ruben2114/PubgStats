@@ -13,6 +13,7 @@ protocol RemoteService {
     func getSurvivalData(account: String, platform: String) -> AnyPublisher<SurvivalDTO, Error>
     func getGamesModesData(account: String, platform: String) -> AnyPublisher<GamesModesDTO, Error>
     func getWeaponData(account: String, platform: String) -> AnyPublisher<WeaponDTO, Error>
+    func getMatchesData(id: String, platform: String) -> AnyPublisher<MatchDTO, Error>
 }
 
 struct RemoteServiceImp: RemoteService {
@@ -35,6 +36,11 @@ struct RemoteServiceImp: RemoteService {
     
     func getWeaponData(account: String, platform: String) -> AnyPublisher<WeaponDTO, Error> {
         guard let url = URL(string: ApisUrl.weaponData(id: account, platform: platform).urlString) else { return Fail(error: URLError(.badURL)).eraseToAnyPublisher()}
+        return apiService.dataPlayer(url: url).eraseToAnyPublisher()
+    }
+    
+    func getMatchesData(id: String, platform: String) -> AnyPublisher<MatchDTO, Error> {
+        guard let url = URL(string: ApisUrl.matchesData(id: id, platform: platform).urlString) else { return Fail(error: URLError(.badURL)).eraseToAnyPublisher()}
         return apiService.dataPlayer(url: url).eraseToAnyPublisher()
     }
 }
