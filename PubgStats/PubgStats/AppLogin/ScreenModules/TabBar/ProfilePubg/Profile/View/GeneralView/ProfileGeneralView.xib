@@ -78,10 +78,10 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="iO6-gM-m4a">
-                                            <rect key="frame" x="0.0" y="16" width="321" height="43"/>
+                                            <rect key="frame" x="0.0" y="16" width="321" height="44.5"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="BTW-1f-uaF">
-                                                    <rect key="frame" x="0.0" y="0.0" width="107" height="43"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="107" height="44.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LEFT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7OR-iv-o1x" userLabel="Wins">
                                                             <rect key="frame" x="0.0" y="0.0" width="107" height="18.5"/>
@@ -90,15 +90,15 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MxQ-To-FRf">
-                                                            <rect key="frame" x="0.0" y="24.5" width="107" height="18.5"/>
-                                                            <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="16"/>
+                                                            <rect key="frame" x="0.0" y="24.5" width="107" height="20"/>
+                                                            <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="16"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="UAN-0y-Yiu">
-                                                    <rect key="frame" x="107" y="0.0" width="107" height="43"/>
+                                                    <rect key="frame" x="107" y="0.0" width="107" height="44.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LEFT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vt-IR-XNm" userLabel="Top">
                                                             <rect key="frame" x="0.0" y="0.0" width="107" height="18.5"/>
@@ -107,15 +107,15 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DDv-nI-nY1">
-                                                            <rect key="frame" x="0.0" y="24.5" width="107" height="18.5"/>
-                                                            <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="16"/>
+                                                            <rect key="frame" x="0.0" y="24.5" width="107" height="20"/>
+                                                            <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="16"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="BpB-Gz-N9s">
-                                                    <rect key="frame" x="214" y="0.0" width="107" height="43"/>
+                                                    <rect key="frame" x="214" y="0.0" width="107" height="44.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RIGHT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fk-TZ-K1q" userLabel="GamesPlayed">
                                                             <rect key="frame" x="0.0" y="0.0" width="107" height="18.5"/>
@@ -124,8 +124,8 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o6x-DM-jes">
-                                                            <rect key="frame" x="0.0" y="24.5" width="107" height="18.5"/>
-                                                            <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="16"/>
+                                                            <rect key="frame" x="0.0" y="24.5" width="107" height="20"/>
+                                                            <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="16"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -134,10 +134,10 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Jd0-Te-Fcf">
-                                            <rect key="frame" x="0.0" y="75" width="321" height="36"/>
+                                            <rect key="frame" x="0.0" y="76.5" width="321" height="34.5"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="CNm-DO-vDu">
-                                                    <rect key="frame" x="0.0" y="0.0" width="107" height="36"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="107" height="34.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="LEFT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBK-rn-x5F" userLabel="Kills">
                                                             <rect key="frame" x="0.0" y="0.0" width="107" height="18.5"/>
@@ -146,42 +146,42 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqv-xO-4mq">
-                                                            <rect key="frame" x="0.0" y="24.5" width="107" height="11.5"/>
-                                                            <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="16"/>
+                                                            <rect key="frame" x="0.0" y="24.5" width="107" height="10"/>
+                                                            <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="16"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ZdU-Fp-Ydd">
-                                                    <rect key="frame" x="107" y="0.0" width="107" height="36"/>
+                                                    <rect key="frame" x="107" y="0.0" width="107" height="34.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="LEFT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cq-XG-J2H" userLabel="Headshot">
-                                                            <rect key="frame" x="0.0" y="0.0" width="107" height="11.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="107" height="8.5"/>
                                                             <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="16"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUY-CA-9kV">
-                                                            <rect key="frame" x="0.0" y="17.5" width="107" height="18.5"/>
-                                                            <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="16"/>
+                                                            <rect key="frame" x="0.0" y="14.5" width="107" height="20"/>
+                                                            <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="16"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="fkX-pR-SC9">
-                                                    <rect key="frame" x="214" y="0.0" width="107" height="36"/>
+                                                    <rect key="frame" x="214" y="0.0" width="107" height="34.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="RIGHT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rv6-8M-xuz" userLabel="Assists">
-                                                            <rect key="frame" x="0.0" y="0.0" width="107" height="11.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="107" height="8.5"/>
                                                             <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="16"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UXn-n1-kdO">
-                                                            <rect key="frame" x="0.0" y="17.5" width="107" height="18.5"/>
-                                                            <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="16"/>
+                                                            <rect key="frame" x="0.0" y="14.5" width="107" height="20"/>
+                                                            <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="16"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>

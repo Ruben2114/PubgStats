@@ -114,8 +114,7 @@ private extension ProfileViewModel {
     
     func getSubcategoriesData(stats: PlayerStats) -> CategoryRepresentable {
         DefaultCategory(percentage: stats.percentage(),
-                        color: stats.color()?.0 ?? .gray,
-                        secundaryColor: stats.color()?.1 ?? .systemGray,
+                        color: stats.color(),
                         currentCenterTitleText: stats.amount(),
                         currentSubTitleText: stats.title())
     }

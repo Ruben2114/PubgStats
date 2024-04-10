@@ -82,7 +82,7 @@ struct DefaultStatSurvival: StatSurvival {
     var top10: String?
     
     init(_ data: StatSurvivalDTO) {
-        hotDropLandings = String(data.hotDropLandings.total)
+        hotDropLandings = String(format: "%.0f", data.hotDropLandings.total)
         top10 = String(data.top10.total)
         airDropsCalled = String(format: "%.0f", data.airDropsCalled.total ?? 0)
         damageDealt = String(format: "%.0f", data.damageDealt.total ?? 0)
