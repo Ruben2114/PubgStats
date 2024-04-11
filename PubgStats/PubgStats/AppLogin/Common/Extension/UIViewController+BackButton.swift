@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIViewController {
-    func titleNavigation(_ title: String?, backButton: Selector? = nil) {
+    func titleNavigation(_ title: String?, backButton: Selector? = nil, moreButton: [UIView] = []) {
         navigationItem.title = title?.localize()
         navigationController?.navigationBar.titleTextAttributes = [
             .foregroundColor : UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1),
@@ -18,6 +18,13 @@ extension UIViewController {
             let backButton = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.backward.circle.fill"), style: .plain, target: self, action: backButton)
             backButton.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
             navigationItem.leftBarButtonItem = backButton
+        }
+        if !moreButton.isEmpty {
+            let stack = createStackHorizontalButton(space: 6)
+            moreButton.forEach {
+                stack.addArrangedSubview($0)
+            }
+            navigationItem.setRightBarButton(UIBarButtonItem(customView: stack), animated: true)
         }
     }
     

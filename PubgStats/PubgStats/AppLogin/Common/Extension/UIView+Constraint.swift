@@ -80,7 +80,7 @@ extension UIView {
         return mask
     }
 
-    func getTitleLabel(text: String) -> UILabel {
+    func getTitleLabel(text: String? = nil) -> UILabel {
         let label = UILabel()
         label.textColor = .white
         label.font = UIFont(name: "AmericanTypewriter-Bold", size: 16)

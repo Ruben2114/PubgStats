@@ -11,7 +11,8 @@ import Combine
 final class ProfileViewController: UIViewController {
     private var cancellable = Set<AnyCancellable>()
     private let viewModel: ProfileViewModel
-    private var reloadButton = UIBarButtonItem()
+    private lazy var reloadButton = createButtonImage(image: UIImage(systemName: "arrow.clockwise.circle.fill"), selector: #selector(reloadButtonAction))
+    private lazy var infoButton = createButtonImage(image: UIImage(systemName: "questionmark.circle"), selector: #selector(helpReloadButtonAction))
     private lazy var scrollableStackView: ScrollableStackView = {
         let view = ScrollableStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -145,12 +146,8 @@ private extension ProfileViewController {
     
     func configureNavigationBar() {
         titleNavigation("profileViewControllerNavigationItem",
-                        backButton: viewModel.type == .favourite ? #selector(backButtonAction) : nil)
-        let helpReloadButton = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: #selector(helpReloadButtonAction))
-        helpReloadButton.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
-        reloadButton = UIBarButtonItem(image: UIImage(systemName: "arrow.clockwise.circle.fill"), style: .plain, target: self, action: #selector(reloadButtonAction))
-        reloadButton.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
-        navigationItem.setRightBarButtonItems([reloadButton, helpReloadButton], animated: true)
+                        backButton: viewModel.type == .favourite ? #selector(backButtonAction) : nil, 
+                        moreButton: [reloadButton, infoButton])
     }
     
     func addViewToScrollableStackView() {

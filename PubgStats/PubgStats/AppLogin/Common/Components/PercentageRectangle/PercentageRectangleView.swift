@@ -14,7 +14,7 @@ class PercentageRectangleView: UIView {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = .white
-        label.font = UIFont(name: "AmericanTypewriter", size: 16)
+        label.font = UIFont(name: "AmericanTypewriter-Bold", size: 16)
         return label
     }()
     

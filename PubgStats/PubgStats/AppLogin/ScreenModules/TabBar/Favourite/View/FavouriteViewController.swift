@@ -34,6 +34,7 @@ class FavouriteViewController: UIViewController {
     private lazy var searchBar: UISearchBar = {
         let search = UISearchBar()
         search.placeholder = "searchPlaceholder".localize()
+        search.searchTextField.font = UIFont(name: "AmericanTypewriter", size: 16)
         search.translatesAutoresizingMaskIntoConstraints = false
         search.searchTextField.backgroundColor = .systemGroupedBackground
         search.backgroundImage = UIImage()
@@ -114,16 +115,11 @@ extension FavouriteViewController: UISearchBarDelegate {
             let updatedText = text.replacingOccurrences(of: " ", with: "%20")
             text = updatedText
         }
+        searchBar.searchTextField.resignFirstResponder()
         //TODO: poner key
-        let alertController = UIAlertController(title: "¿De qué plataforma?", message: nil, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "Steam", style: .default, handler: { (action) in
-            self.viewModel.searchFavourite(name: text, platform: "steam")
-        }))
-        alertController.addAction(UIAlertAction(title: "Xbox", style: .default, handler: { (action) in
-            self.viewModel.searchFavourite(name: text, platform: "xbox")
-        }))
-        present(alertController, animated: true, completion: nil)
+        presentAlertPlatform(title: "¿De qué plataforma?") { [weak self] platform in
+            self?.viewModel.searchFavourite(name: text, platform: platform)
+        }
         searchBar.text = ""
     }
     
@@ -136,7 +132,6 @@ extension FavouriteViewController: UISearchBarDelegate {
 
 extension FavouriteViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //TODO: poner el mensaje arriba y debajo del searchBar en negrita y negro
         tableView.backgroundView = viewModel.profilesFavourite.isEmpty ? messageEmptyLabel : nil
         return filteredProfilesFavourite.count
     }
