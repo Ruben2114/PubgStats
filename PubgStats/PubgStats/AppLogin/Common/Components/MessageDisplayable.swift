@@ -35,11 +35,10 @@ extension MessageDisplayable where Self: UIViewController{
             title: title,
             message: message,
             preferredStyle: .alert)
-
-        let actionRetry = UIAlertAction(title: "actionRetry".localize(), style: .default) { _ in
+        alertController.addAction(UIAlertAction(title: "actionCancel".localize(), style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "actionRetry".localize(), style: .cancel) { _ in
             completion?()
-        }
-        alertController.addAction(actionRetry)
+        })
         self.present(alertController, animated: true)
     }
     
