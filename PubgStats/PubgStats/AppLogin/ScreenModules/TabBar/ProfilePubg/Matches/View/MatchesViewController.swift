@@ -49,7 +49,6 @@ final class MatchesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showLoading()
         setAppearance()
         bind()
         viewModel.viewDidLoad()
@@ -91,6 +90,8 @@ private extension MatchesViewController {
                 self?.errorMatches = true
                 self?.tableView.reloadData()
                 self?.hideLoading()
+            case .showLoading:
+                self?.showLoading()
             }
         }.store(in: &cancellable)
     }
@@ -108,10 +109,8 @@ private extension MatchesViewController {
 extension MatchesViewController: LoadingPresentationDisplayable { }
 extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if matchesList.isEmpty || errorMatches {
-            messageEmptyLabel.text = errorMatches ? "No se han podido cargar las partidas. Inténtalo en unos minutos." : "No existen partidas en los útlimos 7 dias"
-            tableView.backgroundView = messageEmptyLabel
-        }
+        messageEmptyLabel.text = errorMatches ? "No se han podido cargar las partidas. Inténtalo en unos minutos." : "No existen partidas en los útlimos 7 dias"
+        tableView.backgroundView = matchesList.isEmpty || errorMatches ? messageEmptyLabel : nil
         return matchesList.count
     }
     

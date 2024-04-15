@@ -10,6 +10,7 @@ import Combine
 
 enum MatchesState {
     case idle
+    case showLoading
     case showMatches([MatchDataProfileRepresentable]?)
     case showErrorMatches
 }
@@ -35,6 +36,7 @@ final class MatchesViewModel: DataBindable {
     func viewDidLoad() {
         subscribeMatchesPublisher()
         if matchesId?.isEmpty == false {
+            stateSubject.send(.showLoading)
             getMatchesSubject.send()
         } else {
             stateSubject.send(.showMatches([]))

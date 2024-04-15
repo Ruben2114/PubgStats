@@ -57,6 +57,7 @@ final class ProfileViewController: UIViewController {
         setAppearance()
         bind()
         viewModel.viewDidLoad()
+        if viewModel.type == .favourite { showLoading() }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,7 +98,9 @@ private extension ProfileViewController {
             case .showDataGeneral(let data):
                 self?.dataGeneralView.configureView(data)
             case .hideLoading:
-                self?.hideLoading()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [ weak self] in
+                    self?.hideLoading()
+                }
             case .infoVersatileCard(let versatileCardTypes, let matches):
                 self?.configureVersatilCard(versatileCardTypes, matches)
             }
