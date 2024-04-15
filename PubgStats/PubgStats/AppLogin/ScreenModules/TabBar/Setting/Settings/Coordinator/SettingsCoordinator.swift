@@ -47,7 +47,8 @@ extension SettingsCoordinatorImp: SettingsCoordinator {
             helpDataCoordinator.start()
             append(child: helpDataCoordinator)
         case .goDeleteProfile:
-            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewCoordinator()
+            //TODO: borrar perfil
+            setNewRoot()
         }
     }
 }

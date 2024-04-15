@@ -29,17 +29,16 @@ final class MainTabBarCoordinatorImp: MainTabBarCoordinator {
         let tabBarView = TabBarView.getTabBar(externalDependencies)
             .map({createNavController(tabBar: $0, data: dataProfile)})
         let tabBar = dependencies.external.tabBarController()
+        tabBar.showLoading()
         tabBar.viewControllers = tabBarView
         tabBar.tabBar.backgroundColor = .black
         tabBar.tabBar.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
         tabBar.tabBar.unselectedItemTintColor = .systemGray
-    }
-    
-    func dismiss() {
-        dependencies.external.settingsNavigationController().viewControllers = []
-        dependencies.external.profileNavigationController().viewControllers = []
-        dependencies.external.favouriteNavigationController().viewControllers = []
-        childCoordinators.removeAll()
+        UIView.animate(withDuration: 0.8, animations: { [ weak self] in
+            self?.setRoot(tabBar)
+        }, completion: {_ in 
+            tabBar.hideLoading()
+        })
     }
 }
 
@@ -63,6 +62,8 @@ private extension MainTabBarCoordinatorImp {
         return navigation
     }
 }
+
+extension UITabBarController: LoadingPresentationDisplayable { }
 
 private extension MainTabBarCoordinatorImp {
     struct Dependency: MainTabBarDependency {

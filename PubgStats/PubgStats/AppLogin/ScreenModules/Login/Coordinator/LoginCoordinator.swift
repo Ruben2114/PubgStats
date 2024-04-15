@@ -21,21 +21,18 @@ final class LoginCoordinatorImp: LoginCoordinator {
         Dependency(dependencies: externalDependencies, coordinator: self)
     }()
 
-    public init(dependencies: LoginExternalDependencies, navigation: UINavigationController?) {
+    public init(dependencies: LoginExternalDependencies) {
         self.externalDependencies = dependencies
-        self.navigation = navigation
     }
 }
 
 extension LoginCoordinatorImp {
     func start() {
-        self.navigation?.pushViewController(dependencies.resolve(), animated: true)
-        
+        setRoot(dependencies.resolve())
     }
     
     func goToProfile(data: IdAccountDataProfileRepresentable) {
-        dependencies.external.loginNavigationController().viewControllers = []
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewCoordinator(data: data, goToProfile: true)
+        setNewRoot(data)
     }
 }
 

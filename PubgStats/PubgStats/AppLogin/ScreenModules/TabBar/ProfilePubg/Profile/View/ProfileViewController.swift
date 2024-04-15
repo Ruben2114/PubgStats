@@ -54,7 +54,6 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showLoading()
         setAppearance()
         bind()
         viewModel.viewDidLoad()
@@ -98,9 +97,7 @@ private extension ProfileViewController {
             case .showDataGeneral(let data):
                 self?.dataGeneralView.configureView(data)
             case .hideLoading:
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [ weak self] in
-                    self?.hideLoading()
-                }
+                self?.hideLoading()
             case .infoVersatileCard(let versatileCardTypes, let matches):
                 self?.configureVersatilCard(versatileCardTypes, matches)
             }

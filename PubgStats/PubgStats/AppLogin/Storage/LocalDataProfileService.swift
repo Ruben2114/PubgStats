@@ -323,7 +323,7 @@ private extension LocalDataProfileServiceImp {
         do {
             try context.save()
         } catch {
-            fatalError("Failed to save Core Data context: \(error)")
+            
         }
     }
     

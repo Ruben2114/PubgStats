@@ -9,12 +9,11 @@ import UIKit
 
 protocol LoginExternalDependencies {
     func loginCoordinator() -> Coordinator
-    func loginNavigationController() -> UINavigationController
     func resolve() -> DataPlayerRepository
 }
 
 extension LoginExternalDependencies {
     func loginCoordinator() -> Coordinator {
-        LoginCoordinatorImp(dependencies: self, navigation: loginNavigationController())
+        LoginCoordinatorImp(dependencies: self)
     }
 }

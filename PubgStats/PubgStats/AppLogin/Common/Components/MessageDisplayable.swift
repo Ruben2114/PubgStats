@@ -25,7 +25,7 @@ extension MessageDisplayable where Self: UIViewController{
 //        alertController.setValue(attributedMessage, forKey: "attributedMessage")
 //        alertController.view.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
         //TODO: aclarar lo del color
-        let okAction = UIAlertAction(title: "actionAccept".localize(), style: .cancel)
+        let okAction = UIAlertAction(title: "actionAccept".localize(), style: .default)
         alertController.addAction(okAction)
         self.present(alertController, animated: true)
     }
@@ -36,7 +36,7 @@ extension MessageDisplayable where Self: UIViewController{
             message: message,
             preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "actionCancel".localize(), style: .cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "actionRetry".localize(), style: .cancel) { _ in
+        alertController.addAction(UIAlertAction(title: "actionRetry".localize(), style: .default) { _ in
             completion?()
         })
         self.present(alertController, animated: true)

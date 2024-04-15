@@ -22,7 +22,7 @@ class RadarChartView: UIView {
         self.buttonsTitle = buttonsTitle
         configureView()
     }
-    @available(*,unavailable)//este init no se puede utilizar para que nunca llegue el fatal error
+    @available(*,unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

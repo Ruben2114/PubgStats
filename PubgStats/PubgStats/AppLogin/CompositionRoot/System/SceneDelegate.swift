@@ -19,28 +19,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = UIWindow(windowScene: scene)
         window?.makeKeyAndVisible()
         let user = dependencies.resolve().getAnyProfile()
-        window?.rootViewController = user == nil ? dependencies.loginNavigationController() : dependencies.tabBarController()
-        let rootCoordinator = user == nil ? dependencies.loginCoordinator() : dependencies.mainTabBarCoordinator(data: user!)
-        rootCoordinator.start()
-        childCoordinators.append(rootCoordinator)
+        changeRootViewCoordinator(data: user)
     }
     
-    func changeRootViewCoordinator(data: IdAccountDataProfileRepresentable? = nil, goToProfile: Bool = false) {
-        if !goToProfile {
-            childCoordinators.first?.dismiss()
+    func changeRootViewCoordinator(data: IdAccountDataProfileRepresentable? = nil) {
+        let rootCoordinator = data == nil ? dependencies.loginCoordinator() : dependencies.mainTabBarCoordinator(data: data)
+        rootCoordinator.onFinish = { [weak self] in
+            self?.childCoordinators.removeAll()
         }
-        childCoordinators.removeAll()
-        let rootCoordinator = goToProfile ? dependencies.mainTabBarCoordinator(data: data) : dependencies.loginCoordinator()
         rootCoordinator.start()
         childCoordinators.append(rootCoordinator)
-        
-        UIView.transition(with: window!,
-                          duration: 0.5,
-                          options: .transitionCrossDissolve,
-                          animations: { [weak self] in
-            self?.window?.rootViewController = goToProfile ? self?.dependencies.tabBarController() : self?.dependencies.loginNavigationController()
-                          },
-                          completion: nil)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

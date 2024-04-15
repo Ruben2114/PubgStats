@@ -99,16 +99,10 @@ private extension LoginViewController {
             switch state {
             case .idle:
                 break
-            case .sendInfoProfile(let data):
-                self?.hideLoading()
-                self?.viewModel.goToProfile(data: data)
             case .sendInfoProfileError:
-                self?.hideLoading()
                 self?.view.endEditing(true)
                 self?.presentAlert(message: "profileLoginNotExitname".localize(),
                                    title: "Error")
-            case .showLoading:
-                self?.showLoading()
             }
         }.store(in: &cancellable)
     }
@@ -166,7 +160,6 @@ private extension LoginViewController {
     }
 }
 
-extension LoginViewController: LoadingPresentationDisplayable { }
 extension LoginViewController: MessageDisplayable { }
 extension LoginViewController {
     func addObserverKeyboard() {

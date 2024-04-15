@@ -9,7 +9,6 @@ import UIKit
 
 struct AppDependencies {
     private var tabController = UITabBarController()
-    private let loginNavController = UINavigationController()
     private let profileNavController = UINavigationController()
     private let favouriteNavController = UINavigationController()
     private let settingsNavController = UINavigationController()
@@ -35,10 +34,6 @@ struct AppDependencies {
     //TODO: intentar borrarla de todos lados
     func resolve() -> AppDependencies {
         self
-    }
-    
-    func loginNavigationController() -> UINavigationController {
-        loginNavController
     }
     
     func profileNavigationController() -> UINavigationController {

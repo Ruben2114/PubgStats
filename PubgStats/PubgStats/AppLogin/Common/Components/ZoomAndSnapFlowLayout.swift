@@ -42,6 +42,7 @@ open class ZoomAndSnapFlowLayout: UICollectionViewFlowLayout {
         self.edgeInsets = edgeInsets
     }
     
+    @available(*,unavailable)
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
