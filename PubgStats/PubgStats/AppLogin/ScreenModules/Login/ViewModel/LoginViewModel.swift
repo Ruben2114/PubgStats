@@ -10,9 +10,7 @@ import Combine
 
 enum LoginState {
     case idle
-    case sendInfoProfile(IdAccountDataProfileRepresentable)
     case sendInfoProfileError
-    case showLoading
 }
 
 final class LoginViewModel {
@@ -36,7 +34,6 @@ final class LoginViewModel {
     }
     
     func checkPlayer(player: String, platform: String) {
-        stateSubject.send(.showLoading)
         getAccountProfileSubject.send((player, platform))
     }
 }
@@ -61,7 +58,7 @@ private extension LoginViewModel {
             default: break
             }
         } receiveValue: { [weak self] data in
-            self?.stateSubject.send(.sendInfoProfile(data))
+            self?.goToProfile(data: data)
         }.store(in: &anySubscription)
     }
 }

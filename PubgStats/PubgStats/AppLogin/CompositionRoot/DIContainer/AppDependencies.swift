@@ -8,39 +8,32 @@
 import UIKit
 
 struct AppDependencies {
-    let window: UIWindow?
-    private let localDataService = LocalDataProfileServiceImp()
-    private let remoteDataService = RemoteServiceImp()
     private var tabController = UITabBarController()
-    private let loginNavController = UINavigationController()
     private let profileNavController = UINavigationController()
     private let favouriteNavController = UINavigationController()
-    private let guideNavController = UINavigationController()
     private let settingsNavController = UINavigationController()
     
-    init(window: UIWindow?) {
-        self.window = window
-    }
+    init() { }
     
     func resolve() -> LocalDataProfileService {
-        localDataService
+        LocalDataProfileServiceImp()
     }
     
     func resolve() -> RemoteService {
-        remoteDataService
+        RemoteServiceImp()
     }
     
     func resolve() -> DataPlayerRepository {
         DataPlayerRepositoryImp(dependencies: self)
     }
     
+    func resolve() -> FavouritePlayerRepository {
+        FavouriteRepositoryImp(dependencies: self)
+    }
+    
     //TODO: intentar borrarla de todos lados
     func resolve() -> AppDependencies {
         self
-    }
-    
-    func loginNavigationController() -> UINavigationController {
-        loginNavController
     }
     
     func profileNavigationController() -> UINavigationController {
@@ -55,10 +48,6 @@ struct AppDependencies {
         favouriteNavController
     }
     
-    func guideNavigationController() -> UINavigationController {
-        guideNavController
-    }
-    
     func settingsNavigationController() -> UINavigationController {
         settingsNavController
     }
@@ -68,10 +57,10 @@ extension AppDependencies:
     LoginExternalDependencies,
     MainTabBarExternalDependency,
     ProfileExternalDependencies,
-    FavouriteExternalDependency,
-    GuideExternalDependency,
+    FavouriteExternalDependencies,
     SettingsExternalDependency,
     HelpDataExternalDependency,
     AttributesHomeExternalDependencies,
     AttributesDetailExternalDependencies,
+    MatchesExternalDependencies,
     InfoAppExternalDependency{}

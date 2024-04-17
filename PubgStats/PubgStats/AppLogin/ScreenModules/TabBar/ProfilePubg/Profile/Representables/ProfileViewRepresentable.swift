@@ -37,3 +37,7 @@ struct DefaultProfileAttributes: ProfileAttributesRepresentable {
         self.infoWeapon = infoWeapon
     }
 }
+
+public enum UrlType: String {
+    case news = "https://pubg.com/es/news"
+}

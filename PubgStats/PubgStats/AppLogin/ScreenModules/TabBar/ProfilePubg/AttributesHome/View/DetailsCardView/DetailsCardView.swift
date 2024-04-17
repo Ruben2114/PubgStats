@@ -49,11 +49,12 @@ private extension DetailsCardView {
     func createDetails() {
         representableDetails?.attributesHeaderDetails.sorted { $0.title < $1.title}.forEach({ data in
             let stack = getDetailsStack()
-            let text = representableDetails?.type == .modeGames ? setType(data.title)?.setTitle() : data.title
-            let label = getTitleLabel(text: text ?? data.title)
+            let label = getTitleLabel()
             let percentageRectangleView = PercentageRectangleView()
+            let newText = configureColor(data.title)
+            label.attributedText = newText
             percentageRectangleView.configureView(DefaultPercentageRectangle(percentage: data.percentage,
-                                                                             cornerRadius: 4,
+                                                                             cornerRadius: 2,
                                                                              withText: false))
             percentageRectangleView.heightAnchor.constraint(equalToConstant: 4).isActive = true
             
@@ -63,6 +64,17 @@ private extension DetailsCardView {
         })
         let image = representableDetails?.type == .modeGames ? setType(representableDetails?.image ?? "")?.setImage() : representableDetails?.image
         imageView.image = UIImage(named: image ?? "")
+    }
+    
+    func configureColor(_ text: String) -> NSMutableAttributedString {
+        let attributedString = NSMutableAttributedString()
+        let lastText = text.components(separatedBy: ":").last
+        let attributedTitle = NSAttributedString(string: lastText ?? "", attributes: [
+            .foregroundColor: UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
+        ])
+        attributedString.append(NSAttributedString(string: text.replacingOccurrences(of: lastText ?? "", with: "")))
+        attributedString.append(attributedTitle)
+        return attributedString
     }
     
     func createCards() {

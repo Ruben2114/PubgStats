@@ -15,21 +15,32 @@ extension MessageDisplayable where Self: UIViewController{
             title: title,
             message: message,
             preferredStyle: .alert)
+//        let attributedTitle = NSAttributedString(string: title, attributes: [
+//            .font: UIFont(name: "AmericanTypewriter-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20)
+//        ])
+//        let attributedMessage = NSAttributedString(string: message, attributes: [
+//            .font: UIFont(name: "AmericanTypewriter", size: 16) ?? UIFont.systemFont(ofSize: 16)
+//        ])
+//        alertController.setValue(attributedTitle, forKey: "attributedTitle")
+//        alertController.setValue(attributedMessage, forKey: "attributedMessage")
+//        alertController.view.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
+        //TODO: aclarar lo del color
         let okAction = UIAlertAction(title: "actionAccept".localize(), style: .default)
         alertController.addAction(okAction)
         self.present(alertController, animated: true)
     }
     
-    func presentAlertOutOrRetry(message: String, title: String, completion: (() -> Void)?){
+    func presentAlertOutOrRetry(message: String, title: String, retry: (() -> Void)?, cancel: (() -> Void)? = nil){
         let alertController = UIAlertController(
             title: title,
             message: message,
             preferredStyle: .alert)
-
-        let actionRetry = UIAlertAction(title: "actionRetry".localize(), style: .default) { _ in
-            completion?()
-        }
-        alertController.addAction(actionRetry)
+        alertController.addAction(UIAlertAction(title: "actionCancel".localize(), style: .cancel) { _ in
+            cancel?()
+        })
+        alertController.addAction(UIAlertAction(title: "actionRetry".localize(), style: .default) { _ in
+            retry?()
+        })
         self.present(alertController, animated: true)
     }
     
@@ -44,49 +55,15 @@ extension MessageDisplayable where Self: UIViewController{
         }
     }
    
-    func presentAlertTextField(title: String, message: String, textFields: [(title: String, placeholder: String)], completed: ((_ text: [String]) -> Void)? = nil, isSecure: Bool) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        for text in textFields {
-            alert.addTextField { (textField) in
-                textField.placeholder = text.placeholder
-                textField.isSecureTextEntry = isSecure
-            }
-        }
-        let actionAccept = UIAlertAction(title: "actionAccept".localize(), style: .default) { _ in
-            var texts: [String] = []
-            for textField in alert.textFields ?? [] {
-                if let text = textField.text {
-                    texts.append(text)
-                }
-            }
-            completed?(texts)
-        }
-        let actionCancel = UIAlertAction(title: "actionCancel".localize(), style: .destructive)
-        alert.addAction(actionCancel)
-        alert.addAction(actionAccept)
-        present(alert, animated: true)
-    }
-    
-    func alertFetchFavourite(title: String, preferredStyle: UIAlertController.Style, textFieldPlaceholder: String, cancelActionTitle: String, defaultActionTitles: [(title: String, platform: String)], completion: ((String, String) -> Void)?) {
-        
-        let alertController = UIAlertController(title: title, message: nil, preferredStyle: preferredStyle)
-        
-        alertController.addTextField { (textField) in
-            textField.placeholder = textFieldPlaceholder
-        }
-        alertController.addAction(UIAlertAction(title: cancelActionTitle, style: .cancel, handler: nil))
-        
-        for actionTitle in defaultActionTitles {
-            alertController.addAction(UIAlertAction(title: actionTitle.title, style: .default, handler: { action in
-                if var textField = alertController.textFields?.first?.text {
-                    if textField.contains(" ") {
-                        let updatedText = textField.replacingOccurrences(of: " ", with: "%20")
-                        textField = updatedText
-                    }
-                    completion?(textField, actionTitle.platform)
-                }
-            }))
-        }
-        present(alertController, animated: true, completion: nil)
+    func presentAlertPlatform(title: String, message: String? = nil, completed: ((_ platform: String) -> Void)?) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "actionCancel".localize(), style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Steam", style: .default, handler: { (action) in
+            completed?("steam")
+        }))
+        alertController.addAction(UIAlertAction(title: "Xbox", style: .default, handler: { (action) in
+            completed?("xbox")
+        }))
+        present(alertController, animated: true)
     }
 }

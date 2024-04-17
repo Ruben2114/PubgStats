@@ -7,13 +7,12 @@
 
 import UIKit
 import Combine
-import SafariServices
 
 final class ProfileViewController: UIViewController {
     private var cancellable = Set<AnyCancellable>()
     private let viewModel: ProfileViewModel
-    private let dependencies: ProfileDependencies
-    private var reloadButton = UIBarButtonItem()
+    private lazy var reloadButton = createButtonImage(image: UIImage(systemName: "arrow.clockwise.circle.fill"), selector: #selector(reloadButtonAction))
+    private lazy var infoButton = createButtonImage(image: UIImage(systemName: "questionmark.circle"), selector: #selector(helpReloadButtonAction))
     private lazy var scrollableStackView: ScrollableStackView = {
         let view = ScrollableStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -33,15 +32,17 @@ final class ProfileViewController: UIViewController {
     private lazy var bottomSheetView: BottomSheetView = {
         BottomSheetView()
     }()
-    private lazy var newsCardView: VersatilCardView = {
-        VersatilCardView()
+    private lazy var newsCardView: VersatileCardView = {
+        VersatileCardView()
     }()
-    private lazy var survivalCardView: VersatilCardView = {
-        VersatilCardView()
+    private lazy var survivalCardView: VersatileCardView = {
+        VersatileCardView()
+    }()
+    private lazy var matchesCardView: VersatileCardView = {
+        VersatileCardView()
     }()
         
     init(dependencies: ProfileDependencies) {
-        self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)
     }
@@ -53,32 +54,29 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showLoading()
         setAppearance()
         bind()
         viewModel.viewDidLoad()
+        if viewModel.type == .favourite { showLoading() }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNavigationBar()
     }
 }
 
 private extension ProfileViewController {
     func setAppearance() {
-        configView()
-        addViewToScrollableStackView()
-    }
-    
-    func configView() {
         configureImageBackground("backgroundProfile")
-        configureNavigationBar()
-        configureNewsCard()
-        configureSurvivalCard()
+        addViewToScrollableStackView()
     }
     
     func bind() {
         bindViewModel()
         bindHeaderView()
         bindChartView()
-        bindNewsCardView()
-        bindSurvivalCardView()
+        bindVersatileCard()
         bindGeneralView()
     }
     
@@ -92,17 +90,21 @@ private extension ProfileViewController {
                 self?.chartView.configureViewWith(DefaultChartViewData(charts: infoChartView ?? [], chartSelectedIndex: 0))
             case .showErrorPlayerDetails:
                 self?.scrollableStackView.stackView.isHidden = true
-                self?.presentAlertOutOrRetry(message: "errorPlayerDetails".localize(), title: "Error", completion: { [weak self] in
+                self?.presentAlertOutOrRetry(message: "errorPlayerDetails".localize(), title: "Error", retry: { [weak self] in
                     self?.viewModel.reload()
+                }, cancel: { [weak self] in
+                    self?.viewModel.backButton()
                 })
             case .showHeader(let data):
                 self?.headerView.configureView(representable: data)
             case .showDataGeneral(let data):
                 self?.dataGeneralView.configureView(data)
             case .hideLoading:
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [ weak self] in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [ weak self] in
                     self?.hideLoading()
                 }
+            case .infoVersatileCard(let versatileCardTypes, let matches):
+                self?.configureVersatilCard(versatileCardTypes, matches)
             }
         }.store(in: &cancellable)
     }
@@ -130,32 +132,32 @@ private extension ProfileViewController {
         }.store(in: &cancellable)
     }
     
-    func bindNewsCardView() {
+    func bindVersatileCard() {
         newsCardView.publisher.sink { [weak self] in
-            self?.configureWeb()
+            self?.viewModel.goToWeb(urlString: .news)
         }.store(in: &cancellable)
-    }
-    
-    func bindSurvivalCardView() {
+        
         survivalCardView.publisher.sink { [weak self] in
             self?.viewModel.goToSurvival()
+        }.store(in: &cancellable)
+        
+        matchesCardView.publisher.sink { [weak self] in
+            self?.viewModel.goToMatches()
         }.store(in: &cancellable)
     }
     
     func configureNavigationBar() {
-        titleNavigation("profileViewControllerNavigationItem")
-        let helpReloadButton = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: #selector(helpReloadButtonAction))
-        helpReloadButton.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
-        reloadButton = UIBarButtonItem(image: UIImage(systemName: "arrow.clockwise.circle.fill"), style: .plain, target: self, action: #selector(reloadButtonAction))
-        reloadButton.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
-        navigationItem.setRightBarButtonItems([reloadButton, helpReloadButton], animated: true)
+        titleNavigation("profileViewControllerNavigationItem",
+                        backButton: viewModel.type == .favourite ? #selector(backButtonAction) : nil, 
+                        moreButton: [reloadButton, infoButton])
     }
     
     func addViewToScrollableStackView() {
         scrollableStackView.addArrangedSubview(headerView)
         scrollableStackView.addArrangedSubview(dataGeneralView)
-        scrollableStackView.addArrangedSubview(chartView)
+        scrollableStackView.addArrangedSubview(matchesCardView)
         scrollableStackView.addArrangedSubview(survivalCardView)
+        scrollableStackView.addArrangedSubview(chartView)
         scrollableStackView.addArrangedSubview(newsCardView)
     }
     
@@ -163,25 +165,21 @@ private extension ProfileViewController {
         bottomSheetView.show(in: self, title: title, subtitle: subtitle)
     }
     
-    func configureNewsCard() {
-        let model = DefaultVersatilCard(title: "profileCardNews".localize(),
-                                        subTitle: "profileCardNewsSubtitle".localize(),
-                                        customImageView: "NewsSerie")
-        newsCardView.setupVersatilCard(model)
-    }
-    
-    func configureSurvivalCard() {
-        let model = DefaultVersatilCard(title: "profileCardSurvival".localize(),
-                                        subTitle: "profileCardSurvivalSubtitle".localize(),
-                                        customImageView: "survivalSerie")
-        survivalCardView.setupVersatilCard(model)
-    }
-    
-    func configureWeb() {
-        guard let url = URL(string: "https://pubg.com/es/news") else { return }
-        let safariService = SFSafariViewController(url: url)
-        safariService.dismissButtonStyle = .close
-        present(safariService, animated: true)
+    func configureVersatilCard(_ types: [ProfileVersatileCardType], _ matches: Int) {
+        types.forEach { type in
+            let data = type.getData(matchesCount: matches)
+            switch type {
+            case .matches:
+                matchesCardView.setupVersatileCard(data)
+            case .survival:
+                survivalCardView.setupVersatileCard(data)
+            case .news:
+                newsCardView.setupVersatileCard(data)
+            }
+        }
+        if !types.contains(.news) {
+            newsCardView.isHidden = true
+        }
     }
     
     @objc private func helpReloadButtonAction() {
@@ -197,6 +195,10 @@ private extension ProfileViewController {
         }
         showLoading()
         viewModel.reload()
+    }
+    
+    @objc func backButtonAction() {
+        viewModel.backButton()
     }
 }
 

@@ -15,6 +15,7 @@ enum ProfileState {
     case hideLoading
     case showHeader(ProfileHeaderViewRepresentable)
     case showDataGeneral(GamesModesDataProfileRepresentable)
+    case infoVersatileCard([ProfileVersatileCardType], Int)
 }
 
 final class ProfileViewModel: DataBindable {
@@ -24,7 +25,7 @@ final class ProfileViewModel: DataBindable {
     var state: AnyPublisher<ProfileState, Never>
     private let getPlayerDetailsSubject = PassthroughSubject<Bool, Never>()
     @BindingOptional private var dataProfile: IdAccountDataProfileRepresentable?
-    @BindingOptional private var type: NavigationStats?
+    @BindingOptional var type: NavigationStats?
     private var representable: PlayerDetailsRepresentable?
     
     init(dependencies: ProfileDependencies) {
@@ -38,6 +39,7 @@ final class ProfileViewModel: DataBindable {
     
     func viewDidLoad() {
         subscribePlayerDetailsPublisher()
+        configureVersatileCard()
         reloadData()
     }
     
@@ -56,8 +58,20 @@ final class ProfileViewModel: DataBindable {
         coordinator.goToAttributesDetails(attributesDetails)
     }
     
+    func goToMatches() {
+        coordinator.goToMatches(representable?.infoGamesModes.matches ?? [], profile: dataProfile)
+    }
+    
+    func goToWeb(urlString: UrlType) {
+        coordinator.goToWeb(urlString: urlString)
+    }
+    
     func reload(){
         getPlayerDetailsSubject.send(true)
+    }
+    
+    func backButton() {
+        coordinator.goBack()
     }
 }
 
@@ -81,6 +95,11 @@ private extension ProfileViewModel {
         stateSubject.send(.showChartView(chartData))
     }
     
+    func configureVersatileCard() {
+        let info = ProfileVersatileCardType.getTypes(navigation: type)
+        stateSubject.send(.infoVersatileCard(info, representable?.infoGamesModes.matches.count ?? 0))
+    }
+    
     func reloadData() {
         let valueDate = UserDefaults.standard.object(forKey: "date")
         if valueDate != nil {
@@ -95,8 +114,7 @@ private extension ProfileViewModel {
     
     func getSubcategoriesData(stats: PlayerStats) -> CategoryRepresentable {
         DefaultCategory(percentage: stats.percentage(),
-                        color: stats.color()?.0 ?? .gray,
-                        secundaryColor: stats.color()?.1 ?? .systemGray,
+                        color: stats.color(),
                         currentCenterTitleText: stats.amount(),
                         currentSubTitleText: stats.title())
     }
@@ -106,10 +124,10 @@ private extension ProfileViewModel {
         return NSDecimalNumber(decimal: amount).doubleValue
     }
     
-    func getProfileHeader(_ info: SurvivalDataProfileRepresentable) {
+    func getProfileHeader() {
         let profileHeader = DefaultProfileHeaderView(dataPlayer: dataProfile ?? DefaultIdAccountDataProfile(id: "", name: "", platform: ""),
-                                                     level: info.level,
-                                                     xp: info.xp)
+                                                     level: representable?.infoSurvival.level ?? "",
+                                                     xp: representable?.infoSurvival.xp ?? "")
         stateSubject.send(.showHeader(profileHeader))
     }
 }
@@ -129,8 +147,9 @@ private extension ProfileViewModel {
         } receiveValue: { [weak self] data in
             guard let self else { return }
             self.representable = data
+            self.configureVersatileCard()
             self.stateSubject.send(.showDataGeneral(data.infoGamesModes))
-            self.getProfileHeader(data.infoSurvival)
+            self.getProfileHeader()
             self.getChartData(infoGamesModes: data.infoGamesModes)
             self.stateSubject.send(.hideLoading)
         }.store(in: &anySubscription)

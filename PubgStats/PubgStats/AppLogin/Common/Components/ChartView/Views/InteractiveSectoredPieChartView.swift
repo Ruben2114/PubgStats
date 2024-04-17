@@ -81,7 +81,7 @@ private extension InteractiveSectoredPieChartView {
         case .notSet, .none:
             return category.color
         case .selected:
-            return selectedSector.index == index ? color : category.secundaryColor
+            return selectedSector.index == index ? color : category.color
         }
     }
     

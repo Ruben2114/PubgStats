@@ -68,16 +68,6 @@ extension UIView {
         widthAnchor.constraint(equalToConstant: width).isActive = true
     }
     
-    func embedIntoCenter() -> UIView {
-        let container = UIView()
-        container.addSubview(self)
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
-        self.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
-        self.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
-        return container
-    }
-    
     @discardableResult
     func roundCorners(corners: UIRectCorner,
                       radius: CGFloat) -> CAShapeLayer {
@@ -90,7 +80,7 @@ extension UIView {
         return mask
     }
 
-    func getTitleLabel(text: String) -> UILabel {
+    func getTitleLabel(text: String? = nil) -> UILabel {
         let label = UILabel()
         label.textColor = .white
         label.font = UIFont(name: "AmericanTypewriter-Bold", size: 16)

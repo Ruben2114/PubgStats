@@ -61,7 +61,7 @@ enum PlayerStats {
         case .rounds(_):
             return "rounds".localize()
         default:
-            return type()
+            return type().localize().capitalized
         }
     }
 
@@ -100,22 +100,22 @@ enum PlayerStats {
         }
     }
     
-    func color() -> (UIColor, UIColor)? {
+    func color() -> UIColor {
         switch self{
         case .soloWins(_), .soloRounds(_), .soloKills(_):
-            return (.green, .systemGreen)
+            return getColor(red: 72, green: 194, blue: 108)
         case .soloFppWins(_), .soloFppRounds(_), .soloFppKills(_):
-            return (.red, .systemRed)
+            return getColor(red: 255, green: 151, blue: 217)
         case .duoWins(_), .duoRounds(_), .duoKills(_):
-            return (.blue, .systemBlue)
+            return getColor(red: 171, green: 130, blue: 72)
         case .duoFppWins(_), .duoFppRounds(_), .duoFppKills(_):
-            return (.brown, .systemBrown)
+            return getColor(red: 167, green: 190, blue: 249)
         case .squadWins(_), .squadRounds(_), .squadKills(_):
-            return (.purple, .systemPurple)
+            return getColor(red: 171, green: 62, blue: 216)
         case .squadFppWins(_), .squadFppRounds(_), .squadFppKills(_):
-            return (.orange, .systemOrange)
+            return getColor(red: 238, green: 155, blue: 89)
         default:
-            return nil
+            return .systemGray
         }
     }
     
@@ -171,7 +171,11 @@ enum PlayerStats {
         }
     }
     
-    func getSubcategoriesPercentage(valueTotal: Int, valueSubcategory: Int?) -> Double {
+    private func getSubcategoriesPercentage(valueTotal: Int, valueSubcategory: Int?) -> Double {
         return Double((valueSubcategory ?? 0) * 100) / Double(valueTotal)
+    }
+    
+    private func getColor(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor{
+        return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
     }
 }

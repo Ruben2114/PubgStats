@@ -35,7 +35,6 @@ struct DefaultPieChartViewData: PieChartViewDataRepresentable {
 protocol CategoryRepresentable {
     var percentage: Double { get }
     var color: UIColor { get }
-    var secundaryColor: UIColor { get }
     var currentCenterTitleText: String { get }
     var currentSubTitleText: String { get }
 }
@@ -43,14 +42,12 @@ protocol CategoryRepresentable {
 struct DefaultCategory: CategoryRepresentable {
     let percentage: Double
     let color: UIColor
-    let secundaryColor: UIColor
     let currentCenterTitleText: String
     let currentSubTitleText: String
     
-    init(percentage: Double, color: UIColor, secundaryColor: UIColor, currentCenterTitleText: String, currentSubTitleText: String) {
+    init(percentage: Double, color: UIColor, currentCenterTitleText: String, currentSubTitleText: String) {
         self.percentage = percentage
         self.color = color
-        self.secundaryColor = secundaryColor
         self.currentCenterTitleText = currentCenterTitleText
         self.currentSubTitleText = currentSubTitleText
     }

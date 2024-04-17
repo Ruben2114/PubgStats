@@ -6,10 +6,14 @@
 //
 
 import UIKit
+import SafariServices
 
 public protocol ProfileCoordinator: BindableCoordinator {
     func goToAttributes(attributes: ProfileAttributesRepresentable)
     func goToAttributesDetails(_ attributes: ProfileAttributesDetailsRepresentable?)
+    func goBack()
+    func goToWeb(urlString: UrlType)
+    func goToMatches(_ matchesId: [String], profile: IdAccountDataProfileRepresentable?)
 }
 
 final class ProfileCoordinatorImp: ProfileCoordinator {
@@ -33,6 +37,10 @@ extension ProfileCoordinatorImp {
         self.navigation?.pushViewController(dependencies.resolve(), animated: true)
     }
     
+    func goBack() {
+        self.dismiss()
+    }
+    
     func goToAttributes(attributes: ProfileAttributesRepresentable) {
         let coordinator = dependencies.external.attributesHomeCoordinator(navigation: navigation)
         coordinator
@@ -45,6 +53,24 @@ extension ProfileCoordinatorImp {
         let coordinator = dependencies.external.attributesDetailCoordinator(navigation: navigation)
         coordinator
             .set(attributes)
+            .start()
+        append(child: coordinator)
+    }
+    
+    func goToWeb(urlString: UrlType) {
+        guard let url = URL(string: urlString.rawValue) else { return }
+        let safariService = SFSafariViewController(url: url)
+        safariService.preferredBarTintColor = .black
+        safariService.preferredControlTintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
+        safariService.dismissButtonStyle = .close
+        navigation?.present(safariService, animated: true)
+    }
+    
+    func goToMatches(_ matchesId: [String], profile: IdAccountDataProfileRepresentable?) {
+        let coordinator = dependencies.external.matchesCoordinator(navigation: navigation)
+        coordinator
+            .set(matchesId)
+            .set(profile)
             .start()
         append(child: coordinator)
     }

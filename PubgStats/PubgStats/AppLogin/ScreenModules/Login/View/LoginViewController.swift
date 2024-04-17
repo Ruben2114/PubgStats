@@ -16,7 +16,8 @@ class LoginViewController: UIViewController {
         stack.spacing = 20
         return stack
     }()
-    private lazy var userTextField = {
+    //TODO: una vista a la izquierda para que?
+    private lazy var userTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.placeholder = "userTextField".localize()
@@ -98,16 +99,10 @@ private extension LoginViewController {
             switch state {
             case .idle:
                 break
-            case .sendInfoProfile(let data):
-                self?.hideLoading()
-                self?.viewModel.goToProfile(data: data)
             case .sendInfoProfileError:
-                self?.hideLoading()
                 self?.view.endEditing(true)
                 self?.presentAlert(message: "profileLoginNotExitname".localize(),
                                    title: "Error")
-            case .showLoading:
-                self?.showLoading()
             }
         }.store(in: &cancellable)
     }
@@ -165,7 +160,6 @@ private extension LoginViewController {
     }
 }
 
-extension LoginViewController: LoadingPresentationDisplayable { }
 extension LoginViewController: MessageDisplayable { }
 extension LoginViewController {
     func addObserverKeyboard() {

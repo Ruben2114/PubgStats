@@ -41,6 +41,17 @@ public extension Coordinator {
         navigation?.popViewController(animated: true)
         onFinish?()
     }
+    
+    func setRoot(_ controller: UIViewController) {
+        guard let delegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
+        delegate.window?.rootViewController = controller
+    }
+    
+    func setNewRoot(_ data: IdAccountDataProfileRepresentable? = nil) {
+        guard let delegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
+        onFinish?()
+        delegate.changeRootViewCoordinator(data: data)
+    }
 }
 
 public protocol uniqueIdentifiable {

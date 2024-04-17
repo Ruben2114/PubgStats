@@ -52,10 +52,23 @@ struct GamesModesDTO: Decodable {
         let minutes = Int(round((time.truncatingRemainder(dividingBy: 3600)) / 60))
         return "\(days) d \(hours) h \(minutes) m"
     }
+    
+    var matches: [Matches] {
+        return [data.relationships.matchesDuo,
+                data.relationships.matchesDuoFPP,
+                data.relationships.matchesSolo,
+                data.relationships.matchesSoloFPP,
+                data.relationships.matchesSquad,
+                data.relationships.matchesSquadFPP]
+    }
 }
 struct GamesModesDataDTO: Decodable {
+    let type: String
     let attributes: GamesModesAttributesDTO
+    let relationships: MatchesGameMode
 }
+
+// MARK: - Attributes
 struct GamesModesAttributesDTO: Decodable {
     let gameModeStats: StatisticsGameModes
     let bestRankPoint: Double
@@ -101,3 +114,20 @@ struct DuoDTO: Decodable {
          case wins
      }
  }
+
+// MARK: - MatchesGameMode
+struct MatchesGameMode: Decodable {
+    let matchesSolo, matchesSoloFPP, matchesDuo, matchesDuoFPP: Matches
+    let matchesSquad, matchesSquadFPP: Matches
+}
+
+// MARK: - Matches
+struct Matches: Decodable {
+    let data: [MatchesData]
+}
+
+// MARK: - MatchesData
+struct MatchesData: Decodable {
+    let type: String
+    let id: String
+}
