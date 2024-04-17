@@ -59,7 +59,7 @@ final class ProfileViewModel: DataBindable {
     }
     
     func goToMatches() {
-        coordinator.goToMatches(representable?.infoGamesModes.matches ?? [])
+        coordinator.goToMatches(representable?.infoGamesModes.matches ?? [], profile: dataProfile)
     }
     
     func goToWeb(urlString: UrlType) {

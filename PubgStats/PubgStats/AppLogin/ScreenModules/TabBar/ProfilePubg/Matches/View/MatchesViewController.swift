@@ -35,7 +35,7 @@ final class MatchesViewController: UIViewController {
     
     private let cellIdentifier = "MatchesViewCell"
     private var errorMatches: Bool = false
-    private var matchesList: [MatchDataProfileRepresentable] = []
+    private var matchesList: [MatchRepresentable] = []
     
     init(dependencies: MatchesDependencies) {
         self.viewModel = dependencies.resolve()
@@ -68,8 +68,7 @@ private extension MatchesViewController {
     }
     
     func setupTableView() {
-        tableView.register(MatchesTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(UINib(nibName: "MatchesTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.bounces = false
         tableView.dataSource = self
         tableView.delegate = self
@@ -109,6 +108,7 @@ private extension MatchesViewController {
 extension MatchesViewController: LoadingPresentationDisplayable { }
 extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //TODO: key
         messageEmptyLabel.text = errorMatches ? "No se han podido cargar las partidas. Inténtalo en unos minutos." : "No existen partidas en los útlimos 7 dias"
         tableView.backgroundView = matchesList.isEmpty || errorMatches ? messageEmptyLabel : nil
         return matchesList.count
@@ -120,16 +120,12 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.backgroundColor = .clear
         cell.backgroundConfiguration = UIBackgroundConfiguration.clear()
-        //TODO: ordenar por fecha o ya vienen bien?
-        cell.configureWith(representable: matchesList[indexPath.row])
+        let match = matchesList.sorted(by: { $0.date ?? Date() > $1.date ?? Date() })[indexPath.row]
+        cell.configureWith(representable: match)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //viewModel.goToMatchesDetails(matchesList[indexPath.row])
     }
 }

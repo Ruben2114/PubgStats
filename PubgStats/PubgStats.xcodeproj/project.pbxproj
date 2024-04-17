@@ -75,6 +75,7 @@
 		8C3A01442B840E5400211AF3 /* AttributesHomeViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A01432B840E5400211AF3 /* AttributesHomeViewControllerTest.swift */; };
 		8C3A01462B840E9A00211AF3 /* AttributesHomeViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A01452B840E9A00211AF3 /* AttributesHomeViewModelTest.swift */; };
 		8C3B45D22B866E7F00A40B0B /* WeaponAttributesDetailsRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3B45D12B866E7F00A40B0B /* WeaponAttributesDetailsRepresentable.swift */; };
+		8C4A879C2BCF224800A8E609 /* MatchRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4A879B2BCF224800A8E609 /* MatchRepresentable.swift */; };
 		8C6220652BC5DBDE00E925C5 /* MatchesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6220642BC5DBDE00E925C5 /* MatchesCoordinator.swift */; };
 		8C6220672BC5DC6C00E925C5 /* MatchesExternalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6220662BC5DC6C00E925C5 /* MatchesExternalDependencies.swift */; };
 		8C6220692BC5DCC200E925C5 /* MatchesDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6220682BC5DCC200E925C5 /* MatchesDependencies.swift */; };
@@ -278,6 +279,7 @@
 		8C3A01432B840E5400211AF3 /* AttributesHomeViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesHomeViewControllerTest.swift; sourceTree = "<group>"; };
 		8C3A01452B840E9A00211AF3 /* AttributesHomeViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesHomeViewModelTest.swift; sourceTree = "<group>"; };
 		8C3B45D12B866E7F00A40B0B /* WeaponAttributesDetailsRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponAttributesDetailsRepresentable.swift; sourceTree = "<group>"; };
+		8C4A879B2BCF224800A8E609 /* MatchRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchRepresentable.swift; sourceTree = "<group>"; };
 		8C6220642BC5DBDE00E925C5 /* MatchesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesCoordinator.swift; sourceTree = "<group>"; };
 		8C6220662BC5DC6C00E925C5 /* MatchesExternalDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesExternalDependencies.swift; sourceTree = "<group>"; };
 		8C6220682BC5DCC200E925C5 /* MatchesDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesDependencies.swift; sourceTree = "<group>"; };
@@ -721,9 +723,18 @@
 			path = AttributesHome;
 			sourceTree = "<group>";
 		};
+		8C4A879A2BCF222500A8E609 /* Representables */ = {
+			isa = PBXGroup;
+			children = (
+				8C4A879B2BCF224800A8E609 /* MatchRepresentable.swift */,
+			);
+			path = Representables;
+			sourceTree = "<group>";
+		};
 		8C62205E2BC5DB1300E925C5 /* Matches */ = {
 			isa = PBXGroup;
 			children = (
+				8C4A879A2BCF222500A8E609 /* Representables */,
 				8C6220632BC5DB8900E925C5 /* DependenciesResolver */,
 				8C6220622BC5DB4400E925C5 /* Coordinator */,
 				8C6220612BC5DB3B00E925C5 /* UseCase */,
@@ -1721,6 +1732,7 @@
 				8CBC704A2AD7EBBA00234420 /* Bindable.swift in Sources */,
 				8C62206F2BC5E5A500E925C5 /* MatchesViewController.swift in Sources */,
 				8C6220692BC5DCC200E925C5 /* MatchesDependencies.swift in Sources */,
+				8C4A879C2BCF224800A8E609 /* MatchRepresentable.swift in Sources */,
 				8CD7CD6F29BF04E200C57346 /* Profile.xcdatamodeld in Sources */,
 				465550E329CC6F1F00BF932A /* FavouriteViewController.swift in Sources */,
 				8C826AF82BAA40D200ED98BB /* FavouriteTableViewCell.swift in Sources */,

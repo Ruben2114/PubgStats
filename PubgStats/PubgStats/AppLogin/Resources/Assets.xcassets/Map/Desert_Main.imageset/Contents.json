@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Miramar_Main_Low_Res.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

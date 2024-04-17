@@ -124,4 +124,3 @@
 "profileChartRoundTooltip" = "Partidas en los diferentes modos";
 "profileHelpReloadTitle" = "Información sobre la recarga";
 "profileHelpReloadSubtitle" = "La recarga de los datos se realiza automáticamente cada 24 horas.\n\nSi necesitas recargar la vista puedes pulsar el botón de recarga.\n\nEl botón de recarga será activado dos minutos después de la última actualización.";
-

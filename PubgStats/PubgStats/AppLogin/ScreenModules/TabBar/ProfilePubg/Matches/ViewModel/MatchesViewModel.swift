@@ -11,7 +11,7 @@ import Combine
 enum MatchesState {
     case idle
     case showLoading
-    case showMatches([MatchDataProfileRepresentable]?)
+    case showMatches([MatchRepresentable]?)
     case showErrorMatches
 }
 
@@ -56,8 +56,23 @@ private extension MatchesViewModel {
     var matchesDataUseCase: MatchesDataUseCase {
         return dependencies.resolve()
     }
+    
+    func configureMatches(_ matches: [MatchDataProfileRepresentable]) {
+        let matchesDefault = matches.map { DefaultMatch(map: $0.attributes.mapName,
+                                                        gameMode: $0.attributes.gameMode,
+                                                        kills: $0.included.first(where: {$0.attributes.stats?.name == profile?.name})?.attributes.stats?.kills ?? 0,
+                                                        damage: $0.included.first(where: {$0.attributes.stats?.name == profile?.name})?.attributes.stats?.damageDealt ?? 0,
+                                                        date: configureDate($0.attributes.createdAt),
+                                                        position: $0.included.first(where: {$0.attributes.stats?.name == profile?.name})?.attributes.stats?.winPlace ?? 0) }
+        self.stateSubject.send(.showMatches(matchesDefault))
+    }
+    
+    func configureDate(_ dateString: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        return dateFormatter.date(from: dateString)
+    }
 }
-
 
 //MARK: - Subscriptions
 private extension MatchesViewModel {
@@ -70,7 +85,7 @@ private extension MatchesViewModel {
             default: break
             }
         } receiveValue: { [weak self] matches in
-            self?.stateSubject.send(.showMatches(matches))
+            self?.configureMatches(matches)
         }.store(in: &anySubscription)
     }
 }

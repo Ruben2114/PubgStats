@@ -30,14 +30,16 @@ extension MessageDisplayable where Self: UIViewController{
         self.present(alertController, animated: true)
     }
     
-    func presentAlertOutOrRetry(message: String, title: String, completion: (() -> Void)?){
+    func presentAlertOutOrRetry(message: String, title: String, retry: (() -> Void)?, cancel: (() -> Void)? = nil){
         let alertController = UIAlertController(
             title: title,
             message: message,
             preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "actionCancel".localize(), style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "actionCancel".localize(), style: .cancel) { _ in
+            cancel?()
+        })
         alertController.addAction(UIAlertAction(title: "actionRetry".localize(), style: .default) { _ in
-            completion?()
+            retry?()
         })
         self.present(alertController, animated: true)
     }

@@ -13,7 +13,7 @@ public protocol ProfileCoordinator: BindableCoordinator {
     func goToAttributesDetails(_ attributes: ProfileAttributesDetailsRepresentable?)
     func goBack()
     func goToWeb(urlString: UrlType)
-    func goToMatches(_ matchesId: [String])
+    func goToMatches(_ matchesId: [String], profile: IdAccountDataProfileRepresentable?)
 }
 
 final class ProfileCoordinatorImp: ProfileCoordinator {
@@ -66,10 +66,11 @@ extension ProfileCoordinatorImp {
         navigation?.present(safariService, animated: true)
     }
     
-    func goToMatches(_ matchesId: [String]) {
+    func goToMatches(_ matchesId: [String], profile: IdAccountDataProfileRepresentable?) {
         let coordinator = dependencies.external.matchesCoordinator(navigation: navigation)
         coordinator
             .set(matchesId)
+            .set(profile)
             .start()
         append(child: coordinator)
     }

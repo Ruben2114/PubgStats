@@ -7,19 +7,18 @@
 
 import Foundation
 
-enum PubgError: Error {
+public enum PubgError: Error {
     case network
     case manyRequest
     case other
     //TODO: poner bien lo del internet el code
-    static func getError(_ error: Error) -> PubgError {
-        guard let urlError = error as? URLError else { return .other }
+    //TODO: poner la skeys
+    static func getError(_ error: Error) -> String? {
+        guard let urlError = error as? URLError else { return nil }
         switch urlError.errorCode {
-        case 429: return .manyRequest
-        case 1009: return .network
-        default: return .other
+        case 429: return "Demasiadas llamadas poner key"
+        case 1009: return "Problemas con el internet"
+        default: return nil
         }
     }
 }
-
-

@@ -14,10 +14,13 @@ import Combine
 class ApiClientServiceImp: ApiClientService {
     private let privateKey = "PUBG_PRIVATE_API_KEY"
     
+    let enromentKey = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzODNhYWY2MC05MzNmLTAxM2ItMDFmYy01NzVjNzBiMzFiMzkiLCJpc3MiOiJnYW1lbG9ja2VyIiwiaWF0IjoxNjc2ODkyMzM2LCJwdWIiOiJibHVlaG9sZSIsInRpdGxlIjoicHViZyIsImFwcCI6ImxleWVuZGEyMSJ9.OxjYiTYVbtFMNQt2gTwXskHksNex8IGsiCYN1RvGOQw"
+    
     func dataPlayer<T: Decodable>(url: URL) -> AnyPublisher<T, Error> {
         var request = URLRequest(url: url)
         let environment = ProcessInfo.processInfo.environment[privateKey]
-        request.setValue(environment, forHTTPHeaderField: "Authorization")
+        //TODO: si pongo environment no me lo coge cuando me instalo la app sin xcode
+        request.setValue(enromentKey, forHTTPHeaderField: "Authorization")
         request.setValue("application/vnd.api+json", forHTTPHeaderField: "accept")
         let publisher: AnyPublisher<T, Error> = URLSession.shared.dataTaskPublisher(for: request)
             .map{ $0.data }
