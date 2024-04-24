@@ -17,7 +17,8 @@
 "mailComposeControllerDefault" = "Ha ocurrido un error";
 "sendMailSetSubject" = "Correo de prueba";
 "infoAppViewModel" = "Acerca de PubgStats\n\nPubgStats es una aplicación creada por Rubén Rodríguez. Graduado en Programación de aplicaciones móviles con Swift en TokioSchool\n\nEsta aplicación ha sido creada con el objetivo de poder analizar las estadísticas de los diferentes usuarios del juego PUBG. Además ofrece un acceso a la guia oficial donde podrás ver todas las novedades y actualizaciones.\n\nA través de la creación de esta aplicación puedo mostrar los conocimientos adquiridos durante el curso y las prácticas curriculares en la entrega del TFM\n\nSi tienes alguna duda, sugerencia o problema con la ejecución de la app no dudes en contactar a través del correo situado en la zona de Ajustes.";
-"infoAppViewControllerTitle" = "Aviso Legal";
+"infoAppViewTitle" = "Aviso Legal";
+"matchesViewControllerTitle" = "Partidas";
 "searchPlaceholder" = "Nombre de usuarios Pubg";
 "favouriteViewControllerNavigationItem" = "Tus usuarios preferidos";
 "searchBarSearchButtonClickedError" = "Ya tienes en tu lista a un usuario con ese nombre";

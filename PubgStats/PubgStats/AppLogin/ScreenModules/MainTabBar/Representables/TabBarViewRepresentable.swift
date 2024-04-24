@@ -58,7 +58,7 @@ enum TabBarView {
         case .favourite(let dependencies):
             return dependencies.favouriteCoordinator(navigation: dependencies.favouriteNavigationController())
         case .setting(let dependencies):
-            return dependencies.settingsCoordinator()
+            return dependencies.settingsCoordinator(navigation: dependencies.settingsNavigationController())
         }
     }
 }

@@ -58,7 +58,7 @@ extension AppDependencies:
     MainTabBarExternalDependency,
     ProfileExternalDependencies,
     FavouriteExternalDependencies,
-    SettingsExternalDependency,
+    SettingsExternalDependencies,
     HelpDataExternalDependency,
     AttributesHomeExternalDependencies,
     AttributesDetailExternalDependencies,

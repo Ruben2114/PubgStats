@@ -7,14 +7,33 @@
 
 import UIKit
 import MessageUI
+import Combine
 
 final class SettingsViewController: UIViewController {
-    private lazy var tableView = makeTableViewGroup()
-    private let dependencies: SettingsDependency
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.backgroundColor = .clear
+        tableView.dataSource = self
+        tableView.delegate = self
+        view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        return tableView
+    }()
+    private lazy var bottomSheetView: BottomSheetView = {
+        BottomSheetView()
+    }()
+    private var cancellable = Set<AnyCancellable>()
+    private let dependencies: SettingsDependencies
     private let viewModel: SettingsViewModel
-    private let imageView = UIImageView(image: UIImage(named: "backgroundAirDrop"))
+    private var settingsField: [SettingsField] = []
    
-    init(dependencies: SettingsDependency) {
+    init(dependencies: SettingsDependencies) {
         self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)
@@ -25,23 +44,32 @@ final class SettingsViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        configUI()
+        setAppearance()
+        bind()
+        viewModel.viewDidLoad()
     }
-    private func configUI() {
-        view.backgroundColor = .systemGroupedBackground
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.backgroundColor = .clear
-        configConstraints()
+}
+
+private extension SettingsViewController {
+    func setAppearance() {
+        //TODO: key
+        titleNavigation("Ajustes")
+        configureImageBackground("backgroundAirDrop")
     }
-    private func configConstraints() {
-        view.insertSubview(imageView, at: 0)
-        imageView.frame = view.bounds
-        view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    
+    func bind() {
+        viewModel.state.receive(on: DispatchQueue.main).sink { [weak self] state in
+            switch state {
+            case .idle:
+                break
+            case .showFields(let fields):
+                self?.settingsField = fields
+                self?.tableView.reloadData()
+            case .showErrorDelete:
+                //TODO: mostrar un error
+                break
+            }
+        }.store(in: &cancellable)
     }
 }
 
@@ -51,7 +79,7 @@ extension SettingsViewController: MFMailComposeViewControllerDelegate{
         guard error == nil else{return}
         switch result{
         case .cancelled:
-            break
+            controller.dismiss(animated: true)
         case .saved:
             break
         case .sent:
@@ -64,27 +92,32 @@ extension SettingsViewController: MFMailComposeViewControllerDelegate{
     }
 }
 
-extension SettingsViewController: UITableViewDataSource, UITableViewDelegate{
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.settingsField.count
-    }
+extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.settingsField[section].count
+        return 1
     }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return settingsField.count
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        let settingsField = viewModel.settingsField[indexPath.section][indexPath.row]
+        let settingsField = settingsField[indexPath.section]
         cell.accessoryType = .disclosureIndicator
+        cell.backgroundColor = .black.withAlphaComponent(0.8)
         var listContent = UIListContentConfiguration.cell()
-        listContent.textProperties.font = UIFont.systemFont(ofSize: 20)
+        listContent.textProperties.font = UIFont(name: "AmericanTypewriter-Bold", size: 20) ?? UIFont.boldSystemFont(ofSize: 20)
+        listContent.textProperties.color = .white
         listContent.text = settingsField.title()
         listContent.image =  UIImage(systemName: settingsField.icon())
+        listContent.imageProperties.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
         cell.contentConfiguration = listContent
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let settingsField = viewModel.settingsField[indexPath.section][indexPath.row]
-        switch settingsField {
+        switch settingsField[indexPath.section] {
         case .help:
             viewModel.goHelp()
         case .email:
@@ -98,9 +131,17 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate{
             sendMail.mailComposeDelegate = self
             present(sendMail, animated: true, completion: nil)
         case .legal:
-            viewModel.infoDeveloper()
+            //TODO: modificar el texto de infoAppViewModel
+            bottomSheetView.show(in: self, title: "infoAppViewTitle".localize(), subtitle: "infoAppViewModel".localize())
+            //TODO: borrar el infoDeveloper
+            //viewModel.infoDeveloper()
         case .delete:
-            viewModel.deleteProfile()
+            //TODO: poner key
+            presentAlertCustom(message: "estas seguro? perderas los datos de los perfiles favoritos que hayas guardado",
+                               title: "borrar perfil",
+                               action: [.accept({ [weak self] in self?.viewModel.deleteProfile() }),
+                                        .cancel(nil)]
+            )
         }
     }
 }

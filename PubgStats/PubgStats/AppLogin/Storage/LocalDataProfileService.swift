@@ -23,7 +23,7 @@ protocol LocalDataProfileService {
     func getAccountProfile(player: String) -> IdAccountDataProfileRepresentable?
     func getAnyProfile() -> IdAccountDataProfileRepresentable?
     func deleteFavourite(_ profile: IdAccountDataProfileRepresentable)
-    func deleteProfile(player: String)
+    func deleteProfile(player: String) -> AnyPublisher<Void, Error>
 }
 
 struct LocalDataProfileServiceImp: LocalDataProfileService {
@@ -117,7 +117,6 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
                                            platform: profile.first?.platform ?? "")
     }
     
-    //TODO: crear strut del protocolo Error y crear los diferentes escenarios
     func getFavourites() -> AnyPublisher<[IdAccountDataProfileRepresentable], Error> {
         let profile = getAnyProfile()
         let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
@@ -157,23 +156,23 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
         }
     }
     
-    //TODO: con combine y presentar un toast abajo si es error , si va bien pasar a otra pantalla
-    func deleteProfile(player: String) {
+    func deleteProfile(player: String) -> AnyPublisher<Void, Error> {
         let fetchRequest = Profile.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "player == %@", player)
-        do {
-            let result = try context.persistentContainer.viewContext.fetch(fetchRequest).first
-            if let profileDelete = result {
-                context.persistentContainer.viewContext.delete(profileDelete)
+        return Future<Void, Error> { promise in
+            do {
+                guard let result = try context.persistentContainer.viewContext.fetch(fetchRequest).first
+                else {
+                    promise(.failure(NSError(domain: "", code: 0)))
+                    return
+                }
+                context.persistentContainer.viewContext.delete(result)
                 context.saveContext()
-            } else {
-                print("error al borrar objeto")
-                return
+                promise(.success(()))
+            } catch {
+                promise(.failure(error))
             }
-        } catch {
-            print("Error en core data: \(error.localizedDescription)")
-            return
-        }
+        }.eraseToAnyPublisher()
     }
 }
 

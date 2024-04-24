@@ -7,59 +7,65 @@
 
 import UIKit
 
-enum SettingsTransition {
-    case goDeleteProfile
-    case goInfoDeveloper
-    case goHelp
+public protocol SettingsCoordinator: BindableCoordinator {
+    func goDeleteProfile()
+    func goInfoDeveloper()
+    func goHelp()
 }
 
-protocol SettingsCoordinator: Coordinator {
-    func performTransition(_ transition: SettingsTransition)
-}
-final class SettingsCoordinatorImp: Coordinator {
+final class SettingsCoordinatorImp: SettingsCoordinator {
+    lazy var dataBinding: DataBinding = dependencies.resolve()
     weak var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
-    private let externalDependencies: SettingsExternalDependency
+    private let externalDependencies: SettingsExternalDependencies
     private lazy var dependencies: Dependency = {
-        Dependency(external: externalDependencies,
-                   coordinator: self)
+        Dependency(dependencies: externalDependencies, coordinator: self)
     }()
     
-    public init(dependencies: SettingsExternalDependency) {
+    public init(dependencies: SettingsExternalDependencies, navigation: UINavigationController?) {
         self.externalDependencies = dependencies
-        self.navigation = dependencies.settingsNavigationController()
+        self.navigation = navigation
     }
-        
+}
+extension SettingsCoordinatorImp {
     func start() {
         self.navigation?.pushViewController(dependencies.resolve(), animated: true)
     }
-}
-extension SettingsCoordinatorImp: SettingsCoordinator {
-    func performTransition(_ transition: SettingsTransition) {
-        switch transition {
-        case .goInfoDeveloper:
-            let infoAppCoordinator = dependencies.external.infoAppCoordinator()
-            infoAppCoordinator.start()
-            append(child: infoAppCoordinator)
-        case .goHelp:
-            let helpDataCoordinator = dependencies.external.helpDataCoordinator()
-            helpDataCoordinator.start()
-            append(child: helpDataCoordinator)
-        case .goDeleteProfile:
-            //TODO: borrar perfil
-            setNewRoot()
-        }
+    
+    func goDeleteProfile() {
+        setNewRoot()
+    }
+    
+    func goInfoDeveloper() {
+        let infoAppCoordinator = dependencies.external.infoAppCoordinator()
+        infoAppCoordinator.start()
+        append(child: infoAppCoordinator)
+    }
+    
+    func goHelp() {
+        let helpDataCoordinator = dependencies.external.helpDataCoordinator()
+        helpDataCoordinator.start()
+        append(child: helpDataCoordinator)
     }
 }
 
 private extension SettingsCoordinatorImp {
-    struct Dependency: SettingsDependency {
-        let external: SettingsExternalDependency
-        weak var coordinator: SettingsCoordinator?
+    struct Dependency: SettingsDependencies {
+        let dependencies: SettingsExternalDependencies
+        unowned var coordinator: SettingsCoordinator
+        let dataBinding = DataBindingObject()
         
-        func resolve() -> SettingsCoordinator? {
+        var external: SettingsExternalDependencies {
+            return dependencies
+        }
+        
+        func resolve() -> SettingsCoordinator {
             return coordinator
+        }
+        
+        func resolve()  -> DataBinding {
+            return dataBinding
         }
     }
 }

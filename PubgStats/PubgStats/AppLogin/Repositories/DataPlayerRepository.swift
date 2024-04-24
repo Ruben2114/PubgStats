@@ -19,6 +19,7 @@ public protocol DataPlayerRepository {
     func fetchGamesModeData(representable: IdAccountDataProfileRepresentable, type: NavigationStats, reload: Bool) -> AnyPublisher<GamesModesDataProfileRepresentable, Error>
     func fetchWeaponData(representable: IdAccountDataProfileRepresentable, type: NavigationStats,reload: Bool) -> AnyPublisher<WeaponDataProfileRepresentable, Error>
     func fetchMatchesData(id: String, platform: String) -> AnyPublisher<MatchDataProfileRepresentable, Error>
+    func deletePlayerData(profile: IdAccountDataProfileRepresentable) -> AnyPublisher<Void, Error>
 }
 
 struct DataPlayerRepositoryImp: DataPlayerRepository {
@@ -77,5 +78,9 @@ struct DataPlayerRepositoryImp: DataPlayerRepository {
         return remoteData.getMatchesData(id: id, platform: platform).map { data in
             return DefaultMatchDataProfile(data)
         }.eraseToAnyPublisher()
+    }
+    
+    func deletePlayerData(profile: IdAccountDataProfileRepresentable) -> AnyPublisher<Void, Error> {
+        return dataSource.deleteProfile(player: profile.name).eraseToAnyPublisher()
     }
 }
