@@ -40,11 +40,6 @@ final class SettingsViewModel: DataBindable {
         deleteProfileSubject.send(profile ?? DefaultIdAccountDataProfile(id: "", name: "", platform: ""))
     }
     
-    func infoDeveloper() {
-        //TODO: presentar un bottomSheet con el titulo y el label y listo
-        coordinator.goInfoDeveloper()
-    }
-    
     func goHelp() {
         coordinator.goHelp()
     }

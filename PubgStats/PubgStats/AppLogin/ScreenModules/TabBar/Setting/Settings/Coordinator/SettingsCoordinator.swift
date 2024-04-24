@@ -9,7 +9,6 @@ import UIKit
 
 public protocol SettingsCoordinator: BindableCoordinator {
     func goDeleteProfile()
-    func goInfoDeveloper()
     func goHelp()
 }
 
@@ -35,12 +34,6 @@ extension SettingsCoordinatorImp {
     
     func goDeleteProfile() {
         setNewRoot()
-    }
-    
-    func goInfoDeveloper() {
-        let infoAppCoordinator = dependencies.external.infoAppCoordinator()
-        infoAppCoordinator.start()
-        append(child: infoAppCoordinator)
     }
     
     func goHelp() {

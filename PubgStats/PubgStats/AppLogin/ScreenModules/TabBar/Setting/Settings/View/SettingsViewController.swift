@@ -133,8 +133,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .legal:
             //TODO: modificar el texto de infoAppViewModel
             bottomSheetView.show(in: self, title: "infoAppViewTitle".localize(), subtitle: "infoAppViewModel".localize())
-            //TODO: borrar el infoDeveloper
-            //viewModel.infoDeveloper()
         case .delete:
             //TODO: poner key
             presentAlertCustom(message: "estas seguro? perderas los datos de los perfiles favoritos que hayas guardado",
