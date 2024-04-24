@@ -7,38 +7,41 @@
 
 import UIKit
 
-protocol HelpDataCoordinator: Coordinator {
+public protocol HelpDataCoordinator: Coordinator {
+    func goBack()
 }
 
-final class HelpDataCoordinatorImp: Coordinator {
+final class HelpDataCoordinatorImp: HelpDataCoordinator {
     weak var navigation: UINavigationController?
     var childCoordinators: [Coordinator] = []
     var onFinish: (() -> Void)?
-    private let externalDependencies: HelpDataExternalDependency
+    private let externalDependencies: HelpDataExternalDependencies
     private lazy var dependencies: Dependency = {
         Dependency(external: externalDependencies, coordinator: self)
     }()
     
-    public init(dependencies: HelpDataExternalDependency, navigation: UINavigationController) {
+    public init(dependencies: HelpDataExternalDependencies, navigation: UINavigationController?) {
         self.navigation = navigation
         self.externalDependencies = dependencies
     }
-    
+}
+extension HelpDataCoordinatorImp {
     func start() {
         let helpDataView: HelpDataViewController = dependencies.resolve()
         navigation?.pushViewController(helpDataView, animated: false)
     }
-}
-extension HelpDataCoordinatorImp: HelpDataCoordinator {
     
+    func goBack() {
+        dismiss()
+    }
 }
 
 private extension HelpDataCoordinatorImp {
-    struct Dependency: HelpDataDependency {
-        let external: HelpDataExternalDependency
-        weak var coordinator: HelpDataCoordinator?
+    struct Dependency: HelpDataDependencies {
+        let external: HelpDataExternalDependencies
+        unowned var coordinator: HelpDataCoordinator
         
-        func resolve() -> HelpDataCoordinator? {
+        func resolve() -> HelpDataCoordinator {
             return coordinator
         }
     }

@@ -9,7 +9,7 @@ import UIKit
 
 protocol SettingsExternalDependencies {
     func settingsCoordinator(navigation: UINavigationController?) -> BindableCoordinator
-    func helpDataCoordinator() -> Coordinator
+    func helpDataCoordinator(navigation: UINavigationController?) -> Coordinator
     func resolve() -> DataPlayerRepository
 }
 extension SettingsExternalDependencies {

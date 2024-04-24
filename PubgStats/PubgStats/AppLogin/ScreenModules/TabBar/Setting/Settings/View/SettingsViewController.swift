@@ -29,12 +29,10 @@ final class SettingsViewController: UIViewController {
         BottomSheetView()
     }()
     private var cancellable = Set<AnyCancellable>()
-    private let dependencies: SettingsDependencies
     private let viewModel: SettingsViewModel
     private var settingsField: [SettingsField] = []
    
     init(dependencies: SettingsDependencies) {
-        self.dependencies = dependencies
         self.viewModel = dependencies.resolve()
         super.init(nibName: nil, bundle: nil)
     }
@@ -106,6 +104,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         let settingsField = settingsField[indexPath.section]
         cell.accessoryType = .disclosureIndicator
         cell.backgroundColor = .black.withAlphaComponent(0.8)
+        cell.selectionStyle = .none
         var listContent = UIListContentConfiguration.cell()
         listContent.textProperties.font = UIFont(name: "AmericanTypewriter-Bold", size: 20) ?? UIFont.boldSystemFont(ofSize: 20)
         listContent.textProperties.color = .white

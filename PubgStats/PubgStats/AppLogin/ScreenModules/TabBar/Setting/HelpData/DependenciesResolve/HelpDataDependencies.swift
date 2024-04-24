@@ -5,14 +5,14 @@
 //  Created by Rubén Rodríguez Cervigón on 29/3/23.
 //
 
-protocol HelpDataDependency {
-    var external: HelpDataExternalDependency { get }
-    func resolve() -> HelpDataCoordinator?
+protocol HelpDataDependencies {
+    var external: HelpDataExternalDependencies { get }
+    func resolve() -> HelpDataCoordinator
     func resolve() -> HelpDataViewController
     func resolve() -> HelpDataViewModel
 }
 
-extension HelpDataDependency {
+extension HelpDataDependencies {
     func resolve() -> HelpDataViewController {
         HelpDataViewController(dependencies: self)
     }

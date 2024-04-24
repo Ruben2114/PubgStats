@@ -26,6 +26,7 @@ final class MainTabBarCoordinatorImp: MainTabBarCoordinator {
     }
     
     func start() {
+        //TODO: reaccionar al evento de ser tocado para limpiar el array sino crea retención de memoria
         let tabBarView = TabBarView.getTabBar(externalDependencies)
             .map({createNavController(tabBar: $0, data: dataProfile)})
         let tabBar = dependencies.external.tabBarController()

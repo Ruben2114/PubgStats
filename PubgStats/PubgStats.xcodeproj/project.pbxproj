@@ -38,8 +38,8 @@
 		465926EF29EFCFB300A4091D /* ItemCellSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465926EE29EFCFB300A4091D /* ItemCellSettings.swift */; };
 		466BCE152A02657B002896B7 /* UIViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466BCE142A02657B002896B7 /* UIViewController+CollectionView.swift */; };
 		4670EDE729D442C600C1062E /* HelpDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE629D442C600C1062E /* HelpDataViewModel.swift */; };
-		4670EDEA29D442FD00C1062E /* HelpDataDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE929D442FD00C1062E /* HelpDataDependency.swift */; };
-		4670EDEC29D4433B00C1062E /* HelpDataExternalDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDEB29D4433B00C1062E /* HelpDataExternalDependency.swift */; };
+		4670EDEA29D442FD00C1062E /* HelpDataDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDE929D442FD00C1062E /* HelpDataDependencies.swift */; };
+		4670EDEC29D4433B00C1062E /* HelpDataExternalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDEB29D4433B00C1062E /* HelpDataExternalDependencies.swift */; };
 		4670EDEF29D4438500C1062E /* HelpDataCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670EDEE29D4438500C1062E /* HelpDataCoordinator.swift */; };
 		8C2460422B3C4E7A00AB98F3 /* ZoomAndSnapFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2460412B3C4E7A00AB98F3 /* ZoomAndSnapFlowLayout.swift */; };
 		8C2460562B3C4F6800AB98F3 /* Chip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2460542B3C4F6800AB98F3 /* Chip.swift */; };
@@ -235,8 +235,8 @@
 		465926EE29EFCFB300A4091D /* ItemCellSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellSettings.swift; sourceTree = "<group>"; };
 		466BCE142A02657B002896B7 /* UIViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CollectionView.swift"; sourceTree = "<group>"; };
 		4670EDE629D442C600C1062E /* HelpDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataViewModel.swift; sourceTree = "<group>"; };
-		4670EDE929D442FD00C1062E /* HelpDataDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataDependency.swift; sourceTree = "<group>"; };
-		4670EDEB29D4433B00C1062E /* HelpDataExternalDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataExternalDependency.swift; sourceTree = "<group>"; };
+		4670EDE929D442FD00C1062E /* HelpDataDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataDependencies.swift; sourceTree = "<group>"; };
+		4670EDEB29D4433B00C1062E /* HelpDataExternalDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataExternalDependencies.swift; sourceTree = "<group>"; };
 		4670EDEE29D4438500C1062E /* HelpDataCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataCoordinator.swift; sourceTree = "<group>"; };
 		8C2460412B3C4E7A00AB98F3 /* ZoomAndSnapFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomAndSnapFlowLayout.swift; sourceTree = "<group>"; };
 		8C2460542B3C4F6800AB98F3 /* Chip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chip.swift; sourceTree = "<group>"; };
@@ -583,7 +583,6 @@
 			isa = PBXGroup;
 			children = (
 				4670EDE629D442C600C1062E /* HelpDataViewModel.swift */,
-				8C6E9C9329F1560600DE593D /* ItemCellHelpData.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -591,8 +590,8 @@
 		4670EDE829D442ED00C1062E /* DependenciesResolve */ = {
 			isa = PBXGroup;
 			children = (
-				4670EDE929D442FD00C1062E /* HelpDataDependency.swift */,
-				4670EDEB29D4433B00C1062E /* HelpDataExternalDependency.swift */,
+				4670EDE929D442FD00C1062E /* HelpDataDependencies.swift */,
+				4670EDEB29D4433B00C1062E /* HelpDataExternalDependencies.swift */,
 			);
 			path = DependenciesResolve;
 			sourceTree = "<group>";
@@ -778,6 +777,14 @@
 				8C6220722BC5EA1700E925C5 /* MatchesTableViewCell.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		8C6661852BD9AC1700CD1649 /* Representables */ = {
+			isa = PBXGroup;
+			children = (
+				8C6E9C9329F1560600DE593D /* ItemCellHelpData.swift */,
+			);
+			path = Representables;
 			sourceTree = "<group>";
 		};
 		8C68722A2BD7135B00A9B00B /* ViewModel */ = {
@@ -1140,9 +1147,11 @@
 		8CAEB00E29BB46DB009282AF /* HelpData */ = {
 			isa = PBXGroup;
 			children = (
+				8C6661852BD9AC1700CD1649 /* Representables */,
 				4670EDED29D4437A00C1062E /* Coordinator */,
 				4670EDE829D442ED00C1062E /* DependenciesResolve */,
-				8CB39B9C29C06CDE00B1D8EF /* Presentation */,
+				4670EDE529D442BA00C1062E /* ViewModel */,
+				8CB39B9D29C06CE500B1D8EF /* View */,
 			);
 			path = HelpData;
 			sourceTree = "<group>";
@@ -1240,15 +1249,6 @@
 				461C1F3F29C9C86C00540289 /* EndPoint.swift */,
 			);
 			path = Networking;
-			sourceTree = "<group>";
-		};
-		8CB39B9C29C06CDE00B1D8EF /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				4670EDE529D442BA00C1062E /* ViewModel */,
-				8CB39B9D29C06CE500B1D8EF /* View */,
-			);
-			path = Presentation;
 			sourceTree = "<group>";
 		};
 		8CB39B9D29C06CE500B1D8EF /* View */ = {
@@ -1630,7 +1630,7 @@
 				8CBE66AD2B587DF900C64481 /* ProfileViewRepresentable.swift in Sources */,
 				8C2460712B3C50A700AB98F3 /* ChartCollectionView.swift in Sources */,
 				8C7563E429BB5F17000373F9 /* MessageDisplayable.swift in Sources */,
-				4670EDEA29D442FD00C1062E /* HelpDataDependency.swift in Sources */,
+				4670EDEA29D442FD00C1062E /* HelpDataDependencies.swift in Sources */,
 				8CAE34B42B7EAC4900191927 /* GamesModesAttributesDetailsRepresentable.swift in Sources */,
 				465550D829CC504100BF932A /* ProfileCoordinator.swift in Sources */,
 				8C7165622B96701B0018B6B4 /* Double+Extension.swift in Sources */,
@@ -1648,7 +1648,7 @@
 				8CA85D8629DC46160050C19B /* UIViewController+func.swift in Sources */,
 				8C3B45D22B866E7F00A40B0B /* WeaponAttributesDetailsRepresentable.swift in Sources */,
 				8C7165652B9687F10018B6B4 /* PercentageRectangleRepresentable.swift in Sources */,
-				4670EDEC29D4433B00C1062E /* HelpDataExternalDependency.swift in Sources */,
+				4670EDEC29D4433B00C1062E /* HelpDataExternalDependencies.swift in Sources */,
 				8CAE34B62B7EC78A00191927 /* SurvivalAttributesDetailsRepresentable.swift in Sources */,
 				8C24606C2B3C508100AB98F3 /* PieChartView.swift in Sources */,
 				461C1F5229CAE35300540289 /* AppDependencies.swift in Sources */,

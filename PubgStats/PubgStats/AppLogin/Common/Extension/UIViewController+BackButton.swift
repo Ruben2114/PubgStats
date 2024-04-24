@@ -29,7 +29,9 @@ extension UIViewController {
     }
     
     func configureImageBackground(_ image: String) {
-        let imageBackground = UIImageView(image: UIImage(named: image))
+        let contentView = UIView()
+        contentView.backgroundColor = .black
+        let imageBackground = image.isEmpty ? contentView : UIImageView(image: UIImage(named: image))
         view.insertSubview(imageBackground, at: 0)
         imageBackground.frame = view.bounds
     }

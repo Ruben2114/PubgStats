@@ -141,7 +141,7 @@ extension FavouriteViewController: UITableViewDataSource, UITableViewDelegate {
         let nameModel = filteredProfilesFavourite[indexPath.row]
         cell.configureWith(nameModel)
         cell.backgroundColor = .clear
-        cell.backgroundConfiguration = UIBackgroundConfiguration.clear()
+        cell.selectionStyle = .none
         return cell
     }
 

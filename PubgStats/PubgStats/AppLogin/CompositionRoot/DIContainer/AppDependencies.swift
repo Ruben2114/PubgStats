@@ -31,11 +31,6 @@ struct AppDependencies {
         FavouriteRepositoryImp(dependencies: self)
     }
     
-    //TODO: intentar borrarla de todos lados
-    func resolve() -> AppDependencies {
-        self
-    }
-    
     func profileNavigationController() -> UINavigationController {
         profileNavController
     }
@@ -59,7 +54,7 @@ extension AppDependencies:
     ProfileExternalDependencies,
     FavouriteExternalDependencies,
     SettingsExternalDependencies,
-    HelpDataExternalDependency,
+    HelpDataExternalDependencies,
     AttributesHomeExternalDependencies,
     AttributesDetailExternalDependencies,
     MatchesExternalDependencies{}

@@ -19,7 +19,7 @@ final class SettingsCoordinatorImp: SettingsCoordinator {
     var onFinish: (() -> Void)?
     private let externalDependencies: SettingsExternalDependencies
     private lazy var dependencies: Dependency = {
-        Dependency(dependencies: externalDependencies, coordinator: self)
+        Dependency(external: externalDependencies, coordinator: self)
     }()
     
     public init(dependencies: SettingsExternalDependencies, navigation: UINavigationController?) {
@@ -37,7 +37,7 @@ extension SettingsCoordinatorImp {
     }
     
     func goHelp() {
-        let helpDataCoordinator = dependencies.external.helpDataCoordinator()
+        let helpDataCoordinator = dependencies.external.helpDataCoordinator(navigation: navigation)
         helpDataCoordinator.start()
         append(child: helpDataCoordinator)
     }
@@ -45,13 +45,9 @@ extension SettingsCoordinatorImp {
 
 private extension SettingsCoordinatorImp {
     struct Dependency: SettingsDependencies {
-        let dependencies: SettingsExternalDependencies
+        let external: SettingsExternalDependencies
         unowned var coordinator: SettingsCoordinator
         let dataBinding = DataBindingObject()
-        
-        var external: SettingsExternalDependencies {
-            return dependencies
-        }
         
         func resolve() -> SettingsCoordinator {
             return coordinator
