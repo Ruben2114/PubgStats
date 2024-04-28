@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-protocol ProfileDataUseCase {
+public protocol ProfileDataUseCase {
     func fetchPlayerDetails(_ profile: IdAccountDataProfileRepresentable, reload: Bool, type: NavigationStats) -> AnyPublisher<PlayerDetailsRepresentable, Error>
 }
 
@@ -33,7 +33,7 @@ extension ProfileDataUseCaseImp: ProfileDataUseCase {
     }
 }
 
-protocol PlayerDetailsRepresentable {
+public protocol PlayerDetailsRepresentable {
     var infoSurvival: SurvivalDataProfileRepresentable { get }
     var infoGamesModes: GamesModesDataProfileRepresentable { get }
     var infoWeapon: WeaponDataProfileRepresentable { get }

@@ -34,6 +34,16 @@ final class LoginViewModelTest: XCTestCase {
         XCTAssertTrue(dependencies.coordinatorSpy.goToProfileCalled)
     }
     
+    func test_LoginViewModel_When_CheckPlayer_Then_ErrorService() {
+        dependencies.shouldUseMockLoginDataUseCase = true
+        dependencies.playerDataError = true
+        XCTAssertForPublisher(sut.state.filter { $0 == .sendInfoProfileError},
+                              assert: {_ in true },
+                              beforeWait: { [weak self] in
+            self?.sut.viewDidLoad()
+            self?.sut.checkPlayer(player: "A", platform: "steam")
+        })
+    }
 }
 
 extension LoginViewModel: SceneViewModel {}

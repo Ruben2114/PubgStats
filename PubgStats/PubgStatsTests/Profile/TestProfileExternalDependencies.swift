@@ -9,10 +9,8 @@
 import UIKit
 
 final class TestProfileExternalDependencies: ProfileExternalDependencies {
-    var navigationController: UINavigationController
-    
-    init(navigationController: UINavigationController = UINavigationController()) {
-        self.navigationController = navigationController
+    func matchesCoordinator(navigation: UINavigationController?) -> BindableCoordinator {
+        fatalError()
     }
     
     func attributesHomeCoordinator(navigation: UINavigationController?) -> BindableCoordinator {

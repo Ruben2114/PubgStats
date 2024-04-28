@@ -1,15 +1,14 @@
 //
-//  LoginCoordinatorTest.swift
+//  MatchesCoordinatorTest.swift
 //  PubgStatsTests
 //
-//  Created by Ruben Rodriguez on 12/10/23.
+//  Created by Ruben Rodriguez on 27/4/24.
 //
 
-import Foundation
 @testable import PubgStats
 import XCTest
 
-final class LoginCoordinatorTest: XCTestCase {
+final class MatchesCoordinatorTest: XCTestCase {
     var navigationController: UINavigationController!
     
     override func setUp() {
@@ -22,8 +21,7 @@ final class LoginCoordinatorTest: XCTestCase {
         navigationController = nil
     }
     
-    func test_LoginCoordinatorTest_shouldBeDeallocatedCorrectly() {
-        XCAssertDeallocation { LoginCoordinatorImp(dependencies: TestLoginExternalDependencies()) }
+    func test_MatchesCoordinatorTest_shouldBeDeallocatedCorrectly() {
+        XCAssertDeallocation { MatchesCoordinatorImp(dependencies: TestMatchesExternalDependencies(), navigation: navigationController) }
     }
 }
-

@@ -7,7 +7,7 @@
 
 import Combine
 
-protocol LoginDataUseCase {
+public protocol LoginDataUseCase {
     func fetchPlayerData(name: String, platform: String) -> AnyPublisher<IdAccountDataProfileRepresentable, Error>
 }
 

@@ -8,14 +8,4 @@
 @testable import PubgStats
 import UIKit
 
-final class TestAttributesDetailExternalDependencies: AttributesDetailExternalDependencies {
-    var navigationController: UINavigationController
-    
-    init(navigationController: UINavigationController = UINavigationController()) {
-        self.navigationController = navigationController
-    }
-    
-    func attributesDetailCoordinator(navigation: UINavigationController?) -> BindableCoordinator {
-        fatalError()
-    }
-}
+final class TestAttributesDetailExternalDependencies: AttributesDetailExternalDependencies {}

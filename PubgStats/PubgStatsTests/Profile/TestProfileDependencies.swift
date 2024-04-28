@@ -8,9 +8,11 @@
 @testable import PubgStats
 
 final class TestProfileDependencies: ProfileDependencies {
-    //TODO: falta el usecase
     var external: ProfileExternalDependencies
     let coordinatorSpy = ProfileCoordinatorSpy()
+    let mockProfileDataUseCase = MockProfileDataUseCase()
+    var shouldUseMockProfileDataUseCase = false
+    var playerDataError = false
     
     init() {
         self.external = TestProfileExternalDependencies()
@@ -26,5 +28,14 @@ final class TestProfileDependencies: ProfileDependencies {
     
     func resolve() -> DataBinding {
         DataBindingObject()
+    }
+    
+    func resolve() -> ProfileDataUseCase {
+        if shouldUseMockProfileDataUseCase {
+            mockProfileDataUseCase.playerDataError = playerDataError
+            return mockProfileDataUseCase
+        } else {
+            return ProfileDataUseCaseImp(dependencies: self)
+        }
     }
 }
