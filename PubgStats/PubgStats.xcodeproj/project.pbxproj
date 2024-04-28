@@ -94,6 +94,18 @@
 		8C6220742BC5EA1700E925C5 /* MatchesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C6220722BC5EA1700E925C5 /* MatchesTableViewCell.xib */; };
 		8C6AA0E02BC49414002EA742 /* MatchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6AA0DF2BC49414002EA742 /* MatchDTO.swift */; };
 		8C6AA0E22BC49E5F002EA742 /* MatchDataProfileRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6AA0E12BC49E5F002EA742 /* MatchDataProfileRepresentable.swift */; };
+		8C6B039B2BDEE1110086E4C9 /* ProfileDataUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6B039A2BDEE1110086E4C9 /* ProfileDataUseCaseTest.swift */; };
+		8C6B039E2BDEE8F00086E4C9 /* MockMatchesDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6B039D2BDEE8F00086E4C9 /* MockMatchesDataUseCase.swift */; };
+		8C6B03A02BDEEC3E0086E4C9 /* MatchesUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6B039F2BDEEC3E0086E4C9 /* MatchesUseCaseTest.swift */; };
+		8C6B03A22BDEEFD00086E4C9 /* TestFavouriteExternalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6B03A12BDEEFD00086E4C9 /* TestFavouriteExternalDependencies.swift */; };
+		8C6B03A42BDEF03B0086E4C9 /* MockFavouritePlayerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6B03A32BDEF03B0086E4C9 /* MockFavouritePlayerRepository.swift */; };
+		8C6B03A62BDEF8700086E4C9 /* TestFavouriteDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6B03A52BDEF8700086E4C9 /* TestFavouriteDependencies.swift */; };
+		8C6B03A92BDEF90F0086E4C9 /* FavouriteCoordinatorSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6B03A82BDEF90F0086E4C9 /* FavouriteCoordinatorSpy.swift */; };
+		8C6B03AC2BDEF97A0086E4C9 /* MockFavouriteDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6B03AB2BDEF97A0086E4C9 /* MockFavouriteDataUseCase.swift */; };
+		8C6B03AE2BDEFA660086E4C9 /* FavouriteCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6B03AD2BDEFA660086E4C9 /* FavouriteCoordinatorTest.swift */; };
+		8C6B03B02BDEFAA60086E4C9 /* FavouriteViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6B03AF2BDEFAA60086E4C9 /* FavouriteViewControllerTest.swift */; };
+		8C6B03B22BDEFAFC0086E4C9 /* FavouriteViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6B03B12BDEFAFC0086E4C9 /* FavouriteViewModelTest.swift */; };
+		8C6B03B42BDF01680086E4C9 /* FavouriteDataUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6B03B32BDF01680086E4C9 /* FavouriteDataUseCaseTest.swift */; };
 		8C6E9C9429F1560600DE593D /* ItemCellHelpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6E9C9329F1560600DE593D /* ItemCellHelpData.swift */; };
 		8C7165622B96701B0018B6B4 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7165612B96701B0018B6B4 /* Double+Extension.swift */; };
 		8C7165652B9687F10018B6B4 /* PercentageRectangleRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7165642B9687F10018B6B4 /* PercentageRectangleRepresentable.swift */; };
@@ -299,6 +311,18 @@
 		8C6220722BC5EA1700E925C5 /* MatchesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchesTableViewCell.xib; sourceTree = "<group>"; };
 		8C6AA0DF2BC49414002EA742 /* MatchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDTO.swift; sourceTree = "<group>"; };
 		8C6AA0E12BC49E5F002EA742 /* MatchDataProfileRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDataProfileRepresentable.swift; sourceTree = "<group>"; };
+		8C6B039A2BDEE1110086E4C9 /* ProfileDataUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataUseCaseTest.swift; sourceTree = "<group>"; };
+		8C6B039D2BDEE8F00086E4C9 /* MockMatchesDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMatchesDataUseCase.swift; sourceTree = "<group>"; };
+		8C6B039F2BDEEC3E0086E4C9 /* MatchesUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesUseCaseTest.swift; sourceTree = "<group>"; };
+		8C6B03A12BDEEFD00086E4C9 /* TestFavouriteExternalDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFavouriteExternalDependencies.swift; sourceTree = "<group>"; };
+		8C6B03A32BDEF03B0086E4C9 /* MockFavouritePlayerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFavouritePlayerRepository.swift; sourceTree = "<group>"; };
+		8C6B03A52BDEF8700086E4C9 /* TestFavouriteDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFavouriteDependencies.swift; sourceTree = "<group>"; };
+		8C6B03A82BDEF90F0086E4C9 /* FavouriteCoordinatorSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCoordinatorSpy.swift; sourceTree = "<group>"; };
+		8C6B03AB2BDEF97A0086E4C9 /* MockFavouriteDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFavouriteDataUseCase.swift; sourceTree = "<group>"; };
+		8C6B03AD2BDEFA660086E4C9 /* FavouriteCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCoordinatorTest.swift; sourceTree = "<group>"; };
+		8C6B03AF2BDEFAA60086E4C9 /* FavouriteViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewControllerTest.swift; sourceTree = "<group>"; };
+		8C6B03B12BDEFAFC0086E4C9 /* FavouriteViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewModelTest.swift; sourceTree = "<group>"; };
+		8C6B03B32BDF01680086E4C9 /* FavouriteDataUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteDataUseCaseTest.swift; sourceTree = "<group>"; };
 		8C6E9C9329F1560600DE593D /* ItemCellHelpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellHelpData.swift; sourceTree = "<group>"; };
 		8C7165612B96701B0018B6B4 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		8C7165642B9687F10018B6B4 /* PercentageRectangleRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentageRectangleRepresentable.swift; sourceTree = "<group>"; };
@@ -708,6 +732,7 @@
 				8C3A01332B84050C00211AF3 /* ProfileCoordinatorTest.swift */,
 				8C3A01352B84062D00211AF3 /* ProfileViewModelTest.swift */,
 				8C3A01372B84082C00211AF3 /* ProfileViewControllerTest.swift */,
+				8C6B039A2BDEE1110086E4C9 /* ProfileDataUseCaseTest.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -735,11 +760,13 @@
 		8C59F4912BDCE9D100B1CBB3 /* Matches */ = {
 			isa = PBXGroup;
 			children = (
+				8C6B039C2BDEE8E20086E4C9 /* MockUseCase */,
 				8C59F4952BDCEA7500B1CBB3 /* TestMatchesDependencies.swift */,
 				8C59F4972BDCEAC800B1CBB3 /* TestMatchesExternalDependencies.swift */,
 				8C59F49B2BDCECF800B1CBB3 /* MatchesCoordinatorTest.swift */,
 				8C59F49D2BDCED4C00B1CBB3 /* MatchesViewControllerTest.swift */,
 				8C59F49F2BDCEDCE00B1CBB3 /* MatchesViewModelTest.swift */,
+				8C6B039F2BDEEC3E0086E4C9 /* MatchesUseCaseTest.swift */,
 			);
 			path = Matches;
 			sourceTree = "<group>";
@@ -747,6 +774,13 @@
 		8C59F4922BDCE9DB00B1CBB3 /* Favourites */ = {
 			isa = PBXGroup;
 			children = (
+				8C6B03AA2BDEF9660086E4C9 /* MockUseCase */,
+				8C6B03A12BDEEFD00086E4C9 /* TestFavouriteExternalDependencies.swift */,
+				8C6B03A52BDEF8700086E4C9 /* TestFavouriteDependencies.swift */,
+				8C6B03AD2BDEFA660086E4C9 /* FavouriteCoordinatorTest.swift */,
+				8C6B03AF2BDEFAA60086E4C9 /* FavouriteViewControllerTest.swift */,
+				8C6B03B12BDEFAFC0086E4C9 /* FavouriteViewModelTest.swift */,
+				8C6B03B32BDF01680086E4C9 /* FavouriteDataUseCaseTest.swift */,
 			);
 			path = Favourites;
 			sourceTree = "<group>";
@@ -869,6 +903,22 @@
 			path = Representables;
 			sourceTree = "<group>";
 		};
+		8C6B039C2BDEE8E20086E4C9 /* MockUseCase */ = {
+			isa = PBXGroup;
+			children = (
+				8C6B039D2BDEE8F00086E4C9 /* MockMatchesDataUseCase.swift */,
+			);
+			path = MockUseCase;
+			sourceTree = "<group>";
+		};
+		8C6B03AA2BDEF9660086E4C9 /* MockUseCase */ = {
+			isa = PBXGroup;
+			children = (
+				8C6B03AB2BDEF97A0086E4C9 /* MockFavouriteDataUseCase.swift */,
+			);
+			path = MockUseCase;
+			sourceTree = "<group>";
+		};
 		8C7165632B9687DD0018B6B4 /* PercentageRectangle */ = {
 			isa = PBXGroup;
 			children = (
@@ -963,6 +1013,7 @@
 			isa = PBXGroup;
 			children = (
 				8C9ABEF52AD8352900552101 /* MockDataPlayerRepository.swift */,
+				8C6B03A32BDEF03B0086E4C9 /* MockFavouritePlayerRepository.swift */,
 			);
 			path = MockRepository;
 			sourceTree = "<group>";
@@ -975,6 +1026,7 @@
 				8C3A013F2B840D6700211AF3 /* AttributesHomeCoordinatorSpy.swift */,
 				8CCF41412B86A7630061823E /* AttributesDetailCoordinatorSpy.swift */,
 				8C59F4992BDCEC7D00B1CBB3 /* MatchesCoordinatorSpy.swift */,
+				8C6B03A82BDEF90F0086E4C9 /* FavouriteCoordinatorSpy.swift */,
 			);
 			path = Spies;
 			sourceTree = "<group>";
@@ -1813,6 +1865,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C59F49C2BDCECF800B1CBB3 /* MatchesCoordinatorTest.swift in Sources */,
+				8C6B03A22BDEEFD00086E4C9 /* TestFavouriteExternalDependencies.swift in Sources */,
+				8C6B03A62BDEF8700086E4C9 /* TestFavouriteDependencies.swift in Sources */,
 				8C3A013A2B840BAD00211AF3 /* LoginViewControllerTest.swift in Sources */,
 				8C9ABF022AD8450100552101 /* LoginDataUseCaseTest.swift in Sources */,
 				8C3A01442B840E5400211AF3 /* AttributesHomeViewControllerTest.swift in Sources */,
@@ -1820,22 +1874,30 @@
 				8C3A01342B84050C00211AF3 /* ProfileCoordinatorTest.swift in Sources */,
 				8CCF41442B86A7DF0061823E /* AttributesDetailCoordinatorTest.swift in Sources */,
 				8C9ABF002AD8426000552101 /* LoginViewModelTest.swift in Sources */,
+				8C6B03A42BDEF03B0086E4C9 /* MockFavouritePlayerRepository.swift in Sources */,
 				8C59F4A32BDCF0FC00B1CBB3 /* MockLoginDataUseCase.swift in Sources */,
 				8C3A012E2B84003F00211AF3 /* TestProfileDependencies.swift in Sources */,
 				8C59F49E2BDCED4C00B1CBB3 /* MatchesViewControllerTest.swift in Sources */,
 				8CCF41462B86A8190061823E /* AttributesDetailViewControllerTest.swift in Sources */,
 				8C3A01402B840D6700211AF3 /* AttributesHomeCoordinatorSpy.swift in Sources */,
+				8C6B039E2BDEE8F00086E4C9 /* MockMatchesDataUseCase.swift in Sources */,
 				8C3A01422B840DFB00211AF3 /* AttributesHomeCoordinatorTest.swift in Sources */,
 				8C3A01322B84041400211AF3 /* ProfileCoordinatorSpy.swift in Sources */,
+				8C6B039B2BDEE1110086E4C9 /* ProfileDataUseCaseTest.swift in Sources */,
 				8C9ABEF92AD8368F00552101 /* LoginCoordinatorSpy.swift in Sources */,
 				8C9ABEEE2AD830A000552101 /* TestLoginDependencies.swift in Sources */,
 				8C59F4982BDCEAC800B1CBB3 /* TestMatchesExternalDependencies.swift in Sources */,
 				8C59F4962BDCEA7500B1CBB3 /* TestMatchesDependencies.swift in Sources */,
 				8C9ABEF62AD8352900552101 /* MockDataPlayerRepository.swift in Sources */,
+				8C6B03B22BDEFAFC0086E4C9 /* FavouriteViewModelTest.swift in Sources */,
+				8C6B03A02BDEEC3E0086E4C9 /* MatchesUseCaseTest.swift in Sources */,
 				8CCF41422B86A7630061823E /* AttributesDetailCoordinatorSpy.swift in Sources */,
 				8C3A013C2B840C5700211AF3 /* TestAttributesHomeDependencies.swift in Sources */,
 				8CCF41402B86A6EE0061823E /* TestAttributesDetailExternalDependencies.swift in Sources */,
+				8C6B03A92BDEF90F0086E4C9 /* FavouriteCoordinatorSpy.swift in Sources */,
 				8C3A01362B84062D00211AF3 /* ProfileViewModelTest.swift in Sources */,
+				8C6B03AE2BDEFA660086E4C9 /* FavouriteCoordinatorTest.swift in Sources */,
+				8C6B03B42BDF01680086E4C9 /* FavouriteDataUseCaseTest.swift in Sources */,
 				8C3A01462B840E9A00211AF3 /* AttributesHomeViewModelTest.swift in Sources */,
 				8CA398C729B72A2000C09746 /* PubgStatsTests.swift in Sources */,
 				8CCF41482B86A85E0061823E /* AttributesDetailViewModelTest.swift in Sources */,
@@ -1844,10 +1906,12 @@
 				8C59F4A62BDD00AB00B1CBB3 /* MockProfileDataUseCase.swift in Sources */,
 				8C9ABEFE2AD83B3D00552101 /* XCTesCase+Extension.swift in Sources */,
 				8C3A013E2B840CF000211AF3 /* TestAttributesHomeExternalDependencies.swift in Sources */,
+				8C6B03B02BDEFAA60086E4C9 /* FavouriteViewControllerTest.swift in Sources */,
 				8CCF413E2B86A6820061823E /* TestAttributesDetailDependencies.swift in Sources */,
 				8C59F49A2BDCEC7D00B1CBB3 /* MatchesCoordinatorSpy.swift in Sources */,
 				8C9ABEF02AD8318200552101 /* TestLoginExternalDependencies.swift in Sources */,
 				8C3A01302B84033100211AF3 /* TestProfileExternalDependencies.swift in Sources */,
+				8C6B03AC2BDEF97A0086E4C9 /* MockFavouriteDataUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

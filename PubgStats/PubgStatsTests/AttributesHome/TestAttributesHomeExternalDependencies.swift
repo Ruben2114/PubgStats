@@ -9,16 +9,6 @@
 import UIKit
 
 final class TestAttributesHomeExternalDependencies: AttributesHomeExternalDependencies {
-    var navigationController: UINavigationController
-    
-    init(navigationController: UINavigationController = UINavigationController()) {
-        self.navigationController = navigationController
-    }
-    
-    func attributesHomeCoordinator(navigation: UINavigationController?) -> BindableCoordinator {
-        fatalError()
-    }
-    
     func attributesDetailCoordinator(navigation: UINavigationController?) -> BindableCoordinator {
         fatalError()
     }

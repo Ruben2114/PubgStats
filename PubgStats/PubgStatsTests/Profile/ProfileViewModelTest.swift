@@ -86,7 +86,7 @@ final class ProfileViewModelTest: XCTestCase {
                               assert: { state in
             switch state {
             case .showHeader(let info):
-                return info.level == "1" && info.xp == "10" ? true : false
+                return info.level == "1" && info.xp == "10"
             default:
                 return false
             }

@@ -19,16 +19,23 @@ struct MockDataPlayerRepository: DataPlayerRepository {
     }
     
     func fetchMatchesData(id: String, platform: String) -> AnyPublisher<MatchDataProfileRepresentable, Error> {
-        return Just(MockMatchDataProfile()).setFailureType(to: Error.self).eraseToAnyPublisher()
+        if id.isEmpty || platform.isEmpty {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+        } else {
+            return Just(MockMatchDataProfile()).setFailureType(to: Error.self).eraseToAnyPublisher()
+        }
     }
     
     func deletePlayerData(profile: IdAccountDataProfileRepresentable) -> AnyPublisher<Void, Error> {
         return Just(()).setFailureType(to: Error.self).eraseToAnyPublisher()
     }
     
-    func fetchSurvivalData(representable: PubgStats.IdAccountDataProfileRepresentable, type: NavigationStats, reload: Bool) -> AnyPublisher<PubgStats.SurvivalDataProfileRepresentable, Error> {
-        Just(MockSurvivalDataProfile()).setFailureType(to: Error.self).eraseToAnyPublisher()
-
+    func fetchSurvivalData(representable: IdAccountDataProfileRepresentable, type: NavigationStats, reload: Bool) -> AnyPublisher<PubgStats.SurvivalDataProfileRepresentable, Error> {
+        if representable.name.isEmpty || representable.platform.isEmpty {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+        } else {
+            return Just(MockSurvivalDataProfile()).setFailureType(to: Error.self).eraseToAnyPublisher()
+        }
     }
     
     func fetchGamesModeData(representable: PubgStats.IdAccountDataProfileRepresentable, type: NavigationStats, reload: Bool) -> AnyPublisher<PubgStats.GamesModesDataProfileRepresentable, Error> {

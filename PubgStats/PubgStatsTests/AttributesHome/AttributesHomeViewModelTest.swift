@@ -45,4 +45,3 @@ final class AttributesHomeViewModelTest: XCTestCase {
 }
 
 extension AttributesHomeViewModel: SceneViewModel {}
-

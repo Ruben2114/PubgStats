@@ -86,6 +86,12 @@ private extension FavouriteViewController {
                 self?.filteredProfilesFavourite = players.sorted { $0.name.lowercased() < $1.name.lowercased() }
                 self?.tableView.reloadData()
                 self?.presentAlert(message: message, title: "Error")
+            case .deletePlayer(let perfilFavorito):
+                if let indice = self?.filteredProfilesFavourite.firstIndex(where: {$0.name == perfilFavorito?.name}) {
+                    self?.filteredProfilesFavourite.remove(at: indice)
+                    self?.tableView.deleteRows(at: [IndexPath(row: indice, section: 0)], with: .automatic)
+                    self?.tableView.reloadData()
+                }
             }
         }.store(in: &cancellable)
     }
@@ -153,12 +159,6 @@ extension FavouriteViewController: UITableViewDataSource, UITableViewDelegate {
                 guard let self else { return }
                 let perfilFavorito = self.filteredProfilesFavourite[indexPath.row]
                 self.viewModel.deleteFavourite(perfilFavorito)
-                if let indice = self.filteredProfilesFavourite.firstIndex(where: {$0.name == perfilFavorito.name}) {
-                    self.filteredProfilesFavourite.remove(at: indice)
-                    self.viewModel.updateProfilesFavourite(perfilFavorito.name)
-                    self.tableView.deleteRows(at: [IndexPath(row: indice, section: 0)], with: .automatic)
-                    self.tableView.reloadData()
-                }
             })
         delete.image = UIImage(systemName: "trash")
         delete.backgroundColor = .red

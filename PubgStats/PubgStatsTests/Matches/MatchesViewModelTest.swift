@@ -33,6 +33,38 @@ final class MatchesViewModelTest: XCTestCase {
         sut.backButton()
         XCTAssertTrue(dependencies.coordinatorSpy.goToBack)
     }
+    
+    func test_MatchesViewModel_When_getMatchesSubject_Then_ErrorService() {
+        dependencies.shouldUseMockMatchesDataUseCase = true
+        dependencies.matchesDataError = true
+        XCTAssertForPublisher(sut.state,
+                              assert: { state in
+            switch state {
+            case .showErrorMatches:
+                return true
+            default:
+                return false
+            }
+        },beforeWait: { [weak self] in
+            self?.sut.viewDidLoad()
+        })
+    }
+    
+    func test_MatchesViewModel_When_getMatchesSubject_Then_getMatches() {
+        dependencies.shouldUseMockMatchesDataUseCase = true
+        XCTAssertForPublisher(sut.state,
+                              assert: { state in
+            switch state {
+            case .showMatches(let info):
+                return info?.first?.map == "mapName" &&
+                info?.first?.gameMode == "gameMode"
+            default:
+                return false
+            }
+        },beforeWait: { [weak self] in
+            self?.sut.viewDidLoad()
+        })
+    }
 }
 
 extension MatchesViewModel: SceneViewModel {}

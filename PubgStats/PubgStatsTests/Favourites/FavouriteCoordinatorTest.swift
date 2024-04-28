@@ -1,14 +1,14 @@
 //
-//  MatchesCoordinatorTest.swift
+//  FavouriteCoordinatorTest.swift
 //  PubgStatsTests
 //
-//  Created by Ruben Rodriguez on 27/4/24.
+//  Created by Ruben Rodriguez on 28/4/24.
 //
 
 @testable import PubgStats
 import XCTest
 
-final class MatchesCoordinatorTest: XCTestCase {
+final class FavouriteCoordinatorTest: XCTestCase {
     var navigationController: UINavigationController!
     
     override func setUp() {
@@ -21,7 +21,7 @@ final class MatchesCoordinatorTest: XCTestCase {
         navigationController = nil
     }
     
-    func test_MatchesCoordinator_shouldBeDeallocatedCorrectly() {
-        XCAssertDeallocation { MatchesCoordinatorImp(dependencies: TestMatchesExternalDependencies(), navigation: navigationController) }
+    func test_FavouriteCoordinator_shouldBeDeallocatedCorrectly() {
+        XCAssertDeallocation { FavouriteCoordinatorImp(dependencies: TestFavouriteExternalDependencies(), navigation: navigationController) }
     }
 }

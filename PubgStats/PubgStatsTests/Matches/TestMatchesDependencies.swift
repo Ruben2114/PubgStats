@@ -10,6 +10,9 @@
 final class TestMatchesDependencies: MatchesDependencies {
     var external: MatchesExternalDependencies
     let coordinatorSpy = MatchesCoordinatorSpy()
+    let mockMatchesDataUseCase = MockMatchesDataUseCase()
+    var shouldUseMockMatchesDataUseCase = false
+    var matchesDataError = false
     
     init() {
         self.external = TestMatchesExternalDependencies()
@@ -25,5 +28,14 @@ final class TestMatchesDependencies: MatchesDependencies {
     
     func resolve() -> MatchesCoordinator {
         coordinatorSpy
+    }
+    
+    func resolve() -> MatchesDataUseCase {
+        if shouldUseMockMatchesDataUseCase {
+            mockMatchesDataUseCase.matchesDataError = matchesDataError
+            return mockMatchesDataUseCase
+        } else {
+            return MatchesDataUseCaseImp(dependencies: self)
+        }
     }
 }
