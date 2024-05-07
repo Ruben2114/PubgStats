@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol MainTabBarExternalDependency {
+protocol MainTabBarExternalDependencies {
     func mainTabBarCoordinator(data: IdAccountDataProfileRepresentable?) -> Coordinator
     func profileCoordinator(navigation: UINavigationController?) -> BindableCoordinator
     func favouriteCoordinator(navigation: UINavigationController?) -> Coordinator
@@ -15,10 +15,9 @@ protocol MainTabBarExternalDependency {
     func profileNavigationController() -> UINavigationController
     func favouriteNavigationController() -> UINavigationController
     func settingsNavigationController() -> UINavigationController
-    func tabBarController() -> UITabBarController
 }
 
-extension MainTabBarExternalDependency {
+extension MainTabBarExternalDependencies {
     func mainTabBarCoordinator(data: IdAccountDataProfileRepresentable?) -> Coordinator {
         MainTabBarCoordinatorImp(dependencies: self, data: data)
     }

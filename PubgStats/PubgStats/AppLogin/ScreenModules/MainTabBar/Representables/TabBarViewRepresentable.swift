@@ -8,11 +8,11 @@
 import UIKit
 
 enum TabBarView {
-    case profile(MainTabBarExternalDependency)
-    case favourite(MainTabBarExternalDependency)
-    case setting(MainTabBarExternalDependency)
+    case profile(MainTabBarExternalDependencies)
+    case favourite(MainTabBarExternalDependencies)
+    case setting(MainTabBarExternalDependencies)
     
-    static func getTabBar(_ dependencies: MainTabBarExternalDependency) -> [TabBarView] {
+    static func getTabBar(_ dependencies: MainTabBarExternalDependencies) -> [TabBarView] {
         return  [.profile(dependencies),
                  .favourite(dependencies),
                  .setting(dependencies)]

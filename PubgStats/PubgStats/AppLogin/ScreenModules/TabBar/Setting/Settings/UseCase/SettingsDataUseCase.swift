@@ -7,7 +7,7 @@
 
 import Combine
 
-protocol SettingsDataUseCase {
+public protocol SettingsDataUseCase {
     func deleteProfile(profile: IdAccountDataProfileRepresentable) -> AnyPublisher<Void, Error>
 }
 

@@ -9,7 +9,7 @@
 import XCTest
 
 final class AttributesDetailViewControllerTest: XCTestCase {
-    private var dependencies: TestAttributesDetailDependencies!
+    private var dependencies: AttributesDetailDependencies!
     
     override func setUp() {
         super.setUp()

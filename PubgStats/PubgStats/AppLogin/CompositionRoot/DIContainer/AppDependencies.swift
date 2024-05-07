@@ -8,7 +8,6 @@
 import UIKit
 
 struct AppDependencies {
-    private var tabController = UITabBarController()
     private let profileNavController = UINavigationController()
     private let favouriteNavController = UINavigationController()
     private let settingsNavController = UINavigationController()
@@ -35,10 +34,6 @@ struct AppDependencies {
         profileNavController
     }
     
-    func tabBarController() -> UITabBarController {
-        tabController
-    }
-    
     func favouriteNavigationController() -> UINavigationController {
         favouriteNavController
     }
@@ -50,7 +45,7 @@ struct AppDependencies {
 
 extension AppDependencies:
     LoginExternalDependencies,
-    MainTabBarExternalDependency,
+    MainTabBarExternalDependencies,
     ProfileExternalDependencies,
     FavouriteExternalDependencies,
     SettingsExternalDependencies,

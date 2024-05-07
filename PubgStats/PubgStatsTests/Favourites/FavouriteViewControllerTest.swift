@@ -9,7 +9,7 @@
 import XCTest
 
 final class FavouriteViewControllerTest: XCTestCase {
-    private var dependencies: TestFavouriteDependencies!
+    private var dependencies: FavouriteDependencies!
     
     override func setUp() {
         super.setUp()
