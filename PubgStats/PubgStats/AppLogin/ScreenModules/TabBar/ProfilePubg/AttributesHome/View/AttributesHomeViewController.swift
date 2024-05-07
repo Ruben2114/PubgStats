@@ -96,7 +96,7 @@ extension AttributesHomeViewController: UITableViewDelegate, UITableViewDataSour
             return UITableViewCell()
         }
         cell.backgroundColor = .clear
-        cell.backgroundConfiguration = UIBackgroundConfiguration.clear()
+        cell.selectionStyle = .none
         let list = listAttributes.sorted { $0.title < $1.title}
         cell.configureWith(representable: list[indexPath.row])
         return cell

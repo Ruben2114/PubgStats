@@ -9,8 +9,6 @@ import CoreData
 import UIKit
 import Combine
 
-//TODO: manejar errores
-
 protocol LocalDataProfileService {
     func save(player: IdAccountDataProfileRepresentable, type: NavigationStats)
     func saveSurvival(player: String?, survivalData: SurvivalDataProfileRepresentable, type: NavigationStats)
@@ -22,8 +20,8 @@ protocol LocalDataProfileService {
     func getDataWeaponDetail(player: String, type: NavigationStats) -> WeaponDataProfileRepresentable?
     func getAccountProfile(player: String) -> IdAccountDataProfileRepresentable?
     func getAnyProfile() -> IdAccountDataProfileRepresentable?
-    func deleteFavourite(_ profile: IdAccountDataProfileRepresentable)
-    func deleteProfile(player: String)
+    func deleteFavourite(_ profile: IdAccountDataProfileRepresentable) -> AnyPublisher<Void, Error>
+    func deleteProfile(player: String) -> AnyPublisher<Void, Error>
 }
 
 struct LocalDataProfileServiceImp: LocalDataProfileService {
@@ -117,7 +115,6 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
                                            platform: profile.first?.platform ?? "")
     }
     
-    //TODO: crear strut del protocolo Error y crear los diferentes escenarios
     func getFavourites() -> AnyPublisher<[IdAccountDataProfileRepresentable], Error> {
         let profile = getAnyProfile()
         let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
@@ -138,42 +135,43 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
             }
         }.eraseToAnyPublisher()
     }
-    
-    //TODO: con combine y presentar un toast abajo de borrado con exito o el mensaje de error
-    func deleteFavourite(_ profile: IdAccountDataProfileRepresentable) {
+    //TODO: son iguales deberiamos refactorizar esto
+    func deleteFavourite(_ profile: IdAccountDataProfileRepresentable) -> AnyPublisher<Void, Error> {
         let profileFavourite = Favourite.fetchRequest()
         profileFavourite.predicate = NSPredicate(format: "player == %@", profile.name)
-        do {
-            if let result = try context.persistentContainer.viewContext.fetch(profileFavourite).first {
+        return Future<Void, Error> { promise in
+            do {
+                guard let result = try context.persistentContainer.viewContext.fetch(profileFavourite).first
+                else {
+                    promise(.failure(NSError(domain: "", code: 0)))
+                    return
+                }
                 context.persistentContainer.viewContext.delete(result)
                 context.saveContext()
-            } else {
-                print("error al borrar objeto")
-                return
+                promise(.success(()))
+            } catch {
+                promise(.failure(error))
             }
-        } catch {
-            print("Error en core data: \(error.localizedDescription)")
-            return
-        }
+        }.eraseToAnyPublisher()
     }
     
-    //TODO: con combine y presentar un toast abajo si es error , si va bien pasar a otra pantalla
-    func deleteProfile(player: String) {
+    func deleteProfile(player: String) -> AnyPublisher<Void, Error> {
         let fetchRequest = Profile.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "player == %@", player)
-        do {
-            let result = try context.persistentContainer.viewContext.fetch(fetchRequest).first
-            if let profileDelete = result {
-                context.persistentContainer.viewContext.delete(profileDelete)
+        return Future<Void, Error> { promise in
+            do {
+                guard let result = try context.persistentContainer.viewContext.fetch(fetchRequest).first
+                else {
+                    promise(.failure(NSError(domain: "", code: 0)))
+                    return
+                }
+                context.persistentContainer.viewContext.delete(result)
                 context.saveContext()
-            } else {
-                print("error al borrar objeto")
-                return
+                promise(.success(()))
+            } catch {
+                promise(.failure(error))
             }
-        } catch {
-            print("Error en core data: \(error.localizedDescription)")
-            return
-        }
+        }.eraseToAnyPublisher()
     }
 }
 
@@ -225,7 +223,7 @@ private extension LocalDataProfileServiceImp {
         context.saveContext()
     }
     
-    func saveSurvival<T: NSManagedObject & HasEntities>(survivalData: SurvivalDataProfileRepresentable, value: String, fetchRequest: NSFetchRequest<T>) {
+    func saveSurvival<T: HasEntities>(survivalData: SurvivalDataProfileRepresentable, value: String, fetchRequest: NSFetchRequest<T>) {
         fetchRequest.predicate = NSPredicate(format: "player == %@", value)
         guard let result = try? context.persistentContainer.viewContext.fetch(fetchRequest) else { return }
         if var perfil = result.first {

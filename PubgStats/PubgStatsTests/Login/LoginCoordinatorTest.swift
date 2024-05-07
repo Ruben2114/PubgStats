@@ -23,7 +23,7 @@ final class LoginCoordinatorTest: XCTestCase {
     }
     
     func test_LoginCoordinatorTest_shouldBeDeallocatedCorrectly() {
-        XCAssertDeallocation { LoginCoordinatorImp(dependencies: TestLoginExternalDependencies(), navigation: navigationController) }
+        XCAssertDeallocation { LoginCoordinatorImp(dependencies: TestLoginExternalDependencies()) }
     }
 }
 

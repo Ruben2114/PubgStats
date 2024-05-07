@@ -62,8 +62,7 @@ final class MatchesViewController: UIViewController {
 
 private extension MatchesViewController {
     func setAppearance() {
-        //TODO: cambiar imagen
-        configureImageBackground("backgroundProfile")
+        configureImageBackground("matchesBackground")
         setupTableView()
     }
     
@@ -84,20 +83,15 @@ private extension MatchesViewController {
             case .showMatches(let matches):
                 self?.matchesList = matches ?? []
                 self?.tableView.reloadData()
-                self?.hideLoading()
             case .showErrorMatches:
                 self?.errorMatches = true
                 self?.tableView.reloadData()
-                self?.hideLoading()
-            case .showLoading:
-                self?.showLoading()
             }
         }.store(in: &cancellable)
     }
     
     func configureNavigationBar() {
-        //TODO: keys
-        titleNavigation("Matches", backButton: #selector(backButtonAction))
+        titleNavigation("matchesViewControllerTitle".localize(), backButton: #selector(backButtonAction))
     }
     
     @objc func backButtonAction() {
@@ -105,7 +99,6 @@ private extension MatchesViewController {
     }
 }
 
-extension MatchesViewController: LoadingPresentationDisplayable { }
 extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //TODO: key

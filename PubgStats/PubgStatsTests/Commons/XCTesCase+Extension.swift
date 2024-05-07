@@ -8,6 +8,7 @@
 import Foundation
 import PubgStats
 import XCTest
+import Combine
 
 extension XCTestCase {
     public func XCAssertDeallocation<Object: Coordinator>(given coordinator: () -> Object, timeout: TimeInterval = 1.0, file: StaticString = #file, line: UInt = #line) {
@@ -66,6 +67,18 @@ extension XCTestCase {
             clousure()
             XCTAssertTrue(value, "Time out waiting for confition to be true: \(description)", file: file, line: line)
         }
+    }
+    
+    public func XCTAssertForPublisher<T: Publisher>(_ publisher: T, assert: @escaping (T.Output) -> Bool, beforeWait: (() -> Void)? = nil) {
+        let expectation = XCTestExpectation(description: "Await for publisher to complete")
+        expectation.assertForOverFulfill = true
+        let operation = publisher.sink { _ in } receiveValue: { result in
+            guard assert(result) else { return }
+            expectation.fulfill()
+        }
+        beforeWait?()
+        wait(for: [expectation], timeout: 2.0)
+        operation.cancel()
     }
 }
 

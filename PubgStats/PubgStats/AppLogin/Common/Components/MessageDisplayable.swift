@@ -8,6 +8,23 @@
 import UIKit
 protocol MessageDisplayable { }
 
+enum AlertActionTypes {
+    case accept((() -> Void)?)
+    case retry((() -> Void)?)
+    case cancel((() -> Void)?)
+    
+    func setTitle() -> String {
+        switch self {
+        case .accept(_):
+            "actionAccept".localize()
+        case .retry(_):
+            "actionRetry".localize()
+        case .cancel(_):
+            "actionCancel".localize()
+        }
+    }
+}
+
 extension MessageDisplayable where Self: UIViewController{
     
     func presentAlert(message: String, title: String){
@@ -41,6 +58,27 @@ extension MessageDisplayable where Self: UIViewController{
         alertController.addAction(UIAlertAction(title: "actionRetry".localize(), style: .default) { _ in
             retry?()
         })
+        self.present(alertController, animated: true)
+    }
+    
+    //TODO: poner todos como este
+    func presentAlertCustom(message: String, title: String, action: [AlertActionTypes]){
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert)
+        action.forEach { type in
+            alertController.addAction(UIAlertAction(title: type.setTitle(), style: .default) { _ in
+                switch type {
+                case .accept(let action):
+                    action?()
+                case .retry(let action):
+                    action?()
+                case .cancel(let action):
+                    action?()
+                }
+            })
+        }
         self.present(alertController, animated: true)
     }
     

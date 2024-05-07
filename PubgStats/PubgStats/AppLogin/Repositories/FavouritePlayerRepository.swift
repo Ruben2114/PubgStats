@@ -7,9 +7,9 @@
 
 import Combine
 
-protocol FavouritePlayerRepository {
+public protocol FavouritePlayerRepository {
     func getFavouritesPlayers() -> AnyPublisher<[IdAccountDataProfileRepresentable], Error>
-    func deleteFavouritePlayer(_ profile: IdAccountDataProfileRepresentable)
+    func deleteFavouritePlayer(_ profile: IdAccountDataProfileRepresentable) -> AnyPublisher<Void, Error>
 }
 
 struct FavouriteRepositoryImp: FavouritePlayerRepository {
@@ -22,8 +22,8 @@ struct FavouriteRepositoryImp: FavouritePlayerRepository {
     func getFavouritesPlayers() -> AnyPublisher<[IdAccountDataProfileRepresentable], Error> {
         dataSource.getFavourites().eraseToAnyPublisher()
     }
-    
-    func deleteFavouritePlayer(_ profile: IdAccountDataProfileRepresentable) {
-        dataSource.deleteFavourite(profile)
+
+    func deleteFavouritePlayer(_ profile: IdAccountDataProfileRepresentable) -> AnyPublisher<Void, Error> {
+        dataSource.deleteFavourite(profile).eraseToAnyPublisher()
     }
 }

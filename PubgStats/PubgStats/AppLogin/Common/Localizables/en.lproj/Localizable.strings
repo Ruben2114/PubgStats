@@ -17,7 +17,8 @@
 "mailComposeControllerDefault" = "An error has occurred";
 "sendMailSetSubject" = "Test mail";
 "infoAppViewModel" = "About PubgStats\n\nPubgStats is an application created by Rubén Rodríguez. Graduated in Mobile Application Programming with Swift in TokioSchool\n\nThis application has been created with the aim of being able to analyze the statistics of the different users of the PUBG game. It also offers access to the official guide where you can see all the news and updates.\n\nThrough the creation of this application I can show the knowledge acquired during the course and the curricular practices in the delivery of the TFM\n\nIf you have any questions, suggestions or problems with the implementation of the app do not hesitate to contact through the mail located in the Settings area.";
-"infoAppViewControllerTitle" = "Legal Notice";
+"infoAppViewTitle" = "Legal Notice";
+"matchesViewControllerTitle" = "Matches";
 "searchPlaceholder" = "PubgUserName";
 "favouriteViewControllerNavigationItem" = "Your favorite users";
 "searchBarSearchButtonClickedError" = "You already have a user with that name in your list"; "searchBarSearchButtonClickedError" = "You already have a user with that name in your list";

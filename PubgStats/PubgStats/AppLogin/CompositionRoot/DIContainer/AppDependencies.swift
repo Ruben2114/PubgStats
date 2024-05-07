@@ -8,7 +8,6 @@
 import UIKit
 
 struct AppDependencies {
-    private var tabController = UITabBarController()
     private let profileNavController = UINavigationController()
     private let favouriteNavController = UINavigationController()
     private let settingsNavController = UINavigationController()
@@ -31,17 +30,8 @@ struct AppDependencies {
         FavouriteRepositoryImp(dependencies: self)
     }
     
-    //TODO: intentar borrarla de todos lados
-    func resolve() -> AppDependencies {
-        self
-    }
-    
     func profileNavigationController() -> UINavigationController {
         profileNavController
-    }
-    
-    func tabBarController() -> UITabBarController {
-        tabController
     }
     
     func favouriteNavigationController() -> UINavigationController {
@@ -55,12 +45,11 @@ struct AppDependencies {
 
 extension AppDependencies:
     LoginExternalDependencies,
-    MainTabBarExternalDependency,
+    MainTabBarExternalDependencies,
     ProfileExternalDependencies,
     FavouriteExternalDependencies,
-    SettingsExternalDependency,
-    HelpDataExternalDependency,
+    SettingsExternalDependencies,
+    HelpDataExternalDependencies,
     AttributesHomeExternalDependencies,
     AttributesDetailExternalDependencies,
-    MatchesExternalDependencies,
-    InfoAppExternalDependency{}
+    MatchesExternalDependencies{}

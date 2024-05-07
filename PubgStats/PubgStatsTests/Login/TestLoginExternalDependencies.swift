@@ -10,15 +10,6 @@ import Foundation
 import UIKit
 
 final class TestLoginExternalDependencies: LoginExternalDependencies {
-    var navigationController: UINavigationController
-    
-    init(navigationController: UINavigationController = UINavigationController()) {
-        self.navigationController = navigationController
-    }
-    
-    func loginNavigationController() -> UINavigationController {
-        navigationController
-    }
     
     func resolve() -> DataPlayerRepository {
         MockDataPlayerRepository()

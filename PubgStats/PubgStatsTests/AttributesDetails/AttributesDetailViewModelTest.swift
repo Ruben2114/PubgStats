@@ -36,4 +36,3 @@ final class AttributesDetailViewModelTest: XCTestCase {
 }
 
 extension AttributesDetailViewModel: SceneViewModel {}
-

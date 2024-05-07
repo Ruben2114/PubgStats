@@ -10,9 +10,32 @@ import Combine
 import PubgStats
 
 struct MockDataPlayerRepository: DataPlayerRepository {
-    func fetchSurvivalData(representable: PubgStats.IdAccountDataProfileRepresentable, type: NavigationStats, reload: Bool) -> AnyPublisher<PubgStats.SurvivalDataProfileRepresentable, Error> {
-        Just(MockSurvivalDataProfile()).setFailureType(to: Error.self).eraseToAnyPublisher()
-
+    func fetchPlayerData(name: String, platform: String, type: NavigationStats) -> AnyPublisher<IdAccountDataProfileRepresentable, Error> {
+        if name.isEmpty || platform.isEmpty {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+        } else {
+            return Just(MockIdAccountDataProfile(id: "1111", name: name, platform: platform)).setFailureType(to: Error.self).eraseToAnyPublisher()
+        }
+    }
+    
+    func fetchMatchesData(id: String, platform: String) -> AnyPublisher<MatchDataProfileRepresentable, Error> {
+        if id.isEmpty || platform.isEmpty {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+        } else {
+            return Just(MockMatchDataProfile()).setFailureType(to: Error.self).eraseToAnyPublisher()
+        }
+    }
+    
+    func deletePlayerData(profile: IdAccountDataProfileRepresentable) -> AnyPublisher<Void, Error> {
+        return Just(()).setFailureType(to: Error.self).eraseToAnyPublisher()
+    }
+    
+    func fetchSurvivalData(representable: IdAccountDataProfileRepresentable, type: NavigationStats, reload: Bool) -> AnyPublisher<PubgStats.SurvivalDataProfileRepresentable, Error> {
+        if representable.name.isEmpty || representable.platform.isEmpty {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+        } else {
+            return Just(MockSurvivalDataProfile()).setFailureType(to: Error.self).eraseToAnyPublisher()
+        }
     }
     
     func fetchGamesModeData(representable: PubgStats.IdAccountDataProfileRepresentable, type: NavigationStats, reload: Bool) -> AnyPublisher<PubgStats.GamesModesDataProfileRepresentable, Error> {
@@ -22,10 +45,6 @@ struct MockDataPlayerRepository: DataPlayerRepository {
     
     func fetchWeaponData(representable: PubgStats.IdAccountDataProfileRepresentable, type: NavigationStats, reload: Bool) -> AnyPublisher<PubgStats.WeaponDataProfileRepresentable, Error> {
         Just(MockWeaponDataProfile()).setFailureType(to: Error.self).eraseToAnyPublisher()
-    }
-    
-    func fetchPlayerData(name: String, platform: String) -> AnyPublisher<IdAccountDataProfileRepresentable, Error> {
-        return Just(MockIdAccountDataProfile(id: "1111", name: name, platform: platform)).setFailureType(to: Error.self).eraseToAnyPublisher()
     }
 }
 
@@ -98,6 +117,7 @@ struct MockStatSurvival: StatSurvival {
 }
 
 struct MockGamesModesDataProfile: GamesModesDataProfileRepresentable {
+    var matches: [String]
     var bestRankPoint: Double?
     var killsTotal: Int
     var assistsTotal: Int
@@ -118,6 +138,7 @@ struct MockGamesModesDataProfile: GamesModesDataProfileRepresentable {
         self.headshotKillsTotal = 0
         self.timePlayed = "timePlayed"
         self.modes = []
+        self.matches = []
     }
 }
 
@@ -194,5 +215,45 @@ struct MockWeaponDataProfile: WeaponDataProfileRepresentable {
     
     init() {
         self.weaponSummaries = []
+    }
+}
+
+struct MockMatchDataProfile: MatchDataProfileRepresentable {
+    var type: String
+    var id: String
+    var attributes: MatchAttributesRepresentable
+    var included: [MatchIncludedRepresentable]
+    var links: String
+    
+    init() {
+        self.type = "rank"
+        self.id = "1"
+        self.attributes = MockMatchAttributes()
+        self.included = []
+        self.links = "links"
+    }
+}
+
+struct MockMatchAttributes : MatchAttributesRepresentable {
+    var mapName: String
+    var isCustomMatch: Bool
+    var matchType: String
+    var duration: Int
+    var gameMode: String
+    var shardID: String
+    var createdAt: String
+    var titleID: String
+    var seasonState: String
+    
+    init() {
+        self.mapName = "mapName"
+        self.isCustomMatch = false
+        self.matchType = "matchType"
+        self.duration = 0
+        self.gameMode = "gameMode"
+        self.shardID = "shardID"
+        self.createdAt = "createdAt"
+        self.titleID = "titleID"
+        self.seasonState = "seasonState"
     }
 }

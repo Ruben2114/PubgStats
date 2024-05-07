@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-protocol MatchesDataUseCase {
+public protocol MatchesDataUseCase {
     func fetchMatches(_ id: [String], platform: String) -> AnyPublisher<[MatchDataProfileRepresentable], Error>
 }
 

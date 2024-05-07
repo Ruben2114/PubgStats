@@ -15,6 +15,9 @@ final class ProfileCoordinatorSpy: ProfileCoordinator {
     var onFinish: (() -> Void)?
     var goToAttributes = false
     var goToAttributesDetails = false
+    var goToBack = false
+    var goToWeb = false
+    var goToMatches = false
     
     init() {
         dataBinding = DataBindingObject()
@@ -28,5 +31,17 @@ final class ProfileCoordinatorSpy: ProfileCoordinator {
     
     func goToAttributesDetails(_ attributes: ProfileAttributesDetailsRepresentable?) {
         goToAttributesDetails =  true
+    }
+    
+    func goBack() {
+        goToBack = true
+    }
+    
+    func goToWeb(urlString: UrlType) {
+        goToWeb = true
+    }
+    
+    func goToMatches(_ matchesId: [String], profile: IdAccountDataProfileRepresentable?) {
+        goToMatches = true
     }
 }

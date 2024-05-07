@@ -38,9 +38,9 @@ enum ProfileVersatileCardType: CaseIterable {
         //TODO: keys y fotos
         switch self {
         case .matches:
-            return DefaultVersatilCard(title: "Partidas",
+            return DefaultVersatilCard(title: "gamesPlayed".localize(),
                                        subTitle: "Puedes visualizar \(matchesCount) partidas",
-                                       customImageView: "survivalSerie")
+                                       customImageView: "matchesSerie")
         case .survival:
             return DefaultVersatilCard(title: "profileCardSurvival".localize(),
                                        subTitle: "profileCardSurvivalSubtitle".localize(),
