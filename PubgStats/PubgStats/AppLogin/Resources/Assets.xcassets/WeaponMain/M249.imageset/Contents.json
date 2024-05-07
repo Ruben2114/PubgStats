@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Item_Weapon_M249_C.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
