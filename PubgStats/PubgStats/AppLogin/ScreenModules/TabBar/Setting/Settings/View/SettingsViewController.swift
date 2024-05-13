@@ -64,8 +64,8 @@ private extension SettingsViewController {
                 self?.settingsField = fields
                 self?.tableView.reloadData()
             case .showErrorDelete:
-                //TODO: mostrar un error
-                break
+                //TODO: key
+                self?.presentAlert(message: "No se ha podido borrar", title: "Error", action: [.accept(nil)])
             }
         }.store(in: &cancellable)
     }
@@ -83,9 +83,9 @@ extension SettingsViewController: MFMailComposeViewControllerDelegate{
         case .sent:
             presentAlertTimer(message: "mailComposeControllerSent".localize(), title: "", timer: 1)
         case .failed:
-            presentAlert(message: "mailComposeControllerFailed".localize(), title: "Error")
+            presentAlert(message: "mailComposeControllerFailed".localize(), title: "Error", action: [.accept(nil)])
         @unknown default:
-            presentAlert(message: "mailComposeControllerDefault".localize(), title: "Error")
+            presentAlert(message: "mailComposeControllerDefault".localize(), title: "Error", action: [.accept(nil)])
         }
     }
 }
@@ -130,11 +130,11 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             sendMail.mailComposeDelegate = self
             present(sendMail, animated: true, completion: nil)
         case .legal:
-            //TODO: modificar el texto de infoAppViewModel
+            //TODO: change text infoAppViewModel
             bottomSheetView.show(in: self, title: "infoAppViewTitle".localize(), subtitle: "infoAppViewModel".localize())
         case .delete:
-            //TODO: poner key
-            presentAlertCustom(message: "estas seguro? perderas los datos de los perfiles favoritos que hayas guardado",
+            //TODO: key
+            presentAlert(message: "¿Estas seguro? perderás los datos de los perfiles favoritos que hayas guardado",
                                title: "borrar perfil",
                                action: [.accept({ [weak self] in self?.viewModel.deleteProfile() }),
                                         .cancel(nil)]

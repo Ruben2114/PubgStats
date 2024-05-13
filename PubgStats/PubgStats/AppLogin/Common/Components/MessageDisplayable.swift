@@ -15,54 +15,19 @@ enum AlertActionTypes {
     
     func setTitle() -> String {
         switch self {
-        case .accept(_):
+        case .accept:
             "actionAccept".localize()
-        case .retry(_):
+        case .retry:
             "actionRetry".localize()
-        case .cancel(_):
+        case .cancel:
             "actionCancel".localize()
         }
     }
 }
 
 extension MessageDisplayable where Self: UIViewController{
-    
-    func presentAlert(message: String, title: String){
-        let alertController = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert)
-//        let attributedTitle = NSAttributedString(string: title, attributes: [
-//            .font: UIFont(name: "AmericanTypewriter-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20)
-//        ])
-//        let attributedMessage = NSAttributedString(string: message, attributes: [
-//            .font: UIFont(name: "AmericanTypewriter", size: 16) ?? UIFont.systemFont(ofSize: 16)
-//        ])
-//        alertController.setValue(attributedTitle, forKey: "attributedTitle")
-//        alertController.setValue(attributedMessage, forKey: "attributedMessage")
-//        alertController.view.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
-        //TODO: aclarar lo del color
-        let okAction = UIAlertAction(title: "actionAccept".localize(), style: .default)
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true)
-    }
-    
-    func presentAlertOutOrRetry(message: String, title: String, retry: (() -> Void)?, cancel: (() -> Void)? = nil){
-        let alertController = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "actionCancel".localize(), style: .cancel) { _ in
-            cancel?()
-        })
-        alertController.addAction(UIAlertAction(title: "actionRetry".localize(), style: .default) { _ in
-            retry?()
-        })
-        self.present(alertController, animated: true)
-    }
-    
-    //TODO: poner todos como este
-    func presentAlertCustom(message: String, title: String, action: [AlertActionTypes]){
+  
+    func presentAlert(message: String, title: String, action: [AlertActionTypes]){
         let alertController = UIAlertController(
             title: title,
             message: message,

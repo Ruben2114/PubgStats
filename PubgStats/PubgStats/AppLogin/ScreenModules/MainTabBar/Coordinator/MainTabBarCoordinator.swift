@@ -41,9 +41,8 @@ final class MainTabBarCoordinatorImp: MainTabBarCoordinator {
     }
     
     func tabBarSelect(_ item: String) {
-        let controller = tabBarView.first(where: { $0.tabBarItem.title == item })
-        //TODO: asi se borra el controller pero no el coordinator
-        controller?.viewControllers.removeAll(where: {$0 != controller?.viewControllers.first})
+        guard let index = tabBarView.firstIndex(where: { $0.tabBarItem.title == item }) else { return }
+        childCoordinators[index].childCoordinators.forEach { $0.onFinish?() }
     }
 }
 

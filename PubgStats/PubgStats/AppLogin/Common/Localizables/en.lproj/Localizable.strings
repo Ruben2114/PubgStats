@@ -4,10 +4,12 @@
 "favouriteTabBarItem" = "Favourites";
 "settingsTabBarItem" = "Settings";
 "helpDataViewControllerTitle" = "Frequently Asked Questions";
-"itemCellHelpDataQuestionReload" = "When is the data reloaded?";
+"itemCellHelpDataQuestionMatches" = "How long does it take for games to appear?";
 "itemCellHelpDataQuestionDeleteFav" = "How do I delete favorite users from my list?";
-"itemCellHelpDataResponseReload" = "The reloading of the data is limited by the servers, if you decide to reload you will be able to reload once every 2 hours. Otherwise the data will be automatically reloaded every 12 hours since your last search";
+"itemCellHelpDataQuestionSearchFav" = "Can't find an account?";
+"itemCellHelpDataResponseMatches" = "Your recent matches will usually appear within 10 minutes of ending.";
 "itemCellHelpDataResponseDeleteFav" = "Slide your list profile to the left";
+"itemCellHelpDataResponseSearchFav" = "The player name search field is case sensitive, so be sure to use appropriate capitalization of the name.";
 "settingsFieldHelp" = "Frequently Asked Questions";
 "settingsFieldEmail" = "Mail";
 "settingsFieldLegal" = "Legal Notice";

@@ -69,7 +69,7 @@ private extension FavouriteViewModel {
             switch completion {
             case .failure(_):
                 guard let self else { return }
-                //TODO: poner keys
+                //TODO: keys
                 self.stateSubject.send(.showError("error al cargar los datos", profilesFavourite))
                 self.subscribeGetFavouritePublisher()
             default: break
@@ -86,7 +86,7 @@ private extension FavouriteViewModel {
             switch completion {
             case .failure(_):
                 guard let self else { return }
-                //TODO: poner keys
+                //TODO: keys
                 self.stateSubject.send(.showError("no existe un usuario con este nombre", profilesFavourite))
                 self.subscribeSearchFavouritePlayerPublisher()
             default: break
@@ -103,7 +103,7 @@ private extension FavouriteViewModel {
             switch completion {
             case .failure(_):
                 guard let self else { return }
-                //TODO: poner keys
+                //TODO: keys
                 self.stateSubject.send(.showError("no se ha podido borrar", profilesFavourite))
                 self.subscribeDeleteFavouritePlayerPublisher()
             default: break
