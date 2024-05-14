@@ -20,6 +20,7 @@ final class MainTabBarCoordinatorImp: MainTabBarCoordinator {
     private lazy var dependencies: Dependency = {
         Dependency(external: externalDependencies, coordinator: self)
     }()
+    private var selectedTabBarIndex: Int = 0
     private var dataProfile: IdAccountDataProfileRepresentable?
     private var tabBarView: [UINavigationController] = []
     
@@ -42,7 +43,10 @@ final class MainTabBarCoordinatorImp: MainTabBarCoordinator {
     
     func tabBarSelect(_ item: String) {
         guard let index = tabBarView.firstIndex(where: { $0.tabBarItem.title == item }) else { return }
-        childCoordinators[index].childCoordinators.forEach { $0.onFinish?() }
+        if index == selectedTabBarIndex {
+            childCoordinators[index].childCoordinators.forEach { $0.onFinish?() }
+        }
+        selectedTabBarIndex = index
     }
 }
 
