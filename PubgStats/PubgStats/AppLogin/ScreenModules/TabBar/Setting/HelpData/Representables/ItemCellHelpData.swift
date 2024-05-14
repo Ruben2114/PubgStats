@@ -6,24 +6,29 @@
 //
 
 enum ItemCellHelpData: CaseIterable {
-    case reload
+    case matches
     case deleteFav
-    //TODO: quitar la del reload y meter una de matches y del tema de buscar favoritos el sentitiveCase del naming
+    case searchFav
+
     func question() -> String{
         switch self{
-        case .reload:
-            return "itemCellHelpDataQuestionReload".localize()
+        case .matches:
+            return "itemCellHelpDataQuestionMatches".localize()
         case .deleteFav:
             return "itemCellHelpDataQuestionDeleteFav".localize()
+        case .searchFav:
+            return "itemCellHelpDataQuestionSearchFav".localize()
         }
     }
     
     func response() -> String{
         switch self{
-        case .reload:
-            return "itemCellHelpDataResponseReload".localize()
+        case .matches:
+            return "itemCellHelpDataResponseMatches".localize()
         case .deleteFav:
             return "itemCellHelpDataResponseDeleteFav".localize()
+        case .searchFav:
+            return "itemCellHelpDataResponseSearchFav".localize()
         }
     }
 }

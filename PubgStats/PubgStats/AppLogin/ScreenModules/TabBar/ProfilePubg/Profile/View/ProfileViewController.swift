@@ -90,11 +90,11 @@ private extension ProfileViewController {
                 self?.chartView.configureViewWith(DefaultChartViewData(charts: infoChartView ?? [], chartSelectedIndex: 0))
             case .showErrorPlayerDetails:
                 self?.scrollableStackView.stackView.isHidden = true
-                self?.presentAlertOutOrRetry(message: "errorPlayerDetails".localize(), title: "Error", retry: { [weak self] in
-                    self?.viewModel.reload()
-                }, cancel: { [weak self] in
-                    self?.viewModel.backButton()
-                })
+                self?.presentAlert(message: "errorPlayerDetails".localize(),
+                                   title: "Error",
+                                   action: [.cancel { [weak self] in self?.viewModel.backButton() },
+                                            .retry { [weak self] in self?.viewModel.reload() }
+                                   ])
             case .showHeader(let data):
                 self?.headerView.configureView(representable: data)
             case .showDataGeneral(let data):

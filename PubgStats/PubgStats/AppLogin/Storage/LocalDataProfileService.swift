@@ -135,7 +135,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
             }
         }.eraseToAnyPublisher()
     }
-    //TODO: son iguales deberiamos refactorizar esto
+    //TODO: refactor
     func deleteFavourite(_ profile: IdAccountDataProfileRepresentable) -> AnyPublisher<Void, Error> {
         let profileFavourite = Favourite.fetchRequest()
         profileFavourite.predicate = NSPredicate(format: "player == %@", profile.name)
@@ -253,7 +253,7 @@ private extension LocalDataProfileServiceImp {
         }
     }
     
-    func saveGames<T: HasEntities>(gamesModeData: GamesModesDataProfileRepresentable, request: NSFetchRequest<T>, name: String){
+    func saveGames<T: HasEntities>(gamesModeData: GamesModesDataProfileRepresentable, request: NSFetchRequest<T>, name: String) {
         request.predicate = NSPredicate(format: "player == %@", name)
         do {
             let result = try context.persistentContainer.viewContext.fetch(request)
@@ -267,7 +267,7 @@ private extension LocalDataProfileServiceImp {
         }
     }
     
-    func saveWeapon<T: HasEntities>(weaponData: WeaponDataProfileRepresentable, request: NSFetchRequest<T>, name: String){
+    func saveWeapon<T: HasEntities>(weaponData: WeaponDataProfileRepresentable, request: NSFetchRequest<T>, name: String) {
         request.predicate = NSPredicate(format: "player == %@", name)
         do {
             let result = try context.persistentContainer.viewContext.fetch(request)
@@ -311,7 +311,7 @@ private extension LocalDataProfileServiceImp {
         return DefaultWeaponDataProfile(Array(weaponSet))
     }
     
-    //TODO: devolver si se devuelve bien o no para presentar un toast
+    //TODO: reactive error toast
     private func saveProfile(player: IdAccountDataProfileRepresentable) {
         let newUser = Profile(context: context.persistentContainer.viewContext)
         newUser.player = player.name
@@ -325,7 +325,7 @@ private extension LocalDataProfileServiceImp {
         }
     }
     
-    //TODO: devolver si se devuelve bien o no para presentar un toast
+    //TODO: reactive error toast
     private func saveFavourite(player: IdAccountDataProfileRepresentable) {
         let profile = getAnyProfile()
         let fetchRequest = Profile.fetchRequest()

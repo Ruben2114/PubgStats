@@ -85,7 +85,7 @@ private extension FavouriteViewController {
             case .showError(let message, let players):
                 self?.filteredProfilesFavourite = players.sorted { $0.name.lowercased() < $1.name.lowercased() }
                 self?.tableView.reloadData()
-                self?.presentAlert(message: message, title: "Error")
+                self?.presentAlert(message: message, title: "Error", action: [.accept(nil)])
             case .deletePlayer(let perfilFavorito):
                 if let indice = self?.filteredProfilesFavourite.firstIndex(where: {$0.name == perfilFavorito?.name}) {
                     self?.filteredProfilesFavourite.remove(at: indice)
@@ -122,7 +122,7 @@ extension FavouriteViewController: UISearchBarDelegate {
             text = updatedText
         }
         searchBar.searchTextField.resignFirstResponder()
-        //TODO: poner key
+        //TODO: key
         presentAlertPlatform(title: "¿De qué plataforma?") { [weak self] platform in
             self?.viewModel.searchFavourite(name: text, platform: platform)
         }

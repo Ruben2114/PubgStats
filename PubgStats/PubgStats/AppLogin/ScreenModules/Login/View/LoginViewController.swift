@@ -16,7 +16,6 @@ class LoginViewController: UIViewController {
         stack.spacing = 20
         return stack
     }()
-    //TODO: una vista a la izquierda para que?
     private lazy var userTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
@@ -102,7 +101,7 @@ private extension LoginViewController {
             case .sendInfoProfileError:
                 self?.view.endEditing(true)
                 self?.presentAlert(message: "profileLoginNotExitname".localize(),
-                                   title: "Error")
+                                   title: "Error", action: [.accept(nil)])
             }
         }.store(in: &cancellable)
     }
@@ -143,7 +142,7 @@ private extension LoginViewController {
     
     @objc func didTapLoginButton() {
         guard let user = userTextField.text, !user.isEmpty else{
-            presentAlert(message: "profileLoginCellInvalid".localize(), title: "Error")
+            presentAlert(message: "profileLoginCellInvalid".localize(), title: "Error", action: [.accept(nil)])
             return}
         viewModel.checkPlayer(player: user, platform: platform)
     }

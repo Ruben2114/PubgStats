@@ -4,10 +4,12 @@
 "favouriteTabBarItem" = "Favoritos";
 "settingsTabBarItem" = "Ajustes";
 "helpDataViewControllerTitle" = "Dudas Frecuentes";
-"itemCellHelpDataQuestionReload" = "¿Cuando se recargan los datos?";
-"itemCellHelpDataQuestionDeleteFav" = "¿Cómo borro a los usuarios favoritos de mi lista?";
-"itemCellHelpDataResponseReload" = "La recarga de los datos esta limitada por los servidores, si usted decide recargar podrá realizar dicha recarga 1 vez cada 2 horas. Sino automaticamente los datos se recargaran cada 12 horas desde su última búsqueda";
+"itemCellHelpDataQuestionMatches" = "¿Cuanto tardan en aparecer las partidas?";
+"itemCellHelpDataQuestionDeleteFav" = "¿Cómo puedo borrar a los usuarios favoritos de mi lista?";
+"itemCellHelpDataQuestionSearchFav" = "¿No puedes encontrar una cuenta?";
+"itemCellHelpDataResponseMatches" = "Tus partidas recientes generalmente aparecerán a los 10 minutos de su finalización.";
 "itemCellHelpDataResponseDeleteFav" = "Desliza el perfil de tu lista hacia la izquierda";
+"itemCellHelpDataResponseSearchFav" = "El campo de búsqueda de nombre de jugador distingue entre mayúsculas y minúsculas, así que asegúrese de utilizar mayúsculas y minúsculas como corresponda en el nombre.";
 "settingsFieldHelp" = "Dudas Frecuentes";
 "settingsFieldEmail" = "Correo";
 "settingsFieldLegal" = "Aviso Legal";
