@@ -12,9 +12,6 @@ Pubg Player Statistics in Swift
 ## Architecture: MVVM
 MVVM is an appliction of Clean Architecture to iOS Apps. MVVM is an acronym of Model - View - ViewModel.
 
-### 3rd Party Frameworks used
-* Combine
-
 ## APIClient
 Class with functions that retrieve data from Pubg's API
 [(API)](https://documentation.pubg.com/en/introduction.html)
