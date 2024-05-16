@@ -10,9 +10,8 @@ import UIKit
 open class ZoomAndSnapFlowLayout: UICollectionViewFlowLayout {
     
     private var activeDistance: CGFloat = 200
-    private var zoomFactor: CGFloat = 3
+    private var zoomFactor: CGFloat = 0
     private var _indexPath: IndexPath?
-    private var edgeInsets: UIEdgeInsets?
     public var forceSizeCalculation: Bool = false
     
     override public init() {
@@ -30,16 +29,8 @@ open class ZoomAndSnapFlowLayout: UICollectionViewFlowLayout {
         self.itemSize = itemSize
     }
     
-    public func setActiveDistance(_ activeDistance: CGFloat) {
-        self.activeDistance = activeDistance
-    }
-    
-    public func setZoom(_ zoom: CGFloat) {
-        self.zoomFactor = zoom
-    }
-    
-    public func setEdgeInsets(_ edgeInsets: UIEdgeInsets) {
-        self.edgeInsets = edgeInsets
+    public func indexPathForCenterRect() -> IndexPath? {
+        return _indexPath
     }
     
     @available(*,unavailable)
@@ -53,7 +44,7 @@ open class ZoomAndSnapFlowLayout: UICollectionViewFlowLayout {
         let verticalInsets = (collectionView.frame.height - collectionView.contentInset.top - collectionView.contentInset.bottom - itemSize.height) / 2
         let horizontalInsets = (collectionView.frame.width - collectionView.contentInset.right - collectionView.contentInset.left - itemSize.width) / 2
         let collectionViewInsets = UIEdgeInsets(top: verticalInsets, left: horizontalInsets, bottom: verticalInsets, right: horizontalInsets)
-        sectionInset = self.edgeInsets ?? collectionViewInsets
+        sectionInset = collectionViewInsets
         
         super.prepare()
     }
@@ -118,10 +109,6 @@ open class ZoomAndSnapFlowLayout: UICollectionViewFlowLayout {
         let context = super.invalidationContext(forBoundsChange: newBounds) as? UICollectionViewFlowLayoutInvalidationContext
         context?.invalidateFlowLayoutDelegateMetrics = newBounds.size != collectionView?.bounds.size
         return context ?? UICollectionViewLayoutInvalidationContext()
-    }
-    
-    public func indexPathForCenterRect() -> IndexPath? {
-        return _indexPath
     }
 }
 

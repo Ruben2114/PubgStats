@@ -8,22 +8,7 @@
 import UIKit
 
 extension UIViewController {
-    func makeStack(space: CGFloat) -> UIStackView {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.spacing = space
-        return stack
-    }
-    func makeStackImage(space: CGFloat) -> UIStackView {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .horizontal
-        stack.spacing = space
-        stack.alignment = .center
-        stack.distribution = .fillEqually
-        return stack
-    }
+    
     func createStackHorizontalButton(space: CGFloat) -> UIStackView {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -35,12 +20,13 @@ extension UIViewController {
 }
 
 extension UIView {
-    func createStack() -> UIStackView {
+    
+    func getDetailsStack() -> UIStackView {
         let stack = UIStackView()
-        stack.spacing = 5
-         stack.axis = .vertical
-         stack.alignment = .center
-         stack.translatesAutoresizingMaskIntoConstraints = false
-         return stack
+        stack.spacing = 2
+        stack.axis = .vertical
+        stack.alignment = .fill
+        stack.distribution = .fill
+        return stack
     }
 }

@@ -19,7 +19,7 @@ struct DefaultChartViewData: ChartViewData {
     var chartSelectedIndex: Int
 }
 
-enum ChartCollectionViewState: State {
+enum ChartCollectionViewState {
     case didChangeHeight(_ height: CGFloat)
     case didSelectChart(Int)
     case didTapAverageTooltip((String, String)?)
@@ -79,7 +79,6 @@ private extension ChartCollectionView {
         let itemWidth = getItemWidth()
         layout.setItemSize(CGSize(width: itemWidth, height: 2000))
         layout.setMinimumLineSpacing(8)
-        layout.setZoom(0)
         self.collectionViewLayout = layout
     }
     

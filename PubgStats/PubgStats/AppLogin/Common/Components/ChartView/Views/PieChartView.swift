@@ -65,7 +65,8 @@ class PieChartView: UIView {
     }
     
     private lazy var stackViewCenter: UIStackView = {
-        let view = UIStackView(frame: CGRect(centeredOn: viewCenter, size: CGSize(width: innerRect.width, height: innerRect.height)))
+        let size = CGSize(width: innerRect.width, height: innerRect.height)
+        let view = UIStackView(frame: CGRect(origin: CGPoint(x: viewCenter.x - size.width/2, y: center.y - size.height/2), size: size))
         view.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         view.spacing = 0
         view.alignment = .center

@@ -20,7 +20,7 @@ extension LoadingPresentationDisplayable where Self: UIViewController{
     
     private func configureLoading(){
         let containerView = UIView()
-        containerView.tag = ViewValues.tagIdentifierSpinner
+        containerView.tag = LoadingTag.tagIdentifierSpinner
         parentView.addSubview(containerView)
         containerView.fillSuperView()
         containerView.backgroundColor = .black
@@ -36,14 +36,18 @@ extension LoadingPresentationDisplayable where Self: UIViewController{
     }
     
     func hideLoading() {
-        if let foundView = parentView.viewWithTag(ViewValues.tagIdentifierSpinner){
+        if let foundView = parentView.viewWithTag(LoadingTag.tagIdentifierSpinner){
             foundView.removeFromSuperview()
         }
     }
     private var doesNotExistAnotherSpinner: Bool {
-        parentView.viewWithTag(ViewValues.tagIdentifierSpinner) == nil
+        parentView.viewWithTag(LoadingTag.tagIdentifierSpinner) == nil
     }
     private var parentView: UIView {
         navigationController?.view ?? view
     }
+}
+
+struct LoadingTag {
+    static let tagIdentifierSpinner = 123
 }
