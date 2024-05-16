@@ -35,11 +35,11 @@ enum ProfileVersatileCardType: CaseIterable {
     }
     
     func getData(matchesCount: Int) -> VersatileCardRepresentable {
-        //TODO: keys matches
         switch self {
         case .matches:
+            let text = matchesCount == 1 ? "versatilCardSubtitleMatch" : "versatilCardSubtitleMatches"
             return DefaultVersatilCard(title: "gamesPlayed".localize(),
-                                       subTitle: "Puedes visualizar \(matchesCount) partidas",
+                                       subTitle: text.localize().placeholderString(replace: .number, value: String(matchesCount)),
                                        customImageView: "matchesSerie")
         case .survival:
             return DefaultVersatilCard(title: "profileCardSurvival".localize(),

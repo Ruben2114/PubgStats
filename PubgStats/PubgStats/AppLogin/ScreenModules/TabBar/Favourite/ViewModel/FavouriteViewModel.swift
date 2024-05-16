@@ -69,8 +69,7 @@ private extension FavouriteViewModel {
             switch completion {
             case .failure(_):
                 guard let self else { return }
-                //TODO: keys
-                self.stateSubject.send(.showError("error al cargar los datos", profilesFavourite))
+                self.stateSubject.send(.showError("errorPlayerDetails".localize(), profilesFavourite))
                 self.subscribeGetFavouritePublisher()
             default: break
             }
@@ -86,8 +85,7 @@ private extension FavouriteViewModel {
             switch completion {
             case .failure(_):
                 guard let self else { return }
-                //TODO: keys
-                self.stateSubject.send(.showError("no existe un usuario con este nombre", profilesFavourite))
+                self.stateSubject.send(.showError("errorFavouriteViewModel".localize(), profilesFavourite))
                 self.subscribeSearchFavouritePlayerPublisher()
             default: break
             }
@@ -103,8 +101,7 @@ private extension FavouriteViewModel {
             switch completion {
             case .failure(_):
                 guard let self else { return }
-                //TODO: keys
-                self.stateSubject.send(.showError("no se ha podido borrar", profilesFavourite))
+                self.stateSubject.send(.showError("errorDeletePlayer".localize(), profilesFavourite))
                 self.subscribeDeleteFavouritePlayerPublisher()
             default: break
             }

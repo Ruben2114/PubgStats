@@ -114,16 +114,11 @@ private extension FavouriteViewController {
 extension FavouriteViewController: MessageDisplayable{ }
 extension FavouriteViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
-        guard var text = searchBar.text,
+        guard let text = searchBar.text,
               !filteredProfilesFavourite.contains(where: {$0.name == text}) else { return }
         
-        if text.contains(" ") {
-            let updatedText = text.replacingOccurrences(of: " ", with: "%20")
-            text = updatedText
-        }
         searchBar.searchTextField.resignFirstResponder()
-        //TODO: key
-        presentAlertPlatform(title: "¿De qué plataforma?") { [weak self] platform in
+        presentAlertPlatform(title: "searchBarPlatform".localize()) { [weak self] platform in
             self?.viewModel.searchFavourite(name: text, platform: platform)
         }
         searchBar.text = ""

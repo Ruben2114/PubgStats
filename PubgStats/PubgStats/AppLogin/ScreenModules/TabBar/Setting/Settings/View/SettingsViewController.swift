@@ -50,8 +50,7 @@ final class SettingsViewController: UIViewController {
 
 private extension SettingsViewController {
     func setAppearance() {
-        //TODO: key
-        titleNavigation("Ajustes")
+        titleNavigation("settingsTabBarItem".localize())
         configureImageBackground("backgroundAirDrop")
     }
     
@@ -64,8 +63,7 @@ private extension SettingsViewController {
                 self?.settingsField = fields
                 self?.tableView.reloadData()
             case .showErrorDelete:
-                //TODO: key
-                self?.presentAlert(message: "No se ha podido borrar", title: "Error", action: [.accept(nil)])
+                self?.presentAlert(message: "errorDeletePlayer".localize(), title: "Error", action: [.accept(nil)])
             }
         }.store(in: &cancellable)
     }
@@ -133,11 +131,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             //TODO: change text infoAppViewModel
             bottomSheetView.show(in: self, title: "infoAppViewTitle".localize(), subtitle: "infoAppViewModel".localize())
         case .delete:
-            //TODO: key
-            presentAlert(message: "¿Estas seguro? perderás los datos de los perfiles favoritos que hayas guardado",
-                               title: "borrar perfil",
-                               action: [.accept({ [weak self] in self?.viewModel.deleteProfile() }),
-                                        .cancel(nil)]
+            presentAlert(message: "alertDeleteProfile".localize(),
+                         title: "settingsFieldDelete".localize(),
+                         action: [.accept({ [weak self] in self?.viewModel.deleteProfile() }),
+                                  .cancel(nil)]
             )
         }
     }

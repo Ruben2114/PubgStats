@@ -127,3 +127,10 @@
 "profileChartRoundTooltip" = "Matches in different modes";
 "profileHelpReloadTitle" = "Reload information";
 "profileHelpReloadSubtitle" = "Data reload is done automatically every 24 hours.\n\nIf you need to reload the view you can press the reload button.\n\nThe reload button will be activated two minutes after the last update.";
+"matchesTableViewEmpty" = "There are no matches in the last 7 days";
+"matchesTableViewError" = "The games could not be loaded. Please try again in a few minutes.";
+"searchBarPlatform" = "From what platform?";
+"errorDeletePlayer" = "Sorry, the profile could not be deleted";
+"alertDeleteProfile" = "Are you sure? You will lose the data of the favorite profiles you have saved";
+"versatilCardSubtitleMatches" = "You can view {{NUMBER}} matches";
+"versatilCardSubtitleMatch" = "You can view {{NUMBER}} match";

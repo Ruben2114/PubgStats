@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SI0-Uc-w6n">
-                    <rect key="frame" x="0.0" y="16" width="414" height="880"/>
+                    <rect key="frame" x="0.0" y="16" width="414" height="864"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLm-P3-ZQa">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="98"/>
@@ -56,7 +56,7 @@
                             </collectionViewFlowLayout>
                         </collectionView>
                         <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="tUC-lM-41x">
-                            <rect key="frame" x="0.0" y="99" width="414" height="781"/>
+                            <rect key="frame" x="0.0" y="99" width="414" height="765"/>
                             <connections>
                                 <action selector="pageControlValueChanged:" destination="-1" eventType="valueChanged" id="yCj-gs-PWp"/>
                             </connections>
@@ -70,7 +70,7 @@
                 <constraint firstAttribute="trailing" secondItem="SI0-Uc-w6n" secondAttribute="trailing" id="89U-1i-8Au"/>
                 <constraint firstItem="SI0-Uc-w6n" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8u1-FW-KUG"/>
                 <constraint firstItem="SI0-Uc-w6n" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="16" id="HjH-Uo-1te"/>
-                <constraint firstAttribute="bottom" secondItem="SI0-Uc-w6n" secondAttribute="bottom" id="jex-TH-pCT"/>
+                <constraint firstAttribute="bottom" secondItem="SI0-Uc-w6n" secondAttribute="bottom" constant="16" id="jex-TH-pCT"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="33.5" y="54.5"/>

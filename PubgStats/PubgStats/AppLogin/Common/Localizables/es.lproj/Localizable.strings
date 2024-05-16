@@ -127,3 +127,10 @@
 "profileChartRoundTooltip" = "Partidas en los diferentes modos";
 "profileHelpReloadTitle" = "Información sobre la recarga";
 "profileHelpReloadSubtitle" = "La recarga de los datos se realiza automáticamente cada 24 horas.\n\nSi necesitas recargar la vista puedes pulsar el botón de recarga.\n\nEl botón de recarga será activado dos minutos después de la última actualización.";
+"matchesTableViewEmpty" = "No existen partidas en los últimos 7 días";
+"matchesTableViewError" = "No se han podido cargar las partidas. Inténtalo en unos minutos.";
+"searchBarPlatform" = "¿De qué plataforma?";
+"errorDeletePlayer" = "Lo siento, no se ha podido borrar el perfil";
+"alertDeleteProfile" = "¿Estas seguro? Perderás los datos de los perfiles favoritos que hayas guardado";
+"versatilCardSubtitleMatches" = "Puedes visualizar {{NUMBER}} partidas";
+"versatilCardSubtitleMatch" = "Puedes visualizar {{NUMBER}} partida";

@@ -37,6 +37,8 @@ private extension FavouriteTableViewCell {
     
     func configureViews() {
         playerLabel.text = representable?.name
-        platformLogo.image = representable?.platform == "steam" ? UIImage(named: "Steam_icon_logo") : UIImage(systemName: "xbox.logo")
+        if representable?.platform == "steam" {
+            platformLogo.image = UIImage(named: "Steam_icon_logo")
+        }
     }
 }

@@ -101,13 +101,13 @@ private extension MatchesViewController {
 
 extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //TODO: key
-        messageEmptyLabel.text = errorMatches ? "No se han podido cargar las partidas. Inténtalo en unos minutos." : "No existen partidas en los útlimos 7 dias"
-        tableView.backgroundView = matchesList.isEmpty || errorMatches ? messageEmptyLabel : nil
         return matchesList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        messageEmptyLabel.text = errorMatches ? "matchesTableViewError".localize() : "matchesTableViewEmpty".localize()
+        tableView.backgroundView = matchesList.isEmpty || errorMatches ? messageEmptyLabel : nil
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MatchesTableViewCell else {
             return UITableViewCell()
         }
