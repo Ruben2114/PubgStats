@@ -27,7 +27,7 @@ final class MatchesViewController: UIViewController {
     private lazy var messageEmptyLabel: UILabel = {
         let messageLabel = UILabel()
         messageLabel.textColor = .white
-        messageLabel.font = UIFont(name: "AmericanTypewriter-Bold", size: 25)
+        messageLabel.font = ConstantFormat.largeFontBold
         messageLabel.numberOfLines = 0
         messageLabel.textAlignment = .center
         return messageLabel
@@ -36,6 +36,11 @@ final class MatchesViewController: UIViewController {
     private let cellIdentifier = "MatchesViewCell"
     private var errorMatches: Bool = false
     private var matchesList: [MatchRepresentable] = []
+    
+    private enum Constant {
+        static let spacing: CGFloat = 16
+        static let tableViewBottom: CGFloat = 24
+    }
     
     init(dependencies: MatchesDependencies) {
         self.viewModel = dependencies.resolve()
@@ -73,7 +78,7 @@ private extension MatchesViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: Constant.tableViewBottom, right: 0)
     }
     
     func bind() {
@@ -88,6 +93,7 @@ private extension MatchesViewController {
             case .showErrorMatches:
                 self?.errorMatches = true
                 self?.tableView.reloadData()
+                self?.hideLoading()
             }
         }.store(in: &cancellable)
     }
@@ -104,13 +110,13 @@ private extension MatchesViewController {
 extension MatchesViewController: LoadingPresentationDisplayable { }
 extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        messageEmptyLabel.text = errorMatches ? "matchesTableViewError".localize() : "matchesTableViewEmpty".localize()
+        let container = messageEmptyLabel.embedIntoView(leftMargin: Constant.spacing, rightMargin: Constant.spacing)
+        tableView.backgroundView = matchesList.isEmpty || errorMatches ? container : nil
         return matchesList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        messageEmptyLabel.text = errorMatches ? "matchesTableViewError".localize() : "matchesTableViewEmpty".localize()
-        tableView.backgroundView = matchesList.isEmpty || errorMatches ? messageEmptyLabel : nil
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MatchesTableViewCell else {
             return UITableViewCell()
         }

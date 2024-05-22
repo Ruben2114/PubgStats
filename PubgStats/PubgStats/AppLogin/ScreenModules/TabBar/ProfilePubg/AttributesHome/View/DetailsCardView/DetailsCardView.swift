@@ -70,7 +70,7 @@ private extension DetailsCardView {
         let attributedString = NSMutableAttributedString()
         let lastText = text.components(separatedBy: ":").last
         let attributedTitle = NSAttributedString(string: lastText ?? "", attributes: [
-            .foregroundColor: UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
+            .foregroundColor: ConstantFormat.colorDefault
         ])
         attributedString.append(NSAttributedString(string: text.replacingOccurrences(of: lastText ?? "", with: "")))
         attributedString.append(attributedTitle)
@@ -94,7 +94,7 @@ private extension DetailsCardView {
         rightAmountLabel.text = "\(representable.rightAmount ?? 0)"
         let title = representable.type == .modeGames ? setType(representable.title)?.setTitle() : representable.title
         titleLabel.text = title?.uppercased()
-        titleLabel.textColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
+        titleLabel.textColor = ConstantFormat.colorDefault
     }
     
     func setType(_ mode: String) -> GamesModesTypes? {

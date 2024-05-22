@@ -104,11 +104,11 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         cell.backgroundColor = .black.withAlphaComponent(0.8)
         cell.selectionStyle = .none
         var listContent = UIListContentConfiguration.cell()
-        listContent.textProperties.font = UIFont(name: "AmericanTypewriter-Bold", size: 20) ?? UIFont.boldSystemFont(ofSize: 20)
+        listContent.textProperties.font = ConstantFormat.mediumFontBold ?? UIFont.boldSystemFont(ofSize: 20)
         listContent.textProperties.color = .white
         listContent.text = settingsField.title()
         listContent.image =  UIImage(systemName: settingsField.icon())
-        listContent.imageProperties.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
+        listContent.imageProperties.tintColor = ConstantFormat.colorDefault
         cell.contentConfiguration = listContent
         return cell
     }

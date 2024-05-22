@@ -31,8 +31,8 @@ class MatchesTableViewCell: UITableViewCell {
 private extension MatchesTableViewCell {
     func setViewAppearance() {
         containerView.layer.cornerRadius = 8
-        gameModeLabel.textColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
-        positionLabel.textColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
+        gameModeLabel.textColor = ConstantFormat.colorDefault
+        positionLabel.textColor = ConstantFormat.colorDefault
         positionLabel.contentHuggingPriority(for: .horizontal)
         positionLabel.setContentHuggingPriority(.required, for: .horizontal)
         mapLabel.contentHuggingPriority(for: .horizontal)

@@ -173,8 +173,8 @@ extension AttributesDetailViewController: UICollectionViewDataSource, UICollecti
         let label = UILabel(frame: headerView.bounds)
         label.text = listAttributes?.attributesDetails[indexPath.section].first?.titleSection?.uppercased()
         label.textAlignment = .center
-        label.textColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
-        label.font = UIFont(name: "AmericanTypewriter-Bold", size: 20)
+        label.textColor = ConstantFormat.colorDefault
+        label.font = ConstantFormat.mediumFontBold
         headerView.addSubview(label)
         return headerView
     }

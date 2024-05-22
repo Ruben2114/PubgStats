@@ -61,7 +61,7 @@ extension ProfileCoordinatorImp {
         guard let url = URL(string: urlString.rawValue) else { return }
         let safariService = SFSafariViewController(url: url)
         safariService.preferredBarTintColor = .black
-        safariService.preferredControlTintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
+        safariService.preferredControlTintColor = ConstantFormat.colorDefault
         safariService.dismissButtonStyle = .close
         navigation?.present(safariService, animated: true)
     }

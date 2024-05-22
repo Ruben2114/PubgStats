@@ -48,7 +48,7 @@ class PieChartView: UIView {
         label.textColor = .white
         label.backgroundColor = .clear
         label.textAlignment = .center
-        label.font = UIFont(name: "AmericanTypewriter-Bold", size: 20)
+        label.font = ConstantFormat.mediumFontBold
         label.adjustsFontSizeToFitWidth = true
         return label
     }
@@ -57,7 +57,7 @@ class PieChartView: UIView {
         let bottomLabel = UILabel(frame: .zero)
         bottomLabel.text = currentSubTitleText ?? "currentSubTitleText".localize()
         bottomLabel.textColor = .white
-        bottomLabel.font = UIFont(name: "AmericanTypewriter", size: 20)
+        bottomLabel.font = ConstantFormat.mediumFontRegular
         bottomLabel.textAlignment = .center
         bottomLabel.numberOfLines = 2
         bottomLabel.adjustsFontSizeToFitWidth = true

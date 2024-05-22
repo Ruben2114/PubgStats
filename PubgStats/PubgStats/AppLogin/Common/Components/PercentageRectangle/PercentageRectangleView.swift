@@ -14,7 +14,7 @@ class PercentageRectangleView: UIView {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = .white
-        label.font = UIFont(name: "AmericanTypewriter-Bold", size: 16)
+        label.font = ConstantFormat.smallFontBold
         return label
     }()
     
@@ -49,7 +49,7 @@ class PercentageRectangleView: UIView {
     }
     
     private func configUI() {
-        fillLayer.backgroundColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1).cgColor
+        fillLayer.backgroundColor = ConstantFormat.colorDefault.cgColor
         self.layer.addSublayer(fillLayer)
         
         label.translatesAutoresizingMaskIntoConstraints = false

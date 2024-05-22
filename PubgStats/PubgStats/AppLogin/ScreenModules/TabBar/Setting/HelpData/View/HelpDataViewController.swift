@@ -70,11 +70,11 @@ extension HelpDataViewController: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .none
         let itemCellHelpData = ItemCellHelpData.allCases[indexPath.section]
         var listContent = UIListContentConfiguration.cell()
-        listContent.textProperties.font = UIFont(name: "AmericanTypewriter-Bold", size: 20) ?? UIFont.boldSystemFont(ofSize: 20)
+        listContent.textProperties.font = ConstantFormat.mediumFontBold ?? UIFont.boldSystemFont(ofSize: 20)
         listContent.textProperties.color = .white
         listContent.text = itemCellHelpData.question()
         listContent.textProperties.alignment = .center
-        listContent.secondaryTextProperties.font = UIFont(name: "AmericanTypewriter", size: 16) ?? UIFont.systemFont(ofSize: 16)
+        listContent.secondaryTextProperties.font = ConstantFormat.smallFontRegular ?? UIFont.systemFont(ofSize: 16)
         listContent.secondaryText = itemCellHelpData.response()
         listContent.secondaryTextProperties.alignment = .center
         listContent.secondaryTextProperties.color = .white

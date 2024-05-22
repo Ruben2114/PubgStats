@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         textField.leftViewMode = .always
         textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        textField.font = UIFont(name: "AmericanTypewriter-Bold", size: 20)
+        textField.font = ConstantFormat.mediumFontBold
         textField.layer.cornerRadius = 20
         textField.isSecureTextEntry = false
         return textField
@@ -32,12 +32,12 @@ class LoginViewController: UIViewController {
         let segmented = UISegmentedControl(items: ["Steam", "Xbox"])
         segmented.translatesAutoresizingMaskIntoConstraints = false
         segmented.layer.cornerRadius = 15
-        segmented.layer.borderColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1).cgColor
+        segmented.layer.borderColor = ConstantFormat.colorDefault.cgColor
         segmented.layer.borderWidth = 1
         segmented.backgroundColor = .systemGray2
         segmented.selectedSegmentTintColor = .black
         segmented.setTitleTextAttributes([.foregroundColor : UIColor.white,
-                                          .font : UIFont(name: "AmericanTypewriter-Bold", size: 16) ?? .systemFont(ofSize: 16)], for: .normal)
+                                          .font : ConstantFormat.smallFontBold ?? .systemFont(ofSize: 16)], for: .normal)
         segmented.selectedSegmentIndex = 0
         return segmented
     }()
@@ -46,9 +46,9 @@ class LoginViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("titleLoginButton".localize(), for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont(name: "AmericanTypewriter-Bold", size: 20)
+        button.titleLabel?.font = ConstantFormat.mediumFontBold
         button.layer.cornerRadius = 20
-        button.backgroundColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
+        button.backgroundColor = ConstantFormat.colorDefault
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return button
     }()

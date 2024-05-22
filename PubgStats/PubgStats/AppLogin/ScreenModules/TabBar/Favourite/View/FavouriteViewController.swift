@@ -17,7 +17,7 @@ class FavouriteViewController: UIViewController {
         let messageLabel = UILabel()
         messageLabel.text = "profilesFavouriteEmpty".localize()
         messageLabel.textColor = .white
-        messageLabel.font = UIFont(name: "AmericanTypewriter-Bold", size: 25)
+        messageLabel.font = ConstantFormat.largeFontBold
         messageLabel.numberOfLines = 0
         messageLabel.textAlignment = .center
         return messageLabel
@@ -34,7 +34,7 @@ class FavouriteViewController: UIViewController {
     private lazy var searchBar: UISearchBar = {
         let search = UISearchBar()
         search.placeholder = "searchPlaceholder".localize()
-        search.searchTextField.font = UIFont(name: "AmericanTypewriter", size: 16)
+        search.searchTextField.font = ConstantFormat.smallFontRegular
         search.translatesAutoresizingMaskIntoConstraints = false
         search.searchTextField.backgroundColor = .systemGroupedBackground
         search.backgroundImage = UIImage()

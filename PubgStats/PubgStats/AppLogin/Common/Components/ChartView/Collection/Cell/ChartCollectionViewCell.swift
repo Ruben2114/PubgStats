@@ -56,7 +56,7 @@ private extension ChartCollectionViewCell {
         titleLabel.text = representable?.titletext
         helpImageView.isUserInteractionEnabled = true
         helpImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapTooltip)))
-        helpImageView.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
+        helpImageView.tintColor = ConstantFormat.colorDefault
     }
     
     func setViewAppearence() {

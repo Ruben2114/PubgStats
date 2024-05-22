@@ -11,12 +11,12 @@ extension UIViewController {
     func titleNavigation(_ title: String?, backButton: Selector? = nil, moreButton: [UIView] = []) {
         navigationItem.title = title?.localize()
         navigationController?.navigationBar.titleTextAttributes = [
-            .foregroundColor : UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1),
-            .font : UIFont(name: "AmericanTypewriter-Bold", size: 20) ?? UIFont.systemFont(ofSize: 16)
+            .foregroundColor : ConstantFormat.colorDefault,
+            .font : ConstantFormat.mediumFontBold ?? UIFont.systemFont(ofSize: 16)
         ]
         if backButton != nil {
             let backButton = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.backward.circle.fill"), style: .plain, target: self, action: backButton)
-            backButton.tintColor = UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1)
+            backButton.tintColor = ConstantFormat.colorDefault
             navigationItem.leftBarButtonItem = backButton
         }
         if !moreButton.isEmpty {

@@ -12,7 +12,7 @@ extension UIView {
     func getTitleLabel(text: String? = nil) -> UILabel {
         let label = UILabel()
         label.textColor = .white
-        label.font = UIFont(name: "AmericanTypewriter-Bold", size: 16)
+        label.font = ConstantFormat.smallFontBold
         label.numberOfLines = 0
         label.text = text
         return label

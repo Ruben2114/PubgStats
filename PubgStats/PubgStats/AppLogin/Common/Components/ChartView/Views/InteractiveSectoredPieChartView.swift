@@ -91,7 +91,7 @@ private extension InteractiveSectoredPieChartView {
             let path = UIBezierPath(arcCenter: viewCenter, radius: graphRadius - selectionArcWidth/2, startAngle: $0.startAngle, endAngle: $0.endAngle, clockwise: true)
             path.lineWidth = selectionArcWidth
             resolveColorFor(category: $0.sector, 
-                            color: UIColor(red: 255/255, green: 205/255, blue: 61/255, alpha: 1))
+                            color: ConstantFormat.colorDefault)
             .setStroke()
             path.stroke()
         }
