@@ -128,7 +128,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             sendMail.mailComposeDelegate = self
             present(sendMail, animated: true, completion: nil)
         case .legal:
-            //TODO: change text infoAppViewModel
             bottomSheetView.show(in: self, title: "infoAppViewTitle".localize(), subtitle: "infoAppViewModel".localize())
         case .delete:
             presentAlert(message: "alertDeleteProfile".localize(),

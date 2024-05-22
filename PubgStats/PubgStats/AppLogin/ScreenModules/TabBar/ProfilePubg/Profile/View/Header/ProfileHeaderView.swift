@@ -67,9 +67,8 @@ private extension ProfileHeaderView {
     }
     
     func configureImagePlatform() {
-        if representable?.dataPlayer.platform == "steam" {
-            platformImage.image = UIImage(named: "Steam_icon_logo")
-        }
+        let logo = representable?.dataPlayer.platform == "steam" ? "Steam_icon_logo" : "Xbox_icon_logo"
+        platformImage.image = UIImage(named: logo)
     }
     
     func configureLabel() {

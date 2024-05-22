@@ -64,6 +64,7 @@ private extension MatchesViewController {
     func setAppearance() {
         configureImageBackground("matchesBackground")
         setupTableView()
+        showLoading()
     }
     
     func setupTableView() {
@@ -83,6 +84,7 @@ private extension MatchesViewController {
             case .showMatches(let matches):
                 self?.matchesList = matches ?? []
                 self?.tableView.reloadData()
+                self?.hideLoading()
             case .showErrorMatches:
                 self?.errorMatches = true
                 self?.tableView.reloadData()
@@ -99,6 +101,7 @@ private extension MatchesViewController {
     }
 }
 
+extension MatchesViewController: LoadingPresentationDisplayable { }
 extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return matchesList.count

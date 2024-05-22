@@ -135,7 +135,7 @@ struct LocalDataProfileServiceImp: LocalDataProfileService {
             }
         }.eraseToAnyPublisher()
     }
-    //TODO: refactor
+    
     func deleteFavourite(_ profile: IdAccountDataProfileRepresentable) -> AnyPublisher<Void, Error> {
         let profileFavourite = Favourite.fetchRequest()
         profileFavourite.predicate = NSPredicate(format: "player == %@", profile.name)
@@ -255,38 +255,28 @@ private extension LocalDataProfileServiceImp {
     
     func saveGames<T: HasEntities>(gamesModeData: GamesModesDataProfileRepresentable, request: NSFetchRequest<T>, name: String) {
         request.predicate = NSPredicate(format: "player == %@", name)
-        do {
-            let result = try context.persistentContainer.viewContext.fetch(request)
-            if let profile = result.first {
-                gamesModeData.modes.forEach { mode in
-                    saveGameData(profile: profile, result: mode, data: gamesModeData)
-                }
-            }
-        } catch {
-            print("Error en core data saveGames")
+        guard let result = try? context.persistentContainer.viewContext.fetch(request),
+              let profile = result.first else { return }
+        gamesModeData.modes.forEach { mode in
+            saveGameData(profile: profile, result: mode, data: gamesModeData)
         }
     }
     
     func saveWeapon<T: HasEntities>(weaponData: WeaponDataProfileRepresentable, request: NSFetchRequest<T>, name: String) {
         request.predicate = NSPredicate(format: "player == %@", name)
-        do {
-            let result = try context.persistentContainer.viewContext.fetch(request)
-            if let profile = result.first {
-                weaponData.weaponSummaries.forEach { weapon in
-                    let dict = NSDictionary(dictionary: Dictionary(uniqueKeysWithValues: weapon.statsTotal.map { ($0.key, $0.value)}))
-                    guard let data = try? PropertyListSerialization.data(fromPropertyList: dict, format: .binary, options: 0) else { return }
-                    let dataWeapon = profile.weapon?.first(where: {($0 as? Weapon)?.name == weapon.name }) as? Weapon ?? Weapon(context: context.persistentContainer.viewContext)
-                    dataWeapon.name = weapon.name
-                    dataWeapon.level = Int32(weapon.levelCurrent)
-                    dataWeapon.xp = Int32(weapon.xpTotal)
-                    dataWeapon.tier = Int32(weapon.tierCurrent)
-                    dataWeapon.data = data
-                    profile.addToWeapon(dataWeapon)
-                    context.saveContext()
-                }
-            }
-        } catch {
-            print("Error en core data saveWeapon")
+        guard let result = try? context.persistentContainer.viewContext.fetch(request),
+              let profile = result.first else { return }
+        weaponData.weaponSummaries.forEach { weapon in
+            let dict = NSDictionary(dictionary: Dictionary(uniqueKeysWithValues: weapon.statsTotal.map { ($0.key, $0.value)}))
+            guard let data = try? PropertyListSerialization.data(fromPropertyList: dict, format: .binary, options: 0) else { return }
+            let dataWeapon = profile.weapon?.first(where: {($0 as? Weapon)?.name == weapon.name }) as? Weapon ?? Weapon(context: context.persistentContainer.viewContext)
+            dataWeapon.name = weapon.name
+            dataWeapon.level = Int32(weapon.levelCurrent)
+            dataWeapon.xp = Int32(weapon.xpTotal)
+            dataWeapon.tier = Int32(weapon.tierCurrent)
+            dataWeapon.data = data
+            profile.addToWeapon(dataWeapon)
+            context.saveContext()
         }
     }
     
@@ -311,38 +301,26 @@ private extension LocalDataProfileServiceImp {
         return DefaultWeaponDataProfile(Array(weaponSet))
     }
     
-    //TODO: reactive error toast
     private func saveProfile(player: IdAccountDataProfileRepresentable) {
         let newUser = Profile(context: context.persistentContainer.viewContext)
         newUser.player = player.name
         newUser.account = player.id
         newUser.platform = player.platform
-        let context = context.persistentContainer.viewContext
-        do {
-            try context.save()
-        } catch {
-            
-        }
+        context.saveContext()
     }
     
-    //TODO: reactive error toast
     private func saveFavourite(player: IdAccountDataProfileRepresentable) {
         let profile = getAnyProfile()
         let fetchRequest = Profile.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "player == %@", profile?.name ?? "")
-        do {
-            let result = try context.persistentContainer.viewContext.fetch(fetchRequest)
-            if let perfil = result.first {
-                let newFav = Favourite(context: context.persistentContainer.viewContext)
-                newFav.player = player.name
-                newFav.account = player.id
-                newFav.platform = player.platform
-                perfil.addToFavourites(newFav)
-                context.saveContext()
-            }
-        } catch {
-            print("Error en core data saveFav")
-        }
+        guard let result = try? context.persistentContainer.viewContext.fetch(fetchRequest),
+              let perfil = result.first else { return }
+        let newFav = Favourite(context: context.persistentContainer.viewContext)
+        newFav.player = player.name
+        newFav.account = player.id
+        newFav.platform = player.platform
+        perfil.addToFavourites(newFav)
+        context.saveContext()
     }
 }
 

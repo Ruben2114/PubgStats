@@ -4,7 +4,7 @@
 "favouriteTabBarItem" = "Favoritos";
 "settingsTabBarItem" = "Ajustes";
 "helpDataViewControllerTitle" = "Dudas Frecuentes";
-"itemCellHelpDataQuestionMatches" = "¿Cuanto tardan en aparecer las partidas?";
+"itemCellHelpDataQuestionMatches" = "¿Cuánto tardan en aparecer las partidas?";
 "itemCellHelpDataQuestionDeleteFav" = "¿Cómo puedo borrar a los usuarios favoritos de mi lista?";
 "itemCellHelpDataQuestionSearchFav" = "¿No puedes encontrar una cuenta?";
 "itemCellHelpDataResponseMatches" = "Tus partidas recientes generalmente aparecerán a los 10 minutos de su finalización.";
@@ -18,7 +18,7 @@
 "mailComposeControllerFailed" = "Lo siento, no se ha podido enviar el correo";
 "mailComposeControllerDefault" = "Ha ocurrido un error";
 "sendMailSetSubject" = "Correo de prueba";
-"infoAppViewModel" = "Acerca de PubgStats\n\nPubgStats es una aplicación creada por Rubén Rodríguez. Graduado en Programación de aplicaciones móviles con Swift en TokioSchool\n\nEsta aplicación ha sido creada con el objetivo de poder analizar las estadísticas de los diferentes usuarios del juego PUBG. Además ofrece un acceso a la guia oficial donde podrás ver todas las novedades y actualizaciones.\n\nA través de la creación de esta aplicación puedo mostrar los conocimientos adquiridos durante el curso y las prácticas curriculares en la entrega del TFM\n\nSi tienes alguna duda, sugerencia o problema con la ejecución de la app no dudes en contactar a través del correo situado en la zona de Ajustes.";
+"infoAppViewModel" = "Todos los datos del juego los proporciona la API oficial de PUBG.\n\nTodos los logotipos y fotografías relacionados son marcas comerciales de PUBG Corporation o sus afiliados.\n\nDiseñado, desarrollado y publicado por Rubén Rodríguez.";
 "infoAppViewTitle" = "Aviso Legal";
 "matchesViewControllerTitle" = "Partidas";
 "searchPlaceholder" = "Nombre de usuarios Pubg";
